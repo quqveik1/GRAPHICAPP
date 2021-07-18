@@ -1,0 +1,371 @@
+minkernel\crts\ucrt\src\appcrt\stdio\input.cpp(32) : Assertion failed: stream != nullptr
+minkernel\crts\ucrt\src\appcrt\stdio\input.cpp(32) : Assertion failed: stream != nullptr
+minkernel\crts\ucrt\src\appcrt\stdio\input.cpp(32) : Assertion failed: stream != nullptr
+minkernel\crts\ucrt\src\appcrt\stdio\input.cpp(32) : Assertion failed: stream != nullptr
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 150, функция: void __cdecl loadImage(const char *,struct HDC__ *&,struct Vector,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "Copyimage".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x003B43C0 (32-bit), Flags: CMdRe0, Thread: 0x45D4 (Main), GetLastError(): 1813 (Указанный тип ресурса в файле образа отсутствует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 6 0x779CFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77E57A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77E57A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 14 2021 11:22:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 14 2021 11:22:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 150, функция: void __cdecl loadImage(const char *,struct HDC__ *&,struct Vector,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "Copyimage".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x003B43C0 (32-bit), Flags: CMdRe0, Thread: 0x2B80 (Main), GetLastError(): 1813 (Указанный тип ресурса в файле образа отсутствует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 6 0x779CFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77E57A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77E57A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 14 2021 11:22:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 14 2021 11:23:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 150, функция: void __cdecl loadImage(const char *,struct HDC__ *&,struct Vector,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "Copyimage".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x009E43C0 (32-bit), Flags: CMdRe0, Thread: 0x1128 (Main), GetLastError(): 1813 (Указанный тип ресурса в файле образа отсутствует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 6 0x779CFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77E57A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77E57A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 14 2021 11:24:52, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 14 2021 11:24:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 150, функция: void __cdecl loadImage(const char *,struct HDC__ *&,struct Vector,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "Copyimage".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x006743C0 (32-bit), Flags: CMdRe0, Thread: 0x60C0 (Main), GetLastError(): 1813 (Указанный тип ресурса в файле образа отсутствует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 6 0x779CFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77E57A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77E57A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 14 2021 11:25:11, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 14 2021 11:25:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 57, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x006303F8 (32-bit), Flags: Cmdre0, Thread: 0x328C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 5 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 6 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 7 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 14:48:06, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 14:48:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 57, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x008703F8 (32-bit), Flags: Cmdre0, Thread: 0x5C04 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 5 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 6 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 7 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 15:12:16, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 15:12:19
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 57, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x008703F8 (32-bit), Flags: Cmdre0, Thread: 0x6414 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 5 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 6 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 7 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 15:12:16, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 15:13:23
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 57, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x010803F8 (32-bit), Flags: Cmdre0, Thread: 0x4C24 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 5 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 6 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 7 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 15:14:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 15:14:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp, строка: 57, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x002D03F8 (32-bit), Flags: Cmdre0, Thread: 0x2988 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 5 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 6 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 7 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 15:14:42, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 15:14:44
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x83): SIGFPE: Грубая ошибка в вычислениях. _FPE_ZERODIVIDE: Деление на ноль. 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x002616F4 (32-bit), Flags: CMdRe0, Thread: 0x65A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x784FEF08 in C:\Windows\SYSTEM32\ucrtbased.dll: seh_filter_exe()
+# 3 0x7BC8335E in C:\Windows\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 6 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2021 21:46:49, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2021 21:46:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\Examples\txWave\Examples\TXWaveExample.cpp, строка: 187, функция: void __cdecl WaveformDemo(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "waveOut".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x00C19DD4 (32-bit), Flags: CMdRE0, Thread: 0x4098 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 6 0x76AAFA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x776E7A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x776E7A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 18 2021 11:38:46, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 18 2021 11:39:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
+
+--------------------------------------------------

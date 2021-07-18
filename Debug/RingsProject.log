@@ -1,0 +1,18 @@
+﻿  RingsProject.cpp
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(150,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(160,16): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(194,105): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(194,89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(194,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(194,42): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(325,3): error C2146: syntax error: missing ';' before identifier 'nextAppeal'
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(323,3): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(363,34): error C2665: '`anonymous-namespace'::TX::txWaveOut': none of the 2 overloads could convert all the argument types
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\TXWave.h(747,10): message : could be 'HWAVEOUT `anonymous-namespace'::TX::txWaveOut(const `anonymous-namespace'::TX::txWaveData_t &,int)'
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\TXWave.h(579,10): message : or       'HWAVEOUT `anonymous-namespace'::TX::txWaveOut(int,double,double,double,double,int,const `anonymous-namespace'::TX::txWaveData_t &)'
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(363,34): message : while trying to match the argument list '(char [260])'
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(387,16): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(390,35): warning C4305: 'initializing': truncation from '__int64' to 'int'
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(390,17): warning C4309: 'initializing': truncation of constant value
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(497,16): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\RingsProject.cpp(504,16): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
