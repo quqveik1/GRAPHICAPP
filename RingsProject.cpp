@@ -3,9 +3,12 @@
 #include "TXLib.h"
 #include "Q_Vector.h"
 #include "TXWave.h"
+#include "Q_Buttons.h"
+//#include "PowerPoint.cpp"
 
 
 const int RINGSK = 8;
+
 
 struct Rings
 {
@@ -13,6 +16,19 @@ struct Rings
 	int endOfLesson [RINGSK];
 };
 
+
+/*
+	int &a = b;
+	int &x = * (int*) 0
+	printf ("%d", a);
+	x = a;
+
+	int *a = &b;
+	int *x = (int*) 0;
+	printf ("%d", *a);
+	*x = *a;
+
+* */
 
 
 struct Rect
@@ -27,16 +43,33 @@ struct Rect
     double bottom() const { return this->finishPos.y; }
 };
 
-struct Buttons
+
+struct Button
 {
-	Rect VoiceButton = {.pos = {190, 920}, .finishPos = {270, 1000}};
-	Rect escape_Button = {.pos = {1355, 6}, .finishPos = {1445, 1008}};
-	Rect appealButtonUp = {.pos {1240, 930}, .finishPos = {1264, 940}};
-	Rect appealButtonDown = {.pos {1240, 990}, .finishPos = {1264, 1005}};
+	Rect rect = {};
+	void (*funcClicked) ();
+	COLORREF color;
 };
 
+
+
+/*
+struct colorButton : Button
+{
+	COLORREF color;
+};
+
+
+Button button1 = {};
+Button button2 = {};
+
+colorButton button3 = {};
+colorButton button4 = {};
+
+Button Buttons[20] = {};
+ */
+
 Rings RING = {};
-Buttons BUTTONS;
 
 
 const int APPEALK = 10;
@@ -67,19 +100,27 @@ int strToTime (const char* time);
 void makeAppeal (Rect button);
 char* timeToStr (int time);
 void scrollBar (double bigNum, double currPosInBigNum, double partOfBigNum);
+bool stopRecordingFunc (HWAVEIN, txWaveData_t& data, void*);
+bool checkAppeal ();
+void changeButton ();
+void changeColorButton ();
 
 
-#define txSetAllColors(color)  txSetFillColor (color); txSetColor (color);
+#define txSetAllColors(color)  { txSetFillColor (color); txSetColor (color); }
 #define MAINCOLOR RGB (255, 255, 102)
 
 
-int main()
+
+
+
+
+int main2()
 {
 
 	//txWaveData_t ring = txWaveIn ("Purr.wav");
 	//txWaveOut (ring);
 	//txWaveOut ();
-	return 0;
+	//return 0;
 	//txWaveData_t buf =  txWaveLoadWav ("Sound_17211.wav");  
 	//HWAVEOUT waveOut = txWaveOut (buf); assert (waveOut);  // Запускаем звук
 
@@ -94,6 +135,12 @@ int main()
 	HDC Menu = {};
 	loadImage ("Files/Menu4.bmp", Menu);
 
+
+	//Button[0].pos = {.pos = {190, 920}, .finishPos = {270, 1000}};
+	//Button[0].funcClicked = changeButton;
+	//Button[1].pos = {.pos = {1355, 6}, .finishPos = {1445, 1008}};
+	//Button[2].pos = {.pos {1240, 930}, .finishPos = {1264, 940}};
+	//Button[3].pos = {.pos {1240, 990}, .finishPos = {1264, 1005}};
 	
 	
 
@@ -118,7 +165,7 @@ int main()
 		printRings ();
 
 
-		makeAppeal (BUTTONS.VoiceButton);
+		//makeAppeal (BUTTONS.VoiceButton);
 		checkTimeForRing ();
 
 		if (txGetAsyncKeyState (VK_ESCAPE) || onButtonClicked (BUTTONS.escape_Button))
@@ -138,6 +185,18 @@ int main()
 	txDeleteDC (Menu);
 
 	return 0;
+}
+
+//Engine checking
+void checkButtons ()
+{
+	for (int i = 0; i < 20; i++)
+	{
+		if (onButtonClicked (Buttons[i]))
+		{
+
+		}
+	}
 }
 
 void progressBar (double num, double bugNum)
@@ -320,14 +379,18 @@ void makeAppeal (Rect button)
 		const char* cause = txInputBox ("Введите о чем объявления:", "Вопрос жизни или смерти", "Просто объявление");
 		strcpy (AppealsStr[nextAppeal], cause);
 
-		txWaveIn
+		txWaveData_t recording =  txWaveIn (100000, stopRecordingFunc);
+		char path[_MAX_PATH] = {};
+		sprintf (path, "Files/%s%d.wav", cause, nextAppeal);
+
+		txWaveSaveWav (recording, path);
 	
 		nextAppeal++;
 	}
 
 	static int startPos = 0;
 
-	if (onButtonClicked (BUTTONS.appealButtonUp) && startPos > 0)
+	//if (onButtonClicked (BUTTONS.appealButtonUp) && startPos > 0)
 	{
 		startPos--;
 	}
@@ -360,9 +423,59 @@ void makeAppeal (Rect button)
 
 		if (getClockTime () == AppealTime[i])
 		{
-			txWaveOut (Appeals[nextAppeal]);
+			//txWaveOut (Appeals[nextAppeal]);
+			char path[_MAX_PATH] = {};
+			sprintf (path, "Files/%s%d.wav", AppealsStr[i], i);
+			txPlaySound (path);
+
+			sprintf (AppealsStr[i], "[Проиграно]");
+			//startPos++;
+
 		}
 	}
+	if (checkAppeal ())
+	{
+		//startPos++;
+	}
+
+}
+
+bool checkAppeal ()
+{
+	int clockTime = getClockTime ();
+
+	for (int i = 0; i < nextAppeal; i++)
+	{
+		if (clockTime > AppealTime[i])
+		{
+			char cmpText[50] = {};
+			char trashStr[50] = {};
+			sscanf (AppealsStr[i], "%s", cmpText);
+			if (strcmp (cmpText, "[Проиграно]"))
+			{
+				char path[_MAX_PATH] = {};
+				sprintf (path, "Files/%s%d.wav", AppealsStr[i], i);
+				txPlaySound (path);
+
+
+				char copyStr[50] = {};
+				strcpy (copyStr, AppealsStr[i]);
+
+				sprintf (AppealsStr[i], "[Проиграно]");
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool stopRecordingFunc (HWAVEIN, txWaveData_t& data, void*)
+{
+	//if (onButtonClicked (BUTTONS.VoiceButton))
+	{
+		return false;
+	}
+	return true;
 }
 
 void scrollBar (double bigNum, double currPosInBigNum, double partOfBigNum)
@@ -481,6 +594,7 @@ void printTimeBeforeRing ()
 	progressBar (timeJetLasting, timeJetLasting + minDelta);
 }
 
+
 void selectFont (const char * font, int fontNum)
 {
 	txSelectFont (font, (fontNum * UserScreen.x / 1007) * 0.85, (fontNum * UserScreen.x / 1007) * 0.35);	
@@ -532,6 +646,8 @@ int strToTime (const char* time)
 
 	code = sscanf (time, "%d:%d ", &hours, &minutes);
 
+	if (code != 2) return -1;
+
 	int finalTime = minutes * 60 + hours * 3600;
 	return	finalTime;
 }
@@ -555,4 +671,15 @@ void findFont ()
 		selectFont ("Arial", 150 + i * 10);
 		txTextOut (100 + i * 100, 100, "1");
 	}
+}
+
+void changeButton ()
+{
+	printf ("1\n");
+}
+
+
+void changeColorButton ()
+{
+	printf ("Color\n");
 }

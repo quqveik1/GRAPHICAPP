@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RingsProject.cpp">
+    <ClCompile Include="..\TX\Examples\txWave\Examples\TXWaveExample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\TX\Examples\txWave\Examples\TXWaveExample.cpp">
+    <ClCompile Include="PowerPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
