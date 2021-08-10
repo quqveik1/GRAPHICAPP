@@ -369,3 +369,63 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProjec
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\RingsProject
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13620, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x004124BC (32-bit), Flags: CMdRe0, Thread: 0x7EB4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x77A4FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77B97A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#11 0x77B97A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13620):
+
+  13618:     {
+  13619: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13620: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13621: 
+  13622: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13636):
+
+  13634: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13635: 
+=>13636: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13637:     }
+  13638: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (126):
+
+    124: void drawCanvas (const Window &window)
+    125: {
+=>  126: 	txBitBlt (window.rect.pos.x, window.rect.pos.y, window.canvas);
+    127: }
+    128: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug  7 2021 11:56:21, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug  7 2021 11:56:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -1,4 +1,7 @@
 ﻿  PowerPoint.cpp
-C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\PowerPoint.cpp(70,31): warning C4100: 'button': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\PowerPoint.cpp(104,33): warning C4100: 'button': unreferenced formal parameter
-  RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(130,33): warning C4100: 'window': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(139,32): warning C4100: 'window': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(145,33): warning C4100: 'window': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(170,6): warning C4189: 'currMouseButton': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(216,33): warning C4100: 'window': unreferenced formal parameter
+  RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
