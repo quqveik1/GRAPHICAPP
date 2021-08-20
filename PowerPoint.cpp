@@ -32,12 +32,13 @@ struct Canvas : Window
 	HDC canvas;
 	int lineThickness = 3;
 	COLORREF drawColor = TX_RED;
-	bool clearBackground= false;
+	bool clearBackground = false;
 
+	bool wasClicked = false;
 	Vector lastClick = {};
 
-	void drawCanvas (const Window *window);
-	void clicked (const Window *pointer);
+	void drawCanvas ();
+	void clicked ();
 };
 
 struct TimeButton : Window
@@ -186,6 +187,8 @@ int main ()
 		if (!IsRunning) break;
 	}
 
+	
+	txDeleteDC (mainCanvas.canvas);
 	txDisableAutoPause ();
 
 }
@@ -245,41 +248,46 @@ void Window::draw ()
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);	
 }
 
-void Canvas::drawCanvas (const Window *window)
+void Canvas::drawCanvas ()
 {
-	Canvas* canvasPtr = (Canvas*) window;
+	// canvasPtr = this;
 
-	assert (canvasPtr->canvas);
-	txBitBlt (window->rect.pos.x, window->rect.pos.y, canvasPtr->canvas);
-	for(;;)
+	assert (canvas);
+	txBitBlt (rect.pos.x, rect.pos.y, canvas);
+
+	if (txMouseButtons () == 2 && wasClicked)
 	{
-		printf ("1");
+		txSetAllColors (drawColor, canvas);
+		txSetColor (drawColor, lineThickness, canvas);
+		txLine (lastClick.x, lastClick.y - rect.pos.y, txMouseX (), txMouseY () - rect.pos.y, canvas); 
+		wasClicked = false;
 	}
 
-	if (txMouseButtons () == 2 && canvasPtr->isClicked)
+	if (wasClicked)
 	{
-		txSetAllColors (canvasPtr->drawColor, canvasPtr->canvas);
-		txLine (canvasPtr->lastClick.x, canvasPtr->lastClick.y - canvasPtr->rect.pos.y, txMouseX (), txMouseY () - canvasPtr->rect.pos.y, canvasPtr->canvas); 
-		canvasPtr->isClicked = false;
+		txSetAllColors (drawColor);
+		txSetColor (drawColor, lineThickness);
+		if (txMouseY () < rect.pos.y)
+		{
+			txLine (lastClick.x, lastClick.y, txMouseX (), rect.pos.y);	
+		}
+		else
+		{
+			txLine (lastClick.x, lastClick.y, txMouseX (), txMouseY ());
+		}
 	}
 
-	if (canvasPtr->isClicked)
+	if (clearBackground)
 	{
-		txSetAllColors (canvasPtr->drawColor);
-		txLine (canvasPtr->lastClick.x, canvasPtr->lastClick.y, txMouseX (), txMouseY ());
-	}
-
-	if (canvasPtr->clearBackground)
-	{
-		txSetAllColors (TX_BLACK, canvasPtr->canvas);
-		RECTangle (canvasPtr->rect, canvasPtr->canvas);
-		canvasPtr->clearBackground = false;
+		txSetAllColors (TX_BLACK, canvas);
+		RECTangle (rect, canvas);
+		clearBackground = false;
 	}
 }
 
 void SizeButton::minusSize ()
 {
-	if (!isClicked)
+	if (!isClicked && mainCanvas->lineThickness > 0)
 	{
 		mainCanvas->lineThickness--;
 	}
@@ -298,21 +306,19 @@ void CloseButton::endprogramm ()
 	IsRunning = false;
 }
 
-void Canvas::clicked (const Window *window)
+void Canvas::clicked ()
 {
-	
-	
 
-	Canvas* canvasPtr = (Canvas*) window;
-
-	txSetAllColors (canvasPtr->drawColor);
+	txSetAllColors ( drawColor);
 
 	int currMouseButton = txMouseButtons ();
 	
-	if (!(canvasPtr->isClicked))
+	if (!(isClicked))
 	{
-		canvasPtr->lastClick = {.x = txMouseX (), .y = txMouseY ()};
-		canvasPtr->isClicked = true;
+		int mx = txMouseX ();
+		int my = txMouseY ();
+		lastClick = {.x = txMouseX (), .y = txMouseY ()};
+		wasClicked = true;
 	}
 }
 
@@ -322,7 +328,7 @@ void checkClicked (Window *pointers[PointersNum])
 	{
 		if (inButtonClicked (pointers[i]->rect))
 		{
-			pointers[i]->funcClicked;
+			(pointers[i]->*(pointers[i]->funcClicked))();
 			pointers[i]->isClicked = true;
 		}
 		else
