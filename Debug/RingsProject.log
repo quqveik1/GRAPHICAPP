@@ -1,10 +1,6 @@
 ﻿  PowerPoint.cpp
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(162,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(163,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(164,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(223,33): warning C4100: 'window': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(232,32): warning C4100: 'window': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(238,33): warning C4100: 'window': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(251,6): warning C4189: 'currMouseButton': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(346,33): warning C4100: 'window': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(213,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(214,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(215,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(310,6): warning C4189: 'currMouseButton': local variable is initialized but not referenced
   RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
