@@ -14,13 +14,11 @@ struct Window
 {
 	Rect rect = {};
 
-	void (Window::*funcClicked) ();
-	void (Window::*funcDraw) ();
+	//void (Window::*funcClicked) ();
+	//void (Window::*funcDraw) ();
 
-	void draw ();
-
-	//void drawButtons (Window *pointers[PointersNum]);
-	//void checkClicked (Window *pointers[PointersNum]);
+	virtual void draw ();
+	virtual void onClick () {};
 	
 	COLORREF color;
 	char text [20] = {};
@@ -37,43 +35,55 @@ struct Canvas : Window
 	bool wasClicked = false;
 	Vector lastClick = {};
 
-	void drawCanvas ();
-	void clicked ();
+	virtual void draw () override;
+	virtual void onClick () override;
 };
 
 struct TimeButton : Window
 {
-	void printTime ();
+	virtual void draw () override;
 };
 
 struct CloseButton : Window
 {
-	void endprogramm ();
+	virtual void onClick () override;
 };
 
 struct ColorButton : Window
 {
 	Canvas *mainCanvas;
 
-	void reactColor ();
+	virtual void onClick ()override;
 };
 
 struct SizeButton : Window
 {
 	Canvas *mainCanvas;
+	int sizeType;
 
-	void minusSize ();
-	void plusSize ();
-	void textDraw ();
+	virtual void draw () override;
+	virtual void onClick () override;
 
 };
 
 struct CleanButton : Window
 {
 	Canvas *mainCanvas;
-	void cleanScreen ();
 
+	virtual void onClick () override;
 };
+
+struct ManagerButton : Window
+{
+	enum { pointersK = 3};
+	Window *pointers[pointersK];
+	bool advancedMode = false;
+
+	virtual void draw () override;
+	virtual void onClick () override;
+};
+
+
 
 
 
@@ -108,8 +118,6 @@ int main ()
 	Canvas mainCanvas = {};
 	mainCanvas.rect = {.pos = {0, 50}, .finishPos = {1000, 1000}};
 	mainCanvas.color = TX_BLACK;
-	mainCanvas.funcClicked = (void (Window::*) ()) &Canvas::clicked;
-	mainCanvas.funcDraw	= (void (Window::*) ()) &Canvas::drawCanvas;
 	mainCanvas.canvas = txCreateCompatibleDC (mainCanvas.rect.getSize().x, mainCanvas.rect.getSize().y);
 
 	pointers[0] = &mainCanvas;
@@ -119,47 +127,36 @@ int main ()
 	redColor.rect = {.pos = {0, 0}, .finishPos = {50, 50}};
 	redColor.color = TX_LIGHTRED;
 	redColor.mainCanvas = &mainCanvas;
-	redColor.funcClicked = (void (Window::*) ()) &ColorButton::reactColor;
-	redColor.funcDraw = (void (Window::*) ()) &ColorButton::draw;
 	pointers[1] = &redColor;
 
 	ColorButton blueColor = {};
 	blueColor.rect = {.pos = {100, 0}, .finishPos = {150, 50}};  
 	blueColor.color = TX_LIGHTBLUE;
 	blueColor.mainCanvas = &mainCanvas;
-	blueColor.funcClicked = (void (Window::*) ()) &ColorButton::reactColor;
-	blueColor.funcDraw = (void (Window::*) ()) &ColorButton::draw;
 	pointers[2] = &blueColor;
 
 	ColorButton GreenColor = {};
 	GreenColor.rect = {.pos = {200, 0}, .finishPos = {250, 50}};
 	GreenColor.color = TX_LIGHTGREEN;
 	GreenColor.mainCanvas = &mainCanvas;
-	GreenColor.funcClicked = (void (Window::*) ()) &ColorButton::reactColor;
-	GreenColor.funcDraw = (void (Window::*) ()) &ColorButton::draw;
 	pointers[3] = &GreenColor;
 	
 	CleanButton cleanButton = {};
 	cleanButton.rect = {.pos = {300, 0}, .finishPos = {350, 50}};
 	cleanButton.color = TX_WHITE;
 	cleanButton.mainCanvas = &mainCanvas;
-	cleanButton.funcClicked = (void (Window::*) ()) &CleanButton::cleanScreen;
-	cleanButton.funcDraw = (void (Window::*) ()) &CleanButton::draw;
 	pointers[4] = &cleanButton;
 
 	CloseButton closeButton = {};
 	closeButton.rect = {.pos = {950, 0}, .finishPos = {1000, 50}};
 	closeButton.color = TX_RED;
-	closeButton.funcClicked = (void (Window::*) ()) &CloseButton::endprogramm;
-	closeButton.funcDraw = (void (Window::*) ()) &CloseButton::draw;
 	pointers[5] = &closeButton;
 
 	SizeButton minSize = {};
 	minSize.rect = {.pos = {500, 0}, .finishPos = {550, 50}};
 	minSize.color = TX_BLUE;
 	minSize.mainCanvas = &mainCanvas;
-	minSize.funcClicked = (void (Window::*) ()) &SizeButton::minusSize;
-	minSize.funcDraw    = (void (Window::*) ()) &SizeButton::textDraw;
+	minSize.sizeType = -1;
 	sprintf (minSize.text, "-");
 	pointers[6] = &minSize;
 	
@@ -167,15 +164,13 @@ int main ()
 	plusRad.rect = {.pos = {600, 0}, .finishPos = {650, 50}};
 	plusRad.color = TX_GREEN;
 	plusRad.mainCanvas = &mainCanvas;
-	plusRad.funcClicked = (void (Window::*) ()) &SizeButton::plusSize;
-	plusRad.funcDraw    = (void (Window::*) ()) &SizeButton::textDraw;
+	plusRad.sizeType = 1;
 	sprintf (plusRad.text, "+");
 	pointers[7] = &plusRad;
 
 	TimeButton timeButton = {};
 	timeButton.rect	= {.pos = {700, 0}, .finishPos = {850, 50}};
 	timeButton.color = TX_GREEN;
-	timeButton.funcDraw = (void (Window::*) ()) &TimeButton::printTime;
 	pointers[8] = &timeButton;
 
 
@@ -205,7 +200,7 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 }
 
 
-void TimeButton::printTime ()
+void TimeButton::draw ()
 {
 	txSetAllColors (TX_BLACK);
 	RECTangle (rect);
@@ -227,7 +222,9 @@ void TimeButton::printTime ()
 
 }
 
-void SizeButton::textDraw ()
+
+
+void SizeButton::draw ()
 {
 	$s
 	txSetAllColors (color);
@@ -248,7 +245,7 @@ void Window::draw ()
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);	
 }
 
-void Canvas::drawCanvas ()
+void Canvas::draw ()
 {
 	// canvasPtr = this;
 
@@ -280,33 +277,33 @@ void Canvas::drawCanvas ()
 	if (clearBackground)
 	{
 		txSetAllColors (TX_BLACK, canvas);
-		RECTangle (rect, canvas);
+		txRectangle (rect.pos.x, 0, rect.finishPos.x, rect.finishPos.y, canvas);
 		clearBackground = false;
 	}
 }
 
-void SizeButton::minusSize ()
-{
-	if (!isClicked && mainCanvas->lineThickness > 0)
-	{
-		mainCanvas->lineThickness--;
-	}
-}
-
-void SizeButton::plusSize ()
+void SizeButton::onClick ()
 {
 	if (!isClicked)
 	{
-		mainCanvas->lineThickness++;
+		int mx = txMouseX ();
+		if (sizeType > 0)
+		{
+			mainCanvas->lineThickness++;
+		}
+		if (sizeType < 0 && mainCanvas->lineThickness > 0)
+		{
+			mainCanvas->lineThickness--;
+		}
 	}
 }
 
-void CloseButton::endprogramm ()
+void CloseButton::onClick ()
 {
 	IsRunning = false;
 }
 
-void Canvas::clicked ()
+void Canvas::onClick ()
 {
 
 	txSetAllColors ( drawColor);
@@ -328,7 +325,8 @@ void checkClicked (Window *pointers[PointersNum])
 	{
 		if (inButtonClicked (pointers[i]->rect))
 		{
-			(pointers[i]->*(pointers[i]->funcClicked))();
+			//(pointers[i]->*(pointers[i]->funcClicked))();
+			pointers[i]->onClick ();
 			pointers[i]->isClicked = true;
 		}
 		else
@@ -346,27 +344,18 @@ void drawButtons (Window *pointers[PointersNum])
 	$s
 	for (int i = 0; i < PointersNum; i ++)
 	{
-		//void (Window::*ptrDraw)() = Window::*funcDraw;
-		(pointers[i]->*(pointers[i]->funcDraw))();
-		//printf ("1");
-		/*
-		txSetTextAlign (TA_CENTER);
-		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
-		txTextOut (Windows[i].rect.pos.x + (Windows[i].rect.finishPos.x - Windows[i].rect.pos.x) / 2, 
-					Windows[i].rect.pos.y + (Windows[i].rect.finishPos.y - Windows[i].rect.pos.y) / 4, 
-					Windows[i].text);
-					*/
+		//(pointers[i]->*(pointers[i]->draw))();
+		pointers[i]->draw ();
 	}
 }
 
-void ColorButton::reactColor ()
+void ColorButton::onClick ()
 {
 	mainCanvas->drawColor = color;
 }
 
 
-void CleanButton::cleanScreen ()
+void CleanButton::onClick ()
 {
 	mainCanvas->clearBackground = true;
 }
