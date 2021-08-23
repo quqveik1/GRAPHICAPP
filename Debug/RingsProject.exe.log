@@ -503,3 +503,77 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x00927674 (32-bit), Flags: CMdRe0, Thread: 0x247C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7900EF39 in C:\Windows\SYSTEM32\ucrtbased.dll: seh_filter_exe()
+# 3 0x78BF335E in C:\Windows\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 6 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 22 2021 12:55:14, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 22 2021 12:55:17
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x00227674 (32-bit), Flags: CMdRe0, Thread: 0x66B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7924EF39 in C:\Windows\SYSTEM32\ucrtbased.dll: seh_filter_exe()
+# 3 0x7919335E in C:\Windows\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 6 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 22 2021 12:55:14, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 23 2021 00:03:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
