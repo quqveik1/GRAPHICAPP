@@ -577,3 +577,159 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x007BA68C (32-bit), Flags: CMdRe0, Thread: 0x3BBC (Main), GetLastError(): 6 (Неверный дескриптор), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7923E68C in C:\Windows\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7923B438 in C:\Windows\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7923DB8A in C:\Windows\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7923E4A4 in C:\Windows\SYSTEM32\ucrtbased.dll: malloc()
+#13 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#15 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 23 2021 17:12:14, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 23 2021 17:12:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x0035A68C (32-bit), Flags: CMdRe0, Thread: 0x5184 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7923E68C in C:\Windows\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7923B438 in C:\Windows\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7923DB8A in C:\Windows\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7923E4A4 in C:\Windows\SYSTEM32\ucrtbased.dll: malloc()
+#13 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#15 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 23 2021 17:23:32, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 23 2021 17:23:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x0035A68C (32-bit), Flags: CMdRe0, Thread: 0x555C (Main), GetLastError(): 6 (Неверный дескриптор), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7923E68C in C:\Windows\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7923B438 in C:\Windows\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7923DB8A in C:\Windows\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7923E4A4 in C:\Windows\SYSTEM32\ucrtbased.dll: malloc()
+#13 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#15 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 23 2021 17:23:32, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 23 2021 18:37:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x0030A68C (32-bit), Flags: CMdRe0, Thread: 0x4998 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x7923E68C in C:\Windows\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7923B438 in C:\Windows\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7923DB8A in C:\Windows\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7923E4A4 in C:\Windows\SYSTEM32\ucrtbased.dll: malloc()
+#13 0x7680FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77B17A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#15 0x77B17A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 23 2021 18:37:45, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 23 2021 18:37:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
