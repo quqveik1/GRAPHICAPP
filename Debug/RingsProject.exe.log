@@ -733,3 +733,144 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13164, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x0108C644 (32-bit), Flags: CMdRe0, Thread: 0x1484 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x7694FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77757A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#12 0x77757A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13164):
+
+  13162: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13163:     {
+=>13164: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13165: 
+  13166: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (642):
+
+    640: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+    641: {
+=>  642: 	txSetFillColor (color, dc); 
+    643: 	txSetColor (color, 1, dc);
+    644: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Aug 30 2021 13:01:57, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Aug 30 2021 13:01:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400], Instance: 0x007EC644 (32-bit), Flags: CMdRe0, Thread: 0x1438 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x79ECEF39 in C:\Windows\SYSTEM32\ucrtbased.dll: seh_filter_exe()
+# 3 0x79D1335E in C:\Windows\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 6 0x7511FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 7 0x77227A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+# 8 0x77227A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-06-06 04:32:03 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Sep 13 2021 19:31:46, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Sep 13 2021 19:31:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0094D644 (32-bit), Flags: CMdRe0, Thread: 0x3D00 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x7511FA29 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77227A7E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+#12 0x77227A4E in C:\Windows\SYSTEM32\ntdll.dll: RtlGetAppContainerNamedObjectPath()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (774):
+
+    772: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+    773: {
+=>  774: 	txSetFillColor (color, dc); 
+    775: 	txSetColor (color, 1, dc);
+    776: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Sep 16 2021 18:49:32, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Sep 16 2021 18:49:36
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -6,7 +6,7 @@
 
 
 
-
+const int DELTACLOCKTIME = 100;
 
 
 
@@ -154,9 +154,15 @@ struct OpenManager : Window
 {
 	Manager *manager;
 
+	OpenManager (Rect _rect, COLORREF _color, Manager *_manager, const char *_text)	:
+		Window (_rect, _color, _text),
+		manager (_manager)
+	{}
+
 	virtual void draw () override;
 	virtual void onClick () override;
 };
+
 
 struct ColorManager : Window 
 {
@@ -240,6 +246,44 @@ struct OpenSizeManager : Window
 };
 
 
+struct StringButton : Window
+{
+	Canvas *canvas;
+	bool advancedMode;
+	char inText[32] = {};
+	int cursorPosition;
+	int textLen;
+	int placeNewNum;
+	int lastButton;
+	bool buttonClicked;
+	bool allowEnter;
+	int lastTimeClicked;
+
+
+
+	StringButton(Rect _rect, COLORREF _color, Canvas* _canvas) :
+		Window(_rect, _color),
+		canvas(_canvas),
+		advancedMode(true),
+		cursorPosition(-1),
+		textLen (1),
+		placeNewNum (-1),
+		lastButton(0),
+		buttonClicked(false),
+		allowEnter(false),
+		lastTimeClicked(0)
+	{}
+
+
+	virtual void draw () override;
+	void checkSymbols ();
+	void cursorMovement (int side);
+	void backSpace ();
+
+
+};
+
+
 
 
 
@@ -261,23 +305,46 @@ int SLEEPTIME = 30;
 void RECTangle (const Rect rect, HDC dc = txDC ());
 void txSetAllColors (COLORREF color, HDC dc = txDC ());
 void engine (Manager *manager);
+void shiftArrBack (char arr[], int length);
+void shiftArrForward (char arr[], int length);
+
+bool checkDeltaTime (int lastTimeClicked);
 //void drawButtons (Window *pointers[PointersNum]);
 //void checkClicked (Window *pointers[PointersNum]);
+
+/*
+int main ()
+{
+	int i = 0;
+
+	for (;;)
+	{
+		if (_kbhit ())
+		{
+			if (i = _getch ())
+			{
+				printf ("[%c] = %d\n", i, i);
+			}
+		}
+	}
+} */
+
 
 int main ()
 {
 	txCreateWindow (1000, 1000);
-	txSelectFont ("Arial", 40);
+	txSelectFont ("Arial", 40, 30);
+	//printf ("פûאפûא");
 
 	
 	//Window Windows[WindowNum] = {};
 	//Window* pointers[PointersNum] = {};
-	Manager *manager = new Manager({{0, 0}, {1000, 1000}}, TX_WHITE, 8, true);
+	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 9, true);
 
 	Canvas *mainCanvas = new Canvas();
 	manager->addWindow (mainCanvas);
 
-	ColorManager *colorManager = new ColorManager({.pos = {75, 0}, .finishPos = {250, 50}}, 3);
+	Manager *colorManager = new Manager({.pos = {75, 0}, .finishPos = {250, 50}}, TX_WHITE, 3, false);
 	manager->addWindow (colorManager);
 
 		ColorButton *redColor = new ColorButton({.pos = {75, 0}, .finishPos = {125, 50}}, TX_LIGHTRED, mainCanvas);
@@ -289,7 +356,7 @@ int main ()
 		ColorButton *greenColor = new ColorButton({.pos = {225, 0}, .finishPos = {275, 50}}, TX_LIGHTGREEN, mainCanvas);
 		colorManager->addWindow(greenColor);
 
-	OpenColorManager *openManager = new OpenColorManager({.pos = {0, 0}, .finishPos = {50, 50}}, TX_WHITE, colorManager, "->");
+	OpenManager *openManager = new OpenManager({.pos = {0, 0}, .finishPos = {50, 50}}, TX_WHITE, colorManager, "->");
 	manager->addWindow (openManager);
 
 	CleanButton *cleanButton = new CleanButton({.pos = {400, 0}, .finishPos = {450, 50}}, TX_WHITE, mainCanvas, "Clear");
@@ -298,7 +365,7 @@ int main ()
 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, "X");
 	manager->addWindow (closeButton);
 
-	SizeManager *sizeManager = new SizeManager({.pos = {575, 0}, .finishPos = {840, 50}}, 4);
+	Manager *sizeManager = new Manager({.pos = {575, 0}, .finishPos = {840, 50}}, TX_WHITE, 4, false);
 	manager->addWindow (sizeManager);
 
 		SizeButton *minSize = new SizeButton({.pos = {575, 0}, .finishPos = {625, 50}}, TX_BLUE, mainCanvas, -1, "-");
@@ -313,11 +380,16 @@ int main ()
 		SizeNumButton *ten = new SizeNumButton({.pos = {790, 0}, .finishPos = {840, 50}}, TX_RED, mainCanvas, 10, "10");
 		sizeManager->addWindow (ten);
 
-	OpenSizeManager *openSizeManager = new OpenSizeManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager, "->");
+	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager, "->");
 	manager->addWindow (openSizeManager);
 
 	TimeButton *timeButton = new TimeButton ({.pos = {835, 0}, .finishPos = {850, 50}});
 	manager->addWindow (timeButton);
+
+	StringButton *stringButton = new StringButton ({.pos = {350, 50}, .finishPos = {650, 100}}, TX_WHITE, mainCanvas);
+	manager->addWindow (stringButton);
+
+	txBegin ();
 
 	engine (manager);
 
@@ -334,6 +406,8 @@ int main ()
 	
 	txDeleteDC (mainCanvas->canvas);
 	txDisableAutoPause ();
+
+	return 0;
 
 }
 
@@ -354,17 +428,24 @@ void Manager::draw ()
 		for (int i = 0; i < newButtonNum; i++)
 		{
 			pointers[i]->draw();
+			if (txMouseButtons () != 1)
+			{
+				pointers[i]->isClicked = false;
+			}
 		}
 	}
 }	
 
 void Manager::onClick ()
 {
+	int mx = txMouseX ();
+	int my = txMouseY ();
 	if (advancedMode)
 	{
 		for (int i = 0; i < newButtonNum; i++)
 		{
-			if (pointers[i]->rect.inRect (txMouseX (), txMouseY ()))
+			
+			if (pointers[i]->rect.inRect (mx, my))
 			{
 				pointers[i]->onClick ();
 				pointers[i]->isClicked = true;
@@ -397,6 +478,215 @@ bool SizeManager::addWindow (Window *window)
 	newButtonNum++;
 	
 	return 1;
+}
+
+void StringButton::draw ()
+{
+	$s;
+	txSetAllColors (color, canvas->canvas);
+	txRectangle (rect.pos.x - canvas->rect.pos.x, rect.pos.y - canvas->rect.pos.y, rect.finishPos.x - canvas->rect.pos.x, rect.finishPos.y - canvas->rect.pos.y, canvas->canvas);
+
+	/*
+	if (!blinkCursorLastTime)
+	{
+		$s;
+		txSetAllColors (TX_BLACK);
+		txLine(rect.pos.x + (40/3) * cursorPosition, rect.pos.y, rect.pos.x + (40 * 0.3) * cursorPosition, rect.pos.y + 40);
+		blinkCursorLastTime = true;
+	}
+	else
+	{
+		blinkCursorLastTime = false;
+	}
+	*/
+	//const char* alphabet = "abcd";
+
+	bool isShifted = false;
+	bool deleteChar = false;
+	if (checkDeltaTime (lastTimeClicked))
+	{
+		if (txGetAsyncKeyState(VK_LEFT))
+		{
+			cursorMovement (VK_LEFT);
+			/*
+			if (cursorPosition >= 0 && clock() - lastTimeClicked > 100)
+			{
+				lastTimeClicked = clock();
+				shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
+				cursorPosition--;
+				shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+			}
+			*/
+		}
+		if (txGetAsyncKeyState(VK_RIGHT))
+		{
+			cursorMovement (VK_RIGHT);
+			/*
+			if (cursorPosition < textLen - 2 && clock() - lastTimeClicked > 100)
+			{
+				lastTimeClicked = clock();
+				shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
+				cursorPosition++;
+				shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+			}
+			*/
+		}
+
+		if (txGetAsyncKeyState (VK_BACK))
+		{
+			backSpace ();	
+		}
+		/*
+
+		for (int i = '0'; i <= '9'; i++)
+		{
+			if (txGetAsyncKeyState(i))
+			{
+				if (lastButton != i)
+				{
+					lastButton = i;
+					if (clock() - lastTimeClicked > 100)
+					{
+						lastTimeClicked = clock();
+						shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+						inText[cursorPosition + 1] = i;
+						cursorPosition++;
+						textLen++;
+					}
+				}
+			}
+		}
+
+		for (int i = 'A'; i <= 'Z'; i++)
+		{
+			if (txGetAsyncKeyState (i))
+			{
+				if (lastButton != i)
+				{
+					lastButton = i;
+
+					if (clock() - lastTimeClicked > 100)
+					{
+						lastTimeClicked = clock();
+						shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+						inText[cursorPosition + 1] = i + 32;
+
+						if (isShifted)
+						{
+							inText[cursorPosition + 1] -= 32;
+							isShifted = false;
+						}
+
+						cursorPosition++;
+						textLen++;
+					}
+				}
+			}
+			else
+			{
+				if (lastButton == i)
+				{
+					lastButton = 0;
+				}					 
+			}
+		}	*/
+
+		checkSymbols ();
+	}
+	
+	if (clock() % 500 < 250)
+	{
+		inText[cursorPosition + 1] = '|';
+	}
+	else
+	{
+		inText[cursorPosition + 1] = ' ';
+	}
+
+
+	txSetTextAlign (TA_LEFT);
+	txSetAllColors (TX_BLACK, canvas->canvas);
+
+	txTextOut (( rect.pos.x - canvas->rect.pos.x), (rect.pos.y - canvas->rect.pos.y), inText, canvas->canvas);
+}
+
+void StringButton::checkSymbols ()
+{
+	if (!_kbhit ())	return;
+	
+	int symbol = _getch ();
+
+	if (lastButton == symbol || symbol == '\b') return;
+
+	//lastButton = symbol;
+	lastTimeClicked = clock();
+	shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+	inText[cursorPosition + 1] = symbol;
+	cursorPosition++;
+	textLen++;
+}
+
+bool checkDeltaTime (int lastTimeClicked)
+{
+	return clock () - lastTimeClicked > DELTACLOCKTIME;
+}
+
+void StringButton::backSpace ()
+{
+	if (cursorPosition >= 0)
+	{
+		lastTimeClicked = clock();
+		shiftArrBack(&inText[cursorPosition], textLen - cursorPosition  + 1);
+		cursorPosition--;
+		textLen--;
+	}
+}
+
+
+void StringButton::cursorMovement (int side)
+{
+	bool validMovement = false;	
+	if (side == VK_RIGHT) validMovement = (cursorPosition < textLen - 2);
+	if (side == VK_LEFT)  validMovement = (cursorPosition >= 0);
+
+	if (validMovement && clock () - lastTimeClicked > DELTACLOCKTIME)
+	{
+		lastTimeClicked = clock();
+		shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
+		if (side == VK_RIGHT) cursorPosition++;
+		if (side == VK_LEFT) cursorPosition--;
+		shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+	}
+}
+
+void shiftArrForward (char arr[], int length)
+{
+	char copyChar = arr[0];
+
+	for (int i = 1; i < length; i++)
+	{
+		char rememberArr = arr[i];
+		arr[i] = copyChar;
+		copyChar = rememberArr;
+	}
+}
+
+void shiftArrBack (char arr[], int length)
+{
+	char copyChar = '\0';
+
+	for (int i = 0; i < length; i++)
+	{
+		if (i == length - 1)
+		{
+			arr[i] = '\0';
+		}
+		else
+		{
+			arr[i] = arr[i + 1];
+		}
+		
+	}
 }
 
 void OpenSizeManager::draw()
@@ -545,6 +835,10 @@ void engine (Manager *manager)
 			manager->onClick ();
 			if (!IsRunning) break;
 		}
+		txSleep (30);
+
+		txSetAllColors (TX_BLACK);
+		txRectangle (manager->rect.pos.x, manager->rect.pos.y, manager->rect.finishPos.x, manager->rect.finishPos.y);
 		//txClear ();
 	}
 }
