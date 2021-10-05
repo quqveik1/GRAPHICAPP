@@ -51,6 +51,7 @@ struct Canvas : Window
 	virtual void onClick () override;
 };
 
+
 struct TimeButton : Window
 {
 	TimeButton (Rect _rect)	:
@@ -248,7 +249,6 @@ struct OpenSizeManager : Window
 
 struct StringButton : Window
 {
-	Canvas *canvas;
 	bool advancedMode;
 	char inText[32] = {};
 	int cursorPosition;
@@ -258,12 +258,17 @@ struct StringButton : Window
 	bool buttonClicked;
 	bool allowEnter;
 	int lastTimeClicked;
+	Window *saveButton;
+	bool lastConditionOfManager;
+	Canvas *canvas;
 
 
 
-	StringButton(Rect _rect, COLORREF _color, Canvas* _canvas) :
+	StringButton(Rect _rect, COLORREF _color, Window *_saveButton, Canvas *_canvas) :
 		Window(_rect, _color),
-		canvas(_canvas),
+		saveButton (_saveButton),
+		canvas (_canvas),
+		lastConditionOfManager (false),
 		advancedMode(true),
 		cursorPosition(-1),
 		textLen (1),
@@ -279,6 +284,7 @@ struct StringButton : Window
 	void checkSymbols ();
 	void cursorMovement (int side);
 	void backSpace ();
+	void saveDC ();
 
 
 };
@@ -295,6 +301,7 @@ struct StringButton : Window
 bool IsRunning = true;
 int Radius = 2;
 int SLEEPTIME = 30;
+const Vector SCREENSIZE = {1000, 1000};
 
 
 
@@ -307,39 +314,20 @@ void txSetAllColors (COLORREF color, HDC dc = txDC ());
 void engine (Manager *manager);
 void shiftArrBack (char arr[], int length);
 void shiftArrForward (char arr[], int length);
-
 bool checkDeltaTime (int lastTimeClicked);
-//void drawButtons (Window *pointers[PointersNum]);
-//void checkClicked (Window *pointers[PointersNum]);
-
-/*
-int main ()
-{
-	int i = 0;
-
-	for (;;)
-	{
-		if (_kbhit ())
-		{
-			if (i = _getch ())
-			{
-				printf ("[%c] = %d\n", i, i);
-			}
-		}
-	}
-} */
 
 
 int main ()
 {
-	txCreateWindow (1000, 1000);
-	txSelectFont ("Arial", 40, 30);
+	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+	txSelectFont ("Arial", 20, 13);
+	_mkdir ("Images");
 	//printf ("פûאפûא");
 
 	
 	//Window Windows[WindowNum] = {};
 	//Window* pointers[PointersNum] = {};
-	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 9, true);
+	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 10, true);
 
 	Canvas *mainCanvas = new Canvas();
 	manager->addWindow (mainCanvas);
@@ -386,8 +374,20 @@ int main ()
 	TimeButton *timeButton = new TimeButton ({.pos = {835, 0}, .finishPos = {850, 50}});
 	manager->addWindow (timeButton);
 
-	StringButton *stringButton = new StringButton ({.pos = {350, 50}, .finishPos = {650, 100}}, TX_WHITE, mainCanvas);
-	manager->addWindow (stringButton);
+	Manager *stringManager = new Manager({.pos = {300, 0}, .finishPos = {650, 100}}, TX_WHITE, 2, false); 
+	manager->addWindow (stringManager);
+
+		Window *saveButton = new Window ({.pos = {345, 0}, .finishPos = {395, 50}}, TX_WHITE, "<-");
+		stringManager->addWindow (saveButton);
+
+		StringButton *stringButton = new StringButton ({.pos = {285, 55}, .finishPos = {650, 105}}, TX_WHITE, saveButton, mainCanvas);
+		stringManager->addWindow (stringButton);
+		
+
+	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager, "S");
+	manager->addWindow (openSaveNameManager);
+
+	
 
 	txBegin ();
 
@@ -428,7 +428,7 @@ void Manager::draw ()
 		for (int i = 0; i < newButtonNum; i++)
 		{
 			pointers[i]->draw();
-			if (txMouseButtons () != 1)
+			if (txMouseButtons () != 1 && pointers[i]->isClicked != false)
 			{
 				pointers[i]->isClicked = false;
 			}
@@ -483,23 +483,24 @@ bool SizeManager::addWindow (Window *window)
 void StringButton::draw ()
 {
 	$s;
-	txSetAllColors (color, canvas->canvas);
-	txRectangle (rect.pos.x - canvas->rect.pos.x, rect.pos.y - canvas->rect.pos.y, rect.finishPos.x - canvas->rect.pos.x, rect.finishPos.y - canvas->rect.pos.y, canvas->canvas);
+	txSetAllColors (color);
+	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 
-	/*
-	if (!blinkCursorLastTime)
+	if (saveButton->isClicked == true) 
 	{
-		$s;
-		txSetAllColors (TX_BLACK);
-		txLine(rect.pos.x + (40/3) * cursorPosition, rect.pos.y, rect.pos.x + (40 * 0.3) * cursorPosition, rect.pos.y + 40);
-		blinkCursorLastTime = true;
+		lastConditionOfManager = true;
 	}
-	else
+	
+
+	if (lastConditionOfManager == true && saveButton->isClicked == false)
 	{
-		blinkCursorLastTime = false;
+		char path[OFS_MAXPATHNAME] = {};
+		sprintf (path, "Images/%s.bmp", inText);
+
+		printf ("%d", txSaveImage (path, canvas->canvas));
+
+		lastConditionOfManager = false;
 	}
-	*/
-	//const char* alphabet = "abcd";
 
 	bool isShifted = false;
 	bool deleteChar = false;
@@ -508,89 +509,17 @@ void StringButton::draw ()
 		if (txGetAsyncKeyState(VK_LEFT))
 		{
 			cursorMovement (VK_LEFT);
-			/*
-			if (cursorPosition >= 0 && clock() - lastTimeClicked > 100)
-			{
-				lastTimeClicked = clock();
-				shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
-				cursorPosition--;
-				shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-			}
-			*/
 		}
 		if (txGetAsyncKeyState(VK_RIGHT))
 		{
 			cursorMovement (VK_RIGHT);
-			/*
-			if (cursorPosition < textLen - 2 && clock() - lastTimeClicked > 100)
-			{
-				lastTimeClicked = clock();
-				shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
-				cursorPosition++;
-				shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-			}
-			*/
 		}
 
 		if (txGetAsyncKeyState (VK_BACK))
 		{
 			backSpace ();	
 		}
-		/*
-
-		for (int i = '0'; i <= '9'; i++)
-		{
-			if (txGetAsyncKeyState(i))
-			{
-				if (lastButton != i)
-				{
-					lastButton = i;
-					if (clock() - lastTimeClicked > 100)
-					{
-						lastTimeClicked = clock();
-						shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-						inText[cursorPosition + 1] = i;
-						cursorPosition++;
-						textLen++;
-					}
-				}
-			}
-		}
-
-		for (int i = 'A'; i <= 'Z'; i++)
-		{
-			if (txGetAsyncKeyState (i))
-			{
-				if (lastButton != i)
-				{
-					lastButton = i;
-
-					if (clock() - lastTimeClicked > 100)
-					{
-						lastTimeClicked = clock();
-						shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-						inText[cursorPosition + 1] = i + 32;
-
-						if (isShifted)
-						{
-							inText[cursorPosition + 1] -= 32;
-							isShifted = false;
-						}
-
-						cursorPosition++;
-						textLen++;
-					}
-				}
-			}
-			else
-			{
-				if (lastButton == i)
-				{
-					lastButton = 0;
-				}					 
-			}
-		}	*/
-
+		
 		checkSymbols ();
 	}
 	
@@ -605,10 +534,11 @@ void StringButton::draw ()
 
 
 	txSetTextAlign (TA_LEFT);
-	txSetAllColors (TX_BLACK, canvas->canvas);
+	txSetAllColors (TX_BLACK);
 
-	txTextOut (( rect.pos.x - canvas->rect.pos.x), (rect.pos.y - canvas->rect.pos.y), inText, canvas->canvas);
+	txTextOut (rect.pos.x, rect.pos.y, inText);
 }
+
 
 void StringButton::checkSymbols ()
 {
@@ -618,7 +548,6 @@ void StringButton::checkSymbols ()
 
 	if (lastButton == symbol || symbol == '\b') return;
 
-	//lastButton = symbol;
 	lastTimeClicked = clock();
 	shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
 	inText[cursorPosition + 1] = symbol;
@@ -716,6 +645,7 @@ void OpenManager::onClick ()
 	if (!isClicked)
 	{
 		manager->advancedMode = !manager->advancedMode;
+		manager->draw ();
 	}
 }
 
@@ -925,7 +855,12 @@ void Window::draw ()
 {
 	$s
 	txSetAllColors (color);
-	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);	
+	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	txSelectFont ("Arial", 40);
+	txSetAllColors (TX_BLACK);
+		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 5, 
+					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
+					text);
 }
 
 void Canvas::draw ()
