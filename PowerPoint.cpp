@@ -16,6 +16,7 @@ struct Window
 	COLORREF color;
 	const char *text;
 	bool isClicked;
+	HDC dc;
 
 	//void (Window::*funcClicked) ();
 	//void (Window::*funcDraw) ();
@@ -23,11 +24,12 @@ struct Window
 	virtual void draw ();
 	virtual void onClick () {};
 
-	Window (Rect _rect, COLORREF _color = TX_WHITE, const char *_text = "") :
+	Window (Rect _rect, COLORREF _color = TX_WHITE, const char *_text = "", HDC _dc = NULL) :
 		rect (_rect),
 		color(_color),
 		text (_text), 
-		isClicked (false)
+		isClicked (false), 
+		dc (_dc)
 
 	{}
 };
@@ -76,9 +78,9 @@ struct ColorButton : Window
 {
 	Canvas *mainCanvas;
 
-	ColorButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas) :
-		Window (_rect, _color),
-		mainCanvas (_mainCanvas) 
+	ColorButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas, HDC _dc) :
+		Window (_rect, _color, "", _dc),
+		mainCanvas (_mainCanvas)
 	{}
 
 	virtual void onClick ()override;
@@ -89,8 +91,8 @@ struct SizeButton : Window
 	Canvas *mainCanvas;
 	int sizeType;
 
-	SizeButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas, int _sizeType, const char *_text) :
-		Window (_rect, _color, _text),
+	SizeButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas, int _sizeType) :
+		Window (_rect, _color),
 		mainCanvas (_mainCanvas), 
 		sizeType (_sizeType)
 	{}
@@ -99,6 +101,23 @@ struct SizeButton : Window
 	virtual void onClick () override;
 
 };
+
+/*
+struct SwitchButton :Window
+{
+	SizeButton *plus;
+	SizeButton *minus;
+
+	SwitchButton (Rect _rect, SizeButton *_plus, SizeButton *_minus, HDC _dc) :
+		Window (_rect, TX_WHITE, "", _dc),
+		plus (_plus),
+		minus (_minus)
+	{}
+
+	virtual void draw () override;
+	virtual void onClick () override;
+
+};	 */
 
 struct SizeNumButton : Window
 {
@@ -121,8 +140,8 @@ struct CleanButton : Window
 {
 	Canvas *mainCanvas;
 
-	CleanButton (Rect _rect, COLORREF _color, Canvas *_mainCanvas, const char *_text) :
-		Window (_rect, _color, _text),
+	CleanButton (Rect _rect, COLORREF _color, Canvas *_mainCanvas, HDC _dc = NULL, const char *_text = "") :
+		Window (_rect, _color, _text, _dc),
 		mainCanvas (_mainCanvas)
 	{}
 
@@ -137,8 +156,8 @@ struct Manager : Window
 	int newButtonNum;
 	bool advancedMode;
 
-	Manager (Rect _rect, COLORREF _color, int _length, bool _advancedMode) : 
-		Window (_rect, _color),
+	Manager (Rect _rect, COLORREF _color, int _length, bool _advancedMode, HDC _dc = NULL) : 
+		Window (_rect, _color, "", _dc),
 		length (_length),
 		pointers (new Window*[length]{}),
 		advancedMode (_advancedMode),
@@ -155,8 +174,8 @@ struct OpenManager : Window
 {
 	Manager *manager;
 
-	OpenManager (Rect _rect, COLORREF _color, Manager *_manager, const char *_text)	:
-		Window (_rect, _color, _text),
+	OpenManager (Rect _rect, COLORREF _color, Manager *_manager, HDC _dc = NULL, const char *_text = "")	:
+		Window (_rect, _color, _text, _dc),
 		manager (_manager)
 	{}
 
@@ -261,10 +280,11 @@ struct StringButton : Window
 	Window *saveButton;
 	bool lastConditionOfManager;
 	Canvas *canvas;
+	bool onlyNums;
 
 
 
-	StringButton(Rect _rect, COLORREF _color, Window *_saveButton, Canvas *_canvas) :
+	StringButton(Rect _rect, COLORREF _color, Window *_saveButton, Canvas *_canvas, bool _onlyNums = false) :
 		Window(_rect, _color),
 		saveButton (_saveButton),
 		canvas (_canvas),
@@ -276,7 +296,8 @@ struct StringButton : Window
 		lastButton(0),
 		buttonClicked(false),
 		allowEnter(false),
-		lastTimeClicked(0)
+		lastTimeClicked(0),
+		onlyNums (_onlyNums)
 	{}
 
 
@@ -327,55 +348,55 @@ int main ()
 	
 	//Window Windows[WindowNum] = {};
 	//Window* pointers[PointersNum] = {};
-	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 10, true);
+	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 11, true);
 
 	Canvas *mainCanvas = new Canvas();
 	manager->addWindow (mainCanvas);
 
-	Manager *colorManager = new Manager({.pos = {75, 0}, .finishPos = {250, 50}}, TX_WHITE, 3, false);
-	manager->addWindow (colorManager);
+	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, TX_WHITE, 2, true, txLoadImage ("HUD-3.bmp"));
+	manager->addWindow (menu);
 
-		ColorButton *redColor = new ColorButton({.pos = {75, 0}, .finishPos = {125, 50}}, TX_LIGHTRED, mainCanvas);
-		colorManager->addWindow(redColor);
+		Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, TX_WHITE, 3, false);
+		menu->addWindow (colorManager);
+
+			ColorButton *redColor = new ColorButton({.pos = {10, 180}, .finishPos = {50, 220}}, TX_LIGHTRED, mainCanvas, txLoadImage ("RedButton.bmp"));
+			colorManager->addWindow(redColor);
 	
-		ColorButton *blueColor = new ColorButton({.pos = {150, 0}, .finishPos = {200, 50}}, TX_LIGHTBLUE, mainCanvas);
-		colorManager->addWindow(blueColor);
+			ColorButton *blueColor = new ColorButton({.pos = {70, 180}, .finishPos = {110, 220}}, TX_LIGHTBLUE, mainCanvas, txLoadImage ("BlueButton.bmp"));
+			colorManager->addWindow(blueColor);
 
-		ColorButton *greenColor = new ColorButton({.pos = {225, 0}, .finishPos = {275, 50}}, TX_LIGHTGREEN, mainCanvas);
-		colorManager->addWindow(greenColor);
+			ColorButton *greenColor = new ColorButton({.pos = {130, 180}, .finishPos = {170, 220}}, TX_LIGHTGREEN, mainCanvas, txLoadImage ("GreenButton.bmp"));
+			colorManager->addWindow(greenColor);
 
-	OpenManager *openManager = new OpenManager({.pos = {0, 0}, .finishPos = {50, 50}}, TX_WHITE, colorManager, "->");
-	manager->addWindow (openManager);
+		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
+		menu->addWindow (openManager);
 
-	CleanButton *cleanButton = new CleanButton({.pos = {400, 0}, .finishPos = {450, 50}}, TX_WHITE, mainCanvas, "Clear");
+	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
 	manager->addWindow (cleanButton);
 
 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, "X");
 	manager->addWindow (closeButton);
 
-	Manager *sizeManager = new Manager({.pos = {575, 0}, .finishPos = {840, 50}}, TX_WHITE, 4, false);
+	Manager *sizeManager = new Manager({.pos = {0, 0}, .finishPos = {389, 75}}, TX_WHITE, 4, true);
 	manager->addWindow (sizeManager);
 
-		SizeButton *minSize = new SizeButton({.pos = {575, 0}, .finishPos = {625, 50}}, TX_BLUE, mainCanvas, -1, "-");
-		sizeManager->addWindow (minSize);
+		Manager *switchManager = new Manager({.pos = {368, 44}, .finishPos = {389, 74}}, TX_WHITE, 4, true, txLoadImage ("SwitchButton.bmp"));
+		sizeManager->addWindow (switchManager);
+
+			SizeButton *minSize = new SizeButton({.pos = {368, 59}, .finishPos = {389, 74}}, TX_BLUE, mainCanvas, -1);
+			switchManager->addWindow (minSize);
 	
-		SizeButton *plusRad = new SizeButton({.pos = {650, 0}, .finishPos = {700, 50}}, TX_GREEN, mainCanvas, 1, "+");
-		sizeManager->addWindow (plusRad);
+			SizeButton *plusRad = new SizeButton({.pos = {368, 44}, .finishPos = {389, 59}}, TX_GREEN, mainCanvas, 1);
+			switchManager->addWindow (plusRad);
 
-		SizeNumButton *one = new SizeNumButton({.pos = {725, 0}, .finishPos = {775, 50}}, TX_RED, mainCanvas, 1, "1");
-		sizeManager->addWindow (one);
-
-		SizeNumButton *ten = new SizeNumButton({.pos = {790, 0}, .finishPos = {840, 50}}, TX_RED, mainCanvas, 10, "10");
-		sizeManager->addWindow (ten);
-
-	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager, "->");
-	manager->addWindow (openSizeManager);
+	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager);
+	//manager->addWindow (openSizeManager);
 
 	TimeButton *timeButton = new TimeButton ({.pos = {835, 0}, .finishPos = {850, 50}});
 	manager->addWindow (timeButton);
 
 	Manager *stringManager = new Manager({.pos = {300, 0}, .finishPos = {650, 100}}, TX_WHITE, 2, false); 
-	manager->addWindow (stringManager);
+	//manager->addWindow (stringManager);
 
 		Window *saveButton = new Window ({.pos = {345, 0}, .finishPos = {395, 50}}, TX_WHITE, "<-");
 		stringManager->addWindow (saveButton);
@@ -384,8 +405,8 @@ int main ()
 		stringManager->addWindow (stringButton);
 		
 
-	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager, "S");
-	manager->addWindow (openSaveNameManager);
+	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager);
+	//manager->addWindow (openSaveNameManager);
 
 	
 
@@ -425,6 +446,7 @@ void Manager::draw ()
 {
 	if (advancedMode)
 	{
+		if (dc != NULL) txBitBlt (rect.pos.x, rect.pos.y, dc);
 		for (int i = 0; i < newButtonNum; i++)
 		{
 			pointers[i]->draw();
@@ -442,7 +464,7 @@ void Manager::onClick ()
 	int my = txMouseY ();
 	if (advancedMode)
 	{
-		for (int i = 0; i < newButtonNum; i++)
+		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
 			
 			if (pointers[i]->rect.inRect (mx, my))
@@ -483,9 +505,10 @@ bool SizeManager::addWindow (Window *window)
 void StringButton::draw ()
 {
 	$s;
-	txSetAllColors (color);
-	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	//txSetAllColors (color);
+	///txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 
+	
 	if (saveButton->isClicked == true) 
 	{
 		lastConditionOfManager = true;
@@ -545,6 +568,7 @@ void StringButton::checkSymbols ()
 	if (!_kbhit ())	return;
 	
 	int symbol = _getch ();
+	if (! (symbol >= 48 && symbol <= 57) && onlyNums) return;
 
 	if (lastButton == symbol || symbol == '\b') return;
 
@@ -652,8 +676,9 @@ void OpenManager::onClick ()
 void OpenManager::draw()
 {
 	$s
-	txSetAllColors (color);
-	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	//txSetAllColors (color);
+	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
@@ -812,8 +837,9 @@ void TimeButton::draw ()
 void SizeButton::draw ()
 {
 	$s
-	txSetAllColors (color);
-	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	//txSetAllColors (color);
+	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
@@ -826,8 +852,10 @@ void SizeButton::draw ()
 void CleanButton::draw()
 {
 	$s
-		txSetAllColors (color);
-		txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+		//txSetAllColors (color);
+		//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+		txBitBlt (rect.pos.x, rect.pos.y, dc);
+		
 
 		txSetTextAlign (TA_CENTER);
 			txSetAllColors (TX_BLACK);
@@ -856,6 +884,9 @@ void Window::draw ()
 	$s
 	txSetAllColors (color);
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+
+	if (dc != NULL) txBitBlt (rect.pos.x, rect.pos.y, dc);
+
 	txSelectFont ("Arial", 40);
 	txSetAllColors (TX_BLACK);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 5, 
