@@ -3,6 +3,7 @@
 #include "Q_Vector.h"
 #include "Q_Rect.h"
 #include "Q_Buttons.h"
+#include <cmath>
 
 
 
@@ -269,7 +270,7 @@ struct OpenSizeManager : Window
 struct StringButton : Window
 {
 	bool advancedMode;
-	char inText[32] = {};
+	char *inText;
 	int cursorPosition;
 	int textLen;
 	int placeNewNum;
@@ -277,22 +278,19 @@ struct StringButton : Window
 	bool buttonClicked;
 	bool allowEnter;
 	int lastTimeClicked;
-	Window *saveButton;
 	bool lastConditionOfManager;
-	Canvas *canvas;
 	bool onlyNums;
 
 
 
-	StringButton(Rect _rect, COLORREF _color, Window *_saveButton, Canvas *_canvas, bool _onlyNums = false) :
+	StringButton(Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, bool _onlyNums = false) :
 		Window(_rect, _color),
-		saveButton (_saveButton),
-		canvas (_canvas),
+		inText (_redactingText),
 		lastConditionOfManager (false),
 		advancedMode(true),
-		cursorPosition(-1),
-		textLen (1),
-		placeNewNum (-1),
+		cursorPosition(_redactingTextLength - 1),
+		textLen (_redactingTextLength + 1),
+		placeNewNum (_redactingTextLength - 1),
 		lastButton(0),
 		buttonClicked(false),
 		allowEnter(false),
@@ -305,8 +303,20 @@ struct StringButton : Window
 	void checkSymbols ();
 	void cursorMovement (int side);
 	void backSpace ();
-	void saveDC ();
+};
 
+struct StringSizeButton	: StringButton
+{
+	int *num;
+
+	char redactingText[32] = {};
+
+	StringSizeButton(Rect _rect, COLORREF _color, int _redactingTextLength, int *_num) :
+		StringButton (_rect, _color, redactingText, _redactingTextLength, true),
+		num (_num)
+	{}
+
+	virtual void draw () override;
 
 };
 
@@ -389,6 +399,9 @@ int main ()
 			SizeButton *plusRad = new SizeButton({.pos = {368, 44}, .finishPos = {389, 59}}, TX_GREEN, mainCanvas, 1);
 			switchManager->addWindow (plusRad);
 
+		StringSizeButton *stringButton = new StringSizeButton ({.pos = {296, 46}, .finishPos = {362, 74}}, TX_WHITE, 1, &mainCanvas->lineThickness);
+		sizeManager->addWindow (stringButton);
+
 	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager);
 	//manager->addWindow (openSizeManager);
 
@@ -401,8 +414,7 @@ int main ()
 		Window *saveButton = new Window ({.pos = {345, 0}, .finishPos = {395, 50}}, TX_WHITE, "<-");
 		stringManager->addWindow (saveButton);
 
-		StringButton *stringButton = new StringButton ({.pos = {285, 55}, .finishPos = {650, 105}}, TX_WHITE, saveButton, mainCanvas);
-		stringManager->addWindow (stringButton);
+		
 		
 
 	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager);
@@ -431,6 +443,8 @@ int main ()
 	return 0;
 
 }
+
+
 
 bool Manager::addWindow (Window *window)
 {
@@ -471,6 +485,7 @@ void Manager::onClick ()
 			{
 				pointers[i]->onClick ();
 				pointers[i]->isClicked = true;
+				break;
 			}
 			else
 			{
@@ -502,13 +517,13 @@ bool SizeManager::addWindow (Window *window)
 	return 1;
 }
 
-void StringButton::draw ()
+void StringSizeButton::draw ()
 {
 	$s;
 	//txSetAllColors (color);
 	///txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 
-	
+	 /*
 	if (saveButton->isClicked == true) 
 	{
 		lastConditionOfManager = true;
@@ -524,6 +539,10 @@ void StringButton::draw ()
 
 		lastConditionOfManager = false;
 	}
+	*/
+
+	sprintf (inText, "%d", *num);
+
 
 	bool isShifted = false;
 	bool deleteChar = false;
@@ -555,11 +574,90 @@ void StringButton::draw ()
 		inText[cursorPosition + 1] = ' ';
 	}
 
+	inText[textLen]	= 0;
+
+
+	txSetTextAlign (TA_LEFT);
+	txSetAllColors (color);
+
+	txSelectFont ("Arial", 30);
+	
+	txTextOut (rect.pos.x, rect.pos.y, inText);
+
+	sscanf (inText, "%d", num);
+}
+
+void StringButton::draw ()
+{
+	$s;
+	//txSetAllColors (color);
+	///txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+
+	 /*
+	if (saveButton->isClicked == true) 
+	{
+		lastConditionOfManager = true;
+	}
+	
+
+	if (lastConditionOfManager == true && saveButton->isClicked == false)
+	{
+		char path[OFS_MAXPATHNAME] = {};
+		sprintf (path, "Images/%s.bmp", inText);
+
+		printf ("%d", txSaveImage (path, canvas->canvas));
+
+		lastConditionOfManager = false;
+	}
+	*/
+
+
+	bool isShifted = false;
+	bool deleteChar = false;
+	if (checkDeltaTime (lastTimeClicked))
+	{
+		if (txGetAsyncKeyState(VK_LEFT))
+		{
+			cursorMovement (VK_LEFT);
+		}
+		if (txGetAsyncKeyState(VK_RIGHT))
+		{
+			cursorMovement (VK_RIGHT);
+		}
+
+		if (txGetAsyncKeyState (VK_BACK))
+		{
+			backSpace ();	
+		}
+		
+		checkSymbols ();
+	}
+	
+	if (clock() % 500 < 250)
+	{
+		inText[cursorPosition + 1] = '|';
+	}
+	else
+	{
+		inText[cursorPosition + 1] = ' ';
+	}
+
+	inText[textLen]	= 0;
+
 
 	txSetTextAlign (TA_LEFT);
 	txSetAllColors (TX_BLACK);
-
+	
 	txTextOut (rect.pos.x, rect.pos.y, inText);
+}
+
+void stringToInt (const char *str, const int  strLen, int &num)
+{
+	num = 0;
+	for (int i = 0; i < strLen; i++)
+	{
+		num += (str[i] - 48) * pow (10, strLen - i - 1);
+	}
 }
 
 
