@@ -308,7 +308,6 @@ struct StringButton : Window
 struct StringSizeButton	: StringButton
 {
 	int *num;
-
 	char redactingText[32] = {};
 
 	StringSizeButton(Rect _rect, COLORREF _color, int _redactingTextLength, int *_num) :
@@ -317,6 +316,26 @@ struct StringSizeButton	: StringButton
 	{}
 
 	virtual void draw () override;
+
+};
+
+struct NumChange : Window
+{
+	StringButton stringButton;
+	SizeButton plusNum;
+	SizeButton minusNum;
+	int *num;
+	char inText[32] = {};
+
+	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, int _numLength, int *_num) :
+		Window (_mainRect),
+		num (_num),
+		stringButton (_stringRect, TX_WHITE, inText, _numLength, true),
+		plusNum (
+
+	{}
+
+
 
 };
 
@@ -353,11 +372,7 @@ int main ()
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 	txSelectFont ("Arial", 20, 13);
 	_mkdir ("Images");
-	//printf ("פûאפûא");
 
-	
-	//Window Windows[WindowNum] = {};
-	//Window* pointers[PointersNum] = {};
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 11, true);
 
 	Canvas *mainCanvas = new Canvas();
