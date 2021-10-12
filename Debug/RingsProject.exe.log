@@ -994,3 +994,247 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#420) at 0x010FAD00.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x010FAD00 is 376 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13687, функция: bool __cdecl `anonymous-namespace'::TX::txTransparentBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned long),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00360664 (32-bit), Flags: CMdRe0, Thread: 0x1FA8 (Main), GetLastError(): 13 (Недопустимые данные), errno: 17 (File exists), _doserrno: 183 (Unknown error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75236739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77468AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77468ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txTransparentBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13687):
+
+  13685: 
+  13686: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13687: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13688: 
+  13689:     // Это автоматическое определение размеров картинки (точнее, HDC источника - source) с помощью txGetExtent().
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txTransparentBlt(double,double,struct HDC__ *,unsigned long,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13764):
+
+  13762: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13763: 
+=>13764: $   return txTransparentBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource, transColor);
+  13765:     }
+  13766: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1113):
+
+   1111: 	txSetAllColors (color);
+   1112: 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=> 1113: 	txTransparentBlt (rect.pos.x, rect.pos.y, dc);
+   1114: 
+   1115: 		/*
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Oct 12 2021 13:12:11, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Oct 12 2021 13:12:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00DA0664 (32-bit), Flags: CMdRe0, Thread: 0xA810 (Main), GetLastError(): 13 (Недопустимые данные), errno: 17 (File exists), _doserrno: 183 (Unknown error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75236739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77468AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77468ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1097):
+
+   1095: 		//txSetAllColors (color);
+   1096: 		//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=> 1097: 		txBitBlt (rect.pos.x, rect.pos.y, dc);
+   1098: 		
+   1099: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Oct 12 2021 13:13:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Oct 12 2021 13:13:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009E0664 (32-bit), Flags: CMdRe0, Thread: 0xACF0 (Main), GetLastError(): 13 (Недопустимые данные), errno: 17 (File exists), _doserrno: 183 (Unknown error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75236739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77468AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77468ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (418):
+
+    416: 	manager->addWindow (cleanButton);
+    417: 
+=>  418: 	printBlt (txLoadImage ("CloseButton.bmp"));
+    419: 
+    420: 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Oct 12 2021 13:16:23, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Oct 12 2021 13:16:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002C0664 (32-bit), Flags: CMdRe0, Thread: 0xAB64 (Main), GetLastError(): 13 (Недопустимые данные), errno: 17 (File exists), _doserrno: 183 (Unknown error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75236739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77468AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77468ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (418):
+
+    416: 	manager->addWindow (cleanButton);
+    417: 
+=>  418: 	printBlt (txLoadImage ("CloseButton3.bmp"));
+    419: 
+    420: 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton3.bmp"));
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Oct 12 2021 13:22:39, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Oct 12 2021 13:22:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

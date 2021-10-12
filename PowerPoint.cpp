@@ -10,6 +10,14 @@
 const int DELTACLOCKTIME = 100;
 
 
+#define printBlt(image)         \
+{                               \
+    txBitBlt (0, 0, image);     \
+    _getch ();                  \
+    txClear ();                 \
+}
+
+
 
 struct Window
 {
@@ -67,8 +75,8 @@ struct TimeButton : Window
 struct CloseButton : Window
 { 
 
-	CloseButton (Rect _rect, COLORREF _color, const char *_text) :
-		Window (_rect, _color, _text)
+	CloseButton (Rect _rect, COLORREF _color, HDC _dc) :
+		Window (_rect, _color, "", _dc)
 	{}
 
 	virtual void draw () override;
@@ -89,12 +97,12 @@ struct ColorButton : Window
 
 struct SizeButton : Window
 {
-	Canvas *mainCanvas;
+	int *num;
 	int sizeType;
 
-	SizeButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas, int _sizeType) :
-		Window (_rect, _color),
-		mainCanvas (_mainCanvas), 
+	SizeButton(Rect _rect, int *_num, int _sizeType) :
+		Window (_rect),
+		num (_num), 
 		sizeType (_sizeType)
 	{}
 
@@ -273,7 +281,6 @@ struct StringButton : Window
 	char *inText;
 	int cursorPosition;
 	int textLen;
-	int placeNewNum;
 	int lastButton;
 	bool buttonClicked;
 	bool allowEnter;
@@ -290,7 +297,6 @@ struct StringButton : Window
 		advancedMode(true),
 		cursorPosition(_redactingTextLength - 1),
 		textLen (_redactingTextLength + 1),
-		placeNewNum (_redactingTextLength - 1),
 		lastButton(0),
 		buttonClicked(false),
 		allowEnter(false),
@@ -319,25 +325,30 @@ struct StringSizeButton	: StringButton
 
 };
 
+
 struct NumChange : Window
 {
 	StringButton stringButton;
 	SizeButton plusNum;
 	SizeButton minusNum;
+	HDC plusMinusButtons;
 	int *num;
 	char inText[32] = {};
 
-	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, int _numLength, int *_num) :
+	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, HDC _plusMinusButtons, int _numLength, int *_num) :
 		Window (_mainRect),
 		num (_num),
 		stringButton (_stringRect, TX_WHITE, inText, _numLength, true),
-		plusNum (
-
+		plusNum (_plusRect, _num, +1),
+		minusNum (_minusRect, _num, -1),
+		plusMinusButtons (_plusMinusButtons)
 	{}
 
-
+	virtual void draw () override;
+	virtual void onClick () override;
 
 };
+
 
 
 
@@ -365,12 +376,13 @@ void engine (Manager *manager);
 void shiftArrBack (char arr[], int length);
 void shiftArrForward (char arr[], int length);
 bool checkDeltaTime (int lastTimeClicked);
+void printfDCS (const char *str = "");
 
 
 int main ()
 {
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
-	txSelectFont ("Arial", 20, 13);
+	txSelectFont ("Arial", 28, 10);
 	_mkdir ("Images");
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 11, true);
@@ -399,15 +411,18 @@ int main ()
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
 	manager->addWindow (cleanButton);
 
-	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, "X");
+
+	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton3.bmp"));
 	manager->addWindow (closeButton);
 
 	Manager *sizeManager = new Manager({.pos = {0, 0}, .finishPos = {389, 75}}, TX_WHITE, 4, true);
 	manager->addWindow (sizeManager);
 
-		Manager *switchManager = new Manager({.pos = {368, 44}, .finishPos = {389, 74}}, TX_WHITE, 4, true, txLoadImage ("SwitchButton.bmp"));
-		sizeManager->addWindow (switchManager);
+		//Manager *switchManager = new Manager({.pos = {368, 44}, .finishPos = {389, 74}}, TX_WHITE, 4, true, txLoadImage ("SwitchButton.bmp"));
 
+		NumChange *numchange = new NumChange ({.pos = {296, 44}, .finishPos = {389, 74}}, {.pos = {296, 46}, .finishPos = {362, 74}}, {.pos = {368, 44}, .finishPos = {389, 59}}, {.pos = {368, 59}, .finishPos = {389, 74}}, txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness);
+		sizeManager->addWindow (numchange);
+		/*
 			SizeButton *minSize = new SizeButton({.pos = {368, 59}, .finishPos = {389, 74}}, TX_BLUE, mainCanvas, -1);
 			switchManager->addWindow (minSize);
 	
@@ -416,6 +431,7 @@ int main ()
 
 		StringSizeButton *stringButton = new StringSizeButton ({.pos = {296, 46}, .finishPos = {362, 74}}, TX_WHITE, 1, &mainCanvas->lineThickness);
 		sizeManager->addWindow (stringButton);
+		*/
 
 	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager);
 	//manager->addWindow (openSizeManager);
@@ -435,7 +451,7 @@ int main ()
 	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager);
 	//manager->addWindow (openSaveNameManager);
 
-	
+	//printfDCS ("2");
 
 	txBegin ();
 
@@ -453,11 +469,102 @@ int main ()
 	//delete (manager);
 	
 	txDeleteDC (mainCanvas->canvas);
+	txDeleteDC (redColor->dc);
+	txDeleteDC (blueColor->dc);
+	txDeleteDC (greenColor->dc);
+	txDeleteDC (numchange->plusMinusButtons);
+	txDeleteDC (cleanButton->dc);
+	txDeleteDC (menu->dc); 
+	txDeleteDC (openManager->dc);
+	txDeleteDC (closeButton->dc);
 	txDisableAutoPause ();
+
+	//printfDCS ("3");
 
 	return 0;
 
 }
+
+void printfDCS (const char *str)
+{
+    printf ("%s\n", str);
+    for (int i = 0; i < _txCanvas_UserDCs->size (); i++)
+    {
+        printf ("%d: %p\n", i, (*_txCanvas_UserDCs)[i]);
+    }
+    _getch ();
+}
+
+
+void NumChange::draw ()
+{
+	if (! (*num == 0))
+		sprintf (inText, "%d", *num);
+	stringButton.draw ();
+	if (!strcmp ("", inText))
+	{
+		*num = 0;
+	}
+	sscanf  (inText, "%d", num);
+	printf ("%s\n", inText);
+
+	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusButtons); 
+
+	plusNum.draw  ();
+	minusNum.draw ();
+
+	if (txMouseButtons () != 1 && plusNum.isClicked != false)
+	{
+		plusNum.isClicked = false;
+	}
+
+	if (txMouseButtons () != 1 && minusNum.isClicked != false)
+	{
+		minusNum.isClicked = false;
+	}
+}
+
+
+void NumChange::onClick ()
+{
+	int mx = txMouseX ();
+	int my = txMouseY ();
+
+	
+
+	if (plusNum.rect.inRect (mx, my))
+	{
+		if (*num == 9 && !plusNum.isClicked)
+		{
+			stringButton.textLen++;
+			stringButton.cursorPosition++;
+		}
+		plusNum.onClick ();
+		plusNum.isClicked = true;
+	}
+	else
+	{
+		plusNum.isClicked = false;
+	}
+
+	if (minusNum.rect.inRect (mx, my))
+	{
+		if (*num == 10 && !plusNum.isClicked)
+		{
+			stringButton.textLen--;
+			stringButton.cursorPosition--;
+		}
+		minusNum.onClick ();
+		minusNum.isClicked = true;
+	}
+	else
+	{
+		minusNum.isClicked = false;
+	}
+
+
+}
+
 
 
 
@@ -491,6 +598,7 @@ void Manager::onClick ()
 {
 	int mx = txMouseX ();
 	int my = txMouseY ();
+
 	if (advancedMode)
 	{
 		for (int i = newButtonNum - 1; i >= 0; i--)
@@ -595,7 +703,7 @@ void StringSizeButton::draw ()
 	txSetTextAlign (TA_LEFT);
 	txSetAllColors (color);
 
-	txSelectFont ("Arial", 30);
+	//txSelectFont ("Arial", 30);
 	
 	txTextOut (rect.pos.x, rect.pos.y, inText);
 
@@ -627,17 +735,21 @@ void StringButton::draw ()
 	*/
 
 
+	bool switched = false;
 	bool isShifted = false;
 	bool deleteChar = false;
 	if (checkDeltaTime (lastTimeClicked))
 	{
-		if (txGetAsyncKeyState(VK_LEFT))
+		if (txGetAsyncKeyState(VK_LEFT) && cursorPosition >= 0)
 		{
 			cursorMovement (VK_LEFT);
+			//printf ("left");
+			switched = true;
 		}
-		if (txGetAsyncKeyState(VK_RIGHT))
+		if (txGetAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 1)
 		{
 			cursorMovement (VK_RIGHT);
+			switched = true;
 		}
 
 		if (txGetAsyncKeyState (VK_BACK))
@@ -650,20 +762,42 @@ void StringButton::draw ()
 	
 	if (clock() % 500 < 250)
 	{
+		if (!switched)
+			shiftArrForward (&inText[cursorPosition + 1], 10);
+
 		inText[cursorPosition + 1] = '|';
+		printf ("");
 	}
 	else
 	{
+		if (!switched)
+			shiftArrForward (&inText[cursorPosition + 1], 10);
+
 		inText[cursorPosition + 1] = ' ';
 	}
 
-	inText[textLen]	= 0;
+
+	if (! (inText[textLen] >= 48 && inText[textLen] <= 125)) 
+	{
+		//inText[textLen]	= 0;
+	}
+	else
+	{
+		//textLen++;
+		//cursorPosition++;
+	}
+
+	  
 
 
 	txSetTextAlign (TA_LEFT);
-	txSetAllColors (TX_BLACK);
+	txSetAllColors (TX_WHITE);
 	
 	txTextOut (rect.pos.x, rect.pos.y, inText);
+
+	shiftArrBack (&inText[cursorPosition + 1], 10);
+
+	return;
 }
 
 void stringToInt (const char *str, const int  strLen, int &num)
@@ -687,6 +821,7 @@ void StringButton::checkSymbols ()
 
 	lastTimeClicked = clock();
 	shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
+	if (symbol == 48 &&	onlyNums && cursorPosition == -1) return;
 	inText[cursorPosition + 1] = symbol;
 	cursorPosition++;
 	textLen++;
@@ -699,7 +834,7 @@ bool checkDeltaTime (int lastTimeClicked)
 
 void StringButton::backSpace ()
 {
-	if (cursorPosition >= 0)
+	if (cursorPosition >= -1)
 	{
 		lastTimeClicked = clock();
 		shiftArrBack(&inText[cursorPosition], textLen - cursorPosition  + 1);
@@ -718,7 +853,7 @@ void StringButton::cursorMovement (int side)
 	if (validMovement && clock () - lastTimeClicked > DELTACLOCKTIME)
 	{
 		lastTimeClicked = clock();
-		shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
+		//shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
 		if (side == VK_RIGHT) cursorPosition++;
 		if (side == VK_LEFT) cursorPosition--;
 		shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
@@ -763,7 +898,7 @@ void OpenSizeManager::draw()
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
+		//txSelectFont ("Arial", 40);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
 					text);
@@ -795,7 +930,7 @@ void OpenManager::draw()
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
+		//txSelectFont ("Arial", 40);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
 					text);
@@ -809,7 +944,7 @@ void OpenColorManager::draw()
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
+		//txSelectFont ("Arial", 40);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
 					text);
@@ -841,7 +976,7 @@ void SizeNumButton::draw ()
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
+		//txSelectFont ("Arial", 40);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 4, 
 					text);
@@ -956,7 +1091,7 @@ void SizeButton::draw ()
 
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
+		//txSelectFont ("Arial", 40);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 5, 
 					text);
@@ -972,7 +1107,7 @@ void CleanButton::draw()
 
 		txSetTextAlign (TA_CENTER);
 			txSetAllColors (TX_BLACK);
-			txSelectFont ("Arial", 20);
+			//txSelectFont ("Arial", 20);
 			txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 						rect.pos.y + (rect.finishPos.y - rect.pos.y) / 4, 
 						text);
@@ -983,13 +1118,16 @@ void CloseButton::draw()
 	$s
 	txSetAllColors (color);
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	txTransparentBlt (rect.pos.x, rect.pos.y, dc);
 
+		/*
 	txSetTextAlign (TA_CENTER);
 		txSetAllColors (TX_GRAY);
-		txSelectFont ("Arial", 40);
-		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
-					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
+		//txSelectFont ("Arial", 40);
+		txTextOut (rect.pos.x, 
+					rect.pos.y, 
 					text);
+					*/
 }
 
 void Window::draw ()
@@ -1000,7 +1138,7 @@ void Window::draw ()
 
 	if (dc != NULL) txBitBlt (rect.pos.x, rect.pos.y, dc);
 
-	txSelectFont ("Arial", 40);
+	//txSelectFont ("Arial", 40);
 	txSetAllColors (TX_BLACK);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 5, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
@@ -1051,11 +1189,11 @@ void SizeButton::onClick ()
 		int mx = txMouseX ();
 		if (sizeType > 0)
 		{
-			mainCanvas->lineThickness++;
+			(*num)++;
 		}
-		if (sizeType < 0 && mainCanvas->lineThickness > 0)
+		if (sizeType < 0 && num > 0)
 		{
-			mainCanvas->lineThickness--;
+			(*num)--;
 		}
 	}
 }
