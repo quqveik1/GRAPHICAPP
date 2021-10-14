@@ -53,8 +53,8 @@ struct Canvas : Window
 	bool wasClicked = false;
 	Vector lastClick = {};
 
-	Canvas () : 
-		Window ({.pos = {0, 50}, .finishPos = {1000, 1000}}, TX_BLACK),
+	Canvas (Rect _rect, COLORREF _color) : 
+		Window (_rect, _color),
 		canvas (txCreateCompatibleDC (rect.getSize().x, rect.getSize().y))
 	{}
 
@@ -287,10 +287,11 @@ struct StringButton : Window
 	int lastTimeClicked;
 	bool lastConditionOfManager;
 	bool onlyNums;
+	const int MaxSizeOfText;
 
 
 
-	StringButton(Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, bool _onlyNums = false) :
+	StringButton(Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, int _MaxSizeOfText = 5, bool _onlyNums = false) :
 		Window(_rect, _color),
 		inText (_redactingText),
 		lastConditionOfManager (false),
@@ -301,6 +302,7 @@ struct StringButton : Window
 		buttonClicked(false),
 		allowEnter(false),
 		lastTimeClicked(0),
+		MaxSizeOfText (_MaxSizeOfText + 1),
 		onlyNums (_onlyNums)
 	{}
 
@@ -325,6 +327,13 @@ struct StringSizeButton	: StringButton
 
 };
 
+struct NumSlider : Window
+{
+	NumSlider (Rect _rect) :
+		Window (_rect)
+	{}
+};
+
 
 struct NumChange : Window
 {
@@ -332,22 +341,27 @@ struct NumChange : Window
 	SizeButton plusNum;
 	SizeButton minusNum;
 	HDC plusMinusButtons;
+	NumSlider numSlider;
 	int *num;
 	char inText[32] = {};
 
-	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, HDC _plusMinusButtons, int _numLength, int *_num) :
+	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _numSliderRect, HDC _plusMinusButtons, int _numLength, int *_num) :
 		Window (_mainRect),
 		num (_num),
-		stringButton (_stringRect, TX_WHITE, inText, _numLength, true),
+		stringButton (_stringRect, TX_WHITE, inText, _numLength, 5, true),
 		plusNum (_plusRect, _num, +1),
 		minusNum (_minusRect, _num, -1),
-		plusMinusButtons (_plusMinusButtons)
+		plusMinusButtons (_plusMinusButtons),
+		numSlider (_numSliderRect)
 	{}
 
 	virtual void draw () override;
 	virtual void onClick () override;
 
 };
+
+
+
 
 
 
@@ -377,112 +391,77 @@ void shiftArrBack (char arr[], int length);
 void shiftArrForward (char arr[], int length);
 bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
+void createNumChanger (Manager *menu, NumChange **numchange, Canvas *mainCanvas);
 
 
 int main ()
 {
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 	txSelectFont ("Arial", 28, 10);
-	_mkdir ("Images");
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_WHITE, 11, true);
 
-	Canvas *mainCanvas = new Canvas();
+	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_BLACK);
 	manager->addWindow (mainCanvas);
 
-	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, TX_WHITE, 2, true, txLoadImage ("HUD-3.bmp"));
+	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, TX_WHITE, 5, true, txLoadImage ("HUD-3.bmp"));
 	manager->addWindow (menu);
 
 		Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, TX_WHITE, 3, false);
 		menu->addWindow (colorManager);
 
-			ColorButton *redColor = new ColorButton({.pos = {10, 180}, .finishPos = {50, 220}}, TX_LIGHTRED, mainCanvas, txLoadImage ("RedButton.bmp"));
+			ColorButton *redColor = new ColorButton({.pos = {10, 180}, .finishPos = {50, 220}}, RGB (255, 0, 0), mainCanvas, txLoadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
 	
-			ColorButton *blueColor = new ColorButton({.pos = {70, 180}, .finishPos = {110, 220}}, TX_LIGHTBLUE, mainCanvas, txLoadImage ("BlueButton.bmp"));
+			ColorButton *blueColor = new ColorButton({.pos = {70, 180}, .finishPos = {110, 220}}, RGB (0, 0, 255), mainCanvas, txLoadImage ("BlueButton.bmp"));
 			colorManager->addWindow(blueColor);
 
-			ColorButton *greenColor = new ColorButton({.pos = {130, 180}, .finishPos = {170, 220}}, TX_LIGHTGREEN, mainCanvas, txLoadImage ("GreenButton.bmp"));
+			ColorButton *greenColor = new ColorButton({.pos = {130, 180}, .finishPos = {170, 220}}, RGB (0, 255, 0), mainCanvas, txLoadImage ("GreenButton.bmp"));
 			colorManager->addWindow(greenColor);
 
 		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
 		menu->addWindow (openManager);
 
+	NumChange *numChange = NULL;
+	createNumChanger (menu, &numChange, mainCanvas);
+
+
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
-	manager->addWindow (cleanButton);
+	menu->addWindow (cleanButton);
 
-
-	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton3.bmp"));
+	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
 	manager->addWindow (closeButton);
 
-	Manager *sizeManager = new Manager({.pos = {0, 0}, .finishPos = {389, 75}}, TX_WHITE, 4, true);
-	manager->addWindow (sizeManager);
-
-		//Manager *switchManager = new Manager({.pos = {368, 44}, .finishPos = {389, 74}}, TX_WHITE, 4, true, txLoadImage ("SwitchButton.bmp"));
-
-		NumChange *numchange = new NumChange ({.pos = {296, 44}, .finishPos = {389, 74}}, {.pos = {296, 46}, .finishPos = {362, 74}}, {.pos = {368, 44}, .finishPos = {389, 59}}, {.pos = {368, 59}, .finishPos = {389, 74}}, txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness);
-		sizeManager->addWindow (numchange);
-		/*
-			SizeButton *minSize = new SizeButton({.pos = {368, 59}, .finishPos = {389, 74}}, TX_BLUE, mainCanvas, -1);
-			switchManager->addWindow (minSize);
-	
-			SizeButton *plusRad = new SizeButton({.pos = {368, 44}, .finishPos = {389, 59}}, TX_GREEN, mainCanvas, 1);
-			switchManager->addWindow (plusRad);
-
-		StringSizeButton *stringButton = new StringSizeButton ({.pos = {296, 46}, .finishPos = {362, 74}}, TX_WHITE, 1, &mainCanvas->lineThickness);
-		sizeManager->addWindow (stringButton);
-		*/
-
-	OpenManager *openSizeManager = new OpenManager({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, sizeManager);
-	//manager->addWindow (openSizeManager);
-
 	TimeButton *timeButton = new TimeButton ({.pos = {835, 0}, .finishPos = {850, 50}});
-	manager->addWindow (timeButton);
-
-	Manager *stringManager = new Manager({.pos = {300, 0}, .finishPos = {650, 100}}, TX_WHITE, 2, false); 
-	//manager->addWindow (stringManager);
-
-		Window *saveButton = new Window ({.pos = {345, 0}, .finishPos = {395, 50}}, TX_WHITE, "<-");
-		stringManager->addWindow (saveButton);
-
-		
-		
-
-	OpenManager *openSaveNameManager = new OpenManager ({.pos = {285, 0}, .finishPos = {335, 50}}, TX_WHITE, stringManager);
-	//manager->addWindow (openSaveNameManager);
-
-	//printfDCS ("2");
+	menu->addWindow (timeButton);
 
 	txBegin ();
 
 	engine (manager);
 
-	/*
-	for (;;)
-	{
-		//drawButtons (pointers);
-		//checkClicked (pointers);
-		//drawMouse ();
-		if (!IsRunning) break;
-	} */
-
-	//delete (manager);
-	
 	txDeleteDC (mainCanvas->canvas);
 	txDeleteDC (redColor->dc);
 	txDeleteDC (blueColor->dc);
 	txDeleteDC (greenColor->dc);
-	txDeleteDC (numchange->plusMinusButtons);
+	txDeleteDC (numChange->plusMinusButtons);
 	txDeleteDC (cleanButton->dc);
 	txDeleteDC (menu->dc); 
 	txDeleteDC (openManager->dc);
 	txDeleteDC (closeButton->dc);
 	txDisableAutoPause ();
 
-	//printfDCS ("3");
-
 	return 0;
 
+}
+
+void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
+{
+	//Manager *sizeManager = new Manager({.pos = {0, 0}, .finishPos = {389, 75}}, TX_WHITE, 4, true);
+	//menu->addWindow (sizeManager);
+
+
+	*numChange = (new NumChange ({.pos = {296, 44}, .finishPos = {389, 74}}, {.pos = {296, 46}, .finishPos = {362, 74}}, {.pos = {368, 44}, .finishPos = {389, 59}}, {.pos = {368, 59}, .finishPos = {389, 74}}, {.pos = {0, 0}, .finishPos = {368, 74}}, txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness));
+	menu->addWindow (*numChange);
 }
 
 void printfDCS (const char *str)
@@ -500,13 +479,12 @@ void NumChange::draw ()
 {
 	if (! (*num == 0))
 		sprintf (inText, "%d", *num);
+
 	stringButton.draw ();
+
 	if (!strcmp ("", inText))
-	{
 		*num = 0;
-	}
 	sscanf  (inText, "%d", num);
-	printf ("%s\n", inText);
 
 	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusButtons); 
 
@@ -534,10 +512,14 @@ void NumChange::onClick ()
 
 	if (plusNum.rect.inRect (mx, my))
 	{
-		if (*num == 9 && !plusNum.isClicked)
+		if ((*num == 9) || (*num == 99) || (*num == 999) || (*num == 9999) && !plusNum.isClicked)
 		{
 			stringButton.textLen++;
 			stringButton.cursorPosition++;
+		}
+		if (!plusNum.isClicked)
+		{
+			stringButton.cursorPosition =  stringButton.textLen-2;
 		}
 		plusNum.onClick ();
 		plusNum.isClicked = true;
@@ -549,10 +531,14 @@ void NumChange::onClick ()
 
 	if (minusNum.rect.inRect (mx, my))
 	{
-		if (*num == 10 && !plusNum.isClicked)
+		if ((*num == 10) || (*num == 100) || (*num == 1000) || (*num == 10000)&& !plusNum.isClicked)
 		{
 			stringButton.textLen--;
 			stringButton.cursorPosition--;
+		}
+		if (!plusNum.isClicked)
+		{
+			stringButton.cursorPosition =  stringButton.textLen-2;
 		}
 		minusNum.onClick ();
 		minusNum.isClicked = true;
@@ -813,15 +799,15 @@ void stringToInt (const char *str, const int  strLen, int &num)
 void StringButton::checkSymbols ()
 {
 	if (!_kbhit ())	return;
-	
 	int symbol = _getch ();
-	if (! (symbol >= 48 && symbol <= 57) && onlyNums) return;
 
+	if (cursorPosition + 2 == MaxSizeOfText) return;
+	if (! (symbol >= 48 && symbol <= 57) && onlyNums) return;
 	if (lastButton == symbol || symbol == '\b') return;
+	if (symbol == 48 &&	onlyNums && cursorPosition == -1) return;
 
 	lastTimeClicked = clock();
 	shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-	if (symbol == 48 &&	onlyNums && cursorPosition == -1) return;
 	inText[cursorPosition + 1] = symbol;
 	cursorPosition++;
 	textLen++;
@@ -834,7 +820,7 @@ bool checkDeltaTime (int lastTimeClicked)
 
 void StringButton::backSpace ()
 {
-	if (cursorPosition >= -1)
+	if (cursorPosition >= 0)
 	{
 		lastTimeClicked = clock();
 		shiftArrBack(&inText[cursorPosition], textLen - cursorPosition  + 1);
