@@ -348,7 +348,7 @@ struct NumChange : Window
 	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _numSliderRect, HDC _plusMinusButtons, int _numLength, int *_num) :
 		Window (_mainRect),
 		num (_num),
-		stringButton (_stringRect, TX_WHITE, inText, _numLength, 5, true),
+		stringButton (_stringRect, TX_WHITE, inText, _numLength, 6, true),
 		plusNum (_plusRect, _num, +1),
 		minusNum (_minusRect, _num, -1),
 		plusMinusButtons (_plusMinusButtons),
@@ -358,6 +358,42 @@ struct NumChange : Window
 	virtual void draw () override;
 	virtual void onClick () override;
 
+};
+
+
+struct Slider : Window 
+{
+	Window arrow1;
+	Window arrow2;
+	Window sliderRect;
+	int *num;
+	double minNum;
+	double maxNum;
+	double kScale;
+	bool horizontalMode;
+
+	Slider (Rect _mainRect, Rect _arrow1Rect, Rect _arrow2Rect, int *_num, int _minNum, int _maxNum, bool _horizontalMode = true) :
+		Window (_mainRect),
+		arrow1 (_arrow1Rect, TX_RED),
+		arrow2 (_arrow2Rect, TX_RED),
+		num (_num),
+		minNum (_minNum),
+		maxNum (_maxNum),
+		kScale ( ( (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x) ) / (maxNum - minNum) ),
+		horizontalMode (_horizontalMode),
+		sliderRect ({}, TX_BLACK)
+	{
+	
+		sliderRect.rect.pos.x = (double) ( kScale * (*num - minNum) );
+		sliderRect.rect.pos.y = rect.pos.y;
+
+		sliderRect.rect.finishPos.x = (double) ( kScale * (*num - minNum) + 3 );
+		sliderRect.rect.finishPos.y = rect.finishPos.y;
+	}
+
+
+	virtual void draw () override;
+	virtual void onClick () override;
 };
 
 
@@ -425,6 +461,10 @@ int main ()
 	NumChange *numChange = NULL;
 	createNumChanger (menu, &numChange, mainCanvas);
 
+	static int num2 = 3;
+
+	Slider *slider = new Slider ( {.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} }, &num2, 0, 50, true);
+	menu->addWindow (slider);
 
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
 	menu->addWindow (cleanButton);
@@ -453,6 +493,42 @@ int main ()
 	return 0;
 
 }
+
+void Slider::draw ()
+{
+	//txSetAllColors (TX_WHITE);
+	rect.draw ();
+
+	//txSetAllColors (TX_RED);
+	arrow1.draw ();
+	arrow2.draw ();
+
+	//kScale = ( (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x) ) / (maxNum - minNum);
+
+	sliderRect.rect.pos.x		= kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x);
+	sliderRect.rect.finishPos.x = kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x) +  kScale;
+
+	sliderRect.draw ();
+
+}
+
+void Slider::onClick ()
+{
+	int mx = txMouseX ();
+	int my = txMouseY ();
+
+	if (arrow1.rect.inRect (mx, my) & !isClicked)
+	{
+		(*num)--;
+	}
+	if (arrow2.rect.inRect (mx, my) & !isClicked)
+	{
+		(*num)++;
+	}
+
+
+}
+
 
 void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
 {
@@ -491,7 +567,7 @@ void NumChange::draw ()
 	plusNum.draw  ();
 	minusNum.draw ();
 
-	if (txMouseButtons () != 1 && plusNum.isClicked != false)
+	if (txMouseButtons () != 1 && plusNum.isClicked == true)
 	{
 		plusNum.isClicked = false;
 	}
@@ -510,12 +586,13 @@ void NumChange::onClick ()
 
 	
 
-	if (plusNum.rect.inRect (mx, my))
+	if (plusNum.rect.inRect (mx, my) && !plusNum.isClicked)
 	{
 		if ((*num == 9) || (*num == 99) || (*num == 999) || (*num == 9999) && !plusNum.isClicked)
 		{
 			stringButton.textLen++;
-			stringButton.cursorPosition++;
+			//stringButton.cursorPosition++;
+			stringButton.cursorPosition =  stringButton.textLen-2;
 		}
 		if (!plusNum.isClicked)
 		{
@@ -524,17 +601,14 @@ void NumChange::onClick ()
 		plusNum.onClick ();
 		plusNum.isClicked = true;
 	}
-	else
-	{
-		plusNum.isClicked = false;
-	}
 
-	if (minusNum.rect.inRect (mx, my))
+	if (minusNum.rect.inRect (mx, my) && !minusNum.isClicked)
 	{
 		if ((*num == 10) || (*num == 100) || (*num == 1000) || (*num == 10000)&& !plusNum.isClicked)
 		{
 			stringButton.textLen--;
-			stringButton.cursorPosition--;
+			//stringButton.cursorPosition--;
+			stringButton.cursorPosition =  stringButton.textLen-2;
 		}
 		if (!plusNum.isClicked)
 		{
@@ -542,10 +616,6 @@ void NumChange::onClick ()
 		}
 		minusNum.onClick ();
 		minusNum.isClicked = true;
-	}
-	else
-	{
-		minusNum.isClicked = false;
 	}
 
 
@@ -732,7 +802,7 @@ void StringButton::draw ()
 			//printf ("left");
 			switched = true;
 		}
-		if (txGetAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 1)
+		if (txGetAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 2)
 		{
 			cursorMovement (VK_RIGHT);
 			switched = true;
@@ -1124,8 +1194,7 @@ void Window::draw ()
 
 	if (dc != NULL) txBitBlt (rect.pos.x, rect.pos.y, dc);
 
-	//txSelectFont ("Arial", 40);
-	txSetAllColors (TX_BLACK);
+	txSetAllColors (color);
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 5, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
 					text);
@@ -1170,17 +1239,13 @@ void Canvas::draw ()
 
 void SizeButton::onClick ()
 {
-	if (!isClicked)
+	if (sizeType > 0)
 	{
-		int mx = txMouseX ();
-		if (sizeType > 0)
-		{
-			(*num)++;
-		}
-		if (sizeType < 0 && num > 0)
-		{
-			(*num)--;
-		}
+		(*num)++;
+	}
+	if (sizeType < 0 && num > 0)
+	{
+		(*num)--;
 	}
 }
 

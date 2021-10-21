@@ -14,13 +14,20 @@ struct Rect
     double right () const { return this->finishPos.x; }
     double bottom() const { return this->finishPos.y; }
     Vector getSize () const {return this->finishPos - this->pos; }
+    
+    void draw ();
 };
+
+void Rect::draw ()
+{
+    txRectangle (this->pos.x, this->pos.y, this->finishPos.x, this->finishPos.y);
+}
 
 bool Rect::inRect (double x, double y)
 {
-    if (x > pos.x && y > pos.y)
+    if (x > this->pos.x && y > this->pos.y)
     {
-        if (x < finishPos.x && y < finishPos.y)
+        if (x < this->finishPos.x && y < this->finishPos.y)
         {
             return true;
         }
