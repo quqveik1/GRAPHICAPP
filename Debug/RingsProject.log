@@ -1,24 +1,34 @@
 ﻿  PowerPoint.cpp
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(516,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(517,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(518,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(546,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(584,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(585,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(655,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(656,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(727,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(726,7): warning C4189: 'isShifted': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(796,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(795,7): warning C4189: 'isShifted': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(864,50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(881,31): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(933,7): warning C4189: 'copyChar': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1125,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1126,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1127,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1266,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1267,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1262,6): warning C4189: 'currMouseButton': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1267,7): warning C4189: 'my': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1266,7): warning C4189: 'mx': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(518,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(518,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(528,38): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(529,39): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(530,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(531,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(553,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(554,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(555,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(555,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(594,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(633,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(634,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(706,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(707,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(778,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(777,7): warning C4189: 'isShifted': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(847,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(846,7): warning C4189: 'isShifted': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(915,50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(932,31): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(984,7): warning C4189: 'copyChar': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1176,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1177,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1178,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1317,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1318,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1313,6): warning C4189: 'currMouseButton': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1318,7): warning C4189: 'my': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1317,7): warning C4189: 'mx': local variable is initialized but not referenced
   RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe

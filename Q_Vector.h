@@ -8,6 +8,7 @@ struct Vector
     double x;
     double y;
 
+    Vector &operator = (const Vector &a1);
     explicit operator double ();
 };
 
@@ -25,6 +26,8 @@ inline Vector operator / (const double a, const Vector &b);
        bool   operator > (const Vector &a, const Vector &b);
        bool   operator < (const Vector &a, const Vector &b);
        bool operator == (const Vector &a, const Vector &b);
+
+
 
 
 bool operator == (const Vector &a, const Vector &b)
@@ -112,6 +115,14 @@ void equal (Vector &a, const Vector &b)
     a.x = b.x;
     a.y = b.y;
 }
+
+Vector& Vector::operator = (const Vector &a1)
+{
+    this->x = a1.x;
+    this->y = a1.y;
+
+    return *this;
+};
 
 
 inline void lining ()

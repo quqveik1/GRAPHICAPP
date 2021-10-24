@@ -327,11 +327,58 @@ struct StringSizeButton	: StringButton
 
 };
 
-struct NumSlider : Window
+struct Slider : Window 
 {
-	NumSlider (Rect _rect) :
-		Window (_rect)
-	{}
+	Window arrow1;
+	Window arrow2;
+	Window sliderQuadrate;
+	int *num;
+	double minNum;
+	double maxNum;
+	double kScale;
+	bool horizontalMode;
+	double axis;
+	Vector cursorStartPosition;
+	int tempNum = 0;
+
+	Slider (Rect _mainRect, Rect _arrow1Rect, Rect _arrow2Rect, int *_num, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true) :
+		Window (_mainRect),
+		arrow1 (_arrow1Rect, TX_RED),
+		arrow2 (_arrow2Rect, TX_RED),
+		num (_num),
+		minNum (_minNum),
+		maxNum (_maxNum),
+		horizontalMode (_horizontalMode),
+		cursorStartPosition ({}),
+		sliderQuadrate ({}, TX_BLACK)
+	{
+		
+		if (horizontalMode)
+		{
+			axis = (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x);
+		}
+		else
+		{
+			axis = (rect.finishPos.y - arrow2.rect.getSize ().y) - (rect.pos.y + arrow1.rect.getSize ().y);
+		}
+
+		kScale = axis / (maxNum - minNum);
+	
+		if (horizontalMode)
+		{
+			sliderQuadrate.rect.pos.y       = rect.pos.y;
+			sliderQuadrate.rect.finishPos.y = rect.finishPos.y;
+		}
+		else
+		{
+			sliderQuadrate.rect.pos.x       = rect.pos.x;
+			sliderQuadrate.rect.finishPos.x = rect.finishPos.x;
+		}
+	}
+
+
+	virtual void draw () override;
+	virtual void onClick () override;
 };
 
 
@@ -341,60 +388,28 @@ struct NumChange : Window
 	SizeButton plusNum;
 	SizeButton minusNum;
 	HDC plusMinusButtons;
-	NumSlider numSlider;
+	Slider slider;
 	int *num;
 	char inText[32] = {};
 
-	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _numSliderRect, HDC _plusMinusButtons, int _numLength, int *_num) :
+	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, Rect _arrowMinRect, Rect _arrowPlusRect, HDC _plusMinusButtons, int _numLength, int *_num) :
 		Window (_mainRect),
 		num (_num),
 		stringButton (_stringRect, TX_WHITE, inText, _numLength, 6, true),
 		plusNum (_plusRect, _num, +1),
 		minusNum (_minusRect, _num, -1),
 		plusMinusButtons (_plusMinusButtons),
-		numSlider (_numSliderRect)
-	{}
-
-	virtual void draw () override;
-	virtual void onClick () override;
-
-};
-
-
-struct Slider : Window 
-{
-	Window arrow1;
-	Window arrow2;
-	Window sliderRect;
-	int *num;
-	double minNum;
-	double maxNum;
-	double kScale;
-	bool horizontalMode;
-
-	Slider (Rect _mainRect, Rect _arrow1Rect, Rect _arrow2Rect, int *_num, int _minNum, int _maxNum, bool _horizontalMode = true) :
-		Window (_mainRect),
-		arrow1 (_arrow1Rect, TX_RED),
-		arrow2 (_arrow2Rect, TX_RED),
-		num (_num),
-		minNum (_minNum),
-		maxNum (_maxNum),
-		kScale ( ( (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x) ) / (maxNum - minNum) ),
-		horizontalMode (_horizontalMode),
-		sliderRect ({}, TX_BLACK)
+		slider (_sliderRect, _arrowMinRect, _arrowPlusRect, _num, 1, 150)
 	{
-	
-		sliderRect.rect.pos.x = (double) ( kScale * (*num - minNum) );
-		sliderRect.rect.pos.y = rect.pos.y;
-
-		sliderRect.rect.finishPos.x = (double) ( kScale * (*num - minNum) + 3 );
-		sliderRect.rect.finishPos.y = rect.finishPos.y;
 	}
 
-
 	virtual void draw () override;
 	virtual void onClick () override;
+
 };
+
+
+
 
 
 
@@ -463,11 +478,12 @@ int main ()
 
 	static int num2 = 3;
 
-	Slider *slider = new Slider ( {.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} }, &num2, 0, 50, true);
+	Slider *slider = new Slider ( {.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} }, (numChange->num), 0, 50, true);
+	//Slider *slider = new Slider ( {.pos = {70, 70}, .finishPos = {80, 280} }, {.pos = {70, 260}, .finishPos = {80, 280} }, {.pos = {70, 70}, .finishPos = {80, 90} }, &num2, 0, 50, false);
 	menu->addWindow (slider);
 
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
-	menu->addWindow (cleanButton);
+	//menu->addWindow (cleanButton);
 
 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
 	manager->addWindow (closeButton);
@@ -496,19 +512,39 @@ int main ()
 
 void Slider::draw ()
 {
-	//txSetAllColors (TX_WHITE);
+
+	int mx = txMouseX ();
+	int my = txMouseY ();
+	Vector mousePos =  {mx, my};
+
+	txSetAllColors (TX_WHITE);
 	rect.draw ();
 
-	//txSetAllColors (TX_RED);
 	arrow1.draw ();
 	arrow2.draw ();
 
-	//kScale = ( (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x) ) / (maxNum - minNum);
+	if (sliderQuadrate.isClicked)
+	{
+		if (horizontalMode) *num = tempNum + ( (mousePos.x - cursorStartPosition.x) / (kScale));
+		if (!horizontalMode) *num = tempNum - ( (mousePos.y - cursorStartPosition.y) / (kScale)); 
+		if (*num > maxNum) *num = maxNum;
+		if (*num < minNum) *num = minNum;
+	}
 
-	sliderRect.rect.pos.x		= kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x);
-	sliderRect.rect.finishPos.x = kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x) +  kScale;
+	if (horizontalMode)
+	{
+		sliderQuadrate.rect.pos.x		= kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x);
+		sliderQuadrate.rect.finishPos.x = kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x) +  kScale;
+	}
+	else
+	{
+		sliderQuadrate.rect.pos.y		= -kScale * (*num - minNum) + (rect.finishPos.y - arrow1.rect.getSize ().y) -  kScale;
+		sliderQuadrate.rect.finishPos.y = -kScale * (*num - minNum) + (rect.finishPos.y - arrow1.rect.getSize ().y);
+	}
 
-	sliderRect.draw ();
+	if (txMouseButtons () != 1) sliderQuadrate.isClicked = false;
+
+	sliderQuadrate.draw ();
 
 }
 
@@ -516,17 +552,23 @@ void Slider::onClick ()
 {
 	int mx = txMouseX ();
 	int my = txMouseY ();
+	Vector mousePos =  {mx, my};
 
-	if (arrow1.rect.inRect (mx, my) & !isClicked)
+	if (arrow1.rect.inRect (mx, my) && *num > minNum && !isClicked)
 	{
 		(*num)--;
 	}
-	if (arrow2.rect.inRect (mx, my) & !isClicked)
+	if (arrow2.rect.inRect (mx, my) && *num < maxNum && !isClicked)
 	{
 		(*num)++;
 	}
 
-
+	if (sliderQuadrate.rect.inRect (mx, my) && !isClicked)
+	{
+		cursorStartPosition = {(double) mx, (double) my};
+		tempNum = *num;
+		sliderQuadrate.isClicked = true;
+	}
 }
 
 
@@ -536,7 +578,13 @@ void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
 	//menu->addWindow (sizeManager);
 
 
-	*numChange = (new NumChange ({.pos = {296, 44}, .finishPos = {389, 74}}, {.pos = {296, 46}, .finishPos = {362, 74}}, {.pos = {368, 44}, .finishPos = {389, 59}}, {.pos = {368, 59}, .finishPos = {389, 74}}, {.pos = {0, 0}, .finishPos = {368, 74}}, txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness));
+	*numChange = (new NumChange (
+								{.pos = {296, 44}, .finishPos = {389, 74}},
+								{.pos = {296, 46}, .finishPos = {362, 74}}, 
+								{.pos = {368, 44}, .finishPos = {389, 59}}, 
+								{.pos = {368, 59}, .finishPos = {389, 74}}, 
+								{.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} },
+								txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness));
 	menu->addWindow (*numChange);
 }
 
@@ -565,7 +613,8 @@ void NumChange::draw ()
 	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusButtons); 
 
 	plusNum.draw  ();
-	minusNum.draw ();
+	minusNum.draw (); 
+	slider.draw ();
 
 	if (txMouseButtons () != 1 && plusNum.isClicked == true)
 	{
@@ -618,6 +667,8 @@ void NumChange::onClick ()
 		minusNum.isClicked = true;
 	}
 
+
+	slider.onClick();
 
 }
 
