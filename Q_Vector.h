@@ -10,6 +10,8 @@ struct Vector
 
     Vector &operator = (const Vector &a1);
     explicit operator double ();
+
+    void print (const char *str = NULL);
 };
 
 void equal (Vector &a, const Vector &b);
@@ -28,7 +30,10 @@ inline Vector operator / (const double a, const Vector &b);
        bool operator == (const Vector &a, const Vector &b);
 
 
-
+void Vector::print (const char *str /* = NULL*/)
+{
+    printf ("%s: {%lf, %lf}\n", str, x, y);
+}
 
 bool operator == (const Vector &a, const Vector &b)
 {

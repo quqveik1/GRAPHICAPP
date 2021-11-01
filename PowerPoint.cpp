@@ -12,10 +12,13 @@ const int DELTACLOCKTIME = 100;
 
 #define printBlt(image)         \
 {                               \
-    txBitBlt (0, 0, image);     \
+    assert (image);				\
+	txBitBlt (0, 0, image);     \
     _getch ();                  \
     txClear ();                 \
 }
+
+void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
 
 struct Manager;
 
@@ -44,16 +47,18 @@ struct Window
 struct Canvas : Window
 {
 	HDC canvas;
-	int lineThickness = 3;
+	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
 	bool clearBackground = true;
+	Vector canvasCoordinats;
 
 	bool wasClicked = false;
 	Vector lastClick = {};
 
-	Canvas (Rect _rect, COLORREF _color) : 
+	Canvas (Rect _rect, COLORREF _color, Vector _canvasSize) : 
 		Window (_rect, _color),
-		canvas (txCreateCompatibleDC (rect.getSize().x, rect.getSize().y))
+		canvas (txCreateCompatibleDC (_canvasSize.x, _canvasSize.y)),
+		canvasCoordinats ({})
 	{}
 
 	virtual void draw () override;
@@ -95,10 +100,10 @@ struct ColorButton : Window
 
 struct SizeButton : Window
 {
-	int *num;
+	double *num;
 	int sizeType;
 
-	SizeButton(Rect _rect, int *_num, int _sizeType) :
+	SizeButton(Rect _rect, double *_num, int _sizeType) :
 		Window (_rect),
 		num (_num), 
 		sizeType (_sizeType)
@@ -198,35 +203,71 @@ struct Slider : Window
 	Window arrow1;
 	Window arrow2;
 	Window sliderQuadrate;
-	int *num;
+	//HDC QuadrateDC;
+	double *num;
 	double minNum;
 	double maxNum;
 	double kScale;
 	bool horizontalMode;
 	double axis;
 	Vector cursorStartPosition;
-	int tempNum = 0;
+	int tempNum;
+	double quadrateScale;
 
-	Slider (Rect _mainRect, Rect _arrow1Rect, Rect _arrow2Rect, int *_num, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true) :
-		Window (_mainRect),
-		arrow1 (_arrow1Rect, TX_RED),
-		arrow2 (_arrow2Rect, TX_RED),
+	Slider (Rect _mainRect, double *_num, double _quadrateScale, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true) :
+		Window (_mainRect, TX_BLACK),
+		arrow1 ({}, TX_RED),
+		arrow2 ({}, TX_RED),
 		num (_num),
 		minNum (_minNum),
 		maxNum (_maxNum),
 		horizontalMode (_horizontalMode),
 		cursorStartPosition ({}),
-		sliderQuadrate ({}, TX_BLACK)
+		sliderQuadrate ({}, TX_WHITE),
+		tempNum (0),
+		quadrateScale (_quadrateScale)
 	{
-		
+		//compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, _dc, {_originalSize.x, _originalSize.y}
+
 		if (horizontalMode)
 		{
-			axis = (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x);
+			arrow1.rect.pos.x = rect.pos.x;
+			arrow1.rect.pos.y = rect.pos.y;
+			arrow1.rect.finishPos.x = rect.pos.x + (1.3) * (rect.finishPos.y - arrow1.rect.pos.y);
+			arrow1.rect.finishPos.y = rect.finishPos.y;
+			compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1Hor.bmp"), {13, 17});
+
+			arrow2.rect.pos.x = rect.finishPos.x - (1.3) * (rect.finishPos.y - arrow1.rect.pos.y);
+			arrow2.rect.pos.y = rect.pos.y;
+			arrow2.rect.finishPos.x = rect.finishPos.x;
+			arrow2.rect.finishPos.y = rect.finishPos.y;
+			compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2Hor.bmp"), {13, 17});
 		}
 		else
 		{
-			axis = (rect.finishPos.y - arrow2.rect.getSize ().y) - (rect.pos.y + arrow1.rect.getSize ().y);
+			arrow1.rect.pos.x = rect.pos.x;
+			arrow1.rect.pos.y = rect.pos.y;
+			arrow1.rect.finishPos.x = rect.finishPos.x;
+			arrow1.rect.finishPos.y = rect.pos.y + (0.76) * arrow1.rect.getSize().x;
+			compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1.bmp"), {17, 13});
+
+			arrow2.rect.pos.x = rect.pos.x;
+			arrow2.rect.pos.y = rect.finishPos.y - (0.76) * arrow1.rect.getSize().x;
+			arrow2.rect.finishPos.x = rect.finishPos.x;
+			arrow2.rect.finishPos.y = rect.finishPos.y;
+			compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2.bmp"), {17, 13});
 		}
+		
+
+		if (horizontalMode)
+		{
+			axis = (rect.finishPos.x - arrow2.rect.getSize ().x) - (rect.pos.x + arrow1.rect.getSize ().x) - rect.getSize().x * quadrateScale;
+		}
+		else
+		{
+			axis = (rect.finishPos.y - arrow2.rect.getSize ().y) - (rect.pos.y + arrow1.rect.getSize ().y) - rect.getSize().y * quadrateScale;
+		}
+
 
 		kScale = axis / (maxNum - minNum);
 	
@@ -240,11 +281,23 @@ struct Slider : Window
 			sliderQuadrate.rect.pos.x       = rect.pos.x;
 			sliderQuadrate.rect.finishPos.x = rect.finishPos.x;
 		}
+
+
+		if (horizontalMode) 
+		{
+			compressImage (sliderQuadrate.dc, {rect.getSize ().x * _quadrateScale, sliderQuadrate.rect.getSize().y}, txLoadImage ("SliderRect.bmp"), {316, 12});
+		}
+		else
+		{
+			compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, rect.getSize().y *  _quadrateScale}, txLoadImage ("VerticalSliderRect.bmp"), {12, 316});
+		}
 	}
 
 
 	virtual void draw () override;
 	virtual void onClick () override;
+
+	void deleteDC ();
 };
 
 
@@ -253,23 +306,23 @@ struct NumChange : Manager
 	StringButton stringButton;
 	SizeButton plusNum;
 	SizeButton minusNum;
-	HDC plusMinusButtons;
+	HDC plusMinusDC;
 	Slider slider;
-	int *num;
+	double *num;
 	const int maxNum;
 	const int minNum;
 	char inText[32] = {};
 
-	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, Rect _arrowMinRect, Rect _arrowPlusRect, HDC _plusMinusButtons, int _numLength, int *_num) :
+	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, HDC _plusMinusDC, double _sliderQuadrateScale, int _numLength, double *_num) :
 		Manager (_mainRect, 4),
 		num (_num),
 		stringButton (_stringRect, TX_WHITE, inText, _numLength, this, 6, true),
 		plusNum (_plusRect, _num, +1),
 		minusNum (_minusRect, _num, -1),
-		plusMinusButtons (_plusMinusButtons),
+		plusMinusDC (_plusMinusDC),
 		minNum (1),
-		maxNum (50),
-		slider (_sliderRect, _arrowMinRect, _arrowPlusRect, _num, 1, 50)
+		maxNum (10),
+		slider (_sliderRect, _num, _sliderQuadrateScale, 1, 20) 
 	{
 	}
 
@@ -291,22 +344,25 @@ const Vector SCREENSIZE = {1000, 1000};
 void RECTangle (const Rect rect, HDC dc = txDC ());
 void txSetAllColors (COLORREF color, HDC dc = txDC ());
 void engine (Manager *manager);
-void shiftArrBack (char arr[], int length);
+void shiftArrBack    (char arr[], int length);
 void shiftArrForward (char arr[], int length);
 bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
 void createNumChanger (Manager *menu, NumChange **numchange, Canvas *mainCanvas);
 void checkTextLen (int currentNum, int previousNum, int *textLen, int *cursorPosition);
+void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
+
 
 
 int main ()
 {
+	//_txWindowStyle &= ~WS_CAPTION;
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 	txSelectFont ("Arial", 28, 10);
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, 11, true);
 
-	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_BLACK);
+	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_BLACK, {3000, 3000});
 	manager->addWindow (mainCanvas);
 
 	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, 5, true, txLoadImage ("HUD-3.bmp"));
@@ -327,8 +383,28 @@ int main ()
 		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
 		menu->addWindow (openManager);
 
+	printfDCS ();
+
 	NumChange *numChange = NULL;
-	createNumChanger (menu, &numChange, mainCanvas);
+	createNumChanger (menu, &numChange, mainCanvas);	
+
+	printfDCS ();
+
+	Slider *xCoordinat = new Slider (   { .pos = {0, 980}, .finishPos = {1000, 1000} }, 
+										&mainCanvas->canvasCoordinats.x, 
+										0.3,
+										0, 1000);
+	printfDCS ();
+
+
+	Slider *yCoordinat = new Slider (   { .pos = {980, 50}, .finishPos = {1000, 950} }, 
+										&mainCanvas->canvasCoordinats.y,
+										0.3,
+										0, 1000,
+										false);
+
+	manager->addWindow (xCoordinat);
+	manager->addWindow (yCoordinat);
 
 	//static int num2 = 3;
 	//Slider *slider = new Slider ( {.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} }, (numChange->num), 0, 50, true);
@@ -352,15 +428,40 @@ int main ()
 	txDeleteDC (redColor->dc);
 	txDeleteDC (blueColor->dc);
 	txDeleteDC (greenColor->dc);
-	txDeleteDC (numChange->plusMinusButtons);
+
+	txDeleteDC (numChange->plusMinusDC);
+	numChange->slider.deleteDC ();
+
 	txDeleteDC (cleanButton->dc);
 	txDeleteDC (menu->dc); 
 	txDeleteDC (openManager->dc);
 	txDeleteDC (closeButton->dc);
+	txDeleteDC (xCoordinat->dc);
+	xCoordinat->deleteDC ();
+	yCoordinat->deleteDC ();
 	txDisableAutoPause ();
 
 	return 0;
 
+}
+
+void Slider::deleteDC ()
+{
+	txDeleteDC (sliderQuadrate.dc);
+	txDeleteDC (arrow1.dc);
+	txDeleteDC (arrow2.dc);
+}
+
+void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize)
+{
+	if (newSize.x <= 0 || newSize.y <= 0)
+		newSize.print ();
+
+	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+
+	assert (oldDC);
+	assert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY));
+	txDeleteDC (oldDC);
 }
 
 void Slider::draw ()
@@ -370,8 +471,8 @@ void Slider::draw ()
 	Vector mousePos =  {mx, my};
 
 	txSetAllColors (TX_WHITE);
-	rect.draw ();
 
+	//txBitBlt (rect.pos.x, rect.pos.y, dc);
 	arrow1.draw ();
 	arrow2.draw ();
 
@@ -382,7 +483,7 @@ void Slider::draw ()
 	if (sliderQuadrate.isClicked)
 	{
 		if (horizontalMode)  *num = tempNum + ( (mousePos.x - cursorStartPosition.x) / (kScale));
-		if (!horizontalMode) *num = tempNum - ( (mousePos.y - cursorStartPosition.y) / (kScale)); 
+		if (!horizontalMode) *num = tempNum + ( (mousePos.y - cursorStartPosition.y) / (kScale)); 
 
 		if (*num > maxNum) *num = maxNum;
 		if (*num < minNum) *num = minNum;
@@ -390,13 +491,13 @@ void Slider::draw ()
 
 	if (horizontalMode)
 	{
-		sliderQuadrate.rect.pos.x		= kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x);
-		sliderQuadrate.rect.finishPos.x = kScale * (*num - minNum) + (rect.pos.x + arrow1.rect.getSize ().x) +  kScale;
+		sliderQuadrate.rect.pos.x		= kScale * (*num - minNum) + arrow1.rect.finishPos.x;
+		sliderQuadrate.rect.finishPos.x = kScale * (*num - minNum) + arrow1.rect.finishPos.x + quadrateScale * rect.getSize ().x;
 	}
 	else
 	{
-		sliderQuadrate.rect.pos.y		= -kScale * (*num - minNum) + (rect.finishPos.y - arrow1.rect.getSize ().y) -  kScale;
-		sliderQuadrate.rect.finishPos.y = -kScale * (*num - minNum) + (rect.finishPos.y - arrow1.rect.getSize ().y);
+		sliderQuadrate.rect.pos.y		= kScale * (*num - minNum) + arrow1.rect.finishPos.y;
+		sliderQuadrate.rect.finishPos.y= kScale * (*num - minNum) + arrow1.rect.finishPos.y + quadrateScale * rect.getSize ().y;
 	}
 
 }
@@ -407,6 +508,14 @@ void Slider::onClick ()
 	int my = txMouseY ();
 	Vector mousePos =  {mx, my};
 
+
+	if (sliderQuadrate.rect.inRect (mx, my) && !isClicked)
+	{
+		cursorStartPosition = {(double) mx, (double) my};
+		tempNum = *num;
+		sliderQuadrate.isClicked = true;
+	}
+
 	if (arrow1.rect.inRect (mx, my) && *num > minNum && !isClicked)
 	{
 		(*num)--;
@@ -415,25 +524,21 @@ void Slider::onClick ()
 	{
 		(*num)++;
 	}
-
-	if (sliderQuadrate.rect.inRect (mx, my) && !isClicked)
-	{
-		cursorStartPosition = {(double) mx, (double) my};
-		tempNum = *num;
-		sliderQuadrate.isClicked = true;
-	}
 }
 
 
 void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
 {
+
 	*numChange = (new NumChange (
-								{.pos = {70, 44}, .finishPos = {389, 74}},
+								{.pos = {70, 44 - 10}, .finishPos = {389, 74}},
 								{.pos = {296, 46}, .finishPos = {362, 74}}, 
 								{.pos = {368, 44}, .finishPos = {389, 59}}, 
 								{.pos = {368, 59}, .finishPos = {389, 74}}, 
-								{.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} },
-								txLoadImage ("SwitchButton.bmp"), 1, &mainCanvas->lineThickness));
+								{.pos = {70, 55}, .finishPos = {270, 65} },
+								txLoadImage ("SwitchButton.bmp"), 
+								0.3,
+								1, &mainCanvas->lineThickness));
 	menu->addWindow (*numChange);
 }
 
@@ -451,15 +556,18 @@ void printfDCS (const char *str)
 void NumChange::draw ()
 {
 	if (! (*num == 0))
-		sprintf (inText, "%d", *num);
+		sprintf (inText, "%d", (int) *num);
 
 	stringButton.draw ();
 
 	if (!strcmp ("", inText))
 		*num = 0;
+
 	sscanf  (inText, "%d", num);
 
-	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusButtons); 
+	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusDC); 
+
+	//if (backGround) txBitBlt (minusNum.rect.pos.x, minusNum.rect.pos.y, backGround);
 
 	plusNum.draw  ();
 	minusNum.draw (); 
@@ -916,13 +1024,13 @@ void Window::draw ()
 void Canvas::draw ()
 {
 	assert (canvas);
-	txBitBlt (rect.pos.x, rect.pos.y, canvas);
+	txBitBlt (-canvasCoordinats.x, -canvasCoordinats.y, canvas);
 
 	if (txMouseButtons () == 2 && wasClicked)
 	{
 		txSetAllColors (drawColor, canvas);
 		txSetColor (drawColor, lineThickness, canvas);
-		txLine (lastClick.x, lastClick.y - rect.pos.y, txMouseX (), txMouseY () - rect.pos.y, canvas); 
+		txLine (lastClick.x + canvasCoordinats.x, lastClick.y - rect.pos.y + canvasCoordinats.y, txMouseX () + canvasCoordinats.x, txMouseY () - rect.pos.y + canvasCoordinats.y, canvas); 
 		wasClicked = false;
 	}
 
@@ -967,10 +1075,7 @@ void CloseButton::onClick ()
 
 void Canvas::onClick ()
 {
-
 	txSetAllColors ( drawColor);
-
-	int currMouseButton = txMouseButtons ();
 	
 	if (!(isClicked))
 	{
