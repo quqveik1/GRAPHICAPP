@@ -51,6 +51,7 @@ struct Canvas : Window
 	COLORREF drawColor = TX_RED;
 	bool clearBackground = true;
 	Vector canvasCoordinats;
+	Vector canvasSize;
 
 	bool wasClicked = false;
 	Vector lastClick = {};
@@ -58,7 +59,8 @@ struct Canvas : Window
 	Canvas (Rect _rect, COLORREF _color, Vector _canvasSize) : 
 		Window (_rect, _color),
 		canvas (txCreateCompatibleDC (_canvasSize.x, _canvasSize.y)),
-		canvasCoordinats ({})
+		canvasCoordinats ({}),
+		canvasSize (_canvasSize)
 	{}
 
 	virtual void draw () override;
@@ -175,11 +177,11 @@ struct StringButton : Window
 	int lastButton;
 	int lastTimeClicked;
 	bool onlyNums;
-	const int MaxSizeOfText;
+	const int MaxNum;
 
 
 
-	StringButton(Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, Manager *_manager, int _MaxSizeOfText = 5, bool _onlyNums = false) :
+	StringButton(Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, Manager *_manager, int _MaxNum = 20, bool _onlyNums = false) :
 		Window(_rect, _color, NULL, _manager),
 		inText (_redactingText),
 		advancedMode(true),
@@ -187,8 +189,8 @@ struct StringButton : Window
 		textLen (_redactingTextLength + 1),
 		lastButton (0),
 		lastTimeClicked (0),
-		MaxSizeOfText (_MaxSizeOfText + 1),
-		onlyNums (_onlyNums)
+		onlyNums (_onlyNums),
+		MaxNum (_MaxNum)
 	{}
 
 
@@ -316,12 +318,12 @@ struct NumChange : Manager
 	NumChange (Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, HDC _plusMinusDC, double _sliderQuadrateScale, int _numLength, double *_num) :
 		Manager (_mainRect, 4),
 		num (_num),
-		stringButton (_stringRect, TX_WHITE, inText, _numLength, this, 6, true),
+		stringButton (_stringRect, TX_WHITE, inText, _numLength, this, 20, true),
 		plusNum (_plusRect, _num, +1),
 		minusNum (_minusRect, _num, -1),
 		plusMinusDC (_plusMinusDC),
 		minNum (1),
-		maxNum (10),
+		maxNum (20),
 		slider (_sliderRect, _num, _sliderQuadrateScale, 1, 20) 
 	{
 	}
@@ -383,19 +385,13 @@ int main ()
 		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
 		menu->addWindow (openManager);
 
-	printfDCS ();
-
 	NumChange *numChange = NULL;
 	createNumChanger (menu, &numChange, mainCanvas);	
-
-	printfDCS ();
 
 	Slider *xCoordinat = new Slider (   { .pos = {0, 980}, .finishPos = {1000, 1000} }, 
 										&mainCanvas->canvasCoordinats.x, 
 										0.3,
 										0, 1000);
-	printfDCS ();
-
 
 	Slider *yCoordinat = new Slider (   { .pos = {980, 50}, .finishPos = {1000, 950} }, 
 										&mainCanvas->canvasCoordinats.y,
@@ -563,7 +559,7 @@ void NumChange::draw ()
 	if (!strcmp ("", inText))
 		*num = 0;
 
-	sscanf  (inText, "%d", num);
+	sscanf  (inText, "%lf", num);
 
 	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusDC); 
 
@@ -799,6 +795,19 @@ void StringButton::draw ()
 
 	if (manager->getActiveWindow () == this) shiftArrBack (&inText[cursorPosition + 1], 10);
 
+	if (onlyNums)
+	{
+		double num;
+		if (!strcmp ("", inText)) num = 0;
+
+		sscanf  (inText, "%lf", &num);
+		if (num > MaxNum) 
+		{
+			if (num >= 100) cursorPosition--;
+			sprintf (inText, "%d", (int) MaxNum);
+		}
+	}
+
 	return;
 }
 
@@ -817,7 +826,6 @@ void StringButton::checkSymbols ()
 	if (!_kbhit ())	return;
 	int symbol = _getch ();
 
-	if (cursorPosition + 2 == MaxSizeOfText) return;
 	if (! (symbol >= 48 && symbol <= 57) && onlyNums) return;
 	if (lastButton == symbol || symbol == '\b') return;
 	if (symbol == 48 &&	onlyNums && cursorPosition == -1) return;
@@ -1051,7 +1059,7 @@ void Canvas::draw ()
 	if (clearBackground)
 	{
 		txSetAllColors (TX_BLACK, canvas);
-		txRectangle (rect.pos.x, 0, rect.finishPos.x, rect.finishPos.y, canvas);
+		txRectangle (0, 0, canvasSize.x, canvasSize.y, canvas);
 		clearBackground = false;
 	}
 }
