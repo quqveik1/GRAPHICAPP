@@ -4,8 +4,8 @@
 struct Rect
 {
     Vector pos;
-    //Vector size;
     Vector finishPos;
+    Vector size;
 
     bool inRect (double x, double y);
 
