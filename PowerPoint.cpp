@@ -12,6 +12,9 @@ double Brightness = 255;
 double IncomeBrightness = 255;
 
 
+HDC TestPhoto;
+
+
 #define printBlt(image)         \
 {                               \
     assert (image);				\
@@ -448,6 +451,8 @@ int main ()
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 	txSelectFont ("Arial", 28, 10);
 
+	TestPhoto = txLoadImage ("TestPhoto.bmp");
+
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {1000, 1000}}, 13, true);
 
 	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_BLACK, {2000, 2000});
@@ -569,6 +574,11 @@ void BrightnessButton::onClick ()
 	{
 		*confirmBrightness = true;
 		brightnessSlider.maxNum = Brightness;
+	}
+	if (confirmButton.rect.inRect (mx, my) && !isClicked) 
+	{
+		*confirmBrightness = true;
+		incomeBrightnessSlider.maxNum = IncomeBrightness;
 	}
 }
 
@@ -1182,8 +1192,9 @@ void Window::draw ()
 void Canvas::draw ()
 {
 	assert (canvas);
-	txSetAllColors (TX_RED);
-	txRectangle (0, 0, 1000, 1000, canvas);
+	//txSetAllColors (TX_BLACK);
+	//txRectangle (0, 0, 1000, 1000);
+	txBitBlt (canvas, 0, 0, 1000, 1000, TestPhoto);
 
 	for (int x = 0; x < 1000; x++)
 	{
@@ -1191,9 +1202,21 @@ void Canvas::draw ()
 		{
 			RGBQUAD pixel = pixelsArr [int (x + canvasCoordinats.x + (int) ((y + SCREENSIZE.y - canvasCoordinats.y)) * canvasSize.x)];
 
-			pixel.rgbRed = MIN ((pixel.rgbRed / IncomeBrightness)  * Brightness, 255);
-			pixel.rgbGreen = MIN ( (pixel.rgbGreen / IncomeBrightness) * Brightness, 255);
- 			pixel.rgbBlue = MIN ( (pixel.rgbBlue / IncomeBrightness) * Brightness, 255);
+			//pixel.rgbRed = MIN ((pixel.rgbRed / IncomeBrightness)  * 255 + (255 - Brightness), 255);
+			//pixel.rgbGreen = MIN ( (pixel.rgbGreen / IncomeBrightness) * 255 + (255 - Brightness), 255);
+ 			//pixel.rgbBlue = MIN ( (pixel.rgbBlue / IncomeBrightness) * 255 + (255 - Brightness), 255);
+
+			//pixel.rgbRed = MAX ((pixel.rgbRed) + (Brightness - IncomeBrightness), 0);
+			//pixel.rgbGreen = MAX ( (pixel.rgbGreen) + (Brightness - IncomeBrightness), 0);
+ 			//pixel.rgbBlue = MAX ( (pixel.rgbBlue) + (Brightness - IncomeBrightness), 0);
+
+			pixel.rgbRed = MIN ((pixel.rgbRed) * (Brightness - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness, 255);
+			pixel.rgbGreen = MIN (pixel.rgbGreen * (Brightness - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness, 255);
+ 			pixel.rgbBlue = MIN (pixel.rgbBlue * (Brightness - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness, 255);
+
+			//pixel.rgbRed =  (pixel.rgbRed  + (255 - Brightness));
+			//pixel.rgbGreen = pixel.rgbGreen  + (255 - Brightness);
+ 			//pixel.rgbBlue = pixel.rgbBlue  + (255 - Brightness);
 
 			if (confirmBrightness) 
 			{
@@ -1215,8 +1238,12 @@ void Canvas::draw ()
 
 	if (wasClicked)
 	{
+
+		drawColor = RGB (MIN ( (txExtractColor (drawColor, TX_RED) / IncomeBrightness * Brightness), 255), MIN (txExtractColor (drawColor, TX_BLUE) / IncomeBrightness * Brightness, 255), MIN (txExtractColor (drawColor, TX_GREEN) / IncomeBrightness * Brightness, 255));
+		
+
 		txSetAllColors (drawColor);
-		txSetColor (drawColor, lineThickness);
+		txSetColor (drawColor/ IncomeBrightness * Brightness, lineThickness);
 		if (txMouseY () < rect.pos.y)
 		{
 			txLine (lastClick.x, lastClick.y, txMouseX (), rect.pos.y);	
