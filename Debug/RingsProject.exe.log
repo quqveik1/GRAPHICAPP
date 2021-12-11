@@ -7930,3 +7930,3285 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xA0A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:56:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xA0A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:56:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x1B28 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:58:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x1B28 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:58:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x840C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:59:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x840C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 21:59:32
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xA844 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:01:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xA844 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:01:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x40BC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:01:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0x40BC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:01:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xBB10 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:02:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0031B6D8 (32-bit), Flags: CMdRe0, Thread: 0xBB10 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 21:56:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:02:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C3B6D8 (32-bit), Flags: CMdRe0, Thread: 0x9F24 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 22:04:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:04:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C3B6D8 (32-bit), Flags: CMdRe0, Thread: 0x9F24 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 22:04:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:04:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C3B6D8 (32-bit), Flags: CMdRe0, Thread: 0xB934 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 22:04:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:05:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7CB34878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C3B6D8 (32-bit), Flags: CMdRe0, Thread: 0xB934 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7CB34878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7CB34638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  7 2021 22:04:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  7 2021 22:05:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0048B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE1E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:58:44, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 18:58:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0048B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE1E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:58:44, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 18:58:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0107B6D8 (32-bit), Flags: CMdRe0, Thread: 0xB0E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:59:51, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 18:59:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0107B6D8 (32-bit), Flags: CMdRe0, Thread: 0xB0E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:59:51, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 18:59:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0107B6D8 (32-bit), Flags: CMdRe0, Thread: 0xC6C8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:59:51, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:00:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0107B6D8 (32-bit), Flags: CMdRe0, Thread: 0xC6C8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 18:59:51, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:00:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0012B6D8 (32-bit), Flags: CMdRe0, Thread: 0xD5E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:07:01, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:07:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0012B6D8 (32-bit), Flags: CMdRe0, Thread: 0xD5E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:07:01, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:07:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0100B6D8 (32-bit), Flags: CMdRe0, Thread: 0xC55C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:08:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:08:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0100B6D8 (32-bit), Flags: CMdRe0, Thread: 0xC55C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (969):
+
+    967: 		pointers[i]->draw ();
+    968: 
+=>  969:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    970: 
+    971: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:08:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:08:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004FB6D8 (32-bit), Flags: CMdRe0, Thread: 0xEAD4 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (70):
+
+     68: 
+     69: 	{
+=>   70: 		finalDC = txCreateDIBSection (_rect.getSize ().x, _rect.getSize ().y, &finalDCArr);
+     71: 		txSetAllColors (color, finalDC);
+     72: 		txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:26:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:26:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003BB6D8 (32-bit), Flags: CMdRe0, Thread: 0xE3E8 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#11 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1290):
+
+   1288: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1289: {
+=> 1290: 	txSetFillColor (color, dc); 
+   1291: 	txSetColor (color, 1, dc);
+   1292: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:25, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:27:36
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0xD320 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:27:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0xD320 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:27:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0x696C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:28:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0x696C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:28:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0xDF48 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:28:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009DB6D8 (32-bit), Flags: CMdRe0, Thread: 0xDF48 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:27:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:28:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C8B6D8 (32-bit), Flags: CMdRe0, Thread: 0xD6FC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (967):
+
+    965: 		pointers[i]->draw ();
+    966: 
+=>  967:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    968: 
+    969: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:29:23, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:29:30
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C8B6D8 (32-bit), Flags: CMdRe0, Thread: 0xD6FC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (967):
+
+    965: 		pointers[i]->draw ();
+    966: 
+=>  967:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    968: 
+    969: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:29:23, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:29:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002EB6D8 (32-bit), Flags: CMdRe0, Thread: 0xD8E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:30:37, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:30:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002EB6D8 (32-bit), Flags: CMdRe0, Thread: 0xD8E0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:30:37, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:30:44
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F2B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE284 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:31:13, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:31:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F2B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE284 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (968):
+
+    966: 		pointers[i]->draw ();
+    967: 
+=>  968:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    969: 
+    970: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:31:13, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:31:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D2B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE290 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (970):
+
+    968: 		printf("draw end %d\n", i);
+    969: 
+=>  970:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    971: 
+    972: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:32:27, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:32:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D2B6D8 (32-bit), Flags: CMdRe0, Thread: 0xE290 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (970):
+
+    968: 		printf("draw end %d\n", i);
+    969: 
+=>  970:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    971: 
+    972: 		if (txMouseButtons () != 1)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:32:27, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:32:32
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0087B6D8 (32-bit), Flags: CMdRe0, Thread: 0xEB70 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (970):
+
+    968: 		printf("draw end %d\n", i);
+    969: 
+=>  970:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    971: 
+    972: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:32:56, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:33:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0087B6D8 (32-bit), Flags: CMdRe0, Thread: 0xEB70 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (970):
+
+    968: 		printf("draw end %d\n", i);
+    969: 
+=>  970:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    971: 
+    972: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:32:56, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:32:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0028B6D8 (32-bit), Flags: CMdRe0, Thread: 0x9A84 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%d, %d}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:34:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:34:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0028B6D8 (32-bit), Flags: CMdRe0, Thread: 0x9A84 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%d, %d}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:34:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:34:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0028B6D8 (32-bit), Flags: CMdRe0, Thread: 0x7604 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%d, %d}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:34:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:41:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0028B6D8 (32-bit), Flags: CMdRe0, Thread: 0x7604 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%d, %d}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:34:10, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:41:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x005CA183 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0062B6D8 (32-bit), Flags: CMdRe0, Thread: 0x4B28 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1460):
+
+   1458: 		txSetAllColors (drawColor, finalDC);
+   1459: 		txSetColor (drawColor, lineThickness, finalDC);
+=> 1460: 		txLine (lastClick.x, lastClick.y, txMouseX (), txMouseY (), finalDC);
+   1461: 	}
+   1462: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:43:28, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:43:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x005CA183 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0062B6D8 (32-bit), Flags: CMdRe0, Thread: 0x4B28 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1460):
+
+   1458: 		txSetAllColors (drawColor, finalDC);
+   1459: 		txSetColor (drawColor, lineThickness, finalDC);
+=> 1460: 		txLine (lastClick.x, lastClick.y, txMouseX (), txMouseY (), finalDC);
+   1461: 	}
+   1462: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:43:28, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:43:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C7B6D8 (32-bit), Flags: CMdRe0, Thread: 0xEE4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%lf, %lf}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:46:01, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:46:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C7B6D8 (32-bit), Flags: CMdRe0, Thread: 0xEE4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%lf, %lf}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:46:01, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:46:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0036C6D8 (32-bit), Flags: CMdRe0, Thread: 0xC2C0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%lf, %lf}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:50:25, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:50:32
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BBD4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0036C6D8 (32-bit), Flags: CMdRe0, Thread: 0xC2C0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BBD4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BBD4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#10 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (972):
+
+    970: 		printf ("%d {%lf, %lf}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
+    971: 
+=>  972:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+    973: 
+    974: 		printf("blt end %d\n", i);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 19:50:25, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 19:50:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x008BAE78. Попытка прочесть данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0091D6D8 (32-bit), Flags: CMdRe0, Thread: 0xBE60 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 8 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 9 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#10 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1449):
+
+   1447:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+   1448: 
+=> 1449: 		if (txMouseButtons () != 1)
+   1450: 		{
+   1451: 			pointers[i]->isClicked = false;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 22:11:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 22:11:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x008BAE78. Попытка прочесть данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0091D6D8 (32-bit), Flags: CMdRe0, Thread: 0xBE60 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 8 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 9 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#10 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 22:11:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 22:11:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00CC9CB8. Попытка записать данные по адресу 0x077A5460 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D2D6D8 (32-bit), Flags: CMdRe0, Thread: 0x314C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#11 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1512):
+
+   1510: 	assert (canvas);
+   1511: 	txSetAllColors (TX_BLACK, finalDC);
+=> 1512: 	txRectangle (0, 0, 3000, 3000, finalDC);
+   1513: 	//txSetAllColors (TX_BLUE, canvas);
+   1514: 	//txRectangle (0, 0, 1000, 1000, canvas);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 22:14:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 22:14:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00CC9CB8. Попытка записать данные по адресу 0x077A5460 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D2D6D8 (32-bit), Flags: CMdRe0, Thread: 0x314C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x75DD6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77B68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#11 0x77B68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Dec  9 2021 22:14:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Dec  9 2021 22:14:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

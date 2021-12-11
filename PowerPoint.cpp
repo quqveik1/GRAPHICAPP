@@ -31,6 +31,14 @@ HDC TestPhoto;
 	txBitBlt (finalDC, x, y, 0,0, image); \
 }										  \
 
+#define drawOnFinalDC(button)					  \
+{												  \
+	button.draw ();								  \
+	txBitBlt (finalDC, button.rect.pos.x, button.rect.pos.y, 0, 0, button.finalDC);  \
+}												  \
+
+
+
 void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
 void txSetAllColors (COLORREF color, HDC dc = txDC ());
 
@@ -57,14 +65,12 @@ struct Window
 		isClicked (false), 
 		dc (_dc),
 		advancedMode (_advancedMode)
-
 	{
-
-		if (_rect.getSize ().x > 0 && _rect.getSize ().y > 0) 
+		if (_rect.getSize().x > 0 && _rect.getSize().y > 0)
 		{
-			finalDC = txCreateDIBSection (_rect.getSize ().x, _rect.getSize ().y, &finalDCArr);
-			txSetAllColors (color, finalDC);
-			txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+			finalDC = txCreateDIBSection(_rect.getSize().x, _rect.getSize().y, &finalDCArr);
+			txSetAllColors(color, finalDC);
+			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 		}
 	}
 
@@ -77,7 +83,38 @@ struct Window
 	virtual void onClick () {};
 };
 
-struct Canvas : Window
+struct Manager : Window
+{
+	int length;
+	Window **pointers = NULL;
+	int newButtonNum;
+	Window *activeWindow;
+	Window handle;
+	Vector startCursorPos;
+
+	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = TX_WHITE) : 
+		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+		length (_length),
+		pointers (new Window*[length]{}),
+		newButtonNum (0),
+		activeWindow (NULL), 
+		handle (_handle),
+		startCursorPos({})
+	{
+		handle.manager = this;
+	}
+
+	bool addWindow (Window *window);
+	Window *getActiveWindow ();
+	void controlHandle ();
+	void replaceWindow (int numOfWindow, int startOfWindows);
+	void replaceWindow (int numOfWindow);
+
+	virtual void draw () override;
+	virtual void onClick () override;
+};
+
+struct Canvas : Manager
 {
 	HDC canvas;
 	double lineThickness = 3;
@@ -91,8 +128,8 @@ struct Canvas : Window
 	bool wasClicked = false;
 	Vector lastClick = {};
 
-	Canvas (Rect _rect, COLORREF _color, Vector _canvasSize) : 
-		Window (_rect, _color),
+	Canvas (Rect _rect, Vector _canvasSize) : 
+		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _rect.getSize ().y * 0.05}}),
 		canvasCoordinats ({}),
 		canvasSize (_canvasSize),
 		confirmBrightness (false)
@@ -103,7 +140,6 @@ struct Canvas : Window
 	virtual void draw () override;
 	virtual void onClick () override;
 };
-
 
 struct TimeButton : Window
 {
@@ -166,36 +202,21 @@ struct CleanButton : Window
 	virtual void onClick () override;
 };
 
-struct Manager : Window
+struct CanvasManager : Manager 
 {
-	int length;
-	Window **pointers = NULL;
-	int newButtonNum;
-	Window *activeWindow;
-	Window handle;
-	Vector startCursorPos;
-	bool wasHandleClicked;
+	Window newCanvas;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = TX_WHITE) : 
-		Window (_rect, _color, _dc, NULL, "", _advancedMode),
-		length (_length),
-		pointers (new Window*[length]{}),
-		newButtonNum (0),
-		activeWindow (NULL), 
-		handle (_handle),
-		wasHandleClicked (false)
-	
+	CanvasManager (Rect _rect) : 
+		Manager (_rect, 10, true, NULL, {}, TX_BLACK),
+		newCanvas ({.pos = {0, 0}, .finishPos = {100, 100}})
 	{
-		handle.manager = this;
+		addWindow (&newCanvas);
 	}
 
-	bool addWindow (Window *window);
-	Window *getActiveWindow ();
-	void controlHandle ();
-
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick() override;
 };
+
 
 struct OpenManager : Window
 {
@@ -416,6 +437,8 @@ struct Slider : Manager
 };
 
 
+
+
 struct NumChange : Manager
 {
 	StringButton stringButton;
@@ -515,14 +538,17 @@ int main ()
 	//Window *testWindow = new Window ({.pos = {0, 0}, .finishPos = {500, 500}},TX_WHITE, TestPhoto);
 	//manager->addWindow (testWindow);
 
-	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {1000, 1000}}, TX_BLACK, {2000, 2000});
-	manager->addWindow (mainCanvas);
+	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {500, 500}}, {2000, 2000});
+	//manager->addWindow (mainCanvas);
+
+	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {1000, 1000}});
+	manager->addWindow (canvasManager);
 
 	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
-	manager->addWindow (menu);
+	//manager->addWindow (menu);
 
 	Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
-		menu->addWindow (colorManager);
+		//menu->addWindow (colorManager);
 
 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), mainCanvas, txLoadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
@@ -552,32 +578,25 @@ int main ()
 										0, 1000,
 										false);	   
 
-	manager->addWindow (xCoordinat);
-	manager->addWindow (yCoordinat);
-
-	//static int num2 = 3;
-	//Slider *slider = new Slider ( {.pos = {70, 60}, .finishPos = {280, 70} }, {.pos = {70, 60}, .finishPos = {90, 70} }, {.pos = {260, 60}, .finishPos = {280, 70} }, (numChange->num), 0, 50, true);
-	//Slider *slider = new Slider ( {.pos = {70, 70}, .finishPos = {80, 280} }, {.pos = {70, 260}, .finishPos = {80, 280} }, {.pos = {70, 70}, .finishPos = {80, 90} }, &num2, 0, 50, false);
-	//menu->addWindow (slider);
+	//manager->addWindow (xCoordinat);
+	//manager->addWindow (yCoordinat);
 
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
-	menu->addWindow (cleanButton);
-
+	//menu->addWindow (cleanButton);
+	//
 	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
-	manager->addWindow (closeButton);
+	//manager->addWindow (closeButton);
 
-	//TimeButton *timeButton = new TimeButton ({.pos = {835, 0}, .finishPos = {850, 50}});
-	//menu->addWindow (timeButton);
 
 	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {300, 300}, .finishPos = {744, 661}}, {.pos = {55, 64}, .finishPos = {312, 318}},
 															   {.pos = {322, 64}, .finishPos = {338, 318}}, {.pos = {17, 64}, .finishPos = {33, 318}},
 															   {.pos = {357, 63}, .finishPos = {436, 80}},  
 															   {.pos = {357, 90}, .finishPos = {436, 100}},
 																&mainCanvas->confirmBrightness);	 
-	manager->addWindow (brightnessButton);
+	//manager->addWindow (brightnessButton);
 
-	OpenManager *brightnessButtonOpen = new OpenManager ({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, brightnessButton);
-	manager->addWindow (brightnessButtonOpen);
+	//OpenManager *brightnessButtonOpen = new OpenManager ({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, brightnessButton);
+	//manager->addWindow (brightnessButtonOpen);
 
 
 	
@@ -626,6 +645,8 @@ int main ()
 
 }
 
+
+
 void BrightnessButton::draw ()
 {
 	if (!advancedMode) return;
@@ -658,7 +679,7 @@ void BrightnessButton::onClick ()
 	{
 			startCursorPos.x = mx;
 			startCursorPos.y = my;
-			wasHandleClicked = true;
+			handle.isClicked = true;
 	}
 
 	if (brightnessSlider.getAbsRect().inRect (mx, my) && !isClicked) brightnessSlider.onClick ();		
@@ -947,16 +968,28 @@ void Manager::draw ()
 
 	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
 
+	txSetAllColors (TX_BLACK, finalDC);
+	txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+
 	for (int i = 0; i < newButtonNum; i++)
 	{
+		//printf("Manager %d\n", i);
 		pointers[i]->draw ();
+
+		//printf("draw end %d\n", i);
+
+		//printf ("%d {%lf, %lf}, %d\n", finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->finalDC);
 
  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
 
-		if (txMouseButtons () != 1 && pointers[i]->isClicked != false)
+		//printf("blt end %d\n", i);
+
+		if (txMouseButtons () != 1)
 		{
 			pointers[i]->isClicked = false;
 		}
+
+		//printf("Manager end %d\n", i);
 	}
 
 	if (manager->getActiveWindow () != this && manager) 
@@ -967,7 +1000,7 @@ void Manager::draw ()
 
 void Manager::controlHandle ()
 {
-	if (wasHandleClicked)
+	if (handle.isClicked)
 	{
 		rect.pos.x += txMouseX () - startCursorPos.x;
 		rect.pos.y += txMouseY () - startCursorPos.y;
@@ -978,8 +1011,43 @@ void Manager::controlHandle ()
 	}
 	if (txMouseButtons () != 1)
 	{
-		wasHandleClicked = false;
+		handle.isClicked = false;
 	}
+}
+
+
+/*
+void Manager::replaceWindow (int numOfWindow, int startOfWindows)
+{
+	Window *copyOfStartWindow = pointers[numOfWindow];
+	Window *copyOfWindow = pointers[startOfWindows];
+
+	for (int i = startOfWindows; i < numOfWindow; i++)
+	{
+		Window* preCopyOfWindow = pointers[i + 1];
+		pointers[i + 1] = copyOfWindow;
+		copyOfWindow = 	preCopyOfWindow;
+	}
+
+	 if (startOfWindows < numOfWindow) pointers[startOfWindows] = copyOfStartWindow;
+
+}
+*/
+
+void Manager::replaceWindow(int numOfWindow)
+{
+	Window* copyOfStartWindow = pointers[numOfWindow];
+	Window* copyOfWindow = pointers[newButtonNum - 1];
+
+	for (int i = newButtonNum - 1; i > numOfWindow && numOfWindow > 0; i--)
+	{
+		Window* preCopyOfWindow = pointers[i - 1];
+		pointers[i - 1] = copyOfWindow;
+		copyOfWindow = preCopyOfWindow;
+	}
+
+	if (numOfWindow + 1 < newButtonNum - 1) pointers[newButtonNum - 1] = copyOfStartWindow;
+
 }
 
 
@@ -996,7 +1064,7 @@ void Manager::onClick ()
 		{
 			startCursorPos.x = mx;
 			startCursorPos.y = my;
-			wasHandleClicked = true;
+			handle.isClicked = true;
 		}
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
@@ -1032,7 +1100,7 @@ Vector Window::getAbsCoordinats ()
 
 	for (;;)
 	{
-		if (!manager) break;
+		if (!copyOfManager) break;
 
 		coordinats = coordinats + copyOfManager->rect.pos;
 		copyOfManager = copyOfManager->manager;
@@ -1259,6 +1327,8 @@ void engine (Manager *manager)
 
 	for (;;)
 	{
+		txSetAllColors (TX_BLACK);
+		txRectangle (0, 0, 2000, 2000);
 		manager->draw ();
 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
@@ -1266,11 +1336,10 @@ void engine (Manager *manager)
 			manager->onClick ();
 			if (!IsRunning) break;
 		}
+
+		
 		txSleep (30);
 
-		txSetAllColors (TX_BLACK);
-		txRectangle (manager->rect.pos.x, manager->rect.pos.y, manager->rect.finishPos.x, manager->rect.finishPos.y);
-		//txClear ();
 	}
 }
 
@@ -1296,8 +1365,6 @@ void TimeButton::draw ()
 	int hours =	t / 3600;
 	int minutes = t / 60 - hours * 60;
 	int second  = t - hours * 3600 - minutes * 60;
-
-	//strftime (newStr, 50, "%X", localtime (time));
 
 	sprintf (newStr, "%d:%02d:%02d", hours + 3, minutes, second);
 
@@ -1362,28 +1429,104 @@ void Window::deleteButton ()
 	if (finalDC) txDeleteDC (dc);
 }
 
-void Canvas::draw ()
+
+void CanvasManager::draw ()
 {
-	//assert (canvas);
+	if (newCanvas.isClicked)
+	{
+		addWindow (new Canvas ({.pos = {0, 0}, .finishPos = {500, 500}}, {2000, 2000}));
+	}
+
+
 	txSetAllColors (TX_BLACK, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
-	txSetAllColors (TX_RED, canvas);
-	//txRectangle (0, 0, 3000, 3000, canvas);
-	//txBitBlt (canvas, 0, 0, 1000, 1000, TestPhoto);
 
-	for (int x = 0; x < 1000; x++)
+	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
+
+	for (int i = 0; i < newButtonNum; i++)
 	{
-		for (int y = 0; y < 1000; y++)	
+		pointers[i]->draw ();
+
+ 		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, 0, 0, pointers[i]->finalDC); 
+
+		if (txMouseButtons () != 1)
+		{
+			pointers[i]->isClicked = false;
+		}
+	}
+
+	if (manager->getActiveWindow () != this && manager) 
+	{
+		activeWindow = NULL;
+	}
+}
+
+void CanvasManager::onClick()
+{
+	bool missClicked = true;
+
+	int mx = txMouseX();
+	int my = txMouseY();
+
+	if (advancedMode)
+	{
+		if (handle.getAbsRect().inRect(mx, my))
+		{
+			startCursorPos.x = mx;
+			startCursorPos.y = my;
+			handle.isClicked = true;
+		}
+		for (int i = newButtonNum - 1; i >= 0; i--)
+		{
+			if (pointers[i]->getAbsRect().inRect(mx, my))
+			{
+				activeWindow = pointers[i];
+				pointers[i]->onClick();
+				pointers[i]->isClicked = true;
+
+				missClicked = false;
+
+				if (pointers[i]->advancedMode) 
+				{
+					replaceWindow (i);
+					break;
+				}
+			}
+			else
+			{
+				pointers[i]->isClicked = false;
+
+				missClicked = true;
+			}
+		}
+	}
+
+	if (missClicked == true) activeWindow = NULL;
+}
+
+
+void Canvas::draw ()
+{
+	assert (canvas);
+	txSetAllColors (TX_BLACK, finalDC);
+	txRectangle (0, 0, 3000, 3000, finalDC);
+	//txSetAllColors (TX_BLUE, canvas);
+	//txRectangle (0, 0, 1000, 1000, canvas);
+
+	for (int x = 0; x < rect.getSize().x; x++)
+	{
+		for (int y = 0; y < rect.getSize().y; y++)	
 		{
 			RGBQUAD pixel = canvasArr [int (x + canvasCoordinats.x + (int) ((y + SCREENSIZE.y - canvasCoordinats.y)) * canvasSize.x)];
 
 
-			pixel.rgbRed = pixel.rgbRed * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
-			pixel.rgbGreen = pixel.rgbGreen * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
- 			pixel.rgbBlue = pixel.rgbBlue * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+			//pixel.rgbRed = pixel.rgbRed * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+			//pixel.rgbGreen = pixel.rgbGreen * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+ 			//pixel.rgbBlue = pixel.rgbBlue * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
 
+			//if ((int)(x + (y)*SCREENSIZE.x) > canvasSize.x * canvasSize.y) break;
 
-			finalDCArr[(int) (x + (y) * SCREENSIZE.x)] = pixel;
+			finalDCArr[(int) (x + (y) * rect.getSize().x)] = pixel;
 
 			if (confirmBrightness) 
 			{
@@ -1393,11 +1536,20 @@ void Canvas::draw ()
 		}
 	}
 
+	controlHandle ();
+	drawOnFinalDC (handle);
+
+	txSetAllColors (TX_WHITE, finalDC);
+	txRectangle (0, 0, 5, 500, finalDC);
+	txRectangle (0, 495, 500, 500, finalDC);
+	txRectangle (495, 500, 500, 0, finalDC);
+
+
 	if (txMouseButtons () == 2 && wasClicked)
 	{
 		txSetAllColors (drawColor, canvas);
 		txSetColor (drawColor, lineThickness, canvas);
-		txLine (lastClick.x + canvasCoordinats.x, lastClick.y - rect.pos.y + canvasCoordinats.y, txMouseX () + canvasCoordinats.x, txMouseY () - rect.pos.y + canvasCoordinats.y, canvas); 
+		txLine (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, txMouseX () - getAbsCoordinats().x + canvasCoordinats.x, txMouseY () - getAbsCoordinats().y + canvasCoordinats.y, canvas);
 		wasClicked = false;
 	}
 
@@ -1405,7 +1557,7 @@ void Canvas::draw ()
 	{
 		txSetAllColors (drawColor, finalDC);
 		txSetColor (drawColor, lineThickness, finalDC);
-		txLine (lastClick.x, lastClick.y, txMouseX (), txMouseY (), finalDC);
+		txLine (lastClick.x, lastClick.y, txMouseX () - getAbsCoordinats().x, txMouseY () - getAbsCoordinats().y, finalDC);
 	}
 
 	if (clearBackground)
@@ -1436,12 +1588,20 @@ void CloseButton::onClick ()
 void Canvas::onClick ()
 {
 	txSetAllColors ( drawColor);
-	
+
 	if (!(isClicked))
 	{
-		int mx = txMouseX ();
-		int my = txMouseY ();
-		lastClick = {.x = txMouseX (), .y = txMouseY ()};
+		int mx = txMouseX();
+		int my = txMouseY();
+
+		if (handle.getAbsRect().inRect(mx, my))
+		{
+			startCursorPos = { (double)mx, (double)my };
+			handle.isClicked = true;
+			return;
+		}
+
+		lastClick = {.x = txMouseX () - getAbsCoordinats().x, .y = txMouseY () - getAbsCoordinats().y};
 		wasClicked = true;
 	}
 }
@@ -1450,6 +1610,8 @@ void ColorButton::onClick ()
 {
 	mainCanvas->drawColor = color;
 }
+
+
 
 void CleanButton::onClick ()
 {
