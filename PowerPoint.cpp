@@ -9,6 +9,9 @@
 
 const int DELTACLOCKTIME = 100;
 double Brightness = 0;   
+double SizeKForCloseCanvas = 0.05;
+COLORREF BackgroundColor = TX_BLACK;
+COLORREF DrawColor = TX_RED;
 
 double IncomeBrightness = 255;
 
@@ -21,7 +24,8 @@ HDC TestPhoto;
     assert (image);				\
 	txSetAllColors (TX_RED);		\
 	txRectangle (0, 0, 1000, 1000);	 \
-	txBitBlt (0, 0, image);      \
+	txBitBlt (0, 0, image); 		   \
+	txSleep (0);								\
     _getch ();                  \
     txClear ();                 \
 }
@@ -119,6 +123,7 @@ struct Canvas : Manager
 	HDC canvas;
 	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
+	Window closeCanvas;
 	bool clearBackground = true;
 	Vector canvasCoordinats;
 	Vector canvasSize;
@@ -128,11 +133,12 @@ struct Canvas : Manager
 	bool wasClicked = false;
 	Vector lastClick = {};
 
-	Canvas (Rect _rect, Vector _canvasSize) : 
+	Canvas (Rect _rect, Vector _canvasSize, HDC _closeDC = NULL) : 
 		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _rect.getSize ().y * 0.05}}),
 		canvasCoordinats ({}),
 		canvasSize (_canvasSize),
-		confirmBrightness (false)
+		confirmBrightness (false),
+		closeCanvas ({ .pos = {0, 0}, .finishPos = {_rect.getSize().x * SizeKForCloseCanvas, _rect.getSize().y * SizeKForCloseCanvas} }, TX_RED, _closeDC, this, "X")
 	{
 		canvas = txCreateDIBSection (_canvasSize.x, _canvasSize.y, &canvasArr);
 	}
@@ -163,11 +169,8 @@ struct CloseButton : Window
 
 struct ColorButton : Window
 {
-	Canvas *mainCanvas;
-
-	ColorButton(Rect _rect, COLORREF _color, Canvas *_mainCanvas, HDC _dc) :
-		Window (_rect, _color, _dc),
-		mainCanvas (_mainCanvas)
+	ColorButton(Rect _rect, COLORREF _color, HDC _dc) :
+		Window (_rect, _color, _dc)
 	{}
 
 	virtual void onClick ()override;
@@ -205,12 +208,15 @@ struct CleanButton : Window
 struct CanvasManager : Manager 
 {
 	Window newCanvas;
+	HDC closeCanvasButton;
+	Vector sizeOfNewCanvas;
 
-	CanvasManager (Rect _rect) : 
+	CanvasManager (Rect _rect, HDC _NewCanvasDC) : 
 		Manager (_rect, 10, true, NULL, {}, TX_BLACK),
-		newCanvas ({.pos = {0, 0}, .finishPos = {100, 100}})
+		newCanvas ({.pos = {450, 0}, .finishPos = {500, 50}}, TX_WHITE, _NewCanvasDC), 
+		sizeOfNewCanvas ({500, 500})
 	{
-		addWindow (&newCanvas);
+		compressImage (closeCanvasButton, {sizeOfNewCanvas.x * SizeKForCloseCanvas, sizeOfNewCanvas.y * SizeKForCloseCanvas}, txLoadImage("CloseButton2.bmp"), {512, 512});
 	}
 
 	virtual void draw () override;
@@ -502,11 +508,6 @@ struct BrightnessButton : Manager
 	virtual void onClick () override;
 };
 
-//typedef void (Window::*funcClickedPtr) (const Window *);
-
-		
-//COLORREF CurrColor = TX_RED;
-//const int PointersNum = 9;
 bool IsRunning = true;
 int Radius = 2;
 int SLEEPTIME = 30;
@@ -535,28 +536,27 @@ int main ()
 
 	TestPhoto = txLoadImage ("TestPhoto.bmp");
 
-	//Window *testWindow = new Window ({.pos = {0, 0}, .finishPos = {500, 500}},TX_WHITE, TestPhoto);
-	//manager->addWindow (testWindow);
-
-	Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {500, 500}}, {2000, 2000});
+	//Canvas *mainCanvas = new Canvas({.pos = {0, 0}, .finishPos = {500, 500}}, {2000, 2000});
 	//manager->addWindow (mainCanvas);
 
-	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {1000, 1000}});
+	HDC addNewCanvasDC;
+	compressImage (addNewCanvasDC, {50, 50}, txLoadImage ("addNewCanvas.bmp"), {225, 225});
+	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {1000, 1000}}, addNewCanvasDC);
 	manager->addWindow (canvasManager);
 
-	Manager *menu = new Manager({.pos = {0, 0}, .finishPos = {412, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
-	//manager->addWindow (menu);
+	Manager *menu = new Manager({.pos = {588, 0}, .finishPos = {1000, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	manager->addWindow (menu);
 
 	Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
-		//menu->addWindow (colorManager);
+		menu->addWindow (colorManager);
 
-			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), mainCanvas, txLoadImage ("RedButton.bmp"));
+			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), txLoadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
 	
-			ColorButton *blueColor = new ColorButton({.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), mainCanvas, txLoadImage ("BlueButton.bmp"));
+			ColorButton *blueColor = new ColorButton({.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), txLoadImage ("BlueButton.bmp"));
 			colorManager->addWindow(blueColor);
 
-			ColorButton *greenColor = new ColorButton({.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), mainCanvas, txLoadImage ("GreenButton.bmp"));
+			ColorButton *greenColor = new ColorButton({.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), txLoadImage ("GreenButton.bmp"));
 			colorManager->addWindow(greenColor);
 
 		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
@@ -584,8 +584,8 @@ int main ()
 	CleanButton *cleanButton = new CleanButton({.pos = {10, 90}, .finishPos = {94, 121}}, TX_WHITE, mainCanvas, txLoadImage ("CleanButton.bmp"));
 	//menu->addWindow (cleanButton);
 	//
-	CloseButton *closeButton = new CloseButton({.pos = {950, 0}, .finishPos = {1000, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
-	//manager->addWindow (closeButton);
+	CloseButton *closeButton = new CloseButton({.pos = {0, 0}, .finishPos = {50, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
+	manager->addWindow (closeButton);
 
 
 	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {300, 300}, .finishPos = {744, 661}}, {.pos = {55, 64}, .finishPos = {312, 318}},
@@ -664,7 +664,7 @@ void BrightnessButton::draw ()
 	txSetFillColor (TX_RED);
 	txRectangle (300, 300, 400, 400);
 
-	txSetAllColors (TX_BLACK, finalDC);
+	txSetAllColors (BackgroundColor, finalDC);
 	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (IncomeBrightness / 255),
 			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (Brightness / 255), finalDC);
 }
@@ -968,8 +968,8 @@ void Manager::draw ()
 
 	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
 
-	txSetAllColors (TX_BLACK, finalDC);
-	txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+	///txSetAllColors (TX_BLACK, finalDC);
+	//txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 
 	for (int i = 0; i < newButtonNum; i++)
 	{
@@ -1039,14 +1039,17 @@ void Manager::replaceWindow(int numOfWindow)
 	Window* copyOfStartWindow = pointers[numOfWindow];
 	Window* copyOfWindow = pointers[newButtonNum - 1];
 
-	for (int i = newButtonNum - 1; i > numOfWindow && numOfWindow > 0; i--)
+	for (int i = newButtonNum - 1; i > numOfWindow; i--)
 	{
 		Window* preCopyOfWindow = pointers[i - 1];
 		pointers[i - 1] = copyOfWindow;
 		copyOfWindow = preCopyOfWindow;
 	}
 
-	if (numOfWindow + 1 < newButtonNum - 1) pointers[newButtonNum - 1] = copyOfStartWindow;
+	if (numOfWindow < newButtonNum - 1) 
+	{
+		pointers[newButtonNum - 1] = copyOfStartWindow;
+	}
 
 }
 
@@ -1327,7 +1330,7 @@ void engine (Manager *manager)
 
 	for (;;)
 	{
-		txSetAllColors (TX_BLACK);
+		txSetAllColors (BackgroundColor);
 		txRectangle (0, 0, 2000, 2000);
 		manager->draw ();
 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
@@ -1338,7 +1341,7 @@ void engine (Manager *manager)
 		}
 
 		
-		txSleep (30);
+		txSleep (0);
 
 	}
 }
@@ -1357,7 +1360,7 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 
 void TimeButton::draw ()
 {
-	txSetAllColors (TX_BLACK);
+	txSetAllColors (BackgroundColor);
 	time_t t = time (NULL);
 	t = t % (24 * 3600);
 
@@ -1420,6 +1423,12 @@ void Window::draw ()
 	if (finalDC) txSetAllColors (color, finalDC);
 	if (finalDC) txRectangle (0, 0, rect.getSize ().x, rect.getSize ().y, finalDC);
 
+
+	if (finalDC) txSetAllColors (TX_BLACK, finalDC);
+	txSetTextAlign (TA_CENTER, finalDC);
+	txTextOut (rect.getSize ().x / 2, rect.getSize().y / 10, text, finalDC);
+
+
 	if (dc)  txBitBlt (finalDC, 0, 0, rect.size.x, rect.size.y, dc);	
 }
 
@@ -1432,16 +1441,20 @@ void Window::deleteButton ()
 
 void CanvasManager::draw ()
 {
-	if (newCanvas.isClicked)
-	{
-		addWindow (new Canvas ({.pos = {0, 0}, .finishPos = {500, 500}}, {2000, 2000}));
-	}
-
-
-	txSetAllColors (TX_BLACK, finalDC);
+	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
 
+
 	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
+
+	if (newCanvas.isClicked)
+	{
+		addWindow(new Canvas({ .pos = {0, newCanvas.rect.finishPos.y}, .finishPos = {500, newCanvas.rect.finishPos.y + 500} }, {500, 500}, closeCanvasButton));
+		newCanvas.isClicked = false;
+	}
+	
+	newCanvas.draw();
+	txBitBlt(finalDC, newCanvas.rect.pos.x, newCanvas.rect.pos.y, 0, 0, newCanvas.finalDC);
 
 	for (int i = 0; i < newButtonNum; i++)
 	{
@@ -1476,6 +1489,19 @@ void CanvasManager::onClick()
 			startCursorPos.y = my;
 			handle.isClicked = true;
 		}
+
+		if (newCanvas.getAbsRect().inRect (mx, my) && !newCanvas.isClicked)
+		{
+			newCanvas.isClicked = true;
+			missClicked = false;
+		}
+		else
+		{
+			newCanvas.isClicked = false;
+
+			missClicked = true;
+		}
+
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
 			if (pointers[i]->getAbsRect().inRect(mx, my))
@@ -1508,25 +1534,21 @@ void CanvasManager::onClick()
 void Canvas::draw ()
 {
 	assert (canvas);
-	txSetAllColors (TX_BLACK, finalDC);
+	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
-	//txSetAllColors (TX_BLUE, canvas);
-	//txRectangle (0, 0, 1000, 1000, canvas);
 
 	for (int x = 0; x < rect.getSize().x; x++)
 	{
 		for (int y = 0; y < rect.getSize().y; y++)	
 		{
-			RGBQUAD pixel = canvasArr [int (x + canvasCoordinats.x + (int) ((y + SCREENSIZE.y - canvasCoordinats.y)) * canvasSize.x)];
+			RGBQUAD pixel = canvasArr [int (x + canvasCoordinats.x + (int) ((rect.getSize().y - y - canvasCoordinats.y)) * canvasSize.x)];
 
 
-			//pixel.rgbRed = pixel.rgbRed * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
-			//pixel.rgbGreen = pixel.rgbGreen * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
- 			//pixel.rgbBlue = pixel.rgbBlue * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+			pixel.rgbRed = pixel.rgbRed * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+			pixel.rgbGreen = pixel.rgbGreen * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
+ 			pixel.rgbBlue = pixel.rgbBlue * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
 
-			//if ((int)(x + (y)*SCREENSIZE.x) > canvasSize.x * canvasSize.y) break;
-
-			finalDCArr[(int) (x + (y) * rect.getSize().x)] = pixel;
+			finalDCArr[(int) (x + (rect.getSize().y - y) * rect.getSize().x)] = pixel;
 
 			if (confirmBrightness) 
 			{
@@ -1536,36 +1558,40 @@ void Canvas::draw ()
 		}
 	}
 
-	controlHandle ();
-	drawOnFinalDC (handle);
 
-	txSetAllColors (TX_WHITE, finalDC);
-	txRectangle (0, 0, 5, 500, finalDC);
-	txRectangle (0, 495, 500, 500, finalDC);
-	txRectangle (495, 500, 500, 0, finalDC);
+	if (manager->activeWindow != this) wasClicked = false;
 
 
 	if (txMouseButtons () == 2 && wasClicked)
 	{
-		txSetAllColors (drawColor, canvas);
-		txSetColor (drawColor, lineThickness, canvas);
+		txSetAllColors (DrawColor, canvas);
+		txSetColor (DrawColor, lineThickness, canvas);
 		txLine (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, txMouseX () - getAbsCoordinats().x + canvasCoordinats.x, txMouseY () - getAbsCoordinats().y + canvasCoordinats.y, canvas);
 		wasClicked = false;
 	}
 
 	if (wasClicked)
 	{
-		txSetAllColors (drawColor, finalDC);
-		txSetColor (drawColor, lineThickness, finalDC);
+		txSetAllColors (DrawColor, finalDC);
+		txSetColor (DrawColor, lineThickness, finalDC);
 		txLine (lastClick.x, lastClick.y, txMouseX () - getAbsCoordinats().x, txMouseY () - getAbsCoordinats().y, finalDC);
 	}
 
 	if (clearBackground)
 	{
-		txSetAllColors (TX_BLACK, canvas);
+		txSetAllColors (BackgroundColor, canvas);
 		txRectangle (0, 0, canvasSize.x, canvasSize.y, canvas);
 		clearBackground = false;
 	}
+
+	controlHandle();
+	drawOnFinalDC(handle);
+
+	txSetAllColors(TX_WHITE, finalDC);
+	txRectangle(0, 0, 5, 500, finalDC);
+	txRectangle(0, 495, 500, 500, finalDC);
+	txRectangle(495, 500, 500, 0, finalDC);
+	drawOnFinalDC(closeCanvas);
 }
 
 void SizeButton::onClick ()
@@ -1589,10 +1615,16 @@ void Canvas::onClick ()
 {
 	txSetAllColors ( drawColor);
 
-	if (!(isClicked))
+	if (!(isClicked) && manager->activeWindow == this)
 	{
 		int mx = txMouseX();
 		int my = txMouseY();
+
+		if (closeCanvas.getAbsRect().inRect(mx, my))
+		{
+			advancedMode = false;
+			return;
+		}
 
 		if (handle.getAbsRect().inRect(mx, my))
 		{
@@ -1601,6 +1633,8 @@ void Canvas::onClick ()
 			return;
 		}
 
+
+
 		lastClick = {.x = txMouseX () - getAbsCoordinats().x, .y = txMouseY () - getAbsCoordinats().y};
 		wasClicked = true;
 	}
@@ -1608,7 +1642,7 @@ void Canvas::onClick ()
 
 void ColorButton::onClick ()
 {
-	mainCanvas->drawColor = color;
+	DrawColor = color;
 }
 
 
