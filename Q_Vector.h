@@ -23,6 +23,7 @@ inline Vector operator *  (const Vector &a, const double b);
 inline Vector operator *  (const Vector &a, const Vector &b);
 inline Vector &operator *= (Vector &a, const Vector &b);
 inline Vector operator /  (const Vector &a, double m);
+inline Vector operator /  (const Vector &a, const Vector &b);
 inline Vector operator / (const double a, const Vector &b);
        Vector operator ^ (const Vector &vector, int degree);
        bool   operator > (const Vector &a, const Vector &b);
@@ -99,6 +100,13 @@ inline Vector operator / (const Vector &a, double m)
 {
     return {.x = a.x / m,
             .y = a.y / m
+    };
+} 
+
+inline Vector operator / (const Vector &a, const Vector &b)
+{
+    return {.x = a.x / b.x,
+            .y = a.y / b.y
     };
 }
 

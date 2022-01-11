@@ -11453,3 +11453,2596 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C004878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AAE6DC (32-bit), Flags: CMdRe0, Thread: 0x9714 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C004878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C004638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x75566739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77238AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77238ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (781):
+
+    779: 
+    780: 	sliderQuadrate.draw ();
+=>  781: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    782: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    783: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 21:58:45, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan  6 2022 21:58:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C004878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AAE6DC (32-bit), Flags: CMdRe0, Thread: 0x9714 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C004878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C004638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x75566739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77238AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77238ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (781):
+
+    779: 
+    780: 	sliderQuadrate.draw ();
+=>  781: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    782: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    783: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 21:58:45, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan  6 2022 21:58:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C004878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109E6DC (32-bit), Flags: CMdRe0, Thread: 0xA8A4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C004878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C004638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x75566739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77238AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77238ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (781):
+
+    779: 
+    780: 	sliderQuadrate.draw ();
+=>  781: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    782: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    783: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 21:59:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan  6 2022 21:59:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C004878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109E6DC (32-bit), Flags: CMdRe0, Thread: 0xA8A4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C004878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C004638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x75566739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77238AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77238ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (781):
+
+    779: 
+    780: 	sliderQuadrate.draw ();
+=>  781: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    782: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    783: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 21:59:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan  6 2022 21:59:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003BF6DC (32-bit), Flags: CMdRe0, Thread: 0x6784 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: 
+    790: 	sliderQuadrate.draw ();
+=>  791: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    792: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    793: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 22:03:38, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:21:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003BF6DC (32-bit), Flags: CMdRe0, Thread: 0x6784 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: 
+    790: 	sliderQuadrate.draw ();
+=>  791: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    792: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    793: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan  6 2022 22:03:38, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:21:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0017F6DC (32-bit), Flags: CMdRe0, Thread: 0x994 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: 
+    790: 	sliderQuadrate.draw ();
+=>  791: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    792: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    793: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:32:00, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:32:06
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0017F6DC (32-bit), Flags: CMdRe0, Thread: 0x994 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: 
+    790: 	sliderQuadrate.draw ();
+=>  791: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    792: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    793: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:32:00, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:32:06
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CF6DC (32-bit), Flags: CMdRe0, Thread: 0x39A8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (796):
+
+    794: 
+    795: 	sliderQuadrate.draw ();
+=>  796: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    797: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    798: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:33:27, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:33:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CF6DC (32-bit), Flags: CMdRe0, Thread: 0x39A8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (796):
+
+    794: 
+    795: 	sliderQuadrate.draw ();
+=>  796: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    797: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    798: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:33:27, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:33:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0058F6DC (32-bit), Flags: CMdRe0, Thread: 0x64E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (796):
+
+    794: 
+    795: 	sliderQuadrate.draw ();
+=>  796: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    797: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    798: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:34:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:34:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7AB24878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0058F6DC (32-bit), Flags: CMdRe0, Thread: 0x64E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7AB24878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7AB24638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13664):
+
+  13662: $   if (!height) height = size.y;  //-V550
+  13663: 
+=>13664: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13665:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13666:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (796):
+
+    794: 
+    795: 	sliderQuadrate.draw ();
+=>  796: 	copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
+    797: 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
+    798: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:34:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:34:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C9F6DC (32-bit), Flags: CMdRe0, Thread: 0x6138 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758: 		newSize.print ();
+    759: 
+=>  760: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    761: 
+    762: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 17:43:48, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 17:43:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Окно рисования не создано или не в порядке.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003706DC (32-bit), Flags: Cmdre0, Thread: 0x8580 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1489):
+
+   1487: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1488: {
+=> 1489: 	txSetFillColor (color, dc); 
+   1490: 	txSetColor (color, 1, dc);
+   1491: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:19:34, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:19:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Окно рисования не создано или не в порядке.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004706DC (32-bit), Flags: Cmdre0, Thread: 0x8154 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1490):
+
+   1488: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1489: {
+=> 1490: 	txSetFillColor (color, dc); 
+   1491: 	txSetColor (color, 1, dc);
+   1492: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:20:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:20:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Окно рисования не создано или не в порядке.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004706DC (32-bit), Flags: Cmdre0, Thread: 0x63AC (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1490):
+
+   1488: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1489: {
+=> 1490: 	txSetFillColor (color, dc); 
+   1491: 	txSetColor (color, 1, dc);
+   1492: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:20:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:20:19
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Окно рисования не создано или не в порядке.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004706DC (32-bit), Flags: Cmdre0, Thread: 0x8114 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1490):
+
+   1488: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1489: {
+=> 1490: 	txSetFillColor (color, dc); 
+   1491: 	txSetColor (color, 1, dc);
+   1492: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:20:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:20:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13657, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "destImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FD16DC (32-bit), Flags: CMdRe0, Thread: 0x8050 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13657):
+
+  13655:                HDC sourceImage, double xSource /*= 0*/, double ySource /*= 0*/, unsigned operation /*= SRCCOPY*/)
+  13656:     {
+=>13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+  13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (794):
+
+    792: 	HDC copyDC = NULL;
+    793: 
+=>  794: 	txBitBlt (copyDC, 0, 0, 0, 0, dc);
+    795: 
+    796: 	//txBitBlt
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:30:55, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:30:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13657, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "destImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001916DC (32-bit), Flags: CMdRe0, Thread: 0x7414 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x76396739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77348AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77348ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13657):
+
+  13655:                HDC sourceImage, double xSource /*= 0*/, double ySource /*= 0*/, unsigned operation /*= SRCCOPY*/)
+  13656:     {
+=>13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+  13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (794):
+
+    792: 	HDC copyDC = NULL;
+    793: 
+=>  794: 	txBitBlt (copyDC, 0, 0, 0, 0, dc);
+    795: 
+    796: 	printBlt (copyDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 10 2022 21:31:31, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 10 2022 21:31:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x0102437C в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010D16DC (32-bit), Flags: CMdRe0, Thread: 0x1A30 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#12 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#13 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#14 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1772):
+
+   1770: 		rect.finishPos.x += txMouseX() - startResizingCursor.x;
+   1771: 		rect.finishPos.y += txMouseY() - startResizingCursor.y;
+=> 1772: 		startResizingCursor = { txMouseX(), txMouseY() };
+   1773: 
+   1774: 		scrollBarVert.resize ({.pos = {rect.getSize().x * 0.99 - 1 - 20, handle.rect.pos.y}, .finishPos = {rect.getSize().x * 0.99 - 1, rect.getSize().y * 0.99 - 1}});
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 16:11:58, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 16:12:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x0102437C в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010D16DC (32-bit), Flags: CMdRe0, Thread: 0x1A30 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#12 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#13 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#14 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1772):
+
+   1770: 		rect.finishPos.x += txMouseX() - startResizingCursor.x;
+   1771: 		rect.finishPos.y += txMouseY() - startResizingCursor.y;
+=> 1772: 		startResizingCursor = { txMouseX(), txMouseY() };
+   1773: 
+   1774: 		scrollBarVert.resize ({.pos = {rect.getSize().x * 0.99 - 1 - 20, handle.rect.pos.y}, .finishPos = {rect.getSize().x * 0.99 - 1, rect.getSize().y * 0.99 - 1}});
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 16:11:58, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 16:12:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00DE36F0 (32-bit), Flags: CMdRe0, Thread: 0x13B8 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#11 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1615):
+
+   1613: {
+   1614: 	if (dc) txDeleteDC (dc);
+=> 1615: 	if (finalDC) txDeleteDC (dc);
+   1616: }
+   1617: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 16:57:52, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 16:57:56
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C336F0 (32-bit), Flags: CMdRe0, Thread: 0x6198 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (823):
+
+    821: 	clearDC (dc);
+    822: 	txDeleteDC (dc);
+=>  823: 	dc = txCreateCompatibleDC (newSize.x, newSize.y); 
+    824: 
+    825: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 18:53:39, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 18:53:41
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C336F0 (32-bit), Flags: CMdRe0, Thread: 0x169C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (823):
+
+    821: 	clearDC (dc);
+    822: 	txDeleteDC (dc);
+=>  823: 	dc = txCreateCompatibleDC (newSize.x, newSize.y); 
+    824: 
+    825: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 18:53:39, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 18:54:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C336F0 (32-bit), Flags: CMdRe0, Thread: 0x3820 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (823):
+
+    821: 	clearDC (dc);
+    822: 	txDeleteDC (dc);
+=>  823: 	dc = txCreateCompatibleDC (newSize.x, newSize.y); 
+    824: 
+    825: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 18:53:39, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 18:57:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006736F0 (32-bit), Flags: CMdRe0, Thread: 0x1A3C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1538):
+
+   1536: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1537: {
+=> 1538: 	txSetFillColor (color, dc); 
+   1539: 	txSetColor (color, 1, dc);
+   1540: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:29:17, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:29:19
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CF36F0 (32-bit), Flags: CMdRe0, Thread: 0x667C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1543):
+
+   1541: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+   1542: {
+=> 1543: 	txSetFillColor (color, dc); 
+   1544: 	txSetColor (color, 1, dc);
+   1545: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:34:35, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:34:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13115, функция: struct tagPOINT __cdecl `anonymous-namespace'::TX::txGetExtent(struct HDC__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A236F0 (32-bit), Flags: CMdRe0, Thread: 0x5528 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct tagPOINT __cdecl `anonymous-namespace'::TX::txGetExtent(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13115):
+
+  13113: 
+  13114: $   BITMAP bmap = {};
+=>13115: $   txGDI (Win32::GetObject (Win32::GetCurrentObject (dc, OBJ_BITMAP), sizeof (bmap), &bmap), dc) asserted;
+  13116: 
+  13117: $   POINT  size = { bmap.bmWidth, bmap.bmHeight };
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13660):
+
+  13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+=>13660: $   POINT size = txGetExtent (sourceImage);
+  13661: $   if (!width)  width  = size.x;  //-V550
+  13662: $   if (!height) height = size.y;  //-V550
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (865):
+
+    863: 	arrow1.draw ();
+    864: 	compressDraw (finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize ());
+=>  865: 	printBlt (arrow1.finalDC);
+    866: 	//txBitBlt (finalDC, arrow1.rect.pos.x, arrow1.rect.pos.y, rect.getSize ().x, rect.getSize ().y, arrow1.finalDC);
+    867: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:35:26, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:35:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 814, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C136F0 (32-bit), Flags: CMdRe0, Thread: 0x5BC4 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:37:05, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:37:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 814, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C136F0 (32-bit), Flags: CMdRe0, Thread: 0x59D8 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:37:05, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:37:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 814, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C136F0 (32-bit), Flags: CMdRe0, Thread: 0x1210 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:37:05, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:40:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E736F0 (32-bit), Flags: CMdRe0, Thread: 0x35A4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#14 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (819):
+
+    817: 		printBlt (newDC);
+    818: 	}
+=>  819: 	txDeleteDC (oldDC);
+    820: }
+    821: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:43:18, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:43:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AE36F0 (32-bit), Flags: CMdRe0, Thread: 0x3250 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (818):
+
+    816: 	{
+    817: 		printBlt (newDC);
+=>  818: 		printBlt (oldDC);
+    819: 	}
+    820: 	txDeleteDC (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:43:45, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:43:48
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006936F0 (32-bit), Flags: CMdRe0, Thread: 0x5710 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (818):
+
+    816: 	{
+    817: 		//printBlt (newDC);
+=>  818: 		printBlt (oldDC);
+    819: 	}
+    820: 	txDeleteDC (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:44:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:44:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006936F0 (32-bit), Flags: CMdRe0, Thread: 0x5CE0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#13 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#14 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#15 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (818):
+
+    816: 	{
+    817: 		//printBlt (newDC);
+=>  818: 		printBlt (oldDC);
+    819: 	}
+    820: 	txDeleteDC (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:44:02, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:44:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F346F0 (32-bit), Flags: CMdRe0, Thread: 0x5D98 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (849):
+
+    847: 	HDC copyDC = NULL;
+    848: 	compressImage (copyDC, finalSize, dc, originalSize);
+=>  849: 	printBlt (dc);
+    850: 	printBlt (copyDC);
+    851: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:46:44, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:46:46
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F346F0 (32-bit), Flags: CMdRe0, Thread: 0xBC8 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (849):
+
+    847: 	HDC copyDC = NULL;
+    848: 	compressImage (copyDC, finalSize, dc, originalSize);
+=>  849: 	printBlt (dc);
+    850: 	printBlt (copyDC);
+    851: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:46:44, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:47:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F346F0 (32-bit), Flags: CMdRe0, Thread: 0x2798 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (849):
+
+    847: 	HDC copyDC = NULL;
+    848: 	compressImage (copyDC, finalSize, dc, originalSize);
+=>  849: 	printBlt (dc);
+    850: 	printBlt (copyDC);
+    851: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:46:44, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:47:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00EC46F0 (32-bit), Flags: CMdRe0, Thread: 0x6290 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(double,double,struct HDC__ *,double,double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13674):
+
+  13672: $1  if (_TX_TXWINDOW_FAILED()) return false;
+  13673: 
+=>13674: $   return txBitBlt (txDC(), xDest, yDest, 0, 0, sourceImage, xSource, ySource);
+  13675:     }
+  13676: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	printBlt (dc);
+    849: 	compressImage (copyDC, finalSize, dc, originalSize);
+=>  850: 	printBlt (dc);
+    851: 	printBlt (copyDC);
+    852: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:52:05, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:52:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x007636F0 (32-bit), Flags: CMdRe0, Thread: 0x23FC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (812):
+
+    810: 		newSize.print ();
+    811: 
+=>  812: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    813: 
+    814: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:53:01, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:53:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D736F0 (32-bit), Flags: CMdRe0, Thread: 0x5DA0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (812):
+
+    810: 		newSize.print ();
+    811: 
+=>  812: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    813: 
+    814: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 19:54:37, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 19:54:39
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008946F0 (32-bit), Flags: CMdRe0, Thread: 0x581C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (815):
+
+    813: 		newSize.print ();
+    814: 
+=>  815: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    816: 
+    817: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 20:10:42, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 20:10:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008946F0 (32-bit), Flags: CMdRe0, Thread: 0x3AF8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (815):
+
+    813: 		newSize.print ();
+    814: 
+=>  815: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    816: 
+    817: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 20:10:42, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 20:11:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008946F0 (32-bit), Flags: CMdRe0, Thread: 0x1EE4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#15 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#16 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#17 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl `anonymous-namespace'::TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (815):
+
+    813: 		newSize.print ();
+    814: 
+=>  815: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    816: 
+    817: 	assert (oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 20:10:42, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 20:11:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13658, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008256F0 (32-bit), Flags: CMdRe0, Thread: 0x4490 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#10 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13658):
+
+  13656:     {
+  13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+  13660: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1827):
+
+   1825: 	txRectangle (0, 0, 3000, 3000, finalDC);
+   1826: 
+=> 1827: 	txBitBlt (finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, canvas);
+   1828: 	
+   1829: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 21:26:12, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 21:26:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#1: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77114655 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00EB66F0 (32-bit), Flags: CMdRe0, Thread: 0x6068. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77114655 in C:\WINDOWS\System32\KERNELBASE.dll: CtrlRoutine()
+# 1 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 2 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 3 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 21:38:37, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 21:38:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#1: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77114655 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00EB66F0 (32-bit), Flags: CMdRe0, Thread: 0x6068. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77114655 in C:\WINDOWS\System32\KERNELBASE.dll: CtrlRoutine()
+# 1 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 2 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 3 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 11 2022 21:38:37, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 11 2022 21:38:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
