@@ -136,6 +136,7 @@ struct Window
 	void resize (Rect newSize);
 	void resize (Vector newSize, Vector oldSize);
 	void setStartRect (Vector pos, Vector finishPos);
+	void print (HDC finalDC);
 
 	virtual void draw ();
 	virtual void onClick () {};
@@ -166,6 +167,7 @@ struct Manager : Window
 	bool addWindow (Window *window);
 	Window *getActiveWindow ();
 	void controlHandle ();
+	void clickHandle ();
 	void replaceWindow (int numOfWindow);
 	void controlSize ();
 
@@ -382,6 +384,7 @@ struct Canvas : Manager
 	HDC *history = new HDC[HistoryLength]{};
 	int *historyOfDrawingMode = new int [HistoryLength]{};
 	int currentHistoryNumber = 0;
+	int currentHistoryLength = 0;
 	int timesShowedHistoryInRow = 0;
 
 
@@ -413,18 +416,7 @@ struct Canvas : Manager
 	virtual void onClick () override;
 };
 
-struct History : Manager
-{
-	CanvasManager *canvasManager;
 
-	History (Rect _rect, CanvasManager *_canvasManager) :
-		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize().x, _rect.getSize().y * 0.1}}),
-		canvasManager (_canvasManager)
-	{}
-
-	virtual void draw () override;
-	virtual void onClick () override;
-};
 
 
 struct TimeButton : Window
@@ -493,6 +485,7 @@ struct CanvasManager : Manager
 	Window newCanvas;
 	HDC closeCanvasButton;
 	Vector sizeOfNewCanvas;
+	Canvas *activeCanvas = NULL;
 
 	CanvasManager (Rect _rect, HDC _NewCanvasDC) : 
 		Manager (_rect, 10, true, NULL, {}, TX_BLACK),
@@ -504,6 +497,26 @@ struct CanvasManager : Manager
 
 	virtual void draw () override;
 	virtual void onClick() override;
+};
+
+struct History : Manager
+{
+	CanvasManager *canvasManager;
+	ToolsPalette *palette;
+
+	History (Rect _rect, CanvasManager *_canvasManager, ToolsPalette *_palette) :
+		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize().x, _rect.getSize().y * 0.08}}),
+		canvasManager (_canvasManager),
+		palette (_palette)
+	{
+		txSelectFont ("Arial", 27, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
+		handle.rect.finishPos.x = rect.getSize().x;
+		handle.color = TX_WHITE;
+		handle.text = "History";
+	}
+
+	virtual void draw () override;
+	virtual void onClick () override;
 };
 
 
@@ -638,7 +651,7 @@ int main ()
 {
 	//_txWindowStyle &= ~WS_CAPTION;
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
-	txSelectFont ("Arial", 28, 10);
+	//txSelectFont ("Arial", 3, 1);
 
 	//TestPhoto = txLoadImage ("TestPhoto.bmp");
 
@@ -658,9 +671,7 @@ int main ()
 	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {1000, 1000}}, addNewCanvasDC);
 	manager->addWindow (canvasManager);
 
-	History *history = new History ({.pos = {950, 500}, .finishPos = {1000, 800}}, canvasManager);
-	manager->addWindow (history);
-
+	
 	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 300}}, 4);
 	manager->addWindow (toolsPallete);
 
@@ -675,6 +686,10 @@ int main ()
 
 		Window *pen = new Window ({ .pos = {0, 150}, .finishPos = {50, 200}}, TX_WHITE, txLoadImage("Pen.bmp"));
 		toolsPallete->addWindow (pen);
+
+	History *history = new History ({.pos = {950, 500}, .finishPos = {1000, 900}}, canvasManager, toolsPallete);
+	manager->addWindow (history);
+
 
 
 	Manager *menu = new Manager({.pos = {588, 0}, .finishPos = {1000, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
@@ -1299,7 +1314,17 @@ void Manager::draw ()
 	{
 		activeWindow = NULL;
 	}
-}	
+}
+
+void Manager::clickHandle ()
+{
+	if (handle.getAbsRect().inRect (txMouseX (), txMouseY ()))
+	{
+		startCursorPos.x = txMouseX ();
+		startCursorPos.y = txMouseY ();
+		handle.isClicked = true;
+	}
+}
 
 void Manager::controlHandle ()
 {
@@ -1662,12 +1687,65 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 
 void History::draw ()
 {
-	txSetAllColors (TX_WHITE, finalDC);
-	txRectangle	(0, 0, rect.get)
+	txSetAllColors (TX_BLACK, finalDC);
+	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
+	handle.print (finalDC);
+	controlHandle ();
+
+	if (canvasManager->activeCanvas != NULL)
+	{
+		for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
+		{
+		
+			if (canvasManager->activeCanvas != NULL)
+			{
+				if (canvasManager->activeCanvas->historyOfDrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1] > 0 && canvasManager->activeCanvas->currentHistoryNumber - 1 - i >= 0)
+					txBitBlt (finalDC, 0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);
+		
+				if (canvasManager->activeCanvas->currentHistoryNumber - 1 - i < 0 && canvasManager->activeCanvas->historyOfDrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1 >  0)
+				{
+					txBitBlt (finalDC, 0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);	
+				}
+				txSetTextAlign (TA_LEFT);
+				//char *num = new char[canvasManager->activeCanvas->currentHistoryLength]{};
+				char strNum[10] = {};
+				sprintf (strNum, "%d", canvasManager->activeCanvas->currentHistoryLength - i);
+				txTextOut (0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), strNum, finalDC);
+			}
+
+		}
+	}
 }
 
 void History::onClick ()
 {
+	int mx = txMouseX();
+	int my = txMouseY ();
+	if (advancedMode && !isClicked)
+	{
+		clickHandle ();
+
+		if (canvasManager->activeCanvas != NULL)
+		{
+			for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
+			{
+			
+
+					Rect button = {.pos = {getAbsCoordinats().x + i, getAbsCoordinats().y + handle.rect.getSize().y + i * 0.1 * rect.getSize().y}, .finishPos = {getAbsCoordinats().x + rect.getSize().x, getAbsCoordinats().y + handle.rect.getSize().y +  (i + 1) * 0.1 * rect.getSize().y}};
+					if (button.inRect (mx, my))
+					{
+						canvasManager->activeCanvas->currentHistoryNumber -= (i + 1);
+						if (canvasManager->activeCanvas->currentHistoryNumber < 0) canvasManager->activeCanvas->currentHistoryNumber += 10;
+						canvasManager->activeCanvas->currentHistoryLength -= (i + 1);
+
+						canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber];
+					}
+
+			}
+		}
+		
+	}
+
 }
 
 void TimeButton::draw ()
@@ -1729,16 +1807,24 @@ void CloseButton::draw()
 	txBitBlt (finalDC, 0, 0, 0, 0, dc);
 }
 
+void Window::print (HDC DC)
+{
+	draw();
+	txBitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
+}
+
 void Window::draw ()
 {
 	$s
 	if (finalDC) txSetAllColors (color, finalDC);
 	if (finalDC) txRectangle (0, 0, rect.getSize ().x, rect.getSize ().y, finalDC);
+	if (test1)printBlt (finalDC);
 
 
 	if (finalDC) txSetAllColors (TX_BLACK, finalDC);
 	txSetTextAlign (TA_CENTER, finalDC);
 	txTextOut (rect.getSize ().x / 2, rect.getSize().y / 10, text, finalDC);
+	if (test1)printBlt (finalDC);
 
 
 	if (dc) 
@@ -1847,6 +1933,7 @@ void CanvasManager::onClick()
 			if (pointers[i]->getAbsRect().inRect(mx, my))
 			{
 				activeWindow = pointers[i];
+				activeCanvas = (Canvas*)pointers[i];
 				pointers[i]->onClick();
 				pointers[i]->isClicked = true;
 
@@ -1999,6 +2086,8 @@ void Canvas::saveHistory ()
 	historyOfDrawingMode[currentHistoryNumber] = DrawingMode;
 	if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
 	else currentHistoryNumber = 0;
+
+	if (currentHistoryLength < 10) currentHistoryLength++; 
 
 	timesShowedHistoryInRow = 0;
 }

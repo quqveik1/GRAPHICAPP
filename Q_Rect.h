@@ -16,7 +16,7 @@ struct Rect
     double bottom() const { return this->finishPos.y; }
     Vector getSize () const {return this->finishPos - this->pos; }
     
-    void draw ();
+    void draw (HDC dc = txDC());
 };
 
 Rect& Rect::operator = (const Rect &a1)
@@ -28,9 +28,9 @@ Rect& Rect::operator = (const Rect &a1)
     return *this;
 };
 
-void Rect::draw ()
+void Rect::draw (HDC dc /*= txDC()*/)
 {
-    txRectangle (this->pos.x, this->pos.y, this->finishPos.x, this->finishPos.y);
+    txRectangle (this->pos.x, this->pos.y, this->finishPos.x, this->finishPos.y, dc);
 }
 
 bool Rect::inRect (double x, double y)
