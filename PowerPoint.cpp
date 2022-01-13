@@ -296,7 +296,9 @@ struct Slider : Manager
 		if (horizontalMode)
 		{
 			sliderQuadrate.rect.pos.y       = 0;
-			sliderQuadrate.rect.finishPos.y = rect.getSize ().y;
+			sliderQuadrate.rect.finishPos.y = rect.getSize ().y; 
+			sliderQuadrate.rect.pos.x       = arrow1.rect.pos.x;
+			sliderQuadrate.rect.finishPos.x = (rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x) * quadrateScale;
 		}
 		else
 		{
@@ -317,6 +319,8 @@ struct Slider : Manager
 			}
 			sliderQuadrate.rect.pos.x       = 1;
 			sliderQuadrate.rect.finishPos.x = rect.getSize().x - 1;
+			sliderQuadrate.rect.pos.y       = arrow1.rect.pos.y;
+			sliderQuadrate.rect.finishPos.y = (rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y) * quadrateScale; 
 		}
 
 		if (horizontalMode)
@@ -510,6 +514,7 @@ struct History : Manager
 		palette (_palette)
 	{
 		txSelectFont ("Arial", 27, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
+		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y;
 		handle.rect.finishPos.x = rect.getSize().x;
 		handle.color = TX_WHITE;
 		handle.text = "History";
@@ -687,7 +692,7 @@ int main ()
 		Window *pen = new Window ({ .pos = {0, 150}, .finishPos = {50, 200}}, TX_WHITE, txLoadImage("Pen.bmp"));
 		toolsPallete->addWindow (pen);
 
-	History *history = new History ({.pos = {950, 500}, .finishPos = {1000, 900}}, canvasManager, toolsPallete);
+	History *history = new History ({.pos = {950, 400}, .finishPos = {1000, 944}}, canvasManager, toolsPallete);
 	manager->addWindow (history);
 
 
@@ -1691,26 +1696,28 @@ void History::draw ()
 	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
 	handle.print (finalDC);
 	controlHandle ();
+	
 
 	if (canvasManager->activeCanvas != NULL)
 	{
+		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y + (palette->pointers[0]->rect.getSize().y) * canvasManager->activeCanvas->currentHistoryLength;
 		for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
 		{
 		
 			if (canvasManager->activeCanvas != NULL)
 			{
 				if (canvasManager->activeCanvas->historyOfDrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1] > 0 && canvasManager->activeCanvas->currentHistoryNumber - 1 - i >= 0)
-					txBitBlt (finalDC, 0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);
+					txBitBlt (finalDC, 0, handle.rect.getSize().y + (palette->pointers[0]->rect.getSize().y)* i , 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);
 		
 				if (canvasManager->activeCanvas->currentHistoryNumber - 1 - i < 0 && canvasManager->activeCanvas->historyOfDrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1 >  0)
 				{
-					txBitBlt (finalDC, 0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);	
+					txBitBlt (finalDC, 0, handle.rect.getSize().y + (palette->pointers[0]->rect.getSize().y) * i, 0, 0, palette->pointers[canvasManager->activeCanvas->historyOfDrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - i] - 1]->dc);	
 				}
 				txSetTextAlign (TA_LEFT);
 				//char *num = new char[canvasManager->activeCanvas->currentHistoryLength]{};
 				char strNum[10] = {};
 				sprintf (strNum, "%d", canvasManager->activeCanvas->currentHistoryLength - i);
-				txTextOut (0, handle.rect.getSize().y + 0.1 * i * (rect.getSize().y), strNum, finalDC);
+				txTextOut (0, handle.rect.getSize().y + (palette->pointers[0]->rect.getSize().y) * i, strNum, finalDC);
 			}
 
 		}
@@ -1731,14 +1738,24 @@ void History::onClick ()
 			{
 			
 
-					Rect button = {.pos = {getAbsCoordinats().x + i, getAbsCoordinats().y + handle.rect.getSize().y + i * 0.1 * rect.getSize().y}, .finishPos = {getAbsCoordinats().x + rect.getSize().x, getAbsCoordinats().y + handle.rect.getSize().y +  (i + 1) * 0.1 * rect.getSize().y}};
+					Rect button = {.pos = {getAbsCoordinats().x + i, getAbsCoordinats().y + handle.rect.getSize().y + i *(palette->pointers[0]->rect.getSize().y)}, .finishPos = {getAbsCoordinats().x + rect.getSize().x, getAbsCoordinats().y + handle.rect.getSize().y +  (i + 1) * (palette->pointers[0]->rect.getSize().y)}};
 					if (button.inRect (mx, my))
 					{
-						canvasManager->activeCanvas->currentHistoryNumber -= (i + 1);
-						if (canvasManager->activeCanvas->currentHistoryNumber < 0) canvasManager->activeCanvas->currentHistoryNumber += 10;
-						canvasManager->activeCanvas->currentHistoryLength -= (i + 1);
+						int saveCurrentHistoryNumber = canvasManager->activeCanvas->currentHistoryNumber;
+						canvasManager->activeCanvas->currentHistoryNumber -= (i);
+						if (canvasManager->activeCanvas->currentHistoryNumber < 0) canvasManager->activeCanvas->currentHistoryNumber += 9;
+						canvasManager->activeCanvas->currentHistoryLength -= (i);
 
-						canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber];
+						if (i != 0)canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber];
+						if (test1)
+						{
+							for (int i = 0; i < 10; i++)
+							{
+								printf ("%d\n", i);
+								printBlt (canvasManager->activeCanvas->history[i]);
+							}
+
+						}
 					}
 
 			}
@@ -2087,7 +2104,7 @@ void Canvas::saveHistory ()
 	if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
 	else currentHistoryNumber = 0;
 
-	if (currentHistoryLength < 10) currentHistoryLength++; 
+	if (currentHistoryLength < HistoryLength) currentHistoryLength++; 
 
 	timesShowedHistoryInRow = 0;
 }
@@ -2095,6 +2112,7 @@ void Canvas::saveHistory ()
 void Canvas::playHistory ()
 {
 	if (timesShowedHistoryInRow == HistoryLength) return;
+	if (currentHistoryLength <= 1) return; 
 	if (currentHistoryNumber > 0) canvas = history[--currentHistoryNumber];
 	else 
 	{

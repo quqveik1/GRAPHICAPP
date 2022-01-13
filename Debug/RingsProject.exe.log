@@ -14274,3 +14274,175 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00498720 (32-bit), Flags: CMdRe0, Thread: 0x85F4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 9 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#10 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#11 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1840):
+
+   1838: {
+   1839: 	if (dc) txDeleteDC (dc);
+=> 1840: 	if (finalDC) txDeleteDC (dc);
+   1841: }
+   1842: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 12 2022 20:48:24, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 13 2022 16:32:48
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13456, функция: struct HFONT__ *__cdecl `anonymous-namespace'::TX::txSelectFont(const char [],double,double,int,bool,bool,bool,double,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E19720 (32-bit), Flags: CMdRe0, Thread: 0x64A0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HFONT__ *__cdecl `anonymous-namespace'::TX::txSelectFont(const char [],double,double,int,bool,bool,bool,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13456):
+
+  13454:     {
+  13455: $1  if (_TX_ARGUMENT_FAILED    (name)) return NULL;
+=>13456: $   if (_TX_DEFAULT_HDC_FAILED (dc))   return NULL;
+  13457: 
+  13458: $   HFONT font = txFontExist (name)?
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (512):
+
+    510: 		palette (_palette)
+    511: 	{
+=>  512: 		txSelectFont ("Arial", 27, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
+    513: 		handle.rect.finishPos.x = rect.getSize().x;
+    514: 		handle.color = TX_WHITE;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 13 2022 18:54:15, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 13 2022 18:54:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13456, функция: struct HFONT__ *__cdecl `anonymous-namespace'::TX::txSelectFont(const char [],double,double,int,bool,bool,bool,double,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E19720 (32-bit), Flags: CMdRe0, Thread: 0x35D0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 7 0x75E36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 8 0x77C68AFF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 9 0x77C68ACD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HFONT__ *__cdecl `anonymous-namespace'::TX::txSelectFont(const char [],double,double,int,bool,bool,bool,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13456):
+
+  13454:     {
+  13455: $1  if (_TX_ARGUMENT_FAILED    (name)) return NULL;
+=>13456: $   if (_TX_DEFAULT_HDC_FAILED (dc))   return NULL;
+  13457: 
+  13458: $   HFONT font = txFontExist (name)?
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (512):
+
+    510: 		palette (_palette)
+    511: 	{
+=>  512: 		txSelectFont ("Arial", 27, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
+    513: 		handle.rect.finishPos.x = rect.getSize().x;
+    514: 		handle.color = TX_WHITE;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jan 13 2022 18:54:15, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jan 13 2022 18:54:32
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
