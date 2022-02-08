@@ -11,7 +11,7 @@ using namespace std;
 
 
 const int DELTACLOCKTIME = 100;
-double Brightness = 0;   
+  
 double SizeKForCloseCanvas = 0.05;
 COLORREF BackgroundColor = TX_BLACK;
 COLORREF DrawColor = TX_RED;
@@ -20,18 +20,21 @@ const int HANDLEHEIGHT = 26;
 const int SIDETHICKNESS = 3;
 
 int DrawingMode = 1;
-const int TOOLSNUM = 4;
+const int TOOLSNUM = 5;
 
 const Vector SCREENSIZE = {1900, 1000};
 const int DCMAXSIZE = 2000;
 int test1 = 0;
 
 double IncomeBrightness = 255;
+double Brightness = 0;
+bool confirmBrightness = false;
 
 
 HDC TestPhoto;
 
 void clearDC (HDC dc, COLORREF color = TX_BLACK);
+void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
 
 
 #define key(a) txGetAsyncKeyState (a)
@@ -118,6 +121,7 @@ struct Lay
 	HDC lay = {};
 	Vector layCoordinats = {}; 
 	RGBQUAD *layBuf = {};
+	bool isClicked = false;
 
 	void createLay ();
 	//void line (int x0, int y0, int x1, int y1, double t = 0.001);
@@ -133,8 +137,10 @@ struct Window
 	const char *text;
 	bool isClicked;
 	HDC dc;
+
 	HDC finalDC;
 	RGBQUAD *finalDCArr;
+	Vector finalDCSize; 
 	Manager *manager;
 	bool advancedMode;
 	bool reDraw;
@@ -151,7 +157,8 @@ struct Window
 	{
 		if (_rect.getSize().x > 0 && _rect.getSize().y > 0)
 		{
-			finalDC = txCreateDIBSection(DCMAXSIZE, DCMAXSIZE, &finalDCArr);
+			finalDCSize = {DCMAXSIZE, DCMAXSIZE};
+			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
 			txSetAllColors(color, finalDC);
 			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 		}
@@ -183,7 +190,7 @@ struct Manager : Window
 	Window handle;
 	Vector startCursorPos;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = TX_WHITE) : 
+	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = TX_BLUE) : 
 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
 		length (_length),
 		pointers (new Window*[length]{}),
@@ -236,8 +243,6 @@ struct Slider : Manager
 	int tempNum;
 	double quadrateScale;
 	bool isWhite;
-	Window upSideOfQuadrateSlider;
-	Window bottomSideOfQuadrateSlider;
 
 	Slider (Rect _mainRect, double *_num, double _quadrateScale, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true, bool _isWhite = false) :
 		Manager (_mainRect, TX_BLACK),
@@ -251,16 +256,12 @@ struct Slider : Manager
 		sliderQuadrate ({}, TX_WHITE),
 		tempNum (0),
 		quadrateScale (_quadrateScale),
-		isWhite (_isWhite),
-		upSideOfQuadrateSlider ({}), 
-		bottomSideOfQuadrateSlider ({})
+		isWhite (_isWhite)
 	{
 
 		arrow1.manager = this;
 		arrow2.manager = this;
 		sliderQuadrate.manager = this;
-		upSideOfQuadrateSlider.manager = this;
-		bottomSideOfQuadrateSlider.manager = this;
 
 		if (horizontalMode)
 		{
@@ -320,6 +321,7 @@ struct Slider : Manager
 		if (horizontalMode) 
 		{
 			compressImage (dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, txLoadImage ("SliderBackGroundHor.bmp"), {948, 13});
+			//printBlt(dc);
 		}
 		else
 		{
@@ -336,21 +338,6 @@ struct Slider : Manager
 		}
 		else
 		{
-			if (isWhite)
-			{
-				compressImage (upSideOfQuadrateSlider.dc, {rect.getSize().x - 2, floor ((rect.getSize().x / 14) * 3)}, txLoadImage ("UpSideOfWhiteQuadrateSlider.bmp"), {14, 3});
-				upSideOfQuadrateSlider.rect.pos.x = 1;
-				upSideOfQuadrateSlider.rect.finishPos.x = rect.getSize().x - 1;
-				upSideOfQuadrateSlider.rect.size.y = floor ((rect.getSize().x / 14) * 3); 
-
-				
-
-				compressImage (bottomSideOfQuadrateSlider.dc, {rect.getSize().x - 2, floor ((rect.getSize().x / 14) * 3)}, txLoadImage ("BottomSideOfWhiteQuadrateSlider.bmp"), {14, 3});
-				bottomSideOfQuadrateSlider.rect.pos.x = 1;
-				bottomSideOfQuadrateSlider.rect.finishPos.x = rect.getSize().x - 1;
-				bottomSideOfQuadrateSlider.rect.size.y = floor ((rect.getSize().x / 14) * 3); 
-				
-			}
 			sliderQuadrate.rect.pos.x       = 1;
 			sliderQuadrate.rect.finishPos.x = rect.getSize().x - 1;
 			sliderQuadrate.rect.pos.y       = arrow1.rect.pos.y;
@@ -363,7 +350,7 @@ struct Slider : Manager
 		}
 		else
 		{
-			axis = (rect.getSize().y - arrow2.rect.getSize ().y) - (arrow1.rect.getSize ().y) - rect.getSize().y * quadrateScale - bottomSideOfQuadrateSlider.rect.size.y;
+			axis = (rect.getSize().y - arrow2.rect.getSize().y) - (arrow1.rect.getSize().y) - rect.getSize().y * quadrateScale;
 		}
 
 
@@ -380,7 +367,7 @@ struct Slider : Manager
 		{
 
 			if (!isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, rect.getSize().y *  _quadrateScale}, txLoadImage ("VerticalSliderRect.bmp"), {12, 316});
-			if (isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale) - bottomSideOfQuadrateSlider.rect.size.y}, txLoadImage ("WhiteSliderRect.bmp"), {14, 299});
+			if (isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale)}, txLoadImage ("WhiteSliderRect.bmp"), {14, 299});
 			sliderQuadrate.finalDC = txCreateCompatibleDC (sliderQuadrate.rect.getSize().x, rect.getSize().y *  _quadrateScale);
 			sliderQuadrate.originalRect = {.pos = {0, 0}, .finishPos = {12, 316}};
 		}
@@ -401,9 +388,41 @@ struct Slider : Manager
 
 };
 
+struct Filter
+{
+	int lastX = 0;
+	int lastY = 0;
+	double kReduce;
+	Vector delta;
+	RGBQUAD* screen;
+	RGBQUAD* finalDC;
+	Vector size;
+	RGBQUAD* tempScreen;
+
+	
+	Filter (RGBQUAD* _screen, Vector _size, RGBQUAD* _finalDC, RGBQUAD* _tempScreen, double _kReduce = 10)	 :
+		screen (_screen),
+		size (_size),
+		kReduce (_kReduce),
+		finalDC (_finalDC),
+		tempScreen (_tempScreen)
+	{
+		delta = size / kReduce;
+	}
+
+	bool reCount(bool &nonConfirm);
+	void reStartCount();
+	void confirm(HDC dest, HDC source, bool& nonConfirm);
+
+};
+
 struct Canvas : Manager
 {
 	HDC canvas;
+	HDC tempFilterDC;
+	RGBQUAD *tempFilterDCArr;
+	bool nonConfirmBrightness = false; // показывает есть ли сейчас непримененный фильтр
+	bool reCountEnded = false;
 	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
 	Window closeCanvas;
@@ -411,7 +430,7 @@ struct Canvas : Manager
 	Vector canvasCoordinats;
 	Vector canvasSize;
 	RGBQUAD *canvasArr;
-	bool confirmBrightness;
+	//bool confirmBrightness;
 	Vector startResizingCursor = {};
 	bool isResizing = false;
 	Slider scrollBarVert;
@@ -420,8 +439,16 @@ struct Canvas : Manager
 	Vector lastClick = {};
 	double testNum = 0;
 
+	int lastIncomeBrightness = IncomeBrightness;
+	int lastBrightness = Brightness;
+	int lastRecountIncomeBrightness = IncomeBrightness;
+	int lastRecountBrightness = IncomeBrightness;//€ркость при прошлой части расчета
+	DWORD lastTimeRecountFilter = GetTickCount();
+	Filter *filter;
+
 	const int LayersNum = 10;
 	Lay *lay = new Lay[LayersNum];
+	Vector cursorPos = {};
 
 	//HDC *layers = new HDC [LayersNum]{};
 	//Vector *layersCoordinats = new Vector [LayersNum]{}; 
@@ -442,20 +469,22 @@ struct Canvas : Manager
 		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
 		canvasSize({DCMAXSIZE, DCMAXSIZE}),
-		confirmBrightness (false),
 		closeCanvas ({ .pos = {0, 0}, .finishPos = {_rect.getSize().x * SizeKForCloseCanvas, _rect.getSize().y * SizeKForCloseCanvas} }, TX_RED, _closeDC, this, "X"),
 		scrollBarHor ({.pos = {5, 475}, .finishPos = {475, 495}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
 		scrollBarVert ({.pos = {475, 25}, .finishPos = {495, 475}}, &canvasCoordinats.y, 0.3, 0, 500, false, false)
 	{
-
 		canvas = txCreateDIBSection (canvasSize.x, canvasSize.y, &canvasArr);
 		scrollBarVert.manager = this;
 		scrollBarHor.manager = this;
+
+		tempFilterDC = txCreateDIBSection (canvasSize.x, canvasSize.y, &tempFilterDCArr);
 
 		for (int i = 0; i < 10; i++)
 		{
 			history[i] = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
 		}
+
+		filter = new Filter (canvasArr, canvasSize, finalDCArr, tempFilterDCArr);
 	}
 
 	void controlSize();
@@ -466,6 +495,7 @@ struct Canvas : Manager
 	void createLay ();
 	bool controlLay ();
 	void drawLay ();
+	void controlFilter();
 
 	virtual void draw () override;
 	virtual void onClick () override;
@@ -673,17 +703,15 @@ struct BrightnessButton : Manager
 	Window grafic;
 	Window confirmButton;
 	double graficScale;
-	bool *confirmBrightness;
 	//double copyOfBrightness;
 
-	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _incomeBrightnessSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}, bool *_canvasBrightness = NULL) :
+	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _incomeBrightnessSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}) :
 		Manager (_mainRect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_mainRect.getSize ().x, _mainRect.getSize ().y * 0.1}}),
 		grafic (_graficRect),
 		brightnessSlider (_sliderRect, &Brightness, 0.18, 0, 255, false, true),
 		confirmButton (_confirmButton),
 		closeButton (_closeButtonRect),
-		confirmBrightness (_canvasBrightness),
-		incomeBrightnessSlider (_incomeBrightnessSliderRect, &IncomeBrightness, 0.18, 1, 255, false, true)
+		incomeBrightnessSlider (_incomeBrightnessSliderRect, &IncomeBrightness, 0.18, 0, 255, false, true)
 		{
 			brightnessSlider.manager = this;
 			incomeBrightnessSlider.manager = this;
@@ -693,6 +721,8 @@ struct BrightnessButton : Manager
 			graficScale = (grafic.rect.getSize().y / grafic.rect.getSize().x);	
 
 			compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, txLoadImage ("Brightness.bmp"), {444, 361});
+
+			//printBlt (dc);
 		}
 
 
@@ -724,15 +754,18 @@ int main ()
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
 
-	/*
+	
 	Lay lay;
 	lay.createLay ();
 	lay.line (0, 0, 1000, 1000);
 	lay.line (10, 0, 10, 1000);
 	lay.circle (100, 100, 20);
-	txBitBlt (0, 0, lay.lay);
-	stop;
-	*/
+	RGBQUAD *buff;
+	//HDC outDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &buff);
+	//bitBlt (buff, 100, 100, DCMAXSIZE, DCMAXSIZE, lay.layBuf);
+	//txBitBlt (0, 0, outDC);
+	//stop;
+	
 	//txSelectFont ("Arial", 3, 1);
 
 	//TestPhoto = txLoadImage ("TestPhoto.bmp");
@@ -745,7 +778,9 @@ int main ()
 
 	//stop;
 
-	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 7, true, NULL);
+	
+
+	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 10, true, NULL, {}, TX_RED);
 
 	//printfDCS ();
 	
@@ -753,7 +788,7 @@ int main ()
 	HDC oldDC = txLoadImage ("addNewCanvas.bmp");
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
-
+	
 	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC);
 	manager->addWindow (canvasManager);
 	//canvasManager->deleteButton();
@@ -763,7 +798,7 @@ int main ()
 	//printfDCS ();
 
 	
-	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 300}}, 4);
+	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 350}}, 5);
 	manager->addWindow (toolsPallete);
 
 		Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, txLoadImage("Line.bmp"));
@@ -778,13 +813,16 @@ int main ()
 		Window *pen = new Window ({ .pos = {0, 150}, .finishPos = {50, 200}}, TX_WHITE, txLoadImage("Pen.bmp"));
 		toolsPallete->addWindow (pen);
 
+		Window *mover = new Window ({ .pos = {0, 200}, .finishPos = {50, 250}}, TX_WHITE, txLoadImage("Mover.bmp"));
+		toolsPallete->addWindow (mover);
+
 		//printfDCS ();
 
 	History *history = new History ({.pos = {850, 400}, .finishPos = {1000, 944}}, canvasManager, toolsPallete);
 	manager->addWindow (history);
 
 
-
+	 
 	Manager *menu = new Manager({.pos = {588, 0}, .finishPos = {1000, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
@@ -808,20 +846,19 @@ int main ()
 	manager->addWindow (closeButton);
 	
 
-
-
-	/*
+	 
+		
 	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {300, 300}, .finishPos = {744, 661}}, {.pos = {55, 64}, .finishPos = {312, 318}},
 															   {.pos = {322, 64}, .finishPos = {338, 318}}, {.pos = {17, 64}, .finishPos = {33, 318}},
 															   {.pos = {357, 63}, .finishPos = {436, 80}},  
-															   {.pos = {357, 90}, .finishPos = {436, 100}},
-																&mainCanvas->confirmBrightness);	
-																*/
-	//manager->addWindow (brightnessButton);
-
+															   {.pos = {357, 90}, .finishPos = {436, 100}});	
+															  
+	manager->addWindow (brightnessButton);
+	 
 	//OpenManager *brightnessButtonOpen = new OpenManager ({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, brightnessButton);
 	//manager->addWindow (brightnessButtonOpen);
-
+	//printBlt (brightnessButtonOpen->finalDC);
+	
 
 	
 	txBegin ();
@@ -878,12 +915,14 @@ void BrightnessButton::draw ()
 
 	if (dc) copyOnDC (0, 0, dc);
 	brightnessSlider.draw ();
-	txBitBlt (finalDC, brightnessSlider.rect.pos.x, brightnessSlider.rect.pos.y, 0, 0, brightnessSlider.finalDC);
+	//printBlt(brightnessSlider.finalDC);
+	txBitBlt (finalDC, brightnessSlider.rect.pos.x, brightnessSlider.rect.pos.y, brightnessSlider.rect.getSize().x, brightnessSlider.rect.getSize().y, brightnessSlider.finalDC);
 
 	incomeBrightnessSlider.draw ();
-	txBitBlt (finalDC, incomeBrightnessSlider.rect.pos.x, incomeBrightnessSlider.rect.pos.y, 0, 0, incomeBrightnessSlider.finalDC);
+	//printBlt(incomeBrightnessSlider.finalDC);
+	txBitBlt (finalDC, incomeBrightnessSlider.rect.pos.x, incomeBrightnessSlider.rect.pos.y, incomeBrightnessSlider.rect.getSize().x, incomeBrightnessSlider.rect.getSize().y, incomeBrightnessSlider.finalDC);
 	//txBitBlt (incomeBrightnessSlider.rect.pos.x, incomeBrightnessSlider.rect.pos.y, incomeBrightnessSlider.finalDC);
-	txBitBlt (300, 300, incomeBrightnessSlider.finalDC);
+	//txBitBlt (300, 300, incomeBrightnessSlider.finalDC);
 	txSetFillColor (TX_RED);
 	txRectangle (300, 300, 400, 400);
 
@@ -910,9 +949,10 @@ void BrightnessButton::onClick ()
 	if (closeButton.getAbsRect().inRect (mx, my) && !isClicked) advancedMode = false;
 	if (confirmButton.getAbsRect().inRect (mx, my) && !isClicked) 
 	{
-		*confirmBrightness = true;
-		brightnessSlider.maxNum = Brightness;
-		incomeBrightnessSlider.maxNum = IncomeBrightness;
+		confirmBrightness = true;
+		//brightnessSlider.maxNum = Brightness;
+		//brightnessSlider.maxNum = 255;
+		//incomeBrightnessSlider.maxNum = IncomeBrightness;
 	}
 }
 
@@ -922,8 +962,6 @@ void Slider::deleteDC ()
 	txDeleteDC (arrow1.dc);
 	txDeleteDC (arrow2.dc);
 	txDeleteDC (dc);
-	txDeleteDC (upSideOfQuadrateSlider.dc);
-	txDeleteDC (bottomSideOfQuadrateSlider.dc);
 }
 
 void Slider::resize (Rect newRect)
@@ -964,7 +1002,7 @@ void Slider::resize (Rect newRect)
 	}
 	else
 	{
-		axis = (rect.getSize().y - arrow2.rect.getSize ().y) - (arrow1.rect.getSize ().y) - rect.getSize().y * quadrateScale - bottomSideOfQuadrateSlider.rect.size.y;
+		axis = (rect.getSize().y - arrow2.rect.getSize ().y) - (arrow1.rect.getSize ().y) - rect.getSize().y * quadrateScale;
 	}
 
 	clearDC (arrow1.finalDC);
@@ -1040,15 +1078,14 @@ void Slider::deleteButton ()
 	arrow1.deleteButton();
 	arrow2.deleteButton();
 	sliderQuadrate.deleteButton();
-	upSideOfQuadrateSlider.deleteButton ();
-	bottomSideOfQuadrateSlider.deleteButton ();
 	if (dc) txDeleteDC (dc);
 	if (finalDC) txDeleteDC (finalDC);
 }
 
 void Slider::draw ()
 {
-	kScale = axis / (maxNum - minNum);
+	if (maxNum - minNum != 0) kScale = axis / (maxNum - minNum);
+	else kScale = 0;
 
 	int mx = txMouseX ();
 	int my = txMouseY ();
@@ -1071,8 +1108,8 @@ void Slider::draw ()
 
 	if (sliderQuadrate.isClicked)
 	{
-		if (horizontalMode)  *num = tempNum + ( (mousePos.x - cursorStartPosition.x) / (kScale));
-		if (!horizontalMode) *num = tempNum + ( (mousePos.y - cursorStartPosition.y) / (kScale)); 
+		if (horizontalMode && kScale != 0)  *num = tempNum + ( (mousePos.x - cursorStartPosition.x) / (kScale));
+		if (!horizontalMode && kScale != 0) *num = tempNum + ( (mousePos.y - cursorStartPosition.y) / (kScale)); 
 
 		if (*num > maxNum) *num = maxNum;
 		if (*num < minNum) *num = minNum;
@@ -1085,30 +1122,28 @@ void Slider::draw ()
 	}
 	else
 	{
-		upSideOfQuadrateSlider.rect.pos.y = kScale * (*num - minNum) + arrow1.rect.finishPos.y;
-		upSideOfQuadrateSlider.rect.finishPos.y = kScale * (*num - minNum) + arrow1.rect.finishPos.y + upSideOfQuadrateSlider.rect.size.y;
-
-		sliderQuadrate.rect.pos.y		= upSideOfQuadrateSlider.rect.finishPos.y;
-		sliderQuadrate.rect.finishPos.y = quadrateScale * rect.getSize ().y + upSideOfQuadrateSlider.rect.finishPos.y - bottomSideOfQuadrateSlider.rect.size.y;
-
-		bottomSideOfQuadrateSlider.rect.pos.y = sliderQuadrate.rect.finishPos.y;
-		bottomSideOfQuadrateSlider.rect.finishPos.y = bottomSideOfQuadrateSlider.rect.pos.y + bottomSideOfQuadrateSlider.rect.size.y;
-
+		sliderQuadrate.rect.pos.y		= kScale * (*num - minNum) + arrow1.rect.finishPos.y;
+		sliderQuadrate.rect.finishPos.y = quadrateScale * rect.getSize ().y + sliderQuadrate.rect.pos.y;
 	}
 
 	txSetAllColors (TX_WHITE, finalDC);
 
-	compressDraw (finalDC, {0, 0}, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
+	//if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {arrow2.rect.pos.x - arrow1.rect.finishPos.x, arrow2.rect.finishPos.y - arrow1.rect.pos.y}, dc, originalRect.getSize());
+	if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {rect.getSize ().x + arrow2.rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
+	if (!horizontalMode)compressDraw (finalDC, {arrow1.rect.pos.x, arrow1.rect.finishPos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
 	//if (horizontalMode) compressDraw (finalDC, {0, 0}, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
 
 	arrow1.draw ();
 	compressDraw (finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize ());
+	//printBlt(arrow1.finalDC);
 	//printBlt (arrow1.finalDC);
 	//txBitBlt (finalDC, arrow1.rect.pos.x, arrow1.rect.pos.y, rect.getSize ().x, rect.getSize ().y, arrow1.finalDC);
 
 
 	arrow2.draw ();
 	compressDraw (finalDC, arrow2.rect.pos, arrow2.rect.getSize (), arrow2.finalDC, arrow2.originalRect.getSize ());
+	//printBlt(finalDC);
+	//txBitBlt(finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, arrow2.rect.getSize().x, arrow2.rect.getSize().y, arrow2.finalDC);
 
 	//printBlt (sliderQuadrate.dc);
 	sliderQuadrate.draw ();
@@ -1121,7 +1156,7 @@ void Slider::draw ()
 	//printBlt (sliderQuadrate.finalDC)
 	//txBitBlt (sliderQuadrate.finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y);
 	txBitBlt (finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y, sliderQuadrate.dc);
-
+	//printBlt(finalDC);
 }
 
 void Slider::onClick ()
@@ -1320,6 +1355,7 @@ void ToolsPalette::draw()
 	for (int i = 0; i < newButtonNum; i++)
 	{
 		pointers[i]->draw();
+		//if (i == 4) printBlt (pointers[i]->finalDC);
 		if (pointers[i]->advancedMode) txBitBlt(finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.finishPos.x, pointers[i]->rect.finishPos.y, pointers[i]->finalDC);
 		if (lastSelected == i)
 		{
@@ -1402,13 +1438,21 @@ void Manager::draw ()
 {
 	controlHandle ();
 
+
+	txSetAllColors (BackgroundColor, finalDC);
+	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
 	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
 
 
 	for (int i = 0; i < newButtonNum; i++)
 	{
 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
- 		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC);
+ 		if (pointers[i]->advancedMode) 
+		{
+			txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC);
+			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+			//printBlt (pointers[i]->finalDC);
+		}
 		if (txMouseButtons () != 1)
 		{
 			pointers[i]->isClicked = false;
@@ -1794,6 +1838,7 @@ void History::draw ()
 {
 	txSetAllColors (TX_BLACK, finalDC);
 	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
+
 	
 	
 
@@ -2052,7 +2097,7 @@ void CanvasManager::draw ()
 
 	if (manager->getActiveWindow () != this && manager) 
 	{
-		activeWindow = NULL;
+		//activeWindow = NULL;
 	}
 }
 
@@ -2130,10 +2175,26 @@ void Canvas::draw ()
 {
 	assert (canvas);
 	txSetAllColors (BackgroundColor, finalDC);
-	txRectangle (0, 0, 3000, 3000, finalDC);
+	if (!nonConfirmBrightness)
+	{
+		txRectangle(0, 0, 3000, 3000, finalDC);
+	}
+	if (nonConfirmBrightness && reCountEnded)
+	{
+		txRectangle(0, 0, 3000, 3000, finalDC);
+	}
 
-	txBitBlt (finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, canvas);
-	drawLay ();
+	if (!nonConfirmBrightness)
+	{
+		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, canvas);
+	}
+	if (nonConfirmBrightness && reCountEnded)
+	{
+		txBitBlt(finalDC, 0, 0, 0, 0, tempFilterDC);
+	}
+
+
+
 	
 
 	scrollBarVert.draw ();
@@ -2141,48 +2202,22 @@ void Canvas::draw ()
 	scrollBarHor.draw ();
 	txBitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
 
-	//controlLay ();
+	controlFilter();
 
-	
-
-	if (txGetAsyncKeyState ('Q')) 
+	if (txGetAsyncKeyState('Q'))
 	{
-		endtillkey ('Q');
+		endtillkey('Q');
 		//playHistory ();
-		createLay ();
+		createLay();
 	}
-
-	
-
-	/*
-	for (int x = 0; x < DCMAXSIZE; x++)
-	{
-		for (int y = 0; y < DCMAXSIZE; y++)
-		{
-			RGBQUAD pixel = canvasArr [int (x + canvasCoordinats.x + (int) ((DCMAXSIZE - y - canvasCoordinats.y)) * (DCMAXSIZE -1))];
-
-
-			pixel.rgbRed = pixel.rgbRed * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
-			pixel.rgbGreen = pixel.rgbGreen * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
- 			pixel.rgbBlue = pixel.rgbBlue * ((255 - Brightness) - (255 - IncomeBrightness)) / 255.0 + 255 - IncomeBrightness;
-
-			finalDCArr[(int) (x + (DCMAXSIZE - y) * (DCMAXSIZE - 1))] = pixel;
-
-			if (confirmBrightness) 
-			{
-				canvasArr [int (x + canvasCoordinats.x + (int) ((y + SCREENSIZE.y - canvasCoordinats.y)) * DCMAXSIZE)] = pixel;
-				confirmBrightness = false;
-			}
-		}
-	}
-	*/
-
 	if (txGetAsyncKeyState ('Z')) 
 	{
 		endtillkey ('Z');
 		playHistory ();
 	}
+	drawLay();
 
+	
 	if (manager->activeWindow != this) wasClicked = false;
 
 
@@ -2206,18 +2241,55 @@ void Canvas::draw ()
 
 	if (clearBackground)
 	{
-		txSetAllColors (BackgroundColor, canvas);
-		txRectangle (0, 0, canvasSize.x, canvasSize.y, canvas);
-		clearBackground = false;
+		//txSetAllColors (BackgroundColor, canvas);
+		//txRectangle (0, 0, canvasSize.x, canvasSize.y, canvas);
+		//clearBackground = false;
 	}
+
+	
 
 	controlHandle();
 	drawOnFinalDC(handle);
 	controlSize();
+
+	
 	
 	drawOnFinalDC(closeCanvas);
 
 	
+}
+
+void Canvas::controlFilter ()
+{
+	if (manager->activeWindow != this) return;
+	if (confirmBrightness)
+	{
+		filter->confirm(canvas, tempFilterDC, nonConfirmBrightness);
+	}
+
+	if (((int)IncomeBrightness != (int)lastIncomeBrightness || (int)Brightness != (int)lastBrightness))
+	{
+		if (filter->lastX == 0 && filter->lastY == 0)
+		{
+			lastRecountIncomeBrightness = IncomeBrightness;
+			lastRecountBrightness = Brightness;
+		}
+		reCountEnded = filter->reCount(nonConfirmBrightness);
+		if (reCountEnded)
+		{
+			if (!((int)IncomeBrightness != (int)lastRecountIncomeBrightness || (int)Brightness != (int)lastRecountBrightness))
+			{
+				lastIncomeBrightness = IncomeBrightness;
+				lastBrightness = Brightness;
+			}
+			else
+			{
+				reCountEnded = false;
+
+			}
+		}
+	}
+
 }
 
 void Canvas::controlSize()
@@ -2245,6 +2317,66 @@ void Canvas::controlSize()
 void Canvas::controlSizeSliders ()
 {
 	//scrollBarVert.resize ({.pos = {rect.finishPos}});
+}
+
+void Filter::confirm(HDC dest, HDC source, bool& nonConfirm)
+{
+	if (confirmBrightness)
+	{
+		confirmBrightness = false;
+		nonConfirm = false;
+	}
+	txBitBlt(dest, 0, 0, 0, 0, source);
+
+}
+
+void Filter::reStartCount()
+{
+	lastX = 0;
+	lastY = 0;
+}
+
+bool Filter::reCount(bool &nonConfirm)
+{
+	nonConfirm = true;
+	for (int x = lastX; x < lastX + delta.x; x++)
+	{
+		for (int y = lastY; y < lastY + delta.y; y++)
+		{
+			int pixelPos = x + (int)(DCMAXSIZE - y) * (DCMAXSIZE - 1);
+			RGBQUAD pixel = screen[pixelPos];
+			double kOfBrightness = (double)((255 - Brightness) - (255 - IncomeBrightness)) / (255.0); //коэффициент
+			double bOfBrightness = 255 - IncomeBrightness;	// b графика
+
+			pixel.rgbRed   = pixel.rgbRed   * kOfBrightness + bOfBrightness;
+			pixel.rgbGreen = pixel.rgbGreen * kOfBrightness + bOfBrightness;
+			pixel.rgbBlue  = pixel.rgbBlue  * kOfBrightness + bOfBrightness;
+
+			finalDC   [pixelPos] = pixel; //DCMAXSIZE != size.x
+			tempScreen[pixelPos] = pixel;
+
+			if (confirmBrightness)
+			{
+				screen[int(x + (int)((size.y - y)) * (size.x - 1))] = pixel;
+			}
+		}
+	}
+
+	
+	lastY += delta.y;
+	if (lastY >= size.y)
+	{
+		lastY = 0;
+		lastX += delta.x;
+	}
+	if (lastX >= size.y)
+	{
+		lastY = 0;
+		lastX = 0;
+		return true;//reDraw
+	}
+	return false;
+	
 }
 
 void SizeButton::onClick ()
@@ -2296,13 +2428,88 @@ bool Canvas::controlLay ()
 		
  		//txEllipse (lastClick.x + canvasCoordinats.x - 5, lastClick.y + canvasCoordinats.y - 5, lastClick.x + 5 + canvasCoordinats.x, lastClick.y + canvasCoordinats.y + 5, layers[currentLayersNum - 1]);
 		//txSetPixel (lastClick.x - canvasCoordinats.x - layersCoordinats[activeLayNum].x, lastClick.y - canvasCoordinats.y - layersCoordinats[activeLayNum].y, DrawColor, layers[activeLayNum]);
-		if (lastClick.x - canvasCoordinats.x + lay[activeLayNum].layCoordinats.x >= 0 && lastClick.y - canvasCoordinats.y + lay[activeLayNum].layCoordinats.y >= 0)
-			lay[activeLayNum].circle (lastClick.x - canvasCoordinats.x + lay[activeLayNum].layCoordinats.x, lastClick.y - canvasCoordinats.y + lay[activeLayNum].layCoordinats.y, 10);
+		//if (lastClick.x - canvasCoordinats.x + lay[activeLayNum].layCoordinats.x >= 0 && lastClick.y - canvasCoordinats.y + lay[activeLayNum].layCoordinats.y >= 0)
+			//lay[activeLayNum].circle (lastClick.x - canvasCoordinats.x - lay[activeLayNum].layCoordinats.x, lastClick.y - canvasCoordinats.y - lay[activeLayNum].layCoordinats.y, 10);
+		lay[activeLayNum].circle (lastClick.x - canvasCoordinats.x, lastClick.y - canvasCoordinats.y, 10);
 
 		//printBlt ();
 		return true;
 	}
+
+	if (DrawingMode == 5 && currentLayersLength > 0)
+	{
+		cursorPos.x = txMouseX ();
+		cursorPos.y = txMouseY ();
+		lay[activeLayNum].isClicked = true;
+
+		return true;
+	}
 	return false;
+}
+
+void Canvas::drawLay ()
+{
+	//txSetWindowsHook
+	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
+	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
+	if (txGetAsyncKeyState(VK_DOWN) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, 1};		
+	if (txGetAsyncKeyState(VK_UP) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, -1};
+	if (txGetAsyncKeyState ('U') && activeLayNum < currentLayersLength - 1) activeLayNum++;
+	if (txGetAsyncKeyState ('J') && activeLayNum > 0) activeLayNum--;
+
+	if (lay[activeLayNum].isClicked)
+	{
+		printf ("%lf\n", lay[activeLayNum].layCoordinats.x);
+		lay[activeLayNum].layCoordinats.x += txMouseX () - cursorPos.x;
+		lay[activeLayNum].layCoordinats.y += txMouseY () - cursorPos.y;
+		cursorPos.x = txMouseX (); 
+		cursorPos.y = txMouseY (); 
+	}
+	if (txMouseButtons () != 1)
+	{
+		lay[activeLayNum].isClicked = false;
+	}
+
+	for (int i = 0; i < currentLayersLength; i++)
+	{
+		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
+		//if (test1)printBlt (layers[i]);
+		//if (test1)printBlt (copyDC);
+	}	
+	//if (currentLayersNum > 0) txAlphaBlend (finalDC, laysersCoordinats[currentLayersNum-1].x, laysersCoordinats[currentLayersNum-1].y, 0, 0, layers[currentLayersNum - 1]);
+	//if (currentLayersNum > 0) txAlphaBlend (finalDC, 0, 0, 0, 0, copyDC);
+	//if (test1)printBlt (copyDC);
+}
+
+void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX, int originalSizeY, int sourceSizeX, int sourceSizeY)
+{
+	for (int i = 0; i < min (sizeX, sourceSizeX); i++)
+	{
+		for (int j = 0; j < min (sizeY, sourceSizeY); j++)
+		{	
+			if (j + y < originalSizeY && i + x < originalSizeX && j + y >= 0 && i + x >= 0)
+			{
+				//if ( j == 249) _getch ();
+				RGBQUAD *destCopy = &dest[i + (originalSizeY - (j + y) - 1) * originalSizeX + x];
+				RGBQUAD *sourceCopy = &source[i + (sourceSizeY - j - 1) * sourceSizeX];
+				
+				sourceCopy->rgbReserved= 255;
+
+				//if (sourceCopy->rgbReserved != 255) _getch ();
+
+				destCopy->rgbRed = sourceCopy->rgbRed * ((float) sourceCopy->rgbReserved / 255.0);
+				destCopy->rgbGreen = sourceCopy->rgbGreen * ((float)sourceCopy->rgbReserved / 255.0);
+				destCopy->rgbBlue = sourceCopy->rgbBlue * ((float)sourceCopy->rgbReserved / 255.0);
+				destCopy->rgbReserved = 255;
+
+				//txSetPixel (i, j, RGB (sourceCopy->rgbRed, sourceCopy->rgbGreen, sourceCopy->rgbBlue));
+				//txSetPixel (i, j, RGB (dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbRed, dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbGreen, dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbBlue));
+
+				continue;
+			}
+
+		}
+	}
 }
 
 void Lay::createLay	()
@@ -2427,26 +2634,7 @@ void Lay::circle (int x0, int y0, int r)
 }
 
 
-void Canvas::drawLay ()
-{
-	//txSetWindowsHook
-	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
-	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
-	if (txGetAsyncKeyState(VK_DOWN) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, 1};		
-	if (txGetAsyncKeyState(VK_UP) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, -1};
-	if (txGetAsyncKeyState ('U') && activeLayNum < currentLayersLength - 1) activeLayNum++;
-	if (txGetAsyncKeyState ('J') && activeLayNum > 0) activeLayNum--;
-	
-	for (int i = 0; i < currentLayersLength; i++)
-	{
-		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
-		//if (test1)printBlt (layers[i]);
-		//if (test1)printBlt (copyDC);
-	}	
-	//if (currentLayersNum > 0) txAlphaBlend (finalDC, laysersCoordinats[currentLayersNum-1].x, laysersCoordinats[currentLayersNum-1].y, 0, 0, layers[currentLayersNum - 1]);
-	//if (currentLayersNum > 0) txAlphaBlend (finalDC, 0, 0, 0, 0, copyDC);
-	//if (test1)printBlt (copyDC);
-}
+
 
 
 void Canvas::createLay ()
@@ -2562,26 +2750,26 @@ void Canvas::onClick ()
 			return;
 		}
 
-		if (DrawingMode == 1) wasClicked = true;
+		if (DrawingMode == 1 && !nonConfirmBrightness) wasClicked = true;
 	}
 
 	if (controlLay ()) return;
 	
-		if (DrawingMode == 2)
+		if (DrawingMode == 2 && !nonConfirmBrightness)
 		{
 			if (!isClicked) saveHistory ();
 			txSetAllColors(BackgroundColor, canvas);
 			txEllipse(lastClick.x + canvasCoordinats.x - 20, lastClick.y + canvasCoordinats.y - 20, lastClick.x + canvasCoordinats.x + 20, lastClick.y + canvasCoordinats.y + 20, canvas);
 		}
 
-		if (DrawingMode == 3)
+		if (DrawingMode == 3 && !nonConfirmBrightness)
 		{
 			//RGBQUAD pixel = canvasArr[(int)(lastClick.x + canvasCoordinats.x) + (int) ((canvasSize.y - (lastClick.y + canvasCoordinats.y)) * canvasSize.x)];
 			DrawColor = txGetPixel (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, canvas);
 			//DrawColor = RGB (pixel.rgbRed, pixel.rgbGreen, pixel.rgbBlue);
 			//printf ("%d\n", DrawColor);
 		}
-		if (DrawingMode == 4)
+		if (DrawingMode == 4 && !nonConfirmBrightness)
 		{
 			if (!isClicked) saveHistory ();
 			txSetAllColors (DrawColor, canvas);
