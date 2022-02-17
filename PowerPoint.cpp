@@ -1,116 +1,24 @@
 
 #define _CRT_SECURE_NO_WARNINGS
-#include "Q_Vector.h"
+#include "GlobalOptions.h"
+#include "..\Macroses.h"
+#include "..\Q_Vector.h"
 #include "Q_Rect.h"
 #include "Q_Buttons.h"
 #include <cmath>
-#include <iostream>
-
-using namespace std;
-
-
-
-const int DELTACLOCKTIME = 100;
-  
-double SizeKForCloseCanvas = 0.05;
-COLORREF BackgroundColor = TX_BLACK;
-COLORREF DrawColor = TX_RED;
-
-const int HANDLEHEIGHT = 26;
-const int SIDETHICKNESS = 3;
-
-int DrawingMode = 1;
-const int TOOLSNUM = 5;
-
-const Vector SCREENSIZE = {1900, 1000};
-const int DCMAXSIZE = 2000;
-int test1 = 0;
-
-double IncomeBrightness = 255;
-double Brightness = 0;
-bool confirmBrightness = false;
+#include "C:\Users\Алехандро\Desktop\AlexProjects\Brightness\dllmain.h"
+#include "..\Brightness\Q_Filter.h"
 
 
 HDC TestPhoto;
 
 void clearDC (HDC dc, COLORREF color = TX_BLACK);
 void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
-
-
-#define key(a) txGetAsyncKeyState (a)
-#define notKey(a) while (txGetAsyncKeyState (a)) {};
-#define endifkey(a) if (key (a)) break;
-#define endtillkey(a)           \
-{                               \
-    if (key (a))                \
-    {                           \
-        for (;;)                \
-        {                       \
-            if (!key (a))       \
-            {                   \
-                break;          \
-            }                   \
-        }                       \
-    }                           \
-}
-
-#define addKeyNum(a, anum, num)       \
-{                                     \
-    if (key(a))                       \
-    {                                 \
-        num = num * 10 + anum;        \
-        for (;;)                      \
-        {                             \
-            if (!key (a)) break;      \
-        }                            \
-    }                                 \
-}
-
-#define smartDeleteDC(dc)   \
-{							\
-	if (dc)					 \
-	{						 \
-		txDeleteDC (dc);	 \
-	}						\
-}							 
-
-#define stop						\
-{									\
-	printf ("Touch to continue\n");	\
-	txSleep (0);   		           \
-	_getch ();						\
-}									\
-
-#define printBlt(image)         \
-{                               \
-    assert (image);				\
-	txSetAllColors (TX_RED);		\
-	txRectangle (0, 0, 1000, 1000);	  \
-	txSetAllColors (TX_BLACK);    \
-	txRectangle(100, 100, 200, 200);									\
-	txBitBlt (0, 0, image); 		   \
-	txSleep (0);								\
-    stop;                 \
-    txClear ();                 \
-}
-
-#define copyOnDC(x, y, image)	\
-{										  \
-	txBitBlt (finalDC, x, y, 0,0, image); \
-}										  \
-
-#define drawOnFinalDC(button)					  \
-{												  \
-	button.draw ();								  \
-	txBitBlt (finalDC, button.rect.pos.x, button.rect.pos.y, button.rect.getSize().x, button.rect.getSize().y, button.finalDC);  \
-}												  \
-
-
-
 void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
 void compressImage (HDC &dc, Vector newSize, Vector oldSize);
 void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize);
 void txSetAllColors (COLORREF color, HDC dc = txDC ());
+void txSelectFontDC(const char* text, int size, HDC & dc);
 
 
 struct Manager;
@@ -145,7 +53,7 @@ struct Window
 	bool advancedMode;
 	bool reDraw;
 
-	Window (Rect _rect, COLORREF _color = TX_WHITE, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+	Window (Rect _rect, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
 		rect (_rect),
 		color(_color),
 		manager (_manager),
@@ -175,6 +83,7 @@ struct Window
 	void setStartRect (Vector pos, Vector finishPos);
 	void print (HDC finalDC);
 
+	Vector getSize();
 	virtual void draw ();
 	virtual void onClick () {};
 
@@ -190,7 +99,7 @@ struct Manager : Window
 	Window handle;
 	Vector startCursorPos;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = TX_BLUE) : 
+	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor) : 
 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
 		length (_length),
 		pointers (new Window*[length]{}),
@@ -201,6 +110,7 @@ struct Manager : Window
 	{
 		handle.manager = this;
 		handle.rect.finishPos.x = DCMAXSIZE * 10;
+		handle.color = MenuColor;
 	}
 
 	bool addWindow (Window *window);
@@ -388,32 +298,19 @@ struct Slider : Manager
 
 };
 
-struct Filter
+
+struct ProgressBar : Window
 {
-	int lastX = 0;
-	int lastY = 0;
-	double kReduce;
-	Vector delta;
-	RGBQUAD* screen;
-	RGBQUAD* finalDC;
-	Vector size;
-	RGBQUAD* tempScreen;
+	double* totalNum = NULL;
+	double* currentNum = NULL;
 
-	
-	Filter (RGBQUAD* _screen, Vector _size, RGBQUAD* _finalDC, RGBQUAD* _tempScreen, double _kReduce = 10)	 :
-		screen (_screen),
-		size (_size),
-		kReduce (_kReduce),
-		finalDC (_finalDC),
-		tempScreen (_tempScreen)
-	{
-		delta = size / kReduce;
-	}
+	ProgressBar (Rect _rect, COLORREF _color = TX_LIGHTGREEN) :
+		Window(_rect, _color)
+	{}
 
-	bool reCount(bool &nonConfirm);
-	void reStartCount();
-	void confirm(HDC dest, HDC source, bool& nonConfirm);
+	void setProgress(double *total, double *current);
 
+	virtual void draw() override;
 };
 
 struct Canvas : Manager
@@ -465,11 +362,11 @@ struct Canvas : Manager
 	int timesShowedHistoryInRow = 0;
 
 
-	Canvas (Rect _rect, HDC _closeDC = NULL) : 
+	Canvas (Rect _rect, HDC _closeDC = NULL, RGBQUAD (*_algorithm)(RGBQUAD pixel, double Brightness, double IncomeBrightness) = NULL) :
 		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
 		canvasSize({DCMAXSIZE, DCMAXSIZE}),
-		closeCanvas ({ .pos = {0, 0}, .finishPos = {_rect.getSize().x * SizeKForCloseCanvas, _rect.getSize().y * SizeKForCloseCanvas} }, TX_RED, _closeDC, this, "X"),
+		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
 		scrollBarHor ({.pos = {5, 475}, .finishPos = {475, 495}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
 		scrollBarVert ({.pos = {475, 25}, .finishPos = {495, 475}}, &canvasCoordinats.y, 0.3, 0, 500, false, false)
 	{
@@ -484,7 +381,8 @@ struct Canvas : Manager
 			history[i] = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
 		}
 
-		filter = new Filter (canvasArr, canvasSize, finalDCArr, tempFilterDCArr);
+		filter = new Filter(canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, _algorithm);
+		//if (_algorithm) filter->algorithm = _algorithm;
 	}
 
 	void controlSize();
@@ -507,8 +405,10 @@ struct Canvas : Manager
 
 struct TimeButton : Window
 {
-	TimeButton (Rect _rect)	:
-		Window (_rect)
+	int font;
+	TimeButton (Rect _rect, COLORREF _color = TX_RED, int _font = MainFont)	:
+		Window (_rect, _color),
+		font (_font)
 	{}
 
 	virtual void draw () override;
@@ -571,14 +471,26 @@ struct CanvasManager : Manager
 	Window newCanvas;
 	HDC closeCanvasButton;
 	Vector sizeOfNewCanvas;
-	Canvas *activeCanvas = NULL;
+	Canvas *activeCanvas = NULL; 
+	ProgressBar* bar;
+	//bool (*reCount)(Filter& filter, int screenSize, bool confirmBrightness, double Brightness, double IncomeBrightness);
+	RGBQUAD(*algorithm)(RGBQUAD pixel, double Brightness, double IncomeBrightness);
 
-	CanvasManager (Rect _rect, HDC _NewCanvasDC) : 
+
+	CanvasManager (Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar) :
 		Manager (_rect, 10, true, NULL, {}, TX_BLACK),
-		newCanvas ({.pos = {450, 0}, .finishPos = {500, 50}}, TX_WHITE, _NewCanvasDC), 
-		sizeOfNewCanvas ({500, 500})
+		newCanvas ({.pos = {0, 700}, .finishPos = {50, 750}}, TX_WHITE, _NewCanvasDC), 
+		sizeOfNewCanvas ({500, 500}), 
+		bar (_bar)
 	{
-		compressImage (closeCanvasButton, {sizeOfNewCanvas.x * SizeKForCloseCanvas, sizeOfNewCanvas.y * SizeKForCloseCanvas}, txLoadImage("CloseButton2.bmp"), {512, 512});
+		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, txLoadImage("CloseButton4.bmp"), {50, 26});
+
+		HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+		assert(library);
+		algorithm = (RGBQUAD (*)(RGBQUAD pixel, double Brightness, double IncomeBrightness))GetProcAddress(library, "BrightnessFilter");
+		assert(algorithm);
+		//color = plus30(color);
+		//..FreeLibrary(library);
 	}
 
 	virtual void draw () override;
@@ -604,8 +516,8 @@ struct History : Manager
 		txSelectFont ("Arial", 21, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
 		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y;
 		handle.rect.finishPos.x = rect.getSize().x;
-		handle.color = TX_WHITE;
-		handle.text = "History";
+		handle.color = MenuColor;
+		handle.text = "История";
 
 		for (int i = 0; i < TOOLSNUM; i++)
 		{
@@ -618,6 +530,34 @@ struct History : Manager
 
 	virtual void draw () override;
 	virtual void onClick () override;
+};
+
+struct LaysMenu : Manager
+{
+	CanvasManager* canvasManager;
+	HDC openCanvas;
+	int sectionWidth = 20;
+	//HDC toolsDC[TOOLSNUM];
+
+	LaysMenu(Rect _rect, CanvasManager* _canvasManager) :
+		Manager(_rect, 0, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }),
+		canvasManager(_canvasManager)
+	{
+		txSelectFont("Arial", 21, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
+		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y;
+		handle.rect.finishPos.x = rect.getSize().x;
+		handle.color = TX_WHITE;
+		handle.text = "Слои";
+
+		for (int i = 0; i < TOOLSNUM; i++)
+		{
+			//compressImage(toolsDC[i], { (double)toolHDCSize / 2, (double)toolHDCSize / 2 }, palette->pointers[i]->dc, { palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y });
+			//printBlt (toolsDC[i]);
+		}
+	}
+
+	virtual void draw() override;
+	//virtual void onClick() override;
 };
 
 
@@ -703,15 +643,17 @@ struct BrightnessButton : Manager
 	Window grafic;
 	Window confirmButton;
 	double graficScale;
+	double copyOfBrightness = Brightness;
+	double copyOfIncomeBrightness = IncomeBrightness;
 	//double copyOfBrightness;
 
 	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _incomeBrightnessSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}) :
 		Manager (_mainRect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_mainRect.getSize ().x, _mainRect.getSize ().y * 0.1}}),
 		grafic (_graficRect),
-		brightnessSlider (_sliderRect, &Brightness, 0.18, 0, 255, false, true),
+		brightnessSlider (_sliderRect, &copyOfBrightness, 0.18, 0, 255, false, true),
 		confirmButton (_confirmButton),
 		closeButton (_closeButtonRect),
-		incomeBrightnessSlider (_incomeBrightnessSliderRect, &IncomeBrightness, 0.18, 0, 255, false, true)
+		incomeBrightnessSlider (_incomeBrightnessSliderRect, &copyOfIncomeBrightness, 0.18, 0, 255, false, true)
 		{
 			brightnessSlider.manager = this;
 			incomeBrightnessSlider.manager = this;
@@ -728,6 +670,20 @@ struct BrightnessButton : Manager
 
 	virtual void draw () override;
 	virtual void onClick () override;
+};
+
+struct StatusBar : Manager
+{
+
+	TimeButton *timeButton = NULL;
+	ProgressBar *progressBar = NULL;
+
+	StatusBar(Rect _rect, COLORREF _color) :
+		Manager(_rect, 3, true, NULL, {}, _color)
+	{}
+
+
+	virtual void draw() override;
 };
 
 bool IsRunning = true;
@@ -750,17 +706,17 @@ void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
 
 int main ()
 {
-	//_txWindowStyle &= ~WS_CAPTION;
+	_txWindowStyle &= ~WS_CAPTION;
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
 
-	
+	/*
 	Lay lay;
 	lay.createLay ();
 	lay.line (0, 0, 1000, 1000);
 	lay.line (10, 0, 10, 1000);
 	lay.circle (100, 100, 20);
-	RGBQUAD *buff;
+	RGBQUAD *buff;	*/
 	//HDC outDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &buff);
 	//bitBlt (buff, 100, 100, DCMAXSIZE, DCMAXSIZE, lay.layBuf);
 	//txBitBlt (0, 0, outDC);
@@ -788,12 +744,24 @@ int main ()
 	HDC oldDC = txLoadImage ("addNewCanvas.bmp");
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
+
+	StatusBar* statusBar = new StatusBar( {.pos = {0, SCREENSIZE.y - 20}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}} , TX_BLUE);
+		statusBar->progressBar =  new ProgressBar( {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
+		statusBar->progressBar->manager = statusBar;
+		statusBar->timeButton = new TimeButton({.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
+		statusBar->timeButton->manager = statusBar;
 	
-	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC);
+
+
+
+	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar);
 	manager->addWindow (canvasManager);
+
+	manager->addWindow(statusBar);
 	//canvasManager->deleteButton();
 
-	
+	//LaysMenu* lays = new LaysMenu({ .pos = {850, 400}, .finishPos = {1000, 944} }, canvasManager);
+	//manager->addWindow(lays);
 
 	//printfDCS ();
 
@@ -818,12 +786,12 @@ int main ()
 
 		//printfDCS ();
 
-	History *history = new History ({.pos = {850, 400}, .finishPos = {1000, 944}}, canvasManager, toolsPallete);
+	History *history = new History ({.pos = {1750, 500}, .finishPos = {1900, 944}}, canvasManager, toolsPallete);
 	manager->addWindow (history);
 
 
 	 
-	Manager *menu = new Manager({.pos = {588, 0}, .finishPos = {1000, 300}}, 3, true, txLoadImage ("HUD-3.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, true, txLoadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
 	Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
@@ -842,13 +810,17 @@ int main ()
 		menu->addWindow (openManager);	
 	
 
-	CloseButton *closeButton = new CloseButton({.pos = {0, 0}, .finishPos = {50, 50}}, TX_RED, txLoadImage ("CloseButton.bmp"));
-	manager->addWindow (closeButton);
 	
+
+	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 3, true, NULL, {}, RGB(45, 45, 45));
+	manager->addWindow(mainhandle);
+
+		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - 50, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, txLoadImage("CloseButton4.bmp"));
+		mainhandle->addWindow(closeButton);
 
 	 
 		
-	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {300, 300}, .finishPos = {744, 661}}, {.pos = {55, 64}, .finishPos = {312, 318}},
+	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {800, 100}, .finishPos = {1244, 461}}, {.pos = {55, 64}, .finishPos = {312, 318}},
 															   {.pos = {322, 64}, .finishPos = {338, 318}}, {.pos = {17, 64}, .finishPos = {33, 318}},
 															   {.pos = {357, 63}, .finishPos = {436, 80}},  
 															   {.pos = {357, 90}, .finishPos = {436, 100}});	
@@ -859,7 +831,7 @@ int main ()
 	//manager->addWindow (brightnessButtonOpen);
 	//printBlt (brightnessButtonOpen->finalDC);
 	
-
+	
 	
 	txBegin ();
 
@@ -905,11 +877,55 @@ int main ()
 
 }
 
+void StatusBar::draw()
+{
+	txSetAllColors(color, finalDC);
+	txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 
+	if (timeButton)timeButton->draw();
+	
+	progressBar->draw();
+
+	int currentNum = NULL;
+	if (progressBar->currentNum)
+	{
+		currentNum = *progressBar->currentNum;
+	}
+
+	if (currentNum)txBitBlt(finalDC, 0, 0, rect.getSize().x, rect.getSize().y, progressBar->finalDC);
+
+	char text[32] = {};
+	txSetAllColors(TX_WHITE, finalDC);
+	txSelectFontDC("Arial", MainFont, finalDC);
+	if (currentNum != 0)
+	{
+		sprintf(text, "Статус: применяется фильтр");
+	}
+	if (currentNum == 0)
+	{
+		sprintf(text, "Статус: фоновых задач нет");
+	}
+	txSetTextAlign(TA_LEFT, finalDC);
+	txTextOut(10, 0, text, finalDC);
+
+	txBitBlt(finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
+
+}
+
+void txSelectFontDC(const char* text, int size, HDC &dc)
+{
+	txSelectFont(text, size, -1, FW_DONTCARE, false, false, false, 0, dc);
+}
 
 void BrightnessButton::draw ()
 {
 	if (!advancedMode) return;
+
+	if (txMouseButtons() != 1)
+	{
+		Brightness = copyOfBrightness;
+		IncomeBrightness = copyOfIncomeBrightness;
+	}
 
 	controlHandle ();
 
@@ -927,8 +943,8 @@ void BrightnessButton::draw ()
 	txRectangle (300, 300, 400, 400);
 
 	txSetAllColors (BackgroundColor, finalDC);
-	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (IncomeBrightness / 255),
-			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (Brightness / 255), finalDC);
+	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfIncomeBrightness / 255),
+			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfBrightness / 255), finalDC);
 }
 
 void BrightnessButton::onClick ()
@@ -1397,6 +1413,16 @@ void ToolsPalette::onClick ()
 			startCursorPos.y = my;
 			handle.isClicked = true;
 		}
+
+		if (txMouseButtons() == 1)
+		{
+			//HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+			//assert(library);
+			//COLORREF (*plus30)(COLORREF color) = (COLORREF (*)(COLORREF color))GetProcAddress(library, "Plus30");
+			//assert(plus30);
+			//color = plus30(color);
+			//..FreeLibrary(library);
+		}
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
 			if (pointers[i]->getAbsRect().inRect(mx, my))
@@ -1409,6 +1435,8 @@ void ToolsPalette::onClick ()
 
 
 				missClicked = false;
+
+
 
 				if (pointers[i]->advancedMode) break;
 			}
@@ -1439,7 +1467,7 @@ void Manager::draw ()
 	controlHandle ();
 
 
-	txSetAllColors (BackgroundColor, finalDC);
+	txSetAllColors (color, finalDC);
 	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
 	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
 
@@ -1834,6 +1862,40 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
+void LaysMenu::draw()
+{
+	txSetAllColors(TX_BLACK, finalDC);
+	txRectangle(0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
+	char text[30] = {};
+
+
+
+	if (canvasManager->activeCanvas != NULL)
+	{
+
+		for (int i = 0; i <= canvasManager->activeCanvas->currentLayersLength; i++)
+		{
+			sprintf(text, "Слой %d", i + 1);
+
+			txSetTextAlign(TA_CENTER, finalDC);
+			txSetAllColors(TX_WHITE, finalDC);
+			txSelectFont("Arial", 18, 5, FW_DONTCARE, false, false, false, 0, finalDC);
+			txSelectFont("Arial", 18, 5, FW_DONTCARE, false, false, false, 0, finalDC);
+			txDrawText(sectionWidth + rect.getSize().x * 0.05, handle.rect.getSize().y + sectionWidth * i, rect.getSize().x, handle.rect.getSize().y + sectionWidth * (i + 1), text, DT_VCENTER, finalDC);
+
+			txLine(0, handle.rect.getSize().y + sectionWidth * (i), rect.getSize().x, handle.rect.getSize().y + sectionWidth * (i), finalDC);
+			
+		}
+	}
+	if (test1)printBlt(finalDC);
+	handle.print(finalDC);
+	controlHandle();
+	txRectangle(0, 0, SIDETHICKNESS, rect.getSize().y, finalDC);
+	txRectangle(0, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
+	txRectangle(rect.getSize().x - SIDETHICKNESS, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, 0, finalDC);
+	if (test1)printBlt(finalDC);
+}
+
 void History::draw ()
 {
 	txSetAllColors (TX_BLACK, finalDC);
@@ -1883,14 +1945,17 @@ void History::draw ()
 				}
 
 				//txTextOut (0, handle.rect.getSize().y + (toolHDCSize) * i, strNum, finalDC);
-				txSetTextAlign (TA_CENTER, finalDC);
-				txSetAllColors (TX_WHITE, finalDC);
+				
+				
 
 				//txTextOut ((toolHDCSize + rect.getSize().x) / 2, handle.rect.getSize().y + toolHDCSize * i + toolHDCSize / 2, toolName, finalDC);
 				//printBlt(finalDC);
 				txSelectFont ("Arial", 18, 5, FW_DONTCARE, false, false, false, 0, finalDC);
+				txSetTextAlign(TA_CENTER, finalDC);
+				txSetAllColors(TextColor, finalDC);
 				txDrawText (toolHDCSize + rect.getSize().x * 0.05, handle.rect.getSize().y + toolHDCSize * i, rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i + 1), toolName, DT_VCENTER, finalDC);
 
+				txSetAllColors(MenuColor, finalDC);
 				txLine (0, handle.rect.getSize().y + toolHDCSize * (i), rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i), finalDC);
 			}
 
@@ -1899,6 +1964,7 @@ void History::draw ()
 
 	handle.print (finalDC);
 	controlHandle ();
+	
 	txRectangle (0, 0, SIDETHICKNESS, rect.getSize().y, finalDC);
 	txRectangle (0, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
 	txRectangle(rect.getSize().x - SIDETHICKNESS, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, 0, finalDC);
@@ -1948,7 +2014,8 @@ void History::onClick ()
 
 void TimeButton::draw ()
 {
-	txSetAllColors (BackgroundColor);
+	if (manager)txSetAllColors (manager->color, finalDC);
+	txRectangle(0, 0, getSize().x, getSize().y, finalDC);
 	time_t t = time (NULL);
 	t = t % (24 * 3600);
 
@@ -1959,9 +2026,11 @@ void TimeButton::draw ()
 
 	sprintf (newStr, "%d:%02d:%02d", hours + 3, minutes, second);
 
-	txSetTextAlign (TA_LEFT);
-	txSetAllColors (TX_WHITE);
-	txTextOut (rect.pos.x, rect.pos.y, newStr);
+	txSetTextAlign (TA_LEFT, finalDC);
+	txSetAllColors (color, finalDC);
+	txSelectFontDC ("Arial", font, finalDC);
+	txTextOut (0, 0, newStr, finalDC);
+	//printBlt(finalDC);
 
 }
 
@@ -2011,6 +2080,11 @@ void Window::print (HDC DC)
 	txBitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
 }
 
+Vector Window::getSize()
+{
+	return this->rect.finishPos - this->rect.pos;
+}
+
 void Window::draw ()
 {
 	$s
@@ -2019,7 +2093,7 @@ void Window::draw ()
 	if (test1)printBlt (finalDC);
 
 
-	if (finalDC) txSetAllColors (TX_BLACK, finalDC);
+	if (finalDC) txSetAllColors (TextColor, finalDC);
 	txSetTextAlign (TA_CENTER, finalDC);
 	//txDrawText (0, 0, rect.getSize().x, rect.getSize().y, text, DT_CENTER, finalDC);
 	txTextOut (rect.getSize().x / 2, rect.getSize().y * 0.05 , text, finalDC);
@@ -2070,18 +2144,20 @@ void CanvasManager::draw ()
 {
 	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
+	//bar
 
 
-	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
-
+	//if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
+	if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
 	if (newCanvas.isClicked)
 	{
-		addWindow(new Canvas({ .pos = {0, newCanvas.rect.finishPos.y}, .finishPos = {500, newCanvas.rect.finishPos.y + 500} }, closeCanvasButton));
+		addWindow(new Canvas({ .pos = {100, 50}, .finishPos = {600, 500 + 50} }, closeCanvasButton, algorithm));
 		newCanvas.isClicked = false;
 	}
 	
 	newCanvas.draw();
-	txBitBlt(finalDC, newCanvas.rect.pos.x, newCanvas.rect.pos.y, 0, 0, newCanvas.finalDC);
+	txBitBlt(finalDC, newCanvas.rect.pos.x, newCanvas.rect.pos.y, newCanvas.rect.getSize().x, newCanvas.rect.getSize().y, newCanvas.finalDC);
+
 
 	for (int i = 0; i < newButtonNum; i++)
 	{
@@ -2135,6 +2211,7 @@ void CanvasManager::onClick()
 			{
 				activeWindow = pointers[i];
 				activeCanvas = (Canvas*)pointers[i];
+				//bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
 				pointers[i]->onClick();
 				pointers[i]->isClicked = true;
 
@@ -2169,6 +2246,27 @@ void CanvasManager::deleteButton()
 	}
 }
 
+void ProgressBar::setProgress(double* total, double* current)
+{	
+	totalNum = total;
+	currentNum = current;
+
+};
+
+
+void ProgressBar::draw()
+{
+	$s
+	if(manager) txSetAllColors(manager->color, finalDC);
+	txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+
+	txSetAllColors(color, finalDC);
+	if (totalNum && currentNum)
+	{
+		txRectangle(0, 0, rect.getSize().x * (*currentNum / *totalNum), rect.getSize().y, finalDC);
+	}
+	//printBlt(finalDC);
+}
 
 
 void Canvas::draw ()
@@ -2190,7 +2288,7 @@ void Canvas::draw ()
 	}
 	if (nonConfirmBrightness && reCountEnded)
 	{
-		txBitBlt(finalDC, 0, 0, 0, 0, tempFilterDC);
+		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
 	}
 
 
@@ -2249,22 +2347,27 @@ void Canvas::draw ()
 	
 
 	controlHandle();
+	
 	drawOnFinalDC(handle);
 	controlSize();
 
+	closeCanvas.rect.pos = {rect.getSize().x - MENUBUTTONSWIDTH,  0};
+	closeCanvas.rect.finishPos = {rect.getSize().x , HANDLEHEIGHT};
 	
 	
 	drawOnFinalDC(closeCanvas);
 
 	
 }
-
+ 
 void Canvas::controlFilter ()
 {
 	if (manager->activeWindow != this) return;
 	if (confirmBrightness)
 	{
-		filter->confirm(canvas, tempFilterDC, nonConfirmBrightness);
+		confirmBrightness = false;
+		nonConfirmBrightness = false;
+		txBitBlt(canvas, 0, 0, 0, 0, tempFilterDC);
 	}
 
 	if (((int)IncomeBrightness != (int)lastIncomeBrightness || (int)Brightness != (int)lastBrightness))
@@ -2274,7 +2377,7 @@ void Canvas::controlFilter ()
 			lastRecountIncomeBrightness = IncomeBrightness;
 			lastRecountBrightness = Brightness;
 		}
-		reCountEnded = filter->reCount(nonConfirmBrightness);
+		reCountEnded = filter->reCount(nonConfirmBrightness, Brightness, IncomeBrightness);
 		if (reCountEnded)
 		{
 			if (!((int)IncomeBrightness != (int)lastRecountIncomeBrightness || (int)Brightness != (int)lastRecountBrightness))
@@ -2285,16 +2388,15 @@ void Canvas::controlFilter ()
 			else
 			{
 				reCountEnded = false;
-
 			}
 		}
 	}
 
 }
-
+ 
 void Canvas::controlSize()
 {
-	txSetAllColors(TX_WHITE, finalDC);
+	txSetAllColors(MenuColor, finalDC);
 	txRectangle (0, 0, SIDETHICKNESS, rect.getSize().y, finalDC);
 	txRectangle (0, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
 	txRectangle(rect.getSize().x - SIDETHICKNESS, rect.getSize().y - SIDETHICKNESS, rect.getSize().x, 0, finalDC);
@@ -2319,65 +2421,15 @@ void Canvas::controlSizeSliders ()
 	//scrollBarVert.resize ({.pos = {rect.finishPos}});
 }
 
-void Filter::confirm(HDC dest, HDC source, bool& nonConfirm)
-{
-	if (confirmBrightness)
-	{
-		confirmBrightness = false;
-		nonConfirm = false;
-	}
-	txBitBlt(dest, 0, 0, 0, 0, source);
 
-}
 
+/*
 void Filter::reStartCount()
 {
 	lastX = 0;
 	lastY = 0;
-}
-
-bool Filter::reCount(bool &nonConfirm)
-{
-	nonConfirm = true;
-	for (int x = lastX; x < lastX + delta.x; x++)
-	{
-		for (int y = lastY; y < lastY + delta.y; y++)
-		{
-			int pixelPos = x + (int)(DCMAXSIZE - y) * (DCMAXSIZE - 1);
-			RGBQUAD pixel = screen[pixelPos];
-			double kOfBrightness = (double)((255 - Brightness) - (255 - IncomeBrightness)) / (255.0); //коэффициент
-			double bOfBrightness = 255 - IncomeBrightness;	// b графика
-
-			pixel.rgbRed   = pixel.rgbRed   * kOfBrightness + bOfBrightness;
-			pixel.rgbGreen = pixel.rgbGreen * kOfBrightness + bOfBrightness;
-			pixel.rgbBlue  = pixel.rgbBlue  * kOfBrightness + bOfBrightness;
-
-			finalDC   [pixelPos] = pixel; //DCMAXSIZE != size.x
-			tempScreen[pixelPos] = pixel;
-
-			if (confirmBrightness)
-			{
-				screen[int(x + (int)((size.y - y)) * (size.x - 1))] = pixel;
-			}
-		}
-	}
-
-	
-	lastY += delta.y;
-	if (lastY >= size.y)
-	{
-		lastY = 0;
-		lastX += delta.x;
-	}
-	if (lastX >= size.y)
-	{
-		lastY = 0;
-		lastX = 0;
-		return true;//reDraw
-	}
-	return false;
-	
-}
+} */ 
+ 
 
 void SizeButton::onClick ()
 {
@@ -2394,6 +2446,12 @@ void SizeButton::onClick ()
 void CloseButton::onClick ()
 {
 	IsRunning = false;
+}
+
+int min (int a, int b)
+{
+	if (a > b) return b;
+	else return a;
 }
 
 void Canvas::saveHistory ()
@@ -2562,14 +2620,14 @@ void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor)
 	bool steep = false;
 	if (abs (x0 - x1) < abs (y0 - y1)) 
 	{
-		swap (x0, y0);
-		swap (x1, y1);
+		//swap (x0, y0);
+		//swap (x1, y1);
 		steep = true;
 	}
 	if (x0 > x1)
 	{
-		swap (x0, x1);
-		swap (y0, y1);
+		//swap (x0, x1);
+		//swap (y0, y1);
 	}
 	int dx = x1-x0;
 	int dy = y1-y0;
