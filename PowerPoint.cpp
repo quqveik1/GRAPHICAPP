@@ -11,14 +11,44 @@
 
 
 HDC TestPhoto;
+void compressImage(HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
 
-void clearDC (HDC dc, COLORREF color = TX_BLACK);
-void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
-void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
-void compressImage (HDC &dc, Vector newSize, Vector oldSize);
-void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize);
-void txSetAllColors (COLORREF color, HDC dc = txDC ());
-void txSelectFontDC(const char* text, int size, HDC & dc);
+//#define compressImage(newDC, newSize, oldDC, oldSize)	\
+{														\
+	_compressImage(newDC, newSize, oldDC, oldSize, NULL);		\
+}														\
+
+/*
+#define compressImage(newDC, newSize, oldDC, oldSize)  									   \
+{																					 	 \
+	_compressImage(newDC, newSize, oldDC, oldSize);	 					 \
+}																					 	 \
+   */
+void clearDC(HDC dc, COLORREF color = TX_BLACK);
+void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
+void compressDraw(HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
+void txSetAllColors(COLORREF color, HDC dc = txDC());
+void txSelectFontDC(const char* text, int size, HDC& dc);
+
+
+struct Image
+{
+	const char* path = NULL;
+	HDC dc = NULL;
+};
+
+struct CLoadManager
+{
+	int currentImagesAmount = 0;
+
+	Image images[1000];
+
+
+	HDC loadImage (const char* path);
+
+};
+
+CLoadManager LoadManager;
 
 
 struct Manager;
@@ -65,18 +95,19 @@ struct Window
 	{
 		if (_rect.getSize().x > 0 && _rect.getSize().y > 0)
 		{
-			finalDCSize = {DCMAXSIZE, DCMAXSIZE};
+			finalDCSize = {_rect.getSize().x, _rect.getSize().y};
 			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
 			txSetAllColors(color, finalDC);
 			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+			if (test1) printBlt(finalDC);
 		}
 
 		originalRect = rect;
 	}
 
 
-	Vector getAbsCoordinats ();
-	Rect getAbsRect ();
+	Vector getAbsCoordinats (bool coordinatsWithHandle = false);
+	Rect getAbsRect (bool coordinatsWithHandle = false);
 	
 	void resize (Rect newSize);
 	void resize (Vector newSize, Vector oldSize);
@@ -98,15 +129,17 @@ struct Manager : Window
 	Window *activeWindow;
 	Window handle;
 	Vector startCursorPos;
+	bool coordinatSysFromHandle;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor) : 
+	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false) :
 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
 		length (_length),
 		pointers (new Window*[length]{}),
 		newButtonNum (0),
 		activeWindow (NULL), 
 		handle (_handle),
-		startCursorPos({})
+		startCursorPos({}),
+		coordinatSysFromHandle (_coordinatSysFromHandle)
 	{
 		handle.manager = this;
 		handle.rect.finishPos.x = DCMAXSIZE * 10;
@@ -130,13 +163,14 @@ struct ToolsPalette : Manager
 {
 	int lastSelected = 0;
 	ToolsPalette (Rect _rect, int _length) :
-		Manager (_rect, _length)
+		Manager(_rect, _length, true, NULL, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, MenuColor, true)
 	{
 	}
 
 	virtual void onClick() override;
 	virtual void draw() override;
 };
+		
 
 struct Slider : Manager 
 {
@@ -168,7 +202,10 @@ struct Slider : Manager
 		quadrateScale (_quadrateScale),
 		isWhite (_isWhite)
 	{
-
+		if (isWhite)
+		{
+			color = TX_WHITE;
+		}
 		arrow1.manager = this;
 		arrow2.manager = this;
 		sliderQuadrate.manager = this;
@@ -180,12 +217,13 @@ struct Slider : Manager
 			arrow1.rect.finishPos.x = (1) * (rect.getSize ().y);
 			arrow1.rect.finishPos.y = rect.getSize ().y;
 			arrow1.originalRect = arrow1.rect;
-			compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1Hor.bmp"), {13, 17});
+			//compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, LoadManager.loadImage ("arrow1Hor.bmp"), {13, 17});
+			compressImage (arrow1.dc, { arrow1.rect.getSize().x, arrow1.rect.getSize().y }, LoadManager.loadImage("arrow1Hor.bmp"), {13, 17}, __LINE__);
 
 			if (isWhite) 
 			{
 				txDeleteDC (arrow1.dc);
-				compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1WhiteHor.bmp"), {16, 16});
+				compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, LoadManager.loadImage ("arrow1WhiteHor.bmp"), {16, 16}, __LINE__);
 			}
 
 
@@ -194,11 +232,11 @@ struct Slider : Manager
 			arrow2.rect.finishPos.x = rect.getSize ().x;
 			arrow2.rect.finishPos.y = rect.getSize ().y;
 			arrow2.originalRect = arrow2.rect;
-			compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2Hor.bmp"), {13, 17});
+			compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2Hor.bmp"), {13, 17}, __LINE__);
 			if (isWhite) 
 			{
 				txDeleteDC (arrow2.dc);
-				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2WhiteHor.bmp"), {16, 16});
+				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
 			}
 		}
 		else
@@ -208,10 +246,10 @@ struct Slider : Manager
 			arrow1.rect.finishPos.x = rect.getSize().x;
 			arrow1.rect.finishPos.y = (1) * arrow1.rect.getSize().x;
 			arrow1.originalRect = arrow1.rect;
-			if (!isWhite) compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1.bmp"), {17, 13});
+			if (!isWhite) compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, LoadManager.loadImage ("arrow1.bmp"), {17, 13}, __LINE__);
 			if (isWhite) 
 			{
-				compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, txLoadImage ("arrow1WhiteVert.bmp"), {16, 16});
+				compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, LoadManager.loadImage ("arrow1WhiteVert.bmp"), {16, 16}, __LINE__);
 			}
 
 			arrow2.rect.pos.x = 0;
@@ -219,10 +257,10 @@ struct Slider : Manager
 			arrow2.rect.finishPos.x = rect.getSize().x;
 			arrow2.rect.finishPos.y = rect.getSize().y;
 			arrow2.originalRect = arrow2.rect;
-			if (!isWhite) compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2.bmp"), {17, 13});
+			if (!isWhite) compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2.bmp"), {17, 13}, __LINE__);
 			if (isWhite) 
 			{
-				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, txLoadImage ("arrow2WhiteVert.bmp"), {16, 16});
+				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteVert.bmp"), {16, 16}, __LINE__);
 			}
 		}
 
@@ -230,13 +268,14 @@ struct Slider : Manager
 
 		if (horizontalMode) 
 		{
-			compressImage (dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, txLoadImage ("SliderBackGroundHor.bmp"), {948, 13});
-			//printBlt(dc);
+			if (!isWhite)compressImage (dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, LoadManager.loadImage ("SliderBackGroundHor.bmp"), {948, 13}, __LINE__);	
+			if (isWhite)compressImage (dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, LoadManager.loadImage ("SliderBackGroundWhiteHor.bmp"), {870, 16}, __LINE__);	
+			//printBlt(dc);	 	 SliderBackGroundWhiteHot
 		}
 		else
 		{
-			if (!isWhite) compressImage (dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, txLoadImage ("SliderBackGroundVert.bmp"), {13, 948});
-			if (isWhite)  compressImage (dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, txLoadImage ("SliderBackGroundWhite.bmp"), {16, 870});
+			if (!isWhite) compressImage (dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, LoadManager.loadImage ("SliderBackGroundVert.bmp"), {13, 948}, __LINE__);
+			if (isWhite)  compressImage (dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, LoadManager.loadImage ("SliderBackGroundWhite.bmp"), {16, 870}, __LINE__);
 		}
 
 		if (horizontalMode)
@@ -268,17 +307,18 @@ struct Slider : Manager
 
 		if (horizontalMode) 
 		{
-			compressImage (sliderQuadrate.dc, {rect.getSize ().x * _quadrateScale, sliderQuadrate.rect.getSize().y}, txLoadImage ("SliderRect.bmp"), {316, 12});
-			sliderQuadrate.finalDC = txCreateCompatibleDC (rect.getSize ().x * _quadrateScale, sliderQuadrate.rect.getSize().y);
+			if (!isWhite)compressImage (sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, LoadManager.loadImage ("SliderRect.bmp"), {316, 12}, __LINE__);
+			if (isWhite)compressImage (sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, LoadManager.loadImage ("WhiteSliderRectHor.bmp"), {299, 1}, __LINE__);
+			sliderQuadrate.finalDC = txCreateCompatibleDC (ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y);
 			sliderQuadrate.originalRect = {.pos = {0, 0}, .finishPos = {316, 12}};
 			//printBlt (sliderQuadrate.dc);
 		}
 		else
 		{
 
-			if (!isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, rect.getSize().y *  _quadrateScale}, txLoadImage ("VerticalSliderRect.bmp"), {12, 316});
-			if (isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale)}, txLoadImage ("WhiteSliderRect.bmp"), {14, 299});
-			sliderQuadrate.finalDC = txCreateCompatibleDC (sliderQuadrate.rect.getSize().x, rect.getSize().y *  _quadrateScale);
+			if (!isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil(rect.getSize().y *  _quadrateScale)}, LoadManager.loadImage ("VerticalSliderRect.bmp"), {12, 316}, __LINE__);
+			if (isWhite) compressImage (sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale)}, LoadManager.loadImage ("WhiteSliderRect.bmp"), {14, 299}, __LINE__);
+			sliderQuadrate.finalDC = txCreateCompatibleDC (sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale));
 			sliderQuadrate.originalRect = {.pos = {0, 0}, .finishPos = {12, 316}};
 		}
 
@@ -318,7 +358,7 @@ struct Canvas : Manager
 	HDC canvas;
 	HDC tempFilterDC;
 	RGBQUAD *tempFilterDCArr;
-	bool nonConfirmBrightness = false; // показывает есть ли сейчас непримененный фильтр
+	bool nonConfirmFilter = false; // показывает есть ли сейчас непримененный фильтр
 	bool reCountEnded = false;
 	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
@@ -327,7 +367,7 @@ struct Canvas : Manager
 	Vector canvasCoordinats;
 	Vector canvasSize;
 	RGBQUAD *canvasArr;
-	//bool confirmBrightness;
+	//bool confirmFilter;
 	Vector startResizingCursor = {};
 	bool isResizing = false;
 	Slider scrollBarVert;
@@ -336,10 +376,10 @@ struct Canvas : Manager
 	Vector lastClick = {};
 	double testNum = 0;
 
-	int lastIncomeBrightness = IncomeBrightness;
-	int lastBrightness = Brightness;
-	int lastRecountIncomeBrightness = IncomeBrightness;
-	int lastRecountBrightness = IncomeBrightness;//яркость при прошлой части расчета
+	int lastFirstFilterValue = FirstFilterValue;
+	int lastSecondFilterValue = SecondFilterValue;
+	int lastRecountFirstFilterValue = FirstFilterValue;
+	int lastRecountSecondFilterValue = FirstFilterValue;//яркость при прошлой части расчета
 	DWORD lastTimeRecountFilter = GetTickCount();
 	Filter *filter;
 
@@ -362,7 +402,7 @@ struct Canvas : Manager
 	int timesShowedHistoryInRow = 0;
 
 
-	Canvas (Rect _rect, HDC _closeDC = NULL, RGBQUAD (*_algorithm)(RGBQUAD pixel, double Brightness, double IncomeBrightness) = NULL) :
+	Canvas (Rect _rect, HDC _closeDC = NULL) :
 		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
 		canvasSize({DCMAXSIZE, DCMAXSIZE}),
@@ -381,7 +421,7 @@ struct Canvas : Manager
 			history[i] = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
 		}
 
-		filter = new Filter(canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, _algorithm);
+		filter = new Filter(canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, FilterAlgorithm);
 		//if (_algorithm) filter->algorithm = _algorithm;
 	}
 
@@ -473,8 +513,7 @@ struct CanvasManager : Manager
 	Vector sizeOfNewCanvas;
 	Canvas *activeCanvas = NULL; 
 	ProgressBar* bar;
-	//bool (*reCount)(Filter& filter, int screenSize, bool confirmBrightness, double Brightness, double IncomeBrightness);
-	RGBQUAD(*algorithm)(RGBQUAD pixel, double Brightness, double IncomeBrightness);
+	//bool (*reCount)(Filter& filter, int screenSize, bool confirmSecondFilterValue, double SecondFilterValue, double FirstFilterValue);
 
 
 	CanvasManager (Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar) :
@@ -483,12 +522,9 @@ struct CanvasManager : Manager
 		sizeOfNewCanvas ({500, 500}), 
 		bar (_bar)
 	{
-		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, txLoadImage("CloseButton4.bmp"), {50, 26});
+		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, LoadManager.loadImage("CloseButton4.bmp"), {50, 26}, __LINE__);
 
-		HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
-		assert(library);
-		algorithm = (RGBQUAD (*)(RGBQUAD pixel, double Brightness, double IncomeBrightness))GetProcAddress(library, "BrightnessFilter");
-		assert(algorithm);
+		
 		//color = plus30(color);
 		//..FreeLibrary(library);
 	}
@@ -521,11 +557,11 @@ struct History : Manager
 
 		for (int i = 0; i < TOOLSNUM; i++)
 		{
-			compressImage (toolsDC[i], {(double)toolHDCSize/2, (double)toolHDCSize/2}, palette->pointers[i]->dc, {palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y});	
+			compressImage (toolsDC[i], {(double)toolHDCSize/2, (double)toolHDCSize/2}, palette->pointers[i]->dc, {palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y}, __LINE__);
 			 //printBlt (toolsDC[i]);
 		}
 		
-		if (_openCanvas) compressImage (openCanvas, {rect.getSize().x, (double) toolHDCSize}, _openCanvas, {50, 50});  
+		if (_openCanvas) compressImage (openCanvas, {rect.getSize().x, (double) toolHDCSize}, _openCanvas, {50, 50}, __LINE__);
 	}
 
 	virtual void draw () override;
@@ -637,32 +673,32 @@ struct NumChange : Manager
 
 struct BrightnessButton : Manager
 {
-	Slider brightnessSlider;
-	Slider incomeBrightnessSlider;
+	Slider SecondFilterValueSlider;
+	Slider FirstFilterValueSlider;
 	Window closeButton;
 	Window grafic;
 	Window confirmButton;
 	double graficScale;
-	double copyOfBrightness = Brightness;
-	double copyOfIncomeBrightness = IncomeBrightness;
-	//double copyOfBrightness;
+	double copyOfSecondFilterValue = SecondFilterValue;
+	double copyOfFirstFilterValue = FirstFilterValue;
+	//double copyOfSecondFilterValue;
 
-	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _incomeBrightnessSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}) :
+	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _FirstFilterValueSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}) :
 		Manager (_mainRect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_mainRect.getSize ().x, _mainRect.getSize ().y * 0.1}}),
 		grafic (_graficRect),
-		brightnessSlider (_sliderRect, &copyOfBrightness, 0.18, 0, 255, false, true),
+		SecondFilterValueSlider (_sliderRect, &copyOfSecondFilterValue, 0.18, 0, 255, false, true),
 		confirmButton (_confirmButton),
 		closeButton (_closeButtonRect),
-		incomeBrightnessSlider (_incomeBrightnessSliderRect, &copyOfIncomeBrightness, 0.18, 0, 255, false, true)
+		FirstFilterValueSlider (_FirstFilterValueSliderRect, &copyOfFirstFilterValue, 0.18, 0, 255, false, true)
 		{
-			brightnessSlider.manager = this;
-			incomeBrightnessSlider.manager = this;
+			SecondFilterValueSlider.manager = this;
+			FirstFilterValueSlider.manager = this;
 			closeButton.manager = this;
-			brightnessSlider.manager = this;
+			SecondFilterValueSlider.manager = this;
 			confirmButton.manager = this;
 			graficScale = (grafic.rect.getSize().y / grafic.rect.getSize().x);	
 
-			compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, txLoadImage ("Brightness.bmp"), {444, 361});
+			compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, LoadManager.loadImage ("Brightness.bmp"), {444, 361}, __LINE__);
 
 			//printBlt (dc);
 		}
@@ -670,6 +706,34 @@ struct BrightnessButton : Manager
 
 	virtual void draw () override;
 	virtual void onClick () override;
+};
+
+ 
+struct ContrastMenu : Manager
+{
+	Slider upSlider;
+	Slider downSlider;
+	double brightness = FirstFilterValue;
+	double contrast = SecondFilterValue;
+
+	Window confirmButton;
+	RGBQUAD(*algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue);
+
+	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+		Manager (_rect, 3, true, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+		algorithm (_algorithm)
+	{
+		addWindow(&upSlider);
+		addWindow(&downSlider);
+		addWindow(&confirmButton);
+		compressImage(dc, getSize(), LoadManager.loadImage("ContrastMenu.bmp"), {335, 179} );
+	}
+
+	virtual void draw() override;
+	virtual void onClick() override;
 };
 
 struct StatusBar : Manager
@@ -700,13 +764,12 @@ bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
 void createNumChanger (Manager *menu, NumChange **numchange, Canvas *mainCanvas);
 void checkTextLen (int currentNum, int previousNum, int *textLen, int *cursorPosition);
-void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize);
 
 
 
 int main ()
 {
-	_txWindowStyle &= ~WS_CAPTION;
+	//_txWindowStyle &= ~WS_CAPTION;
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
 
@@ -724,7 +787,7 @@ int main ()
 	
 	//txSelectFont ("Arial", 3, 1);
 
-	//TestPhoto = txLoadImage ("TestPhoto.bmp");
+	//TestPhoto = LoadManager.loadImage ("TestPhoto.bmp");
 
 	//txBitBlt (TestPhoto, 1000, 1000, 0, 0, TestPhoto);
 
@@ -740,8 +803,9 @@ int main ()
 
 	//printfDCS ();
 	
+	
 	HDC addNewCanvasDC = {};
-	HDC oldDC = txLoadImage ("addNewCanvas.bmp");
+	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
 
@@ -758,6 +822,7 @@ int main ()
 	manager->addWindow (canvasManager);
 
 	manager->addWindow(statusBar);
+	
 	//canvasManager->deleteButton();
 
 	//LaysMenu* lays = new LaysMenu({ .pos = {850, 400}, .finishPos = {1000, 944} }, canvasManager);
@@ -766,22 +831,22 @@ int main ()
 	//printfDCS ();
 
 	
-	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 350}}, 5);
+	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 380}}, 5);
 	manager->addWindow (toolsPallete);
 
-		Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, txLoadImage("Line.bmp"));
+		Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, LoadManager.loadImage("Line.bmp"));
 		toolsPallete->addWindow(line);
 
-		Window *gummi = new Window ({ .pos = {0, 50}, .finishPos = {50, 100}}, TX_WHITE, txLoadImage ("Gummi.bmp"));
+		Window *gummi = new Window ({ .pos = {0, 50}, .finishPos = {50, 100}}, TX_WHITE, LoadManager.loadImage ("Gummi.bmp"));
 		toolsPallete->addWindow (gummi); 
 
-		Window *vignette = new Window ({ .pos = {0, 100}, .finishPos = {50, 150} }, TX_WHITE, txLoadImage ("Vignette.bmp"));
+		Window *vignette = new Window ({ .pos = {0, 100}, .finishPos = {50, 150} }, TX_WHITE, LoadManager.loadImage ("Vignette.bmp"));
 		toolsPallete->addWindow (vignette);
 
-		Window *pen = new Window ({ .pos = {0, 150}, .finishPos = {50, 200}}, TX_WHITE, txLoadImage("Pen.bmp"));
+		Window *pen = new Window ({ .pos = {0, 150}, .finishPos = {50, 200}}, TX_WHITE, LoadManager.loadImage("Pen.bmp"));
 		toolsPallete->addWindow (pen);
 
-		Window *mover = new Window ({ .pos = {0, 200}, .finishPos = {50, 250}}, TX_WHITE, txLoadImage("Mover.bmp"));
+		Window *mover = new Window ({ .pos = {0, 200}, .finishPos = {50, 250}}, TX_WHITE, LoadManager.loadImage("Mover.bmp"));
 		toolsPallete->addWindow (mover);
 
 		//printfDCS ();
@@ -791,22 +856,22 @@ int main ()
 
 
 	 
-	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, true, txLoadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, true, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
 	Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
 		menu->addWindow (colorManager);
 
-			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), txLoadImage ("RedButton.bmp"));
+			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
 	
-			ColorButton *blueColor = new ColorButton({.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), txLoadImage ("BlueButton.bmp"));
+			ColorButton *blueColor = new ColorButton({.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), LoadManager.loadImage ("BlueButton.bmp"));
 			colorManager->addWindow(blueColor);
 
-			ColorButton *greenColor = new ColorButton({.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), txLoadImage ("GreenButton.bmp"));
+			ColorButton *greenColor = new ColorButton({.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), LoadManager.loadImage ("GreenButton.bmp"));
 			colorManager->addWindow(greenColor);
 
-		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, txLoadImage ("OpenColorButton.bmp"));
+		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
 		menu->addWindow (openManager);	
 	
 
@@ -815,19 +880,31 @@ int main ()
 	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 3, true, NULL, {}, RGB(45, 45, 45));
 	manager->addWindow(mainhandle);
 
-		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - 50, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, txLoadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - 50, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
-
+	  
 	 
-		
+	 /*
 	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {800, 100}, .finishPos = {1244, 461}}, {.pos = {55, 64}, .finishPos = {312, 318}},
 															   {.pos = {322, 64}, .finishPos = {338, 318}}, {.pos = {17, 64}, .finishPos = {33, 318}},
 															   {.pos = {357, 63}, .finishPos = {436, 80}},  
 															   {.pos = {357, 90}, .finishPos = {436, 100}});	
+	manager->addWindow(brightnessButton);
+	*/
+	
+	HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+	assert(library);
+	//algorithm = (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter");
+	//assert(algorithm);
+	ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+	manager->addWindow(contrastMenu);  
+	
+	ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
+	manager->addWindow(brightnessMenu);
 															  
-	manager->addWindow (brightnessButton);
-	 
-	//OpenManager *brightnessButtonOpen = new OpenManager ({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, brightnessButton);
+	
+	   
+	//OpeManager *brightnessButtonOpen = new OpenManager ({.pos = {500, 0}, .finishPos = {550, 50}}, TX_WHITE, brightnessButton);
 	//manager->addWindow (brightnessButtonOpen);
 	//printBlt (brightnessButtonOpen->finalDC);
 	
@@ -917,34 +994,108 @@ void txSelectFontDC(const char* text, int size, HDC &dc)
 	txSelectFont(text, size, -1, FW_DONTCARE, false, false, false, 0, dc);
 }
 
+void ContrastMenu::onClick()
+{
+	if (!advancedMode) return;
+	int mx = txMouseX();
+	int my = txMouseY();
+
+	if (handle.getAbsRect().inRect(mx, my))
+	{
+		startCursorPos.x = mx;
+		startCursorPos.y = my;
+		handle.isClicked = true;
+	}
+
+	if (upSlider.getAbsRect().inRect(mx, my) && !isClicked)
+	{
+		upSlider.onClick();
+	}
+	if (downSlider.getAbsRect().inRect(mx, my) && !isClicked)
+	{
+		downSlider.onClick();
+	}
+	//if (closeButton.getAbsRect().inRect(mx, my) && !isClicked) advancedMode = false;
+	if (confirmButton.getAbsRect().inRect(mx, my) && !isClicked)
+	{
+		confirmFilter = true;
+		//brightnessSlider.maxNum = Brightness;
+		//brightnessSlider.maxNum = 255;
+		//FirstFilterValueSlider.maxNum = FirstFilterValue;
+	}
+}
+
+void ContrastMenu::draw()
+{
+
+	if (!advancedMode) return;
+
+	if (txMouseButtons() != 1 && manager->activeWindow == this)
+	{
+		SecondFilterValue = brightness;
+		FirstFilterValue = contrast;
+	}
+
+	controlHandle();
+
+	if (dc) copyOnDC(0, 0, dc);
+	upSlider.draw();
+	//printBlt(finalDC);
+	txBitBlt(finalDC, upSlider.rect.pos.x, upSlider.rect.pos.y, upSlider.rect.getSize().x, upSlider.rect.getSize().y, upSlider.finalDC);
+
+	downSlider.draw();
+	//printBlt(FirstFilterValueSlider.finalDC);
+	txBitBlt(finalDC, downSlider.rect.pos.x, downSlider.rect.pos.y, downSlider.rect.getSize().x, downSlider.rect.getSize().y, downSlider.finalDC);
+	//txBitBlt (FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.finalDC);
+	//txBitBlt (300, 300, FirstFilterValueSlider.finalDC);
+	char upNum[100] = {};
+	char downNum[100] = {};
+	sprintf(upNum, "%d", (int)brightness);
+	sprintf(downNum, "%d", (int)contrast);
+
+	txSetTextAlign(TA_LEFT, finalDC);
+	txSetAllColors(TX_BLACK, finalDC);
+	txSelectFont ("Arial", 18, -1, FW_DONTCARE, false, false, false, 0, finalDC);
+	txTextOut (185, 43, upNum, finalDC);
+	txTextOut (185, 92, downNum, finalDC);
+
+	if (manager->activeWindow == this)
+	{
+		FilterAlgorithm = algorithm;
+	}
+
+	//txSetFillColor(TX_RED);
+	//txRectangle(300, 300, 400, 400);
+}
+
 void BrightnessButton::draw ()
 {
 	if (!advancedMode) return;
 
 	if (txMouseButtons() != 1)
 	{
-		Brightness = copyOfBrightness;
-		IncomeBrightness = copyOfIncomeBrightness;
+		SecondFilterValue = copyOfSecondFilterValue;
+		FirstFilterValue = copyOfFirstFilterValue;
 	}
 
 	controlHandle ();
 
 	if (dc) copyOnDC (0, 0, dc);
-	brightnessSlider.draw ();
+	SecondFilterValueSlider.draw ();
 	//printBlt(brightnessSlider.finalDC);
-	txBitBlt (finalDC, brightnessSlider.rect.pos.x, brightnessSlider.rect.pos.y, brightnessSlider.rect.getSize().x, brightnessSlider.rect.getSize().y, brightnessSlider.finalDC);
+	txBitBlt (finalDC, SecondFilterValueSlider.rect.pos.x, SecondFilterValueSlider.rect.pos.y, SecondFilterValueSlider.rect.getSize().x, SecondFilterValueSlider.rect.getSize().y, SecondFilterValueSlider.finalDC);
 
-	incomeBrightnessSlider.draw ();
-	//printBlt(incomeBrightnessSlider.finalDC);
-	txBitBlt (finalDC, incomeBrightnessSlider.rect.pos.x, incomeBrightnessSlider.rect.pos.y, incomeBrightnessSlider.rect.getSize().x, incomeBrightnessSlider.rect.getSize().y, incomeBrightnessSlider.finalDC);
-	//txBitBlt (incomeBrightnessSlider.rect.pos.x, incomeBrightnessSlider.rect.pos.y, incomeBrightnessSlider.finalDC);
-	//txBitBlt (300, 300, incomeBrightnessSlider.finalDC);
+	FirstFilterValueSlider.draw ();
+	//printBlt(FirstFilterValueSlider.finalDC);
+	txBitBlt (finalDC, FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.rect.getSize().x, FirstFilterValueSlider.rect.getSize().y, FirstFilterValueSlider.finalDC);
+	//txBitBlt (FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.finalDC);
+	//txBitBlt (300, 300, FirstFilterValueSlider.finalDC);
 	txSetFillColor (TX_RED);
 	txRectangle (300, 300, 400, 400);
 
 	txSetAllColors (BackgroundColor, finalDC);
-	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfIncomeBrightness / 255),
-			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfBrightness / 255), finalDC);
+	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfFirstFilterValue / 255),
+			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfSecondFilterValue / 255), finalDC);
 }
 
 void BrightnessButton::onClick ()
@@ -960,15 +1111,15 @@ void BrightnessButton::onClick ()
 			handle.isClicked = true;
 	}
 
-	if (brightnessSlider.getAbsRect().inRect (mx, my) && !isClicked) brightnessSlider.onClick ();		
-	if (incomeBrightnessSlider.getAbsRect().inRect (mx, my) && !isClicked) incomeBrightnessSlider.onClick ();		
+	if (SecondFilterValueSlider.getAbsRect().inRect (mx, my) && !isClicked) SecondFilterValueSlider.onClick ();		
+	if (FirstFilterValueSlider.getAbsRect().inRect (mx, my) && !isClicked) FirstFilterValueSlider.onClick ();		
 	if (closeButton.getAbsRect().inRect (mx, my) && !isClicked) advancedMode = false;
 	if (confirmButton.getAbsRect().inRect (mx, my) && !isClicked) 
 	{
-		confirmBrightness = true;
-		//brightnessSlider.maxNum = Brightness;
+		confirmFilter = true;
+		//SecondFilterValueSlider.maxNum = Brightness;
 		//brightnessSlider.maxNum = 255;
-		//incomeBrightnessSlider.maxNum = IncomeBrightness;
+		//FirstFilterValueSlider.maxNum = FirstFilterValue;
 	}
 }
 
@@ -1034,14 +1185,17 @@ void clearDC (HDC dc, COLORREF color /* = TX_BLACK*/)
 	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, dc);
 }
 
-void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize)
+void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line)
 {
+
+	char str[10] = {};
+	sprintf(str, "%d", line);
 	if (newSize.x <= 0 || newSize.y <= 0)
-		newSize.print ();
+		newSize.print (str);
 
 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
 
-	//if (test1)printBlt (newDC);
+	
 	//if (test1)printBlt (oldDC);
 
 	assert (oldDC);
@@ -1050,35 +1204,15 @@ void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize)
 		//printBlt (newDC);
 		printBlt (oldDC);
 	}
+
+	if (test1)printBlt (newDC);
 }
 
-void compressImage (HDC &dc, Vector newSize, Vector oldSize)
-{
-	assert (dc);
-	if (newSize.x <= 0 || newSize.y <= 0)
-		newSize.print ();
-
-	HDC copyDC = txCreateCompatibleDC (oldSize.x, oldSize.y);;
-
-	txBitBlt (copyDC, 0, 0, 0, 0, dc);
-
-	//printBlt (copyDC);
-
-	clearDC (dc);
-	txDeleteDC (dc);
-	dc = txCreateCompatibleDC (newSize.x, newSize.y); 
-
-
-	assert (dc);
-	assert (StretchBlt (dc, 0, 0, newSize.x, newSize.y, copyDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY));
-	txDeleteDC (copyDC);
-}
-
-void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize)
+void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line)
 {
 	HDC copyDC = NULL;
 	//if (test1)printBlt (dc);
-	compressImage (copyDC, finalSize, dc, originalSize);
+	compressImage (copyDC, finalSize, dc, originalSize, line);
 	//printBlt (dc);
 	if (test1)
 	{
@@ -1145,19 +1279,19 @@ void Slider::draw ()
 	txSetAllColors (TX_WHITE, finalDC);
 
 	//if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {arrow2.rect.pos.x - arrow1.rect.finishPos.x, arrow2.rect.finishPos.y - arrow1.rect.pos.y}, dc, originalRect.getSize());
-	if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {rect.getSize ().x + arrow2.rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
-	if (!horizontalMode)compressDraw (finalDC, {arrow1.rect.pos.x, arrow1.rect.finishPos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
+	if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
+	if (!horizontalMode)compressDraw (finalDC, {arrow1.rect.pos.x, arrow1.rect.finishPos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
 	//if (horizontalMode) compressDraw (finalDC, {0, 0}, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
 
 	arrow1.draw ();
-	compressDraw (finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize ());
+	compressDraw (finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize (), __LINE__);
 	//printBlt(arrow1.finalDC);
 	//printBlt (arrow1.finalDC);
 	//txBitBlt (finalDC, arrow1.rect.pos.x, arrow1.rect.pos.y, rect.getSize ().x, rect.getSize ().y, arrow1.finalDC);
 
 
 	arrow2.draw ();
-	compressDraw (finalDC, arrow2.rect.pos, arrow2.rect.getSize (), arrow2.finalDC, arrow2.originalRect.getSize ());
+	compressDraw (finalDC, arrow2.rect.pos, arrow2.rect.getSize (), arrow2.finalDC, arrow2.originalRect.getSize (), __LINE__);
 	//printBlt(finalDC);
 	//txBitBlt(finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, arrow2.rect.getSize().x, arrow2.rect.getSize().y, arrow2.finalDC);
 
@@ -1171,8 +1305,9 @@ void Slider::draw ()
 	//stop;
 	//printBlt (sliderQuadrate.finalDC)
 	//txBitBlt (sliderQuadrate.finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y);
-	txBitBlt (finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y, sliderQuadrate.dc);
 	//printBlt(finalDC);
+	txBitBlt (finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y, sliderQuadrate.dc);
+	//printBlt (finalDC);
 }
 
 void Slider::onClick ()
@@ -1210,7 +1345,7 @@ void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
 								{.pos = {368, 44}, .finishPos = {389, 59}}, 
 								{.pos = {368, 59}, .finishPos = {389, 74}}, 
 								{.pos = {70, 55}, .finishPos = {270, 65} },
-								txLoadImage ("SwitchButton.bmp"), 
+								LoadManager.loadImage ("SwitchButton.bmp"), 
 								0.3,
 								1, &mainCanvas->lineThickness));
 	menu->addWindow (*numChange);
@@ -1363,20 +1498,23 @@ bool Manager::addWindow (Window *window)
 
 void ToolsPalette::draw()
 {
-	reDraw = false;
+	//reDraw = false;
 
 	//controlHandle();
 	if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
+
+	controlHandle();
+	drawOnFinalDC(handle);
 
 	for (int i = 0; i < newButtonNum; i++)
 	{
 		pointers[i]->draw();
 		//if (i == 4) printBlt (pointers[i]->finalDC);
-		if (pointers[i]->advancedMode) txBitBlt(finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.finishPos.x, pointers[i]->rect.finishPos.y, pointers[i]->finalDC);
+		if (pointers[i]->advancedMode) txBitBlt(finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.finishPos.x, pointers[i]->rect.finishPos.y, pointers[i]->finalDC);
 		if (lastSelected == i)
 		{
 			txSetAllColors(TX_WHITE, finalDC);
-			txRectangle(pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.pos.x + pointers[i]->rect.getSize().x * 0.1, pointers[i]->rect.pos.y + pointers[i]->rect.getSize().y * 0.1, finalDC);
+			txRectangle(pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.pos.x + pointers[i]->rect.getSize().x * 0.1, pointers[i]->rect.pos.y + pointers[i]->rect.getSize().y * 0.1  + handle.rect.finishPos.y, finalDC);
 		}
 		if (txMouseButtons() != 1)
 		{
@@ -1389,7 +1527,7 @@ void ToolsPalette::draw()
 		activeWindow = NULL;
 	}
 
-	//controlHandle ();
+	
 	//handle.print(finalDC);
 }
 
@@ -1399,20 +1537,16 @@ void ToolsPalette::onClick ()
 
 	int mx = txMouseX();
 	int my = txMouseY();
-
+	clickHandle();
 	
+
 
 	if (advancedMode && !isClicked)
 	{
 		//clickHandle ();
 
 		reDraw = true;
-		if (handle.getAbsRect().inRect(mx, my))
-		{
-			startCursorPos.x = mx;
-			startCursorPos.y = my;
-			handle.isClicked = true;
-		}
+		//clickHandle();
 
 		if (txMouseButtons() == 1)
 		{
@@ -1477,6 +1611,7 @@ void Manager::draw ()
 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
  		if (pointers[i]->advancedMode) 
 		{
+			//printBlt(finalDC);
 			txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC);
 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
 			//printBlt (pointers[i]->finalDC);
@@ -1495,7 +1630,7 @@ void Manager::draw ()
 
 void Manager::clickHandle ()
 {
-	if (handle.getAbsRect().inRect (txMouseX (), txMouseY ()))
+	if (handle.getAbsRect(true).inRect (txMouseX (), txMouseY ()))
 	{
 		startCursorPos.x = txMouseX ();
 		startCursorPos.y = txMouseY ();
@@ -1518,6 +1653,7 @@ void Manager::controlHandle ()
 	{
 		handle.isClicked = false;
 	}
+	//drawOnFinalDC (handle);
 }
 
 
@@ -1568,6 +1704,7 @@ void Manager::onClick ()
 
 	if (advancedMode)
 	{
+		clickHandle();
 		if (handle.getAbsRect().inRect (mx, my))
 		{
 			startCursorPos.x = mx;
@@ -1598,7 +1735,7 @@ void Manager::onClick ()
 	if (missClicked == true) activeWindow = NULL;
 }
 
-Vector Window::getAbsCoordinats ()
+Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)
 {
 	Vector coordinats = {};
 
@@ -1611,6 +1748,7 @@ Vector Window::getAbsCoordinats ()
 		if (!copyOfManager) break;
 
 		coordinats = coordinats + copyOfManager->rect.pos;
+		if (copyOfManager->coordinatSysFromHandle && !coordinatsWithHandle) coordinats.y += copyOfManager->handle.rect.finishPos.y;
 		copyOfManager = copyOfManager->manager;
 
 	}
@@ -1618,7 +1756,7 @@ Vector Window::getAbsCoordinats ()
 	return coordinats;
 }
 
-Rect Window::getAbsRect ()
+Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 {
 	Rect coordinats = {};
 
@@ -1630,13 +1768,44 @@ Rect Window::getAbsRect ()
 	{
 		if (!copyOfManager) break;
 
-		coordinats.pos += copyOfManager->rect.pos; 
+		coordinats.pos += copyOfManager->rect.pos;
+		if (copyOfManager->coordinatSysFromHandle && !coordinatsWithHandle)
+		{
+			coordinats.pos.y += copyOfManager->handle.rect.finishPos.y;
+		}
 		copyOfManager = copyOfManager->manager;
 	}
 
 	coordinats.finishPos = rect.finishPos + (coordinats.pos - rect.pos);
 
 	return coordinats;
+}
+
+
+HDC CLoadManager::loadImage(const char* path)
+{
+	bool newImage = true;
+	int suitableDCNum = -1;
+	for (int i = 0; i < currentImagesAmount; i++)
+	{
+		if (!strcmp(path, images[i].path))
+		{
+			newImage = false;
+			suitableDCNum = i;
+			break;
+		}
+	}
+
+	if (!newImage) return images[suitableDCNum].dc;
+
+	
+	images[currentImagesAmount].dc = txLoadImage(path);
+	images[currentImagesAmount].path = path;
+	currentImagesAmount++;
+
+	return images[currentImagesAmount-1].dc;
+
+
 }
 
 
@@ -2103,7 +2272,7 @@ void Window::draw ()
 	if (dc) 
 	{
 		//txBitBlt (finalDC, rect.size.x, rect.size.y, originalRect.size.x, originalRect.size.y, dc);	
-		compressDraw (finalDC, {0, 0}, rect.getSize (), dc, originalRect.getSize ());
+		compressDraw (finalDC, {0, 0}, rect.getSize (), dc, originalRect.getSize (), __LINE__);
 	}
 }
 
@@ -2144,6 +2313,8 @@ void CanvasManager::draw ()
 {
 	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
+
+
 	//bar
 
 
@@ -2151,7 +2322,7 @@ void CanvasManager::draw ()
 	if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
 	if (newCanvas.isClicked)
 	{
-		addWindow(new Canvas({ .pos = {100, 50}, .finishPos = {600, 500 + 50} }, closeCanvasButton, algorithm));
+		addWindow(new Canvas({ .pos = {100, 50}, .finishPos = {600, 500 + 50} }, closeCanvasButton));
 		newCanvas.isClicked = false;
 	}
 	
@@ -2273,20 +2444,20 @@ void Canvas::draw ()
 {
 	assert (canvas);
 	txSetAllColors (BackgroundColor, finalDC);
-	if (!nonConfirmBrightness)
+	if (!nonConfirmFilter)
 	{
 		txRectangle(0, 0, 3000, 3000, finalDC);
 	}
-	if (nonConfirmBrightness && reCountEnded)
+	if (nonConfirmFilter && reCountEnded)
 	{
 		txRectangle(0, 0, 3000, 3000, finalDC);
 	}
 
-	if (!nonConfirmBrightness)
+	if (!nonConfirmFilter)
 	{
 		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, canvas);
 	}
-	if (nonConfirmBrightness && reCountEnded)
+	if (nonConfirmFilter && reCountEnded)
 	{
 		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
 	}
@@ -2347,8 +2518,8 @@ void Canvas::draw ()
 	
 
 	controlHandle();
-	
 	drawOnFinalDC(handle);
+	
 	controlSize();
 
 	closeCanvas.rect.pos = {rect.getSize().x - MENUBUTTONSWIDTH,  0};
@@ -2362,28 +2533,36 @@ void Canvas::draw ()
  
 void Canvas::controlFilter ()
 {
+	if (txGetAsyncKeyState(VK_LEFT)) SecondFilterValue++;
+	if (txGetAsyncKeyState(VK_RIGHT)) SecondFilterValue--;
+	if (txGetAsyncKeyState(VK_DOWN)) FirstFilterValue+=10;
+	if (txGetAsyncKeyState(VK_UP)) FirstFilterValue-=10;
+
+	filter->algorithm = FilterAlgorithm;
+
+
 	if (manager->activeWindow != this) return;
-	if (confirmBrightness)
+	if (confirmFilter)
 	{
-		confirmBrightness = false;
-		nonConfirmBrightness = false;
+		confirmFilter = false;
+		nonConfirmFilter = false;
 		txBitBlt(canvas, 0, 0, 0, 0, tempFilterDC);
 	}
 
-	if (((int)IncomeBrightness != (int)lastIncomeBrightness || (int)Brightness != (int)lastBrightness))
+	if (((int)FirstFilterValue != (int)lastFirstFilterValue || (int)SecondFilterValue != (int)lastSecondFilterValue))
 	{
 		if (filter->lastX == 0 && filter->lastY == 0)
 		{
-			lastRecountIncomeBrightness = IncomeBrightness;
-			lastRecountBrightness = Brightness;
+			lastRecountFirstFilterValue = FirstFilterValue;
+			lastRecountSecondFilterValue = SecondFilterValue;
 		}
-		reCountEnded = filter->reCount(nonConfirmBrightness, Brightness, IncomeBrightness);
+		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
 		if (reCountEnded)
 		{
-			if (!((int)IncomeBrightness != (int)lastRecountIncomeBrightness || (int)Brightness != (int)lastRecountBrightness))
+			if (!((int)FirstFilterValue != (int)lastRecountFirstFilterValue || (int)SecondFilterValue != (int)lastRecountSecondFilterValue))
 			{
-				lastIncomeBrightness = IncomeBrightness;
-				lastBrightness = Brightness;
+				lastFirstFilterValue = FirstFilterValue;
+				lastSecondFilterValue = SecondFilterValue;
 			}
 			else
 			{
@@ -2808,26 +2987,26 @@ void Canvas::onClick ()
 			return;
 		}
 
-		if (DrawingMode == 1 && !nonConfirmBrightness) wasClicked = true;
+		if (DrawingMode == 1 && !nonConfirmFilter) wasClicked = true;
 	}
 
 	if (controlLay ()) return;
 	
-		if (DrawingMode == 2 && !nonConfirmBrightness)
+		if (DrawingMode == 2 && !nonConfirmFilter)
 		{
 			if (!isClicked) saveHistory ();
 			txSetAllColors(BackgroundColor, canvas);
 			txEllipse(lastClick.x + canvasCoordinats.x - 20, lastClick.y + canvasCoordinats.y - 20, lastClick.x + canvasCoordinats.x + 20, lastClick.y + canvasCoordinats.y + 20, canvas);
 		}
 
-		if (DrawingMode == 3 && !nonConfirmBrightness)
+		if (DrawingMode == 3 && !nonConfirmFilter)
 		{
 			//RGBQUAD pixel = canvasArr[(int)(lastClick.x + canvasCoordinats.x) + (int) ((canvasSize.y - (lastClick.y + canvasCoordinats.y)) * canvasSize.x)];
 			DrawColor = txGetPixel (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, canvas);
 			//DrawColor = RGB (pixel.rgbRed, pixel.rgbGreen, pixel.rgbBlue);
 			//printf ("%d\n", DrawColor);
 		}
-		if (DrawingMode == 4 && !nonConfirmBrightness)
+		if (DrawingMode == 4 && !nonConfirmFilter)
 		{
 			if (!isClicked) saveHistory ();
 			txSetAllColors (DrawColor, canvas);
