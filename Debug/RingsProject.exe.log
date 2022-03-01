@@ -19923,3 +19923,331 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13657, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "destImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00918738 (32-bit), Flags: CMdRe0, Thread: 0x7070 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x75B06739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77198E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77198E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13657):
+
+  13655:                HDC sourceImage, double xSource /*= 0*/, double ySource /*= 0*/, unsigned operation /*= SRCCOPY*/)
+  13656:     {
+=>13657: $1  if (_TX_HDC_FAILED (destImage))   return false;
+  13658: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13659: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2638):
+
+   2636: void Canvas::saveHistory ()
+   2637: {
+=> 2638: 	txBitBlt (history[currentHistoryNumber], 0, 0, 0, 0, canvas);
+   2639: 	historyOfDrawingMode[currentHistoryNumber] = DrawingMode;
+   2640: 	if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Feb 22 2022 21:47:19, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Feb 22 2022 21:47:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x0112A250.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x00B69A00.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x00B29700.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x01699018.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: after Normal block (#515) at 0x00A05C90.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x00A05C90 is 10433104 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E08784 (32-bit), Flags: CMdRe0, Thread: 0x6EF4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x761A6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77118E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77118E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2138):
+
+   2136: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2137: {
+=> 2138: 	txSetFillColor (color, dc); 
+   2139: 	txSetColor (color, thickness, dc);
+   2140: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar  1 2022 17:39:18, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar  1 2022 17:39:36
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E08784 (32-bit), Flags: CMdRe0, Thread: 0x278 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x761A6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77118E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77118E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2138):
+
+   2136: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2137: {
+=> 2138: 	txSetFillColor (color, dc); 
+   2139: 	txSetColor (color, thickness, dc);
+   2140: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar  1 2022 17:39:18, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar  1 2022 17:39:44
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00758784 (32-bit), Flags: CMdRe0, Thread: 0x7700 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x761A6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77118E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77118E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2139):
+
+   2137: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2138: {
+=> 2139: 	txSetFillColor (color, dc); 
+   2140: 	txSetColor (color, thickness, dc);
+   2141: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar  1 2022 17:41:19, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar  1 2022 17:41:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A28784 (32-bit), Flags: CMdRe0, Thread: 0x784C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x761A6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77118E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77118E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2140):
+
+   2138: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2139: {
+=> 2140: 	txSetFillColor (color, dc); 
+   2141: 	txSetColor (color, thickness, dc);
+   2142: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar  1 2022 17:42:36, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar  1 2022 17:42:39
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A28784 (32-bit), Flags: CMdRe0, Thread: 0x2020 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+#11 0x761A6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77118E7F in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77118E4D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2140):
+
+   2138: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2139: {
+=> 2140: 	txSetFillColor (color, dc); 
+   2141: 	txSetColor (color, thickness, dc);
+   2142: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar  1 2022 17:42:36, MSVS 1927, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar  1 2022 17:43:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#521) at 0x00A14EC8.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x00A14EC8 is 10292224 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()

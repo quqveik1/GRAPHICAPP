@@ -27,8 +27,9 @@ void compressImage(HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize, int li
 void clearDC(HDC dc, COLORREF color = TX_BLACK);
 void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
 void compressDraw(HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
-void txSetAllColors(COLORREF color, HDC dc = txDC());
+void txSetAllColors(COLORREF color, HDC dc = txDC(), int thickness = 1);
 void txSelectFontDC(const char* text, int size, HDC& dc);
+void copyAndDelete (HDC dest, HDC source);
 
 
 struct Image
@@ -49,6 +50,102 @@ struct CLoadManager
 };
 
 CLoadManager LoadManager;
+
+
+
+
+struct ToolSave
+{
+	Vector pos = {};
+	Vector size = {};
+	COLORREF color = NULL;
+	int thickness = NULL;  
+    const char *name;
+
+	ToolSave (Vector _pos, Vector _size, COLORREF _color, int _thickness, const char *_name) :
+		pos (_pos),
+		size (_size),
+		color (_color),
+		thickness (_thickness),
+        name (_name)
+	{}
+
+    ToolSave () :
+        name (NULL)
+    {}
+
+};
+
+struct Tool
+{
+    HDC dc;
+
+	const char* name;
+
+    Vector startPos = {};
+    bool workedLastTime = false;
+
+	Tool (const char* _name, HDC _dc = NULL) :
+		name (_name), 
+        dc (_dc)
+	{}
+
+
+    virtual bool use (Vector pos, COLORREF color, int thickness, HDC canvas, void* output, HDC tempDC){return true;};
+    virtual void load(void* output, HDC finalDC){};
+};
+
+
+
+struct Line : Tool
+{
+   
+	Line(const char* _name, HDC _dc) :
+		Tool(_name, _dc)
+	{
+	}
+
+
+	virtual bool use(Vector pos, COLORREF color, int thickness, HDC finalDC, void* output, HDC tempDC);
+	virtual void load(void* input, HDC finalDC);
+};
+
+struct Point : Tool 
+{
+    Point(const char* _name, HDC _dc) :
+		Tool(_name, _dc)
+	{
+	}
+
+
+	virtual bool use(Vector pos, COLORREF color, int thickness, HDC finalDC, void* output, HDC tempDC);
+	virtual void load(void* input, HDC finalDC);
+
+
+};
+
+struct CToolManager 
+{
+    const int ToolsLength = 10;
+    Tool **tools = new Tool* [ToolsLength];
+    int currentLength = 0;
+
+    void addTool (Tool *tool);
+};
+
+CToolManager ToolManager;
+
+
+struct CHistoryStep
+{
+	int toolsNum = 0;
+	Tool* tools;
+    void* toolsData = NULL;
+	int thickness = 1;
+};
+
+
+
 
 
 struct Manager;
@@ -83,7 +180,7 @@ struct Window
 	bool advancedMode;
 	bool reDraw;
 
-	Window (Rect _rect, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+    Window (Rect _rect = {}, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
 		rect (_rect),
 		color(_color),
 		manager (_manager),
@@ -103,10 +200,11 @@ struct Window
 		}
 
 		originalRect = rect;
-	}
+	} 
 
 
 	Vector getAbsCoordinats (bool coordinatsWithHandle = false);
+    Vector getRelativeMousePos (bool coordinatsWithHandle = false);
 	Rect getAbsRect (bool coordinatsWithHandle = false);
 	
 	void resize (Rect newSize);
@@ -162,9 +260,21 @@ struct Manager : Window
 struct ToolsPalette : Manager
 {
 	int lastSelected = 0;
+    
 	ToolsPalette (Rect _rect, int _length) :
 		Manager(_rect, _length, true, NULL, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, MenuColor, true)
 	{
+        Window *tools = new Window[ToolManager.currentLength];
+        for (int i = 0; i < ToolManager.currentLength; i++)
+        {
+            tools[i].rect = {.pos = {0, (double) i * 50}, .finishPos = {50, (double) (i + 1) * 50}};
+            tools[i].dc = ToolManager.tools[i]->dc;
+            tools[i].finalDC = txCreateDIBSection (tools[i].getSize().x, tools[i].getSize().y);
+            tools[i].originalRect = tools[i].rect;
+            //printBlt (tools[i].dc);
+            addWindow (&tools[i]);
+        }
+        
 	}
 
 	virtual void onClick() override;
@@ -394,12 +504,18 @@ struct Canvas : Manager
 	int currentLayersLength = 0;
 	int activeLayNum = 0;
 
-	const int HistoryLength = 10;
-	HDC *history = new HDC[HistoryLength]{};
+	const int HistoryLength = 100;
+	HDC lastSavedDC;
+	CHistoryStep* history = new CHistoryStep[HistoryLength];
+	int timeSavedHistory = 0;
+	//HDC *history = new HDC[HistoryLength]{};
 	int *historyOfDrawingMode = new int [HistoryLength]{};
 	int currentHistoryNumber = 0;
 	int currentHistoryLength = 0;
 	int timesShowedHistoryInRow = 0;
+
+    //Tool** tools = new Tool*[10];
+    bool activeTool = false;
 
 
 	Canvas (Rect _rect, HDC _closeDC = NULL) :
@@ -416,19 +532,19 @@ struct Canvas : Manager
 
 		tempFilterDC = txCreateDIBSection (canvasSize.x, canvasSize.y, &tempFilterDCArr);
 
-		for (int i = 0; i < 10; i++)
-		{
-			history[i] = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
-		}
+		lastSavedDC = txCreateDIBSection(canvasSize.x, canvasSize.y, &canvasArr);
 
 		filter = new Filter(canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, FilterAlgorithm);
-		//if (_algorithm) filter->algorithm = _algorithm;
+        
+
+        //tools[1] = line; 
 	}
 
 	void controlSize();
 	void controlSizeSliders ();
 	void saveHistory ();
-	void playHistory ();
+	HDC playHistoryDC (int stepBack);
+	void returnHistory(int stepsBack);
 	void deleteHistory ();
 	void createLay ();
 	bool controlLay ();
@@ -803,7 +919,12 @@ int main ()
 
 	//printfDCS ();
 	
-	
+	Line *line = new Line ((const char*) (1), LoadManager.loadImage ("Line.bmp"));
+    ToolManager.addTool (line); 
+    Point *point = new Point ((const char*) (2), LoadManager.loadImage ("Pen.bmp"));
+    ToolManager.addTool (point);
+
+
 	HDC addNewCanvasDC = {};
 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
@@ -833,9 +954,10 @@ int main ()
 	
 	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, 380}}, 5);
 	manager->addWindow (toolsPallete);
+    /*
 
-		Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, LoadManager.loadImage("Line.bmp"));
-		toolsPallete->addWindow(line);
+		 //Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, LoadManager.loadImage("Line.bmp"));
+		//toolsPallete->addWindow(line);
 
 		Window *gummi = new Window ({ .pos = {0, 50}, .finishPos = {50, 100}}, TX_WHITE, LoadManager.loadImage ("Gummi.bmp"));
 		toolsPallete->addWindow (gummi); 
@@ -853,7 +975,7 @@ int main ()
 
 	History *history = new History ({.pos = {1750, 500}, .finishPos = {1900, 944}}, canvasManager, toolsPallete);
 	manager->addWindow (history);
-
+    */
 
 	 
 	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, true, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
@@ -1509,7 +1631,7 @@ void ToolsPalette::draw()
 	for (int i = 0; i < newButtonNum; i++)
 	{
 		pointers[i]->draw();
-		//if (i == 4) printBlt (pointers[i]->finalDC);
+		//printBlt (pointers[i]->dc);
 		if (pointers[i]->advancedMode) txBitBlt(finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.finishPos.x, pointers[i]->rect.finishPos.y, pointers[i]->finalDC);
 		if (lastSelected == i)
 		{
@@ -1735,6 +1857,11 @@ void Manager::onClick ()
 	if (missClicked == true) activeWindow = NULL;
 }
 
+Vector Window::getRelativeMousePos (bool coordinatsWithHandle)
+{
+    return {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};    
+}
+
 Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)
 {
 	Vector coordinats = {};
@@ -1796,7 +1923,10 @@ HDC CLoadManager::loadImage(const char* path)
 		}
 	}
 
-	if (!newImage) return images[suitableDCNum].dc;
+	if (!newImage)
+	{
+		return images[suitableDCNum].dc;
+	}
 
 	
 	images[currentImagesAmount].dc = txLoadImage(path);
@@ -2020,10 +2150,10 @@ void engine (Manager *manager)
 	}
 }
 
-void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/)
+void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
 {
 	txSetFillColor (color, dc); 
-	txSetColor (color, 1, dc);
+	txSetColor (color, thickness, dc);
 }
 
 void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
@@ -2162,16 +2292,7 @@ void History::onClick ()
 						if (canvasManager->activeCanvas->currentHistoryNumber < 0) canvasManager->activeCanvas->currentHistoryNumber += 9;
 						canvasManager->activeCanvas->currentHistoryLength -= (i);
 
-						if (i != 0)canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber];
-						if (test1)
-						{
-							for (int i = 0; i < 10; i++)
-							{
-								printf ("%d\n", i);
-								printBlt (canvasManager->activeCanvas->history[i]);
-							}
-
-						}
+						//if (i != 0)canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber];
 					}
 
 			}
@@ -2446,11 +2567,11 @@ void Canvas::draw ()
 	txSetAllColors (BackgroundColor, finalDC);
 	if (!nonConfirmFilter)
 	{
-		txRectangle(0, 0, 3000, 3000, finalDC);
+		txRectangle (0, 0, 3000, 3000, finalDC);
 	}
 	if (nonConfirmFilter && reCountEnded)
 	{
-		txRectangle(0, 0, 3000, 3000, finalDC);
+		txRectangle (0, 0, 3000, 3000, finalDC);
 	}
 
 	if (!nonConfirmFilter)
@@ -2464,6 +2585,7 @@ void Canvas::draw ()
 
 
 
+
 	
 
 	scrollBarVert.draw ();
@@ -2472,6 +2594,15 @@ void Canvas::draw ()
 	txBitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
 
 	controlFilter();
+
+    if (activeTool)
+    {
+        if (history[currentHistoryNumber - 1].tools->use (getRelativeMousePos() - canvasCoordinats, DrawColor, lineThickness, canvas, history[currentHistoryNumber - 1].toolsData, finalDC))
+        {
+            activeTool = false;
+        }
+    }
+
 
 	if (txGetAsyncKeyState('Q'))
 	{
@@ -2482,21 +2613,31 @@ void Canvas::draw ()
 	if (txGetAsyncKeyState ('Z')) 
 	{
 		endtillkey ('Z');
-		playHistory ();
+		//playHistory ();
+		returnHistory(1);
 	}
-	drawLay();
+	//drawLay();
+
+    if (txGetAsyncKeyState ('2'))
+    {
+        DrawingMode = 2;
+    }
 
 	
 	if (manager->activeWindow != this) wasClicked = false;
 
-
+     /*
 	if (txMouseButtons () == 2 && wasClicked)
 	{
-		saveHistory ();
-		txSetAllColors (DrawColor, canvas);
-		txSetColor (DrawColor, lineThickness, canvas);
-		txLine (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, txMouseX () - getAbsCoordinats().x + canvasCoordinats.x, txMouseY () - getAbsCoordinats().y + canvasCoordinats.y, canvas);
+        
+		//txSetColor (DrawColor, lineThickness, canvas);
+		//txLine (lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y, txMouseX () - getAbsCoordinats().x + canvasCoordinats.x, txMouseY () - getAbsCoordinats().y + canvasCoordinats.y, canvas);
 		wasClicked = false;
+
+        if (currentHistoryLength < HistoryLength - 1) currentHistoryLength++;
+
+        timesShowedHistoryInRow = 0;
+
 	}
 
 	if (wasClicked && manager->activeWindow != this) wasClicked = false;
@@ -2506,7 +2647,7 @@ void Canvas::draw ()
 		txSetAllColors (DrawColor, finalDC);
 		txSetColor (DrawColor, lineThickness, finalDC);
 		txLine (lastClick.x, lastClick.y, txMouseX () - getAbsCoordinats().x, txMouseY () - getAbsCoordinats().y, finalDC);
-	}
+	}  */
 
 	if (clearBackground)
 	{
@@ -2529,6 +2670,31 @@ void Canvas::draw ()
 	drawOnFinalDC(closeCanvas);
 
 	
+}
+
+void Canvas::returnHistory (int stepsBack)
+{
+	//if (!(stepsBack <= currentHistoryLength)) return;   !!!
+	//HDC historyDC = playHistoryDC();
+    //printfDCS ();
+	copyAndDelete(canvas, playHistoryDC (stepsBack));
+    //txDeleteDC (hdc);
+    //printfDCS ();
+	currentHistoryNumber -= stepsBack;
+	if (currentHistoryNumber < 0) currentHistoryNumber += HistoryLength;
+	if (!(timeSavedHistory >= HistoryLength))
+	{
+		currentHistoryLength--;
+	}	
+
+	timeSavedHistory--;
+
+}
+
+void copyAndDelete (HDC dest, HDC source)
+{
+    copyDC (dest, source);
+    txDeleteDC (source);
 }
  
 void Canvas::controlFilter ()
@@ -2635,21 +2801,41 @@ int min (int a, int b)
 
 void Canvas::saveHistory ()
 {
-	txBitBlt (history[currentHistoryNumber], 0, 0, 0, 0, canvas);
-	historyOfDrawingMode[currentHistoryNumber] = DrawingMode;
+	//txBitBlt (history[currentHistoryNumber], 0, 0, 0, 0, canvas);
+	timeSavedHistory++;
 	if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
 	else currentHistoryNumber = 0;
+    //printf ("%d %d\n ", currentHistoryNumber, (currentHistoryNumber < HistoryLength - 1));
 
-	if (currentHistoryLength < HistoryLength) currentHistoryLength++; 
+    currentHistoryLength++;
 
-	timesShowedHistoryInRow = 0;
+	
+	if (timeSavedHistory > HistoryLength - 1)
+	{
+		int newLastStep = currentHistoryNumber;
+		if (newLastStep >= HistoryLength)
+		{
+			newLastStep = 0;
+		}
+		lastSavedDC = playHistoryDC(9);
+		printBlt(lastSavedDC);
+	}
+	
+	//history[addNewHistoryNum].toolsNum = DrawingMode;
+	//history[addNewHistoryNum].pos = {lastClick.x + canvasCoordinats.x,  lastClick.y + canvasCoordinats.y};
+	//history[addNewHistoryNum].size = size;
+	//history[addNewHistoryNum].color = DrawColor;
+	//history[addNewHistoryNum].thickness = lineThickness;
+	
+	
+	
 }
 
 void Canvas::deleteHistory ()
 {
 	for (int i = 0; i < HistoryLength; i++)
 	{
-		smartDeleteDC (history[i]);
+		//smartDeleteDC (history[i]);
 	}
 }
 
@@ -2793,6 +2979,18 @@ void Lay::line (int x0, int y0, int x1, int y1, double t)
 */
 
 
+void CToolManager::addTool (Tool *tool)
+{
+    assert (tool);
+    if (currentLength < ToolsLength - 1)
+    {
+        tools[currentLength] = tool;
+        currentLength++;    
+    }
+
+}
+
+
 void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor) 
 {
 	
@@ -2842,6 +3040,76 @@ void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor)
 		}
 	}
 }
+
+bool Point::use (Vector pos, COLORREF color, int thickness, HDC finalDC, void* output, HDC tempDC)
+{
+    if (!workedLastTime)
+    {
+        workedLastTime = true;
+        startPos = pos;
+    }
+    txSetAllColors(color, tempDC, thickness);
+	txEllipse (pos.x - thickness, pos.y - thickness, pos.x + thickness, pos.y + thickness, tempDC);
+
+    ToolSave saveTool (pos, {(double)thickness, (double)thickness}, color, thickness, (const char*)2);
+
+	*(ToolSave*)output = saveTool;
+
+    //printf ("1");
+    
+    if (txMouseButtons () != 1 || pos != startPos) 
+    {
+        txSetAllColors(color, finalDC, thickness);
+	    txEllipse (pos.x - thickness, pos.y - thickness, pos.x + thickness, pos.y + thickness, finalDC);
+
+        workedLastTime = false;
+        return true;
+    }
+
+    return false;
+}
+
+void Point::load (void* input, HDC finalDC)
+{
+    ToolSave* toolDate = (ToolSave*)input;
+    txSetAllColors (toolDate->color, finalDC, toolDate->thickness);
+	txEllipse (toolDate->pos.x - toolDate->size.x, toolDate->pos.y - toolDate->size.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+}
+
+bool Line::use (Vector pos, COLORREF color, int thickness, HDC finalDC, void* output, HDC tempDC)
+{
+    if (!workedLastTime) 
+    {
+        startPos = pos;
+        workedLastTime = true;
+    }
+	txSetAllColors(color, tempDC, thickness);
+	txLine (startPos.x, startPos.y, pos.x, pos.y, tempDC);
+
+    if (txMouseButtons () == 2)
+    {
+        txSetAllColors(color, finalDC, thickness);
+	    txLine (startPos.x, startPos.y, pos.x, pos.y, finalDC);
+        ToolSave saveTool (startPos, pos - startPos, color, thickness, (const char*)1);
+
+	    *(ToolSave*)output = saveTool;
+
+       // printf ("1");
+        workedLastTime = false;
+        return true;
+
+    }
+    return false;
+}
+
+void Line::load (void* input, HDC finalDC)
+{
+	ToolSave* toolDate = (ToolSave*)input;
+    txSetAllColors (toolDate->color, finalDC, toolDate->thickness);
+	txLine (toolDate->pos.x, toolDate->pos.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+
+}
+
 
 void Lay::circle (int x0, int y0, int r)
 {
@@ -2909,24 +3177,54 @@ void Canvas::createLay ()
 	
 }
 
-void Canvas::playHistory ()
+HDC Canvas::playHistoryDC (int stepBack)
 {
+	/*
 	if (timesShowedHistoryInRow == HistoryLength) return;
 	if (currentHistoryLength <= 1) return; 
 	if (currentHistoryNumber > 0)
 	{
-		canvas = history[--currentHistoryNumber];
+		//canvas = history[--currentHistoryNumber];
 		currentHistoryLength--;
 	}
 	else 
 	{
 		currentHistoryNumber = HistoryLength;
-		canvas = history[--currentHistoryNumber];
+		//canvas = history[--currentHistoryNumber];
 		currentHistoryLength;
 		
+	}			  */
+	HDC historyDC = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
+
+	if (stepBack <= currentHistoryLength && stepBack < HistoryLength)
+	{
+		txBitBlt(historyDC, 0, 0, 0, 0, lastSavedDC);
+		//printBlt(lastSavedDC);
+
+		for (int i = 0; i < currentHistoryLength - stepBack; i++)
+		{
+			int pos;
+			if (currentHistoryLength == HistoryLength - 1)  pos = currentHistoryNumber + 1 + i;
+			if (currentHistoryLength < HistoryLength - 1) pos = currentHistoryNumber - 2 - i;
+			if (pos >= HistoryLength) pos -= HistoryLength;
+
+			//txSetAllColors(history[pos].color, historyDC, history[pos].thickness);
+            history[pos].tools->load (history[pos].toolsData, historyDC);
+			if (history[pos].toolsNum == 1)
+			{
+				//txLine(history[pos].pos.x, history[pos].pos.y, history[pos].size.x, history[pos].size.y, historyDC);
+			} 
+			if (history[pos].toolsNum == 4)
+			{
+				//txLine(history[pos].pos.x, history[pos].pos.y, history[pos].size.x, history[pos].size.y, lastSavedDC);
+				//txEllipse (history[pos].pos.x - history[pos].size.x, history[pos].pos.y - history[pos].size.y, history[pos].pos.x + history[pos].size.x, history[pos].pos.y + history[pos].size.y, historyDC);
+			}
+		}
 	}
+	
 
 	timesShowedHistoryInRow++;
+	return	historyDC;
 }
 
 void Canvas::deleteButton ()
@@ -2987,14 +3285,15 @@ void Canvas::onClick ()
 			return;
 		}
 
-		if (DrawingMode == 1 && !nonConfirmFilter) wasClicked = true;
+		//if (DrawingMode == 1 && !nonConfirmFilter) wasClicked = true;
 	}
 
-	if (controlLay ()) return;
+	//if (controlLay ()) return;
 	
+    /*
 		if (DrawingMode == 2 && !nonConfirmFilter)
 		{
-			if (!isClicked) saveHistory ();
+			// saveHistory({20, 20});
 			txSetAllColors(BackgroundColor, canvas);
 			txEllipse(lastClick.x + canvasCoordinats.x - 20, lastClick.y + canvasCoordinats.y - 20, lastClick.x + canvasCoordinats.x + 20, lastClick.y + canvasCoordinats.y + 20, canvas);
 		}
@@ -3008,11 +3307,29 @@ void Canvas::onClick ()
 		}
 		if (DrawingMode == 4 && !nonConfirmFilter)
 		{
-			if (!isClicked) saveHistory ();
-			txSetAllColors (DrawColor, canvas);
-			txEllipse (lastClick.x + canvasCoordinats.x - 5, lastClick.y + canvasCoordinats.y - 5, lastClick.x + 5 + canvasCoordinats.x, lastClick.y + canvasCoordinats.y + 5, canvas);
-		}
+			//saveHistory({20, 20});
+			//txSetAllColors (DrawColor, canvas);
 
+			//txEllipse (lastClick.x + canvasCoordinats.x - 5, lastClick.y + canvasCoordinats.y - 5, lastClick.x + 5 + canvasCoordinats.x, lastClick.y + canvasCoordinats.y + 5, canvas);
+		}
+    */
+    if (!activeTool)
+    {
+        saveHistory();
+	    txSetAllColors (DrawColor, canvas);
+       // int addNewHistoryNum = currentHistoryNumber - 1;
+	    //if (addNewHistoryNum < 0) addNewHistoryNum += 10;
+        //history[addNewHistoryNum].tools = tools[1];
+        //assert (history[addNewHistoryNum].tools);
+        history[currentHistoryNumber - 1].tools = ToolManager.tools[DrawingMode - 1];
+        history[currentHistoryNumber - 1].toolsData = new ToolSave ();
+        activeTool = true;
+        if (history[currentHistoryNumber - 1].tools->use ({lastClick.x + canvasCoordinats.x, lastClick.y + canvasCoordinats.y}, DrawColor, lineThickness, canvas, history[currentHistoryNumber - 1].toolsData, finalDC))
+        {
+            activeTool = false;
+        }
+    }
+    
 }
 
 void ColorButton::onClick ()
