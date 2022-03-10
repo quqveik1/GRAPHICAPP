@@ -14,6 +14,7 @@ int MainFont = 20;
 const int HANDLEHEIGHT = 26;
 const int MENUBUTTONSWIDTH = 50;
 const int SIDETHICKNESS = 3;
+int GummiThickness = 10;
 
 int DrawingMode = 1;
 const int TOOLSNUM = 5;

@@ -20251,3 +20251,15 @@ HEAP CORRUPTION DETECTED: after Normal block (#521) at 0x00A14EC8.
 CRT detected that the application wrote to memory after end of heap buffer.
 Normal located at 0x00A14EC8 is 10292224 bytes long.
 minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#531) at 0x017026F8.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x017026F8 is 8 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: before DAMAGED block (#128) at 0x011415E0.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#16711680) at 0x00FA3DA8.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#128) at 0x012255F0.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#128) at 0x00FC42B0.
+CRT detected that the application wrote to memory before start of heap buffer.
