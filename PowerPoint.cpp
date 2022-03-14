@@ -105,12 +105,12 @@ struct ToolSave : ToolData
 
 struct PointSave : ToolData 
 {
-    int Length = 100;
+    int Length = POINTSAVELENGTH;
     int currentLength = 0;
     ToolSave *points = new ToolSave [Length]{};
 
 
-    PointSave (int _Length = 100) :
+    PointSave (int _Length = POINTSAVELENGTH) :
         Length (_Length)
     {
     }
@@ -354,7 +354,7 @@ struct ToolsPalette : Manager
 	int lastSelected = 0;
     
 	ToolsPalette (Rect _rect, int _length) :
-		Manager(_rect, _length, true, NULL, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, MenuColor, true)
+		Manager(_rect, _length, false, NULL, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, MenuColor, true)
 	{
         Window *tools = new Window[ToolManager.currentLength];
         for (int i = 0; i < ToolManager.currentLength; i++)
@@ -714,17 +714,17 @@ struct CleanButton : Window
 
 struct CanvasManager : Manager 
 {
-	Window newCanvas;
+	//Window newCanvas;
 	HDC closeCanvasButton;
 	Vector sizeOfNewCanvas;
 	Canvas *activeCanvas = NULL; 
 	ProgressBar* bar;
+    bool addNewCanvas = false;
 	//bool (*reCount)(Filter& filter, int screenSize, bool confirmSecondFilterValue, double SecondFilterValue, double FirstFilterValue);
 
 
 	CanvasManager (Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar) :
 		Manager (_rect, 10, true, NULL, {}, TX_BLACK),
-		newCanvas ({.pos = {0, 700}, .finishPos = {50, 750}}, TX_WHITE, _NewCanvasDC), 
 		sizeOfNewCanvas ({500, 500}), 
 		bar (_bar)
 	{
@@ -808,7 +808,7 @@ struct OpenManager : Window
 	Manager *manager;
 
 	OpenManager (Rect _rect, COLORREF _color, Manager *_manager, HDC _dc = NULL, const char *_text = "")	:
-		Window (_rect, _color, _dc),
+		Window (_rect, _color, _dc, NULL, _text),
 		manager (_manager)
 	{}
 
@@ -926,7 +926,7 @@ struct ContrastMenu : Manager
 	RGBQUAD(*algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue);
 
 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
-		Manager (_rect, 3, true, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
@@ -956,6 +956,23 @@ struct StatusBar : Manager
 	virtual void draw() override;
 };
 
+struct TouchButton : Window
+{
+    bool *flag = NULL;
+
+    TouchButton (Rect _rect, HDC _dc, bool *_flag) :
+        Window (_rect, MenuColor, _dc),
+        flag (_flag)
+    {
+    }
+
+    virtual void onClick () override;
+};
+
+struct List : Manager
+{
+};
+
 bool IsRunning = true;
 int Radius = 2;
 int SLEEPTIME = 30;
@@ -978,34 +995,6 @@ int main ()
 	//_txWindowStyle &= ~WS_CAPTION;
 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
-    //double x = 10;
-    //printf ("%d", sizeof(x));
-	/*
-	Lay lay;
-	lay.createLay ();
-	lay.line (0, 0, 1000, 1000);
-	lay.line (10, 0, 10, 1000);
-	lay.circle (100, 100, 20);
-	RGBQUAD *buff;	*/
-	//HDC outDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &buff);
-	//bitBlt (buff, 100, 100, DCMAXSIZE, DCMAXSIZE, lay.layBuf);
-	//txBitBlt (0, 0, outDC);
-	//stop;
-	
-	//txSelectFont ("Arial", 3, 1);
-
-	//TestPhoto = LoadManager.loadImage ("TestPhoto.bmp");
-
-	//txBitBlt (TestPhoto, 1000, 1000, 0, 0, TestPhoto);
-
-	//compressImage (TestPhoto, {100, 100}, {1200, 727});
-
-	//printBlt (TestPhoto);
-
-	//stop;
-
-	
-
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 10, true, NULL, {}, TX_RED);
 
 	//printfDCS ();
@@ -1017,7 +1006,7 @@ int main ()
 	
 	Line *line = new Line ((const char*) (1), sizeof (ToolSave), LoadManager.loadImage ("Line.bmp"));
     ToolManager.addTool (line); 
-    Point *point = new Point ((const char*) (2), sizeof (PointSave) + sizeof (ToolSave) * 100, LoadManager.loadImage ("Pen.bmp"));
+    Point *point = new Point ((const char*) (2), sizeof (PointSave) + sizeof (ToolSave) * POINTSAVELENGTH, LoadManager.loadImage ("Pen.bmp"));
     ToolManager.addTool (point);
     Vignette *vignette = new Vignette ((const char*) (3), sizeof (ColorSave), LoadManager.loadImage ("Vignette.bmp"));
     ToolManager.addTool (vignette);
@@ -1038,13 +1027,17 @@ int main ()
 		statusBar->timeButton = new TimeButton({.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
 	
-
+   
 
 
 	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar);
 	manager->addWindow (canvasManager);
 
-	manager->addWindow(statusBar);
+    manager->addWindow(statusBar);
+
+
+
+	
 	
 	//canvasManager->deleteButton();
 
@@ -1054,8 +1047,8 @@ int main ()
 	//printfDCS ();
 
 	
-	ToolsPalette *toolsPallete = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, TOOLSNUM * 50 + HANDLEHEIGHT + 100}}, 5);
-	manager->addWindow (toolsPallete);
+	ToolsPalette *toolsPallette = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, TOOLSNUM * 50 + HANDLEHEIGHT + 100}}, 5);
+	manager->addWindow (toolsPallette);
     /*
 
 		 //Window* line = new Window({ .pos = {0, 0}, .finishPos = {50, 50} }, TX_WHITE, LoadManager.loadImage("Line.bmp"));
@@ -1080,7 +1073,7 @@ int main ()
     */
 
 	 
-	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, true, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
 	Manager *colorManager = new Manager({.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
@@ -1098,14 +1091,49 @@ int main ()
 		OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
 		menu->addWindow (openManager);	
 	
+     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+	assert(library);
+
+    ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+	manager->addWindow(contrastMenu);  
+	
+	ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
+	manager->addWindow(brightnessMenu);
+
+    Manager *openWindows = new Manager ({.pos = {BUTTONWIDTH, HANDLEHEIGHT}, .finishPos = {BUTTONWIDTH * 5, 500}}, 4, false);   
+    manager->addWindow (openWindows);
+        
 
 	
 
 	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 3, true, NULL, {}, RGB(45, 45, 45));
-	manager->addWindow(mainhandle);
+	
 
-		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - 50, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - BUTTONWIDTH, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
+
+        TouchButton *addNewCanvas = new TouchButton({.pos = {0, 0}, .finishPos = {BUTTONWIDTH, HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), &canvasManager->addNewCanvas);
+		mainhandle->addWindow(addNewCanvas);
+
+        OpenManager *openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenNewWindows.bmp"));
+        mainhandle->addWindow(openWindowsManager);
+
+    manager->addWindow(mainhandle);
+
+    openWindows->rect = {.pos = {openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y}, .finishPos = {BUTTONWIDTH * 5, 300} };   
+    manager->addWindow (openWindows);
+
+         OpenManager *colorMenu = new OpenManager ({ .pos = {0, 0}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT} }, MenuColor, menu, NULL, "Цвет");
+         openWindows->addWindow (colorMenu);
+
+         OpenManager *contrastFilter = new OpenManager ({ .pos = {0, HANDLEHEIGHT}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 2} }, MenuColor, contrastMenu, NULL, "Контрастный фильтр");
+         openWindows->addWindow (contrastFilter);  
+
+         OpenManager *brightnessFilter = new OpenManager ({ .pos = {0, HANDLEHEIGHT * 2}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 3} }, MenuColor, brightnessMenu, NULL, "Фильтр яркости");
+         openWindows->addWindow (brightnessFilter);
+
+         OpenManager *tools = new OpenManager ({ .pos = {0, HANDLEHEIGHT * 3}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 4} }, MenuColor, toolsPallette, NULL, "Инструменты");
+         openWindows->addWindow (tools);
 	  
 	 
 	 /*
@@ -1116,15 +1144,10 @@ int main ()
 	manager->addWindow(brightnessButton);
 	*/
 	
-	HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
-	assert(library);
+	
 	//algorithm = (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter");
 	//assert(algorithm);
-	ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
-	manager->addWindow(contrastMenu);  
 	
-	ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
-	manager->addWindow(brightnessMenu);
 															  
 	
 	   
@@ -1211,6 +1234,12 @@ void StatusBar::draw()
 
 	txBitBlt(finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
 
+}
+
+
+void TouchButton::onClick ()
+{
+    if (!isClicked) *flag = true;
 }
 
 void txSelectFontDC(const char* text, int size, HDC &dc)
@@ -2221,14 +2250,13 @@ void OpenManager::draw()
 	txSetAllColors (color, finalDC);
 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 	//if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
-	txBitBlt (finalDC, 0, 0, 0, 0, dc);
+	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
+    if (!dc) txRectangle (0, 0, getSize().x, getSize().y, finalDC);
 
-	txSetTextAlign (TA_CENTER);
-		txSetAllColors (TX_GRAY);
+	txSetTextAlign (TA_LEFT, finalDC);
+	txSetAllColors (TextColor, finalDC, MainFont);
 		//txSelectFont ("Arial", 40);
-		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
-					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 10, 
-					text);
+	txTextOut (0, 0,  text, finalDC);
 }
 
 void engine (Manager *manager)
@@ -2537,20 +2565,13 @@ void CanvasManager::draw ()
 	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
 
-
-	//bar
-
-
-	//if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
 	if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
-	if (newCanvas.isClicked)
+	if (addNewCanvas)
 	{
 		addWindow(new Canvas({ .pos = {100, 50}, .finishPos = {600, 500 + 50} }, closeCanvasButton));
-		newCanvas.isClicked = false;
+        addNewCanvas = false;
 	}
-	
-	newCanvas.draw();
-	txBitBlt(finalDC, newCanvas.rect.pos.x, newCanvas.rect.pos.y, newCanvas.rect.getSize().x, newCanvas.rect.getSize().y, newCanvas.finalDC);
+
 
 
 	for (int i = 0; i < newButtonNum; i++)
@@ -2587,18 +2608,6 @@ void CanvasManager::onClick()
 			handle.isClicked = true;
 		}
 
-		if (newCanvas.getAbsRect().inRect (mx, my) && !newCanvas.isClicked && !isClicked)
-		{
-			newCanvas.isClicked = true;
-			missClicked = false;
-		}
-		else
-		{
-			newCanvas.isClicked = false;
-
-			missClicked = true;
-		}
-
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
 			if (pointers[i]->getAbsRect().inRect(mx, my))
@@ -2631,7 +2640,7 @@ void CanvasManager::onClick()
 
 void CanvasManager::deleteButton()
 {
-	newCanvas.deleteButton();
+	//newCanvas.deleteButton();
 	smartDeleteDC (closeCanvasButton);
 
 	for (int i = 0; i < length; i++)

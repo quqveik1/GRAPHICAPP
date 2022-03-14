@@ -12,6 +12,7 @@ COLORREF DrawColor = TX_RED;
 int MainFont = 20;
 
 const int HANDLEHEIGHT = 26;
+const int BUTTONWIDTH = 50;
 const int MENUBUTTONSWIDTH = 50;
 const int SIDETHICKNESS = 3;
 int GummiThickness = 10;
@@ -27,6 +28,8 @@ int test1 = 0 ;
 //double Brightness = 0;
 double FirstFilterValue = 0;
 double SecondFilterValue = 0;
+
+int POINTSAVELENGTH = 100;
 
 
 bool confirmFilter = false;
