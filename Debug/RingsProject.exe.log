@@ -20523,3 +20523,1020 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D85864 (32-bit), Flags: CMdRe0, Thread: 0x2D20 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D50C6D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00D4EC22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345)
+
+# 2 0x00D2DC04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2310):
+
+   2308: {
+   2309: 	$s
+=> 2310: 	txSetAllColors (color, finalDC);
+   2311: 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+   2312: 	//if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
+
+# 3 0x00D2CDA1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1218):
+
+   1216: 	for (int i = 0; i < newButtonNum; i++)
+   1217: 	{
+=> 1218: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1219:  		if (pointers[i]->advancedMode) 
+   1220: 		{
+
+# 4 0x00D2D3C1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1912):
+
+   1910: 	for (int i = 0; i < newButtonNum; i++)
+   1911: 	{
+=> 1912: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1913:  		if (pointers[i]->advancedMode) 
+   1914: 		{
+
+# 5 0x00D34185 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2329):
+
+   2327: 		txSetAllColors (BackgroundColor);
+   2328: 		txRectangle (0, 0, 2000, 2000);
+=> 2329: 		manager->draw ();
+   2330: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2331: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00D59049 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1160):
+
+   1158: 
+   1159: 
+=> 1160: 	engine (manager);
+   1161: 
+   1162: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345):
+
+   2343: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2344: {
+=> 2345: 	txSetFillColor (color, dc); 
+   2346: 	txSetColor (color, thickness, dc);
+   2347: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 20:09:57, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 20:10:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00455864 (32-bit), Flags: CMdRe0, Thread: 0x4744 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00420C6D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x0041EC22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345)
+
+# 2 0x003FDC04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2310):
+
+   2308: {
+   2309: 	$s
+=> 2310: 	txSetAllColors (color, finalDC);
+   2311: 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+   2312: 	//if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
+
+# 3 0x003FCDA1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1218):
+
+   1216: 	for (int i = 0; i < newButtonNum; i++)
+   1217: 	{
+=> 1218: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1219:  		if (pointers[i]->advancedMode) 
+   1220: 		{
+
+# 4 0x003FD3C1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1912):
+
+   1910: 	for (int i = 0; i < newButtonNum; i++)
+   1911: 	{
+=> 1912: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1913:  		if (pointers[i]->advancedMode) 
+   1914: 		{
+
+# 5 0x00404185 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2329):
+
+   2327: 		txSetAllColors (BackgroundColor);
+   2328: 		txRectangle (0, 0, 2000, 2000);
+=> 2329: 		manager->draw ();
+   2330: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2331: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x0042903A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1160):
+
+   1158: 
+   1159: 
+=> 1160: 	engine (manager);
+   1161: 
+   1162: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345):
+
+   2343: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2344: {
+=> 2345: 	txSetFillColor (color, dc); 
+   2346: 	txSetColor (color, thickness, dc);
+   2347: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 20:10:26, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 20:10:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00875864 (32-bit), Flags: CMdRe0, Thread: 0x5AB4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00840C6D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x0083EC22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345)
+
+# 2 0x0081DC04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2310):
+
+   2308: {
+   2309: 	$s
+=> 2310: 	txSetAllColors (color, finalDC);
+   2311: 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+   2312: 	//if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
+
+# 3 0x0081CDA1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1218):
+
+   1216: 	for (int i = 0; i < newButtonNum; i++)
+   1217: 	{
+=> 1218: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1219:  		if (pointers[i]->advancedMode) 
+   1220: 		{
+
+# 4 0x0081D3C1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1912):
+
+   1910: 	for (int i = 0; i < newButtonNum; i++)
+   1911: 	{
+=> 1912: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1913:  		if (pointers[i]->advancedMode) 
+   1914: 		{
+
+# 5 0x00824185 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2329):
+
+   2327: 		txSetAllColors (BackgroundColor);
+   2328: 		txRectangle (0, 0, 2000, 2000);
+=> 2329: 		manager->draw ();
+   2330: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2331: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00849040 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1160):
+
+   1158: 
+   1159: 
+=> 1160: 	engine (manager);
+   1161: 
+   1162: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345):
+
+   2343: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2344: {
+=> 2345: 	txSetFillColor (color, dc); 
+   2346: 	txSetColor (color, thickness, dc);
+   2347: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 20:10:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 20:10:56
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13389, функция: bool __cdecl `anonymous-namespace'::TX::txTextOut(double,double,const char [],struct HDC__ *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "text".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00826874 (32-bit), Flags: CMdRe0, Thread: 0x5A18 (Main), GetLastError(): 160 (Неверны один или несколько аргументов). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007F4440 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txTextOut() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13389)
+
+# 1 0x007CDF4F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2324):
+
+   2322: 	txSetAllColors (TextColor, finalDC, MainFont);
+   2323: 		//txSelectFont ("Arial", 40);
+=> 2324: 	txTextOut (0, 0,  text, finalDC);
+   2325: }
+   2326: 
+
+# 2 0x007CCE01 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1219):
+
+   1217: 	for (int i = 0; i < newButtonNum; i++)
+   1218: 	{
+=> 1219: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1220:  		if (pointers[i]->advancedMode) 
+   1221: 		{
+
+# 3 0x007CD421 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1917):
+
+   1915: 	for (int i = 0; i < newButtonNum; i++)
+   1916: 	{
+=> 1917: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1918:  		if (pointers[i]->advancedMode) 
+   1919: 		{
+
+# 4 0x007D41E5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2334):
+
+   2332: 		txSetAllColors (BackgroundColor);
+   2333: 		txRectangle (0, 0, 2000, 2000);
+=> 2334: 		manager->draw ();
+   2335: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2336: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 5 0x007F9A18 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1161):
+
+   1159: 
+   1160: 
+=> 1161: 	engine (manager);
+   1162: 
+   1163: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txTextOut(double,double,const char [],struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13389):
+
+  13387: bool txTextOut (double x, double y, const char text[], HDC dc /*= txDC()*/)
+  13388:     {
+=>13389: $1  if (_TX_ARGUMENT_FAILED    (text)) return false;
+  13390: $   if (_TX_DEFAULT_HDC_FAILED (dc))   return false;
+  13391: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2324):
+
+   2322: 	txSetAllColors (TextColor, finalDC, MainFont);
+   2323: 		//txSelectFont ("Arial", 40);
+=> 2324: 	txTextOut (0, 0,  text, finalDC);
+   2325: }
+   2326: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 20:15:00, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 20:15:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2746, функция: void __thiscall Canvas::draw(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "canvas".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00185874 (32-bit), Flags: CMdRe0, Thread: 0x6F18 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001275A2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2746):
+
+   2744: void Canvas::draw ()
+   2745: {
+=> 2746: 	assert (canvas);
+   2747: 	txSetAllColors (BackgroundColor, finalDC);
+   2748: 	if (!nonConfirmFilter)
+
+# 1 0x00128CE0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2648):
+
+   2646: 	for (int i = 0; i < newButtonNum; i++)
+   2647: 	{
+=> 2648: 		pointers[i]->draw ();
+   2649: 
+   2650:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 2 0x0012D621 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1918):
+
+   1916: 	for (int i = 0; i < newButtonNum; i++)
+   1917: 	{
+=> 1918: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1919:  		if (pointers[i]->advancedMode) 
+   1920: 		{
+
+# 3 0x00133B85 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2341):
+
+   2339: 		txSetAllColors (BackgroundColor);
+   2340: 		txRectangle (0, 0, 2000, 2000);
+=> 2341: 		manager->draw ();
+   2342: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2343: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 4 0x001593C8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1156):
+
+   1154: 
+   1155: 
+=> 1156: 	engine (manager);
+   1157: 
+   1158: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:25:32, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:25:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2746, функция: void __thiscall Canvas::draw(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "canvas".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D95874 (32-bit), Flags: CMdRe0, Thread: 0x754C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D375F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2746):
+
+   2744: void Canvas::draw ()
+   2745: {
+=> 2746: 	assert (canvas);
+   2747: 	txSetAllColors (BackgroundColor, finalDC);
+   2748: 	if (!nonConfirmFilter)
+
+# 1 0x00D38D60 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2648):
+
+   2646: 	for (int i = 0; i < newButtonNum; i++)
+   2647: 	{
+=> 2648: 		pointers[i]->draw ();
+   2649: 
+   2650:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 2 0x00D3D6A1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1918):
+
+   1916: 	for (int i = 0; i < newButtonNum; i++)
+   1917: 	{
+=> 1918: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1919:  		if (pointers[i]->advancedMode) 
+   1920: 		{
+
+# 3 0x00D43C05 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2341):
+
+   2339: 		txSetAllColors (BackgroundColor);
+   2340: 		txRectangle (0, 0, 2000, 2000);
+=> 2341: 		manager->draw ();
+   2342: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2343: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 4 0x00D69448 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1156):
+
+   1154: 
+   1155: 
+=> 1156: 	engine (manager);
+   1157: 
+   1158: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:27:28, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:27:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00885874 (32-bit), Flags: CMdRe0, Thread: 0x75F0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00850FCD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x0084EF82 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2357)
+
+# 2 0x00837A98 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (3592):
+
+   3590:     {
+   3591:         saveHistory();
+=> 3592: 	    txSetAllColors (DrawColor, canvas);
+   3593:        // int addNewHistoryNum = currentHistoryNumber - 1;
+   3594: 	    //if (addNewHistoryNum < 0) addNewHistoryNum += 10;
+
+# 3 0x00838055 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2687):
+
+   2685: 				activeCanvas = (Canvas*)pointers[i];
+   2686: 				//bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
+=> 2687: 				pointers[i]->onClick();
+   2688: 				pointers[i]->isClicked = true;
+   2689: 
+
+# 4 0x00838E31 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2038):
+
+   2036: 			{
+   2037: 				activeWindow = pointers[i];
+=> 2038: 				pointers[i]->onClick ();
+   2039: 				pointers[i]->isClicked = true;
+   2040: 
+
+# 5 0x00833DA0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2345):
+
+   2343: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+   2344: 		{
+=> 2345: 			manager->onClick ();
+   2346: 			if (!IsRunning) break;
+   2347: 		}
+
+# 6 0x008593B8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1156):
+
+   1154: 
+   1155: 
+=> 1156: 	engine (manager);
+   1157: 
+   1158: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2357):
+
+   2355: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+   2356: {
+=> 2357: 	txSetFillColor (color, dc); 
+   2358: 	txSetColor (color, thickness, dc);
+   2359: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:27:59, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:28:02
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h, строка: 55, функция: bool __thiscall Filter::reCount(bool &,double,double),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "algorithm".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00425874 (32-bit), Flags: CMdRe0, Thread: 0x75E4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x003DAB35 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Filter::reCount() at C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h (55):
+
+     53: 			RGBQUAD pixel = (*screen)[pixelPos];
+     54: 
+=>   55: 			assert(algorithm);
+     56: 			pixel = algorithm(pixel, Brightness, IncomeBrightness);
+     57: 			/*
+
+# 1 0x003C3FE1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlFilter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2912):
+
+   2910: 			lastRecountSecondFilterValue = SecondFilterValue;
+   2911: 		}
+=> 2912: 		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
+   2913: 		if (reCountEnded)
+   2914: 		{
+
+# 2 0x003C7AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2778):
+
+   2776: 
+   2777: 
+=> 2778: 	controlFilter();
+   2779: 
+   2780:     if (activeTool)
+
+# 3 0x003C8CD0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2648):
+
+   2646: 	for (int i = 0; i < newButtonNum; i++)
+   2647: 	{
+=> 2648: 		pointers[i]->draw ();
+   2649: 
+   2650:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 4 0x003CD611 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1918):
+
+   1916: 	for (int i = 0; i < newButtonNum; i++)
+   1917: 	{
+=> 1918: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1919:  		if (pointers[i]->advancedMode) 
+   1920: 		{
+
+# 5 0x003D3B75 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2341):
+
+   2339: 		txSetAllColors (BackgroundColor);
+   2340: 		txRectangle (0, 0, 2000, 2000);
+=> 2341: 		manager->draw ();
+   2342: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2343: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x003F93C8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1156):
+
+   1154: 
+   1155: 
+=> 1156: 	engine (manager);
+   1157: 
+   1158: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:28:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:28:39
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h, строка: 55, функция: bool __thiscall Filter::reCount(bool &,double,double),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "algorithm".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F56874 (32-bit), Flags: CMdRe0, Thread: 0x49D4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F0B155 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Filter::reCount() at C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h (55):
+
+     53: 			RGBQUAD pixel = (*screen)[pixelPos];
+     54: 
+=>   55: 			assert(algorithm);
+     56: 			pixel = algorithm(pixel, Brightness, IncomeBrightness);
+     57: 			/*
+
+# 1 0x00EF3FF1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlFilter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2962):
+
+   2960: 			lastRecountSecondFilterValue = SecondFilterValue;
+   2961: 		}
+=> 2962: 		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
+   2963: 		if (reCountEnded)
+   2964: 		{
+
+# 2 0x00EF79F6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2828):
+
+   2826: 
+   2827: 
+=> 2828: 	controlFilter();
+   2829: 
+   2830:     if (activeTool)
+
+# 3 0x00EF8B90 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2698):
+
+   2696: 	for (int i = 0; i < newButtonNum; i++)
+   2697: 	{
+=> 2698: 		pointers[i]->draw ();
+   2699: 
+   2700:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 4 0x00EFD4D1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1968):
+
+   1966: 	for (int i = 0; i < newButtonNum; i++)
+   1967: 	{
+=> 1968: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1969:  		if (pointers[i]->advancedMode) 
+   1970: 		{
+
+# 5 0x00F03CD5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2391):
+
+   2389: 		txSetAllColors (BackgroundColor);
+   2390: 		txRectangle (0, 0, 2000, 2000);
+=> 2391: 		manager->draw ();
+   2392: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2393: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00F29968 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1157):
+
+   1155: 
+   1156: 
+=> 1157: 	engine (manager);
+   1158: 
+   1159: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:55:00, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:55:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h, строка: 55, функция: bool __thiscall Filter::reCount(bool &,double,double),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "algorithm".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F56874 (32-bit), Flags: CMdRe0, Thread: 0x14D0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F0B155 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Filter::reCount() at C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h (55):
+
+     53: 			RGBQUAD pixel = (*screen)[pixelPos];
+     54: 
+=>   55: 			assert(algorithm);
+     56: 			pixel = algorithm(pixel, Brightness, IncomeBrightness);
+     57: 			/*
+
+# 1 0x00EF3FF1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlFilter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2962):
+
+   2960: 			lastRecountSecondFilterValue = SecondFilterValue;
+   2961: 		}
+=> 2962: 		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
+   2963: 		if (reCountEnded)
+   2964: 		{
+
+# 2 0x00EF79F6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2828):
+
+   2826: 
+   2827: 
+=> 2828: 	controlFilter();
+   2829: 
+   2830:     if (activeTool)
+
+# 3 0x00EF8B90 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2698):
+
+   2696: 	for (int i = 0; i < newButtonNum; i++)
+   2697: 	{
+=> 2698: 		pointers[i]->draw ();
+   2699: 
+   2700:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 4 0x00EFD4D1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1968):
+
+   1966: 	for (int i = 0; i < newButtonNum; i++)
+   1967: 	{
+=> 1968: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1969:  		if (pointers[i]->advancedMode) 
+   1970: 		{
+
+# 5 0x00F03CD5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2391):
+
+   2389: 		txSetAllColors (BackgroundColor);
+   2390: 		txRectangle (0, 0, 2000, 2000);
+=> 2391: 		manager->draw ();
+   2392: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2393: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00F29968 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1157):
+
+   1155: 
+   1156: 
+=> 1157: 	engine (manager);
+   1158: 
+   1159: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:55:00, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:55:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h, строка: 55, функция: bool __thiscall Filter::reCount(bool &,double,double),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "algorithm".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B16874 (32-bit), Flags: CMdRe0, Thread: 0xA50 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00ACB1C5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Filter::reCount() at C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h (55):
+
+     53: 			RGBQUAD pixel = (*screen)[pixelPos];
+     54: 
+=>   55: 			assert(algorithm);
+     56: 			pixel = algorithm(pixel, Brightness, IncomeBrightness);
+     57: 			/*
+
+# 1 0x00AB4001 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlFilter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2969):
+
+   2967: 			lastRecountSecondFilterValue = SecondFilterValue;
+   2968: 		}
+=> 2969: 		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
+   2970: 		if (reCountEnded)
+   2971: 		{
+
+# 2 0x00AB7A06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2835):
+
+   2833: 
+   2834: 
+=> 2835: 	controlFilter();
+   2836: 
+   2837:     if (activeTool)
+
+# 3 0x00AB8BA0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2705):
+
+   2703: 	for (int i = 0; i < newButtonNum; i++)
+   2704: 	{
+=> 2705: 		pointers[i]->draw ();
+   2706: 
+   2707:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 4 0x00ABD4E1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1975):
+
+   1973: 	for (int i = 0; i < newButtonNum; i++)
+   1974: 	{
+=> 1975: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1976:  		if (pointers[i]->advancedMode) 
+   1977: 		{
+
+# 5 0x00AC3CE5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2398):
+
+   2396: 		txSetAllColors (BackgroundColor);
+   2397: 		txRectangle (0, 0, 2000, 2000);
+=> 2398: 		manager->draw ();
+   2399: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2400: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00AE9A48 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1158):
+
+   1156: 
+   1157: 
+=> 1158: 	engine (manager);
+   1159: 
+   1160: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:57:59, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:58:56
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h, строка: 55, функция: bool __thiscall Filter::reCount(bool &,double,double),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "algorithm".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B16874 (32-bit), Flags: CMdRe0, Thread: 0x53D0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00ACB1C5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Filter::reCount() at C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h (55):
+
+     53: 			RGBQUAD pixel = (*screen)[pixelPos];
+     54: 
+=>   55: 			assert(algorithm);
+     56: 			pixel = algorithm(pixel, Brightness, IncomeBrightness);
+     57: 			/*
+
+# 1 0x00AB4001 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlFilter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2969):
+
+   2967: 			lastRecountSecondFilterValue = SecondFilterValue;
+   2968: 		}
+=> 2969: 		reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
+   2970: 		if (reCountEnded)
+   2971: 		{
+
+# 2 0x00AB7A06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2835):
+
+   2833: 
+   2834: 
+=> 2835: 	controlFilter();
+   2836: 
+   2837:     if (activeTool)
+
+# 3 0x00AB8BA0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2705):
+
+   2703: 	for (int i = 0; i < newButtonNum; i++)
+   2704: 	{
+=> 2705: 		pointers[i]->draw ();
+   2706: 
+   2707:  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
+
+# 4 0x00ABD4E1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1975):
+
+   1973: 	for (int i = 0; i < newButtonNum; i++)
+   1974: 	{
+=> 1975: 		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
+   1976:  		if (pointers[i]->advancedMode) 
+   1977: 		{
+
+# 5 0x00AC3CE5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2398):
+
+   2396: 		txSetAllColors (BackgroundColor);
+   2397: 		txRectangle (0, 0, 2000, 2000);
+=> 2398: 		manager->draw ();
+   2399: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   2400: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00AE9A48 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1158):
+
+   1156: 
+   1157: 
+=> 1158: 	engine (manager);
+   1159: 
+   1160: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 15 2022 21:57:59, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 15 2022 21:59:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
