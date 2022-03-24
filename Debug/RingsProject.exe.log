@@ -21540,3 +21540,2227 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x012722F8.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: after DAMAGED block (#0) at 0x012722F8.
+CRT detected that the application wrote to memory after end of heap buffer.
+DAMAGED located at 0x012722F8 is 0 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 85, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006388C4 (32-bit), Flags: CMdRe0, Thread: 0xDF80 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x005D4637 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (85):
+
+     83: 	//if (test1)printBlt (oldDC);
+     84: 
+=>   85: 	assert (oldDC);
+     86: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     87: 	{
+
+# 1 0x0058DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0058B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x0060AF06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:10:45, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:10:48
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xEA08 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:24:56
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xE5DC (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:25:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xE324 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:25:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xD120 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:26:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xF2A4 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:27:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 87, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009F88C4 (32-bit), Flags: CMdRe0, Thread: 0xF024 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00994647 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (87):
+
+     85: 	//if (test1)printBlt (oldDC);
+     86: 
+=>   87: 	assert (oldDC);
+     88: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     89: 	{
+
+# 1 0x0094DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x0094B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x009CAF16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:27:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 86, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E988C4 (32-bit), Flags: CMdRe0, Thread: 0xD1EC (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E34633 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (86):
+
+     84: 	//if (test1)printBlt (oldDC);
+     85: 
+=>   86: 	assert (oldDC);
+     87: 	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
+     88: 	{
+
+# 1 0x00DEDA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x00DEB1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x00E6AF06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:29:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:29:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 90, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FC88C4 (32-bit), Flags: CMdRe0, Thread: 0xC514 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F64679 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (90):
+
+     88: 	{
+     89: 		//printBlt (newDC);
+=>   90: 		printBlt (oldDC);
+     91: 	}
+     92: 
+
+# 1 0x00F1DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x00F1B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x00F9AE86 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:30:00, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:30:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 90, функция: void __cdecl compressImage(struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B088C4 (32-bit), Flags: CMdRe0, Thread: 0xB014 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00AA4679 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (90):
+
+     88: 	{
+     89: 		//printBlt (newDC);
+=>   90: 		printBlt (oldDC);
+     91: 	}
+     92: 
+
+# 1 0x00A5DA28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (353):
+
+    351: 			{
+    352: 				txDeleteDC (arrow2.dc);
+=>  353: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+    354: 			}
+    355: 		}
+
+# 2 0x00A5B1F1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (850):
+
+    848: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    849: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  850: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    851: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    852: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 3 0x00ADAE86 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1029):
+
+   1027: 	assert(library);
+   1028: 
+=> 1029:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1030: 	manager->addWindow(contrastMenu);  
+   1031: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 19:30:19, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 22 2022 19:30:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010888C4 (32-bit), Flags: CMdRe0, Thread: 0xC4B4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00FEA190 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x01044B08 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627)
+# 2 0x010451F3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649)
+
+# 3 0x01027B2B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::deleteButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (518):
+
+    516: {
+    517: 	if (dc) txDeleteDC (dc);
+=>  518: 	if (finalDC) txDeleteDC (finalDC);
+    519: 	for (int i = 0; i < length; i++)
+    520: 	{
+
+# 4 0x01027B87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::deleteButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (521):
+
+    519: 	for (int i = 0; i < length; i++)
+    520: 	{
+=>  521: 		if (pointers[i]) pointers[i]->deleteButton ();
+    522: 	}
+    523: }
+
+# 5 0x0105BB85 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1103):
+
+   1101: 	//blueColor->deleteButton ();
+   1102: 
+=> 1103: 	manager->deleteButton ();	
+   1104: 	 
+   1105: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (518):
+
+    516: {
+    517: 	if (dc) txDeleteDC (dc);
+=>  518: 	if (finalDC) txDeleteDC (finalDC);
+    519: 	for (int i = 0; i < length; i++)
+    520: 	{
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 22 2022 20:53:45, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 14:49:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005388C4 (32-bit), Flags: CMdRe0, Thread: 0xF994 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004C4386 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0050CA7D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0050CB1C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x0048C730 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x0048C299 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length];
+
+# 9 0x0050B9C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:44:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:44:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005388C4 (32-bit), Flags: CMdRe0, Thread: 0x10D34 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004C4386 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0050CA7D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0050CB1C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x0048C730 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x0048C299 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length];
+
+# 9 0x0050B9C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:44:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:44:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005388C4 (32-bit), Flags: CMdRe0, Thread: 0x550C (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004C4386 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0050CA7D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0050CB1C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x0048C730 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x0048C299 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length];
+
+# 9 0x0050B9C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:44:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:44:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005388C4 (32-bit), Flags: CMdRe0, Thread: 0xCCB8 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004C4386 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0050CA7D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0050CB1C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x0048C730 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x0048C299 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length];
+
+# 9 0x0050B9C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:44:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:45:30
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005388C4 (32-bit), Flags: CMdRe0, Thread: 0x4FE4 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004C4386 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0050CA7D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0050CB1C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x0048C730 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x0048C299 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length];
+
+# 9 0x0050B9C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:44:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:46:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004588C4 (32-bit), Flags: CMdRe0, Thread: 0xD79C (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x003E4416 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0042CB0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0042CBAC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x003AC7C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x003AC339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length]{};
+
+# 9 0x0042BA50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:48:29, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:48:32
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008588C4 (32-bit), Flags: CMdRe0, Thread: 0xD6D0 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007E4416 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0082CB0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0082CBAC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x007AC7BA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[_length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x007AC339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length]{};
+
+# 9 0x0082BA50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:49:26, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:49:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008588C4 (32-bit), Flags: CMdRe0, Thread: 0x104E0 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007E4416 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0082CB0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0082CBAC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x007AC7BA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[_length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x007AC339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length]{};
+
+# 9 0x0082BA50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:49:26, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:49:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: operator new: Ошибка выделения 4294967295 байт памяти.
+
+С помощью _set_new_handler() вы можете сами обработать эту ошибку и где-нибудь найти недостающую память.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008588C4 (32-bit), Flags: CMdRe0, Thread: 0x10734 (Main), errno: 12 (Not enough space). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007E4416 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnNewHandler() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11164)
+# 1 0x7A25E68C in C:\WINDOWS\SYSTEM32\ucrtbased.dll: callnewh()
+# 2 0x7A25B438 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+# 3 0x7A25DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+# 4 0x7A25E4A4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc()
+# 5 0x0082CB0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_scalar.cpp (35)
+# 6 0x0082CBAC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator new[]() at d:\a01\_work\11\s\src\vctools\crt\vcstartup\src\heap\new_array.cpp (28)
+
+# 7 0x007AC7BA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (208):
+
+    206: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    207: 		length (_length),
+=>  208: 		pointers (new Window*[_length]{}),
+    209: 		newButtonNum (0),
+    210: 		activeWindow (NULL), 
+
+# 8 0x007AC339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::List() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (893):
+
+    891: 
+    892:     List (int _length) :
+=>  893:         Manager ({}, length, false)
+    894:     {
+    895:         items = new OpenManager[length]{};
+
+# 9 0x0082BA50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1075):
+
+   1073:          openWindows->addNewItem (laysMenu, NULL, "Слои");
+   1074:          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
+=> 1075:          List *filters = new List (3);
+   1076:          manager->addWindow (filters);
+   1077: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:49:26, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:49:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008B88C4 (32-bit), Flags: CMdRe0, Thread: 0x10558 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0088375D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00881712 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0086EC26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (689):
+
+    687:     //}
+    688: 
+=>  689: 	txSetAllColors (manager->color, manager->finalDC);
+    690: 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+    691: 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+
+# 3 0x0085F087 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1279):
+
+   1277: {
+   1278: 
+=> 1279:     standartManagerDraw (this);
+   1280: 
+   1281:     
+
+# 4 0x0086A322 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2169):
+
+   2167: 	{
+   2168: 		openManager->advancedMode = !openManager->advancedMode;
+=> 2169: 		openManager->draw ();
+   2170: 	}
+   2171: }
+
+# 5 0x008547A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 6 0x0086F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+# 7 0x00869AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1293):
+
+   1291: void List::onClick ()
+   1292: {
+=> 1293:     int clikedButtonNum = standartManagerOnClick (this);
+   1294:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+   1295:     {
+
+# 8 0x008547A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 9 0x0086F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+#10 0x00869BB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (613):
+
+    611: void Manager::onClick ()
+    612: {
+=>  613:     standartManagerOnClick (this);	
+    614: }
+    615: 
+
+#11 0x00864AD0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2196):
+
+   2194: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+   2195: 		{
+=> 2196: 			manager->onClick ();
+   2197: 			if (!IsRunning) break;
+   2198: 		}
+
+#12 0x0088BB52 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1119):
+
+   1117: 
+   1118: 
+=> 1119: 	engine (manager);
+   1120: 
+   1121: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:50:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:50:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001588C4 (32-bit), Flags: CMdRe0, Thread: 0xFBFC (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0012375D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00121712 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0010EC26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (689):
+
+    687:     //}
+    688: 
+=>  689: 	txSetAllColors (manager->color, manager->finalDC);
+    690: 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+    691: 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+
+# 3 0x000FF087 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1279):
+
+   1277: {
+   1278: 
+=> 1279:     standartManagerDraw (this);
+   1280: 
+   1281:     
+
+# 4 0x0010A322 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2169):
+
+   2167: 	{
+   2168: 		openManager->advancedMode = !openManager->advancedMode;
+=> 2169: 		openManager->draw ();
+   2170: 	}
+   2171: }
+
+# 5 0x000F47A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 6 0x0010F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+# 7 0x00109AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1293):
+
+   1291: void List::onClick ()
+   1292: {
+=> 1293:     int clikedButtonNum = standartManagerOnClick (this);
+   1294:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+   1295:     {
+
+# 8 0x000F47A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 9 0x0010F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+#10 0x00109BB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (613):
+
+    611: void Manager::onClick ()
+    612: {
+=>  613:     standartManagerOnClick (this);	
+    614: }
+    615: 
+
+#11 0x00104AD0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2196):
+
+   2194: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+   2195: 		{
+=> 2196: 			manager->onClick ();
+   2197: 			if (!IsRunning) break;
+   2198: 		}
+
+#12 0x0012BB52 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1119):
+
+   1117: 
+   1118: 
+=> 1119: 	engine (manager);
+   1120: 
+   1121: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:52:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 16:53:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001588C4 (32-bit), Flags: CMdRe0, Thread: 0x10A98 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0012375D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00121712 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0010EC26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (689):
+
+    687:     //}
+    688: 
+=>  689: 	txSetAllColors (manager->color, manager->finalDC);
+    690: 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+    691: 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+
+# 3 0x000FF087 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1279):
+
+   1277: {
+   1278: 
+=> 1279:     standartManagerDraw (this);
+   1280: 
+   1281:     
+
+# 4 0x0010A322 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2169):
+
+   2167: 	{
+   2168: 		openManager->advancedMode = !openManager->advancedMode;
+=> 2169: 		openManager->draw ();
+   2170: 	}
+   2171: }
+
+# 5 0x000F47A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 6 0x0010F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+# 7 0x00109AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1293):
+
+   1291: void List::onClick ()
+   1292: {
+=> 1293:     int clikedButtonNum = standartManagerOnClick (this);
+   1294:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+   1295:     {
+
+# 8 0x000F47A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (718):
+
+    716: {
+    717:     manager->activeWindow = window;
+=>  718: 	window->onClick ();
+    719: 	window->isClicked = true;
+    720: }
+
+# 9 0x0010F35D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (660):
+
+    658: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    659: 			{
+=>  660: 				clickButton (manager->pointers[i], manager);
+    661: 
+    662: 				missClicked = false;
+
+#10 0x00109BB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (613):
+
+    611: void Manager::onClick ()
+    612: {
+=>  613:     standartManagerOnClick (this);	
+    614: }
+    615: 
+
+#11 0x00104AD0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2196):
+
+   2194: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+   2195: 		{
+=> 2196: 			manager->onClick ();
+   2197: 			if (!IsRunning) break;
+   2198: 		}
+
+#12 0x0012BB52 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1119):
+
+   1117: 
+   1118: 
+=> 1119: 	engine (manager);
+   1120: 
+   1121: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 16:52:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:35:10
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001888C4 (32-bit), Flags: CMdRe0, Thread: 0xF304 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0015374D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00151702 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0013E4AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (619):
+
+    617:                                                                                          
+    618:     $s                                                                                     
+=>  619: 	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
+    620: 	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+    621:                                                                                            
+
+# 3 0x001335E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (412):
+
+    410: void Window::draw ()
+    411: {
+=>  412: 	standartDraw(this);
+    413: }
+    414: 
+
+# 4 0x000DB07E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (581):
+
+    579: 		Window (_rect, _color, _dc)
+    580: 	{
+=>  581: 		draw ();
+    582: 		reDraw = false;
+    583: 	}
+
+# 5 0x0015AA26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1022):
+
+   1020: 		menu->addWindow (colorManager);
+   1021: 
+=> 1022: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+   1023: 			colorManager->addWindow(redColor);
+   1024: 	
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 17:37:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:37:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001888C4 (32-bit), Flags: CMdRe0, Thread: 0x11394 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0015374D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00151702 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0013E4AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (619):
+
+    617:                                                                                          
+    618:     $s                                                                                     
+=>  619: 	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
+    620: 	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+    621:                                                                                            
+
+# 3 0x001335E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (412):
+
+    410: void Window::draw ()
+    411: {
+=>  412: 	standartDraw(this);
+    413: }
+    414: 
+
+# 4 0x000DB07E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (581):
+
+    579: 		Window (_rect, _color, _dc)
+    580: 	{
+=>  581: 		draw ();
+    582: 		reDraw = false;
+    583: 	}
+
+# 5 0x0015AA26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1022):
+
+   1020: 		menu->addWindow (colorManager);
+   1021: 
+=> 1022: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+   1023: 			colorManager->addWindow(redColor);
+   1024: 	
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 17:37:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:37:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001888C4 (32-bit), Flags: CMdRe0, Thread: 0x10984 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0015374D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00151702 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0013E4AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (619):
+
+    617:                                                                                          
+    618:     $s                                                                                     
+=>  619: 	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
+    620: 	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+    621:                                                                                            
+
+# 3 0x001335E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (412):
+
+    410: void Window::draw ()
+    411: {
+=>  412: 	standartDraw(this);
+    413: }
+    414: 
+
+# 4 0x000DB07E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (581):
+
+    579: 		Window (_rect, _color, _dc)
+    580: 	{
+=>  581: 		draw ();
+    582: 		reDraw = false;
+    583: 	}
+
+# 5 0x0015AA26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1022):
+
+   1020: 		menu->addWindow (colorManager);
+   1021: 
+=> 1022: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+   1023: 			colorManager->addWindow(redColor);
+   1024: 	
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 17:37:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:38:10
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001888C4 (32-bit), Flags: CMdRe0, Thread: 0x10998 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0015374D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00151702 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57)
+
+# 2 0x0013E4AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (619):
+
+    617:                                                                                          
+    618:     $s                                                                                     
+=>  619: 	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
+    620: 	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+    621:                                                                                            
+
+# 3 0x001335E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (412):
+
+    410: void Window::draw ()
+    411: {
+=>  412: 	standartDraw(this);
+    413: }
+    414: 
+
+# 4 0x000DB07E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (581):
+
+    579: 		Window (_rect, _color, _dc)
+    580: 	{
+=>  581: 		draw ();
+    582: 		reDraw = false;
+    583: 	}
+
+# 5 0x0015AA26 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1022):
+
+   1020: 		menu->addWindow (colorManager);
+   1021: 
+=> 1022: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+   1023: 			colorManager->addWindow(redColor);
+   1024: 	
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (57):
+
+     55: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     56: {
+=>   57: 	txSetFillColor (color, dc); 
+     58: 	txSetColor (color, thickness, dc);
+     59: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 17:37:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:38:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 339, функция: __thiscall Slider::Slider(struct Rect,double *,double,int,int,bool,bool),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "LoadManager.loadImage ("arrow2WhiteHor.bmp")".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CE88C4 (32-bit), Flags: CMdRe0, Thread: 0x5220 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00C3E03E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (339):
+
+    337: 				txDeleteDC (arrow2.dc);
+    338: 				compressImage (arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, LoadManager.loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+=>  339:                 printBlt (LoadManager.loadImage ("arrow2WhiteHor.bmp"));
+    340: 			}
+    341: 		}
+
+# 1 0x00C3B311 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (836):
+
+    834: 	ContrastMenu(Rect _rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))	:
+    835: 		Manager (_rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+=>  836: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &brightness, 0.3, firstDomain.x, firstDomain.y, true, true),
+    837: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &contrast, 0.3, secondDomain.x, secondDomain.y, true, true),
+    838: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 2 0x00CBB1A4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1044):
+
+   1042: 	assert(library);
+   1043: 
+=> 1044:     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+   1045: 	manager->addWindow(contrastMenu);  
+   1046: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 17:57:43, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 17:57:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x015E3AB8.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x01842B98.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x015A3618.
+CRT detected that the application wrote to memory before start of heap buffer.
+HEAP CORRUPTION DETECTED: before DAMAGED block (#0) at 0x01563668.
+CRT detected that the application wrote to memory before start of heap buffer.
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13202, функция: struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *),
+
+Сообщение: Параметр "dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AE68C4 (32-bit), Flags: CMdRe0, Thread: 0x4AF0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00AB1E3D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetFillColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202)
+# 1 0x00AAFDF2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (58)
+
+# 2 0x00A9D2F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (696):
+
+    694:     //}
+    695: 
+=>  696: 	txSetAllColors (manager->color, manager->finalDC);
+    697: 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+    698: 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+
+# 3 0x00A8CE9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1289):
+
+   1287: void List::draw()
+   1288: {
+=> 1289:     standartManagerDraw (this);
+   1290: 
+   1291:     for (int i = 0; i < newButtonNum; i++)
+
+# 4 0x00A983D2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2189):
+
+   2187: 	{
+   2188: 		openManager->advancedMode = !openManager->advancedMode;
+=> 2189: 		openManager->draw ();
+   2190: 	}
+   2191: }
+
+# 5 0x00A829D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (725):
+
+    723: {
+    724:     manager->activeWindow = window;
+=>  725: 	window->onClick ();
+    726: 	window->isClicked = true;
+    727: }
+
+# 6 0x00A9DA3D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (667):
+
+    665: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    666: 			{
+=>  667: 				clickButton (manager->pointers[i], manager);
+    668: 
+    669: 				missClicked = false;
+
+# 7 0x00A97C67 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (616):
+
+    614: void Manager::onClick ()
+    615: {
+=>  616:     standartManagerOnClick (this);	
+    617: }
+    618: 
+
+# 8 0x00A829D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (725):
+
+    723: {
+    724:     manager->activeWindow = window;
+=>  725: 	window->onClick ();
+    726: 	window->isClicked = true;
+    727: }
+
+# 9 0x00A9DA3D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (667):
+
+    665: 			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+    666: 			{
+=>  667: 				clickButton (manager->pointers[i], manager);
+    668: 
+    669: 				missClicked = false;
+
+#10 0x00A97C67 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (616):
+
+    614: void Manager::onClick ()
+    615: {
+=>  616:     standartManagerOnClick (this);	
+    617: }
+    618: 
+
+#11 0x00A92AB6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2217):
+
+   2215: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+   2216: 		{
+=> 2217: 			manager->onClick ();
+   2218: 			if (!IsRunning) break;
+   2219: 		}
+
+#12 0x00ABA1A3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1130):
+
+   1128: 
+   1129: 
+=> 1130: 	engine (manager);
+   1131: 
+   1132: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HBRUSH__ *__cdecl `anonymous-namespace'::TX::txSetFillColor(unsigned long,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13202):
+
+  13200: HBRUSH txSetFillColor (COLORREF color, HDC dc /*= txDC()*/)
+  13201:     {
+=>13202: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13203: 
+  13204: $   HBRUSH brush = (color == TX_TRANSPARENT)? (HBRUSH) Win32::GetStockObject (HOLLOW_BRUSH) : Win32::CreateSolidBrush (color);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (58):
+
+     56: void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+     57: {
+=>   58: 	txSetFillColor (color, dc); 
+     59: 	txSetColor (color, thickness, dc);
+     60: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 24 2022 20:04:15, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 24 2022 20:04:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
