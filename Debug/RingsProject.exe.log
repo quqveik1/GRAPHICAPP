@@ -23764,3 +23764,386 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 44, функция: void __cdecl txSetAllColors(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006898C4 (32-bit), Flags: CMdRe0, Thread: 0x2AD0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00651C9B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (44)
+
+# 1 0x0063CCDF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (469):
+
+    467: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+    468: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+=>  469: 		txSetAllColors(color, finalDC);
+    470: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    471: 		if (test1) printBlt(finalDC);
+
+# 2 0x005E181F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (201):
+
+    199: 		reDraw (true)
+    200: 	{
+=>  201: 		resize (rect);
+    202: 
+    203: 		originalRect = rect;
+
+# 3 0x005DC4F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (239):
+
+    237: 
+    238: 	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+=>  239: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    240: 		length (_length),
+    241: 		pointers (new Window*[_length]{}),
+
+# 4 0x0065A5AB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (947):
+
+    945: 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+    946: 
+=>  947: 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
+    948: 
+    949: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 19:26:45, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 19:26:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h, строка: 92, функция: void __cdecl compressImage(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "newDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0097C8DC (32-bit), Flags: CMdRe0, Thread: 0x6694 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00915D5B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\DrawBibliothek.h (92):
+
+     90: 	sprintf(str, "%d", line);
+     91: 		//newSize.print (str);
+=>   92:     printBlt (newDC);
+     93: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+     94:     qassert (newDC, info);
+
+# 1 0x0094CD33 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (966):
+
+    964: 	HDC addNewCanvasDC = {};
+    965: 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
+=>  966: 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+    967: 	txDeleteDC(oldDC);
+    968: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 19:58:55, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 19:58:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h, строка: 568, функция: void __thiscall Window::resize(struct Rect),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!newRect.isValid()".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0075C8EC (32-bit), Flags: CMdRe0, Thread: 0x7610 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0070EC07 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (568):
+
+    566: void Window::resize (Rect newRect)
+    567: {
+=>  568:     assert (!newRect.isValid());
+    569: 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
+    570: 	{
+
+# 1 0x006B2D8F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (217):
+
+    215: 		reDraw (true)
+    216: 	{
+=>  217: 		resize (rect);
+    218: 
+    219: 		originalRect = rect;
+
+# 2 0x006AD5E0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (255):
+
+    253: 
+    254: 	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+=>  255: 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+    256: 		length (_length),
+    257: 		pointers (new Window*[_length]{}),
+
+# 3 0x0072CC2B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (947):
+
+    945: 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+    946: 
+=>  947: 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
+    948: 
+    949: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 20:10:15, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 20:10:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h, строка: 568, функция: void __thiscall Window::resize(struct Rect),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "newRect.isValid()".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B2C8EC (32-bit), Flags: CMdRe0, Thread: 0x6BCC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00ADEC07 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (568):
+
+    566: void Window::resize (Rect newRect)
+    567: {
+=>  568:     assert (newRect.isValid());
+    569: 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
+    570: 	{
+
+# 1 0x00A82D8F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (217):
+
+    215: 		reDraw (true)
+    216: 	{
+=>  217: 		resize (rect);
+    218: 
+    219: 		originalRect = rect;
+
+# 2 0x00A7D6C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (260):
+
+    258: 		newButtonNum (0),
+    259: 		activeWindow (NULL), 
+=>  260: 		handle (_handle),
+    261: 		startCursorPos({}),
+    262: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 3 0x00AFCC2B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (947):
+
+    945: 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+    946: 
+=>  947: 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
+    948: 
+    949: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 20:11:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 20:11:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h, строка: 568, функция: void __thiscall Window::resize(struct Rect),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "newRect.isValid()".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B2C8EC (32-bit), Flags: CMdRe0, Thread: 0x5910 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00ADEC07 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (568):
+
+    566: void Window::resize (Rect newRect)
+    567: {
+=>  568:     assert (newRect.isValid());
+    569: 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
+    570: 	{
+
+# 1 0x00A82D8F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (217):
+
+    215: 		reDraw (true)
+    216: 	{
+=>  217: 		resize (rect);
+    218: 
+    219: 		originalRect = rect;
+
+# 2 0x00A7D6C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (260):
+
+    258: 		newButtonNum (0),
+    259: 		activeWindow (NULL), 
+=>  260: 		handle (_handle),
+    261: 		startCursorPos({}),
+    262: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 3 0x00AFCC2B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (947):
+
+    945: 	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+    946: 
+=>  947: 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
+    948: 
+    949: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 20:11:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 20:11:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0034C8EC (32-bit), Flags: CMdRe0, Thread: 0x4FA0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x002AB310 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x003076D8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627)
+# 2 0x00307DC3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649)
+
+# 3 0x002E5E9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (92):
+
+     90: 	sprintf(str, "%d", line);
+     91: 		//newSize.print (str);
+=>   92:     if (newDC) txDeleteDC (newDC);
+     93: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+     94:     qassert (newDC, info);
+
+# 4 0x0029BBC3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::CanvasManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (634):
+
+    632: 		bar (_bar)
+    633: 	{
+=>  634: 		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, LoadManager.loadImage("CloseButton4.bmp"), {50, 26}, __LINE__);
+    635: 	}
+    636: 
+
+# 5 0x0031D437 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (975):
+
+    973: 		statusBar->timeButton->manager = statusBar;
+    974: 
+=>  975: 	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar);
+    976: 	manager->addWindow (canvasManager);
+    977: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (92):
+
+     90: 	sprintf(str, "%d", line);
+     91: 		//newSize.print (str);
+=>   92:     if (newDC) txDeleteDC (newDC);
+     93: 	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+     94:     qassert (newDC, info);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 20:13:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 20:13:50
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

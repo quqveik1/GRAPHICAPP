@@ -1,7 +1,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "..\GlobalOptions.h"
-#include "..\DrawBibliothek.h"
+#include "DrawBibliothek.h"
 #include "..\Macroses.h"
 #include "..\Q_Vector.h"
 #include "..\Q_Rect.h"
@@ -11,22 +11,11 @@
 #include "..\Brightness\Q_Filter.h"
 #include "StandartFunctions.h"
 #include "CurvesFilter.h"
+#include "..\Graphicapp-dll.h"
+#include "LoadManager.h"
 
 
 HDC TestPhoto;
-
-
-//#define compressImage(newDC, newSize, oldDC, oldSize)	\
-{														\
-	_compressImage(newDC, newSize, oldDC, oldSize, NULL);		\
-}														\
-
-/*
-#define compressImage(newDC, newSize, oldDC, oldSize)  									   \
-{																					 	 \
-	_compressImage(newDC, newSize, oldDC, oldSize);	 					 \
-}																					 	 \
-   */
 void clearDC(HDC dc, COLORREF color = TX_BLACK);
 void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = DCMAXSIZE, int originalSizeY = DCMAXSIZE, int sourceSizeX = DCMAXSIZE, int sourceSizeY = DCMAXSIZE);
 
@@ -36,22 +25,7 @@ void copyAndDelete (HDC dest, HDC source);
 
 
 
-struct Image
-{
-	const char* path = NULL;
-	HDC dc = NULL;
-};
 
-struct CLoadManager
-{
-	int currentImagesAmount = 0;
-
-	Image images[1000];
-
-
-	HDC loadImage (const char* path);
-
-};
 
 CLoadManager LoadManager;
 
@@ -242,8 +216,11 @@ struct CHistoryStep
 };
 
 
-
-
+struct ProgrammToDll
+{
+    Window *window = new Window({.pos = {0, 0}, .finishPos = {100, 100}});
+    //void (*drawFunc) (Window *window) = standartDraw;
+};
 
 
 
@@ -921,17 +898,13 @@ bool IsRunning = true;
 int Radius = 2;
 int SLEEPTIME = 30;
 
-
+void Engine (Manager *manager);
 
 void RECTangle (const Rect rect, HDC dc = txDC ());
-void engine (Manager *manager);
 void shiftArrBack    (char arr[], int length);
 void shiftArrForward (char arr[], int length);
 bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
-void createNumChanger (Manager *menu, NumChange **numchange, Canvas *mainCanvas);
-void checkTextLen (int currentNum, int previousNum, int *textLen, int *cursorPosition);
-void swap (int &x0, int &y0);
 
 
 
@@ -942,13 +915,11 @@ int main ()
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
 
-	//printfDCS ();
+    //compressImage ()
+
 
     ToolSave toolSave = {};
-    //PointSave pointSave = {};
-    //ColorSave colorSave = {};
-    //printf ("getByteSize():%d||sizeof:%d||sizeof(ptr):%d", toolSave.getByteSize(), sizeof (ToolSave), sizeof (*(&toolSave)));
-	
+
 	Line *line = new Line ((const char*) (1), sizeof (ToolSave), LoadManager.loadImage ("Line.bmp"));
     ToolManager.addTool (line); 
     Point *point = new Point ((const char*) (2), sizeof (PointSave) + sizeof (ToolSave) * POINTSAVELENGTH, LoadManager.loadImage ("Pen.bmp"));
@@ -976,14 +947,7 @@ int main ()
 	manager->addWindow (canvasManager);
 
     manager->addWindow(statusBar);
-	//canvasManager->deleteButton();
 
-	//LaysMenu* lays = new LaysMenu({ .pos = {850, 400}, .finishPos = {1000, 944} }, canvasManager);
-	//manager->addWindow(lays);
-
-	//printfDCS ();
-
-	
 	ToolsPalette *toolsPallette = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, TOOLSNUM * 50 + HANDLEHEIGHT + 100}}, 5);
 	manager->addWindow (toolsPallette);
 
@@ -1010,6 +974,8 @@ int main ()
 
     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
 	assert(library);
+
+    ProgrammToDll ptoDll;
 
     ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
 	manager->addWindow(contrastMenu);  
@@ -1091,7 +1057,7 @@ int main ()
 
 
 
-	engine (manager);
+	Engine (manager);
 
 	txEnd ();
 
@@ -1549,21 +1515,6 @@ void Slider::onClick ()
 }
 
 
-void createNumChanger (Manager *menu, NumChange **numChange, Canvas *mainCanvas)
-{
-
-	*numChange = (new NumChange (
-								{.pos = {70, 44 - 10}, .finishPos = {389, 74}},
-								{.pos = {296, 46}, .finishPos = {362, 74}}, 
-								{.pos = {368, 44}, .finishPos = {389, 59}}, 
-								{.pos = {368, 59}, .finishPos = {389, 74}}, 
-								{.pos = {70, 55}, .finishPos = {270, 65} },
-								LoadManager.loadImage ("SwitchButton.bmp"), 
-								0.3,
-								1, &mainCanvas->lineThickness));
-	menu->addWindow (*numChange);
-}
-
 void printfDCS (const char *str)
 {
     printf ("%s\n", str);
@@ -1596,7 +1547,7 @@ void NumChange::draw ()
 
 	int numBeforeSlider = *num;
 	slider.draw ();
-	checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
+	//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 
 	if (txMouseButtons () != 1 && plusNum.isClicked  == true) plusNum.isClicked = false;
 	if (txMouseButtons () != 1 && minusNum.isClicked == true) minusNum.isClicked = false;
@@ -1663,81 +1614,9 @@ void NumChange::onClick ()
 
 		slider.onClick();
 
-		checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
+		//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 	}
 
-}
-
-
-/*
-void line (int x0, int y0, int x1, int y1, RGBQUAD* buf, HDC canvas, COLORREF drawColor)
-{
-    bool steep = false;
-	if (abs (x0 - x1) < abs (y0 - y1)) 
-	{
-		swap (x0, y0);
-		swap (x1, y1);
-		steep = true;
-	}
-	if (x0 > x1)
-	{
-		swap (x0, x1);
-		swap (y0, y1);
-	}
-	int dx = x1-x0;
-	int dy = y1-y0;
-	int derror2 = abs (dy) * 2;
-	int error2 = 0;
-	int y = y0;
-
-	for (int x = x0; x <= x1; x++)
-	{
-		if (steep) 
-		{
-			RGBQUAD* color = &buf[(int) (y + (DCMAXSIZE - x) * DCMAXSIZE)];
-			color->rgbRed = txExtractColor (drawColor, TX_RED);
-			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
-			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
-			color->rgbReserved = 255;
-		} 
-		else 
-		{
-			RGBQUAD* color = &buf[(int) (x + (DCMAXSIZE - y) * DCMAXSIZE)];
-			color->rgbRed = txExtractColor (drawColor, TX_RED);
-			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
-			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
-			color->rgbReserved = 255;
-		}
-		error2 += derror2;
-
-		if (error2 > dx) 
-		{
-			y += (y1 > y0 ? 1 : -1);
-
-			error2 -= dx * 2;
-		}
-	}
-}
-  */
-void checkTextLen (int currentNum, int previousNum, int *textLen, int *cursorPosition)
-{
-	if (currentNum >= 10)
-	{
-		*textLen = 3;
-	}
-	else
-	{
-		*textLen = 2;
-	}
-
-	if (previousNum >= 10 && currentNum <= 9)
-	{
-		*cursorPosition =  *textLen - 2;
-	}
-	if (previousNum <= 9 && currentNum >= 10)
-	{
-		*cursorPosition =  *textLen - 2;
-	}
 }
 
 
@@ -1830,41 +1709,6 @@ void ToolsPalette::onClick ()
 
 	if (missClicked == true) activeWindow = NULL;
 }
-
-
-
-
-
-HDC CLoadManager::loadImage(const char* path)
-{
-	bool newImage = true;
-	int suitableDCNum = -1;
-	for (int i = 0; i < currentImagesAmount; i++)
-	{
-		if (!strcmp(path, images[i].path))
-		{
-			newImage = false;
-			suitableDCNum = i;
-			break;
-		}
-	}
-
-	if (!newImage)
-	{
-		return images[suitableDCNum].dc;
-	}
-
-	
-	images[currentImagesAmount].dc = txLoadImage(path);
-    if (images[currentImagesAmount].dc == NULL) assert (path);
-	images[currentImagesAmount].path = path;
-	currentImagesAmount++;
-
-	return images[currentImagesAmount-1].dc;
-
-
-}
-
 
 void StringButton::draw ()
 {
@@ -2002,6 +1846,7 @@ void StringButton::cursorMovement (int side)
 
 void shiftArrForward (char arr[], int length)
 {
+    assert (arr);
 	char copyChar = arr[0];
 
 	for (int i = 1; i < length; i++)
@@ -2014,6 +1859,8 @@ void shiftArrForward (char arr[], int length)
 
 void shiftArrBack (char arr[], int length)
 {
+
+    assert (arr);
 	char copyChar = '\0';
 
 	for (int i = 0; i < length; i++)
@@ -2053,9 +1900,9 @@ void OpenManager::draw()
 	//if (text) txDrawText (0, 0, rect.getSize ().x, rect.getSize ().y, text, DT_VCENTER, finalDC);
 }
 
-void engine (Manager *manager)
+void Engine (Manager *manager)
 {
-
+    assert (manager);
 	for (;;)
 	{
 		txSetAllColors (BackgroundColor);
@@ -2078,6 +1925,7 @@ void engine (Manager *manager)
 
 void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 {
+    assert (dc);
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 

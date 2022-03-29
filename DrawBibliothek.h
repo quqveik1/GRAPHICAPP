@@ -1,21 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
+
 #include "TXLib.h"
 #include "..\Q_Rect.h"
 #include "..\Macroses.h"
 #include "..\GlobalOptions.h"
 
 struct Manager;
-struct Windows;
+struct Window;
+struct Lay;
 
+Lay *ActiveLay;
 
-void txSetAllColors(COLORREF color, HDC dc = txDC(), int thickness = 1);
-void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
-void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
-bool drag(Vector *objPos, Vector *lastTimePos, bool *dragedLastTime);
-
-
-bool drag(Vector *objPos, Vector *lastTimePos, bool *dragedLastTime)
+struct DebugInfo
 {
+    int line;
+    const char *func;
+};
+
+
+#define qassert(condition, info)         \
+{                                              \
+                                             \
+    if (condition == NULL) printf ("[func: %s, line: %d]\n", info.func, info.line);                               \
+    if (condition == NULL) assert (condition);                                      \
+}  
+
+#define getDebugInfo {__LINE__, __FUNCSIG__}
+
+
+void txSetAllColors(DebugInfo info, COLORREF color, HDC dc = txDC(), int thickness = 1);
+void compressDraw (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
+void compressImage (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
+bool drag(DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime);
+int standartManagerOnClick (DebugInfo info, Manager *manager);
+void standartDraw (DebugInfo info, Window *window);
+void standartManagerDraw (DebugInfo info, Manager *manager);
+void clickButton (Window *window, Manager *manager);
+void selectFont (DebugInfo info, const char *text, int font, HDC dc);
+void swap (DebugInfo info, int &x0, int &y0);
+
+void txSetAllColors (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+{
+    qassert (dc, info);
+	txSetFillColor (color, dc); 
+	txSetColor (color, thickness, dc);
+}
+#define txSetAllColors(...) txSetAllColors (getDebugInfo, __VA_ARGS__)
+
+bool drag (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime)
+{
+    qassert (objPos && lastTimePos, info);
+
     int mx = txMouseX();
     int my = txMouseY();
     if (*dragedLastTime == false && txMouseButtons() == 1)
@@ -42,68 +78,117 @@ bool drag(Vector *objPos, Vector *lastTimePos, bool *dragedLastTime)
 	}
     return false;
 }
+#define drag(...) drag (getDebugInfo, __VA_ARGS__)
 
 
 
-void txSetAllColors (COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+
+
+ void compressImage (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line)
 {
-	txSetFillColor (color, dc); 
-	txSetColor (color, thickness, dc);
-}
+    qassert (oldDC, info);
+	char str[10] = {};
+	sprintf(str, "%d", line);
+		//newSize.print (str);
+
+    if (!newDC) txDeleteDC (newDC);
+	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    qassert (newDC, info);
+
+	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+
+ }
+#define compressImage(...) compressImage (getDebugInfo, __VA_ARGS__);
 
 
-void compressDraw (HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line)
+
+
+
+
+void compressDraw (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line)
 {
+    qassert (finalDC && dc, info);
 	HDC copyDC = NULL;
 	//if (test1)printBlt (dc);
 	compressImage (copyDC, finalSize, dc, originalSize, line);
 	//printBlt (dc);
-	if (test1)
-	{
-		//printBlt (copyDC);
-		//txRectangle (0, 0, 300, 300)
-	}
 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
 	
     txDeleteDC (copyDC);
 }
+#define compressDraw(...) compressDraw (getDebugInfo, __VA_ARGS__);
 
 
-void compressImage (HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line)
+
+
+
+
+
+
+
+void selectFont (DebugInfo info, const char *text, int font, HDC dc)
 {
-
-	char str[10] = {};
-	sprintf(str, "%d", line);
-	//if (newSize.x <= 0 || newSize.y <= 0)
-		newSize.print (str);
-
-	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
-
-	
-	//if (test1)printBlt (oldDC);
-
-	//assert (oldDC);
-	if (!StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY))
-	{
-		//printBlt (newDC);
-		printBlt (oldDC);
-	}
-
-	if (test1)printBlt (newDC);
+    txSelectFont ("Arial", font, -1, FW_DONTCARE, false, false, false, 0, dc);    
 }
+
+#define selectFont(...) selectFont (getDebugInfo, __VA_ARGS__)
+
+
+
+
+
+
+struct Linen
+{
+    HDC dc = NULL;
+    RGBQUAD *buf = NULL;
+
+   Linen (Vector size)
+   {
+       dc = txCreateDIBSection (size.x, size.y, &buf);
+   }
+
+   Linen ()
+   {
+   }
+
+};
+
+
+struct Lay
+{
+	HDC lay = {};
+	Vector layCoordinats = {}; 
+    Vector laySize = {};
+	RGBQUAD *layBuf = {};
+    HDC brightnessHDC = {};
+    RGBQUAD *brightnessBuf = {};
+	bool isClicked = false;
+
+    void createLay (Vector size = {DCMAXSIZE, DCMAXSIZE});
+    int getDownUpCoordinats (int x, int y);
+	void line (int x0, int y0, int x1, int y1, COLORREF drawColor =  DrawColor);
+	void circle (int x, int y, int r, COLORREF color = TX_BLACK);
+    void rectangle (int x0, int y0, int x1, int y1);
+};
 
 struct Window
 {
 	Rect rect;
 	Rect originalRect;
 	COLORREF color;
+
 	const char *text;
+    int format = DT_CENTER;
+    int font = MainFont;
+    int sideThickness = SIDETHICKNESS;
+
 	bool isClicked;
 	HDC dc;
 
-	HDC finalDC;
-	RGBQUAD *finalDCArr;
-	Vector finalDCSize; 
+	HDC finalDC = NULL;
+	RGBQUAD *finalDCArr = NULL;
+    Vector finalDCSize = {}; 
 	Manager *manager;
 	bool advancedMode;
 	bool reDraw;
@@ -118,14 +203,7 @@ struct Window
 		advancedMode (_advancedMode),
 		reDraw (true)
 	{
-		if (_rect.getSize().x > 0 && _rect.getSize().y > 0)
-		{
-			finalDCSize = {_rect.getSize().x, _rect.getSize().y};
-			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
-			txSetAllColors(color, finalDC);
-			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
-			if (test1) printBlt(finalDC);
-		}
+		resize (rect);
 
 		originalRect = rect;
 	} 
@@ -149,8 +227,6 @@ struct Window
 	virtual void deleteButton ();
 };
 
-void standartDraw (Window *window);
-
 struct Manager : Window
 {
 	int length;
@@ -165,7 +241,7 @@ struct Manager : Window
 	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
 		Window (_rect, _color, _dc, NULL, "", _advancedMode),
 		length (_length),
-		pointers (new Window*[length]{}),
+		pointers (new Window*[_length]{}),
 		newButtonNum (0),
 		activeWindow (NULL), 
 		handle (_handle),
@@ -183,7 +259,6 @@ struct Manager : Window
 	void controlHandle ();
 	void clickHandle ();
 	void replaceWindow (int numOfWindow);
-	void controlSize ();
     void hide ();
     void unHide ();
 
@@ -194,8 +269,271 @@ struct Manager : Window
 };
 
 
+void standartDraw (DebugInfo info, Window *window)
+{
+    qassert (window, info);
+    $s                                                                                     
+	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
+	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+                                                                                           
+                                                                                          
+	if (window->finalDC) txSetAllColors (TextColor, window->finalDC);                                     
+	txSetTextAlign (TA_CENTER, window->finalDC);
+    selectFont ("Arial", window->font, window->finalDC);
+    txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
+                                                                                           
+                                                                                          
+	if (window->dc)                                                                                
+	{                                                                                           
+		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+	}                                                                                         
+}
+#define standartDraw(...) standartDraw (getDebugInfo, __VA_ARGS__);
+
+
+int standartManagerOnClick (DebugInfo info, Manager *manager)
+{
+    qassert (manager, info);
+    bool missClicked = true;
+
+	int mx = txMouseX ();
+	int my = txMouseY ();
+    int returnableVal = -1;
+
+    //if (HideIfIsNotActive) unHide ();
+
+	if (manager->advancedMode)
+	{
+		manager->clickHandle();
+		if (manager->handle.getAbsRect().inRect (mx, my))
+		{
+			manager->startCursorPos.x = mx;
+			manager->startCursorPos.y = my;
+			manager->handle.isClicked = true;
+		}
+		for (int i = manager->newButtonNum - 1; i >= 0; i--)
+		{
+			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+			{
+				clickButton (manager->pointers[i], manager);
+
+				missClicked = false;
+                returnableVal=  i;
+				if (manager->pointers[i]->advancedMode) break;
+			}
+			else
+			{
+				manager->pointers[i]->isClicked = false;
+
+				missClicked = true;
+			}
+		}
+	}
+
+	if (missClicked == true) manager->activeWindow = NULL;
+
+    return returnableVal;
+}
+#define standartManagerOnClick(...) standartManagerOnClick (getDebugInfo, __VA_ARGS__);
+
+
+void standartManagerDraw (DebugInfo info, Manager *manager)
+{
+    qassert (manager, info);
+
+    manager->controlHandle ();
+
+    //if (manager->HideIfIsNotActive && manager->activeWindow != this) 
+    //{
+        //hide ();
+    //}
+
+	txSetAllColors (manager->color, manager->finalDC);
+	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+
+
+	for (int i = 0; i < manager->newButtonNum; i++)
+	{
+		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+ 		if (manager->pointers[i]->advancedMode) 
+		{
+			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+			//printBlt (pointers[i]->finalDC);
+		}
+		if (txMouseButtons () != 1)
+		{
+			manager->pointers[i]->isClicked = false;
+		}
+	}
+
+	if (manager->getActiveWindow () != manager && manager->manager) 
+	{
+		manager->activeWindow = NULL;
+	
+    }
+}
+#define standartManagerDraw(...) standartManagerDraw (getDebugInfo, __VA_ARGS__);
+
+
+void Lay::createLay	(Vector _laySize)
+{
+    //qassert (manager, info);
+    laySize = _laySize;
+	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
+	//brightnessHDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
+
+
+	for (int y = 0; y < laySize.x; y++)
+	{
+		for (int x = 0; x < laySize.y; x++)
+		{
+			RGBQUAD* copy = &layBuf[x + y * DCMAXSIZE];
+			//copy->rgbRed      = (BYTE) 0;
+			//copy->rgbGreen    = (BYTE) 0;
+			//copy->rgbBlue     = (BYTE) 0;
+			copy->rgbReserved = (BYTE) 0;
+		}
+	}
+}
+
+
+int Lay::getDownUpCoordinats (int x, int y)
+{
+    return (int) (x + (laySize.y - y) * laySize.x); 
+}
+
+
+void swap (DebugInfo info, int &x0, int &y0)
+{
+    assert (&x0 && &y0);
+    int copy = x0;
+    x0 = y0;
+    y0 = copy;
+}
+#define swap(...) swap (getDebugInfo, __VA_ARGS__)
+
+
+void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor) 
+{
+	bool steep = false;
+	if (abs (x0 - x1) < abs (y0 - y1)) 
+	{
+		swap (x0, y0);
+		swap (x1, y1);
+		steep = true;
+	}
+	if (x0 > x1)
+	{
+		swap (x0, x1);
+		swap (y0, y1);
+	}
+	int dx = x1-x0;
+	int dy = y1-y0;
+	int derror2 = abs (dy) * 2;
+	int error2 = 0;
+	int y = y0;
+
+	for (int x = x0; x <= x1; x++)
+	{
+		if (steep) 
+		{
+			RGBQUAD* color = &layBuf[getDownUpCoordinats(y, x)];
+			color->rgbRed = txExtractColor (drawColor, TX_RED);
+			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
+			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
+			color->rgbReserved = 255;
+		} 
+		else 
+		{
+			RGBQUAD* color = &layBuf[getDownUpCoordinats(x, y)];
+			color->rgbRed = txExtractColor (drawColor, TX_RED);
+			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
+			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
+			color->rgbReserved = 255;
+		}
+		error2 += derror2;
+
+		if (error2 > dx) 
+		{
+			y += (y1 > y0 ? 1 : -1);
+
+			error2 -= dx * 2;
+		}
+	}
+}
+
+
+void Lay::rectangle (int x0, int y0, int x1, int y1)
+{
+    if (x0 > x1) swap (x0, x1);
+    if (y0 > y1) swap (y0, y1);
+    COLORREF currColor = txGetColor (lay);
+
+    for (int x = x0; x <= x1; x++)
+    {
+        //line (x, y0, x, y1);
+        
+        for (int y = y0; y <= y1; y++)
+        {
+            RGBQUAD *pixel = &layBuf[getDownUpCoordinats(x, y)];
+            pixel->rgbRed = txExtractColor (currColor, TX_RED);
+            pixel->rgbGreen = txExtractColor (currColor, TX_GREEN);
+            pixel->rgbBlue = txExtractColor (currColor, TX_BLUE);
+            pixel->rgbReserved = 255;
+        }
+    }
+   // txSetAllColors (TX_RED, lay);
+    //txRectangle (x0, y0, x1, y1, lay);
+    //printBlt (lay);
+}
+
+
+void Lay::circle (int x0, int y0, int r, COLORREF color)
+{
+    
+	for (double t = 0; t <= 1; t += 0.001)
+	{
+		double x = x0 - r + t * 2 *(r);
+		int y1 = sqrt (r * r - (x - x0) * (x - x0)) + y0;
+		int y2 = -sqrt (r * r - (x - x0) * (x - x0)) + y0;
+
+		//printf ("x: %lf y = {%lf, %lf}\n", x, y1, y2);
+		//txSetAllColors (TX_RED, lay);
+		//txSetColor (TX_RED, 2);
+		//txLine (x, y1, x, y2, lay);
+		//if (x >= 0 && y1 >= 0 && y2 >= 0)
+		line (x, y1, x, y2, color);
+	}
+}
+
+
+Window* Manager::getActiveWindow ()
+{
+	if (this == NULL) return 0;
+
+	return activeWindow;
+}
+
+
+bool Manager::addWindow (Window *window)
+{
+    assert (window);
+	if (newButtonNum >= length) return 0;
+
+	pointers[newButtonNum] = window;
+	newButtonNum++;
+
+	window->manager = this;
+	
+	return 1;
+}
+
+
 void Window::print (HDC DC)
 {
+    assert (DC);
 	draw();
 	txBitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
 }
@@ -220,11 +558,16 @@ void Window::deleteButton ()
 
 void Window::resize (Rect newRect)
 {
-	
-	if (!dc) return;
-	//compressImage (dc, {newRect.getSize().x, newRect.getSize().y}, {rect.getSize().x, rect.getSize().y});
-	if (test1) printBlt (dc);
-	rect = newRect;
+    //assert (newRect.isValid());
+	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
+	{
+		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+		txSetAllColors(color, finalDC);
+		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+		if (test1) printBlt(finalDC);
+	}
+    rect = newRect;
 }
 
 void Window::reInit ()
@@ -243,7 +586,7 @@ void Window::reInit ()
 
 void Window::resize (Vector newSize, Vector oldSize)
 {
-	
+	assert (newSize > 0 && oldSize > 0);
 	if (!dc) return;
 	//compressImage (dc, newSize, {rect.getSize().x, rect.getSize().y});
 	//if (test1) printBlt (dc);
@@ -252,6 +595,7 @@ void Window::resize (Vector newSize, Vector oldSize)
 
 void Window::setStartRect (Vector pos, Vector finishPos)
 {
+    assert (pos > 0 && finishPos > 0);
 	rect = {pos, finishPos};
 	originalRect = rect;
 }
@@ -319,38 +663,7 @@ void Manager::deleteButton ()
 
 void Manager::draw ()
 {
-	controlHandle ();
-
-    if (HideIfIsNotActive && manager->activeWindow != this) 
-    {
-        //hide ();
-    }
-
-	txSetAllColors (color, finalDC);
-	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, finalDC);
-	if (dc) txBitBlt (finalDC, 0, 0, 0, 0, dc);
-
-
-	for (int i = 0; i < newButtonNum; i++)
-	{
-		if (pointers[i]->advancedMode && pointers[i]->reDraw) pointers[i]->draw ();
- 		if (pointers[i]->advancedMode) 
-		{
-			//printBlt(finalDC);
-			txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC);
-			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
-			//printBlt (pointers[i]->finalDC);
-		}
-		if (txMouseButtons () != 1)
-		{
-			pointers[i]->isClicked = false;
-		}
-	}
-
-	if (manager->getActiveWindow () != this && manager) 
-	{
-		activeWindow = NULL;
-	}
+    standartManagerDraw (this);	
 }
 
 void Manager::clickHandle ()
@@ -429,66 +742,18 @@ void Manager::replaceWindow(int numOfWindow)
 
 }
 
-
 void Manager::onClick ()
 {
-	bool missClicked = true;
-
-	int mx = txMouseX ();
-	int my = txMouseY ();
-
-    //if (HideIfIsNotActive) unHide ();
-
-	if (advancedMode)
-	{
-		clickHandle();
-		if (handle.getAbsRect().inRect (mx, my))
-		{
-			startCursorPos.x = mx;
-			startCursorPos.y = my;
-			handle.isClicked = true;
-		}
-		for (int i = newButtonNum - 1; i >= 0; i--)
-		{
-			if (pointers[i]->getAbsRect().inRect(mx, my))
-			{
-				activeWindow = pointers[i];
-				pointers[i]->onClick ();
-				pointers[i]->isClicked = true;
-
-				missClicked = false;
-
-				if (pointers[i]->advancedMode) break;
-			}
-			else
-			{
-				pointers[i]->isClicked = false;
-
-				missClicked = true;
-			}
-		}
-	}
-
-	if (missClicked == true) activeWindow = NULL;
+    standartManagerOnClick (this);	
 }
 
-
-
-void standartDraw (Window *window)
+void clickButton (Window *window, Manager *manager)
 {
-                                                                                         
-    $s                                                                                     
-	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
-	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
-                                                                                           
-                                                                                          
-	if (window->finalDC) txSetAllColors (TextColor, window->finalDC);                                     
-	txSetTextAlign (TA_CENTER, window->finalDC);                                                    
-                                                                                           
-                                                                                          
-	if (window->dc)                                                                                
-	{                                                                                           
-		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize (), __LINE__);
-	}                                                                                         
-     
+    manager->activeWindow = window;
+	window->onClick ();
+	window->isClicked = true;
 }
+
+
+
+
