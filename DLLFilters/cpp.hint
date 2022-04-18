@@ -1,0 +1,2 @@
+﻿#define DLLFILTERS_API __declspec(dllexport)
+#define DLLFILTERS_API __declspec(dllimport)

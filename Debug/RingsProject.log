@@ -1,25 +1,25 @@
 ﻿  PowerPoint.cpp
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(55,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(56,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(98,2): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(129,46): warning C4100: 'text': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(129,28): warning C4100: 'info': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(312,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(313,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(421,22): warning C4100: 'info': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(456,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(457,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(458,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(464,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(465,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(466,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(494,29): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(495,31): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(496,30): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(512,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(513,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(520,16): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(520,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(18,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(19,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(57,2): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88,47): warning C4100: 'text': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88,29): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(122,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(123,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(231,23): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(266,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(267,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(268,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(274,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(275,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(276,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(304,29): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(305,31): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(306,30): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(322,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(323,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(330,16): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(330,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h(73,18): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h(78,19): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\Brightness\Q_Filter.h(90,50): warning C4100: 'nonConfirm': unreferenced formal parameter
@@ -30,102 +30,93 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CurvesFilter.h(117,1
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CurvesFilter.h(124,46): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CurvesFilter.h(125,50): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CurvesFilter.h(126,48): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(461,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(462,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(463,36): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(464,37): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(582,93): warning C4100: '_text': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(603,33): warning C4100: '_NewCanvasDC': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(628,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(654,32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(815,100): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(815,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(816,105): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(816,89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1147,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1152,18): warning C4458: declaration of 'text' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(194,14): message : see declaration of 'Window::text'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1171,48): warning C4458: declaration of 'dc' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(200,6): message : see declaration of 'Window::dc'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1171,75): warning C4458: declaration of 'text' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(194,14): message : see declaration of 'Window::text'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1214,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1215,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1318,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1319,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1419,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1420,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1421,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1421,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1494,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1495,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1496,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1496,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1503,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1521,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1548,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1548,6): warning C4189: 'numBeforeSlider': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1561,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1562,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1613,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1613,7): warning C4189: 'numBeforeSlider': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1612,8): warning C4189: 'changeTextLen': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1662,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1663,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1718,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1717,7): warning C4189: 'isShifted': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1793,50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1809,31): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1864,7): warning C4189: 'copyChar': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1960,18): warning C4458: declaration of 'text' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(194,14): message : see declaration of 'Window::text'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2074,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2075,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2087,11): warning C4189: 'saveCurrentHistoryNumber': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2110,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2111,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2112,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2409,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2410,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2417,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2418,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2599,43): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2600,47): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2601,45): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2656,70): warning C4100: 'tempDC': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2670,39): warning C4100: 'finalDC': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2685,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2694,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2697,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2697,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2697,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2700,160): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2695,14): warning C4189: 'comp': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2719,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2724,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2725,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2725,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2725,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2725,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2727,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2753,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2758,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2760,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2760,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2760,24): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2762,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2792,49): warning C4100: 'output': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2792,37): warning C4100: 'data': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2813,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2822,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2827,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2874,2): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2879,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2881,252): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2881,188): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2881,124): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2881,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2882,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2975,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2976,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(85,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(86,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(87,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(87,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(160,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(161,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(162,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(162,26): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(169,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(187,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(289,29): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(290,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(291,36): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(292,37): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(410,93): warning C4100: '_text': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(431,33): warning C4100: '_NewCanvasDC': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(456,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(482,32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(953,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(958,18): warning C4458: declaration of 'text' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(70,14): message : see declaration of 'Window::text'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(977,48): warning C4458: declaration of 'dc' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(76,6): message : see declaration of 'Window::dc'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(977,75): warning C4458: declaration of 'text' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(70,14): message : see declaration of 'Window::text'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1052,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1053,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1094,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1094,6): warning C4189: 'numBeforeSlider': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1107,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1108,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1159,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1159,7): warning C4189: 'numBeforeSlider': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1158,8): warning C4189: 'changeTextLen': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1208,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1209,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1264,7): warning C4189: 'deleteChar': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1263,7): warning C4189: 'isShifted': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1339,50): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1355,31): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1410,7): warning C4189: 'copyChar': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1506,18): warning C4458: declaration of 'text' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(70,14): message : see declaration of 'Window::text'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1620,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1621,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1633,11): warning C4189: 'saveCurrentHistoryNumber': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1656,12): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1657,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1658,14): warning C4244: 'initializing': conversion from 'time_t' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1955,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1956,35): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1963,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(1964,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2145,43): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2146,47): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2147,45): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2202,70): warning C4100: 'tempDC': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2233,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2242,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2245,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2245,32): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2245,25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2248,160): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2243,14): warning C4189: 'comp': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2268,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2273,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2274,59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2274,52): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2274,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2274,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2276,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2304,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2309,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2311,45): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2311,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2311,24): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2313,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2367,5): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2376,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2381,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2431,2): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2436,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2438,252): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2438,188): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2438,124): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2438,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2439,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2533,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(2534,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe

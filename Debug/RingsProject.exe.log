@@ -24147,3 +24147,161 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 971, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "library".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0042C89C (32-bit), Flags: CMdRe0, Thread: 0x8EDC (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x003FDB40 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (971):
+
+    969: 
+    970:     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+=>  971: 	assert(library);
+    972: 
+    973:     ProgrammToDll ptoDll;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 29 2022 21:52:21, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 29 2022 21:52:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 971, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "library".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E6B89C (32-bit), Flags: CMdRe0, Thread: 0x9664 (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E3D7A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (971):
+
+    969: 
+    970:     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
+=>  971: 	assert(library);
+    972: 
+    973:     ProgrammToDll ptoDll;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Mar 30 2022 18:24:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Mar 30 2022 18:24:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009EE89C (32-bit), Flags: CMdRe0, Thread: 0xC18C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0094BC30 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x009A7968 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627)
+# 2 0x009A8053 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649)
+
+# 3 0x00988EB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CLoadManager::deleteAllImages() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h (26):
+
+     24:     for (int i = 0; i < currentImagesAmount; i++)
+     25:     {
+=>   26:         if (images[i].dc) txDeleteDC (images[i].dc); 
+     27:     }
+     28: }
+
+# 4 0x009BF0A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1065):
+
+   1063: 
+   1064: 	manager->deleteButton ();
+=> 1065:     LoadManager.deleteAllImages ();
+   1066: 	 
+   1067: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13627):
+
+  13625: 
+  13626: $   HDC  dc = *pdc;
+=>13627: $   bool ok = _txBuffer_Delete (pdc);
+  13628: $   if (!ok) return false;
+  13629: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13649):
+
+  13647: bool txDeleteDC (HDC dc)
+  13648:     {
+=>13649: $1  return txDeleteDC (&dc);
+  13650:     }
+  13651: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h (26):
+
+     24:     for (int i = 0; i < currentImagesAmount; i++)
+     25:     {
+=>   26:         if (images[i].dc) txDeleteDC (images[i].dc); 
+     27:     }
+     28: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr  7 2022 18:56:23, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr  7 2022 18:56:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

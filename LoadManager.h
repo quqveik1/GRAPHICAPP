@@ -14,11 +14,18 @@ struct CLoadManager
 
 
 	HDC loadImage (const char* path);
+    void deleteAllImages ();
 
 };
 
 
-
+void CLoadManager::deleteAllImages ()
+{
+    for (int i = 0; i < currentImagesAmount; i++)
+    {
+        //if (images[i].dc) txDeleteDC (images[i].dc); 
+    }
+}
 
 
 

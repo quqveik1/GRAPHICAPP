@@ -1,5 +1,5 @@
 #pragma once
-#include "DrawBibliothek.h"
+#include "DrawBibliothek.cpp"
 
 
 struct Curves : Manager
