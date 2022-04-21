@@ -26,19 +26,20 @@ void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, H
 #define compressDraw(...) compressDraw$ (getDebugInfo, __VA_ARGS__)
 void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
 #define compressImage(...) compressImage$ (getDebugInfo, __VA_ARGS__)
-bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime);
+bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked);
 #define drag(...) drag$ (getDebugInfo, __VA_ARGS__)
-int standartManagerOnClick$ (DebugInfo info, Manager *manager);
+int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp);
 #define standartManagerOnClick(...) standartManagerOnClick$ (getDebugInfo, __VA_ARGS__);;
 void standartDraw$ (DebugInfo info, Window *window);
 #define standartDraw(...) standartDraw$ (getDebugInfo, __VA_ARGS__)
 void standartManagerDraw$ (DebugInfo info, Manager *manager);
 #define standartManagerDraw(...) standartManagerDraw$ (getDebugInfo, __VA_ARGS__)
-void clickButton (Window *window, Manager *manager);
+void clickButton (Window *window, Manager *manager, Vector mp);
 void selectFont$ (DebugInfo info, const char *text, int font, HDC dc);
 #define selectFont(...) selectFont$ (getDebugInfo, __VA_ARGS__)
 void swap$ (DebugInfo info, int &x0, int &y0);
 #define swap(...) swap$ (getDebugInfo, __VA_ARGS__)
+Vector windowMousePos(bool isThisMainFile = true);
 
 
 
@@ -82,6 +83,9 @@ struct Window
 	bool advancedMode;
 	bool reDraw;
 
+    Vector mousePos = {};
+    bool clicked = false;
+
     Window (Rect _rect = {}, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
 		rect (_rect),
 		color(_color),
@@ -117,7 +121,7 @@ struct Window
 
 	Vector getSize();
 	virtual void draw ();
-	virtual void onClick () {};
+	virtual void onClick (Vector mp) {};
 
 	virtual void deleteButton ();
 };
@@ -157,8 +161,10 @@ struct Manager : Window
     void hide ();
     void unHide ();
 
+    void controlMouse ();
+
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 
 	virtual void deleteButton () override;
 };

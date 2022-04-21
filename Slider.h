@@ -155,6 +155,10 @@ struct Slider : Manager
 
 		arrow1.finalDC = txCreateCompatibleDC (arrow1.rect.getSize().x, arrow1.rect.getSize().y);
 		arrow2.finalDC = txCreateCompatibleDC (arrow2.rect.getSize().x, arrow2.rect.getSize().y);
+
+        addWindow (&arrow1);
+        addWindow (&arrow2);
+        addWindow (&sliderQuadrate);
 		 
 
 	}
@@ -163,7 +167,7 @@ struct Slider : Manager
 	void deleteDC ();
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
                                                                                                   
 	virtual void deleteButton() override;
 

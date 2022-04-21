@@ -13,6 +13,8 @@
 #include "CurvesFilter.h"
 #include "..\Graphicapp-dll.h"
 #include "Slider.cpp"
+#include "DLLFilters\ContrastMenu.h"
+#include "TransferStructure.h"
 //#include "LoadManager.h"
 
 
@@ -118,6 +120,8 @@ struct Tool
     Vector startPos = {};
     bool workedLastTime = false;
     const int ToolSaveLen;
+
+    bool clicked = false;
 
 	Tool (const char* _name, const int _ToolSaveLen, HDC _dc = NULL) :
 		name (_name), 
@@ -238,7 +242,7 @@ struct ToolsPalette : Manager
         
 	}
 
-	virtual void onClick() override;
+	virtual void onClick(Vector mp) override;
 	virtual void draw() override;
 };
 		
@@ -315,7 +319,7 @@ struct Canvas : Manager
 
 
 	Canvas (Rect _rect, HDC _closeDC = NULL) :
-		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
+		Manager (_rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
 		canvasSize({DCMAXSIZE, DCMAXSIZE}),
 		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
@@ -332,6 +336,10 @@ struct Canvas : Manager
 		lastSavedDC = txCreateDIBSection(canvasSize.x, canvasSize.y, &canvasArr);
 
 		filter = new Filter(&canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, FilterAlgorithm);
+
+        addWindow (&closeCanvas);
+        addWindow (&scrollBarVert);
+        addWindow (&scrollBarHor);
 	}
 
 	void controlSize();
@@ -346,7 +354,7 @@ struct Canvas : Manager
 	void controlFilter();
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 	virtual void deleteButton () override;
 };
 
@@ -372,7 +380,7 @@ struct CloseButton : Window
 	{}
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
 struct ColorButton : Window
@@ -384,7 +392,7 @@ struct ColorButton : Window
 		reDraw = false;
 	}
 
-	virtual void onClick ()override;
+	virtual void onClick (Vector mp)override;
 };
 																																					    
 struct SizeButton : Window
@@ -399,7 +407,7 @@ struct SizeButton : Window
 	{}
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 
 };
 
@@ -413,7 +421,7 @@ struct CleanButton : Window
 	{}
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
 struct CanvasManager : Manager 
@@ -436,7 +444,7 @@ struct CanvasManager : Manager
 	}
 
 	virtual void draw () override;
-	virtual void onClick() override;
+	virtual void onClick(Vector mp) override;
 
 	virtual void deleteButton() override;
 };
@@ -471,7 +479,7 @@ struct History : Manager
 	}
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
 struct LaysMenu : Manager
@@ -501,7 +509,7 @@ struct LaysMenu : Manager
 	}
 
 	virtual void draw() override;
-	virtual void onClick() override;
+	virtual void onClick(Vector mp) override;
 };
 
 
@@ -526,7 +534,7 @@ struct OpenManager : Window
     }
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
 struct StringButton : Window
@@ -587,7 +595,7 @@ struct NumChange : Manager
 	{}
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
 struct BrightnessButton : Manager
@@ -624,7 +632,7 @@ struct BrightnessButton : Manager
 
 
 	virtual void draw () override;
-	virtual void onClick () override;
+	virtual void onClick (Vector mp) override;
 };
 
  
@@ -654,7 +662,7 @@ struct TouchButton : Window
     {
     }
 
-    virtual void onClick () override;
+    virtual void onClick (Vector mp) override;
 };
 
 struct List : Manager
@@ -692,7 +700,7 @@ struct List : Manager
     void addSubList (List *subList, const char *ListText);
 
     virtual void draw() override;
-	virtual void onClick() override;
+	virtual void onClick(Vector mp) override;
 };
 
 
@@ -714,7 +722,11 @@ void printfDCS (const char *str = "");
 int main ()
 {
 	//_txWindowStyle &= ~WS_CAPTION;
-	txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+	MAINWINDOW = txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+
+    TransferData Data;
+    Data.MAINWINDOW = MAINWINDOW;
+
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
 
@@ -779,15 +791,24 @@ int main ()
     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
 	assert(library);
 
+    HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
+    assert (filtersLibrary);
+
+    Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(filtersLibrary, "createContrastMenu");
+    assert (createContrastMenu);
+
     ProgrammToDll ptoDll;
 
     //ProgrammToDll data = {manager, NULL};
 
     ///getDataFromProgramm (data);
-
+    ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+    manager->addWindow(contrastMenu);
     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
-	//manager->addWindow(contrastMenu);  
-	
+	//  
+
+	ContrastMenu *brightnessMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
+    manager->addWindow(brightnessMenu);
 	//ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
 	//manager->addWindow(brightnessMenu);
 
@@ -822,8 +843,8 @@ int main ()
         manager->addWindow (filters);
 
         openWindows->addSubList (filters, "Фильтры");
-            //filters->addNewItem (contrastMenu, NULL, "Контрастный фильтр");
-            //filters->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
+            filters->addNewItem (contrastMenu, NULL, "Контрастный фильтр");
+            filters->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
             filters->addNewItem (curves, NULL, "Кривые");
          
 
@@ -926,13 +947,14 @@ void List::draw()
     }
 }
 
-void List::onClick ()
+void List::onClick (Vector mp)
 {
-    int clikedButtonNum = standartManagerOnClick (this);
+    mousePos = mp;
+    int clikedButtonNum = standartManagerOnClick (this, mp);
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
     {
         //printf ("last: %d, current: %d\n", lastClickedItemNum, clikedButtonNum);
-        if (lastClickedItemNum >= 0 && items[lastClickedItemNum].openManager->advancedMode && !mayFewWindowsBeOpenedAtTheSameTime) clickButton (pointers[lastClickedItemNum], this);
+        if (lastClickedItemNum >= 0 && items[lastClickedItemNum].openManager->advancedMode && !mayFewWindowsBeOpenedAtTheSameTime) clickButton (pointers[lastClickedItemNum], this, mp);
         lastClickedItemNum = clikedButtonNum;
     }
 
@@ -1004,7 +1026,7 @@ Vector List::getNewSubItemCoordinats ()
 }
 
 
-void TouchButton::onClick ()
+void TouchButton::onClick (Vector mp)
 {
     if (!isClicked) *flag = true;
 }
@@ -1046,23 +1068,23 @@ void BrightnessButton::draw ()
 			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfSecondFilterValue / 255), finalDC);
 }
 
-void BrightnessButton::onClick ()
+void BrightnessButton::onClick (Vector mp)
 {
 	if (!advancedMode) return;
-	int mx = txMouseX ();
-	int my = txMouseY ();
+	int mx = mp.x;
+	int my = mp.y;
 
-	if (handle.getAbsRect().inRect (mx, my))
+	if (handle.rect.inRect (mx, my))
 	{
 			startCursorPos.x = mx;
 			startCursorPos.y = my;
 			handle.isClicked = true;
 	}
 
-	if (SecondFilterValueSlider.getAbsRect().inRect (mx, my) && !isClicked) SecondFilterValueSlider.onClick ();		
-	if (FirstFilterValueSlider.getAbsRect().inRect (mx, my) && !isClicked) FirstFilterValueSlider.onClick ();		
-	if (closeButton.getAbsRect().inRect (mx, my) && !isClicked) advancedMode = false;
-	if (confirmButton.getAbsRect().inRect (mx, my) && !isClicked) 
+	if (SecondFilterValueSlider.rect.inRect (mx, my) && !isClicked) SecondFilterValueSlider.onClick (mp - SecondFilterValueSlider.rect.pos);		
+	if (FirstFilterValueSlider.rect.inRect (mx, my) && !isClicked) FirstFilterValueSlider.onClick (mp - FirstFilterValueSlider.rect.pos);		
+	if (closeButton.rect.inRect (mx, my) && !isClicked) advancedMode = false;
+	if (confirmButton.rect.inRect (mx, my) && !isClicked) 
 	{
 		confirmFilter = true;
 		//SecondFilterValueSlider.maxNum = Brightness;
@@ -1095,14 +1117,14 @@ void NumChange::draw ()
 	slider.draw ();
 	//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 
-	if (txMouseButtons () != 1 && plusNum.isClicked  == true) plusNum.isClicked = false;
-	if (txMouseButtons () != 1 && minusNum.isClicked == true) minusNum.isClicked = false;
+	if (clicked != 1 && plusNum.isClicked  == true) plusNum.isClicked = false;
+	if (clicked != 1 && minusNum.isClicked == true) minusNum.isClicked = false;
 
 	if (manager->activeWindow != this) activeWindow = NULL;
 }
 
 
-void NumChange::onClick ()
+void NumChange::onClick (Vector mp)
 {
 	int mx = txMouseX ();
 	int my = txMouseY ();
@@ -1117,7 +1139,6 @@ void NumChange::onClick ()
 		activeWindow = &plusNum;
 
 		if (*num >= maxNum) return;
-
 		if ((*num == 9) || (*num == 99) || (*num == 999) || (*num == 9999) && !plusNum.isClicked && *num < maxNum) //fix?!
 		{
 			stringButton.textLen++;
@@ -1127,7 +1148,7 @@ void NumChange::onClick ()
 		{
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
-		plusNum.onClick ();
+		//plusNum.onClick ();
 		plusNum.isClicked = true;
 	}
 
@@ -1146,7 +1167,7 @@ void NumChange::onClick ()
 		{
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
-		minusNum.onClick ();
+		//minusNum.onClick ();
 		minusNum.isClicked = true;
 	}
 
@@ -1158,7 +1179,7 @@ void NumChange::onClick ()
 		bool changeTextLen = false;
 		int numBeforeSlider = *num;
 
-		slider.onClick();
+		//slider.onClick();
 
 		//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 	}
@@ -1201,12 +1222,13 @@ void ToolsPalette::draw()
 	//handle.print(finalDC);
 }
 
-void ToolsPalette::onClick ()
+void ToolsPalette::onClick (Vector mp)
 {
 	bool missClicked = true;
 
-	int mx = txMouseX();
-	int my = txMouseY();
+    mousePos = mp;
+	int mx = mp.x;
+	int my = mp.y;
 	clickHandle();
 	
 
@@ -1229,11 +1251,12 @@ void ToolsPalette::onClick ()
 		}
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
-			if (pointers[i]->getAbsRect().inRect(mx, my))
+			if (pointers[i]->rect.inRect(mx, my))
 			{
 				activeWindow = pointers[i];
-				pointers[i]->onClick();
-				pointers[i]->isClicked = true;
+                clickButton (pointers[i], this, mp);
+				//pointers[i]->onClick(mp - pointers[i]->rect.pos);
+				//pointers[i]->isClicked = true;
 				DrawingMode = i + 1;
 				lastSelected = i;
 
@@ -1424,7 +1447,7 @@ void shiftArrBack (char arr[], int length)
 }
 
 
-void OpenManager::onClick ()
+void OpenManager::onClick (Vector mp)
 {
 	if (!isClicked)
 	{
@@ -1453,13 +1476,22 @@ void Engine (Manager *manager)
 	{
 		txSetAllColors (BackgroundColor);
 		txRectangle (0, 0, 2000, 2000);
+
+        Vector mp = {txMouseX (), txMouseY ()};
+        manager->mousePos = mp;
 		manager->draw ();
 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
 		{
-			manager->onClick ();
+            
+            manager->clicked = 1;
+			manager->onClick (mp);
 			if (!IsRunning) break;
 		}
+        else
+        {
+            manager->clicked = 0;
+        }
 
 		
 		txSleep (0);
@@ -1475,8 +1507,9 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
-void LaysMenu::onClick ()
+void LaysMenu::onClick (Vector mp)
 {
+    mousePos = mp;
     if (advancedMode)
     {
 
@@ -1489,7 +1522,7 @@ void LaysMenu::onClick ()
 			    for (int i = 0; i < ((Canvas*)canvasManager->activeWindow)->currentHistoryLength; i++)
 			    {
 				    Rect button = {.pos = {(double)i, handle.rect.getSize().y + i * sectionHeight}, .finishPos = {rect.getSize().x, handle.rect.getSize().y +  (i + 1) * sectionHeight}};
-                    if (button.inRect (getRelativeMousePos().x, getRelativeMousePos().y))
+                    if (button.inRect (mp))
                     {
                         ((Canvas*)canvasManager->activeWindow)->activeLayNum = i;
                     }
@@ -1615,10 +1648,11 @@ void History::draw ()
 }
 
 
-void History::onClick ()
+void History::onClick (Vector mp)
 {
-	int mx = txMouseX();
-	int my = txMouseY ();
+    mousePos = mp;
+	int mx = mp.x;
+	int my = mp.y;
 	if (advancedMode && !isClicked)
 	{
 		clickHandle ();
@@ -1628,7 +1662,7 @@ void History::onClick ()
 			for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
 			{
 					Rect button = {.pos = {getAbsCoordinats().x + i, getAbsCoordinats().y + handle.rect.getSize().y + i *toolHDCSize}, .finishPos = {getAbsCoordinats().x + rect.getSize().x, getAbsCoordinats().y + handle.rect.getSize().y +  (i + 1) * toolHDCSize}};
-					if (button.inRect (mx, my))
+					if (button.inRect (txMouseX(), txMouseY()))
 					{
 						int saveCurrentHistoryNumber = canvasManager->activeCanvas->currentHistoryNumber;
 						canvasManager->activeCanvas->currentHistoryNumber -= (i);
@@ -1715,6 +1749,8 @@ void CanvasManager::draw ()
 	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
 
+    controlMouse ();
+
 	if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
 	if (addNewCanvas)
 	{
@@ -1722,19 +1758,22 @@ void CanvasManager::draw ()
         addNewCanvas = false;
 	}
 
+    if (key (VK_SPACE)) _getch();
+    standartManagerDraw (this);
 
 
+    /*
 	for (int i = 0; i < newButtonNum; i++)
 	{
 		pointers[i]->draw ();
 
  		if (pointers[i]->advancedMode) txBitBlt (finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDC); 
 
-		if (txMouseButtons () != 1)
+		if (clicked != 1)
 		{
 			pointers[i]->isClicked = false;
 		}
-	}
+	}  */
 
 	if (manager->getActiveWindow () != this && manager) 
 	{
@@ -1742,10 +1781,10 @@ void CanvasManager::draw ()
 	}
 }
 
-void CanvasManager::onClick()
+void CanvasManager::onClick(Vector mp)
 {
-
-    int clickedCellNum = standartManagerOnClick(this);
+    mousePos = mp;
+    int clickedCellNum = standartManagerOnClick(this, mp);
     if (clickedCellNum >= 0) replaceWindow (clickedCellNum);
 
     /*
@@ -1755,7 +1794,8 @@ void CanvasManager::onClick()
 
 		for (int i = newButtonNum - 1; i >= 0; i--)
 		{
-			if (pointers[i]->getAbsRect().inRect(mx, my))
+			if (pointers[i]->
+           ().inRect(mx, my))
 			{
 				activeWindow = pointers[i];
 				activeCanvas = (Canvas*)pointers[i];
@@ -1820,6 +1860,8 @@ void ProgressBar::draw()
 
 void Canvas::draw ()
 {
+
+    controlMouse();
 	//assert (canvas);
 	txSetAllColors (BackgroundColor, finalDC);
 	if (!nonConfirmFilter)
@@ -1840,14 +1882,14 @@ void Canvas::draw ()
 		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
 	}
 
-    currentDate->absMouseCoordinats = {txMouseX(), txMouseY ()};
+    //currentDate->absMouseCoordinats = {txMouseX(), txMouseY ()};
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
     currentDate->gummiThickness = GummiThickness;
     currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
 
-     drawLay ();
+    drawLay ();
 	
 
 
@@ -2009,7 +2051,7 @@ void Filter::reStartCount()
 } */ 
  
 
-void SizeButton::onClick ()
+void SizeButton::onClick (Vector mp)
 {
 	if (sizeType > 0)
 	{
@@ -2021,7 +2063,7 @@ void SizeButton::onClick ()
 	}
 }
 
-void CloseButton::onClick ()
+void CloseButton::onClick (Vector mp)
 {
 	IsRunning = false;
 }
@@ -2109,7 +2151,7 @@ void Canvas::drawLay ()
 		cursorPos.x = txMouseX (); 
 		cursorPos.y = txMouseY (); 
 	}
-	if (txMouseButtons () != 1)
+	if (clicked != 1)
 	{
 		lay[activeLayNum].isClicked = false;
 	}
@@ -2237,7 +2279,7 @@ bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 
     //printf ("1");
     
-    if (txMouseButtons () != 1 || pos != startPos) 
+    if (clicked != 1 || pos != startPos) 
     {
         txSetAllColors(data->backGroundColor, lay->lay, data->size.x);
         bool comp = data->backGroundColor == TX_WHITE;
@@ -2268,7 +2310,7 @@ bool RectangleTool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC
     txSetAllColors(data->color, tempDC, data->size.x);       
     txRectangle (startPos.x, startPos.y, pos.x, pos.y, tempDC);
 
-    if (txMouseButtons () == 2)
+    if (clicked == 2)
     {
         txSetAllColors(data->color, lay->lay, data->size.x);       
         lay->rectangle (startPos.x, startPos.y, pos.x, pos.y);
@@ -2314,7 +2356,7 @@ bool Point::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
         pointSave->addPoint (saveTool);
     }
     
-    if (txMouseButtons () != 1) 
+    if (clicked != 1) 
     { 
         *((PointSave*)output) = *pointSave;
 
@@ -2371,7 +2413,7 @@ bool Tool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 
     //printf ("1");
     
-    if (txMouseButtons () != 1 || pos != startPos) 
+    if (clicked != 1 || pos != startPos) 
     {
         txSetAllColors(data->color, lay->lay, data->size.x);
 	    txEllipse (pos.x - data->size.x + data->canvasCoordinats.x, pos.y - data->size.y + data->canvasCoordinats.y, pos.x + data->size.x + data->canvasCoordinats.x, pos.y + data->size.y + data->canvasCoordinats.y, lay->lay);
@@ -2525,35 +2567,39 @@ void Canvas::deleteButton ()
 	
 }
 
-void Canvas::onClick ()
+void Canvas::onClick (Vector mp)
 {
 	txSetAllColors ( drawColor);
-	lastClick = { .x = txMouseX() - getAbsCoordinats().x, .y = txMouseY() - getAbsCoordinats().y };
+	lastClick = mp;
+    mousePos = mp;
 	
-	int mx = txMouseX();
-	int my = txMouseY();
+	
+    int mx = mp.x;
+    int my = mp.y;
 
 	if (manager->activeWindow == this)
 	{
-		if (scrollBarVert.getAbsRect().inRect(mx, my))
+		if (scrollBarVert.rect.inRect(mx, my))
 		{
-			scrollBarVert.onClick();
+            clickButton (&scrollBarVert, this, mousePos);
+			//scrollBarVert.onClick(mp - scrollBarVert.rect.pos);
 			return;
 		}
-		if (scrollBarHor.getAbsRect().inRect(mx, my))
+		if (scrollBarHor.rect.inRect(mx, my))
 		{
-			scrollBarHor.onClick();
+            clickButton (&scrollBarHor, this, mousePos);
+			//scrollBarHor.onClick(mp - scrollBarHor.rect.pos);
 			return;
 		}
 
-		if (closeCanvas.getAbsRect().inRect(mx, my))
+		if (closeCanvas.rect.inRect(mx, my))
 		{
 			advancedMode = false;
 			return;
 		}
 	}
 
-	
+	clickHandle ();
 	
 	if (!(isClicked) && manager->activeWindow == this)
 	{
@@ -2561,12 +2607,11 @@ void Canvas::onClick ()
 		{
 			if (resizingPlace.inRect(lastClick.x, lastClick.y))
 			{
-				startResizingCursor = { (double)mx, (double)my };
-				isResizing = true;
+				//startResizingCursor = { (double)mx, (double)my };
+				//isResizing = true;
 				return;
 			}
-			startCursorPos = { (double)mx, (double)my };
-			handle.isClicked = true;
+			
 			return;
 		}
 
@@ -2592,14 +2637,14 @@ void Canvas::onClick ()
     
 }
 
-void ColorButton::onClick ()
+void ColorButton::onClick (Vector mp)
 {
 	DrawColor = color;
 }
 
 
 
-void CleanButton::onClick ()
+void CleanButton::onClick (Vector mp)
 {
 	mainCanvas->clearBackground = true;
 }

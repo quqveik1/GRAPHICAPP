@@ -4,6 +4,7 @@
 #include "dllmain.h"
 //#include "..\DrawBibliothek.h"
 
+TransferData DATA = {};
 
 
 
@@ -21,6 +22,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         break;
     }
     return TRUE;
+}
+
+Window *createContrastMenu (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))
+{
+    DATA = data;
+    MAINWINDOW = data.MAINWINDOW;
+    return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm);
 }
 
 

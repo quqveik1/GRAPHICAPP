@@ -38,13 +38,13 @@ struct Curves : Manager
     void countPermutate ();
 
     virtual void draw() override;
-    virtual void onClick () override;
+    virtual void onClick (Vector mp) override;
 };
 
-void Curves::onClick ()
+void Curves::onClick (Vector mp)
 {
     clickHandle();
-    Vector mPos = getRelativeMousePos();
+    Vector mPos = mp;
 
     for (int i = 0; i < numberOfPoints; i++)
     {
@@ -76,7 +76,7 @@ void Curves::draw()
     if (activePointNum >= 0 )
     {
         //printf ("[num: %d|pos: {%lf, %lf}]  ", activePointNum, points[activePointNum].x, points[activePointNum].y);
-        if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime))
+        if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime, clicked))
         {
             activePointNum = -1;
             countPermutate ();

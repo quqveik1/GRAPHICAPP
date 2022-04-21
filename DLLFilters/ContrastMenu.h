@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\DrawBibliothek.h"
+#include "..\Slider.cpp";
 
 
 struct ContrastMenu : Manager
@@ -27,5 +28,5 @@ struct ContrastMenu : Manager
 	}
 
 	virtual void draw() override;
-	virtual void onClick() override;
+	virtual void onClick(Vector mp) override;
 };

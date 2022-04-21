@@ -2,41 +2,50 @@
 #include "ContrastMenu.h"
 
 
-void ContrastMenu::onClick()
+void ContrastMenu::onClick(Vector mp)
 {
-	if (!advancedMode) return;
-	int mx = txMouseX();
-	int my = txMouseY();
+    mousePos = mp;
+    //printf ("It is working");
+   
+	//if (!advancedMode) return;
+	//int my = getRelativeMousePos().y;
 
-	if (handle.getAbsRect().inRect(mx, my))
-	{
-		startCursorPos.x = mx;
-		startCursorPos.y = my;
-		handle.isClicked = true;
-	}
+    //int absCoordinats = getAbsCoordinats().y;
+    //int absCoordinatsx = getAbsCoordinats().x;
+    //int mrealY = txMouseY();
+    //int mrealX = txMouseX();
+    //Vector WindowMousePos = windowMousePos (false);
 
-	if (upSlider.getAbsRect().inRect(mx, my) && !isClicked)
+    //txSetAllColors (TX_RED, finalDC);
+    //txRectangle (0, 0, 100, 100, finalDC);
+
+	clickHandle ();
+
+	if (upSlider.rect.inRect(mp) && !isClicked)
 	{
-		upSlider.onClick();
+        clickButton (&upSlider, this, mousePos);
+		//upSlider.onClick(mp - upSlider.rect.pos);
 	}
-	if (downSlider.getAbsRect().inRect(mx, my) && !isClicked)
+	if (downSlider.rect.inRect(mp) && !isClicked)
 	{
-		downSlider.onClick();
+        clickButton (&downSlider, this, mousePos);
+		//downSlider.onClick(mp - downSlider.rect.pos);
 	}
 	//if (closeButton.getAbsRect().inRect(mx, my) && !isClicked) advancedMode = false;
-	if (confirmButton.getAbsRect().inRect(mx, my) && !isClicked)
+	if (confirmButton.rect.inRect(mp) && !isClicked)
 	{
 		confirmFilter = true;
 		//brightnessSlider.maxNum = Brightness;
 		//brightnessSlider.maxNum = 255;
 		//FirstFilterValueSlider.maxNum = FirstFilterValue;
 	}
+   
 }
 
 void ContrastMenu::draw()
 {
 
-	if (!advancedMode) return;
+	//if (!advancedMode) return;
 
 	if (txMouseButtons() != 1 && manager->activeWindow == this)
 	{
@@ -45,6 +54,8 @@ void ContrastMenu::draw()
 	}
 
 	controlHandle();
+    controlMouse ();
+    //printf ("Was drawn");
 
 	if (dc) copyOnDC(0, 0, dc);
 	upSlider.draw();
@@ -71,6 +82,8 @@ void ContrastMenu::draw()
 	{
 		FilterAlgorithm = algorithm;
 	}
+     //txSetAllColors (TX_RED, finalDC);
+    //txRectangle (0, 0, 100, 100, finalDC);
 
 	//txSetFillColor(TX_RED);
 	//txRectangle(300, 300, 400, 400);

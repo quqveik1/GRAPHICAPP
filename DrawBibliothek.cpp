@@ -11,7 +11,7 @@ void txSetAllColors$ (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int 
 	txSetColor (color, thickness, dc);
 }
 
-bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime)
+bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked)
 {
     qassert (objPos && lastTimePos, info);
 
@@ -34,7 +34,7 @@ bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLas
 
         
 	}
-	if (txMouseButtons () != 1)
+	if (clicked != 1)
 	{
 		*dragedLastTime = false;
         return true;//true if finished
@@ -114,13 +114,14 @@ void standartDraw$ (DebugInfo info, Window *window)
 
 
 
-int standartManagerOnClick$ (DebugInfo info, Manager *manager)
+int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 {
     qassert (manager, info);
+
+    manager->mousePos = mp;
+
     bool missClicked = true;
 
-	int mx = txMouseX ();
-	int my = txMouseY ();
     int returnableVal = -1;
 
     //if (HideIfIsNotActive) unHide ();
@@ -128,17 +129,11 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager)
 	if (manager->advancedMode)
 	{
 		manager->clickHandle();
-		if (manager->handle.getAbsRect().inRect (mx, my))
-		{
-			manager->startCursorPos.x = mx;
-			manager->startCursorPos.y = my;
-			manager->handle.isClicked = true;
-		}
 		for (int i = manager->newButtonNum - 1; i >= 0; i--)
 		{
-			if (manager->pointers[i]->getAbsRect().inRect(mx, my))
+			if (manager->pointers[i]->rect.inRect(mp))
 			{
-				clickButton (manager->pointers[i], manager);
+				clickButton (manager->pointers[i], manager, mp);
 
 				missClicked = false;
                 returnableVal=  i;
@@ -175,9 +170,13 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
+    manager->controlMouse ();
+
 
 	for (int i = 0; i < manager->newButtonNum; i++)
 	{
+        
+
 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
  		if (manager->pointers[i]->advancedMode) 
 		{
@@ -185,7 +184,7 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
 			//printBlt (pointers[i]->finalDC);
 		}
-		if (txMouseButtons () != 1)
+		if (manager->clicked != 1)
 		{
 			manager->pointers[i]->isClicked = false;
 		}
@@ -343,7 +342,11 @@ Window* Manager::getActiveWindow ()
 bool Manager::addWindow (Window *window)
 {
     assert (window);
-	if (newButtonNum >= length) return 0;
+	if (newButtonNum >= length)
+    {
+        //printf ("!!!Unable to add new Window!!!\n");
+        return 0;
+    }
 
 	pointers[newButtonNum] = window;
 	newButtonNum++;
@@ -425,7 +428,9 @@ void Window::setStartRect (Vector pos, Vector finishPos)
 }
 Vector Window::getRelativeMousePos (bool coordinatsWithHandle)
 {
-    return {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};    
+    POINT mousePos = {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};
+    ScreenToClient (MAINWINDOW, &mousePos); 
+    return {(double)mousePos.x, (double)mousePos.y};
 }
 
 Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)
@@ -446,7 +451,19 @@ Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)
 
 	}
 
-	return coordinats;
+
+    return coordinats;
+}
+
+Vector windowMousePos(bool isThisMainFile /* = true*/)
+{
+    POINT mousePos = {(double)txMouseX(), (double)txMouseY()};
+
+    if (!isThisMainFile)
+    {
+        ScreenToClient (MAINWINDOW, &mousePos);
+    }
+    return {(double)mousePos.x, (double)mousePos.y};
 }
 
 Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
@@ -471,6 +488,7 @@ Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 
 	coordinats.finishPos = rect.finishPos + (coordinats.pos - rect.pos);
 
+
 	return coordinats;
 }
 
@@ -492,7 +510,7 @@ void Manager::draw ()
 
 void Manager::clickHandle ()
 {
-	if (handle.getAbsRect(true).inRect (txMouseX (), txMouseY ()))
+	if (handle.rect.inRect (mousePos))
 	{
 		startCursorPos.x = txMouseX ();
 		startCursorPos.y = txMouseY ();
@@ -502,18 +520,22 @@ void Manager::clickHandle ()
 
 void Manager::controlHandle ()
 {
+    
 	if (handle.isClicked)
 	{
+        //printf ("%d", txMouseX());
 		rect.pos.x += txMouseX () - startCursorPos.x;
 		rect.pos.y += txMouseY () - startCursorPos.y;
 		rect.finishPos.x += txMouseX () - startCursorPos.x;
 		rect.finishPos.y += txMouseY () - startCursorPos.y;
 		startCursorPos.x = txMouseX (); 
 		startCursorPos.y = txMouseY (); 
+        //printf ("mouse == 1\n");
 	}
-	if (txMouseButtons () != 1)
+	if (clicked != 1)
 	{
 		handle.isClicked = false;
+        //printf ("mouse == 0\n");
 	}
 	//drawOnFinalDC (handle);
 }
@@ -547,6 +569,22 @@ void Manager::unHide ()
     advancedMode = true;
 }
 
+void Manager::controlMouse ()
+{
+    for (int i = 0; i < newButtonNum; i++)
+    {
+        assert (pointers[i]);
+        pointers[i]->mousePos = mousePos - pointers[i]->rect.pos;
+    }
+
+    if (clicked == 1) return;
+    for (int i = 0; i < newButtonNum; i++)
+    {
+        pointers[i]->clicked = 0;
+        pointers[i]->isClicked = 0;
+    }
+}
+
 void Manager::replaceWindow(int numOfWindow)
 {
 	Window* copyOfStartWindow = pointers[numOfWindow];
@@ -566,14 +604,15 @@ void Manager::replaceWindow(int numOfWindow)
 
 }
 
-void Manager::onClick ()
+void Manager::onClick (Vector mp)
 {
-    standartManagerOnClick (this);	
+    standartManagerOnClick (this, mp);	
 }
 
-void clickButton (Window *window, Manager *manager)
+void clickButton (Window *window, Manager *manager, Vector mp)
 {
     manager->activeWindow = window;
-	window->onClick ();
+    window->clicked = true;
+	window->onClick (mp - window->rect.pos);
 	window->isClicked = true;
 }

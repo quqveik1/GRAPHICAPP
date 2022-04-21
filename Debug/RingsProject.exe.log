@@ -24305,3 +24305,89 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 783, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "createContrastMenu".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E4A86C (32-bit), Flags: CMdRe0, Thread: 0x8E5C (Main), GetLastError(): 127 (Не найдена указанная процедура). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E1B8DE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (783):
+
+    781: 
+    782:     Window *(*createContrastMenu) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(library, "createContrastMenu");
+=>  783:     assert (createContrastMenu);
+    784: 
+    785:     ProgrammToDll ptoDll;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 18 2022 19:48:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 18 2022 19:48:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 783, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "filtersLibrary".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0066A86C (32-bit), Flags: CMdRe0, Thread: 0x86F0 (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0063B8D7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (783):
+
+    781: 
+    782:     HMODULE filtersLibrary = LoadLibrary ("DLLFilters\\Debug\\DLLFilters.dll");
+=>  783:     assert (filtersLibrary);
+    784: 
+    785:     Window *(*createContrastMenu) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(filtersLibrary, "createContrastMenu");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 18 2022 19:51:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 18 2022 19:51:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#528) at 0x011CD068.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x011CD068 is 0 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#530) at 0x0129DA08.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x0129DA08 is 0 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#530) at 0x016AFA88.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x016AFA88 is 0 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()

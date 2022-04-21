@@ -1,42 +1,64 @@
 ﻿  dllmain.cpp
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(8,9): error C3646: 'upSlider': unknown override specifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(8,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(9,9): error C3646: 'downSlider': unknown override specifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(9,19): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(18,3): error C2614: 'ContrastMenu': illegal member initialization: 'upSlider' is not a base or member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(19,3): error C2614: 'ContrastMenu': illegal member initialization: 'downSlider' is not a base or member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(23,14): error C2065: 'upSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(24,14): error C2065: 'downSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(26,32): error C2065: 'LoadManager': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(26,1): error C2660: 'compressImage': function does not take 3 arguments
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(21,6): message : see declaration of 'compressImage'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(8,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(9,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(18,6): error C2065: 'upSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(20,3): error C2065: 'upSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(22,6): error C2065: 'downSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(24,3): error C2065: 'downSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(50,2): error C2065: 'upSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(52,2): error C2065: 'upSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(52,2): error C2661: '`anonymous-namespace'::TX::txBitBlt': no overloaded function takes 1 arguments
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(54,2): error C2065: 'downSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(56,2): error C2065: 'downSlider': undeclared identifier
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(56,2): error C2661: '`anonymous-namespace'::TX::txBitBlt': no overloaded function takes 1 arguments
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(65,34): error C2664: 'void txSetAllColors(DebugInfo,COLORREF,HDC,int)': cannot convert argument 1 from 'const COLORREF' to 'DebugInfo'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp(65,34): message : No constructor could take the source type, or constructor overload resolution was ambiguous
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(19,6): message : see declaration of 'txSetAllColors'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(49,46): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(50,50): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(51,48): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(63,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(64,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(68,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(69,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(73,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(74,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(88,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(89,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(93,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(94,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(98,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(99,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(124,31): warning C4100: 'mp': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(18,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(19,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(57,2): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88,47): warning C4100: 'text': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88,29): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(230,23): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(265,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(266,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(267,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(273,20): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(274,22): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(275,21): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(303,29): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(304,31): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(305,30): warning C4244: '=': conversion from 'unsigned int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(321,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(322,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(329,16): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(329,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(431,22): warning C4458: declaration of 'mousePos' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(86,12): message : see declaration of 'Window::mousePos'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(431,42): warning C4838: conversion from 'double' to 'LONG' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(431,42): warning C4244: 'initializing': conversion from 'double' to 'LONG', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(431,107): warning C4838: conversion from 'double' to 'LONG' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(431,107): warning C4244: 'initializing': conversion from 'double' to 'LONG', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(460,31): warning C4838: conversion from 'double' to 'LONG' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(460,31): warning C4244: 'initializing': conversion from 'double' to 'LONG', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(460,51): warning C4838: conversion from 'double' to 'LONG' requires a narrowing conversion
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(460,51): warning C4244: 'initializing': conversion from 'double' to 'LONG', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(87,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(88,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(88,6): warning C4189: 'my': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(87,6): warning C4189: 'mx': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(163,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(164,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(173,13): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(194,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(19,100): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(19,85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(20,105): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h(20,89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(13,31): warning C4100: 'lpReserved': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(11,32): warning C4100: 'hModule': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(57,46): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(58,50): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(59,48): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(71,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(72,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(76,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(77,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(81,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(82,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(96,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(97,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(101,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(102,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(106,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(107,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(89,75): warning C4100: 'SecondValue': unreferenced formal parameter
+     Creating library C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.lib and object C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.exp
+  DLLFilters.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll

@@ -82,9 +82,12 @@ void Slider::draw ()
 	if (maxNum - minNum != 0) kScale = axis / (maxNum - minNum);
 	else kScale = 0;
 
-	int mx = txMouseX ();
-	int my = txMouseY ();
-	Vector mousePos =  {mx, my};
+    controlMouse ();
+
+	int mx = mousePos.x;
+	int my = mousePos.y;
+    //printf ("{%d}\n", mx);
+	//mousePos =  {mx, my};
 
 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, arrow2.finalDC);
 
@@ -94,7 +97,7 @@ void Slider::draw ()
 	//bottomSideOfQuadrateSlider.draw ();
 	//txBitBlt (finalDC, bottomSideOfQuadrateSlider.rect.pos.x, bottomSideOfQuadrateSlider.rect.pos.y, rect.getSize ().x, rect.getSize ().y, bottomSideOfQuadrateSlider.finalDC);
 
-	if (txMouseButtons () != 1) sliderQuadrate.isClicked = false;
+	if (isClicked == 0) sliderQuadrate.isClicked = false;
 
 	
 	//copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
@@ -142,7 +145,7 @@ void Slider::draw ()
 
 	//printBlt (sliderQuadrate.dc);
 	sliderQuadrate.draw ();
-	txSetAllColors (TX_RED);
+	//txSetAllColors (TX_RED);
 	//txRectangle (0, 0, 1000 ,1000);
 	//txBitBlt (txDC(), 0, 0, 50, sliderQuadrate.rect.getSize ().y, sliderQuadrate.finalDC );
 	
@@ -155,27 +158,31 @@ void Slider::draw ()
 	//printBlt (finalDC);
 }
 
-void Slider::onClick ()
+void Slider::onClick (Vector mp)
 {
-	int mx = txMouseX ();
-	int my = txMouseY ();
-	Vector mousePos =  {mx, my};
+	int mx = mp.x;
+	int my = mp.y;
+    mousePos = mp;
+	//Vector mousePos =  {mx, my};
 
 
 
-	if (sliderQuadrate.getAbsRect().inRect (mx, my) && !isClicked)
+	if (sliderQuadrate.rect.inRect (mx, my) && !isClicked)
 	{
-		cursorStartPosition = {(double) mx, (double) my};
+		cursorStartPosition = mp;
 		tempNum = *num;
+        sliderQuadrate.clicked = true;
 		sliderQuadrate.isClicked = true;
 	}
 
-	if (arrow1.getAbsRect().inRect (mx, my) && *num > minNum && !isClicked)
+	if (arrow1.rect.inRect (mx, my) && *num > minNum && !isClicked)
 	{
+        arrow1.clicked = true;
 		(*num)--;
 	}
-	if (arrow2.getAbsRect().inRect (mx, my) && *num < maxNum && !isClicked)
+	if (arrow2.rect.inRect (mx, my) && *num < maxNum && !isClicked)
 	{
+        arrow2.clicked = true;
 		(*num)++;
 	}
 }
