@@ -6,6 +6,12 @@
 
 TransferData DATA = {};
 
+struct DLLFilterControler : AbstractDLLFilter
+{
+    virtual void apply (HDC dc, Vector size) { printf ("Я вызвалась\n"); };
+};
+
+
 
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -24,11 +30,27 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
-Window *createContrastMenu (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))
+AbstractAppData * TheApp = NULL;
+
+DLLExportData *initDLL (AbstractAppData * app)
 {
-    DATA = data;
-    MAINWINDOW = data.MAINWINDOW;
-    return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm);
+    TheApp = app;
+    DLLExportData data;
+    data.createContrastWindow = createContrastMenu;
+    return &data;
+}
+
+/*
+DLLData* initDll()
+{
+    DLLData *transferData = new DLLData;
+    transferData->createContrastMenu = createContrastMenu;
+    return transferData;
+}*/
+
+Window *createContrastMenu (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
+{
+    return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm, canvasManager, TheApp);
 }
 
 

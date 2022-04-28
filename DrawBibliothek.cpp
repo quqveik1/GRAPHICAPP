@@ -215,7 +215,7 @@ void Lay::createLay	(Vector _laySize)
 			//copy->rgbRed      = (BYTE) 0;
 			//copy->rgbGreen    = (BYTE) 0;
 			//copy->rgbBlue     = (BYTE) 0;
-			copy->rgbReserved = (BYTE) 0;
+			//copy->rgbReserved = (BYTE) 0;
 		}
 	}
 }
@@ -589,6 +589,7 @@ void Manager::replaceWindow(int numOfWindow)
 {
 	Window* copyOfStartWindow = pointers[numOfWindow];
 	Window* copyOfWindow = pointers[newButtonNum - 1];
+    
 
 	for (int i = newButtonNum - 1; i > numOfWindow; i--)
 	{
@@ -601,6 +602,7 @@ void Manager::replaceWindow(int numOfWindow)
 	{
 		pointers[newButtonNum - 1] = copyOfStartWindow;
 	}
+    
 
 }
 

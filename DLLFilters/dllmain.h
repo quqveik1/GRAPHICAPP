@@ -3,6 +3,7 @@
 #include "..\..\Q_Vector.h"
 #include "ContrastMenu.cpp"
 #include "..\TransferStructure.h"
+#include "..\Canvas.h"
 
 //extern "C" COLORREF __declspec (dllexport) Plus30(COLORREF color);
 
@@ -12,6 +13,7 @@ extern "C" __declspec (dllexport) RGBQUAD KontrastFilter(RGBQUAD pixel, double B
 
 extern "C" __declspec (dllexport) RGBQUAD BrightnessKontrastFilter(RGBQUAD pixel, double FirstValue, double SecondValue);
 
-extern "C" __declspec (dllexport) Window *createContrastMenu (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue));
+extern "C" __declspec (dllexport) Window *createContrastMenu (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager);
 
+extern "C" __declspec (dllexport) DLLExportData *initDLL (AbstractAppData *data);
 

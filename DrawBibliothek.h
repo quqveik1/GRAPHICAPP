@@ -8,6 +8,7 @@
 #include "..\GlobalOptions.h"
 #include "DebugInfo.h"
 #include "LoadManager.h"
+#include "Q_Filter.h"
 
 CLoadManager LoadManager;
 
@@ -16,6 +17,62 @@ struct Window;
 struct Lay;
 
 Lay *ActiveLay;
+
+struct ProgrammeDate
+{
+    Vector absMouseCoordinats;
+    Vector mousePos;
+    Vector managerPos;
+    Vector canvasCoordinats = {};
+    COLORREF color;
+    COLORREF backGroundColor;
+    int thickness;
+    int gummiThickness;
+    Vector size;
+    Vector activeLayCoordinats = {};
+
+    ProgrammeDate (Vector _absMouseCoordinats, Vector _managerPos, Vector _size, COLORREF _color) :
+        absMouseCoordinats (_absMouseCoordinats),
+        managerPos (_managerPos),
+        size (_size),
+        color (_color)
+    {}
+
+};
+
+struct Tool
+{
+    HDC dc;
+
+	const char* name;
+
+    Vector startPos = {};
+    bool workedLastTime = false;
+    const int ToolSaveLen;
+
+    bool clicked = false;
+
+	Tool (const char* _name, const int _ToolSaveLen, HDC _dc = NULL) :
+		name (_name), 
+        dc (_dc),
+        ToolSaveLen (_ToolSaveLen)
+	{}
+
+
+    bool firstUse (ProgrammeDate *data, void* output, Vector currentPos);
+    void finishUse ();
+
+    virtual bool use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual void load(void* output, HDC finalDC);
+};
+
+struct CHistoryStep
+{
+	int toolsNum = 0;
+	Tool* tools;
+    void* toolsData = NULL;
+	int thickness = 1;
+};
 
 
 
@@ -52,7 +109,7 @@ struct Lay
     Vector laySize = {};
 	RGBQUAD *layBuf = {};
     HDC brightnessHDC = {};
-    RGBQUAD *brightnessBuf = {};
+    RGBQUAD *tempBuf = {};
 	bool isClicked = false;
 
     void createLay (Vector size = {DCMAXSIZE, DCMAXSIZE});

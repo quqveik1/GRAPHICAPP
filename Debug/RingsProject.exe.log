@@ -24391,3 +24391,1000 @@ HEAP CORRUPTION DETECTED: after Normal block (#530) at 0x016AFA88.
 CRT detected that the application wrote to memory after end of heap buffer.
 Normal located at 0x016AFA88 is 0 bytes long.
 minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 655, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "filtersLibrary".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004CC870 (32-bit), Flags: CMdRe0, Thread: 0x7918 (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0049D16E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (655):
+
+    653: 
+    654:     HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
+=>  655:     assert (filtersLibrary);
+    656: 
+    657:     Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(filtersLibrary, "createContrastMenu");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:44:12, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:44:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 658, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "createContrastMenu".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004CC870 (32-bit), Flags: CMdRe0, Thread: 0x488C (Main), GetLastError(): 127 (Не найдена указанная процедура). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0049D1FC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657:     Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(filtersLibrary, "createContrastMenu");
+=>  658:     assert (createContrastMenu);
+    659: 
+    660:     ProgrammToDll ptoDll;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:44:12, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:45:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x6AB0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:51:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x6AB0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:51:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x5E78 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:51:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x5E78 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:51:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x3300 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:52:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x3300 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:52:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0xAE0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:52:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7A535602 в функции CDLLFilters::CDLLFilters() в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0xAE0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7A535602 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 1 0x7A5350C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+# 2 0x7A590E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: CDLLFilters::CDLLFilters()
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:52:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7ABF54B2 в функции Filter::Filter() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h на строке 33 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x8038 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7ABF54B2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: Filter::Filter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h (33):
+
+     31: 	{
+     32: 		delta = size / kReduce;
+=>   33: 		totalProgress = (size.x / delta.x) * (size.y / delta.y);
+     34: 	}
+     35: 
+
+# 1 0x7ABF4F72 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h (29):
+
+     27: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+     28: 		algorithm (_algorithm),
+=>   29:         filter (NULL, {}, NULL, NULL, {}, _algorithm)
+     30: 	{
+     31: 		addWindow(&upSlider);
+
+# 2 0x7AC50CD4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: createContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (31):
+
+     29:     DATA = data;
+     30:     MAINWINDOW = data.MAINWINDOW;
+=>   31:     return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm, canvasManager);
+     32: }
+     33: 
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:57:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x7ABF54B2 в функции Filter::Filter() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h на строке 33 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C2C870 (32-bit), Flags: CMdRe0, Thread: 0x8038 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7ABF54B2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: Filter::Filter() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h (33):
+
+     31: 	{
+     32: 		delta = size / kReduce;
+=>   33: 		totalProgress = (size.x / delta.x) * (size.y / delta.y);
+     34: 	}
+     35: 
+
+# 1 0x7ABF4F72 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: ContrastMenu::ContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.h (29):
+
+     27: 		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+     28: 		algorithm (_algorithm),
+=>   29:         filter (NULL, {}, NULL, NULL, {}, _algorithm)
+     30: 	{
+     31: 		addWindow(&upSlider);
+
+# 2 0x7AC50CD4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: createContrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (31):
+
+     29:     DATA = data;
+     30:     MAINWINDOW = data.MAINWINDOW;
+=>   31:     return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm, canvasManager);
+     32: }
+     33: 
+
+# 3 0x00BFD420 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (666):
+
+    664: 
+    665:     ///getDataFromProgramm (data);
+=>  666:     ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    667:     manager->addWindow(contrastMenu);
+    668:     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (393):
+
+    391: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    392: 		txSetAllColors(color, finalDC);
+=>  393: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+    394: 		if (test1) printBlt(finalDC);
+    395: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 25 2022 22:51:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 25 2022 22:57:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 655, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "filtersLibrary".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C1C870 (32-bit), Flags: CMdRe0, Thread: 0x9740 (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BED20E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (655):
+
+    653: 
+    654:     HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
+=>  655:     assert (filtersLibrary);
+    656: 
+    657:     Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 26 2022 18:48:34, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 26 2022 18:48:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C7D870 (32-bit), Flags: CMdRe0, Thread: 0x9F7C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00C43318 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00C24975 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2004):
+
+   2002: 	//txSetWindowsHook
+   2003:     ActiveLay = &lay[activeLayNum];
+=> 2004:     txSetAllColors (TX_WHITE, lay[activeLayNum].lay);
+   2005: 	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
+   2006: 	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
+
+# 2 0x00C1ACB1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1769):
+
+   1767:     currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
+   1768: 
+=> 1769:     drawLay ();
+   1770: 	
+   1771: 
+
+# 3 0x00C309F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 4 0x00C1BF37 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1628):
+
+   1626: 
+   1627:     if (key (VK_SPACE)) _getch();
+=> 1628:     standartManagerDraw (this);
+   1629:     activeWindow = activeCanvas;
+   1630:     printf ("%p\n", activeWindow);
+
+# 5 0x00C309F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 6 0x00C1FCEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (508):
+
+    506: void Manager::draw ()
+    507: {
+=>  508:     standartManagerDraw (this);	
+    509: }
+    510: 
+
+# 7 0x00BD6578 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1344):
+
+   1342:         Vector mp = {txMouseX (), txMouseY ()};
+   1343:         manager->mousePos = mp;
+=> 1344: 		manager->draw ();
+   1345: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1346: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 8 0x00C4E16A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (748):
+
+    746: 
+    747: 
+=>  748: 	Engine (manager);
+    749: 
+    750: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 26 2022 19:44:06, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 26 2022 19:44:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003BD870 (32-bit), Flags: CMdRe0, Thread: 0x65A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00383328 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00364981 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2004):
+
+   2002: 	//txSetWindowsHook
+   2003:     ActiveLay = &lay[activeLayNum];
+=> 2004:     if (activeLayNum >= 0)txSetAllColors (TX_WHITE, lay[activeLayNum].lay);
+   2005: 	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
+   2006: 	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
+
+# 2 0x0035ACB1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1769):
+
+   1767:     currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
+   1768: 
+=> 1769:     drawLay ();
+   1770: 	
+   1771: 
+
+# 3 0x00370A04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 4 0x0035BF37 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1628):
+
+   1626: 
+   1627:     if (key (VK_SPACE)) _getch();
+=> 1628:     standartManagerDraw (this);
+   1629:     activeWindow = activeCanvas;
+   1630:     printf ("%p\n", activeWindow);
+
+# 5 0x00370A04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 6 0x0035FCEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (508):
+
+    506: void Manager::draw ()
+    507: {
+=>  508:     standartManagerDraw (this);	
+    509: }
+    510: 
+
+# 7 0x00316578 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1344):
+
+   1342:         Vector mp = {txMouseX (), txMouseY ()};
+   1343:         manager->mousePos = mp;
+=> 1344: 		manager->draw ();
+   1345: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1346: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 8 0x0038E17A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (748):
+
+    746: 
+    747: 
+=>  748: 	Engine (manager);
+    749: 
+    750: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 26 2022 19:44:41, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 26 2022 19:44:44
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 674, функция: int __cdecl main(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "initDLL".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0077D8B0 (32-bit), Flags: CMdRe0, Thread: 0xB968 (Main), GetLastError(): 127 (Не найдена указанная процедура). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0074D706 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (674):
+
+    672: 
+    673:     AbstractDLLFilter * (*initDLL) (PowerPoint *_appData) =  (AbstractDLLFilter * (*) (PowerPoint *_appData)) GetProcAddress(filtersLibrary, "init");
+=>  674:     assert (initDLL);
+    675: 
+    676:     ProgrammToDll ptoDll;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 28 2022 18:52:55, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 28 2022 18:52:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B7D8C0 (32-bit), Flags: CMdRe0, Thread: 0xC210 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B436D8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00B2F7B5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::setColor() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (811):
+
+    809: void PowerPoint::setColor (COLORREF color, HDC dc)
+    810: {
+=>  811:     txSetAllColors (color, dc);
+    812: }
+    813: 
+
+# 2 0x7A583F8E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.dll: ContrastMenu::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\ContrastMenu.cpp (112):
+
+    110:         {
+    111:             //printf  ("Pointers in Dll: %p\n", activeCanvas);
+=>  112:             data->setColor (TX_WHITE, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+    113:             data->rectangle ({.pos = {0, 0}, .finishPos = {1000, 1000}}, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+    114:             //txSetFillColor (TX_WHITE, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+
+# 3 0x00B30DB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 4 0x00B1FBAF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (508):
+
+    506: void Manager::draw ()
+    507: {
+=>  508:     standartManagerDraw (this);	
+    509: }
+    510: 
+
+# 5 0x00AD65B8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1379):
+
+   1377:         Vector mp = {txMouseX (), txMouseY ()};
+   1378:         manager->mousePos = mp;
+=> 1379: 		manager->draw ();
+   1380: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1381: 		if (txMouseButtons () == 1 && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x00B4E402 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (766):
+
+    764: 
+    765: 
+=>  766: 	Engine (manager);
+    767: 
+    768: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Apr 28 2022 19:27:47, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Apr 28 2022 19:29:41
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

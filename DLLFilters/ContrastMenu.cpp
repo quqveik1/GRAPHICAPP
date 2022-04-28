@@ -35,6 +35,7 @@ void ContrastMenu::onClick(Vector mp)
 	if (confirmButton.rect.inRect(mp) && !isClicked)
 	{
 		confirmFilter = true;
+        
 		//brightnessSlider.maxNum = Brightness;
 		//brightnessSlider.maxNum = 255;
 		//FirstFilterValueSlider.maxNum = FirstFilterValue;
@@ -44,8 +45,24 @@ void ContrastMenu::onClick(Vector mp)
 
 void ContrastMenu::draw()
 {
-
+    
+    //filter.
 	//if (!advancedMode) return;
+    //Canvas *
+    if (canvasManager && canvasManager->activeWindow) 
+    {
+        activeCanvas = (Canvas *)canvasManager->activeWindow; 
+        //printBlt (canvasManager->finalDC);
+        txRectangle (0, 0, 1000 ,1000, canvasManager->finalDC);
+
+    }
+    if (canvasManager && canvasManager->activeWindow)
+    {
+        activeLay = &activeCanvas->lay[activeCanvas->activeLayNum];
+        //filter.init (&activeLay->layBuf, activeLay->laySize, activeLay->layBuf, );
+        txSetFillColor (TX_WHITE, canvasManager->finalDC);
+        //txRectangle (0, 0, 1000, 1000, canvasManager->finalDC);
+    }
 
 	if (txMouseButtons() != 1 && manager->activeWindow == this)
 	{
@@ -73,15 +90,39 @@ void ContrastMenu::draw()
 	sprintf(downNum, "%d", (int)contrast);
 
 	txSetTextAlign(TA_LEFT, finalDC);
-	txSetAllColors(TX_BLACK, finalDC);
+	//txSetAllColors(TX_BLACK, finalDC);
 	txSelectFont ("Arial", 18, -1, FW_DONTCARE, false, false, false, 0, finalDC);
 	txTextOut (185, 43, upNum, finalDC);
 	txTextOut (185, 92, downNum, finalDC);
 
 	if (manager->activeWindow == this)
 	{
-		FilterAlgorithm = algorithm;
+		//FilterAlgorithm = algorithm;
 	}
+    bool nonConfirm = 0;
+
+    filter.reCount (nonConfirm, brightness, contrast);
+
+    if (confirmFilter)
+    {
+        //confirmFilter = false;
+        if (canvasManager && canvasManager->activeWindow && canvasManager->activeWindow->finalDC)
+        {
+            //printf  ("Pointers in Dll: %p\n", activeCanvas);
+            data->setColor (TX_WHITE, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+            data->rectangle ({.pos = {0, 0}, .finishPos = {1000, 1000}}, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+            //data->drawOnScreen (activeCanvas->lay[activeCanvas->activeLayNum].lay);
+            //txSetFillColor (TX_WHITE, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+            //txRectangle (0, 0, 1000, 1000, activeCanvas->lay[activeCanvas->activeLayNum].lay);
+            //data->setColor (TX_ORANGE, activeCanvas->finalDC);
+           // data->rectangle ({.pos = {0, 0}, .finishPos = {1000, 1000}}, activeCanvas->finalDC);
+            //data->drawOnScreen (activeCanvas->finalDC);
+            //printBlt (activeCanvas->lay[activeCanvas->activeLayNum].lay);
+        }
+    }
+
+    
+
      //txSetAllColors (TX_RED, finalDC);
     //txRectangle (0, 0, 100, 100, finalDC);
 

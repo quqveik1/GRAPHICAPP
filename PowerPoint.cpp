@@ -8,13 +8,15 @@
 #include "Q_Buttons.h"
 #include <cmath>
 #include "C:\Users\Алехандро\Desktop\AlexProjects\Brightness\dllmain.h"
-#include "..\Brightness\Q_Filter.h"
+//#include "..\Brightness\Q_Filter.h"
 #include "StandartFunctions.h"
 #include "CurvesFilter.h"
 #include "..\Graphicapp-dll.h"
 #include "Slider.cpp"
 #include "DLLFilters\ContrastMenu.h"
+#include "Canvas.h"
 #include "TransferStructure.h"
+
 //#include "LoadManager.h"
 
 
@@ -33,26 +35,7 @@ void copyAndDelete (HDC dest, HDC source);
 
 
 
-struct ProgrammeDate
-{
-    Vector absMouseCoordinats;
-    Vector managerPos;
-    Vector canvasCoordinats = {};
-    COLORREF color;
-    COLORREF backGroundColor;
-    int thickness;
-    int gummiThickness;
-    Vector size;
-    Vector activeLayCoordinats = {};
 
-    ProgrammeDate (Vector _absMouseCoordinats, Vector _managerPos, Vector _size, COLORREF _color) :
-        absMouseCoordinats (_absMouseCoordinats),
-        managerPos (_managerPos),
-        size (_size),
-        color (_color)
-    {}
-
-};
 
 
 struct ToolData
@@ -111,31 +94,7 @@ struct ColorSave : ToolData
 
 };
 
-struct Tool
-{
-    HDC dc;
 
-	const char* name;
-
-    Vector startPos = {};
-    bool workedLastTime = false;
-    const int ToolSaveLen;
-
-    bool clicked = false;
-
-	Tool (const char* _name, const int _ToolSaveLen, HDC _dc = NULL) :
-		name (_name), 
-        dc (_dc),
-        ToolSaveLen (_ToolSaveLen)
-	{}
-
-
-    bool firstUse (ProgrammeDate *data, void* output, Vector currentPos);
-    void finishUse ();
-
-    virtual bool use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
-    virtual void load(void* output, HDC finalDC);
-};
 
 
 
@@ -211,13 +170,7 @@ struct CToolManager
 CToolManager ToolManager;
 
 
-struct CHistoryStep
-{
-	int toolsNum = 0;
-	Tool* tools;
-    void* toolsData = NULL;
-	int thickness = 1;
-};
+
 
 
 
@@ -263,100 +216,7 @@ struct ProgressBar : Window
 	virtual void draw() override;
 };
 
-struct Canvas : Manager
-{
-	HDC canvas = NULL;
-    RGBQUAD *canvasArr = NULL;
-	HDC tempFilterDC;
-	RGBQUAD *tempFilterDCArr;
-	bool nonConfirmFilter = false; // показывает есть ли сейчас непримененный фильтр
-	bool reCountEnded = false;
-	double lineThickness = 3;
-	COLORREF drawColor = TX_RED;
-	Window closeCanvas;
-	bool clearBackground = true;
-	Vector canvasCoordinats;
-	Vector canvasSize;
-	
-	//bool confirmFilter;
 
-	Vector startResizingCursor = {};
-	bool isResizing = false;
-    Rect resizingPlace = {};
-
-	Slider scrollBarVert;
-	Slider scrollBarHor;
-	bool wasClicked = false;
-	Vector lastClick = {};
-	double testNum = 0;
-
-	int lastFirstFilterValue = FirstFilterValue;
-	int lastSecondFilterValue = SecondFilterValue;
-	int lastRecountFirstFilterValue = FirstFilterValue;
-	int lastRecountSecondFilterValue = FirstFilterValue;//яркость при прошлой части расчета
-	DWORD lastTimeRecountFilter = GetTickCount();
-	Filter *filter;
-
-	const int LayersNum = 10;
-	Lay *lay = new Lay[LayersNum];
-	Vector cursorPos = {};
-	int currentLayersLength = 0;
-	int activeLayNum = 0;   
-
-	const int HistoryLength = 1000;
-	HDC lastSavedDC;
-	CHistoryStep* history = new CHistoryStep[HistoryLength];
-	int timeSavedHistory = 0;
-	//HDC *history = new HDC[HistoryLength]{};
-	int *historyOfDrawingMode = new int [HistoryLength]{};
-	int currentHistoryNumber = 0;
-	int currentHistoryLength = 0;
-	int timesShowedHistoryInRow = 0;
-
-    //Tool** tools = new Tool*[10];
-    bool activeTool = false;
-    ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
-
-
-	Canvas (Rect _rect, HDC _closeDC = NULL) :
-		Manager (_rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
-		canvasCoordinats ({}),
-		canvasSize({DCMAXSIZE, DCMAXSIZE}),
-		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor ({.pos = {5, _rect.getSize().y - SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
-		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
-        resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y})
-	{
-		//canvas = txCreateDIBSection (canvasSize.x, canvasSize.y, &canvasArr);
-		scrollBarVert.manager = this;
-		scrollBarHor.manager = this;
-
-		//tempFilterDC = txCreateDIBSection (canvasSize.x, canvasSize.y, &tempFilterDCArr);
-
-		lastSavedDC = txCreateDIBSection(canvasSize.x, canvasSize.y, &canvasArr);
-
-		filter = new Filter(&canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, FilterAlgorithm);
-
-        addWindow (&closeCanvas);
-        addWindow (&scrollBarVert);
-        addWindow (&scrollBarHor);
-	}
-
-	void controlSize();
-	void controlSizeSliders ();
-	void saveHistory ();
-	HDC playHistoryDC (int stepBack);
-	void returnHistory(int stepsBack);
-	void deleteHistory ();
-	void createLay ();
-	bool controlLay ();
-	void drawLay ();
-	void controlFilter();
-
-	virtual void draw () override;
-	virtual void onClick (Vector mp) override;
-	virtual void deleteButton () override;
-};
 
 
 
@@ -703,6 +563,13 @@ struct List : Manager
 	virtual void onClick(Vector mp) override;
 };
 
+struct PowerPoint : AbstractAppData
+{
+    virtual void setColor (COLORREF color, HDC dc);
+    virtual void rectangle (Rect rect, HDC dc);
+    virtual void drawOnScreen (HDC dc);
+};
+
 
 
 bool IsRunning = true;
@@ -719,6 +586,7 @@ void printfDCS (const char *str = "");
 
 
 
+
 int main ()
 {
 	//_txWindowStyle &= ~WS_CAPTION;
@@ -726,6 +594,7 @@ int main ()
 
     TransferData Data;
     Data.MAINWINDOW = MAINWINDOW;
+    Data.MainWindowDC = txDC ();
 
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
@@ -787,6 +656,9 @@ int main ()
 	menu->addWindow (openManager);	
 	
 
+    PowerPoint *appData = new PowerPoint;
+
+    AbstractDLLFilter *filterData = NULL;
 
     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
 	assert(library);
@@ -794,21 +666,31 @@ int main ()
     HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
     assert (filtersLibrary);
 
-    Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue)) = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue))) GetProcAddress(filtersLibrary, "createContrastMenu");
-    assert (createContrastMenu);
+
+    
+    /*
+    Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
+                                 = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)) GetProcAddress(filtersLibrary, "createContrastMenu");
+    assert (createContrastMenu); 
+    */
+
+    DLLExportData * (*initDLL) (PowerPoint *_appData) =  (DLLExportData * (*) (PowerPoint *_appData)) GetProcAddress(filtersLibrary, "initDLL");
+    assert (initDLL);
 
     ProgrammToDll ptoDll;
 
     //ProgrammToDll data = {manager, NULL};
 
+    DLLExportData* DLLData = initDLL (appData);
+
     ///getDataFromProgramm (data);
-    ContrastMenu *contrastMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
+    ContrastMenu *contrastMenu = (ContrastMenu*) DLLData->createContrastWindow ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
     manager->addWindow(contrastMenu);
     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
 	//  
 
-	ContrastMenu *brightnessMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
-    manager->addWindow(brightnessMenu);
+	//ContrastMenu *brightnessMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"), canvasManager);
+    //manager->addWindow(brightnessMenu);
 	//ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
 	//manager->addWindow(brightnessMenu);
 
@@ -844,7 +726,7 @@ int main ()
 
         openWindows->addSubList (filters, "Фильтры");
             filters->addNewItem (contrastMenu, NULL, "Контрастный фильтр");
-            filters->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
+            //filters->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
             filters->addNewItem (curves, NULL, "Кривые");
          
 
@@ -925,6 +807,23 @@ int main ()
 
 }
 
+
+void PowerPoint::setColor (COLORREF color, HDC dc)
+{
+    txSetAllColors (color, dc);
+}
+
+void PowerPoint::rectangle (Rect rect, HDC dc)
+{
+    txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
+}
+
+void PowerPoint::drawOnScreen (HDC dc)
+{
+    txBitBlt (0, 0, dc);
+    txSleep (0);
+    //_getch();
+}
 
 
 void List::draw()
@@ -1746,6 +1645,10 @@ void CloseButton::draw()
 
 void CanvasManager::draw ()
 {
+    //txSetAllColors (TX_GREEN, finalDC);
+   ///txRectangle (0, 0, 3000, 3000, finalDC);
+    //return;
+   
 	txSetAllColors (BackgroundColor, finalDC);
 	txRectangle (0, 0, 3000, 3000, finalDC);
 
@@ -1760,6 +1663,8 @@ void CanvasManager::draw ()
 
     if (key (VK_SPACE)) _getch();
     standartManagerDraw (this);
+    activeWindow = activeCanvas;
+    printf ("%p\n", activeWindow);
 
 
     /*
@@ -1785,7 +1690,15 @@ void CanvasManager::onClick(Vector mp)
 {
     mousePos = mp;
     int clickedCellNum = standartManagerOnClick(this, mp);
-    if (clickedCellNum >= 0) replaceWindow (clickedCellNum);
+    
+    if (clickedCellNum >= 0) 
+    {
+        activeCanvas = (Canvas*)pointers [clickedCellNum];
+        replaceWindow (clickedCellNum);
+    }
+    
+    //printf ("%d: %p\n", clickedCellNum, activeCanvas);
+    //activeWindow = pointers[clickedCellNum];
 
     /*
 	if (advancedMode)
@@ -1860,7 +1773,8 @@ void ProgressBar::draw()
 
 void Canvas::draw ()
 {
-
+    //txSetAllColors (TX_WHITE, finalDC);
+    //return;
     controlMouse();
 	//assert (canvas);
 	txSetAllColors (BackgroundColor, finalDC);
@@ -1870,7 +1784,7 @@ void Canvas::draw ()
 	}
 	if (nonConfirmFilter && reCountEnded)
 	{
-		txRectangle (0, 0, 3000, 3000, finalDC);
+		//txRectangle (0, 0, 3000, 3000, finalDC);
 	}
 
 	if (!nonConfirmFilter && canvas)
@@ -1882,7 +1796,7 @@ void Canvas::draw ()
 		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
 	}
 
-    //currentDate->absMouseCoordinats = {txMouseX(), txMouseY ()};
+    currentDate->mousePos = mousePos;
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
@@ -2122,8 +2036,10 @@ bool Canvas::controlLay ()
 
 void Canvas::drawLay ()
 {
+    //return;
 	//txSetWindowsHook
     ActiveLay = &lay[activeLayNum];
+    //if (lay[activeLayNum].lay) txSetAllColors (TX_WHITE, lay[activeLayNum].lay);
 	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
 	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
 	if (txGetAsyncKeyState(VK_DOWN) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, 1};		
@@ -2155,10 +2071,13 @@ void Canvas::drawLay ()
 	{
 		lay[activeLayNum].isClicked = false;
 	}
+    //printf ("activeLayNum:")
 
 	for (int i = 0; i < currentLayersLength; i++)
 	{
+        //if (test1 == 1)printBlt (lay[i].lay);
  		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
+ 		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
 		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
 		//if (test1)printBlt (layers[i]);
 		//if (test1)printBlt (copyDC);
@@ -2243,7 +2162,7 @@ void CToolManager::addTool (Tool *tool)
 
 bool Vignette::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
-    Vector pos = data->absMouseCoordinats - data->managerPos + data->canvasCoordinats;
+    Vector pos = data->mousePos + data->canvasCoordinats;
     firstUse (data, output, pos);
     DrawColor = txGetPixel (pos.x, pos.y, lay->lay);
 
@@ -2265,7 +2184,7 @@ void Vignette::load (void* input, HDC finalDC)
 bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
     assert (data && lay && output && tempDC);
-    Vector pos = data->absMouseCoordinats - data->managerPos;
+    Vector pos = data->mousePos;
     if (!workedLastTime)
     {
         workedLastTime = true;
@@ -2300,7 +2219,7 @@ bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 bool RectangleTool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
     assert (data && lay && output && tempDC);
-    Vector pos = data->absMouseCoordinats - data->managerPos;
+    Vector pos = data->mousePos;
     if (!workedLastTime)
     {
         workedLastTime = true;
@@ -2337,7 +2256,7 @@ void RectangleTool::load (void* input, HDC finalDC)
 bool Point::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
     assert (data && lay && output && tempDC);
-    Vector pos = data->absMouseCoordinats - data->managerPos;
+    Vector pos = data->mousePos;
     if (firstUse (data, output, pos))
     {
         if (pointSave) delete(pointSave);
@@ -2404,7 +2323,7 @@ void Tool::finishUse ()
 bool Tool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
     assert (data && lay && output && tempDC);
-    Vector pos = data->absMouseCoordinats - data->managerPos;
+    Vector pos = data->mousePos;
     firstUse(data, output, pos);
     txSetAllColors(data->color, tempDC, data->size.x);
 	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, tempDC);
@@ -2464,7 +2383,7 @@ int PointSave::getByteSize ()
 bool Line::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
 {
     assert (data && lay && output && tempDC);
-    Vector pos = data->absMouseCoordinats - data->managerPos;
+    Vector pos = data->mousePos;
     if (!workedLastTime || txMouseButtons() == 1) 
     {
         startPos = pos;
