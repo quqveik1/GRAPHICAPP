@@ -13,7 +13,6 @@
 #include "CurvesFilter.h"
 #include "..\Graphicapp-dll.h"
 #include "Slider.cpp"
-#include "DLLFilters\ContrastMenu.h"
 #include "Canvas.h"
 #include "TransferStructure.h"
 
@@ -657,8 +656,8 @@ int main ()
 	
 
     PowerPoint *appData = new PowerPoint;
+    appData->canvasManager = canvasManager;
 
-    AbstractDLLFilter *filterData = NULL;
 
     HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
 	assert(library);
@@ -667,25 +666,19 @@ int main ()
     assert (filtersLibrary);
 
 
-    
-    /*
-    Window *(*createContrastMenu) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
-                                 = (Window*(*) (TransferData data, Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)) GetProcAddress(filtersLibrary, "createContrastMenu");
-    assert (createContrastMenu); 
-    */
 
     DLLExportData * (*initDLL) (PowerPoint *_appData) =  (DLLExportData * (*) (PowerPoint *_appData)) GetProcAddress(filtersLibrary, "initDLL");
     assert (initDLL);
 
-    ProgrammToDll ptoDll;
-
-    //ProgrammToDll data = {manager, NULL};
-
     DLLExportData* DLLData = initDLL (appData);
 
-    ///getDataFromProgramm (data);
-    ContrastMenu *contrastMenu = (ContrastMenu*) DLLData->createContrastWindow ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+    CFilter* contrastMenu = DLLData->createKontrastFilter ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256});
+    assert (contrastMenu);
     manager->addWindow(contrastMenu);
+
+    ///getDataFromProgramm (data);
+    //ContrastMenu *contrastMenu = (ContrastMenu*) DLLData->createContrastWindow ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
+   // manager->addWindow(contrastMenu);
     //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
 	//  
 

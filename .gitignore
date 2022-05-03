@@ -1,3 +1,11 @@
 
 *.db-wal
 *.vs/*
+*.log
+*.pdb
+*.obj
+*.obj
+*.tlog
+*.tlog
+*.log
+*Debug/*

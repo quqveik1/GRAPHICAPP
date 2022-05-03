@@ -8,24 +8,15 @@ struct TransferData
     HDC MainWindowDC = NULL;
 };
 
-struct DLLExportData
-{ 
-    Window* (*createContrastWindow) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager) = NULL;    
-};
 
-
-struct CFilter
+struct CFilter : Manager
 {
-
-    virtual void apply (RGBQUAD **mainScreen, Vector size); 
-};
-
-
-struct AbstractDLLFilter
-{
+    CFilter (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}) :
+        Manager (_rect, _length, _advancedMode, _dc, _handle)
+    {
+    }
     
-
-    virtual void apply (HDC dc, Vector size) = 0;
+    virtual void apply () = 0; 
 };
 
 struct AbstractAppData
@@ -34,8 +25,22 @@ struct AbstractAppData
     virtual void rectangle (Rect rect, HDC dc) = 0;
     virtual void drawOnScreen (HDC dc) = 0;
 
+    Manager *canvasManager = NULL;
+
 
 };
+
+struct DLLExportData
+{ 
+    Window* (*createContrastWindow) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager) = NULL;    
+    CFilter* (*createKontrastFilter) (Rect rect, Vector firstDomain, Vector secondDomain) = 0;
+};
+
+
+
+
+
+
 
 
 

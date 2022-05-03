@@ -1,7 +1,7 @@
 #pragma once
 
 #include "..\..\Q_Vector.h"
-#include "ContrastMenu.cpp"
+#include "KontrastMenu.cpp"
 #include "..\TransferStructure.h"
 #include "..\Canvas.h"
 
@@ -16,4 +16,9 @@ extern "C" __declspec (dllexport) RGBQUAD BrightnessKontrastFilter(RGBQUAD pixel
 extern "C" __declspec (dllexport) Window *createContrastMenu (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager);
 
 extern "C" __declspec (dllexport) DLLExportData *initDLL (AbstractAppData *data);
+
+extern "C" __declspec (dllexport) CFilter* createKontrastFilter(Rect rect, Vector firstDomain, Vector secondDomain);
+
+
+  
 
