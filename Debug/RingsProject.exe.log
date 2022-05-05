@@ -25462,3 +25462,630 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+minkernel\crts\ucrt\inc\corecrt_internal_stdio_input.h(1250) : Assertion failed: buffer != nullptr
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0xEE955955): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010DC8B0 (32-bit), Flags: CMdRe0, Thread: 0x8E50 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x010678ED in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7A58FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7A58CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7A58D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7A58E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7A58D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7A5A4B45 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 7 0x7A5A8AC3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 8 0x7A5A7EA3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 9 0x7A5A8889 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#10 0x7A5A781A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#11 0x7A5A705B in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#12 0x7A59FA53 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#13 0x7A59FB4E in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#14 0x7A59FCBD in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#15 0x7A5AA202 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vfscanf()
+
+#16 0x010ABA79 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _vfscanf_l() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1063):
+
+   1061:     #else
+   1062:     {
+=> 1063:         return __stdio_common_vfscanf(
+   1064:             _CRT_INTERNAL_LOCAL_SCANF_OPTIONS,
+   1065:             _Stream, _Format, _Locale, _ArgList);
+
+#17 0x010ABED2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: fscanf() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1208):
+
+   1206:         va_list _ArgList;
+   1207:         __crt_va_start(_ArgList, _Format);
+=> 1208:         _Result = _vfscanf_l(_Stream, _Format, NULL, _ArgList);
+   1209:         __crt_va_end(_ArgList);
+   1210:         return _Result;
+
+#18 0x010881C4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (13):
+
+     11:         const char *path = NULL;
+     12: 
+=>   13:         fscanf (libsList, "|%s|", path);
+     14: 
+     15:         libs[i] = LoadLibrary (path);
+
+#19 0x010AD314 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt");
+=>  662:     dllManager->loadLibs ();
+    663: 
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  3 2022 21:19:37, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  3 2022 21:19:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+minkernel\crts\ucrt\inc\corecrt_internal_stdio_input.h(1250) : Assertion failed: buffer != nullptr
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0xF81B1DA3): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0018C8C0 (32-bit), Flags: CMdRe0, Thread: 0x713C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001178ED in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7A58FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7A58CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7A58D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7A58E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7A58D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7A5A4B45 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 7 0x7A5A8AC3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 8 0x7A5A7EA3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 9 0x7A5A8889 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#10 0x7A5A781A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#11 0x7A5A705B in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#12 0x7A59FA53 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#13 0x7A59FB4E in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#14 0x7A59FCBD in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#15 0x7A5AA202 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vfscanf()
+
+#16 0x0015BAD9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _vfscanf_l() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1063):
+
+   1061:     #else
+   1062:     {
+=> 1063:         return __stdio_common_vfscanf(
+   1064:             _CRT_INTERNAL_LOCAL_SCANF_OPTIONS,
+   1065:             _Stream, _Format, _Locale, _ArgList);
+
+#17 0x0015BF32 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: fscanf() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1208):
+
+   1206:         va_list _ArgList;
+   1207:         __crt_va_start(_ArgList, _Format);
+=> 1208:         _Result = _vfscanf_l(_Stream, _Format, NULL, _ArgList);
+   1209:         __crt_va_end(_ArgList);
+   1210:         return _Result;
+
+#18 0x0013822B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (14):
+
+     12:         const char *path = NULL;
+     13: 
+=>   14:         fscanf (libsList, "|%s|", path);
+     15: 
+     16:         //libs[i] = LoadLibrary (path);
+
+#19 0x0015D374 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt");
+=>  662:     dllManager->loadLibs ();
+    663: 
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  3 2022 21:20:31, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  3 2022 21:20:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+minkernel\crts\ucrt\inc\corecrt_internal_stdio_input.h(1250) : Assertion failed: buffer != nullptr
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0x546130B5): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0018C8C0 (32-bit), Flags: CMdRe0, Thread: 0x908 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001178ED in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7A58FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7A58CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7A58D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7A58E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7A58D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7A5A4B45 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 7 0x7A5A8AC3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 8 0x7A5A7EA3 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+# 9 0x7A5A8889 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#10 0x7A5A781A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#11 0x7A5A705B in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#12 0x7A59FA53 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#13 0x7A59FB4E in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#14 0x7A59FCBD in C:\WINDOWS\SYSTEM32\ucrtbased.dll: getw()
+#15 0x7A5AA202 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vfscanf()
+
+#16 0x0015BAD9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _vfscanf_l() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1063):
+
+   1061:     #else
+   1062:     {
+=> 1063:         return __stdio_common_vfscanf(
+   1064:             _CRT_INTERNAL_LOCAL_SCANF_OPTIONS,
+   1065:             _Stream, _Format, _Locale, _ArgList);
+
+#17 0x0015BF32 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: fscanf() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (1208):
+
+   1206:         va_list _ArgList;
+   1207:         __crt_va_start(_ArgList, _Format);
+=> 1208:         _Result = _vfscanf_l(_Stream, _Format, NULL, _ArgList);
+   1209:         __crt_va_end(_ArgList);
+   1210:         return _Result;
+
+#18 0x0013822B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (14):
+
+     12:         const char *path = NULL;
+     13: 
+=>   14:         fscanf (libsList, "|%s|", path);
+     15: 
+     16:         //libs[i] = LoadLibrary (path);
+
+#19 0x0015D374 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt");
+=>  662:     dllManager->loadLibs ();
+    663: 
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  3 2022 21:20:31, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  3 2022 21:20:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 48, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "oldDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BEC8C0 (32-bit), Flags: CMdRe0, Thread: 0x7350 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B866B2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (48):
+
+     46: void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line)
+     47: {
+=>   48:     qassert (oldDC, info);
+     49: 	char str[10] = {};
+     50: 	sprintf(str, "%d", line);
+
+# 1 0x00BBC9EA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (614):
+
+    612: 	HDC addNewCanvasDC = {};
+    613: 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
+=>  614: 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+    615: 	txDeleteDC(oldDC);
+    616: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:11:55, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:15:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#245: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77964545 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Также превышен лимит фатальных исключений _TX_FATAL_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#3: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D4D8C0 (32-bit), Flags: CMdre0, Thread: 0x7754. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77EDB44D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 1 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 2 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 3 0x7A1C4A9C in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 4 0x7A1C4B9E in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 5 0x7A1C4B3B in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 6 0x7A1C4B21 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 7 0x00CD3B45 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnExceptionSEH() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11476)
+#42 0x7A1DB0C4 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: _report_gsfailure()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:28:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:28:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#245: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77964545 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Также превышен лимит фатальных исключений _TX_FATAL_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#4: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D4D8C0 (32-bit), Flags: CMdRe0, Thread: 0x7754. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77EDB44D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 1 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 2 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 3 0x7A1C4A9C in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 4 0x7A1C4B9E in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 5 0x7A1C4B3B in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 6 0x7A1C4B21 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 7 0x00CD3B45 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnExceptionSEH() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11476)
+#42 0x7A1DB0C4 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: _report_gsfailure()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:28:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:28:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#245: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77964545 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Также превышен лимит фатальных исключений _TX_FATAL_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#4: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D4D8C0 (32-bit), Flags: CMdRe0, Thread: 0x682C. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77EDB44D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 1 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 2 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 3 0x7A1C4A9C in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 4 0x7A1C4B9E in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 5 0x7A1C4B3B in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 6 0x7A1C4B21 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 7 0x00CD3B45 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnExceptionSEH() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11476)
+#42 0x7A1DB0C4 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: _report_gsfailure()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:28:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:28:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#245: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77964545 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Также превышен лимит фатальных исключений _TX_FATAL_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#4: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D4D8C0 (32-bit), Flags: CMdRe0, Thread: 0x682C. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77EDB44D in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlCaptureStackContext()
+# 1 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 2 0x7A1C36A2 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: seh_longjmp_unwind4()
+# 3 0x7A1C4A9C in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 4 0x7A1C4B9E in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 5 0x7A1C4B3B in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 6 0x7A1C4B21 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: strstr()
+# 7 0x00CD3B45 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnExceptionSEH() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11476)
+#42 0x7A1DB0C4 in C:\WINDOWS\SYSTEM32\VCRUNTIME140D.dll: _report_gsfailure()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in long __cdecl `anonymous-namespace'::TX::_txOnExceptionSEH(struct _EXCEPTION_POINTERS *,const char []) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11476):
+
+
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:28:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:28:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13404, функция: bool __cdecl `anonymous-namespace'::TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "text".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0051C8C0 (32-bit), Flags: CMdRe0, Thread: 0x4890 (Main), GetLastError(): 160 (Неверны один или несколько аргументов). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004D7A20 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13404)
+
+# 1 0x004D039A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104: 	txSetTextAlign (TA_CENTER, window->finalDC);
+    105:     selectFont ("Arial", window->font, window->finalDC);
+=>  106:     txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
+    107:                                                                                            
+    108:                                                                                           
+
+# 2 0x004BFCEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1365):
+
+   1363: void OpenManager::draw()
+   1364: {
+=> 1365:     standartDraw (this);
+   1366: 	txSetAllColors (TextColor, finalDC, MainFont); 
+   1367:     
+
+# 3 0x004D0D44 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         
+    179: 
+=>  180: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    181:  		if (manager->pointers[i]->advancedMode) 
+    182: 		{
+
+# 4 0x004BF362 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (836):
+
+    834: void List::draw()
+    835: {
+=>  836:     standartManagerDraw (this);
+    837: 
+    838:     for (int i = 0; i < newButtonNum; i++)
+
+# 5 0x004CB653 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1359):
+
+   1357: 	{
+   1358: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1359: 		openManager->draw ();
+   1360: 	}
+   1361: }
+
+# 6 0x004B5FC6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+# 7 0x004D1259 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+# 8 0x004CADB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (857):
+
+    855: {
+    856:     mousePos = mp;
+=>  857:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    858:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    859:     {
+
+# 9 0x004B5FC6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+#10 0x004D1259 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+#11 0x004CAF82 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (611):
+
+    609: void Manager::onClick (Vector mp)
+    610: {
+=>  611:     standartManagerOnClick (this, mp);	
+    612: }
+    613: 
+
+#12 0x004765C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1392):
+
+   1390:             
+   1391:             manager->clicked = 1;
+=> 1392: 			manager->onClick (mp);
+   1393: 			if (!IsRunning) break;
+   1394: 		}
+
+#13 0x004EE106 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (773):
+
+    771: 
+    772: 
+=>  773: 	Engine (manager);
+    774: 
+    775: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13404):
+
+  13402:                  HDC dc /*= txDC()*/)
+  13403:     {
+=>13404: $1  if (_TX_ARGUMENT_FAILED    (text)) return false;
+  13405: $   if (_TX_DEFAULT_HDC_FAILED (dc))   return false;
+  13406: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104: 	txSetTextAlign (TA_CENTER, window->finalDC);
+    105:     selectFont ("Arial", window->font, window->finalDC);
+=>  106:     txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
+    107:                                                                                            
+    108:                                                                                           
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May  5 2022 19:47:39, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May  5 2022 19:47:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#456) at 0x00D2D4C0.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x00D2D4C0 is 460 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#454) at 0x0156F0B8.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x0156F0B8 is 460 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#454) at 0x0152D2C8.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x0152D2C8 is 100 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()

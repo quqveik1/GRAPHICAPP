@@ -15,6 +15,7 @@
 #include "Slider.cpp"
 #include "Canvas.h"
 #include "TransferStructure.h"
+#include "DLLManager.cpp"
 
 //#include "LoadManager.h"
 
@@ -26,11 +27,6 @@ void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, 
 
 void txSelectFontDC(const char* text, int size, HDC& dc);
 void copyAndDelete (HDC dest, HDC source);
-
-
-
-
-
 
 
 
@@ -658,24 +654,36 @@ int main ()
     PowerPoint *appData = new PowerPoint;
     appData->canvasManager = canvasManager;
 
-
-    HMODULE library = LoadLibrary("..\\Brightness\\Debug\\Brightness.dll");
-	assert(library);
-
-    HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
-    assert (filtersLibrary);
+    //HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
+    //assert (filtersLibrary);
 
 
+    DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+    dllManager->loadLibs ();
+    dllManager->addToManager(manager);
 
+
+
+
+    /*
     DLLExportData * (*initDLL) (PowerPoint *_appData) =  (DLLExportData * (*) (PowerPoint *_appData)) GetProcAddress(filtersLibrary, "initDLL");
     assert (initDLL);
 
     DLLExportData* DLLData = initDLL (appData);
+    assert (DLLData);
+    assert (DLLData->createKontrastFilter);
+    assert (DLLData->createBrightnessFilter);
 
-    CFilter* contrastMenu = DLLData->createKontrastFilter ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256});
+    
+    
+    CFilter* brightnessMenu = DLLData->createBrightnessFilter ();
+    assert (brightnessMenu);
+    manager->addWindow(brightnessMenu);
+
+    CFilter* contrastMenu = DLLData->createKontrastFilter ();
     assert (contrastMenu);
     manager->addWindow(contrastMenu);
-
+    */
     ///getDataFromProgramm (data);
     //ContrastMenu *contrastMenu = (ContrastMenu*) DLLData->createContrastWindow ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
    // manager->addWindow(contrastMenu);
@@ -714,13 +722,17 @@ int main ()
         openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
         openWindows->addNewItem (laysMenu, NULL, "Слои");
          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
-        List *filters = new List (3, false);
+        List *filters = new List (1 + dllManager->currLoadWindowNum, false);
         manager->addWindow (filters);
 
         openWindows->addSubList (filters, "Фильтры");
-            filters->addNewItem (contrastMenu, NULL, "Контрастный фильтр");
-            //filters->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
+            //filters->addNewItem (dllManager->dllWindows[0], NULL, "Контрастный фильтр");
+            //filters->addNewItem (dllManager->dllWindows[1], NULL, "Фильтр яркости");
             filters->addNewItem (curves, NULL, "Кривые");
+            for (int i = 0; i < dllManager->currLoadWindowNum; i++)
+            {
+                filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
+            }
          
 
         /* 
@@ -1647,17 +1659,17 @@ void CanvasManager::draw ()
 
     controlMouse ();
 
-	if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
+	//if (activeCanvas)bar->setProgress(&activeCanvas->filter->totalProgress, &activeCanvas->filter->currentProgress);
 	if (addNewCanvas)
 	{
 		addWindow(new Canvas({ .pos = {100, 50}, .finishPos = {newCanvasWindowSize.x + 100, newCanvasWindowSize.y + 50} }, closeCanvasButton));
         addNewCanvas = false;
 	}
 
-    if (key (VK_SPACE)) _getch();
+    //if (key (VK_SPACE)) _getch();
     standartManagerDraw (this);
     activeWindow = activeCanvas;
-    printf ("%p\n", activeWindow);
+    //printf ("%p\n", activeWindow);
 
 
     /*
@@ -1885,7 +1897,7 @@ void Canvas::controlFilter ()
 	//if (txGetAsyncKeyState(VK_RIGHT)) SecondFilterValue--;
 	//if (txGetAsyncKeyState(VK_DOWN)) FirstFilterValue+=10;
 	//if (txGetAsyncKeyState(VK_UP)) FirstFilterValue-=10;
-
+    /*
 	filter->algorithm = FilterAlgorithm;
 
 
@@ -1918,6 +1930,7 @@ void Canvas::controlFilter ()
 			}
 		}
 	}
+    */
 
 }
  

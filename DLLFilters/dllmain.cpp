@@ -8,10 +8,6 @@ TransferData DATA = {};
 
 
 
-
-
-
-
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
                        LPVOID lpReserved
@@ -29,13 +25,18 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 AbstractAppData * TheApp = NULL;
+DLLExportData dlldata(2); 
 
 DLLExportData *initDLL (AbstractAppData * app)
 {
     TheApp = app;
-    DLLExportData data;
-    data.createKontrastFilter = createKontrastFilter;
-    return &data;
+    
+
+    dlldata.addFunc(createKontrastFilter);
+    dlldata.addFunc(createBrightnessFilter);
+    //dlldata.createKontrastFilter = createKontrastFilter;
+    //dlldata.createBrightnessFilter = createBrightnessFilter;
+    return &dlldata;
 }
 
 /*
@@ -45,16 +46,20 @@ DLLData* initDll()
     transferData->createContrastMenu = createContrastMenu;
     return transferData;
 }*/
-
 /*
 Window *createContrastMenu (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
 {
     return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm, canvasManager, TheApp);
 } */
 
-CFilter* createKontrastFilter(Rect rect, Vector firstDomain, Vector secondDomain)
+CFilter* createKontrastFilter()
 {
-    return new KontrastMenu (rect, firstDomain, secondDomain, TheApp);
+    return new KontrastMenu ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, {-256, 256}, TheApp);
+} 
+
+CFilter* createBrightnessFilter()
+{
+    return new BrightnessMenu ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, {-256, 256}, TheApp);    
 }
 
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "TXLib.h"
 #include "DrawBibliothek.h"
+#include "DLLFilters\DLLExportData.cpp"
+#include "CFilter.h"
 
 struct TransferData
 {
@@ -9,15 +11,7 @@ struct TransferData
 };
 
 
-struct CFilter : Manager
-{
-    CFilter (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}) :
-        Manager (_rect, _length, _advancedMode, _dc, _handle)
-    {
-    }
-    
-    virtual void apply () = 0; 
-};
+
 
 struct AbstractAppData
 {
@@ -30,11 +24,11 @@ struct AbstractAppData
 
 };
 
-struct DLLExportData
-{ 
-    Window* (*createContrastWindow) (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager) = NULL;    
-    CFilter* (*createKontrastFilter) (Rect rect, Vector firstDomain, Vector secondDomain) = 0;
-};
+
+
+
+
+
 
 
 

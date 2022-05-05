@@ -35,7 +35,6 @@ struct Canvas : Manager
 	int lastRecountFirstFilterValue = FirstFilterValue;
 	int lastRecountSecondFilterValue = FirstFilterValue;//яркость при прошлой части расчета
 	DWORD lastTimeRecountFilter = GetTickCount();
-	Filter *filter;
 
 	const int LayersNum = 10;
 	Lay *lay = new Lay[LayersNum];
@@ -75,7 +74,6 @@ struct Canvas : Manager
 
 		//lastSavedDC = txCreateDIBSection(canvasSize.x, canvasSize.y, &canvasArr);
 
-		filter = new Filter(&canvasArr, canvasSize, finalDCArr, tempFilterDCArr, {DCMAXSIZE, DCMAXSIZE}, FilterAlgorithm);
 
         addWindow (&closeCanvas);
         addWindow (&scrollBarVert);

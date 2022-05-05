@@ -4,6 +4,7 @@
 #include "KontrastMenu.cpp"
 #include "..\TransferStructure.h"
 #include "..\Canvas.h"
+#include "BrightnessFilter.cpp"
 
 //extern "C" COLORREF __declspec (dllexport) Plus30(COLORREF color);
 
@@ -17,7 +18,9 @@ extern "C" __declspec (dllexport) Window *createContrastMenu (Rect rect, Vector 
 
 extern "C" __declspec (dllexport) DLLExportData *initDLL (AbstractAppData *data);
 
-extern "C" __declspec (dllexport) CFilter* createKontrastFilter(Rect rect, Vector firstDomain, Vector secondDomain);
+extern "C" __declspec (dllexport) CFilter* createKontrastFilter();
+
+extern "C" __declspec (dllexport) CFilter* createBrightnessFilter();
 
 
   
