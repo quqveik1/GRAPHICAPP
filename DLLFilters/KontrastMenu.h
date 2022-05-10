@@ -10,6 +10,6 @@ struct KontrastMenu : TwoOptionsMenu
     }
 
 
-   
+    virtual void useAlgorithm();
     virtual void apply ();
 };

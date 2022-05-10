@@ -13,9 +13,14 @@ struct TwoOptionsMenu : CFilter
 	Slider downSlider;
 	double firstVal = 0;
 	double secondVal = 0;
+    double lastfirstVal = 0;
+	double lastsecondVal = 0;
+
     AbstractAppData *data;
 
     Lay *activeLay = NULL;
+    Lay *lastActiveLay = NULL;
+    HDC copyOfTempDC = NULL; //делается копия, тк каждый раз основной холст копируется на временный
 
 
 	Window confirmButton;
@@ -40,6 +45,8 @@ struct TwoOptionsMenu : CFilter
 		compressImage(dc, getSize(), LoadManager.loadImage("ContrastMenu.bmp"), {335, 179});
 	}
 
+
+    virtual void useAlgorithm () {};
 
 	virtual void draw() override;
 	virtual void onClick(Vector mp) override;

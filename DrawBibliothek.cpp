@@ -204,20 +204,25 @@ void Lay::createLay	(Vector _laySize)
     //qassert (manager, info);
     laySize = _laySize;
 	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
+    tempLay = txCreateDIBSection (laySize.x, laySize.y, &tempBuf);
+    outputLay = txCreateDIBSection (laySize.x, laySize.y, &outputBuf);
 	//brightnessHDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
 
 
+    
 	for (int y = 0; y < laySize.x; y++)
 	{
 		for (int x = 0; x < laySize.y; x++)
 		{
-			RGBQUAD* copy = &layBuf[x + y * DCMAXSIZE];
+			RGBQUAD* copyLay = &layBuf[x + y * DCMAXSIZE];
+			RGBQUAD* copyTemp = &tempBuf[x + y * DCMAXSIZE];
 			//copy->rgbRed      = (BYTE) 0;
 			//copy->rgbGreen    = (BYTE) 0;
 			//copy->rgbBlue     = (BYTE) 0;
 			//copy->rgbReserved = (BYTE) 0;
 		}
 	}
+    
 }
 
 
@@ -237,8 +242,9 @@ void swap$ (DebugInfo info, int &x0, int &y0)
 
 
 
-void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor) 
+void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD *buf/*=NULL*/, COLORREF drawColor /*=DrawColor*/) 
 {
+    if (buf == NULL) buf = layBuf;
 	bool steep = false;
 	if (abs (x0 - x1) < abs (y0 - y1)) 
 	{
@@ -261,7 +267,7 @@ void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor)
 	{
 		if (steep) 
 		{
-			RGBQUAD* color = &layBuf[getDownUpCoordinats(y, x)];
+			RGBQUAD* color = &buf[getDownUpCoordinats(y, x)];
 			color->rgbRed = txExtractColor (drawColor, TX_RED);
 			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
 			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
@@ -269,7 +275,7 @@ void Lay::line(int x0, int y0, int x1, int y1, COLORREF drawColor)
 		} 
 		else 
 		{
-			RGBQUAD* color = &layBuf[getDownUpCoordinats(x, y)];
+			RGBQUAD* color = &buf[getDownUpCoordinats(x, y)];
 			color->rgbRed = txExtractColor (drawColor, TX_RED);
 			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
 			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
@@ -326,7 +332,7 @@ void Lay::circle (int x0, int y0, int r, COLORREF color)
 		//txSetColor (TX_RED, 2);
 		//txLine (x, y1, x, y2, lay);
 		//if (x >= 0 && y1 >= 0 && y2 >= 0)
-		line (x, y1, x, y2, color);
+		line (x, y1, x, y2, NULL, color);
 	}
 }
 

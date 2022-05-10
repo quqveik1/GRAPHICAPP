@@ -26486,3 +26486,221 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2391, функция: bool __thiscall Line::use(struct ProgrammeDate *,struct Lay *,void *,struct HDC__ *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "data && lay && output && tempDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00EAD8C0 (32-bit), Flags: CMdRe0, Thread: 0xABB0 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E79EF5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Line::use() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2391):
+
+   2389: bool Line::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+   2390: {
+=> 2391:     assert (data && lay && output && tempDC);
+   2392:     Vector pos = data->mousePos;
+   2393:     if (!workedLastTime || txMouseButtons() == 1) 
+
+# 1 0x00E59FF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2557):
+
+   2555:         currentDate->size = { lineThickness, lineThickness };
+   2556:         activeTool = true;
+=> 2557:         if (history[currentHistoryNumber - 1].tools->use(currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, lay[activeLayNum].tempLay))
+   2558:         {
+   2559:             activeTool = false;
+
+# 2 0x00E46006 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+# 3 0x00E61429 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+# 4 0x00E5A254 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1697):
+
+   1695: {
+   1696:     mousePos = mp;
+=> 1697:     int clickedCellNum = standartManagerOnClick(this, mp);
+   1698:     
+   1699:     if (clickedCellNum >= 0) 
+
+# 5 0x00E46006 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+# 6 0x00E61429 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+# 7 0x00E5B152 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (611):
+
+    609: void Manager::onClick (Vector mp)
+    610: {
+=>  611:     standartManagerOnClick (this, mp);	
+    612: }
+    613: 
+
+# 8 0x00E06600 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1392):
+
+   1390:             
+   1391:             manager->clicked = 1;
+=> 1392: 			manager->onClick (mp);
+   1393: 			if (!IsRunning) break;
+   1394: 		}
+
+# 9 0x00E7E2D6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (773):
+
+    771: 
+    772: 
+=>  773: 	Engine (manager);
+    774: 
+    775: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:22:50, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:22:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2391, функция: bool __thiscall Line::use(struct ProgrammeDate *,struct Lay *,void *,struct HDC__ *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "data && lay && output && tempDC".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00EAD8C0 (32-bit), Flags: CMdRe0, Thread: 0xC104 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E79EF5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Line::use() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2391):
+
+   2389: bool Line::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+   2390: {
+=> 2391:     assert (data && lay && output && tempDC);
+   2392:     Vector pos = data->mousePos;
+   2393:     if (!workedLastTime || txMouseButtons() == 1) 
+
+# 1 0x00E59FF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2557):
+
+   2555:         currentDate->size = { lineThickness, lineThickness };
+   2556:         activeTool = true;
+=> 2557:         if (history[currentHistoryNumber - 1].tools->use(currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, lay[activeLayNum].tempLay))
+   2558:         {
+   2559:             activeTool = false;
+
+# 2 0x00E46006 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+# 3 0x00E61429 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+# 4 0x00E5A254 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1697):
+
+   1695: {
+   1696:     mousePos = mp;
+=> 1697:     int clickedCellNum = standartManagerOnClick(this, mp);
+   1698:     
+   1699:     if (clickedCellNum >= 0) 
+
+# 5 0x00E46006 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (618):
+
+    616:     manager->activeWindow = window;
+    617:     window->clicked = true;
+=>  618: 	window->onClick (mp - window->rect.pos);
+    619: 	window->isClicked = true;
+    620: }
+
+# 6 0x00E61429 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (136):
+
+    134: 			if (manager->pointers[i]->rect.inRect(mp))
+    135: 			{
+=>  136: 				clickButton (manager->pointers[i], manager, mp);
+    137: 
+    138: 				missClicked = false;
+
+# 7 0x00E5B152 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (611):
+
+    609: void Manager::onClick (Vector mp)
+    610: {
+=>  611:     standartManagerOnClick (this, mp);	
+    612: }
+    613: 
+
+# 8 0x00E06600 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1392):
+
+   1390:             
+   1391:             manager->clicked = 1;
+=> 1392: 			manager->onClick (mp);
+   1393: 			if (!IsRunning) break;
+   1394: 		}
+
+# 9 0x00E7E2D6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (773):
+
+    771: 
+    772: 
+=>  773: 	Engine (manager);
+    774: 
+    775: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:22:50, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:23:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

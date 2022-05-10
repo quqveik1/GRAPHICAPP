@@ -37,12 +37,32 @@ void TwoOptionsMenu::draw()
         activeLay = &activeCanvas->lay[activeCanvas->activeLayNum];
         txSetFillColor (TX_WHITE, canvasManager->finalDC);
     }
+    if (lastActiveLay != activeLay)
+    {
+        lastActiveLay = activeLay;
+        copyOfTempDC = txCreateCompatibleDC(activeLay->laySize.x, activeLay->laySize.y);
+    }
 
-	if (txMouseButtons() != 1 && manager->activeWindow == this)
-	{
-		//SecondFilterValue = firstVal;
-		//FirstFilterValue = secondVal;
-	}
+    
+
+    if (clicked == 2) 
+    {
+        //data->drawOnScreen(copyOfTempDC);
+        _getch();
+    }
+
+    if (!clicked && (lastfirstVal != firstVal || lastsecondVal != secondVal))
+    {
+        useAlgorithm();
+        txAlphaBlend(copyOfTempDC, 0, 0, 0, 0, activeLay->tempLay);
+        lastfirstVal = firstVal;
+        lastsecondVal = secondVal;
+    }
+    else
+    {
+        txAlphaBlend(activeLay->tempLay, 0, 0, 0, 0, copyOfTempDC);
+    }
+    
 
 	controlHandle();
     controlMouse ();
@@ -73,6 +93,8 @@ void TwoOptionsMenu::draw()
         if (canvasManager && canvasManager->activeWindow && canvasManager->activeWindow->finalDC)
         {
             apply ();
+            firstVal = 0;
+            secondVal = 0;
             confirmFilter = false;
         }
     }

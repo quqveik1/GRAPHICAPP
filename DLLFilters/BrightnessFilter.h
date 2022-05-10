@@ -8,6 +8,6 @@ struct BrightnessMenu : TwoOptionsMenu
         name = "‘ильтр €ркости";
     }
 
-   
+    virtual void useAlgorithm();
     virtual void apply ();
 };

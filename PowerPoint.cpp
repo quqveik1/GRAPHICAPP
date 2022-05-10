@@ -102,7 +102,7 @@ struct Line : Tool
 	}
 
 
-	virtual bool use(ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+	virtual bool use(ProgrammeDate *data, Lay *lay, void* output);
 	virtual void load(void* input, HDC finalDC);
 };
 
@@ -117,7 +117,7 @@ struct Point : Tool
 	}
 
 
-    virtual bool use(ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual bool use(ProgrammeDate *data, Lay *lay, void* output);
     virtual void load(void* input, HDC finalDC);
 };
 
@@ -128,7 +128,7 @@ struct Vignette : Tool
 	{
 	}
 
-    virtual bool use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual bool use (ProgrammeDate *data, Lay *lay, void* output);
 	virtual void load(void* input, HDC finalDC);
 };
 
@@ -139,7 +139,7 @@ struct Gummi : Tool
         Tool(_name, _ToolSaveLen, _dc)
     {
     }
-    virtual bool use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual bool use (ProgrammeDate *data, Lay *lay, void* output);
 };
 
 struct RectangleTool : Tool 
@@ -149,7 +149,7 @@ struct RectangleTool : Tool
     {
     }
 
-    virtual bool use(ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual bool use(ProgrammeDate *data, Lay *lay, void* output);
 	virtual void load(void* input, HDC finalDC);
 };
 
@@ -1778,18 +1778,20 @@ void ProgressBar::draw()
 
 void Canvas::draw ()
 {
-    //txSetAllColors (TX_WHITE, finalDC);
-    //return;
     controlMouse();
-	//assert (canvas);
-	txSetAllColors (BackgroundColor, finalDC);
+    txSetFillColor(TX_BLACK, finalDC);
+    txRectangle(0, 0, 3000, 3000, finalDC);
+	txSetAllColors (BackgroundColor, finalDC); 
+
+    cleanOutputLay();
+
 	if (!nonConfirmFilter)
 	{
-		txRectangle (0, 0, 3000, 3000, finalDC);
+		//txRectangle (0, 0, 3000, 3000, finalDC);
 	}
 	if (nonConfirmFilter && reCountEnded)
 	{
-		//txRectangle (0, 0, 3000, 3000, finalDC);
+        
 	}
 
 	if (!nonConfirmFilter && canvas)
@@ -1798,7 +1800,7 @@ void Canvas::draw ()
 	}
 	if (nonConfirmFilter && reCountEnded && canvas)
 	{
-		txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
+		//txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
 	}
 
     currentDate->mousePos = mousePos;
@@ -1808,7 +1810,7 @@ void Canvas::draw ()
     currentDate->gummiThickness = GummiThickness;
     currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
 
-    drawLay ();
+    
 	
 
 
@@ -1816,11 +1818,14 @@ void Canvas::draw ()
 
     if (activeTool)
     {
-        if (history[currentHistoryNumber - 1].tools->use (currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, finalDC))
+        if (history[currentHistoryNumber - 1].tools->use (currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData))
         {
             activeTool = false;
+            txAlphaBlend(lay[activeLayNum].tempLay, 0, 0, 0, 0, lay[activeLayNum].lay);
         }
     }
+
+    drawLay();
 
 
 	if (txGetAsyncKeyState('Q'))
@@ -2040,6 +2045,15 @@ bool Canvas::controlLay ()
 	return false;
 }
 
+void Canvas::cleanOutputLay()
+{
+    for (int i = 0; i < currentLayersLength; i++)
+    {
+        //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
+        txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].tempLay);
+    }
+}
+
 void Canvas::drawLay ()
 {
     //return;
@@ -2082,7 +2096,9 @@ void Canvas::drawLay ()
 	for (int i = 0; i < currentLayersLength; i++)
 	{
         //if (test1 == 1)printBlt (lay[i].lay);
- 		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
+        
+
+ 		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay);
  		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
 		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
 		//if (test1)printBlt (layers[i]);
@@ -2166,7 +2182,7 @@ void CToolManager::addTool (Tool *tool)
 
 
 
-bool Vignette::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool Vignette::use (ProgrammeDate *data, Lay *lay, void* output)
 {
     Vector pos = data->mousePos + data->canvasCoordinats;
     firstUse (data, output, pos);
@@ -2187,9 +2203,9 @@ void Vignette::load (void* input, HDC finalDC)
     DrawColor = toolDate->color;
 }
 
-bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output)
 {
-    assert (data && lay && output && tempDC);
+    assert (data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (!workedLastTime)
     {
@@ -2197,8 +2213,8 @@ bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
         startPos = pos;
     }
     //bool comp1 = data->backGroundColor == TX_WHITE;
-    txSetAllColors(data->backGroundColor, tempDC, data->size.x);
-	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, tempDC);
+    txSetAllColors(data->backGroundColor, lay->outputLay, data->size.x);
+	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
 
     
 
@@ -2222,9 +2238,9 @@ bool Gummi::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
     return false;
 }
 
-bool RectangleTool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool RectangleTool::use (ProgrammeDate *data, Lay *lay, void* output)
 {
-    assert (data && lay && output && tempDC);
+    assert (data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (!workedLastTime)
     {
@@ -2232,8 +2248,8 @@ bool RectangleTool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC
         startPos = pos;
     }
 
-    txSetAllColors(data->color, tempDC, data->size.x);       
-    txRectangle (startPos.x, startPos.y, pos.x, pos.y, tempDC);
+    txSetAllColors(data->color, lay->outputLay, data->size.x);
+    txRectangle (startPos.x, startPos.y, pos.x, pos.y, lay->outputLay);
 
     if (clicked == 2)
     {
@@ -2259,17 +2275,17 @@ void RectangleTool::load (void* input, HDC finalDC)
 	txRectangle (rectDate->pos.x, rectDate->pos.y, rectDate->pos.x + rectDate->size.x, rectDate->pos.y + rectDate->size.y, finalDC);   
 }
 
-bool Point::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool Point::use (ProgrammeDate *data, Lay *lay, void* output)
 {
-    assert (data && lay && output && tempDC);
+    assert (data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (firstUse (data, output, pos))
     {
         if (pointSave) delete(pointSave);
         pointSave = new PointSave(100);
     }
-    txSetAllColors(data->color, tempDC, data->size.x);
-	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, tempDC);
+    txSetAllColors(data->color, lay->outputLay, data->size.x);
+	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
 
     if (lastPos != pos)
     {
@@ -2326,13 +2342,13 @@ void Tool::finishUse ()
 }
 
 
-bool Tool::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool Tool::use (ProgrammeDate *data, Lay *lay, void* output)
 {
-    assert (data && lay && output && tempDC);
+    assert (data && lay && output && lay->tempLay);
     Vector pos = data->mousePos;
     firstUse(data, output, pos);
-    txSetAllColors(data->color, tempDC, data->size.x);
-	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, tempDC);
+    txSetAllColors(data->color, lay->outputLay, data->size.x);
+	txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
 
     
 
@@ -2386,17 +2402,17 @@ int PointSave::getByteSize ()
     return byteLength;
 }
 
-bool Line::use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC)
+bool Line::use (ProgrammeDate *data, Lay *lay, void* output)
 {
-    assert (data && lay && output && tempDC);
+    assert (data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (!workedLastTime || txMouseButtons() == 1) 
     {
         startPos = pos;
         workedLastTime = true;
     }
-	txSetAllColors(data->color, tempDC, data->size.x);
-	txLine (startPos.x, startPos.y, pos.x, pos.y, tempDC);
+	txSetAllColors(data->color, lay->outputLay, data->size.x);
+	lay->line (startPos.x, startPos.y, pos.x, pos.y, lay->outputBuf);
 
     if (txMouseButtons () == 2)
     {
@@ -2554,7 +2570,7 @@ void Canvas::onClick (Vector mp)
         history[currentHistoryNumber - 1].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
         currentDate->size = { lineThickness, lineThickness };
         activeTool = true;
-        if (history[currentHistoryNumber - 1].tools->use(currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, finalDC))
+        if (history[currentHistoryNumber - 1].tools->use(currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData))
         {
             activeTool = false;
         }

@@ -62,7 +62,7 @@ struct Tool
     bool firstUse (ProgrammeDate *data, void* output, Vector currentPos);
     void finishUse ();
 
-    virtual bool use (ProgrammeDate *data, Lay *lay, void* output, HDC tempDC);
+    virtual bool use (ProgrammeDate *data, Lay *lay, void* output);
     virtual void load(void* output, HDC finalDC);
 };
 
@@ -110,11 +110,13 @@ struct Lay
 	RGBQUAD *layBuf = {};
     HDC tempLay = {};
     RGBQUAD *tempBuf = {};
+    HDC outputLay = NULL;
+    RGBQUAD* outputBuf = {};
 	bool isClicked = false;
 
     void createLay (Vector size = {DCMAXSIZE, DCMAXSIZE});
     int getDownUpCoordinats (int x, int y);
-	void line (int x0, int y0, int x1, int y1, COLORREF drawColor =  DrawColor);
+	void line (int x0, int y0, int x1, int y1, RGBQUAD* buf = NULL, COLORREF drawColor =  DrawColor);
 	void circle (int x, int y, int r, COLORREF color = TX_BLACK);
     void rectangle (int x0, int y0, int x1, int y1);
 };
@@ -141,7 +143,7 @@ struct Window
 	bool reDraw;
 
     Vector mousePos = {};
-    bool clicked = false;
+    int clicked = false;
 
     Window (Rect _rect = {}, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
 		rect (_rect),

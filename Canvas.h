@@ -89,6 +89,7 @@ struct Canvas : Manager
 	void createLay ();
 	bool controlLay ();
 	void drawLay ();
+    void cleanOutputLay();
 	void controlFilter();
 
 	virtual void draw () override;
