@@ -1,6 +1,4 @@
-﻿  pch.cpp
-  DLLFilters.cpp
-  dllmain.cpp
+﻿  dllmain.cpp
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h(46,214): warning C4100: '_kReduce': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h(46,123): warning C4100: '_algorithm': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Filter.h(46,101): warning C4100: '_screenSize': unreferenced formal parameter
@@ -92,6 +90,6 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.c
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(137,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(138,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(120,75): warning C4100: 'SecondValue': unreferenced formal parameter
-  Generating Code...
+  LINK : C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter not found or not built by the last incremental link; performing full link
      Creating library C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.lib and object C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.exp
-  DLLFilters.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.8bf
+  DLLFilters.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter

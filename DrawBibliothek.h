@@ -108,7 +108,7 @@ struct Lay
 	Vector layCoordinats = {}; 
     Vector laySize = {};
 	RGBQUAD *layBuf = {};
-    HDC brightnessHDC = {};
+    HDC tempLay = {};
     RGBQUAD *tempBuf = {};
 	bool isClicked = false;
 

@@ -3,6 +3,8 @@
 #include "DrawBibliothek.h"
 #include "DLLFilters\DLLExportData.h"
 
+int findSymbol(const char* text, int size, char symbol);
+
 struct DLLManager 
 {
     const char *pathToDLLList = NULL;

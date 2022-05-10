@@ -58,10 +58,10 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(33,29): war
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(34,30): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(35,36): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(36,37): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(14,32): warning C4477: 'fscanf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'const char *'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(18,9): warning C4804: '*=': unsafe use of type 'bool' in operation
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(34,9): warning C4456: declaration of 'i' hides previous local declaration
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(28,14): message : see declaration of 'i'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(51,17): warning C4804: '*=': unsafe use of type 'bool' in operation
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(58,13): warning C4804: '*=': unsafe use of type 'bool' in operation
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(84,9): warning C4456: declaration of 'i' hides previous local declaration
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp(78,14): message : see declaration of 'i'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(273,93): warning C4100: '_text': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(294,33): warning C4100: '_NewCanvasDC': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(319,15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data

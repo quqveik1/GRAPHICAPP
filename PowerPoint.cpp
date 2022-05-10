@@ -2545,16 +2545,16 @@ void Canvas::onClick (Vector mp)
     if (!activeTool && canvas)
     {
         saveHistory();
-	    txSetAllColors (DrawColor, canvas);
-       // int addNewHistoryNum = currentHistoryNumber - 1;
-	    //if (addNewHistoryNum < 0) addNewHistoryNum += 10;
-        //history[addNewHistoryNum].tools = tools[1];
-        //assert (history[addNewHistoryNum].tools);
+        txSetAllColors(DrawColor, canvas);
+        // int addNewHistoryNum = currentHistoryNumber - 1;
+         //if (addNewHistoryNum < 0) addNewHistoryNum += 10;
+         //history[addNewHistoryNum].tools = tools[1];
+         //assert (history[addNewHistoryNum].tools);
         history[currentHistoryNumber - 1].tools = ToolManager.tools[DrawingMode - 1];
-        history[currentHistoryNumber - 1].toolsData = new char [ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
-        currentDate->size = {lineThickness, lineThickness};
+        history[currentHistoryNumber - 1].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
+        currentDate->size = { lineThickness, lineThickness };
         activeTool = true;
-        if (history[currentHistoryNumber - 1].tools->use (currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, finalDC))
+        if (history[currentHistoryNumber - 1].tools->use(currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData, finalDC))
         {
             activeTool = false;
         }

@@ -26089,3 +26089,400 @@ HEAP CORRUPTION DETECTED: after Normal block (#454) at 0x0152D2C8.
 CRT detected that the application wrote to memory after end of heap buffer.
 Normal located at 0x0152D2C8 is 100 bytes long.
 minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+minkernel\crts\ucrt\src\appcrt\filesystem\findfile.cpp(271) : Assertion failed: os_handle != INVALID_HANDLE_VALUE
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0x289A2D4A): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001FD8C0 (32-bit), Flags: CMdRe0, Thread: 0x98A0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0018799D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7B79FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7B79CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7B79D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7B79E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7B79D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7B80F053 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 7 0x7B80E4D5 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 8 0x7B80F968 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: findnext64i32()
+
+# 9 0x001A87F7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (33):
+
+     31:                 if (j != 0)
+     32:                 {
+=>   33:                     if (_findnext(x, &fileinfo) < 0) break;
+     34:                 }
+     35: 
+
+#10 0x001CD9F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+=>  662:     dllManager->loadLibs ();
+    663:     dllManager->addToManager(manager);
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 18:52:17, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 18:52:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+minkernel\crts\ucrt\src\appcrt\filesystem\findfile.cpp(270) : Assertion failed: os_handle != 0
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0x7A349348): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0016D8C0 (32-bit), Flags: CMdRe0, Thread: 0xB3BC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x000F799D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7B79FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7B79CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7B79D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7B79E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7B79D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7B80EFBF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 7 0x7B80E4D5 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 8 0x7B80F968 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: findnext64i32()
+
+# 9 0x001187F7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (33):
+
+     31:                 if (j != 0)
+     32:                 {
+=>   33:                     x = _findnext(x, &fileinfo);
+     34:                     
+     35:                 }
+
+#10 0x0013DA04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+=>  662:     dllManager->loadLibs ();
+    663:     dllManager->addToManager(manager);
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 18:53:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 18:53:33
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+minkernel\crts\ucrt\src\appcrt\filesystem\findfile.cpp(270) : Assertion failed: os_handle != 0
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0x23A7DE67): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002CD8C0 (32-bit), Flags: CMdRe0, Thread: 0x8050 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0025799D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txOnSignal() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (11020)
+# 1 0x7B79FD98 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x7B79CA44 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x7B79D3B2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x7B79E8D4 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x7B79D2FF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7B80EFBF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 7 0x7B80E4D5 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: chmod()
+# 8 0x7B80F968 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: findnext64i32()
+
+# 9 0x002787F7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (33):
+
+     31:                 if (j != 0)
+     32:                 {
+=>   33:                     x = _findnext(x, &fileinfo);
+     34:                     
+     35:                 }
+
+#10 0x0029DA04 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+=>  662:     dllManager->loadLibs ();
+    663:     dllManager->addToManager(manager);
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 18:53:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 18:53:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 46, функция: bool __thiscall DLLManager::loadLibs(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!fileinfo.name".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AAD8C0 (32-bit), Flags: CMdRe0, Thread: 0x88CC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A588BB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (46):
+
+     44:                 char fullPath[100] = {};
+     45: 
+=>   46:                 assert(!fileinfo.name);
+     47: 
+     48:                 sprintf(fullPath, "%s%s", path, fileinfo.name);
+
+# 1 0x00A7DBF4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+=>  662:     dllManager->loadLibs ();
+    663:     dllManager->addToManager(manager);
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:02:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:02:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 46, функция: bool __thiscall DLLManager::loadLibs(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!fileinfo.name".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AAD8C0 (32-bit), Flags: CMdRe0, Thread: 0xBC78 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A588BB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (46):
+
+     44:                 char fullPath[100] = {};
+     45: 
+=>   46:                 assert(!fileinfo.name);
+     47: 
+     48:                 sprintf(fullPath, "%s%s", path, fileinfo.name);
+
+# 1 0x00A7DBF4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (662):
+
+    660: 
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+=>  662:     dllManager->loadLibs ();
+    663:     dllManager->addToManager(manager);
+    664: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:02:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:02:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу NULL. Попытка исполнить код по адресу NULL. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00ABD8C0 (32-bit), Flags: CMdRe0, Thread: 0x421C (Main), GetLastError(): 127 (Не найдена указанная процедура), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 2 0x00A8DC03 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (663):
+
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+    662:     dllManager->loadLibs ();
+=>  663:     dllManager->addToManager(manager);
+    664: 
+    665: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:07:58, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:08:25
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 81, функция: void __thiscall DLLManager::addToManager(struct Manager *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!"функция не загрузилась"".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FFD8C0 (32-bit), Flags: CMdRe0, Thread: 0xC358 (Main), GetLastError(): 127 (Не найдена указанная процедура), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F94665 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (81):
+
+     79:     {
+     80:         DLLExportData* (*initDll) (AbstractAppData* data) = (DLLExportData * (*) (AbstractAppData * data))GetProcAddress(libs[i], "initDLL");
+=>   81:         if (!initDll) assert(!"функция не загрузилась");
+     82:         DLLExportData* exportData = initDll(appData);
+     83: 
+
+# 1 0x00FCDC03 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (663):
+
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+    662:     dllManager->loadLibs ();
+=>  663:     dllManager->addToManager(manager);
+    664: 
+    665: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:09:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:09:30
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 81, функция: void __thiscall DLLManager::addToManager(struct Manager *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!"функция не загрузилась"".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FFD8C0 (32-bit), Flags: CMdRe0, Thread: 0xC5C0 (Main), GetLastError(): 127 (Не найдена указанная процедура), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F94665 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (81):
+
+     79:     {
+     80:         DLLExportData* (*initDll) (AbstractAppData* data) = (DLLExportData * (*) (AbstractAppData * data))GetProcAddress(libs[i], "initDLL");
+=>   81:         if (!initDll) assert(!"функция не загрузилась");
+     82:         DLLExportData* exportData = initDll(appData);
+     83: 
+
+# 1 0x00FCDC03 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (663):
+
+    661:     DLLManager* dllManager = new DLLManager ("DLLPathList.txt", appData);
+    662:     dllManager->loadLibs ();
+=>  663:     dllManager->addToManager(manager);
+    664: 
+    665: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 10 2022 19:09:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 10 2022 19:09:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

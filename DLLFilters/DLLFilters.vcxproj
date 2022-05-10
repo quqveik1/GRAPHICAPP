@@ -75,7 +75,7 @@
     <TargetName>DLLFilters</TargetName>
     <CustomBuildAfterTargets>
     </CustomBuildAfterTargets>
-    <TargetExt>.8bf</TargetExt>
+    <TargetExt>.filter</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
