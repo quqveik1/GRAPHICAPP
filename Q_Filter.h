@@ -1,7 +1,7 @@
 #pragma once
 //#include "Q_Filter.h"
 #include "..\Q_Vector.h"
-#include  "..\GlobalOptions.h"
+#include  "GlobalOptions.h"
 
 struct Filter
 {

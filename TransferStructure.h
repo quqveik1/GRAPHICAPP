@@ -1,8 +1,6 @@
 #pragma once
 #include "TXLib.h"
 #include "DrawBibliothek.h"
-#include "DLLFilters\DLLExportData.cpp"
-#include "CFilter.h"
 
 struct TransferData
 {
@@ -11,15 +9,14 @@ struct TransferData
 };
 
 
-
-
 struct AbstractAppData
 {
-    virtual void setColor (COLORREF color, HDC dc) = 0;
+    virtual void setColor (COLORREF color, HDC dc, int thickness) = 0;
     virtual void rectangle (Rect rect, HDC dc) = 0;
     virtual void drawOnScreen (HDC dc) = 0;
 
-    Manager *canvasManager = NULL;
+    struct Manager* canvasManager = NULL;
+    COLORREF* currColor = NULL;
 
 
 };

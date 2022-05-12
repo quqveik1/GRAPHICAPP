@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RingsProject", "RingsProjec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLLFilters", "DLLFilters\DLLFilters.vcxproj", "{5F00F0A7-43D2-4430-BA63-DEEAC923C196}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DLLTools", "DLLTools\DLLTools.vcxproj", "{C20BFE77-0960-4205-95D6-6861EB049C47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{5F00F0A7-43D2-4430-BA63-DEEAC923C196}.Release|x64.Build.0 = Release|x64
 		{5F00F0A7-43D2-4430-BA63-DEEAC923C196}.Release|x86.ActiveCfg = Release|Win32
 		{5F00F0A7-43D2-4430-BA63-DEEAC923C196}.Release|x86.Build.0 = Release|Win32
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Debug|x64.ActiveCfg = Debug|x64
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Debug|x64.Build.0 = Debug|x64
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Debug|x86.ActiveCfg = Debug|Win32
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Debug|x86.Build.0 = Debug|Win32
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Release|x64.ActiveCfg = Release|x64
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Release|x64.Build.0 = Release|x64
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Release|x86.ActiveCfg = Release|Win32
+		{C20BFE77-0960-4205-95D6-6861EB049C47}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -77,14 +77,6 @@ void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, H
 }
 
 
-
-
-
-
-
-
-
-
 void selectFont$ (DebugInfo info, const char *text, int font, HDC dc)
 {
     txSelectFont ("Arial", font, -1, FW_DONTCARE, false, false, false, 0, dc);    
@@ -241,9 +233,14 @@ void swap$ (DebugInfo info, int &x0, int &y0)
 }
 
 
-
 void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD *buf/*=NULL*/, COLORREF drawColor /*=DrawColor*/) 
 {
+    if (x0 < 0) x0 = 1;
+    if (x1 < 0) x1 = 1;
+    if (y0 < 0) y0 = 1;
+    if (y1 < 0) y1 = 1;
+
+
     if (buf == NULL) buf = layBuf;
 	bool steep = false;
 	if (abs (x0 - x1) < abs (y0 - y1)) 
@@ -620,7 +617,7 @@ void Manager::onClick (Vector mp)
 void clickButton (Window *window, Manager *manager, Vector mp)
 {
     manager->activeWindow = window;
-    window->clicked = true;
+    window->clicked = manager->clicked;
 	window->onClick (mp - window->rect.pos);
 	window->isClicked = true;
 }

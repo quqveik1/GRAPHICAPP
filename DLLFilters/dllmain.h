@@ -2,7 +2,7 @@
 
 #include "..\..\Q_Vector.h"
 #include "KontrastMenu.cpp"
-#include "..\TransferStructure.h"
+#include "..\TransferFilterStructure.h"
 #include "..\Canvas.h"
 #include "BrightnessFilter.cpp"
 

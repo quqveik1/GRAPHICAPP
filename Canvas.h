@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DrawBibliothek.h"
-#include "Q_Filter.h"
 
 struct Canvas : Manager
 {

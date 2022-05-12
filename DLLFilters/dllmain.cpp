@@ -1,4 +1,5 @@
 ﻿// dllmain.cpp : Defines the entry point for the DLL application.
+//DLLFilters
 #define _CRT_SECURE_NO_WARNINGS
 #include "TXLib.h"
 #include "dllmain.h"

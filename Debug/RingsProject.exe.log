@@ -26704,3 +26704,93 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp, строка: 17, функция: void __thiscall DLLFiltersManager::addToManager(struct Manager *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!"функция не загрузилась"".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D567EC (32-bit), Flags: CMdRe0, Thread: 0xF678 (Main), GetLastError(): 127 (Не найдена указанная процедура), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00CF1AB5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (17):
+
+     15:     {
+     16:         DLLExportData* (*initDll) (AbstractAppData* data) = (DLLExportData * (*) (AbstractAppData * data))GetProcAddress(libs[i], "initDLL");
+=>   17:         if (!initDll) assert(!"функция не загрузилась");
+     18:         DLLExportData* exportData = initDll(appData);
+     19: 
+
+# 1 0x00D27BEA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (555):
+
+    553:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    554:     dllManager->loadLibs ();
+=>  555:     dllManager->addToManager(manager);
+    556: 
+    557: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 12 2022 19:57:12, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 12 2022 19:57:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp, строка: 17, функция: void __thiscall DLLFiltersManager::addToManager(struct Manager *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!"функция не загрузилась"".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00D567EC (32-bit), Flags: CMdRe0, Thread: 0xF774 (Main), GetLastError(): 127 (Не найдена указанная процедура), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00CF1AB5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (17):
+
+     15:     {
+     16:         DLLExportData* (*initDll) (AbstractAppData* data) = (DLLExportData * (*) (AbstractAppData * data))GetProcAddress(libs[i], "initDLL");
+=>   17:         if (!initDll) assert(!"функция не загрузилась");
+     18:         DLLExportData* exportData = initDll(appData);
+     19: 
+
+# 1 0x00D27BEA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (555):
+
+    553:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    554:     dllManager->loadLibs ();
+=>  555:     dllManager->addToManager(manager);
+    556: 
+    557: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 12 2022 19:57:12, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 12 2022 19:57:36
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

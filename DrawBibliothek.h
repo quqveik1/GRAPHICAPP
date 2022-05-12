@@ -5,66 +5,20 @@
 #include "TXLib.h"
 #include "..\Q_Rect.h"
 #include "..\Macroses.h"
-#include "..\GlobalOptions.h"
+#include "GlobalOptions.h"
 #include "DebugInfo.h"
 #include "LoadManager.h"
-#include "Q_Filter.h"
+#include "Tool.h"
+#include "ProgrammeDate.h"
 
 CLoadManager LoadManager;
 
 struct Manager;
 struct Window;
-struct Lay;
 
-Lay *ActiveLay;
-
-struct ProgrammeDate
-{
-    Vector absMouseCoordinats;
-    Vector mousePos;
-    Vector managerPos;
-    Vector canvasCoordinats = {};
-    COLORREF color;
-    COLORREF backGroundColor;
-    int thickness;
-    int gummiThickness;
-    Vector size;
-    Vector activeLayCoordinats = {};
-
-    ProgrammeDate (Vector _absMouseCoordinats, Vector _managerPos, Vector _size, COLORREF _color) :
-        absMouseCoordinats (_absMouseCoordinats),
-        managerPos (_managerPos),
-        size (_size),
-        color (_color)
-    {}
-
-};
-
-struct Tool
-{
-    HDC dc;
-
-	const char* name;
-
-    Vector startPos = {};
-    bool workedLastTime = false;
-    const int ToolSaveLen;
-
-    bool clicked = false;
-
-	Tool (const char* _name, const int _ToolSaveLen, HDC _dc = NULL) :
-		name (_name), 
-        dc (_dc),
-        ToolSaveLen (_ToolSaveLen)
-	{}
+Lay *ActiveLay = NULL;
 
 
-    bool firstUse (ProgrammeDate *data, void* output, Vector currentPos);
-    void finishUse ();
-
-    virtual bool use (ProgrammeDate *data, Lay *lay, void* output);
-    virtual void load(void* output, HDC finalDC);
-};
 
 struct CHistoryStep
 {
@@ -102,24 +56,7 @@ Vector windowMousePos(bool isThisMainFile = true);
 
 
 
-struct Lay
-{
-	HDC lay = {};
-	Vector layCoordinats = {}; 
-    Vector laySize = {};
-	RGBQUAD *layBuf = {};
-    HDC tempLay = {};
-    RGBQUAD *tempBuf = {};
-    HDC outputLay = NULL;
-    RGBQUAD* outputBuf = {};
-	bool isClicked = false;
 
-    void createLay (Vector size = {DCMAXSIZE, DCMAXSIZE});
-    int getDownUpCoordinats (int x, int y);
-	void line (int x0, int y0, int x1, int y1, RGBQUAD* buf = NULL, COLORREF drawColor =  DrawColor);
-	void circle (int x, int y, int r, COLORREF color = TX_BLACK);
-    void rectangle (int x0, int y0, int x1, int y1);
-};
 
 struct Window
 {

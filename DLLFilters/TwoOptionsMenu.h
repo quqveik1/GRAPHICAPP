@@ -4,7 +4,7 @@
 #include "..\Slider.cpp";
 #include "..\..\Macroses.h"
 #include "..\Canvas.h"
-#include "..\TransferStructure.h"
+#include "..\TransferFilterStructure.h"
 
 
 struct TwoOptionsMenu : CFilter
