@@ -196,25 +196,23 @@ void Lay::createLay	(Vector _laySize)
     //qassert (manager, info);
     laySize = _laySize;
 	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
+    clean();
     tempLay = txCreateDIBSection (laySize.x, laySize.y, &tempBuf);
+    clean(tempLay);
     outputLay = txCreateDIBSection (laySize.x, laySize.y, &outputBuf);
-	//brightnessHDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
+    clean(tempLay);
 
-
-    
+    /*
 	for (int y = 0; y < laySize.x; y++)
 	{
 		for (int x = 0; x < laySize.y; x++)
 		{
 			RGBQUAD* copyLay = &layBuf[x + y * DCMAXSIZE];
 			RGBQUAD* copyTemp = &tempBuf[x + y * DCMAXSIZE];
-			//copy->rgbRed      = (BYTE) 0;
-			//copy->rgbGreen    = (BYTE) 0;
-			//copy->rgbBlue     = (BYTE) 0;
-			//copy->rgbReserved = (BYTE) 0;
+			RGBQUAD* copyOutput = &outputBuf[x + y * DCMAXSIZE];
 		}
 	}
-    
+    */
 }
 
 
@@ -287,6 +285,13 @@ void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD *buf/*=NULL*/, COLORREF d
 			error2 -= dx * 2;
 		}
 	}
+}
+
+void Lay::clean(HDC dc/* = NULL*/)
+{
+    if (!dc) dc = lay;
+    txSetAllColors(TRANSPARENTCOLOR, dc);
+    txRectangle (0, 0, laySize.x, laySize.y, dc);
 }
 
 

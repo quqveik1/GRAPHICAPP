@@ -13,11 +13,16 @@ struct AbstractAppData
 {
     virtual void setColor (COLORREF color, HDC dc, int thickness) = 0;
     virtual void rectangle (Rect rect, HDC dc) = 0;
-    virtual void drawOnScreen (HDC dc) = 0;
+    virtual void drawOnScreen (HDC dc, bool useAlpha = false) = 0;
+    virtual void cleanTransparentDC() = 0;
+    virtual bool getAsyncKeyState(int symbol) = 0;
+    virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize) = 0;
+    void (*invert) (RGBQUAD* buf, unsigned int totalSize) = 0;
 
     struct Manager* canvasManager = NULL;
     COLORREF* currColor = NULL;
 
+    Lay transparentLay;
 
 };
 

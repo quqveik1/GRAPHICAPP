@@ -68,20 +68,16 @@ bool Gummi::use(ProgrammeDate* data, Lay* lay, void* output)
         workedLastTime = true;
         startPos = pos;
     }
-    //bool comp1 = data->backGroundColor == TX_WHITE;
-    app->setColor(data->backGroundColor, lay->outputLay, data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
+
+    app->setColor(data->backGroundColor, lay->lay, data->size.x);
+    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay);
 
 
 
     //printf ("1");
 
-    if (clicked != 1 || pos != startPos)
+    if (clicked != 1)
     {
-        app->setColor(data->backGroundColor, lay->lay, data->size.x);
-        bool comp = data->backGroundColor == TX_WHITE;
-        //txEllipse (pos.x - data->gummiThickness + data->canvasCoordinats.x, pos.y - data->gummiThickness + data->canvasCoordinats.y, pos.x + data->gummiThickness + data->canvasCoordinats.x, pos.y + data->gummiThickness + data->canvasCoordinats.y, canvas);
-        lay->circle(pos.x, pos.y, data->size.x);
         workedLastTime = false;
 
         ToolSave saveTool(startPos + data->canvasCoordinats, { (double)data->gummiThickness, (double)data->gummiThickness }, data->backGroundColor, data->size.x, (const char*)2);
@@ -140,15 +136,11 @@ bool Point::use(ProgrammeDate* data, Lay* lay, void* output)
         if (pointSave) delete(pointSave);
         pointSave = new PointSave(100);
     }
-    app->setColor(data->color, lay->outputLay, data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
+    app->setColor(data->color, lay->lay, data->size.x);
+    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay);
 
     if (lastPos != pos)
     {
-        app->setColor(data->color, lay->lay, data->size.x);
-        //txEllipse (pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay);
-        lay->circle(pos.x, pos.y, data->size.x, data->color);
-
         ToolSave saveTool(pos + data->canvasCoordinats, data->size, data->color, data->size.x, (const char*)2);
         pointSave->addPoint(saveTool);
     }
@@ -188,26 +180,26 @@ bool Line::use(ProgrammeDate* data, Lay* lay, void* output)
     if (!workedLastTime || clicked == 1)
     {
         startPos = pos;
-        printf("StartPos %d||", (int)startPos.x);
+        //printf("StartPos %d||", (int)startPos.x);
         workedLastTime = true;
     }
-    printf("%d", data->color == TX_LIGHTBLUE);
     app->setColor(data->color, lay->outputLay, data->size.x);
-    //lay->line(startPos.x, startPos.y, pos.x, pos.y, lay->outputBuf, *app->currColor);
+    txLine(startPos.x, startPos.y, pos.x, pos.y, lay->outputLay);
 
     if (clicked == 2)
     {
         app->setColor(data->color, lay->lay, data->size.x);
 
-        lay->line(startPos.x + data->canvasCoordinats.x - data->activeLayCoordinats.x, startPos.y + data->canvasCoordinats.y - data->activeLayCoordinats.y, pos.x + data->canvasCoordinats.x - data->activeLayCoordinats.x, pos.y + data->canvasCoordinats.y - data->activeLayCoordinats.y, NULL, *app->currColor);
-        ToolSave saveTool(startPos + data->canvasCoordinats, pos - startPos, data->color, data->size.x, (const char*)1);
+        txTransparentBlt (lay->lay, 0, 0, lay->laySize.x, lay->laySize.y, lay->outputLay, 0, 0, TRANSPARENTCOLOR);
 
+        ToolSave saveTool(startPos + data->canvasCoordinats, pos - startPos, data->color, data->size.x, (const char*)1);
         *(ToolSave*)output = saveTool;
 
         finishUse();
         return true;
 
     }
+
     return false;
 }
 

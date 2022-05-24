@@ -29,6 +29,7 @@ void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, 
 
 void txSelectFontDC(const char* text, int size, HDC& dc);
 void copyAndDelete (HDC dest, HDC source);
+void invertDC (RGBQUAD* buf, unsigned int totalsize);
 
 
 
@@ -452,7 +453,11 @@ struct PowerPoint : AbstractAppData
 {
     virtual void setColor (COLORREF color, HDC dc, int thickness);
     virtual void rectangle (Rect rect, HDC dc);
-    virtual void drawOnScreen (HDC dc);
+    virtual void drawOnScreen (HDC dc, bool useAlpha = false);
+    virtual void cleanTransparentDC();
+    virtual bool getAsyncKeyState(int symbol);
+    virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize);
+    
 };
 
 
@@ -476,6 +481,20 @@ int main ()
 {
 	//_txWindowStyle &= ~WS_CAPTION;
 	MAINWINDOW = txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
+
+    HDC testDC = txCreateCompatibleDC(1000, 1000);
+    txSetAllColors(TX_RED, testDC);
+    txRectangle(0, 0, 200, 200, testDC);
+
+    HDC testTransDC = txCreateCompatibleDC(1000, 1000);
+    txSetAllColors(TRANSPARENTCOLOR, testTransDC);
+    txRectangle(0, 0, 1000, 1000, testTransDC);
+    txSetAllColors(TX_BLUE, testTransDC);
+    txRectangle(100, 0, 200, 100, testTransDC);
+    txTransparentBlt(testDC, 0, 0, 0, 0, testTransDC, 0, 0, TRANSPARENTCOLOR);
+    txBitBlt(0, 0, testDC);
+    _getch();
+    
 
     TransferData Data;
     Data.MAINWINDOW = MAINWINDOW;
@@ -527,6 +546,13 @@ int main ()
     PowerPoint* appData = new PowerPoint;
     appData->canvasManager = canvasManager;
     appData->currColor = &DrawColor;
+    appData->transparentLay.lay = txCreateDIBSection(2000, 2000, &appData->transparentLay.layBuf);
+    appData->transparentLay.laySize = { 2000, 2000 };
+    appData->cleanTransparentDC();
+    appData->invert = invertDC;
+    txAlphaBlend(0, 0, appData->transparentLay.lay);
+
+    appData->drawOnScreen(appData->transparentLay.lay);
 
     DLLToolsManager* dllToolsManager = new DLLToolsManager("DLLPathList.txt", appData);
     dllToolsManager->loadLibs();
@@ -730,11 +756,31 @@ void PowerPoint::rectangle (Rect rect, HDC dc)
     txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
-void PowerPoint::drawOnScreen (HDC dc)
+void PowerPoint::drawOnScreen (HDC dc, bool useAlpha /*=false*/)
 {
-    txBitBlt (0, 0, dc);
+    if (!useAlpha)txBitBlt (0, 0, dc);
+    if (useAlpha)txAlphaBlend (0, 0, dc);
     txSleep (0);
-    //_getch();
+} 
+void PowerPoint::cleanTransparentDC()
+{
+    txSetAllColors(TRANSPARENTCOLOR, transparentLay.lay);
+    txRectangle(0, 0, transparentLay.laySize.x, transparentLay.laySize.y, transparentLay.lay);
+    //txClear(transparentLay.lay);
+    //deleteTransparency(transparentLay.layBuf, transparentLay.laySize.x * transparentLay.laySize.y);
+}
+
+bool PowerPoint::getAsyncKeyState(int symbol)
+{
+    return txGetAsyncKeyState(symbol);
+}
+
+void PowerPoint::deleteTransparency(RGBQUAD* buf, unsigned int totalSize)
+{
+    for (int i = 0; i < totalSize; i++)
+    {
+        buf[i].rgbReserved = 255;
+    }
 }
 
 
@@ -1274,6 +1320,8 @@ void Engine (Manager *manager)
     assert (manager);                                                       
 	for (;;)
 	{
+        txClearConsole();
+        printf ("FPS: %lf\n", txGetFPS());
 		txSetAllColors (BackgroundColor);
 		txRectangle (0, 0, 2000, 2000);
 
@@ -1679,49 +1727,28 @@ void Canvas::draw ()
     txRectangle(0, 0, 3000, 3000, finalDC);
 	txSetAllColors (BackgroundColor, finalDC); 
 
-    cleanOutputLay();
-
-     
-
-	if (!nonConfirmFilter)
-	{
-		//txRectangle (0, 0, 3000, 3000, finalDC);
-	}
-	if (nonConfirmFilter && reCountEnded)
-	{
-        
-	}
-
-	if (!nonConfirmFilter && canvas)
-	{
-		//txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, canvas);
-	}
-	if (nonConfirmFilter && reCountEnded && canvas)
-	{
-		//txBitBlt(finalDC, -canvasCoordinats.x, -canvasCoordinats.y, 0, 0, tempFilterDC);
-	}
-
     currentDate->mousePos = mousePos;
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
     currentDate->gummiThickness = GummiThickness;
+    currentDate->backGroundColor = TRANSPARENTCOLOR;
     currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
-
-    printf("%d", DrawColor == TX_LIGHTBLUE);
 
     
     printf("Clicked: %d\n", clicked);
 
-
 	controlFilter();
+
+    cleanOutputLay();
 
     if (activeTool)
     {
+        txTransparentBlt(lay[activeLayNum].tempLay, 0, 0, 0, 0, lay[activeLayNum].lay, 0, 0, TRANSPARENTCOLOR);
         if (history[currentHistoryNumber - 1].tools->use (currentDate, &lay[activeLayNum], history[currentHistoryNumber - 1].toolsData))
         {
             activeTool = false;
-            txAlphaBlend(lay[activeLayNum].tempLay, 0, 0, 0, 0, lay[activeLayNum].lay);
+            txTransparentBlt(lay[activeLayNum].tempLay, 0, 0, 0, 0, lay[activeLayNum].lay, 0, 0, TRANSPARENTCOLOR);
             history[currentHistoryNumber - 1].tools->clicked = 0;
         }
         if (clicked == 0)history[currentHistoryNumber - 1].tools->clicked = clicked;
@@ -1952,7 +1979,8 @@ void Canvas::cleanOutputLay()
     for (int i = 0; i < currentLayersLength; i++)
     {
         //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
-        txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].tempLay);
+        txTransparentBlt (lay[i].outputLay, 0, 0, 0, 0, lay[i].tempLay, 0, 0, TRANSPARENTCOLOR);
+        
     }
 }
 
@@ -1961,7 +1989,6 @@ void Canvas::drawLay ()
     //return;
 	//txSetWindowsHook
     ActiveLay = &lay[activeLayNum];
-    //if (lay[activeLayNum].lay) txSetAllColors (TX_WHITE, lay[activeLayNum].lay);
 	if (txGetAsyncKeyState(VK_RIGHT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {1, 0};		
 	if (txGetAsyncKeyState(VK_LEFT) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {-1, 0};		
 	if (txGetAsyncKeyState(VK_DOWN) && currentLayersLength > 0) lay[activeLayNum].layCoordinats += {0, 1};		
@@ -1993,22 +2020,16 @@ void Canvas::drawLay ()
 	{
 		lay[activeLayNum].isClicked = false;
 	}
-    //printf ("activeLayNum:")
-
 	for (int i = 0; i < currentLayersLength; i++)
 	{
-        //if (test1 == 1)printBlt (lay[i].lay);
+        //txTransparentBlt(0, 0, lay[i].outputLay, TRANSPARENTCOLOR);
+        //txSleep(0);
+        while (txGetAsyncKeyState('L')) {};
+ 		//txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay);
+ 		txTransparentBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay, 0, 0, TRANSPARENTCOLOR);
+        lay[i].clean(lay[i].outputLay);
         
-
- 		txAlphaBlend (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay);
- 		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
-		//txBitBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].lay);
-		//if (test1)printBlt (layers[i]);
-		//if (test1)printBlt (copyDC);
 	}	
-	//if (currentLayersNum > 0) txAlphaBlend (finalDC, laysersCoordinats[currentLayersNum-1].x, laysersCoordinats[currentLayersNum-1].y, 0, 0, layers[currentLayersNum - 1]);
-	//if (currentLayersNum > 0) txAlphaBlend (finalDC, 0, 0, 0, 0, copyDC);
-	//if (test1)printBlt (copyDC);
 }
 
 void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX, int originalSizeY, int sourceSizeX, int sourceSizeY)
@@ -2149,14 +2170,9 @@ void Canvas::deleteButton ()
 
 void Canvas::onClick(Vector mp)
 {
-
     if (activeTool)
     {
         history[currentHistoryNumber - 1].tools->clicked = clicked;  
-        if (clicked == 2)
-        {
-            history[currentHistoryNumber - 1].tools->clicked = clicked;
-        }
     }
     if (clicked == 1)
     {
@@ -2212,12 +2228,8 @@ void Canvas::onClick(Vector mp)
         if (!activeTool && canvas)
         {
             saveHistory();
-            txSetAllColors(DrawColor, canvas);
-            // int addNewHistoryNum = currentHistoryNumber - 1;
-             //if (addNewHistoryNum < 0) addNewHistoryNum += 10;
-             //history[addNewHistoryNum].tools = tools[1];
-             //assert (history[addNewHistoryNum].tools);
             history[currentHistoryNumber - 1].tools = ToolManager.tools[DrawingMode - 1];
+            history[currentHistoryNumber - 1].tools->clicked = clicked;
             history[currentHistoryNumber - 1].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
             currentDate->size = { lineThickness, lineThickness };
             activeTool = true;
@@ -2241,4 +2253,14 @@ void ColorButton::onClick (Vector mp)
 void CleanButton::onClick (Vector mp)
 {
 	mainCanvas->clearBackground = true;
+}
+
+
+
+void invertDC(RGBQUAD* buf, unsigned int totalsize)
+{
+    for (int i = 0; i < totalsize; i++)
+    {
+        buf[i].rgbReserved = 255 - buf[i].rgbReserved;
+    }
 }
