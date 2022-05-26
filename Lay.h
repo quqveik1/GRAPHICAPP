@@ -1,4 +1,7 @@
 #pragma once
+
+
+
 struct Lay
 {
     HDC lay = {};

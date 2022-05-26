@@ -23,6 +23,7 @@ struct ColorSave : ToolData
 
 struct Line : Tool
 {
+    ToolSave saveTool = {};
 
     Line(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
         Tool(_name, _ToolSaveLen, _dc, _data)
@@ -31,7 +32,7 @@ struct Line : Tool
 
 
     virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
-    virtual void load(void* input, HDC finalDC);
+    virtual void load(ToolLay *toollay);
 };
 
 struct Point : Tool
@@ -46,7 +47,7 @@ struct Point : Tool
 
 
     virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
-    virtual void load(void* input, HDC finalDC);
+    virtual void load(ToolLay* toollay);
 };
 
 struct Vignette : Tool
@@ -57,7 +58,7 @@ struct Vignette : Tool
     }
 
     virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
-    virtual void load(void* input, HDC finalDC);
+    virtual void load(ToolLay* toollay);
 };
 
 struct Gummi : Tool
@@ -78,5 +79,15 @@ struct RectangleTool : Tool
     }
 
     virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
-    virtual void load(void* input, HDC finalDC);
+    virtual void load(ToolLay* toollay);
+};
+
+struct EllipseTool : Tool
+{
+    EllipseTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool(_name, _ToolSaveLen, _dc, _data)
+    {
+    }
+
+    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
 };

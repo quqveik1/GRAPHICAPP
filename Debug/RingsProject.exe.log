@@ -26794,3 +26794,244 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797A4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BAA804 (32-bit), Flags: CMdRe0, Thread: 0x666C (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797A4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x797A4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x7A407495 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::txLine() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13284)
+
+# 3 0x7A402B6F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLTools.tool: Line::load() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLTools\dllmain.cpp (238):
+
+    236:     ToolSave* toolDate = (ToolSave*)input;
+    237:     app->setColor(toolDate->color, finalDC, toolDate->thickness);
+=>  238:     txLine(toolDate->pos.x, toolDate->pos.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+    239: 
+    240: }
+
+# 4 0x00B54C17 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2036):
+
+   2034:         for (int j = 0; j < currentHistoryNumber; j++)
+   2035:         {
+=> 2036:             history[j].tools->load(history[j].toolsData, lay[i].outputLay);
+   2037:         }
+   2038:         txTransparentBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay, 0, 0, TRANSPARENTCOLOR);
+
+# 5 0x00B4A81F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1760):
+
+   1758:     }
+   1759: 
+=> 1760:     drawLay();
+   1761: 
+   1762: 
+
+# 6 0x00B5FFE4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 7 0x00B4B950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1616):
+
+   1614: 
+   1615:     //if (key (VK_SPACE)) _getch();
+=> 1616:     standartManagerDraw (this);
+   1617:     activeWindow = activeCanvas;
+   1618:     //printf ("%p\n", activeWindow);
+
+# 8 0x00B5FFE4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 9 0x00B4F6DF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (516):
+
+    514: void Manager::draw ()
+    515: {
+=>  516:     standartManagerDraw (this);	
+    517: }
+    518: 
+
+#10 0x00B056FE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1332):
+
+   1330:         Vector mp = {txMouseX (), txMouseY ()};
+   1331:         manager->mousePos = mp;
+=> 1332: 		manager->draw ();
+   1333: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1334: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+#11 0x00B7C757 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (707):
+
+    705: 
+    706: 
+=>  707: 	Engine (manager);
+    708: 
+    709: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 26 2022 18:48:39, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 26 2022 18:48:43
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797A4878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BAA804 (32-bit), Flags: CMdRe0, Thread: 0x666C (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797A4878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x797A4638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x7A407495 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::txLine() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13284)
+
+# 3 0x7A402B6F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLTools.tool: Line::load() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLTools\dllmain.cpp (238):
+
+    236:     ToolSave* toolDate = (ToolSave*)input;
+    237:     app->setColor(toolDate->color, finalDC, toolDate->thickness);
+=>  238:     txLine(toolDate->pos.x, toolDate->pos.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+    239: 
+    240: }
+
+# 4 0x00B54C17 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2036):
+
+   2034:         for (int j = 0; j < currentHistoryNumber; j++)
+   2035:         {
+=> 2036:             history[j].tools->load(history[j].toolsData, lay[i].outputLay);
+   2037:         }
+   2038:         txTransparentBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay, 0, 0, TRANSPARENTCOLOR);
+
+# 5 0x00B4A81F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1760):
+
+   1758:     }
+   1759: 
+=> 1760:     drawLay();
+   1761: 
+   1762: 
+
+# 6 0x00B5FFE4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 7 0x00B4B950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1616):
+
+   1614: 
+   1615:     //if (key (VK_SPACE)) _getch();
+=> 1616:     standartManagerDraw (this);
+   1617:     activeWindow = activeCanvas;
+   1618:     //printf ("%p\n", activeWindow);
+
+# 8 0x00B5FFE4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 9 0x00B4F6DF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (516):
+
+    514: void Manager::draw ()
+    515: {
+=>  516:     standartManagerDraw (this);	
+    517: }
+    518: 
+
+#10 0x00B056FE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1332):
+
+   1330:         Vector mp = {txMouseX (), txMouseY ()};
+   1331:         manager->mousePos = mp;
+=> 1332: 		manager->draw ();
+   1333: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1334: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+#11 0x00B7C757 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (707):
+
+    705: 
+    706: 
+=>  707: 	Engine (manager);
+    708: 
+    709: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	May 26 2022 18:48:39, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	May 26 2022 18:48:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#589) at 0x0163E380.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x0163E380 is 400 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: after Normal block (#589) at 0x010BE7D0.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x010BE7D0 is 400 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+HEAP CORRUPTION DETECTED: before Normal block (#594) at 0x01818DF8.
+CRT detected that the application wrote to memory before start of heap buffer.
+Normal located at 0x01818DF8 is 16000 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()

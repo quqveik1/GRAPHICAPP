@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DrawBibliothek.h"
+#include "CLay.h"
 
 struct Canvas : Manager
 {
@@ -36,10 +37,16 @@ struct Canvas : Manager
 	DWORD lastTimeRecountFilter = GetTickCount();
 
 	const int LayersNum = 10;
-	Lay *lay = new Lay[LayersNum];
+    Lay* lay = new Lay[LayersNum]{};
 	Vector cursorPos = {};
 	int currentLayersLength = 0;
-	int activeLayNum = 0;   
+	int activeLayNum = 0; 
+
+    CLay* canvasLays = new CLay[LayersNum]{};
+
+    ToolLay* toolLays = new ToolLay[LayersNum]{};
+    int currentToolLength = 0;
+    int activeToolNum = 0;
 
 	const int HistoryLength = 1000;
 	HDC lastSavedDC;
@@ -90,6 +97,10 @@ struct Canvas : Manager
 	void drawLay ();
     void cleanOutputLay();
 	void controlFilter();
+    void finishTool();
+    void controlTool();
+    void startTool();
+    void initToolLay();
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

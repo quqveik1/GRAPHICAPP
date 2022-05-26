@@ -49,10 +49,10 @@ bool Tool::use(ProgrammeDate* data, Lay* lay, void* output)
     return false;
 }
 
-void Tool::load(void* input, HDC finalDC)
+void Tool::load(ToolLay* toollay)
 {
-    assert(input && finalDC);
-    ToolSave* toolDate = (ToolSave*)input;
-    (app)->setColor(toolDate->color, finalDC, toolDate->thickness);
-    txEllipse(toolDate->pos.x - toolDate->size.x, toolDate->pos.y - toolDate->size.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+    //assert(input && finalDC);
+    //ToolSave* toolDate = (ToolSave*)input;
+   // (app)->setColor(toolDate->color, finalDC, toolDate->thickness);
+    //txEllipse(toolDate->pos.x - toolDate->size.x, toolDate->pos.y - toolDate->size.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
 }

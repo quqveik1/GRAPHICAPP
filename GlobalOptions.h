@@ -13,6 +13,8 @@ COLORREF BackgroundColor = TX_BLACK;
 COLORREF DrawColor = TX_RED;
 const COLORREF TRANSPARENTCOLOR = RGB(57, 57, 57);
 
+const int ONELAYTOOLSLIMIT = 100;
+
 
 
 

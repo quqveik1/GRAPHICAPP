@@ -4,7 +4,8 @@
 #include "Lay.h"
 #include "TransferStructure.h"
 
-
+struct Tool;
+struct ToolLay;
 
 
 struct ToolData
@@ -74,7 +75,7 @@ struct Tool
     void finishUse();
 
     virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
-    virtual void load(void* output, HDC finalDC);
+    virtual void load(ToolLay* toollay);
 };
 
 
@@ -85,4 +86,16 @@ struct CToolManager
     int currentLength = 0;
 
     virtual void addTool(Tool* tool);
+};
+
+
+struct ToolLay
+{
+    HDC dc;
+    Vector startPos;
+    Vector size = { 1, 1 };//rotates between[0; unlim)
+    const char* name;
+    Tool* tools;
+    void* toolsData = NULL;
+    int thickness = 1;
 };
