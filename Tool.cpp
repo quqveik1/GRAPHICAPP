@@ -59,3 +59,16 @@ void Tool::load(ToolLay* toollay)
 
 
 
+HDC Tool::getDC()
+{
+    return dc;
+}
+
+
+const char* Tool::getName()
+{
+    return name;
+}
+
+
+

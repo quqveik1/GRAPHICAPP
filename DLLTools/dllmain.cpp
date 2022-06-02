@@ -25,7 +25,7 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     TheApp = data;
     DLLToolExportData* dllData = new DLLToolExportData(6);
 
-    dllData->addTool(new Line            ((const char*)(1), sizeof(ToolSave),                                       LoadManager.loadImage("Line.bmp"), data));
+    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),                                       LoadManager.loadImage("Line.bmp"), data));
     dllData->addTool(new Point           ((const char*)(2), sizeof(PointSave) + sizeof(ToolSave) * POINTSAVELENGTH, LoadManager.loadImage("Pen.bmp"), data));
     dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave),                                      LoadManager.loadImage("Vignette.bmp"), data));
     dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),                                       LoadManager.loadImage("Gummi.bmp"), data));

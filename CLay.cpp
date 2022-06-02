@@ -9,10 +9,11 @@ void CLay::createLay(Vector _size /* = DCVECTORSIZE*/)
 
 void CLay::addTool(ToolLay* tool)
 {
-    assert(lastToolNum < ONELAYTOOLSLIMIT - 1);
+    assert(toolLength < ONELAYTOOLSLIMIT);
 
-    lastToolNum++;
-    toolLays[lastToolNum] = tool;
+    toolLength++;
+    activeToolNum = toolLength - 1;
+    toolLays[activeToolNum] = tool;
     tool->lay = this;
 }
 
@@ -33,9 +34,24 @@ bool CLay::redrawStatus()
 }
 
 
-ToolLay* CLay::getActiveLay()
+ToolLay* CLay::getActiveToolLay()
 {
-    return toolLays[lastToolNum];
+    return toolLays[activeToolNum];
+}
+
+int CLay::getActiveToolLayNum()
+{
+    return activeToolNum;
+}
+
+void CLay::setActiveToolLayNum(int num)
+{
+    activeToolNum = num;
+}
+
+int CLay::getCurrentSize()
+{
+    return toolLength;
 }
 
 HDC CLay::getDCForToolLoad()
@@ -43,12 +59,17 @@ HDC CLay::getDCForToolLoad()
     return lay.outputLay;
 }
 
+ToolLay** CLay::getToolLays()
+{
+    return &(toolLays[0]);
+}
+
 void CLay::redraw()
 {
     lay.clean();
     lay.clean(lay.outputLay);
 
-    for (int toollay = 0; toollay <= lastToolNum; toollay++)
+    for (int toollay = 0; toollay < toolLength; toollay++)
     {
         toolLays[toollay]->tool->load(toolLays[toollay]);
     }

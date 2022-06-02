@@ -90,7 +90,6 @@ struct Canvas : Manager
     void startTool();
     void initToolLay();
 
-    ToolLay* getActiveToolLay();
     CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();
 

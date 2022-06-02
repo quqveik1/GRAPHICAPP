@@ -49,7 +49,7 @@ struct ToolSave : ToolData
 
 struct Tool
 {
-    HDC dc;
+    HDC dc; //ее изображение
 
     const char* name;
 
@@ -74,6 +74,9 @@ struct Tool
 
     bool firstUse(ProgrammeDate* data, void* output, Vector currentPos);
     void finishUse();
+
+    virtual HDC getDC();
+    virtual const char* getName();
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay);

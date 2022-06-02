@@ -26,4 +26,6 @@ struct ToolLay
 
 
     virtual void needRedraw();
+
+    virtual Tool* getTool();
 };

@@ -185,7 +185,6 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 	if (manager->getActiveWindow () != manager && manager->manager) 
 	{
 		manager->activeWindow = NULL;
-	
     }
 }
 
@@ -511,19 +510,26 @@ void Manager::deleteButton ()
 	}
 }
 
+Vector Manager::getMousePos()
+{
+    return mousePos;
+}
+
 void Manager::draw ()
 {
     standartManagerDraw (this);	
 }
 
-void Manager::clickHandle ()
+bool Manager::clickHandle ()
 {
 	if (handle.rect.inRect (mousePos))
 	{
-		startCursorPos.x = txMouseX ();
-		startCursorPos.y = txMouseY ();
+		startCursorPos.x = manager->getMousePos().x;
+		startCursorPos.y = manager->getMousePos().y;
 		handle.isClicked = true;
+        return true;
 	}
+    return false;
 }
 
 void Manager::controlHandle ()
@@ -531,13 +537,12 @@ void Manager::controlHandle ()
     
 	if (handle.isClicked)
 	{
-        //printf ("%d", txMouseX());
-		rect.pos.x += txMouseX () - startCursorPos.x;
-		rect.pos.y += txMouseY () - startCursorPos.y;
-		rect.finishPos.x += txMouseX () - startCursorPos.x;
-		rect.finishPos.y += txMouseY () - startCursorPos.y;
-		startCursorPos.x = txMouseX (); 
-		startCursorPos.y = txMouseY (); 
+		rect.pos.x += manager->getMousePos().x - startCursorPos.x;
+		rect.pos.y += manager->getMousePos().y - startCursorPos.y;
+		rect.finishPos.x += manager->getMousePos().x - startCursorPos.x;
+		rect.finishPos.y += manager->getMousePos().y - startCursorPos.y;
+		startCursorPos.x = manager->getMousePos().x;
+		startCursorPos.y = manager->getMousePos().y;
         //printf ("mouse == 1\n");
 	}
 	if (clicked != 1)

@@ -27338,3 +27338,179 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x79414878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0053D88C (32-bit), Flags: CMdRe0, Thread: 0x678C (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x79414878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x79414638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x004F50E9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txBitBlt() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13667)
+
+# 3 0x004F2070 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (175):
+
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+=>  175: 			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+    176: 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+    177: 			//printBlt (pointers[i]->finalDC);
+
+# 4 0x004E197F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (515):
+
+    513: void Manager::draw ()
+    514: {
+=>  515:     standartManagerDraw (this);	
+    516: }
+    517: 
+
+# 5 0x0049705E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1303):
+
+   1301:         Vector mp = {txMouseX (), txMouseY ()};
+   1302:         manager->mousePos = mp;
+=> 1303: 		manager->draw ();
+   1304: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1305: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x0050E705 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (690):
+
+    688: 
+    689: 
+=>  690: 	Engine (manager);
+    691: 
+    692: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13667):
+
+  13665: $   if (!height) height = size.y;  //-V550
+  13666:      
+=>13667: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13668:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13669:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (175):
+
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+=>  175: 			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+    176: 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+    177: 			//printBlt (pointers[i]->finalDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  2 2022 16:34:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  2 2022 16:34:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x79414878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0053D88C (32-bit), Flags: CMdRe0, Thread: 0x678C (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x79414878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x79414638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x004F50E9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txBitBlt() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13667)
+
+# 3 0x004F2070 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (175):
+
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+=>  175: 			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+    176: 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+    177: 			//printBlt (pointers[i]->finalDC);
+
+# 4 0x004E197F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (515):
+
+    513: void Manager::draw ()
+    514: {
+=>  515:     standartManagerDraw (this);	
+    516: }
+    517: 
+
+# 5 0x0049705E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1303):
+
+   1301:         Vector mp = {txMouseX (), txMouseY ()};
+   1302:         manager->mousePos = mp;
+=> 1303: 		manager->draw ();
+   1304: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1305: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 6 0x0050E705 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (690):
+
+    688: 
+    689: 
+=>  690: 	Engine (manager);
+    691: 
+    692: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13667):
+
+  13665: $   if (!height) height = size.y;  //-V550
+  13666:      
+=>13667: $   return txGDI (!!(Win32::BitBlt (destImage,   ROUND (xDest),   ROUND (yDest),   ROUND (width), ROUND (height),
+  13668:                                     sourceImage, ROUND (xSource), ROUND (ySource), operation)), destImage);
+  13669:     }
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (175):
+
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+=>  175: 			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+    176: 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
+    177: 			//printBlt (pointers[i]->finalDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  2 2022 16:34:30, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  2 2022 16:34:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

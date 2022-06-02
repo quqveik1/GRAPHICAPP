@@ -63,12 +63,14 @@ CToolManager ToolManager;
 struct Menu : Manager
 {
     int lastSelected = -1;
-    Menu(Rect _rect) :
-        Manager(_rect, ONEMENUBUTTONSNUM)
+    int currentSize = 0;
+    Menu(Rect _rect, Rect _handle, int _length = ONEMENUBUTTONSNUM) :
+        Manager(_rect, _length, false, NULL, _handle, MenuColor, true)
     {}
 
     virtual void drawOneLine(int lineNum) = NULL;
-    virtual void clickOneLine(int lineNum) = NULL;
+    virtual int onClickLine(Vector mp) = NULL;
+    virtual void onUpdate() {};
 
     virtual void draw();
     virtual void onClick(Vector mp);
@@ -79,12 +81,11 @@ struct Menu : Manager
 
 
 
-struct ToolsPalette : Manager
+struct ToolsPalette : Menu
 {
-	int lastSelected = 0;
     
 	ToolsPalette (Rect _rect, int _length) :
-		Manager(_rect, _length, false, NULL, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, MenuColor, true)
+		Menu(_rect, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT}}, _length)
 	{
         Window *tools = new Window[ToolManager.currentLength];
         for (int i = 0; i < ToolManager.currentLength; i++)
@@ -95,12 +96,38 @@ struct ToolsPalette : Manager
             tools[i].originalRect = tools[i].rect;
             //printBlt (tools[i].dc);
             addWindow (&tools[i]);
+            currentSize++;
         }
         
 	}
 
-	virtual void onClick(Vector mp) override;
-	virtual void draw() override;
+    virtual void drawOneLine(int lineNum);
+    virtual int onClickLine(Vector mp);
+};
+
+
+//Меню, которое будет позволять управлять уже нарисованными на слое инструментами
+struct ToolMenu : Menu
+{
+    struct CanvasManager* canvasManager = NULL;
+
+
+    ToolMenu(CanvasManager* _canvasManager) :
+        Menu({ .pos = {0, 300}, .finishPos = {100, ONELAYTOOLSLIMIT * BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, ONELAYTOOLSLIMIT),
+        canvasManager(_canvasManager)
+    {
+        //currentSize = canvasManager->getActiveCanvas()->getCurrentToolLengthOnActiveLay();
+        txSetAllColors(color, finalDC);
+        txRectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
+        font = 30;
+        txSelectFontDC(TEXTNAME, font, finalDC);
+    }
+
+
+    virtual void onUpdate();
+    virtual void drawOneLine(int lineNum);
+    virtual int  onClickLine(Vector mp);
+
 };
 		
 
@@ -208,6 +235,8 @@ struct CanvasManager : Manager
 	{
 		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, LoadManager.loadImage("CloseButton4.bmp"), {50, 26}, __LINE__);
 	}
+
+    Canvas* getActiveCanvas();
 
 	virtual void draw () override;
 	virtual void onClick(Vector mp) override;
@@ -502,21 +531,6 @@ int main ()
 	//_txWindowStyle &= ~WS_CAPTION;
 	MAINWINDOW = txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
-    /*
-    HDC testDC = txCreateCompatibleDC(1000, 1000);
-    txSetAllColors(TX_RED, testDC);
-    txRectangle(0, 0, 200, 200, testDC);
-    21
-    HDC testTransDC = txCreateCompatibleDC(1000, 1000);
-    txSetAllColors(TRANSPARENTCOLOR, testTransDC);
-    txRectangle(0, 0, 1000, 1000, testTransDC);
-    txSetAllColors(TX_BLUE, testTransDC);
-    txRectangle(100, 0, 200, 100, testTransDC);
-    txTransparentBlt(testDC, 0, 0, 0, 0, testTransDC, 0, 0, TRANSPARENTCOLOR);
-    txBitBlt(0, 0, testDC);
-    _getch();
-    */
-
     TransferData Data;
     Data.MAINWINDOW = MAINWINDOW;
     Data.MainWindowDC = txDC ();
@@ -524,26 +538,7 @@ int main ()
 
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
 
-
     ToolSave toolSave = {};
-
-   
-
-    /*
-	Line *line = new Line ((const char*) (1), sizeof (ToolSave), LoadManager.loadImage ("Line.bmp"));
-    ToolManager.addTool (line); 
-    Point *point = new Point ((const char*) (2), sizeof (PointSave) + sizeof (ToolSave) * POINTSAVELENGTH, LoadManager.loadImage ("Pen.bmp"));
-    ToolManager.addTool (point);
-    Vignette *vignette = new Vignette ((const char*) (3), sizeof (ColorSave), LoadManager.loadImage ("Vignette.bmp"));
-    ToolManager.addTool (vignette);
-    Gummi *gummi = new Gummi ((const char*) (4), sizeof (ToolSave), LoadManager.loadImage ("Gummi.bmp"));
-    ToolManager.addTool (gummi);
-    RectangleTool *rect = new RectangleTool ((const char*) (1), sizeof (ToolSave), LoadManager.loadImage ("Rectangle.bmp"));
-    //ToolManager.addTool (rect);
-    */
-
-
-
 
 	HDC addNewCanvasDC = {};
 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
@@ -555,7 +550,6 @@ int main ()
 		statusBar->progressBar->manager = statusBar;
 		statusBar->timeButton = new TimeButton({.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
-
     
 
 	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar);
@@ -583,7 +577,11 @@ int main ()
 
 
 	ToolsPalette *toolsPallette = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + HANDLEHEIGHT + 100}}, ToolManager.currentLength);
-	manager->addWindow (toolsPallette);
+    manager->addWindow(toolsPallette);
+    ToolMenu* toolMenu = new ToolMenu(canvasManager);
+    manager->addWindow(toolMenu);
+
+
 
 	 
 	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
@@ -615,39 +613,6 @@ int main ()
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
 
-
-
-
-    /*
-    DLLExportData * (*initDLL) (PowerPoint *_appData) =  (DLLExportData * (*) (PowerPoint *_appData)) GetProcAddress(filtersLibrary, "initDLL");
-    assert (initDLL);
-
-    DLLExportData* DLLData = initDLL (appData);
-    assert (DLLData);
-    assert (DLLData->createKontrastFilter);
-    assert (DLLData->createBrightnessFilter);
-
-    
-    
-    CFilter* brightnessMenu = DLLData->createBrightnessFilter ();
-    assert (brightnessMenu);
-    manager->addWindow(brightnessMenu);
-
-    CFilter* contrastMenu = DLLData->createKontrastFilter ();
-    assert (contrastMenu);
-    manager->addWindow(contrastMenu);
-    */
-    ///getDataFromProgramm (data);
-    //ContrastMenu *contrastMenu = (ContrastMenu*) DLLData->createContrastWindow ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"), canvasManager);
-   // manager->addWindow(contrastMenu);
-    //ContrastMenu* contrastMenu = new ContrastMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -10, 10 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter"));
-	//  
-
-	//ContrastMenu *brightnessMenu = (ContrastMenu*) createContrastMenu (Data, { .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"), canvasManager);
-    //manager->addWindow(brightnessMenu);
-	//ContrastMenu* brightnessMenu = new ContrastMenu({ .pos = {900, 500}, .finishPos = {1235, 679} }, {-100, 100 }, {-256, 256}, (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "BrightnessKontrastFilter"));
-	//manager->addWindow(brightnessMenu);
-
     LaysMenu* laysMenu = new LaysMenu ({.pos = {0, 700}, .finishPos = {BUTTONWIDTH, 1000}}, canvasManager);
     manager->addWindow(laysMenu);
 
@@ -663,17 +628,16 @@ int main ()
         TouchButton *addNewCanvas = new TouchButton({.pos = {0, 0}, .finishPos = {BUTTONWIDTH, HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), &canvasManager->addNewCanvas);
 		mainhandle->addWindow(addNewCanvas);
 
-        List *openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 5, HANDLEHEIGHT}, 4); 
+        List *openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 6, HANDLEHEIGHT}, 5); 
         OpenManager *openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
         mainhandle->addWindow(openWindowsManager);
         
-
-
     manager->addWindow (openWindows);
         openWindows->addNewItem (menu, NULL, "Цвет");
 
         openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
         openWindows->addNewItem (laysMenu, NULL, "Слои");
+        openWindows->addNewItem (toolMenu, NULL, "Инструментальные слои");
          ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
         List *filters = new List (1 + dllManager->currLoadWindowNum, false);
         manager->addWindow (filters);
@@ -1064,87 +1028,98 @@ void NumChange::onClick (Vector mp)
 
 }
 
-
-void ToolsPalette::draw()
+void ToolsPalette::drawOneLine(int lineNum)
 {
-	//reDraw = false;
+    pointers[lineNum]->draw();
+    //printBlt (pointers[lineNum]->dc);
+    if (pointers[lineNum]->advancedMode) txBitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
 
-	controlHandle();
-	if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
-
-	drawOnFinalDC(handle);
-
-	for (int i = 0; i < newButtonNum; i++)
-	{
-		pointers[i]->draw();
-		//printBlt (pointers[i]->dc);
-		if (pointers[i]->advancedMode) txBitBlt(finalDC, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.finishPos.x, pointers[i]->rect.finishPos.y, pointers[i]->finalDC);
-		if (lastSelected == i)
-		{
-			txSetAllColors(TX_WHITE, finalDC);
-			txRectangle(pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.pos.x + pointers[i]->rect.getSize().x * 0.1, pointers[i]->rect.pos.y + pointers[i]->rect.getSize().y * 0.1  + handle.rect.finishPos.y, finalDC);
-		}
-		if (txMouseButtons() != 1)
-		{
-			pointers[i]->isClicked = false;
-		}
-	}
-
-	if (manager->getActiveWindow() != this && manager)
-	{
-		activeWindow = NULL;
-	}
-
-	
-	//handle.print(finalDC);
+    if (lastSelected == lineNum)
+    {
+        txSetAllColors(TX_WHITE, finalDC);
+        txRectangle(pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.pos.x + pointers[lineNum]->rect.getSize().x * 0.1, pointers[lineNum]->rect.pos.y + pointers[lineNum]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
+    }
+    if (txMouseButtons() != 1)
+    {
+        pointers[lineNum]->isClicked = false;
+    }
 }
 
-void ToolsPalette::onClick (Vector mp)
-{
-	bool missClicked = true;
+int ToolsPalette::onClickLine(Vector mp)
+{   
+    for (int lineNum = currentSize - 1; lineNum >= 0; lineNum--)
+    {
 
-    mousePos = mp;
-	int mx = mp.x;
-	int my = mp.y;
-	clickHandle();
-	
+        bool missClicked = false;
+        if (pointers[lineNum]->rect.inRect(mp.x, mp.y))
+        {
+            activeWindow = pointers[lineNum];
+            clickButton(pointers[lineNum], this, mp);
+            //pointers[lineNum]->onClick(mp - pointers[lineNum]->rect.pos);
+            //pointers[lineNum]->isClicked = true;
+            DrawingMode = lineNum + 1;
+            lastSelected = lineNum;
 
+            missClicked = false;
 
-	if (advancedMode && !isClicked)
-	{
-		//clickHandle ();
+            if (pointers[lineNum]->advancedMode) return missClicked + 2;
+        }
+        else
+        {
+            pointers[lineNum]->isClicked = false;
 
-		reDraw = true;
-		//clickHandle();
-		for (int i = newButtonNum - 1; i >= 0; i--)
-		{
-			if (pointers[i]->rect.inRect(mx, my))
-			{
-				activeWindow = pointers[i];
-                clickButton (pointers[i], this, mp);
-				//pointers[i]->onClick(mp - pointers[i]->rect.pos);
-				//pointers[i]->isClicked = true;
-				DrawingMode = i + 1;
-				lastSelected = i;
+            missClicked = true;
+        }
 
-
-				missClicked = false;
-
-
-
-				if (pointers[i]->advancedMode) break;
-			}
-			else
-			{
-				pointers[i]->isClicked = false;
-
-				missClicked = true;
-			}
-		}
-	}
-
-	if (missClicked == true) activeWindow = NULL;
+        
+    }
+    return  1;
 }
+
+void ToolMenu::onUpdate()
+{   
+    Canvas* activeCanvas = canvasManager->getActiveCanvas();
+
+    if (activeCanvas) currentSize = activeCanvas->getCurrentToolLengthOnActiveLay();
+    rect.finishPos.y = currentSize * BUTTONHEIGHT + handle.rect.finishPos.y + rect.pos.y;
+}
+
+
+void ToolMenu::drawOneLine(int lineNum)
+{
+    CLay* lay = canvasManager->getActiveCanvas()->getActiveLay();
+    Tool* tool = lay->getToolLays()[lineNum]->getTool();
+    HDC toolDC = tool->getDC(); 
+    char outputText[20] = {};
+    sprintf(outputText, "%d", lineNum + 1);
+
+    int linePosY = BUTTONHEIGHT * lineNum + handle.rect.finishPos.y;
+
+    txBitBlt(finalDC, 0, linePosY, BUTTONWIDTH, linePosY + BUTTONHEIGHT, toolDC);
+    txSetColor(TextColor, 1, finalDC);
+
+    txDrawText(BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + BUTTONHEIGHT, outputText, TEXTFORMAT, finalDC);
+
+    txSetColor(TX_BLACK, 1, finalDC);
+    txLine(0, linePosY, rect.getSize().x, linePosY, finalDC);
+}
+
+
+int ToolMenu::onClickLine(Vector mp)
+{
+    int my = mp.y;
+
+    int buttonNum = my / BUTTONWIDTH;
+
+
+    if (!(buttonNum >= 0 && buttonNum <= currentSize))  return 0;
+
+    canvasManager->getActiveCanvas()->getActiveLay()->setActiveToolLayNum(buttonNum);
+
+    return 1;
+}
+
+
 
 void StringButton::draw ()
 {
@@ -1612,6 +1587,11 @@ void CloseButton::draw()
 
 
 
+Canvas* CanvasManager::getActiveCanvas()
+{
+    return activeCanvas;
+}
+
 
 void CanvasManager::draw ()
 {
@@ -1739,24 +1719,20 @@ void ProgressBar::draw()
 	}
 	//printBlt(finalDC);
 } 
+
 void Menu::draw()
 {
     if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
 
+    controlHandle();
+
+    onUpdate();
+
     drawOnFinalDC(handle);
 
-    for (int i = 0; i < newButtonNum; i++)
+    for (int i = 0; i < currentSize; i++)
     {
         drawOneLine(i);
-        if (lastSelected == i)
-        {
-            txSetAllColors(TX_WHITE, finalDC);
-            txRectangle(pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.pos.x + pointers[i]->rect.getSize().x * 0.1, pointers[i]->rect.pos.y + pointers[i]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
-        }
-        if (txMouseButtons() != 1)
-        {
-            pointers[i]->isClicked = false;
-        }
     }
 
     if (manager->getActiveWindow() != this && manager)
@@ -1768,37 +1744,24 @@ void Menu::draw()
 
 void Menu::onClick(Vector mp)
 {
-    bool missClicked = true;
+    int missClicked = true;
+    clickHandle();
+
+    mp.y -= handle.rect.finishPos.y;
+
+  
 
     mousePos = mp;
     int mx = mp.x;
     int my = mp.y;
-    clickHandle();
+    
 
 
 
     if (advancedMode && !isClicked)
     {
         reDraw = true;
-        for (int i = newButtonNum - 1; i >= 0; i--)
-        {
-            if (pointers[i]->rect.inRect(mx, my))
-            {
-                activeWindow = pointers[i];
-                clickOneLine(i);
-                lastSelected = i;
-
-                missClicked = false;
-
-                if (pointers[i]->advancedMode) break;
-            }
-            else
-            {
-                pointers[i]->isClicked = false;
-
-                missClicked = true;
-            }
-        }
+        missClicked = onClickLine(mp);
     }
 
     if (missClicked == true) activeWindow = NULL;
@@ -1877,10 +1840,7 @@ void Canvas::draw ()
 	
 }
 
-ToolLay* Canvas::getActiveToolLay()
-{
-    return &(toolLays[currentToolLength - 1]);
-} 
+
 
 CLay* Canvas::getActiveLay()
 {
@@ -1889,16 +1849,21 @@ CLay* Canvas::getActiveLay()
 
 int Canvas::getCurrentToolLengthOnActiveLay()
 {
-    return getActiveLay()->lastToolNum + 1;
+    return getActiveLay()->getCurrentSize();
 }
+
 
 void Canvas::controlTool()
 {
-    if ( getActiveToolLay()->tool->use   (currentDate, getActiveLay()->getActiveLay (), getActiveToolLay()->toolsData)     )
+    CLay* clay = getActiveLay();
+    ToolLay* toollay = clay->getActiveToolLay();
+    Tool* tool = toollay->getTool();
+
+    if (tool->use   (currentDate, toollay, toollay->toolsData))
     {
         finishTool();
     }
-    else if (clicked == 0)getActiveToolLay()->tool->clicked = clicked;
+    else if (clicked == 0)toollay->tool->clicked = clicked;
 }
 
 void Canvas::finishTool()
@@ -2078,57 +2043,48 @@ void Canvas::deleteHistory ()
 
 bool Canvas::controlLay ()
 {
+    ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
     if (txGetAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
     {
-        toolLays[activeToolNum].startPos += {1, 0};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->startPos += {1, 0};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_LEFT) && currentToolLength > 0)
     {
-        toolLays[activeToolNum].startPos += {-1, 0};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->startPos += {-1, 0};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_DOWN) && currentToolLength > 0)
     {
-        toolLays[activeToolNum].startPos += {0, 1};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->startPos += {0, 1};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_UP) && currentToolLength > 0)
     {
-        toolLays[activeToolNum].startPos += {0, -1};
-        toolLays[activeToolNum].needRedraw();
-    }
-
-    if (txGetAsyncKeyState('U') && activeToolNum < currentToolLength - 1)
-    {
-        endtillkey('U');
-        activeToolNum++;
-    }
-    if (txGetAsyncKeyState('J') && activeToolNum > 0)
-    {
-        endtillkey('J');
-        activeToolNum--;
+        activeToolLay->startPos += {0, -1};
+        activeToolLay->needRedraw();
     }
 
     if (txGetAsyncKeyState('T') && currentToolLength > 0)
     {
-        toolLays[activeToolNum].size += { 0.01, 0};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->size += { 0.01, 0};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState('G') && currentToolLength > 0)
     {
-        toolLays[activeToolNum].size += {-0.01, 0};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->size += {-0.01, 0};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState('Y') && currentToolLength > 0)
     {
-        toolLays[activeToolNum].size += { 0, 0.01};
-        toolLays[activeToolNum].needRedraw();
+        activeToolLay->size += { 0, 0.01};
+        activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState('H') && currentToolLength > 0)
     {
-       toolLays[activeToolNum].size += { 0, -0.01};
-       toolLays[activeToolNum].needRedraw();    
+        activeToolLay->size += { 0, -0.01};
+        activeToolLay->needRedraw();
+        printBlt(getActiveLay()->lay.lay);
     }
 	return false;
 }
@@ -2178,7 +2134,7 @@ void Canvas::drawLay()
     for (int lays = 0; lays < currentLayersLength; lays++)
     {
         /*
-        for (int toollay = 0; toollay <= lay[lays].lastToolNum; toollay++)
+        for (int toollay = 0; toollay <= lay[lays].toolLength; toollay++)
         {
             lay[lays].toolLays[toollay]->tool->load(lay[lays].toolLays[toollay]);
         }  */
@@ -2399,7 +2355,7 @@ void Canvas::onClick(Vector mp)
             }
         }
 
-        clickHandle();
+        if (clickHandle()) return;
 
         if (!(isClicked) && manager->activeWindow == this)
         {

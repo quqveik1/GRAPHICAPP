@@ -152,7 +152,7 @@ struct Manager : Window
 	bool addWindow (Window *window);
 	Window *getActiveWindow ();
 	void controlHandle ();
-	void clickHandle ();
+	bool clickHandle ();
 	void replaceWindow (int numOfWindow);
     void hide ();
     void unHide ();
@@ -163,6 +163,7 @@ struct Manager : Window
 	virtual void onClick (Vector mp) override;
 
 	virtual void deleteButton () override;
+    Vector getMousePos();
 };
 
 

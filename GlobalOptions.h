@@ -21,12 +21,16 @@ const int ONEMENUBUTTONSNUM = 10; //количество пунктов в структрах MENU
 
 
 int MainFont = 20;
+const char* TEXTNAME = "Arial";
+const int TEXTFORMAT = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
 
 const int HANDLEHEIGHT = 26;
 const int BUTTONWIDTH = 50;
+const int BUTTONHEIGHT = 50;
 const int MENUBUTTONSWIDTH = 50;
 const int SIDETHICKNESS = 2;
 const int SCROLLBARTHICKNESS = 20;
+
 
 int GummiThickness = 10;
 
