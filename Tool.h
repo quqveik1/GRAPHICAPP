@@ -3,7 +3,8 @@
 #include "ProgrammeDate.h"
 #include "Lay.h"
 #include "TransferStructure.h"
-
+#include "CLay.h"
+#include "MainTools.h"
 struct Tool;
 struct ToolLay;
 
@@ -74,28 +75,9 @@ struct Tool
     bool firstUse(ProgrammeDate* data, void* output, Vector currentPos);
     void finishUse();
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay);
 };
 
 
-struct CToolManager
-{
-    const int ToolsLength = 10;
-    Tool** tools = new Tool * [ToolsLength];
-    int currentLength = 0;
 
-    virtual void addTool(Tool* tool);
-};
-
-
-struct ToolLay
-{
-    HDC dc;
-    Vector startPos;
-    Vector size = { 1, 1 };//rotates between[0; unlim)
-    const char* name;
-    Tool* tools;
-    void* toolsData = NULL;
-    int thickness = 1;
-};

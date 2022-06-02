@@ -200,7 +200,7 @@ void Lay::createLay	(Vector _laySize)
     tempLay = txCreateDIBSection (laySize.x, laySize.y, &tempBuf);
     clean(tempLay);
     outputLay = txCreateDIBSection (laySize.x, laySize.y, &outputBuf);
-    clean(tempLay);
+    clean(outputLay);
 
     /*
 	for (int y = 0; y < laySize.x; y++)

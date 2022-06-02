@@ -9,3 +9,10 @@
 *.tlog
 *.log
 *Debug/*
+Debug/PowerPoint.obj
+Debug/PowerPoint.obj
+Debug/PowerPoint.obj
+Debug/RingsProject.exe.log
+*.dmp
+Debug/RingsProject.ilk
+*.obj

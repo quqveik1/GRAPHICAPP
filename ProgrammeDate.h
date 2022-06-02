@@ -10,7 +10,6 @@ struct ProgrammeDate
     int thickness;
     int gummiThickness;
     Vector size;
-    Vector activeLayCoordinats = {};
 
     ProgrammeDate(Vector _absMouseCoordinats, Vector _managerPos, Vector _size, COLORREF _color) :
         absMouseCoordinats(_absMouseCoordinats),

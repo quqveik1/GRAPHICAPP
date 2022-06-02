@@ -40,8 +40,9 @@ DLLToolExportData* initDLL(AbstractAppData* data)
 
 
 
-bool Vignette::use(ProgrammeDate* data, Lay* lay, void* output)
+bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
+    /*
     Vector pos = data->mousePos + data->canvasCoordinats;
     firstUse(data, output, pos);
     *(app->currColor) = txGetPixel(pos.x, pos.y, lay->lay);
@@ -50,7 +51,7 @@ bool Vignette::use(ProgrammeDate* data, Lay* lay, void* output)
     *(ColorSave*)output = colorsave;
 
     finishUse();
-
+    */
     return true;
 }
 
@@ -61,8 +62,9 @@ void Vignette::load(ToolLay* toollay)
     //*(app->currColor) = toolDate->color;
 }
 
-bool Gummi::use(ProgrammeDate* data, Lay* lay, void* output)
+bool Gummi::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
+    /*
     assert(data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (!workedLastTime)
@@ -83,13 +85,14 @@ bool Gummi::use(ProgrammeDate* data, Lay* lay, void* output)
         *(ToolSave*)output = saveTool;
 
         return true;
-    }
+    }  &*/
 
     return false;
 }
 
-bool RectangleTool::use(ProgrammeDate* data, Lay* lay, void* output)
-{
+bool RectangleTool::use(ProgrammeDate* data, ToolLay* lay, void* output)
+{    
+    /*
     assert(data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (!workedLastTime)
@@ -109,7 +112,7 @@ bool RectangleTool::use(ProgrammeDate* data, Lay* lay, void* output)
         (*(ToolSave*)output) = saveTool;
         workedLastTime = false;
         return true;
-    }
+    }  */
 
     return false;
 }
@@ -124,8 +127,9 @@ void RectangleTool::load(ToolLay* toollay)
     //txRectangle(rectDate->pos.x, rectDate->pos.y, rectDate->pos.x + rectDate->size.x, rectDate->pos.y + rectDate->size.y, finalDC);
 }
 
-bool EllipseTool::use(ProgrammeDate* data, Lay* lay, void* output)
-{
+bool EllipseTool::use(ProgrammeDate* data, ToolLay* lay, void* output)
+{      
+    /*
     assert(data && lay && output);
     Vector pos = data->mousePos;
     if (!workedLastTime)
@@ -148,14 +152,15 @@ bool EllipseTool::use(ProgrammeDate* data, Lay* lay, void* output)
         (*(ToolSave*)output) = saveTool;
         workedLastTime = false;
         return true;
-    }
+    }    */
 
     return false;
 
 }
 
-bool Point::use(ProgrammeDate* data, Lay* lay, void* output)
+bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
+    /*
     assert(data && lay && output && lay->outputLay);
     Vector pos = data->mousePos;
     if (firstUse(data, output, pos))
@@ -181,7 +186,7 @@ bool Point::use(ProgrammeDate* data, Lay* lay, void* output)
         return true;
     }
 
-    lastPos = pos;
+    lastPos = pos; */
 
     return false;
 }
@@ -200,9 +205,12 @@ void Point::load(ToolLay* toollay)
 }
 
 
-bool Line::use(ProgrammeDate* data, Lay* lay, void* output)
+bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
-    assert(data && lay && output && lay->outputLay);
+    assert(data && lay && output);
+
+    lay->needRedraw();
+
     Vector pos = data->mousePos;
     if (!workedLastTime || clicked == 1)
     {
@@ -218,9 +226,11 @@ bool Line::use(ProgrammeDate* data, Lay* lay, void* output)
 
     *(ToolSave*)output = saveTool;
 
+
     if (clicked == 2)
     {
         finishUse();
+        lay->isToolFinished = true;
         return true;
     }
 
@@ -231,8 +241,14 @@ void Line::load(ToolLay* toollay)
 {
     assert(toollay);
     ToolSave* toolDate = (ToolSave*)toollay->toolsData;
-    app->setColor(toolDate->color, toollay->dc, toolDate->thickness);
-    txLine(toolDate->pos.x + toollay->startPos.x, toolDate->pos.y + toollay->startPos.y, toolDate->pos.x + (toolDate->size.x * toollay->size.x) + toollay->startPos.x, toolDate->pos.y + (toolDate->size.y * toollay->size.y) + toollay->startPos.y, toollay->dc);
+    HDC outDC = NULL;
+    if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
+    else                         outDC = toollay->lay->getDCForToolLoad();
+
+    app->setColor(toolDate->color, outDC, toolDate->thickness);
+    txLine(toolDate->pos.x + toollay->startPos.x, toolDate->pos.y + toollay->startPos.y, toolDate->pos.x + (toolDate->size.x * toollay->size.x) + toollay->startPos.x, toolDate->pos.y + (toolDate->size.y * toollay->size.y) + toollay->startPos.y, outDC);
+    //app->drawOnScreen(toollay->lay->getDCForToolLoad());
+    //while (app->getAsyncKeyState('P')) {};
 }                                                                                                          
 
 

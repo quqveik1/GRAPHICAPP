@@ -18,6 +18,9 @@
 #include "DLLFiltersManager.cpp"
 #include "Tool.h"
 #include "DLLToolsManager.cpp"
+#include "CLay.cpp"
+#include "MainTools.cpp"
+
 
 //#include "LoadManager.h"
 int testMode = 1;
@@ -57,7 +60,21 @@ void invertDC (RGBQUAD* buf, unsigned int totalsize);
 CToolManager ToolManager;
 
 
+struct Menu : Manager
+{
+    int lastSelected = -1;
+    Menu(Rect _rect) :
+        Manager(_rect, ONEMENUBUTTONSNUM)
+    {}
 
+    virtual void drawOneLine(int lineNum) = NULL;
+    virtual void clickOneLine(int lineNum) = NULL;
+
+    virtual void draw();
+    virtual void onClick(Vector mp);
+
+
+};
 
 
 
@@ -102,6 +119,8 @@ struct ProgressBar : Window
 
 	virtual void draw() override;
 };
+
+
 
 
 
@@ -1050,7 +1069,7 @@ void ToolsPalette::draw()
 {
 	//reDraw = false;
 
-	//controlHandle();
+	controlHandle();
 	if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
 
 	drawOnFinalDC(handle);
@@ -1719,6 +1738,70 @@ void ProgressBar::draw()
 		txRectangle(0, 0, rect.getSize().x * (*currentNum / *totalNum), rect.getSize().y, finalDC);
 	}
 	//printBlt(finalDC);
+} 
+void Menu::draw()
+{
+    if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
+
+    drawOnFinalDC(handle);
+
+    for (int i = 0; i < newButtonNum; i++)
+    {
+        drawOneLine(i);
+        if (lastSelected == i)
+        {
+            txSetAllColors(TX_WHITE, finalDC);
+            txRectangle(pointers[i]->rect.pos.x, pointers[i]->rect.pos.y + handle.rect.finishPos.y, pointers[i]->rect.pos.x + pointers[i]->rect.getSize().x * 0.1, pointers[i]->rect.pos.y + pointers[i]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
+        }
+        if (txMouseButtons() != 1)
+        {
+            pointers[i]->isClicked = false;
+        }
+    }
+
+    if (manager->getActiveWindow() != this && manager)
+    {
+        activeWindow = NULL;
+    }
+
+}
+
+void Menu::onClick(Vector mp)
+{
+    bool missClicked = true;
+
+    mousePos = mp;
+    int mx = mp.x;
+    int my = mp.y;
+    clickHandle();
+
+
+
+    if (advancedMode && !isClicked)
+    {
+        reDraw = true;
+        for (int i = newButtonNum - 1; i >= 0; i--)
+        {
+            if (pointers[i]->rect.inRect(mx, my))
+            {
+                activeWindow = pointers[i];
+                clickOneLine(i);
+                lastSelected = i;
+
+                missClicked = false;
+
+                if (pointers[i]->advancedMode) break;
+            }
+            else
+            {
+                pointers[i]->isClicked = false;
+
+                missClicked = true;
+            }
+        }
+    }
+
+    if (missClicked == true) activeWindow = NULL;
 }
 
 
@@ -1735,14 +1818,13 @@ void Canvas::draw ()
     currentDate->canvasCoordinats = canvasCoordinats;
     currentDate->gummiThickness = GummiThickness;
     currentDate->backGroundColor = TRANSPARENTCOLOR;
-    currentDate->activeLayCoordinats = lay[activeLayNum].layCoordinats;
 
-    
     if (testMode) printf("Clicked: %d\n", clicked);
 
-	controlFilter();
+	//controlFilter();
 
     cleanOutputLay();
+    controlLay();
 
     if (activeTool)
     {
@@ -1763,7 +1845,7 @@ void Canvas::draw ()
 	{
 		endtillkey ('Z');
 		//playHistory ();
-		returnHistory(1);
+		//returnHistory(1);
 	}
 	//drawLay();
 
@@ -1795,20 +1877,35 @@ void Canvas::draw ()
 	
 }
 
+ToolLay* Canvas::getActiveToolLay()
+{
+    return &(toolLays[currentToolLength - 1]);
+} 
+
+CLay* Canvas::getActiveLay()
+{
+    return &(lay[activeLayNum]);
+} 
+
+int Canvas::getCurrentToolLengthOnActiveLay()
+{
+    return getActiveLay()->lastToolNum + 1;
+}
+
 void Canvas::controlTool()
 {
-    if (toolLays[currentToolLength - 1].tools->use(currentDate, &lay[activeLayNum - 1], toolLays[currentToolLength - 1].toolsData))
+    if ( getActiveToolLay()->tool->use   (currentDate, getActiveLay()->getActiveLay (), getActiveToolLay()->toolsData)     )
     {
         finishTool();
     }
-    else if (clicked == 0)toolLays[currentToolLength - 1].tools->clicked = clicked;
+    else if (clicked == 0)getActiveToolLay()->tool->clicked = clicked;
 }
 
 void Canvas::finishTool()
 {
     activeTool = false;
     //txTransparentBlt(lay[activeLayNum].outputLay, 0, 0, 0, 0, lay[activeLayNum].lay, 0, 0, TRANSPARENTCOLOR);
-    toolLays[currentToolLength - 1].tools->clicked = 0;
+    toolLays[currentToolLength - 1].tool->clicked = 0;
 }
 
 void Canvas::returnHistory (int stepsBack)
@@ -1981,30 +2078,26 @@ void Canvas::deleteHistory ()
 
 bool Canvas::controlLay ()
 {
-	
-	return false;
-}
-
-void Canvas::cleanOutputLay()
-{
-    for (int i = 0; i < currentLayersLength; i++)
+    if (txGetAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
     {
-        //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
-        lay[i].clean(lay[i].outputLay);
-        txTransparentBlt (lay[i].outputLay, 0, 0, 0, 0, lay[i].lay, 0, 0, TRANSPARENTCOLOR);
-        //txBitBlt(0, 0, lay[i].tempLay);
-        //while (txGetAsyncKeyState('G')) { txSleep(0); }
-        
+        toolLays[activeToolNum].startPos += {1, 0};
+        toolLays[activeToolNum].needRedraw();
     }
-}
-
-void Canvas::drawLay()
-{
-    ActiveLay = &lay[activeLayNum];
-    if (txGetAsyncKeyState(VK_RIGHT) && currentToolLength > 0) toolLays[activeToolNum].startPos += {1, 0};
-    if (txGetAsyncKeyState(VK_LEFT) && currentToolLength > 0) toolLays[activeToolNum].startPos += {-1, 0};
-    if (txGetAsyncKeyState(VK_DOWN) && currentToolLength > 0) toolLays[activeToolNum].startPos += {0, 1};
-    if (txGetAsyncKeyState(VK_UP) && currentToolLength > 0) toolLays[activeToolNum].startPos += {0, -1};
+    if (txGetAsyncKeyState(VK_LEFT) && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].startPos += {-1, 0};
+        toolLays[activeToolNum].needRedraw();
+    }
+    if (txGetAsyncKeyState(VK_DOWN) && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].startPos += {0, 1};
+        toolLays[activeToolNum].needRedraw();
+    }
+    if (txGetAsyncKeyState(VK_UP) && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].startPos += {0, -1};
+        toolLays[activeToolNum].needRedraw();
+    }
 
     if (txGetAsyncKeyState('U') && activeToolNum < currentToolLength - 1)
     {
@@ -2017,12 +2110,47 @@ void Canvas::drawLay()
         activeToolNum--;
     }
 
-    if (txGetAsyncKeyState('T') && currentToolLength > 0) toolLays[activeToolNum].size += { 0.01,  0};
-    if (txGetAsyncKeyState('G') && currentToolLength > 0) toolLays[activeToolNum].size += {-0.01,  0};
-    if (txGetAsyncKeyState('Y') && currentToolLength > 0) toolLays[activeToolNum].size += { 0   ,  0.01};
-    if (txGetAsyncKeyState('H') && currentToolLength > 0) toolLays[activeToolNum].size += { 0   , -0.01};
-                                                                                                
+    if (txGetAsyncKeyState('T') && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].size += { 0.01, 0};
+        toolLays[activeToolNum].needRedraw();
+    }
+    if (txGetAsyncKeyState('G') && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].size += {-0.01, 0};
+        toolLays[activeToolNum].needRedraw();
+    }
+    if (txGetAsyncKeyState('Y') && currentToolLength > 0)
+    {
+        toolLays[activeToolNum].size += { 0, 0.01};
+        toolLays[activeToolNum].needRedraw();
+    }
+    if (txGetAsyncKeyState('H') && currentToolLength > 0)
+    {
+       toolLays[activeToolNum].size += { 0, -0.01};
+       toolLays[activeToolNum].needRedraw();    
+    }
+	return false;
+}
 
+void Canvas::cleanOutputLay()
+{
+    for (int i = 0; i < currentLayersLength; i++)
+    {
+        //if (lay[i].redrawStatus ()) txBitBlt(lay[i].getDCForToolLoad(), 0, 0, 0, 0, lay[i].getPermanentDC());
+        //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
+        //lay[i].clean(lay[i].outputLay);
+        //txTransparentBlt (lay[i].outputLay, 0, 0, 0, 0, lay[i].lay, 0, 0, TRANSPARENTCOLOR);
+        //txBitBlt(0, 0, lay[i].tempLay);
+        //while (txGetAsyncKeyState('G')) { txSleep(0); }
+        
+    }
+}
+
+void Canvas::drawLay()
+{
+    //ActiveLay = &lay[activeLayNum];
+    /*
     if (lay[activeLayNum].isClicked)
     {
         printf("%lf\n", lay[activeLayNum].layCoordinats.x);
@@ -2034,7 +2162,8 @@ void Canvas::drawLay()
     if (clicked != 1)
     {
         lay[activeLayNum].isClicked = false;
-    }
+    }  */
+    /*
     for (int i = 0; i < currentLayersLength; i++)
     {
         for (int j = 0; j < currentToolLength; j++)
@@ -2043,8 +2172,28 @@ void Canvas::drawLay()
         }
         
         txTransparentBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay, 0, 0, TRANSPARENTCOLOR);
-    }
+    } */
 
+
+    for (int lays = 0; lays < currentLayersLength; lays++)
+    {
+        /*
+        for (int toollay = 0; toollay <= lay[lays].lastToolNum; toollay++)
+        {
+            lay[lays].toolLays[toollay]->tool->load(lay[lays].toolLays[toollay]);
+        }  */
+        if (lay[lays].redrawStatus())
+        {
+            lay[lays].redraw();
+            lay[lays].noMoreRedraw();
+            txTransparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay, 0, 0, TRANSPARENTCOLOR);
+        }
+        txTransparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay, 0, 0, TRANSPARENTCOLOR);
+        
+        //txBitBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
+        //printBlt(lay[lays].lay.outputLay);
+
+    }
     
 }
 
@@ -2123,15 +2272,11 @@ void CToolManager::addTool (Tool *tool)
 
 void Canvas::createLay ()
 {
+    assert(!(currentLayersLength >= LayersNum));
+    lay[currentLayersLength].createLay();
+    if (currentLayersLength <= LayersNum) currentLayersLength++;
 
-    /*
-	lay[currentLayersLength].createLay ();
-    canvas = lay[currentLayersLength].lay;
-    canvasArr = lay[currentLayersLength].layBuf;
-
-	currentLayersLength++;
-	activeLayNum = currentLayersLength - 1;
-	*/
+    activeLayNum = currentLayersLength - 1;
 }
 
 HDC Canvas::playHistoryDC (int stepBack)
@@ -2203,12 +2348,13 @@ void Canvas::startTool()
 
 void Canvas::initToolLay()
 {
+    assert(LayersNum >= currentToolLength);
     activeTool = true;
-    toolLays[currentToolLength].tools = ToolManager.tools[DrawingMode - 1];
-    toolLays[currentToolLength].tools->clicked = clicked;
+    toolLays[currentToolLength].tool = ToolManager.tools[DrawingMode - 1];
+    toolLays[currentToolLength].tool->clicked = clicked;
     toolLays[currentToolLength].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
     currentDate->size = { lineThickness, lineThickness };
-    toolLays[currentToolLength].dc = lay[activeLayNum].outputLay;
+    lay[activeLayNum].addTool(&toolLays[currentToolLength]);
 
     currentToolLength++;
     activeToolNum = currentToolLength - 1;
@@ -2218,7 +2364,7 @@ void Canvas::onClick(Vector mp)
 {
     if (activeTool)
     {
-        toolLays[activeToolNum].tools->clicked = clicked;  
+        toolLays[activeToolNum].tool->clicked = clicked;  
     }
     if (clicked == 1)
     {
@@ -2271,7 +2417,7 @@ void Canvas::onClick(Vector mp)
 
         }
 
-        if (!activeTool && canvas)
+        if (!activeTool)
         {
             startTool();
         }

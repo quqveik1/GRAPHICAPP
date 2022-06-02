@@ -30,19 +30,10 @@ struct Canvas : Manager
 	Vector lastClick = {};
 	double testNum = 0;
 
-	int lastFirstFilterValue = FirstFilterValue;
-	int lastSecondFilterValue = SecondFilterValue;
-	int lastRecountFirstFilterValue = FirstFilterValue;
-	int lastRecountSecondFilterValue = FirstFilterValue;//яркость при прошлой части расчета
-	DWORD lastTimeRecountFilter = GetTickCount();
-
-	const int LayersNum = 10;
-    Lay* lay = new Lay[LayersNum]{};
-	Vector cursorPos = {};
+    const int LayersNum = 100;
 	int currentLayersLength = 0;
 	int activeLayNum = 0; 
-
-    CLay* canvasLays = new CLay[LayersNum]{};
+    CLay* lay = new CLay[LayersNum]{};
 
     ToolLay* toolLays = new ToolLay[LayersNum]{};
     int currentToolLength = 0;
@@ -72,14 +63,8 @@ struct Canvas : Manager
 		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y})
 	{
-		//canvas = txCreateDIBSection (canvasSize.x, canvasSize.y, &canvasArr);
 		scrollBarVert.manager = this;
 		scrollBarHor.manager = this;
-
-		//tempFilterDC = txCreateDIBSection (canvasSize.x, canvasSize.y, &tempFilterDCArr);
-
-		//lastSavedDC = txCreateDIBSection(canvasSize.x, canvasSize.y, &canvasArr);
-
 
         addWindow (&closeCanvas);
         addWindow (&scrollBarVert);
@@ -92,15 +77,22 @@ struct Canvas : Manager
 	HDC playHistoryDC (int stepBack);
 	void returnHistory(int stepsBack);
 	void deleteHistory ();
+
 	void createLay ();
 	bool controlLay ();
 	void drawLay ();
     void cleanOutputLay();
+
 	void controlFilter();
+
     void finishTool();
     void controlTool();
     void startTool();
     void initToolLay();
+
+    ToolLay* getActiveToolLay();
+    CLay* getActiveLay();
+    int getCurrentToolLengthOnActiveLay();
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

@@ -27035,3 +27035,306 @@ HEAP CORRUPTION DETECTED: before Normal block (#594) at 0x01818DF8.
 CRT detected that the application wrote to memory before start of heap buffer.
 Normal located at 0x01818DF8 is 16000 bytes long.
 minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2136, функция: void __thiscall Canvas::createLay(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "currentLayersLength >= LayersNum".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00ECA82C (32-bit), Flags: CMdRe0, Thread: 0x3880 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E69016 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::createLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2136):
+
+   2134: void Canvas::createLay ()
+   2135: {
+=> 2136:     assert(currentLayersLength >= LayersNum);
+   2137:     lay[currentLayersLength].createLay();
+   2138:     if (currentLayersLength > LayersNum)
+
+# 1 0x00E6B67E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1760):
+
+   1758: 		endtillkey('Q');
+   1759: 		//playHistory ();
+=> 1760: 		createLay();
+   1761: 
+   1762: 	}
+
+# 2 0x00E7FA74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 3 0x00E6C5A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1618):
+
+   1616: 
+   1617:     //if (key (VK_SPACE)) _getch();
+=> 1618:     standartManagerDraw (this);
+   1619:     activeWindow = activeCanvas;
+   1620:     //printf ("%p\n", activeWindow);
+
+# 4 0x00E7FA74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 5 0x00E7032F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (516):
+
+    514: void Manager::draw ()
+    515: {
+=>  516:     standartManagerDraw (this);	
+    517: }
+    518: 
+
+# 6 0x00E25ADE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1334):
+
+   1332:         Vector mp = {txMouseX (), txMouseY ()};
+   1333:         manager->mousePos = mp;
+=> 1334: 		manager->draw ();
+   1335: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1336: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 7 0x00E9C257 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (709):
+
+    707: 
+    708: 
+=>  709: 	Engine (manager);
+    710: 
+    711: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  1 2022 22:15:05, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  1 2022 22:15:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2136, функция: void __thiscall Canvas::createLay(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "currentLayersLength >= LayersNum".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00ECA82C (32-bit), Flags: CMdRe0, Thread: 0x57CC (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E69016 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::createLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2136):
+
+   2134: void Canvas::createLay ()
+   2135: {
+=> 2136:     assert(currentLayersLength >= LayersNum);
+   2137:     lay[currentLayersLength].createLay();
+   2138:     if (currentLayersLength > LayersNum)
+
+# 1 0x00E6B67E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1760):
+
+   1758: 		endtillkey('Q');
+   1759: 		//playHistory ();
+=> 1760: 		createLay();
+   1761: 
+   1762: 	}
+
+# 2 0x00E7FA74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 3 0x00E6C5A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1618):
+
+   1616: 
+   1617:     //if (key (VK_SPACE)) _getch();
+=> 1618:     standartManagerDraw (this);
+   1619:     activeWindow = activeCanvas;
+   1620:     //printf ("%p\n", activeWindow);
+
+# 4 0x00E7FA74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (172):
+
+    170:         
+    171: 
+=>  172: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    173:  		if (manager->pointers[i]->advancedMode) 
+    174: 		{
+
+# 5 0x00E7032F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (516):
+
+    514: void Manager::draw ()
+    515: {
+=>  516:     standartManagerDraw (this);	
+    517: }
+    518: 
+
+# 6 0x00E25ADE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1334):
+
+   1332:         Vector mp = {txMouseX (), txMouseY ()};
+   1333:         manager->mousePos = mp;
+=> 1334: 		manager->draw ();
+   1335: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1336: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 7 0x00E9C257 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (709):
+
+    707: 
+    708: 
+=>  709: 	Engine (manager);
+    710: 
+    711: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  1 2022 22:15:05, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  1 2022 22:16:19
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp, строка: 2232, функция: void __thiscall Canvas::initToolLay(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "LayersNum <= currentToolLength".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BE984C (32-bit), Flags: CMdRe0, Thread: 0x5064 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B970C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::initToolLay() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2232):
+
+   2230: void Canvas::initToolLay()
+   2231: {
+=> 2232:     assert(LayersNum <= currentToolLength);
+   2233:     activeTool = true;
+   2234:     toolLays[currentToolLength].tool = ToolManager.tools[DrawingMode - 1];
+
+# 1 0x00BA05F6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::startTool() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2225):
+
+   2223:     */
+   2224: 
+=> 2225:     initToolLay();
+   2226: 
+   2227:     controlTool();
+
+# 2 0x00B99AFA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2303):
+
+   2301:         if (!activeTool)
+   2302:         {
+=> 2303:             startTool();
+   2304:         }
+   2305:     }
+
+# 3 0x00B85D7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (626):
+
+    624:     manager->activeWindow = window;
+    625:     window->clicked = manager->clicked;
+=>  626: 	window->onClick (mp - window->rect.pos);
+    627: 	window->isClicked = true;
+    628: }
+
+# 4 0x00BA04C9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (128):
+
+    126: 			if (manager->pointers[i]->rect.inRect(mp))
+    127: 			{
+=>  128: 				clickButton (manager->pointers[i], manager, mp);
+    129: 
+    130: 				missClicked = false;
+
+# 5 0x00B99CC4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1646):
+
+   1644: {
+   1645:     mousePos = mp;
+=> 1646:     int clickedCellNum = standartManagerOnClick(this, mp);
+   1647:     
+   1648:     if (clickedCellNum >= 0) 
+
+# 6 0x00B85D7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (626):
+
+    624:     manager->activeWindow = window;
+    625:     window->clicked = manager->clicked;
+=>  626: 	window->onClick (mp - window->rect.pos);
+    627: 	window->isClicked = true;
+    628: }
+
+# 7 0x00BA04C9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (128):
+
+    126: 			if (manager->pointers[i]->rect.inRect(mp))
+    127: 			{
+=>  128: 				clickButton (manager->pointers[i], manager, mp);
+    129: 
+    130: 				missClicked = false;
+
+# 8 0x00B9AB12 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (619):
+
+    617: void Manager::onClick (Vector mp)
+    618: {
+=>  619:     standartManagerOnClick (this, mp);	
+    620: }
+    621: 
+
+# 9 0x00B45E0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1341):
+
+   1339:             
+   1340:             manager->clicked = txMouseButtons();
+=> 1341: 			manager->onClick (mp);
+   1342: 			if (!IsRunning) break;
+   1343: 		}
+
+#10 0x00BBB377 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  1 2022 23:35:31, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  1 2022 23:35:36
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -31,7 +31,7 @@ struct Line : Tool
     }
 
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay *toollay);
 };
 
@@ -46,7 +46,7 @@ struct Point : Tool
     }
 
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay);
 };
 
@@ -57,7 +57,7 @@ struct Vignette : Tool
     {
     }
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay);
 };
 
@@ -68,7 +68,7 @@ struct Gummi : Tool
         Tool(_name, _ToolSaveLen, _dc, _data)
     {
     }
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
 };
 
 struct RectangleTool : Tool
@@ -78,7 +78,7 @@ struct RectangleTool : Tool
     {
     }
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay);
 };
 
@@ -89,5 +89,5 @@ struct EllipseTool : Tool
     {
     }
 
-    virtual bool use(ProgrammeDate* data, Lay* lay, void* output);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
 };

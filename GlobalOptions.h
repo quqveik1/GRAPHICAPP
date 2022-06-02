@@ -15,6 +15,8 @@ const COLORREF TRANSPARENTCOLOR = RGB(57, 57, 57);
 
 const int ONELAYTOOLSLIMIT = 100;
 
+const int ONEMENUBUTTONSNUM = 10; //количество пунктов в структрах MENU
+
 
 
 
@@ -33,6 +35,7 @@ const int TOOLSNUM = 5;
 
 const Vector SCREENSIZE = { 1900, 900 };
 const int DCMAXSIZE = 1000;
+const Vector DCVECTORSIZE = { 1000, 1000 };
 const int TRANSPARENTDCSIZE = 2000;
 int test1 = 0;
 

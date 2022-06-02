@@ -21,13 +21,13 @@ void Tool::finishUse()
 }
 
 
-bool Tool::use(ProgrammeDate* data, Lay* lay, void* output)
+bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
-    assert(data && lay && output && lay->tempLay);
+    assert(data && lay && output);
     Vector pos = data->mousePos;
     firstUse(data, output, pos);
-    (app)->setColor(data->color, lay->outputLay, data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->outputLay);
+    (app)->setColor(data->color, lay->lay->getDCForToolLoad(), data->size.x);
+    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay->getDCForToolLoad());
 
 
 
@@ -35,8 +35,8 @@ bool Tool::use(ProgrammeDate* data, Lay* lay, void* output)
 
     if (clicked != 1 || pos != startPos)
     {
-        (app)->setColor(data->color, lay->lay, data->size.x);
-        txEllipse(pos.x - data->size.x + data->canvasCoordinats.x, pos.y - data->size.y + data->canvasCoordinats.y, pos.x + data->size.x + data->canvasCoordinats.x, pos.y + data->size.y + data->canvasCoordinats.y, lay->lay);
+        (app)->setColor(data->color, lay->lay->getPermanentDC (), data->size.x);
+        txEllipse(pos.x - data->size.x + data->canvasCoordinats.x, pos.y - data->size.y + data->canvasCoordinats.y, pos.x + data->size.x + data->canvasCoordinats.x, pos.y + data->size.y + data->canvasCoordinats.y, lay->lay->getPermanentDC());
 
         workedLastTime = false;
 
@@ -56,3 +56,6 @@ void Tool::load(ToolLay* toollay)
    // (app)->setColor(toolDate->color, finalDC, toolDate->thickness);
     //txEllipse(toolDate->pos.x - toolDate->size.x, toolDate->pos.y - toolDate->size.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
 }
+
+
+
