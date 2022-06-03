@@ -49,7 +49,7 @@ bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void Tool::load(ToolLay* toollay)
+void Tool::load(ToolLay* toollay, HDC dc /* = NULL*/)
 {
     //assert(input && finalDC);
     //ToolSave* toolDate = (ToolSave*)input;
@@ -68,6 +68,11 @@ HDC Tool::getDC()
 const char* Tool::getName()
 {
     return name;
+}
+
+void Tool::setMBCondition(int mbCond)
+{
+    clicked = mbCond;
 }
 
 

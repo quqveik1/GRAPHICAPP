@@ -62,7 +62,7 @@ CToolManager ToolManager;
 
 struct Menu : Manager
 {
-    int lastSelected = -1;
+    int lastSelected = 0;
     int currentSize = 0;
     Menu(Rect _rect, Rect _handle, int _length = ONEMENUBUTTONSNUM) :
         Manager(_rect, _length, false, NULL, _handle, MenuColor, true)
@@ -695,7 +695,7 @@ int main ()
 	//blueColor->deleteButton ();
 	//blueColor->deleteButton ();
 
-	manager->deleteButton ();
+    delete manager;
     LoadManager.deleteAllImages ();
 	 
 
@@ -1043,6 +1043,9 @@ void ToolsPalette::drawOneLine(int lineNum)
     {
         pointers[lineNum]->isClicked = false;
     }
+
+    txSetColor(TX_BLACK, 1, finalDC);
+    txLine(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
 }
 
 int ToolsPalette::onClickLine(Vector mp)
@@ -1090,6 +1093,8 @@ void ToolMenu::drawOneLine(int lineNum)
     CLay* lay = canvasManager->getActiveCanvas()->getActiveLay();
     Tool* tool = lay->getToolLays()[lineNum]->getTool();
     HDC toolDC = tool->getDC(); 
+    lastSelected = lay->getActiveToolLayNum();
+
     char outputText[20] = {};
     sprintf(outputText, "%d", lineNum + 1);
 
@@ -1102,6 +1107,12 @@ void ToolMenu::drawOneLine(int lineNum)
 
     txSetColor(TX_BLACK, 1, finalDC);
     txLine(0, linePosY, rect.getSize().x, linePosY, finalDC);
+
+    if (lastSelected == lineNum)
+    {
+        txSetAllColors(TX_WHITE, finalDC);
+        txRectangle(0, linePosY, 5, linePosY + 5, finalDC);
+    }
 }
 
 
@@ -1786,13 +1797,10 @@ void Canvas::draw ()
 
 	//controlFilter();
 
-    cleanOutputLay();
+    cleanOutputLay();                                                                                                                      
     controlLay();
 
-    if (activeTool)
-    {
-        controlTool();
-    }
+    if (activeTool) controlTool();
 
     drawLay();
 
@@ -1804,13 +1812,6 @@ void Canvas::draw ()
 		createLay();
 
 	}
-	if (txGetAsyncKeyState ('Z')) 
-	{
-		endtillkey ('Z');
-		//playHistory ();
-		//returnHistory(1);
-	}
-	//drawLay();
 
     if (txGetAsyncKeyState ('2'))
     {
@@ -1844,6 +1845,7 @@ void Canvas::draw ()
 
 CLay* Canvas::getActiveLay()
 {
+    if (activeLayNum < 0) assert(!"Lay hasn't created");
     return &(lay[activeLayNum]);
 } 
 
@@ -1859,11 +1861,11 @@ void Canvas::controlTool()
     ToolLay* toollay = clay->getActiveToolLay();
     Tool* tool = toollay->getTool();
 
-    if (tool->use   (currentDate, toollay, toollay->toolsData))
+    if (toollay->useTool (currentDate))
     {
         finishTool();
     }
-    else if (clicked == 0)toollay->tool->clicked = clicked;
+    if (clicked == 0) tool->setMBCondition (clicked);
 }
 
 void Canvas::finishTool()
@@ -2041,27 +2043,54 @@ void Canvas::deleteHistory ()
 	}
 }
 
+void Canvas::controlEditLay()
+{
+    ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
+    if (txGetAsyncKeyState('E') && currentToolLength > 0)
+    {
+        while (txGetAsyncKeyState('E')) {};
+        editingMode = !editingMode;
+        activeToolLay->needRedraw();
+    }
+
+    if (editingMode)
+    {
+        activeToolLay->getTool()->setMBCondition(clicked);
+        activeToolLay->editTool(currentDate);
+    }
+}
+
+bool Canvas::onClickEditLay()
+{
+    if (editingMode)
+    {
+        
+        return true;
+    } 
+    return false;
+}
+
 bool Canvas::controlLay ()
 {
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
     if (txGetAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
     {
-        activeToolLay->startPos += {1, 0};
+        activeToolLay->toolZone.pos += {1, 0};
         activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_LEFT) && currentToolLength > 0)
     {
-        activeToolLay->startPos += {-1, 0};
+        activeToolLay->toolZone.pos += {-1, 0};
         activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_DOWN) && currentToolLength > 0)
     {
-        activeToolLay->startPos += {0, 1};
+        activeToolLay->toolZone.pos += {0, 1};
         activeToolLay->needRedraw();
     }
     if (txGetAsyncKeyState(VK_UP) && currentToolLength > 0)
     {
-        activeToolLay->startPos += {0, -1};
+        activeToolLay->toolZone.pos += {0, -1};
         activeToolLay->needRedraw();
     }
 
@@ -2084,8 +2113,10 @@ bool Canvas::controlLay ()
     {
         activeToolLay->size += { 0, -0.01};
         activeToolLay->needRedraw();
-        printBlt(getActiveLay()->lay.lay);
     }
+
+    controlEditLay();
+
 	return false;
 }
 
@@ -2105,39 +2136,10 @@ void Canvas::cleanOutputLay()
 
 void Canvas::drawLay()
 {
-    //ActiveLay = &lay[activeLayNum];
-    /*
-    if (lay[activeLayNum].isClicked)
-    {
-        printf("%lf\n", lay[activeLayNum].layCoordinats.x);
-        lay[activeLayNum].layCoordinats.x += txMouseX() - cursorPos.x;
-        lay[activeLayNum].layCoordinats.y += txMouseY() - cursorPos.y;
-        cursorPos.x = txMouseX();
-        cursorPos.y = txMouseY();
-    }
-    if (clicked != 1)
-    {
-        lay[activeLayNum].isClicked = false;
-    }  */
-    /*
-    for (int i = 0; i < currentLayersLength; i++)
-    {
-        for (int j = 0; j < currentToolLength; j++)
-        {
-            toolLays[j].tools->load(&toolLays[j]);
-        }
-        
-        txTransparentBlt (finalDC, lay[i].layCoordinats.x - canvasCoordinats.x, lay[i].layCoordinats.y - canvasCoordinats.y, 0, 0, lay[i].outputLay, 0, 0, TRANSPARENTCOLOR);
-    } */
 
 
     for (int lays = 0; lays < currentLayersLength; lays++)
     {
-        /*
-        for (int toollay = 0; toollay <= lay[lays].toolLength; toollay++)
-        {
-            lay[lays].toolLays[toollay]->tool->load(lay[lays].toolLays[toollay]);
-        }  */
         if (lay[lays].redrawStatus())
         {
             lay[lays].redraw();
@@ -2145,10 +2147,6 @@ void Canvas::drawLay()
             txTransparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay, 0, 0, TRANSPARENTCOLOR);
         }
         txTransparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay, 0, 0, TRANSPARENTCOLOR);
-        
-        //txBitBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
-        //printBlt(lay[lays].lay.outputLay);
-
     }
     
 }
@@ -2304,24 +2302,30 @@ void Canvas::startTool()
 
 void Canvas::initToolLay()
 {
-    assert(LayersNum >= currentToolLength);
-    activeTool = true;
-    toolLays[currentToolLength].tool = ToolManager.tools[DrawingMode - 1];
-    toolLays[currentToolLength].tool->clicked = clicked;
-    toolLays[currentToolLength].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
+    
     currentDate->size = { lineThickness, lineThickness };
-    lay[activeLayNum].addTool(&toolLays[currentToolLength]);
+    addToolLay();
+    getActiveLay()->addTool(&toolLays[currentToolLength]);
 
     currentToolLength++;
-    activeToolNum = currentToolLength - 1;
+}
+
+void Canvas::addToolLay()
+{
+    assert(LayersNum >= currentToolLength);
+    activeTool = true;
+    getNewToolLay()->tool = ToolManager.tools[DrawingMode - 1];
+    getNewToolLay()->tool->clicked = clicked;
+    getNewToolLay()->toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
+}
+
+ToolLay* Canvas::getNewToolLay()
+{
+    return &(toolLays[currentToolLength]);
 }
 
 void Canvas::onClick(Vector mp)
 {
-    if (activeTool)
-    {
-        toolLays[activeToolNum].tool->clicked = clicked;  
-    }
     if (clicked == 1)
     {
 
@@ -2373,12 +2377,24 @@ void Canvas::onClick(Vector mp)
 
         }
 
-        if (!activeTool)
+        if (!activeTool && !editingMode)
         {
             startTool();
         }
+
+
     }
 
+    if (editingMode)
+    {
+        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, mousePos, clicked)) return;
+    }
+
+    
+    //independet scenery block++++++++++++++++++++++++++++++++++++++++++++++++++++
+    getActiveLay()->getActiveToolLay()->getTool()->setMBCondition(clicked);
+    if (activeTool) controlTool();
+    //independet scenery block----------------------------------------------------
     
 }
 

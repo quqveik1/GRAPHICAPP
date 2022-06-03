@@ -500,15 +500,6 @@ Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 }
 
 
-void Manager::deleteButton ()
-{
-	if (dc) txDeleteDC (dc);
-	if (finalDC) txDeleteDC (finalDC);
-	for (int i = 0; i < length; i++)
-	{
-		if (pointers[i]) pointers[i]->deleteButton ();
-	}
-}
 
 Vector Manager::getMousePos()
 {

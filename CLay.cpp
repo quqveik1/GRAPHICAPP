@@ -47,6 +47,7 @@ int CLay::getActiveToolLayNum()
 void CLay::setActiveToolLayNum(int num)
 {
     activeToolNum = num;
+    needRedraw();
 }
 
 int CLay::getCurrentSize()
@@ -71,7 +72,7 @@ void CLay::redraw()
 
     for (int toollay = 0; toollay < toolLength; toollay++)
     {
-        toolLays[toollay]->tool->load(toolLays[toollay]);
+        toolLays[toollay]->drawTool();
     }
 }
 

@@ -5,6 +5,7 @@
 #include "ToolExportData.cpp"
 #include "..\ProgrammeDate.h"
 #include "..\Tool.cpp"
+#include "..\..\BaseFunctions.cpp"
 
 extern "C" __declspec (dllexport) DLLToolExportData * initDLL(AbstractAppData* data);
 
@@ -25,14 +26,23 @@ struct Line : Tool
 {
     ToolSave saveTool = {};
 
+    ToolLay* toolLay = NULL;
+    ProgrammeDate* appData = NULL;
+
+    bool draggedLastTime = false;
+    Vector lastTimeMP = {};
+
     Line(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
         Tool(_name, _ToolSaveLen, _dc, _data)
     {
     }
 
 
+    void controlMoving();
+
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay *toollay);
+    virtual void load(ToolLay *toollay, HDC dc = NULL);
+    virtual bool edit(ProgrammeDate* data, ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Point : Tool
@@ -47,7 +57,7 @@ struct Point : Tool
 
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay);
+    virtual void load(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Vignette : Tool
@@ -58,7 +68,7 @@ struct Vignette : Tool
     }
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay);
+    virtual void load(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Gummi : Tool
@@ -79,7 +89,7 @@ struct RectangleTool : Tool
     }
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay);
+    virtual void load(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct EllipseTool : Tool

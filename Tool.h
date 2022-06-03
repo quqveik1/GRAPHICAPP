@@ -49,20 +49,17 @@ struct ToolSave : ToolData
 
 struct Tool
 {
-    HDC dc; //ее изображение
+    HDC dc = NULL; //ее изображение
 
-    const char* name;
+    const char* name = NULL;
 
     Vector startPos = {};
     bool workedLastTime = false;
-    const int ToolSaveLen;
+    const int ToolSaveLen = 0;
 
     int clicked = 0;
 
-    AbstractAppData* app;
-
-
-
+    AbstractAppData* app = NULL;
 
     Tool(const char* _name, const int _ToolSaveLen, HDC _dc = NULL, AbstractAppData* _app = NULL) :
         name(_name),
@@ -77,9 +74,11 @@ struct Tool
 
     virtual HDC getDC();
     virtual const char* getName();
+    virtual void setMBCondition(int mbCond);
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay);
+    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual bool edit(ProgrammeDate* data, ToolLay* toollay, HDC dc = NULL) { return 0; };
 };
 
 

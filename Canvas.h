@@ -37,7 +37,6 @@ struct Canvas : Manager
 
     ToolLay* toolLays = new ToolLay[LayersNum]{};
     int currentToolLength = 0;
-    int activeToolNum = 0;
 
 	const int HistoryLength = 1000;
 	HDC lastSavedDC;
@@ -48,6 +47,8 @@ struct Canvas : Manager
 	int currentHistoryNumber = 0;
 	int currentHistoryLength = 0;
 	int timesShowedHistoryInRow = 0;
+
+    bool editingMode = false;
 
     //Tool** tools = new Tool*[10];
     bool activeTool = false;
@@ -80,6 +81,8 @@ struct Canvas : Manager
 
 	void createLay ();
 	bool controlLay ();
+    void controlEditLay();
+    bool onClickEditLay();
 	void drawLay ();
     void cleanOutputLay();
 
@@ -89,6 +92,8 @@ struct Canvas : Manager
     void controlTool();
     void startTool();
     void initToolLay();
+    void addToolLay();
+    ToolLay* getNewToolLay();
 
     CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();

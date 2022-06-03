@@ -55,7 +55,7 @@ bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return true;
 }
 
-void Vignette::load(ToolLay* toollay)
+void Vignette::load(ToolLay* toollay, HDC dc)
 {
     //assert(input && toollay);
     //ColorSave* toolDate = (ColorSave*)input;
@@ -117,7 +117,7 @@ bool RectangleTool::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void RectangleTool::load(ToolLay* toollay)
+void RectangleTool::load(ToolLay* toollay, HDC dc)
 {
     assert(toollay);
     //ToolSave* rectDate = (ToolSave*)input;
@@ -191,7 +191,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void Point::load(ToolLay* toollay)
+void Point::load(ToolLay* toollay, HDC dc)
 {
     //assert(input && toollay);
     //PointSave* pointsDate = (PointSave*)input;
@@ -208,6 +208,8 @@ void Point::load(ToolLay* toollay)
 bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
     assert(data && lay && output);
+    appData = data;
+    toolLay = lay;
 
     lay->needRedraw();
 
@@ -223,7 +225,8 @@ bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
     saveTool.color = data->color;
     saveTool.thickness = data->size.x;
     saveTool.name = (const char*)1;
-
+    
+    lay->toolZone = { .pos = startPos, .size = pos - startPos };
     *(ToolSave*)output = saveTool;
 
 
@@ -231,28 +234,79 @@ bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
     {
         finishUse();
         lay->isToolFinished = true;
+        
         return true;
     }
 
     return false;
 }
 
-void Line::load(ToolLay* toollay)
+void Line::load(ToolLay* toollay, HDC dc /* = NULL*/)
 {
     assert(toollay);
+
+    toolLay = toollay;
+
     ToolSave* toolDate = (ToolSave*)toollay->toolsData;
-    HDC outDC = NULL;
-    if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
-    else                         outDC = toollay->lay->getDCForToolLoad();
+
+    HDC outDC = dc;
+    if (!dc)
+    {
+        if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
+        else                         outDC = toollay->lay->getDCForToolLoad();
+    }
 
     app->setColor(toolDate->color, outDC, toolDate->thickness);
-    txLine(toolDate->pos.x + toollay->startPos.x, toolDate->pos.y + toollay->startPos.y, toolDate->pos.x + (toolDate->size.x * toollay->size.x) + toollay->startPos.x, toolDate->pos.y + (toolDate->size.y * toollay->size.y) + toollay->startPos.y, outDC);
+    txLine(toollay->toolZone.pos.x, toollay->toolZone.pos.y, (toolDate->size.x * toollay->size.x) + toollay->toolZone.pos.x, (toolDate->size.y * toollay->size.y) + toollay->toolZone.pos.y, outDC);
     //app->drawOnScreen(toollay->lay->getDCForToolLoad());
     //while (app->getAsyncKeyState('P')) {};
-}                                                                                                          
+}  
+
+bool Line::edit(ProgrammeDate* data, ToolLay* toollay, HDC dc/* = NULL*/)
+{
+    assert(data, toollay);
+    appData = data;
+    toolLay = toollay;
+    load(toollay, dc);
+    toollay->toolZone.finishPos = toollay->toolZone.pos + toollay->toolZone.size;
+    app->setColor(TX_WHITE, dc, 1);
+    
+    drawCadre(toollay->toolZone, dc);
+
+    int middleVert  = (toollay->toolZone.pos.y + toollay->toolZone.finishPos.y) / 2;
+    int middleHor = (toollay->toolZone.pos.x + toollay->toolZone.finishPos.x) / 2;
+
+    txRectangle (toollay->toolZone.pos.x - 10,       middleVert - 10, toollay->toolZone.pos.x + 10, middleVert + 10, dc);
+    txRectangle (middleHor - 10, toollay->toolZone.finishPos.y - 10, middleHor + 10, toollay->toolZone.finishPos.y + 10, dc);
+    txRectangle (toollay->toolZone.finishPos.x - 10, middleVert - 10, toollay->toolZone.finishPos.x + 10, middleVert + 10, dc);
+    txRectangle (middleHor - 10, toollay->toolZone.pos.y - 10,       middleHor + 10, toollay->toolZone.pos.y + 10, dc);
+
+    controlMoving();
 
 
+    return false;
+}
 
 
-//app->drawOnScreen(lay->outputLay);
-    //while (app->getAsyncKeyState('F')) { txSleep(0); }
+void Line::controlMoving()
+{
+    if (clicked == 2)
+    {
+        draggedLastTime = true;
+        toolLay->needRedraw();
+    }
+
+    if (draggedLastTime)
+    {
+        toolLay->toolZone.pos += appData->mousePos - lastTimeMP;
+
+        printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
+    }
+
+    if (clicked != 2 && draggedLastTime)
+    {
+        draggedLastTime = false;
+    }
+
+    lastTimeMP = appData->mousePos;
+}

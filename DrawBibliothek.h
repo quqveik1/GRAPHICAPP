@@ -149,6 +149,16 @@ struct Manager : Window
 		handle.color = MenuColor;
 	}
 
+    ~Manager()
+    {
+        if (dc) txDeleteDC(dc);
+        if (finalDC) txDeleteDC(finalDC);
+        for (int i = 0; i < length; i++)
+        {
+            if (pointers[i]) delete pointers[i];
+        }
+    }
+
 	bool addWindow (Window *window);
 	Window *getActiveWindow ();
 	void controlHandle ();
@@ -162,7 +172,6 @@ struct Manager : Window
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;
 
-	virtual void deleteButton () override;
     Vector getMousePos();
 };
 
