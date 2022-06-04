@@ -226,7 +226,11 @@ bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
     saveTool.thickness = data->size.x;
     saveTool.name = (const char*)1;
     
-    lay->toolZone = { .pos = startPos, .size = pos - startPos };
+    int isSizePositivX = (lay->toolZone.size.x > 0);
+    int isSizePositivY = (lay->toolZone.size.y > 0);
+    deltaForButtons = { (!isSizePositivX) * ((-controlSquareSize.x) * 2) + controlSquareSize.x, (!isSizePositivY) * ((-controlSquareSize.y) * 2) + controlSquareSize.y };
+    lay->toolZone = { .pos = startPos - deltaForButtons, .size = (pos - startPos) + (deltaForButtons * 2) };
+
     *(ToolSave*)output = saveTool;
 
 
@@ -234,6 +238,19 @@ bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
     {
         finishUse();
         lay->isToolFinished = true;
+
+
+
+        /*
+         _(3)_
+        |     |
+        (0)  (2)
+        |_(1)_|
+        */
+
+       
+        sortContolSquares();
+
         
         return true;
     }
@@ -247,7 +264,7 @@ void Line::load(ToolLay* toollay, HDC dc /* = NULL*/)
 
     toolLay = toollay;
 
-    ToolSave* toolDate = (ToolSave*)toollay->toolsData;
+    ToolSave* toolDate = (ToolSave*)toollay->getToolsData();
 
     HDC outDC = dc;
     if (!dc)
@@ -257,7 +274,7 @@ void Line::load(ToolLay* toollay, HDC dc /* = NULL*/)
     }
 
     app->setColor(toolDate->color, outDC, toolDate->thickness);
-    txLine(toollay->toolZone.pos.x, toollay->toolZone.pos.y, (toolDate->size.x * toollay->size.x) + toollay->toolZone.pos.x, (toolDate->size.y * toollay->size.y) + toollay->toolZone.pos.y, outDC);
+    txLine(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
     //app->drawOnScreen(toollay->lay->getDCForToolLoad());
     //while (app->getAsyncKeyState('P')) {};
 }  
@@ -268,18 +285,26 @@ bool Line::edit(ProgrammeDate* data, ToolLay* toollay, HDC dc/* = NULL*/)
     appData = data;
     toolLay = toollay;
     load(toollay, dc);
-    toollay->toolZone.finishPos = toollay->toolZone.pos + toollay->toolZone.size;
+    toollay->toolZone.countFinishPos();
     app->setColor(TX_WHITE, dc, 1);
-    
+
     drawCadre(toollay->toolZone, dc);
 
-    int middleVert  = (toollay->toolZone.pos.y + toollay->toolZone.finishPos.y) / 2;
-    int middleHor = (toollay->toolZone.pos.x + toollay->toolZone.finishPos.x) / 2;
+    sortContolSquares();
 
-    txRectangle (toollay->toolZone.pos.x - 10,       middleVert - 10, toollay->toolZone.pos.x + 10, middleVert + 10, dc);
-    txRectangle (middleHor - 10, toollay->toolZone.finishPos.y - 10, middleHor + 10, toollay->toolZone.finishPos.y + 10, dc);
-    txRectangle (toollay->toolZone.finishPos.x - 10, middleVert - 10, toollay->toolZone.finishPos.x + 10, middleVert + 10, dc);
-    txRectangle (middleHor - 10, toollay->toolZone.pos.y - 10,       middleHor + 10, toollay->toolZone.pos.y + 10, dc);
+    
+
+
+    app->rectangle(controlSquare[0], dc);
+    app->rectangle(controlSquare[1], dc);
+    app->rectangle(controlSquare[2], dc);
+    app->rectangle(controlSquare[3], dc);
+    /*
+    txRectangle(toollay->toolZone.pos.x,                                 middleVert - controlSquareSize.y, toollay->toolZone.pos.x + controlSquareSize.x * 2, middleVert + controlSquareSize.y, dc); //(1)
+    txRectangle(middleHor - controlSquareSize.x, toollay->toolZone.finishPos.y - controlSquareSize.y * 2, middleHor + controlSquareSize.x, toollay->toolZone.finishPos.y,                       dc);  //(2)
+    txRectangle(toollay->toolZone.finishPos.x - controlSquareSize.x * 2, middleVert - controlSquareSize.y, toollay->toolZone.finishPos.x,                     middleVert + controlSquareSize.y, dc); //(3)
+    txRectangle(middleHor - controlSquareSize.x, toollay->toolZone.pos.y,                                 middleHor + controlSquareSize.x, toollay->toolZone.pos.y + controlSquareSize.y * 2,  dc); //(4)
+    */
 
     controlMoving();
 
@@ -288,8 +313,48 @@ bool Line::edit(ProgrammeDate* data, ToolLay* toollay, HDC dc/* = NULL*/)
 }
 
 
+void Line::sortContolSquares()
+{
+
+    /*
+        _(3)_
+       |\   |
+      (0)\ (2)
+       |  \ |
+       |___\|
+        (1)
+       */
+
+    toolLay->toolZone.countFinishPos();
+
+    int middleVert = (toolLay->toolZone.pos.y + toolLay->toolZone.finishPos.y) / 2;
+    int middleHor = (toolLay->toolZone.pos.x + toolLay->toolZone.finishPos.x) / 2;
+    controlSquare[0] = { .pos = {toolLay->toolZone.pos.x,                                 middleVert - controlSquareSize.y}, .finishPos = {toolLay->toolZone.pos.x + deltaForButtons.x * 2, middleVert + controlSquareSize.y} };
+    controlSquare[1] = { .pos = {middleHor - controlSquareSize.x, toolLay->toolZone.finishPos.y - deltaForButtons.y * 2},  .finishPos = {middleHor + controlSquareSize.x, toolLay->toolZone.finishPos.y                    } };
+    controlSquare[2] = { .pos = {toolLay->toolZone.finishPos.x - deltaForButtons.x * 2, middleVert - controlSquareSize.y}, .finishPos = {toolLay->toolZone.finishPos.x,                     middleVert + controlSquareSize.y} };
+    controlSquare[3] = { .pos = {middleHor - controlSquareSize.x, toolLay->toolZone.pos.y},                                  .finishPos = {middleHor + controlSquareSize.x, toolLay->toolZone.pos.y + deltaForButtons.y * 2} };
+
+
+    if (toolLay->toolZone.pos.x > toolLay->toolZone.finishPos.x)
+    {
+        Rect copyRect = controlSquare[2];
+        controlSquare[2] = controlSquare[0];
+        controlSquare[0] = copyRect;
+    }    
+    
+    if (toolLay->toolZone.pos.y > toolLay->toolZone.finishPos.y)
+    {
+        Rect copyRect = controlSquare[3];
+        controlSquare[3] = controlSquare[1];
+        controlSquare[1] = copyRect;
+    }
+}
+
+
 void Line::controlMoving()
 {
+
+    ToolSave* toolDate = (ToolSave*)toolLay->getToolsData();
     if (clicked == 2)
     {
         draggedLastTime = true;
@@ -299,6 +364,8 @@ void Line::controlMoving()
     if (draggedLastTime)
     {
         toolLay->toolZone.pos += appData->mousePos - lastTimeMP;
+        
+        toolDate->pos += appData->mousePos - lastTimeMP;
 
         printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     }
@@ -307,6 +374,57 @@ void Line::controlMoving()
     {
         draggedLastTime = false;
     }
+
+
+    if (clicked == 1)
+    {
+        for (int i = 0; i < controlSquareLength; i++)
+        {
+            if (controlSquare[i].inRect(appData->getMousePos()))
+            {
+                isResizing = true;
+                activeControlSquareNum = i;
+            }
+        }
+    }
+
+    if (activeControlSquareNum >= 0)
+    {
+        toolLay->needRedraw();
+        Vector deltaMP = appData->mousePos - lastTimeMP;
+        if (activeControlSquareNum == 0)
+        {
+            toolLay->toolZone.pos.x += deltaMP.x;
+            toolLay->toolZone.size.x -= deltaMP.x;
+            toolDate->pos.x += deltaMP.x;
+            toolDate->size.x -= deltaMP.x;
+        }
+
+        if (activeControlSquareNum == 1)
+        {
+            toolLay->toolZone.size.y += deltaMP.y;
+            toolDate->size.y += deltaMP.y;
+        }
+
+        if (activeControlSquareNum == 2)
+        {
+            toolLay->toolZone.size.x += deltaMP.x;
+            toolDate->size.x += deltaMP.x;
+        }
+
+        if (activeControlSquareNum == 3)
+        {
+            toolLay->toolZone.pos.y += deltaMP.y;
+            toolLay->toolZone.size.y -= deltaMP.y;
+            toolDate->pos.y += deltaMP.y;
+            toolDate->size.y -= deltaMP.y;
+        }
+
+    }
+
+    if (clicked != 1 && activeControlSquareNum >= 0) activeControlSquareNum = -1;
+
+
 
     lastTimeMP = appData->mousePos;
 }

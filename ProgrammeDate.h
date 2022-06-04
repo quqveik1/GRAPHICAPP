@@ -19,4 +19,6 @@ struct ProgrammeDate
         color(_color)
     {}
 
+    virtual Vector getMousePos() { return mousePos; };
+
 };

@@ -32,6 +32,7 @@ struct ToolLay
     void drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
     bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
+    void* getToolsData() { return toolsData; };
 
 
 
