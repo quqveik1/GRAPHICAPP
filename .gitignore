@@ -16,3 +16,5 @@ Debug/RingsProject.exe.log
 *.dmp
 Debug/RingsProject.ilk
 *.obj
+Debug/vc142.idb
+*.pdb

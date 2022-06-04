@@ -31,12 +31,11 @@ struct Line : Tool
 
     const int controlSquareLength = 4;
     Rect* controlSquare = new Rect[controlSquareLength]{};
-    Vector controlSquareSize = { 10, 10 };
+    Vector controlSquareSize = { 5, 5 };
     Vector deltaForButtons = {};
     int activeControlSquareNum = -1;
 
     bool draggedLastTime = false;
-    bool isResizing = false;
     Vector lastTimeMP = {};
 
     Line(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
@@ -46,7 +45,9 @@ struct Line : Tool
 
 
     void controlMoving();
-    void sortContolSquares();
+    void setControlSquares();
+    void countDeltaButtons();
+    void countToolZone();
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay *toollay, HDC dc = NULL);
