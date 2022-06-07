@@ -10,6 +10,7 @@
 #include "LoadManager.h"
 #include "Tool.h"
 #include "ProgrammeDate.h"
+#include "commdlg.h"
 
 CLoadManager LoadManager;
 
@@ -51,6 +52,7 @@ void selectFont$ (DebugInfo info, const char *text, int font, HDC dc);
 void swap$ (DebugInfo info, int &x0, int &y0);
 #define swap(...) swap$ (getDebugInfo, __VA_ARGS__)
 Vector windowMousePos(bool isThisMainFile = true);
+const char* getCustomFilePath(const char* question);
 
 
 

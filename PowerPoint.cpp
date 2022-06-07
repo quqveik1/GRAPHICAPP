@@ -91,7 +91,7 @@ struct ToolsPalette : Menu
         for (int i = 0; i < ToolManager.currentLength; i++)
         {
             tools[i].rect = {.pos = {0, (double) i * 50}, .finishPos = {50, (double) (i + 1) * 50}};
-            tools[i].dc = ToolManager.tools[i]->dc;
+            tools[i].dc = ToolManager.tools[i]->getDC();
             tools[i].finalDC = txCreateDIBSection (tools[i].getSize().x, tools[i].getSize().y);
             tools[i].originalRect = tools[i].rect;
             //printBlt (tools[i].dc);
@@ -464,22 +464,19 @@ struct List : Manager
 {
     int itemHeight = HANDLEHEIGHT;
     OpenManager *items;
+    Vector oneItemSize;
     bool *isThisItemList;
     int lastClickedItemNum = -1;
     bool mayFewWindowsBeOpenedAtTheSameTime;
     int activeItemCircleSize = 3;
 
-    List (Vector _pos, Vector _size, int _length, bool _mayFewWindowsBeOpenedAtTheSameTime = true) : 
-        Manager ({.pos = _pos, .finishPos = {_pos.x + _size.x, _pos.y + _length * _size.y }}, _length, false),
-        mayFewWindowsBeOpenedAtTheSameTime (_mayFewWindowsBeOpenedAtTheSameTime)
+    List (Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true) : 
+        Manager ({.pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y }}, _maxLength, false),
+        mayFewWindowsBeOpenedAtTheSameTime (_mayFewWindowsBeOpenedAtTheSameTime),
+        oneItemSize (_oneItemSize)
     {
         items = new OpenManager[length]{};
         isThisItemList = new bool[length]{};
-        
-        for (int i = 0; i < length; i++)
-        {
-            //items[i].advancedModeIsSameWithOpenManager = true;
-        }
     }
 
     List (int _length, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
@@ -493,9 +490,23 @@ struct List : Manager
     void addNewItem (Window *openButton, HDC dc = NULL, const char *text = NULL);
     Vector getNewSubItemCoordinats ();
     void addSubList (List *subList, const char *ListText);
+    void controlRect();
 
     virtual void draw() override;
 	virtual void onClick(Vector mp) override;
+};
+
+struct SaveImages : Window
+{
+    CanvasManager* canvasManager;
+
+    SaveImages(CanvasManager* _canvasManager) :
+        Window({}),
+        canvasManager (_canvasManager)
+    {
+    }
+
+    virtual void draw() override;
 };
 
 struct PowerPoint : AbstractAppData
@@ -619,18 +630,27 @@ int main ()
     Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 3, true, NULL, {}, RGB(45, 45, 45));
+	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
 
 		CloseButton* closeButton = new CloseButton({ .pos = {SCREENSIZE.x - BUTTONWIDTH, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
 
-        TouchButton *addNewCanvas = new TouchButton({.pos = {0, 0}, .finishPos = {BUTTONWIDTH, HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), &canvasManager->addNewCanvas);
+        TouchButton* addNewCanvas = new TouchButton({.pos = {0, 0}, .finishPos = {BUTTONWIDTH, HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), &canvasManager->addNewCanvas);
 		mainhandle->addWindow(addNewCanvas);
 
-        List *openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 6, HANDLEHEIGHT}, 5); 
-        OpenManager *openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
+        List* openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 5, HANDLEHEIGHT}, 5); 
+        OpenManager* openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
         mainhandle->addWindow(openWindowsManager);
+
+        List* systemList = new List({ BUTTONWIDTH * 2, HANDLEHEIGHT }, { BUTTONWIDTH * 5, HANDLEHEIGHT }, 1);
+        OpenManager* openSystemList = new OpenManager({ .pos = {BUTTONWIDTH * 2, 0}, .finishPos = {BUTTONWIDTH * 3, HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
+        mainhandle->addWindow(openSystemList);
+
+    manager->addWindow(systemList);
+    SaveImages* saveImages = new SaveImages(canvasManager);
+    systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
+
         
     manager->addWindow (openWindows);
         openWindows->addNewItem (menu, NULL, "Цвет");
@@ -771,6 +791,8 @@ void PowerPoint::deleteTransparency(RGBQUAD* buf, unsigned int totalSize)
 
 void List::draw()
 {
+
+    controlRect();
     standartManagerDraw (this);
 
     for (int i = 0; i < newButtonNum; i++)
@@ -800,6 +822,17 @@ void List::onClick (Vector mp)
         lastClickedItemNum = clikedButtonNum;
     }
 
+}
+
+
+void SaveImages::draw()
+{
+    const char* pathToSave = getCustomFilePath("Место сохранения картинки");
+
+    HDC saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
+
+    txSaveImage(pathToSave, saveDC);
+    advancedMode = false;
 }
 
 void StatusBar::draw()
@@ -850,6 +883,12 @@ void List::addNewItem (Window *openButton, HDC dc/* = NULL*/, const char *text/*
 
 
     addWindow (&items[newButtonNum]);
+}
+
+
+void List::controlRect()
+{
+    rect.finishPos = { rect.pos.x + oneItemSize.x, rect.pos.y + oneItemSize.y * newButtonNum};
 }
 
 
@@ -1334,6 +1373,7 @@ void Engine (Manager *manager)
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
+        printf("Engine clicked: %d\n", txMouseButtons());
 		manager->draw ();
 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
@@ -1800,9 +1840,16 @@ void Canvas::draw ()
     cleanOutputLay();                                                                                                                      
     controlLay();
 
-    if (activeTool) controlTool();
+    
+
 
     drawLay();
+
+    if (activeTool) controlTool();
+
+    controlEditLay();
+
+    
 
 
 	if (txGetAsyncKeyState('Q'))
@@ -1843,11 +1890,24 @@ void Canvas::draw ()
 
 
 
+HDC Canvas::getImageForSaving()
+{
+    return getActiveLay()->lay.lay;
+}
+
+
+int Canvas::getActiveLayNum()
+{
+    return activeLayNum;
+}
+
+
 CLay* Canvas::getActiveLay()
 {
     if (activeLayNum < 0) assert(!"Lay hasn't created");
     return &(lay[activeLayNum]);
 } 
+
 
 int Canvas::getCurrentToolLengthOnActiveLay()
 {
@@ -2045,18 +2105,13 @@ void Canvas::deleteHistory ()
 
 void Canvas::controlEditLay()
 {
+    if (!getActiveLay()) return;
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
-    if (txGetAsyncKeyState('E') && currentToolLength > 0)
+    if (txGetAsyncKeyState('E') && currentToolLength > 0 && !activeTool)
     {
         while (txGetAsyncKeyState('E')) {};
         editingMode = !editingMode;
         activeToolLay->needRedraw();
-    }
-
-    if (editingMode)
-    {
-        activeToolLay->getTool()->setMBCondition(clicked);
-        activeToolLay->editTool(currentDate);
     }
 }
 
@@ -2115,8 +2170,6 @@ bool Canvas::controlLay ()
         activeToolLay->needRedraw();
     }
 
-    controlEditLay();
-
 	return false;
 }
 
@@ -2136,8 +2189,6 @@ void Canvas::cleanOutputLay()
 
 void Canvas::drawLay()
 {
-
-
     for (int lays = 0; lays < currentLayersLength; lays++)
     {
         if (lay[lays].redrawStatus())
@@ -2146,8 +2197,16 @@ void Canvas::drawLay()
             lay[lays].noMoreRedraw();
             txTransparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay, 0, 0, TRANSPARENTCOLOR);
         }
+
+        if (editingMode && (lays == getActiveLayNum()))
+        {
+            lay[lays].getActiveToolLay()->getTool()->setMBCondition(clicked);
+            lay[lays].editTool(currentDate);
+        }
+
         txTransparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay, 0, 0, TRANSPARENTCOLOR);
     }
+    
     
 }
 

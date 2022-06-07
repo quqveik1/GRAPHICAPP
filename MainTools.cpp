@@ -27,7 +27,7 @@ void ToolLay::editTool(ProgrammeDate* data)
     assert(data);
     HDC outDC = lay->lay.outputLay;
 
-    isEditing = !tool->edit(data, this, outDC);
+    isEditing = !tool->edit(this, outDC);
 
 
 
@@ -36,13 +36,12 @@ void ToolLay::editTool(ProgrammeDate* data)
 
 bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
 {
-    toolZone.countFinishPos();
     if (toolZone.inRect(mp))
     {
         HDC outDC = lay->lay.outputLay;
-        tool->setMBCondition(mbCondition);
-        isEditing = !tool->edit(data, this, outDC);
-        return isEditing;
+        getTool()->setMBCondition(mbCondition);
+        //isEditing = !tool->edit(this, outDC);
+        return true;
     }
     return false;
 }

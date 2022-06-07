@@ -22,6 +22,12 @@ void CLay::needRedraw()
     needToRedraw = true;
 } 
 
+void CLay::editTool(ProgrammeDate* data)
+{
+    if (getActiveToolLay() && getActiveToolLay()->getTool()) getActiveToolLay()->editTool(data);
+}
+
+
 void CLay::noMoreRedraw()
 {
     needToRedraw = false;

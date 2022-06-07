@@ -61,7 +61,7 @@ void Tool::load(ToolLay* toollay, HDC dc /* = NULL*/)
 
 HDC Tool::getDC()
 {
-    return dc;
+    return iconDC;
 }
 
 

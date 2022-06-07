@@ -105,6 +105,30 @@ void standartDraw$ (DebugInfo info, Window *window)
 }
 
 
+const char* getCustomFilePath(const char* question)
+{
+    char fileName[MAX_PATH] = "";
+
+    OPENFILENAMEW ofn = { sizeof(ofn), txWindow() };  //  +-- Загадка Жака Фреско... на размышление дается 20 секунд
+                                                        //  V
+    ofn.lpstrTitle = (LPCWSTR)question;
+
+    ofn.lpstrFile = (LPWSTR)fileName;
+    ofn.nMaxFile = sizeof(fileName);
+
+    ofn.lpstrInitialDir = NULL;
+
+    ofn.Flags = OFN_PATHMUSTEXIST;
+
+    if ((GetOpenFileNameW))
+        (GetOpenFileNameW(&ofn));
+    // Весьма полезная функция, отображает диалог выбора файла.
+
+
+    return fileName;
+}
+
+
 
 int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 {
@@ -581,7 +605,7 @@ void Manager::controlMouse ()
         pointers[i]->mousePos = mousePos - pointers[i]->rect.pos;
     }
 
-    if (clicked == 1) return;
+    if (clicked >= 1) return;
     for (int i = 0; i < newButtonNum; i++)
     {
         pointers[i]->clicked = 0;

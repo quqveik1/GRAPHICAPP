@@ -49,7 +49,7 @@ struct ToolSave : ToolData
 
 struct Tool
 {
-    HDC dc = NULL; //ее изображение
+    HDC iconDC = NULL; //ее изображение
 
     const char* name = NULL;
 
@@ -61,9 +61,9 @@ struct Tool
 
     AbstractAppData* app = NULL;
 
-    Tool(const char* _name, const int _ToolSaveLen, HDC _dc = NULL, AbstractAppData* _app = NULL) :
+    Tool(const char* _name, const int _ToolSaveLen, HDC _iconDC = NULL, AbstractAppData* _app = NULL) :
         name(_name),
-        dc(_dc),
+        iconDC(_iconDC),
         ToolSaveLen(_ToolSaveLen),
         app(_app)
     {}
@@ -78,7 +78,7 @@ struct Tool
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);
-    virtual bool edit(ProgrammeDate* data, ToolLay* toollay, HDC dc = NULL) { return 0; };
+    virtual bool edit(ToolLay* toollay, HDC dc = NULL) { return 1; };
 };
 
 

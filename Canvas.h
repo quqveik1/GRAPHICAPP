@@ -95,8 +95,10 @@ struct Canvas : Manager
     void addToolLay();
     ToolLay* getNewToolLay();
 
+    HDC getImageForSaving();
     CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();
+    int getActiveLayNum();
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

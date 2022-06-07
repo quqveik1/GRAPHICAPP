@@ -50,7 +50,7 @@ HDC CLoadManager::loadImage(const char* path)
 
 	
 	images[currentImagesAmount].dc = txLoadImage(path);
-    if (images[currentImagesAmount].dc == NULL) assert (path);
+    if (images[currentImagesAmount].dc == NULL) assert (!path);
 	images[currentImagesAmount].path = path;
 	currentImagesAmount++;
 

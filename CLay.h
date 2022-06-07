@@ -25,4 +25,5 @@ struct CLay
     virtual void noMoreRedraw();
     virtual bool redrawStatus();
     virtual void redraw();
+    virtual void editTool(ProgrammeDate* data);
 };

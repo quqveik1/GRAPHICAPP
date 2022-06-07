@@ -31,10 +31,9 @@ struct Line : Tool
 
     const int controlSquareLength = 4;
     Rect* controlSquare = new Rect[controlSquareLength]{};
-    Vector controlSquareSize = { 5, 5 };
+    Vector controlSquareSize = { 10, 10 };
     Vector deltaForButtons = {};
     int activeControlSquareNum = -1;
-
     bool draggedLastTime = false;
     Vector lastTimeMP = {};
 
@@ -48,10 +47,13 @@ struct Line : Tool
     void setControlSquares();
     void countDeltaButtons();
     void countToolZone();
+    void drawControlButtons(HDC outDC);
+
+    ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay *toollay, HDC dc = NULL);
-    virtual bool edit(ProgrammeDate* data, ToolLay* toollay, HDC dc = NULL);
+    virtual bool edit(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Point : Tool
@@ -99,6 +101,7 @@ struct RectangleTool : Tool
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual bool edit(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct EllipseTool : Tool
