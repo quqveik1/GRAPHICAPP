@@ -26,9 +26,6 @@ struct Line : Tool
 {
     ToolSave saveTool = {};
 
-    ToolLay* toolLay = NULL;
-    ProgrammeDate* appData = NULL;
-
     const int controlSquareLength = 4;
     Rect* controlSquare = new Rect[controlSquareLength]{};
     Vector controlSquareSize = { 10, 10 };
@@ -44,9 +41,11 @@ struct Line : Tool
 
 
     void controlMoving();
+    void controlLeftButton();
+    void controlRightButton();
     void setControlSquares();
     void countDeltaButtons();
-    void countToolZone();
+    virtual void countToolZone();
     void drawControlButtons(HDC outDC);
 
     ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
@@ -73,6 +72,8 @@ struct Point : Tool
 
 struct Vignette : Tool
 {
+    COLORREF selectedColor = NULL;
+
     Vignette(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
         Tool(_name, _ToolSaveLen, _dc, _data)
     {
@@ -92,24 +93,28 @@ struct Gummi : Tool
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
 };
 
-struct RectangleTool : Tool
+struct RectangleTool : Line
 {
+    
+
     RectangleTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+        Line(_name, _ToolSaveLen, _dc, _data)
+    {
+    }
+
+    virtual void countToolZone();
+
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
+    virtual void load(ToolLay* toollay, HDC dc = NULL);
+};
+
+struct EllipseTool : Line
+{
+    EllipseTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Line(_name, _ToolSaveLen, _dc, _data)
     {
     }
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);
-    virtual bool edit(ToolLay* toollay, HDC dc = NULL);
-};
-
-struct EllipseTool : Tool
-{
-    EllipseTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
-    {
-    }
-
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
 };

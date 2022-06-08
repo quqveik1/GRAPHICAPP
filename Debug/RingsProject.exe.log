@@ -28434,3 +28434,1921 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0xD5DC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:04:48
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0xD5DC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:04:48
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0xC5D0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:05:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0xC5D0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:05:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0x7C60 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:05:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002018EC (32-bit), Flags: CMdRe0, Thread: 0x7C60 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001C8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001C8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001A2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (801):
+
+    799:     {
+    800:         //pointers[i]->advancedMode = advancedMode;
+=>  801:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    802:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    803: 
+
+# 5 0x001AF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 	{
+   1346: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1347: 		openManager->draw ();
+   1348: 	}
+   1349: }
+
+# 6 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001AEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (817):
+
+    815: {
+    816:     mousePos = mp;
+=>  817:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    818:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    819:     {
+
+# 9 0x00198A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001B4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001AED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001588F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1383):
+
+   1381:             
+   1382:             manager->clicked = txMouseButtons();
+=> 1383: 			manager->onClick (mp);
+   1384: 			if (!IsRunning) break;
+   1385: 		}
+
+#13 0x001D27A7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (710):
+
+    708: 
+    709: 
+=>  710: 	Engine (manager);
+    711: 
+    712: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 19:23:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:05:23
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0xC578 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:08:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0xC578 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:08:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0x84C8 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:09:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0x84C8 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:09:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0xA6BC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:09:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0xA6BC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:09:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0x6E28 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:10:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7BE14878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002218EC (32-bit), Flags: CMdRe0, Thread: 0x6E28 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7BE14878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7BE14638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x001E8D9F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSetColor() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152)
+# 3 0x001E8B06 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11)
+
+# 4 0x001C2580 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (760):
+
+    758:     {
+    759:         //pointers[i]->advancedMode = advancedMode;
+=>  760:         txSetAllColors (SecondMenuColor, finalDC, SIDETHICKNESS);
+    761:         txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+    762: 
+
+# 5 0x001CF583 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1306):
+
+   1304: 	{
+   1305: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1306: 		openManager->draw ();
+   1307: 	}
+   1308: }
+
+# 6 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+# 7 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+# 8 0x001CEB94 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (776):
+
+    774: {
+    775:     mousePos = mp;
+=>  776:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    777:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    778:     {
+
+# 9 0x001B8A3E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (646):
+
+    644:     manager->activeWindow = window;
+    645:     window->clicked = manager->clicked;
+=>  646: 	window->onClick (mp - window->rect.pos);
+    647: 	window->isClicked = true;
+    648: }
+
+#10 0x001D4AF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (152):
+
+    150: 			if (manager->pointers[i]->rect.inRect(mp))
+    151: 			{
+=>  152: 				clickButton (manager->pointers[i], manager, mp);
+    153: 
+    154: 				missClicked = false;
+
+#11 0x001CED62 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (639):
+
+    637: void Manager::onClick (Vector mp)
+    638: {
+=>  639:     standartManagerOnClick (this, mp);	
+    640: }
+    641: 
+
+#12 0x001788F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1342):
+
+   1340:             
+   1341:             manager->clicked = txMouseButtons();
+=> 1342: 			manager->onClick (mp);
+   1343: 			if (!IsRunning) break;
+   1344: 		}
+
+#13 0x001F27A5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (669):
+
+    667: 
+    668: 
+=>  669: 	Engine (manager);
+    670: 
+    671: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HPEN__ *__cdecl `anonymous-namespace'::TX::txSetColor(unsigned long,double,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13152):
+
+  13150: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return NULL;
+  13151: 
+=>13152: $   HPEN pen = Win32::CreatePen ((color == TX_TRANSPARENT? PS_NULL : PS_SOLID), ROUND (thickness), color);
+  13153: 
+  13154: $   if (!pen) return (HPEN) NULL;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (11):
+
+      9:     qassert (dc, info);
+     10: 	txSetFillColor (color, dc); 
+=>   11: 	txSetColor (color, thickness, dc);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun  7 2022 20:10:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -1,6 +1,5 @@
-
+*.vs/RingsProject/v16/ipch/*
 *.db-wal
-*.vs/*
 *.log
 *.pdb
 *.obj

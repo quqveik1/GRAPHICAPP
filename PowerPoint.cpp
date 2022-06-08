@@ -584,17 +584,11 @@ int main ()
     dllToolsManager->loadLibs();
     dllToolsManager->addToManager(&ToolManager);
 
-    
-
-
 	ToolsPalette *toolsPallette = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
     ToolMenu* toolMenu = new ToolMenu(canvasManager);
     manager->addWindow(toolMenu);
 
-
-
-	 
 	Manager *menu = new Manager({.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
@@ -613,9 +607,6 @@ int main ()
 	OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
 	menu->addWindow (openManager);	
 	
-
-    
-
     //HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
     //assert (filtersLibrary);
 
@@ -662,7 +653,7 @@ int main ()
         List *filters = new List (1 + dllManager->currLoadWindowNum, false);
         manager->addWindow (filters);
 
-        openWindows->addSubList (filters, "Фильтры");
+        //openWindows->addSubList (filters, "Фильтры");
             //filters->addNewItem (dllManager->dllWindows[0], NULL, "Контрастный фильтр");
             //filters->addNewItem (dllManager->dllWindows[1], NULL, "Фильтр яркости");
             filters->addNewItem (curves, NULL, "Кривые");
@@ -670,38 +661,6 @@ int main ()
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
             }
-         
-
-        /* 
-         List *Filters = new List ({.pos       = {openWindows->rect.finishPos.x,               openWindows->rect.pos.y + openWindows->newButtonNum * openWindows->itemHeight},
-                                    .finishPos = {openWindows->rect.finishPos.x + BUTTONWIDTH, openWindows->rect.pos.y + (openWindows->newButtonNum + 2) * openWindows->itemHeight}});
-         openWindows->addNewItem (Filters, NULL, "Фильтры");
-          */
-         //OpenManager *contrastFilter = new OpenManager ({ .pos = {0, HANDLEHEIGHT}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 2} }, MenuColor, contrastMenu, NULL, "Контрастный фильтр");
-         //openWindows->addNewItem (contrastMenu, NULL, "Контрастный фильтр");  
-
-         //OpenManager *brightnessFilter = new OpenManager ({ .pos = {0, HANDLEHEIGHT * 2}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 3} }, MenuColor, brightnessMenu, NULL, "Фильтр яркости");
-         //openWindows->addNewItem (brightnessMenu, NULL, "Фильтр яркости");
-
-         //OpenManager *tools = new OpenManager ({ .pos = {0, HANDLEHEIGHT * 3}, .finishPos = {openWindows->getSize().x, HANDLEHEIGHT * 4} }, MenuColor, toolsPallette, NULL, "Инструменты");
-         
-
-	  
-	 
-	/*
-	BrightnessButton *brightnessButton = new BrightnessButton ({.pos = {800, 100}, .finishPos = {1244, 461}}, {.pos = {55, 64}, .finishPos = {312, 318}},
-															   {.pos = {322, 64}, .finishPos = {338, 318}}, {.pos = {17, 64}, .finishPos = {33, 318}},
-															   {.pos = {357, 63}, .finishPos = {436, 80}},  
-															   {.pos = {357, 90}, .finishPos = {436, 100}});	
-
-	manager->addWindow(brightnessButton);
-	*/
-
-    
-	
-	//algorithm = (RGBQUAD(*)(RGBQUAD pixel, double SecondFilterValue, double FirstFilterValue))GetProcAddress(library, "KontrastFilter");
-	//assert(algorithm);
-	
 	
 	txBegin ();
 
