@@ -1,5 +1,5 @@
 #pragma once
-#include "..\Q_Vector.h"
+#include "Q_Vector.h"
 
 const int DELTACLOCKTIME = 100;
 

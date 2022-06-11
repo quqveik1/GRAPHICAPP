@@ -1,17 +1,12 @@
 
 #define _CRT_SECURE_NO_WARNINGS
-#include "GlobalOptions.h"
 #include "DrawBibliothek.cpp"
-#include "..\Macroses.h"
-#include "..\Q_Vector.h"
-#include "..\Q_Rect.h"
+#include "GlobalOptions.h"
 #include "Q_Buttons.h"
 #include <cmath>
-#include "C:\Users\Алехандро\Desktop\AlexProjects\Brightness\dllmain.h"
 //#include "..\Brightness\Q_Filter.h"
 #include "StandartFunctions.h"
 #include "CurvesFilter.h"
-#include "..\Graphicapp-dll.h"
 #include "Slider.cpp"
 #include "Canvas.h"
 #include "TransferStructure.h"
@@ -113,7 +108,7 @@ struct ToolMenu : Menu
 
 
     ToolMenu(CanvasManager* _canvasManager) :
-        Menu({ .pos = {0, 300}, .finishPos = {100, ONELAYTOOLSLIMIT * BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, ONELAYTOOLSLIMIT),
+        Menu({ .pos = {900, 300}, .finishPos = {1000, ONELAYTOOLSLIMIT * BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {DCMAXSIZE, HANDLEHEIGHT} }, ONELAYTOOLSLIMIT),
         canvasManager(_canvasManager)
     {
         //currentSize = canvasManager->getActiveCanvas()->getCurrentToolLengthOnActiveLay();
@@ -517,6 +512,8 @@ struct PowerPoint : AbstractAppData
     virtual void cleanTransparentDC();
     virtual bool getAsyncKeyState(int symbol);
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize);
+    virtual void line(Rect rect, HDC dc);
+    virtual void ellipse(Vector centrPos, Vector halfSize, HDC dc);
     
 };
 
@@ -537,9 +534,8 @@ void printfDCS (const char *str = "");
 
 
 
-int main ()
+int main (int argc, int *argv[])
 {
-	//_txWindowStyle &= ~WS_CAPTION;
 	MAINWINDOW = txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
 
     TransferData Data;
@@ -572,13 +568,7 @@ int main ()
     PowerPoint* appData = new PowerPoint;
     appData->canvasManager = canvasManager;
     appData->currColor = &DrawColor;
-    appData->transparentLay.lay = txCreateDIBSection(2000, 2000, &appData->transparentLay.layBuf);
     appData->transparentLay.laySize = { 2000, 2000 };
-    appData->cleanTransparentDC();
-    appData->invert = invertDC;
-    txAlphaBlend(0, 0, appData->transparentLay.lay);
-
-    appData->drawOnScreen(appData->transparentLay.lay);
 
     DLLToolsManager* dllToolsManager = new DLLToolsManager("DLLPathList.txt", appData);
     dllToolsManager->loadLibs();
@@ -718,6 +708,16 @@ void PowerPoint::setColor (COLORREF color, HDC dc, int thickness)
 void PowerPoint::rectangle (Rect rect, HDC dc)
 {
     txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
+}
+
+void PowerPoint::line(Rect rect, HDC dc)
+{
+    txLine(rect.pos.x, rect.pos .y, rect.finishPos.x, rect.finishPos.y, dc);
+}
+
+void PowerPoint::ellipse(Vector centrePos, Vector halfSize, HDC dc)
+{
+    txEllipse(centrePos.x - halfSize.x, centrePos.y - halfSize.y, centrePos.x + halfSize.x, centrePos.y + halfSize.y, dc);
 }
 
 void PowerPoint::drawOnScreen (HDC dc, bool useAlpha /*=false*/)
@@ -1116,14 +1116,15 @@ void ToolMenu::drawOneLine(int lineNum)
 
 int ToolMenu::onClickLine(Vector mp)
 {
-    int my = mp.y;
+    double my = mp.y;
+    //int my = mp.y;
 
-    int buttonNum = my / BUTTONWIDTH;
+    int buttonNum = floor (my / BUTTONWIDTH);
 
 
     if (!(buttonNum >= 0 && buttonNum <= currentSize))  return 0;
 
-    canvasManager->getActiveCanvas()->getActiveLay()->setActiveToolLayNum(buttonNum);
+    canvasManager->getActiveCanvas()->setActiveToolLayNum(buttonNum);
 
     return 1;
 }
@@ -1785,14 +1786,11 @@ void Canvas::draw ()
     txRectangle(0, 0, 3000, 3000, finalDC);
 	txSetAllColors (BackgroundColor, finalDC); 
 
-    currentDate->mousePos = mousePos;
-    currentDate->managerPos = getAbsCoordinats();
-    currentDate->color = DrawColor;
-    currentDate->canvasCoordinats = canvasCoordinats;
-    currentDate->gummiThickness = GummiThickness;
-    currentDate->backGroundColor = TRANSPARENTCOLOR;
+    
 
     if (testMode) printf("Clicked: %d\n", clicked);
+
+    
 
 	//controlFilter();
 
@@ -1804,7 +1802,7 @@ void Canvas::draw ()
 
     drawLay();
 
-    if (activeTool) controlTool();
+    if (getActiveLay()->lay.lay)controlTool();
 
     controlEditLay();
 
@@ -1836,13 +1834,16 @@ void Canvas::draw ()
 	controlHandle();
 	drawOnFinalDC(handle);
 	
-	controlSize();
+	controlSize();                                   
 
 	closeCanvas.rect.pos = {rect.getSize().x - MENUBUTTONSWIDTH,  0};
 	closeCanvas.rect.finishPos = {rect.getSize().x , HANDLEHEIGHT};
 	
 	
 	drawOnFinalDC(closeCanvas);
+
+
+    drawingModeLastTime = DrawingMode;
 
 	
 }
@@ -1870,19 +1871,35 @@ CLay* Canvas::getActiveLay()
 
 int Canvas::getCurrentToolLengthOnActiveLay()
 {
-    return getActiveLay()->getCurrentSize();
+    int length =  getActiveLay()->getCurrentSize() - 1;
+    length += getActiveLay()->getActiveToolLay()->isStarted();
+    if (length < 0) length = 0;
+    return length;
 }
 
 
 void Canvas::controlTool()
 {
+    if (!activeTool)
+    {
+        startTool();
+    }
+
     CLay* clay = getActiveLay();
     ToolLay* toollay = clay->getActiveToolLay();
     Tool* tool = toollay->getTool();
+    bool isFinished = toollay->isFinished();
 
-    if (toollay->useTool (currentDate))
+    
+    setCurrentData();
+    if (!isFinished)
     {
-        finishTool();
+        if (isDrawingModeChanged()) changeTool();
+        printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
+        if (toollay->useTool(currentDate))
+        {
+            finishTool();
+        }
     }
     if (clicked == 0) tool->setMBCondition (clicked);
 }
@@ -1890,7 +1907,6 @@ void Canvas::controlTool()
 void Canvas::finishTool()
 {
     activeTool = false;
-    //txTransparentBlt(lay[activeLayNum].outputLay, 0, 0, 0, 0, lay[activeLayNum].lay, 0, 0, TRANSPARENTCOLOR);
     toolLays[currentToolLength - 1].tool->clicked = 0;
 }
 
@@ -2005,7 +2021,7 @@ void SizeButton::onClick (Vector mp)
 	{
 		(*num)++;
 	}
-	if (sizeType < 0 && num > 0)
+	if (sizeType < 0 && *num > 0)
 	{
 		(*num)--;
 	}
@@ -2066,22 +2082,12 @@ void Canvas::controlEditLay()
 {
     if (!getActiveLay()) return;
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
-    if (txGetAsyncKeyState('E') && currentToolLength > 0 && !activeTool)
+    if (txGetAsyncKeyState('E') && currentToolLength > 0 && activeToolLay->isFinished())
     {
         while (txGetAsyncKeyState('E')) {};
         editingMode = !editingMode;
         activeToolLay->needRedraw();
     }
-}
-
-bool Canvas::onClickEditLay()
-{
-    if (editingMode)
-    {
-        
-        return true;
-    } 
-    return false;
 }
 
 bool Canvas::controlLay ()
@@ -2304,18 +2310,14 @@ void Canvas::deleteButton ()
 
 void Canvas::startTool()
 {
-    /*
-    saveHistory();
-    history[currentHistoryNumber - 1].tools = ToolManager.tools[DrawingMode - 1];
-    history[currentHistoryNumber - 1].tools->clicked = clicked;
-    history[currentHistoryNumber - 1].toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
-    currentDate->size = { lineThickness, lineThickness };
-    activeTool = true;
-    */
-
     initToolLay();
 
     controlTool();
+}
+
+void Canvas::changeTool()
+{
+    getActiveLay()->getActiveToolLay()->tool = getActiveTool();
 }
 
 void Canvas::initToolLay()
@@ -2323,7 +2325,7 @@ void Canvas::initToolLay()
     
     currentDate->size = { lineThickness, lineThickness };
     addToolLay();
-    getActiveLay()->addTool(&toolLays[currentToolLength]);
+    getActiveLay()->addToolLay(&toolLays[currentToolLength]);
 
     currentToolLength++;
 }
@@ -2332,15 +2334,43 @@ void Canvas::addToolLay()
 {
     assert(LayersNum >= currentToolLength);
     activeTool = true;
-    getNewToolLay()->tool = ToolManager.tools[DrawingMode - 1];
-    getNewToolLay()->tool->clicked = clicked;
-    getNewToolLay()->toolsData = new char[ToolManager.tools[DrawingMode - 1]->ToolSaveLen];
+    ToolLay* toollay = getNewToolLay();
+    toollay->tool = getActiveTool();
+    toollay->tool->clicked = clicked;
+    toollay->toolsData = new char[getActiveTool()->ToolSaveLen]{};
+    ToolSave* toolsave = (ToolSave*)toollay->toolsData;
+}
+
+void Canvas::setCurrentData()
+{
+    currentDate->mousePos = mousePos;
+    currentDate->managerPos = getAbsCoordinats();
+    currentDate->color = DrawColor;
+    currentDate->canvasCoordinats = canvasCoordinats;
+    currentDate->gummiThickness = GummiThickness;
+    currentDate->backGroundColor = TRANSPARENTCOLOR;
 }
 
 ToolLay* Canvas::getNewToolLay()
 {
     return &(toolLays[currentToolLength]);
 }
+
+bool Canvas::isDrawingModeChanged()
+{
+    return drawingModeLastTime != DrawingMode;
+}
+
+Tool* Canvas::getActiveTool()
+{
+    return ToolManager.tools[DrawingMode - 1];
+}
+
+void Canvas::setActiveToolLayNum(int num) 
+{ 
+    getActiveLay()->setActiveToolLayNum(num); 
+    editingMode = 0;
+};
 
 void Canvas::onClick(Vector mp)
 {
@@ -2394,13 +2424,6 @@ void Canvas::onClick(Vector mp)
             }
 
         }
-
-        if (!activeTool && !editingMode)
-        {
-            startTool();
-        }
-
-
     }
 
     if (editingMode)
@@ -2410,8 +2433,7 @@ void Canvas::onClick(Vector mp)
 
     
     //independet scenery block++++++++++++++++++++++++++++++++++++++++++++++++++++
-    getActiveLay()->getActiveToolLay()->getTool()->setMBCondition(clicked);
-    if (activeTool) controlTool();
+    if (getActiveLay() && getActiveLay()->getActiveToolLay() && getActiveLay()->getActiveToolLay()->getTool()) getActiveLay()->getActiveToolLay()->getTool()->setMBCondition(clicked);
     //independet scenery block----------------------------------------------------
     
 }

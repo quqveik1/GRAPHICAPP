@@ -32,6 +32,7 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),                                       LoadManager.loadImage("Rectangle.bmp"), data));
     dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),                                       LoadManager.loadImage("Ellipse.bmp"), data));
 
+
     return dllData;
 }
 
@@ -42,23 +43,18 @@ DLLToolExportData* initDLL(AbstractAppData* data)
 
 bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
+    colorSave = (ColorSave*) lay->getToolsData();
     Vector pos = data->mousePos;
-    firstUse(data, output, pos);
     *(app->currColor) = txGetPixel(pos.x, pos.y, lay->lay->getPermanentDC());
 
-    ColorSave colorsave(*(app->currColor));
-    *(ColorSave*)output = colorsave;
+    colorSave->color = *(app->currColor);
 
-    finishUse();
-    
-    return true;
+    if (clicked) return false;
+
+    colorSave->isFinished = true;
+    return colorSave->isFinished;
 }
 
-void Vignette::load(ToolLay* toollay, HDC dc)
-{
-
-
-}
 
 bool Gummi::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
@@ -88,55 +84,14 @@ bool Gummi::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-bool RectangleTool::use(ProgrammeDate* data, ToolLay* lay, void* output)
-{    
-    assert(data && lay && output);
-    lay->needRedraw();
-    Vector pos = data->mousePos;
-    if (!workedLastTime)
-    {
-        workedLastTime = true;
-        startPos = pos;
-        lay->isToolFinished = false;
-    }
-
-    saveTool.pos = startPos;
-    saveTool.size = pos - startPos;
-    saveTool.color = data->color;
-    saveTool.thickness = data->size.x;
-    saveTool.name = (const char*)1;
-    (*(ToolSave*)output) = saveTool;
-    appData = data;
-    toolLay = lay;
-
-    if (clicked == 2)
-    {
-        workedLastTime = false;
-        toolLay->isToolFinished = true;
-        countToolZone();
-        
-        return true;
-    }  
-
-    return false;
-}
-
-void RectangleTool::load(ToolLay* toollay, HDC dc)
+void RectangleTool::outputFunc(HDC outdc)
 {
-    assert(toollay);
-    ToolSave* rectDate = (ToolSave*)toollay->getToolsData();
+    ToolSave* rectDate = getToolData();
 
-    toolLay = toollay;
-
-    HDC outDC = dc;
-    if (!dc)
-    {
-        if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
-        else                         outDC = toollay->lay->getDCForToolLoad();
-    }
-
-    app->setColor(rectDate->color, outDC, rectDate->thickness);
-    txRectangle(rectDate->pos.x, rectDate->pos.y, rectDate->pos.x + rectDate->size.x, rectDate->pos.y + rectDate->size.y, outDC);
+    Vector ellipsePos = rectDate->pos + (rectDate->size) / 2;
+    Vector ellipseSize = (rectDate->size) / 2;
+    app->setColor(rectDate->color, outdc, rectDate->thickness);
+    app->rectangle({ .pos = rectDate->pos, .finishPos = rectDate->pos + rectDate->size }, outdc);
 }
 
 
@@ -149,61 +104,15 @@ void RectangleTool::countToolZone()
 }
 
 
-bool EllipseTool::use(ProgrammeDate* data, ToolLay* lay, void* output)
-{      
-    assert(data && lay && output);
-    lay->needRedraw();
-    Vector pos = data->mousePos;
-    if (!workedLastTime || clicked == 1)
-    {
-        workedLastTime = true;
-        startPos = pos;
-        lay->isToolFinished = false;
-    }
-
-    Vector ellipsePos = (startPos + pos) / 2;
-    Vector ellipseSize = (startPos - pos) / 2;
-
-    saveTool.pos = startPos;
-    saveTool.size = pos - startPos;
-    saveTool.color = data->color;
-    saveTool.thickness = data->size.x;
-    saveTool.name = (const char*)1;
-    (*(ToolSave*)output) = saveTool;
-    appData = data;
-    toolLay = lay;
-
-
-    {
-        workedLastTime = false;
-        toolLay->isToolFinished = true;
-        countToolZone();
-        return true;
-    }    
-
-    return false;
-
-}
-
-void EllipseTool::load(ToolLay* toollay, HDC dc)
+void EllipseTool::outputFunc(HDC outdc)
 {
-    toolLay = toollay;
-    HDC outDC = dc;
-    if (!dc)
-    {
-        if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
-        else                         outDC = toollay->lay->getDCForToolLoad();
-    }
+    ToolSave* rectDate = getToolData();
 
-    ToolSave* rectDate = (ToolSave*)toollay->getToolsData();
-
-    Vector ellipsePos  = rectDate->pos + (rectDate->size) / 2;
+    Vector ellipsePos = rectDate->pos + (rectDate->size) / 2;
     Vector ellipseSize = (rectDate->size) / 2;
-
-    app->setColor(rectDate->color, outDC, rectDate->thickness);
-    txEllipse(ellipsePos.x - ellipseSize.x, ellipsePos.y - ellipseSize.y, ellipsePos.x + ellipseSize.x, ellipsePos.y + ellipseSize.y, outDC);
+    app->setColor(rectDate->color, outdc, rectDate->thickness);
+    app->ellipse(ellipsePos, ellipseSize, outdc);
 }
-
 
 bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
@@ -252,42 +161,44 @@ void Point::load(ToolLay* toollay, HDC dc)
 }
 
 
-bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
+void Line::outputFunc(HDC outdc)
+{ 
+    ToolSave* toolDate = getToolData();
+    app->line({ .pos = toolDate->pos, .finishPos = toolDate->pos + toolDate->size }, outdc);
+    //txLine(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
+}
+
+
+bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
     assert(data && lay && output);
     appData = data;
     toolLay = lay;
-
-    lay->needRedraw();
-
+    saveTool = (ToolSave*)output;
     Vector pos = data->mousePos;
-    if (!workedLastTime || clicked == 1)
+    if (clicked == 1)
     {
-        startPos = pos;
-        //printf("StartPos %d||", (int)startPos.x);
+        saveTool->pos = pos;
         workedLastTime = true;
-        toolLay->isToolFinished = false;
+        saveTool->isStarted = true;
+        saveTool->isFinished = false;
     }
-    saveTool.pos = startPos;
-    saveTool.size = pos - startPos;
-    saveTool.color = data->color;
-    saveTool.thickness = data->size.x;
-    saveTool.name = (const char*)1;
-    
-    
-    
 
-    *(ToolSave*)output = saveTool;
+    if (isStarted(toolLay))lay->needRedraw();
+    saveTool->size = pos - saveTool->pos;
+    saveTool->color = data->color;
+    saveTool->thickness = data->size.x;
+    saveTool->name = (const char*)1;
 
 
-    if (clicked == 2)
+    if (clicked == 2 && workedLastTime)
     {
         finishUse();
-        lay->isToolFinished = true;
 
         setControlSquares();
         countDeltaButtons();
         countToolZone();
+        saveTool->isFinished = true;
 
         
         return true;
@@ -296,7 +207,7 @@ bool Line::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void Line::load(ToolLay* toollay, HDC dc /* = NULL*/)
+void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 {
     assert(toollay);
 
@@ -314,12 +225,10 @@ void Line::load(ToolLay* toollay, HDC dc /* = NULL*/)
     
 
     app->setColor(toolDate->color, outDC, toolDate->thickness);
-    txLine(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
-    //app->drawOnScreen(toollay->lay->getDCForToolLoad());
-    //while (app->getAsyncKeyState('P')) {};
+    outputFunc(outDC);
 }  
 
-bool Line::edit(ToolLay* toollay, HDC dc/* = NULL*/)
+bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     assert(toollay);
     printf("Tool clicked: %d\n", clicked);
@@ -345,20 +254,34 @@ bool Line::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 }
 
 
-void Line::countDeltaButtons()
+void Tool4Squares::countDeltaButtons()
 {
     int isSizePositivX = (toolLay->toolZone.getSize().x > 0);
     int isSizePositivY = (toolLay->toolZone.getSize().y > 0);
     deltaForButtons = { (!isSizePositivX) * ((-controlSquareSize.x) * 2) + controlSquareSize.x, (!isSizePositivY) * ((-controlSquareSize.y) * 2) + controlSquareSize.y };
 }
 
-void Line::countToolZone()
+void Tool4Squares::countToolZone()
 {
     ToolSave* toolDate = (ToolSave*)toolLay->getToolsData();
     toolLay->toolZone = { .pos = toolDate->pos - deltaForButtons, .finishPos = toolDate->size + toolDate->pos + (deltaForButtons) };
 }
 
-void Line::drawControlButtons(HDC outDC)
+bool Tool4Squares::isFinished(ToolLay* data)
+{
+    toolLay = data;
+    ToolSave* saveData =  getToolData(); 
+    return saveData->isFinished;
+} 
+
+bool Tool4Squares::isStarted(ToolLay* data)
+{
+    toolLay = data;
+    ToolSave* saveData =  getToolData(); 
+    return saveData->isStarted;
+}
+
+void Tool4Squares::drawControlButtons(HDC outDC)
 {
     for (int i = 0; i < controlSquareLength; i++)
     {
@@ -368,7 +291,7 @@ void Line::drawControlButtons(HDC outDC)
 }
 
 
-void Line::setControlSquares()
+void Tool4Squares::setControlSquares()
 {
     Vector size = toolLay->toolZone.getSize();
     controlSquare[0] = { .pos = {0, 0}, .finishPos = deltaForButtons };
@@ -379,7 +302,7 @@ void Line::setControlSquares()
 
 
 
-void Line::controlMoving()
+void Tool4Squares::controlMoving()
 {
     controlLeftButton();
     controlRightButton();
@@ -388,7 +311,7 @@ void Line::controlMoving()
 }
 
 
-void Line::controlLeftButton()
+void Tool4Squares::controlLeftButton()
 {
     ToolSave* toolDate = getToolData();
 
@@ -451,7 +374,7 @@ void Line::controlLeftButton()
 }
 
 
-void Line::controlRightButton()
+void Tool4Squares::controlRightButton()
 {
     ToolSave* toolDate = getToolData();
 

@@ -6,6 +6,7 @@ struct CToolManager
     struct Tool** tools = new Tool * [ToolsLength];
     int currentLength = 0;
 
+
     virtual void addTool(Tool* tool);
 };
 
@@ -33,9 +34,7 @@ struct ToolLay
     void editTool(ProgrammeDate* data);
     bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
     void* getToolsData() { return toolsData; };
-
-
-
-
+    virtual bool isFinished();
+    virtual bool isStarted();
     virtual Tool* getTool();
 };

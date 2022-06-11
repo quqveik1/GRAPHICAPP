@@ -3,8 +3,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "TXLib.h"
-#include "..\Q_Rect.h"
-#include "..\Macroses.h"
+#include "Q_Rect.h"
+#include "Macroses.h"
 #include "GlobalOptions.h"
 #include "DebugInfo.h"
 #include "LoadManager.h"

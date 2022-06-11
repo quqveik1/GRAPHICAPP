@@ -12,13 +12,14 @@ struct ToolLay;
 struct ToolData
 {
     int byteLength = 0;
+    bool isFinished = false;
+    bool isStarted = false;
 
     virtual int getByteSize();
 };
 
 int ToolData::getByteSize()
 {
-
     byteLength = sizeof(*this);
     return byteLength;
 }
@@ -59,6 +60,8 @@ struct Tool
 
     int clicked = 0;
 
+    ToolData* toolData = NULL;
+
     AbstractAppData* app = NULL;
     ToolLay* toolLay = NULL;
     ProgrammeDate* appData = NULL;
@@ -77,6 +80,8 @@ struct Tool
     virtual HDC getDC();
     virtual const char* getName();
     virtual void setMBCondition(int mbCond);
+    virtual bool isFinished(ToolLay* data) { return toolData->isFinished; };
+    virtual bool isStarted(ToolLay* data) { return toolData->isStarted; };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);

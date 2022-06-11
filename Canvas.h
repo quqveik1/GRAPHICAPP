@@ -52,6 +52,7 @@ struct Canvas : Manager
 
     //Tool** tools = new Tool*[10];
     bool activeTool = false;
+    bool drawingModeLastTime = DrawingMode;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
 
@@ -82,7 +83,6 @@ struct Canvas : Manager
 	void createLay ();
 	bool controlLay ();
     void controlEditLay();
-    bool onClickEditLay();
 	void drawLay ();
     void cleanOutputLay();
 
@@ -91,14 +91,20 @@ struct Canvas : Manager
     void finishTool();
     void controlTool();
     void startTool();
+    void changeTool();
     void initToolLay();
     void addToolLay();
-    ToolLay* getNewToolLay();
+    void setCurrentData();
+   
 
     HDC getImageForSaving();
     CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();
     int getActiveLayNum();
+    ToolLay* getNewToolLay();
+    bool isDrawingModeChanged();
+    Tool* getActiveTool();
+    void setActiveToolLayNum(int num);
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

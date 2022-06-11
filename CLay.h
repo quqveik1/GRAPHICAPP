@@ -10,7 +10,7 @@ struct CLay
 
 
     virtual void createLay(Vector _size = DCVECTORSIZE);
-    virtual void addTool (ToolLay* tool);
+    virtual void addToolLay (ToolLay* tool);
 
     virtual HDC getDCForToolLoad ();
     virtual HDC getPermanentDC();

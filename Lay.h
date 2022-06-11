@@ -4,11 +4,11 @@
 
 struct Lay
 {
-    HDC lay = {};
+    HDC lay = NULL;
     Vector layCoordinats = {};
     Vector laySize = {};
     RGBQUAD* layBuf = {};
-    HDC tempLay = {};
+    HDC tempLay = NULL;
     RGBQUAD* tempBuf = {};
     HDC outputLay = NULL;
     RGBQUAD* outputBuf = {};

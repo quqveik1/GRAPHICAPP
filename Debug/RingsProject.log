@@ -1,1 +1,121 @@
-﻿  RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+﻿  PowerPoint.cpp
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Q_Rect.h(61,50): warning C4554: "^": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Q_Rect.h(63,54): warning C4554: "^": проверьте приоритет операторов на ошибки; для уточнения приоритета используйте скобки
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Tool.h(83,38): warning C4100: data: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Tool.h(84,37): warning C4100: data: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Tool.h(88,45): warning C4100: dc: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Tool.h(88,32): warning C4100: toollay: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(122,31): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(18,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(19,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(57,2): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(80,47): warning C4100: text: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(80,29): warning C4100: info: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(123,10): warning C4551: в вызове функции отсутствует список аргументов
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(248,23): warning C4100: info: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(289,20): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(290,22): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(291,21): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(297,20): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(298,22): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(299,21): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(334,29): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(335,31): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(336,30): warning C4244: =: преобразование "unsigned int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(352,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(353,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(360,16): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(360,9): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(462,22): warning C4458: объявление "mousePos" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(84,12): message : см. объявление "Window::mousePos"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(462,42): warning C4838: Преобразование из "double" в "LONG" требует сужающего преобразования.
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(462,42): warning C4244: инициализация: преобразование "double" в "LONG", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(462,107): warning C4838: Преобразование из "double" в "LONG" требует сужающего преобразования.
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(462,107): warning C4244: инициализация: преобразование "double" в "LONG", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(491,31): warning C4838: Преобразование из "double" в "LONG" требует сужающего преобразования.
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(491,31): warning C4244: инициализация: преобразование "double" в "LONG", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(491,51): warning C4838: Преобразование из "double" в "LONG" требует сужающего преобразования.
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(491,51): warning C4244: инициализация: преобразование "double" в "LONG", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CurvesFilter.h(104,19): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CurvesFilter.h(117,120): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CurvesFilter.h(124,46): warning C4244: =: преобразование "int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CurvesFilter.h(125,50): warning C4244: =: преобразование "int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CurvesFilter.h(126,48): warning C4244: =: преобразование "int" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(87,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(88,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(88,6): warning C4189: my: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(87,6): warning C4189: mx: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(163,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(164,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(173,13): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider.cpp(194,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(59,17): warning C4804: *=: небезопасное использование типа "bool" в операции
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(66,13): warning C4804: *=: небезопасное использование типа "bool" в операции
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFiltersManager.cpp(20,9): warning C4456: объявление "i" скрывает предыдущее локальное объявление
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFiltersManager.cpp(14,14): message : см. объявление "i"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainTools.cpp(49,43): warning C4100: data: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainTools.cpp(53,13): warning C4189: outDC: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(206,93): warning C4100: _text: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(227,33): warning C4100: _NewCanvasDC: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(254,15): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(280,32): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(537,26): warning C4100: argv: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(537,15): warning C4100: argc: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(744,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(809,16): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(814,18): warning C4458: объявление "text" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(69,14): message : см. объявление "Window::text"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(833,48): warning C4458: объявление "dc" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(75,6): message : см. объявление "Window::dc"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(833,75): warning C4458: объявление "text" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(69,14): message : см. объявление "Window::text"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(869,35): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(914,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(915,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(956,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(956,6): warning C4189: numBeforeSlider: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(969,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(970,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1020,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(967,33): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1020,7): warning C4189: numBeforeSlider: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1019,8): warning C4189: changeTextLen: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1099,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1122,19): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1139,7): warning C4189: deleteChar: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1138,7): warning C4189: isShifted: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1214,24): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1230,31): warning C4244: =: преобразование "int" в "char", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1285,7): warning C4189: copyChar: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1302,35): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1394,18): warning C4458: объявление "text" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(69,14): message : см. объявление "Window::text"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1509,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1510,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1510,6): warning C4189: my: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1509,6): warning C4189: mx: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1545,12): warning C4244: инициализация: преобразование "time_t" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1546,14): warning C4244: инициализация: преобразование "time_t" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1547,14): warning C4244: инициализация: преобразование "time_t" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1766,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1767,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1778,24): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1767,9): warning C4189: my: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1766,9): warning C4189: mx: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(1874,19): warning C4458: объявление "length" скрывает член класса
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.h(129,6): message : см. объявление "Manager::length"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2018,34): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2030,35): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2194,43): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2195,47): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2196,45): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2341,15): warning C4189: toolsave: локальная переменная инициализирована, но не использована
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2361,35): warning C4805: !=: небезопасное смешение типа "bool" и типа "int" в операции
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2385,16): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2386,16): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2441,35): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2448,35): warning C4100: mp: неиспользованный формальный параметр
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2457,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(128): warning C4172: возвращение адреса локальной или временной переменной : fileName
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(2289): warning C4701: использована потенциально неинициализированная локальная переменная "pos"
+  RingsProject.vcxproj -> C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe

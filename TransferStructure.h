@@ -17,6 +17,8 @@ struct AbstractAppData
     virtual void cleanTransparentDC() = 0;
     virtual bool getAsyncKeyState(int symbol) = 0;
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize) = 0;
+    virtual void line(Rect rect, HDC dc) = 0;
+    virtual void ellipse(Vector centrPos, Vector halfSize, HDC dc) = 0;
     void (*invert) (RGBQUAD* buf, unsigned int totalSize) = 0;
 
     struct Manager* canvasManager = NULL;

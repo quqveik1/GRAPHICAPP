@@ -9,6 +9,18 @@ Tool* ToolLay::getTool()
     return tool;
 }
 
+bool ToolLay::isFinished()
+{
+    assert(getTool());
+    return getTool()->isFinished(this);
+}
+
+bool ToolLay::isStarted()
+{
+    assert(getTool());
+    return getTool()->isStarted(this);
+}
+
 bool ToolLay::useTool(ProgrammeDate* data)
 {
     assert(tool);
@@ -19,7 +31,7 @@ bool ToolLay::useTool(ProgrammeDate* data)
 void ToolLay::drawTool(HDC dc /*= NULL*/)
 {
     assert(tool);
-    tool->load(this, dc);
+    if (isStarted())tool->load(this, dc);
 }
 
 void ToolLay::editTool(ProgrammeDate* data)

@@ -7,7 +7,7 @@ void CLay::createLay(Vector _size /* = DCVECTORSIZE*/)
 }
 
 
-void CLay::addTool(ToolLay* tool)
+void CLay::addToolLay(ToolLay* tool)
 {
     assert(toolLength < ONELAYTOOLSLIMIT);
 
