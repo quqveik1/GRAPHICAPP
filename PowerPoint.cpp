@@ -1802,7 +1802,8 @@ void Canvas::draw ()
 
     drawLay();
 
-    if (getActiveLay()->lay.lay)controlTool();
+    CLay* activeLay = getActiveLay();
+    if (activeLay->lay.lay) controlTool();
 
     controlEditLay();
 
@@ -2317,7 +2318,9 @@ void Canvas::startTool()
 
 void Canvas::changeTool()
 {
-    getActiveLay()->getActiveToolLay()->tool = getActiveTool();
+    delete (getActiveLay()->getActiveToolLay()->getToolsData());
+
+    setToolToToolLay (getActiveLay()->getActiveToolLay());
 }
 
 void Canvas::initToolLay()
@@ -2334,11 +2337,17 @@ void Canvas::addToolLay()
 {
     assert(LayersNum >= currentToolLength);
     activeTool = true;
+    Tool* activeTool = getActiveTool();
     ToolLay* toollay = getNewToolLay();
+    setToolToToolLay(toollay);
+}
+
+
+void Canvas::setToolToToolLay(ToolLay* toollay)
+{
     toollay->tool = getActiveTool();
     toollay->tool->clicked = clicked;
     toollay->toolsData = new char[getActiveTool()->ToolSaveLen]{};
-    ToolSave* toolsave = (ToolSave*)toollay->toolsData;
 }
 
 void Canvas::setCurrentData()

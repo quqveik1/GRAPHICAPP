@@ -26,7 +26,7 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     DLLToolExportData* dllData = new DLLToolExportData(6);
 
     dllData->addTool(new Line            ("Линия", sizeof(ToolSave),                                       LoadManager.loadImage("Line.bmp"), data));
-    dllData->addTool(new Point           ((const char*)(2), sizeof(PointSave) + sizeof(ToolSave) * POINTSAVELENGTH, LoadManager.loadImage("Pen.bmp"), data));
+    dllData->addTool(new Point           ("Точка", sizeof(PointSave) + sizeof(Vector) * POINTSAVELENGTH, LoadManager.loadImage("Pen.bmp"), data));
     dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave),                                      LoadManager.loadImage("Vignette.bmp"), data));
     dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),                                       LoadManager.loadImage("Gummi.bmp"), data));
     dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),                                       LoadManager.loadImage("Rectangle.bmp"), data));
@@ -53,35 +53,6 @@ bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
 
     colorSave->isFinished = true;
     return colorSave->isFinished;
-}
-
-
-bool Gummi::use(ProgrammeDate* data, ToolLay* lay, void* output)
-{
-    /*
-    assert(data && lay && output && lay->outputLay);
-    Vector pos = data->mousePos;
-    if (!workedLastTime)
-    {
-        workedLastTime = true;
-        startPos = pos;
-    }
-
-    app->setColor(data->backGroundColor, lay->lay, data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay); 
-
-    if (clicked != 1)
-    {
-        workedLastTime = false;
-
-        ToolSave saveTool(startPos + data->canvasCoordinats, { (double)data->gummiThickness, (double)data->gummiThickness }, data->backGroundColor, data->size.x, (const char*)2);
-
-        *(ToolSave*)output = saveTool;
-
-        return true;
-    }  &*/
-
-    return false;
 }
 
 void RectangleTool::outputFunc(HDC outdc)
@@ -114,50 +85,67 @@ void EllipseTool::outputFunc(HDC outdc)
     app->ellipse(ellipsePos, ellipseSize, outdc);
 }
 
+
+void Point::initPointSave()
+{
+    pointSave->size = appData->size;
+    pointSave->color = appData->color;
+    pointSave->pointsPosition = new Vector[POINTSAVELENGTH];
+}
+
+void Gummi::initPointSave()
+{
+    pointSave->size = appData->size;
+    pointSave->color = appData->backGroundColor;
+    pointSave->pointsPosition = new Vector[POINTSAVELENGTH];
+}
+
 bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
-    /*
-    assert(data && lay && output && lay->outputLay);
-    Vector pos = data->mousePos;
-    if (firstUse(data, output, pos))
+    assert(data && lay && output); 
+    appData = data;
+    toolLay = lay;
+    toolData = (ToolData*)lay->getToolsData();
+    pointSave = (PointSave*)lay->getToolsData();
+
+    if (clicked == 1)
     {
-        if (pointSave) delete(pointSave);
-        pointSave = new PointSave(100);
-    }
-    app->setColor(data->color, lay->lay, data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay);
+        lay->needRedraw();
 
-    if (lastPos != pos)
-    {
-        ToolSave saveTool(pos + data->canvasCoordinats, data->size, data->color, data->size.x, (const char*)2);
-        pointSave->addPoint(saveTool);
-    }
+        if (!isStarted(lay)) initPointSave();
 
-    if (clicked != 1)
-    {
-        *((PointSave*)output) = *pointSave;
-
-        finishUse();
-
-        return true;
+        pointSave->isStarted = true;
+        if (lastPos != data->mousePos)
+        {
+            pointSave->addPoint(data->mousePos);
+        }
+        lastPos = data->mousePos;
     }
 
-    lastPos = pos; */
+    if ((!clicked) && isStarted(lay))
+    {
+        pointSave->isFinished = true;
+    }
 
-    return false;
+
+    return pointSave->isFinished;
 }
 
 void Point::load(ToolLay* toollay, HDC dc)
 {
-    //assert(input && toollay);
-    //PointSave* pointsDate = (PointSave*)input;
-    //if (pointsDate->currentLength > 0) app->setColor(pointsDate->points[1].color, finalDC, pointsDate->points[1].thickness);
+    assert(toollay);
+    toolLay = toollay;
 
-   // for (int i = 0; i < pointsDate->currentLength; i++)
+    pointSave = (PointSave*)toollay->getToolsData();
+    HDC outDC = dc;
+    if (!outDC) outDC = getOutDC();
+
+    app->setColor(pointSave->color, outDC, 1);
+
+    for (int i = 0; i < pointSave->currentLength; i++)
     {
-        //txEllipse(pointsDate->points[i].pos.x - pointsDate->points[i].size.x, pointsDate->points[i].pos.y - pointsDate->points[i].size.y, pointsDate->points[i].pos.x + pointsDate->points[i].size.x, pointsDate->points[i].pos.y + pointsDate->points[i].size.y, finalDC);
+        app->ellipse(pointSave->pointsPosition[i], pointSave->size, outDC);
     }
-
 }
 
 

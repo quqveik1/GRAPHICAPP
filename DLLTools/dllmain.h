@@ -96,6 +96,7 @@ struct Point : Tool
     {
     }
 
+    virtual void initPointSave();
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);
@@ -118,14 +119,15 @@ struct Vignette : Tool
     virtual void load(ToolLay* toollay, HDC dc = NULL) {};
 };
 
-struct Gummi : Tool
+struct Gummi : Point
 {
 
     Gummi(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+        Point(_name, _ToolSaveLen, _dc, _data)
     {
     }
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
+
+    virtual void initPointSave();
 };
 
 struct RectangleTool : Tool4Squares

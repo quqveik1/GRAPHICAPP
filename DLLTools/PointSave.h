@@ -3,7 +3,9 @@ struct PointSave : ToolData
 {
     int Length = POINTSAVELENGTH;
     int currentLength = 0;
-    ToolSave* points = new ToolSave[Length]{};
+    Vector size = {};
+    COLORREF color = {};
+    Vector* pointsPosition = new Vector[Length]{};
 
 
     PointSave(int _Length = POINTSAVELENGTH) :
@@ -11,7 +13,5 @@ struct PointSave : ToolData
     {
     }
 
-    void addPoint(ToolSave& point);
-
-    virtual int getByteSize();
+    void addPoint(Vector pos);
 };

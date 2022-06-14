@@ -76,12 +76,13 @@ struct Tool
 
     bool firstUse(ProgrammeDate* data, void* output, Vector currentPos);
     void finishUse();
+    HDC getOutDC();
 
     virtual HDC getDC();
     virtual const char* getName();
     virtual void setMBCondition(int mbCond);
-    virtual bool isFinished(ToolLay* data) { return toolData->isFinished; };
-    virtual bool isStarted(ToolLay* data) { return toolData->isStarted; };
+    virtual bool isFinished(ToolLay* data);
+    virtual bool isStarted(ToolLay* data) { return ((ToolData*)data->getToolsData())->isStarted; };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual void load(ToolLay* toollay, HDC dc = NULL);

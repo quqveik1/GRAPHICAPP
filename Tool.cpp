@@ -20,6 +20,18 @@ void Tool::finishUse()
     workedLastTime = false;
 }
 
+HDC Tool::getOutDC()
+{
+        if (isFinished(toolLay)) return toolLay->lay->getPermanentDC();
+        else                         return toolLay->lay->getDCForToolLoad();
+}
+
+
+bool Tool::isFinished(ToolLay* data) 
+{ 
+    return ((ToolData*)data->getToolsData())->isFinished;
+};
+
 
 bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {

@@ -50,9 +50,8 @@ struct Canvas : Manager
 
     bool editingMode = false;
 
-    //Tool** tools = new Tool*[10];
     bool activeTool = false;
-    bool drawingModeLastTime = DrawingMode;
+    int drawingModeLastTime = DrawingMode;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
 
@@ -94,6 +93,7 @@ struct Canvas : Manager
     void changeTool();
     void initToolLay();
     void addToolLay();
+    void setToolToToolLay(ToolLay* toollay);
     void setCurrentData();
    
 

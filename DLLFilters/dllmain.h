@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Q_Vector.h"
+#include "..\..\Q_Vector.h"
 #include "KontrastMenu.cpp"
 #include "..\TransferFilterStructure.h"
 #include "..\Canvas.h"
