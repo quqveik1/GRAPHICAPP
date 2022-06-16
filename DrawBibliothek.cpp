@@ -109,8 +109,8 @@ const char* getCustomFilePath(const char* question)
 {
     char fileName[MAX_PATH] = "";
 
-    OPENFILENAMEW ofn = { sizeof(ofn), txWindow() };  //  +-- Загадка Жака Фреско... на размышление дается 20 секунд
-                                                        //  V
+    OPENFILENAMEW ofn = { sizeof(ofn), txWindow() }; 
+
     ofn.lpstrTitle = (LPCWSTR)question;
 
     ofn.lpstrFile = (LPWSTR)fileName;
@@ -122,11 +122,39 @@ const char* getCustomFilePath(const char* question)
 
     if ((GetOpenFileNameW))
         (GetOpenFileNameW(&ofn));
-    // Весьма полезная функция, отображает диалог выбора файла.
 
 
     return fileName;
 }
+
+
+const char* getCustomFilePathForSaving(const char* question, const char* fileTypeDescribtion, const char* fileType)
+{
+    char fileName[MAX_PATH] = "";
+
+    OPENFILENAME ofn = { sizeof(OPENFILENAME), txWindow() };
+
+    ofn.lpstrTitle = question;
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = sizeof(fileName);
+    ofn.lpstrFilter = fileTypeDescribtion;
+    ofn.nFilterIndex = 1;
+    ofn.lpstrInitialDir = NULL;
+    ofn.lpstrDefExt = fileType;
+
+
+    bool oldPSW = _txProcessSystemWarnings;
+    _txProcessSystemWarnings = false;//отключает всякие системные проверки тхлибом иначе возникает ошибка 298
+
+    if ((GetSaveFileNameA))
+        (GetSaveFileNameA(&ofn));
+
+    _txProcessSystemWarnings = oldPSW;
+
+    return fileName;
+}
+
+
 
 
 

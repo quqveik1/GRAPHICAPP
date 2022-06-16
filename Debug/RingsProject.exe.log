@@ -30695,3 +30695,2662 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010F9D40.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A9190C (32-bit), Flags: CMdRe0, Thread: 0xF9DC (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x00A39E2E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (150):
+
+    148: 
+    149:     if ((GetSaveFileNameA))
+=>  150:         (GetSaveFileNameA(&ofn));
+    151: 
+    152:     return fileName;
+
+#51 0x00A32FE5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (790):
+
+    788: void SaveImages::draw()
+    789: {
+=>  790:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки");
+    791:     char fullPath[MAX_PATH] = {};
+    792:     strcpy(fullPath, pathToSave);
+
+#52 0x00A3FB43 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1313):
+
+   1311: 	{
+   1312: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1313: 		openManager->draw ();
+   1314: 	}
+   1315: }
+
+#53 0x00A28B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x00A45339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x00A3F154 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00A28B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x00A45339 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x00A3F322 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x009E89C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1349):
+
+   1347:             
+   1348:             manager->clicked = txMouseButtons();
+=> 1349: 			manager->onClick (mp);
+   1350: 			if (!IsRunning) break;
+   1351: 		}
+
+#60 0x00A62E22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 18:39:09, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 18:39:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x00EFA1A8.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008A190C (32-bit), Flags: CMdRe0, Thread: 0xFFAC (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x00849E24 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     return fileName;
+
+#51 0x00842FE5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (790):
+
+    788: void SaveImages::draw()
+    789: {
+=>  790:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки");
+    791:     char fullPath[MAX_PATH] = {};
+    792:     strcpy(fullPath, pathToSave);
+
+#52 0x0084FB33 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1313):
+
+   1311: 	{
+   1312: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1313: 		openManager->draw ();
+   1314: 	}
+   1315: }
+
+#53 0x00838B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (670):
+
+    668:     manager->activeWindow = window;
+    669:     window->clicked = manager->clicked;
+=>  670: 	window->onClick (mp - window->rect.pos);
+    671: 	window->isClicked = true;
+    672: }
+
+#54 0x00855329 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (176):
+
+    174: 			if (manager->pointers[i]->rect.inRect(mp))
+    175: 			{
+=>  176: 				clickButton (manager->pointers[i], manager, mp);
+    177: 
+    178: 				missClicked = false;
+
+#55 0x0084F144 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00838B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (670):
+
+    668:     manager->activeWindow = window;
+    669:     window->clicked = manager->clicked;
+=>  670: 	window->onClick (mp - window->rect.pos);
+    671: 	window->isClicked = true;
+    672: }
+
+#57 0x00855329 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (176):
+
+    174: 			if (manager->pointers[i]->rect.inRect(mp))
+    175: 			{
+=>  176: 				clickButton (manager->pointers[i], manager, mp);
+    177: 
+    178: 				missClicked = false;
+
+#58 0x0084F312 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (663):
+
+    661: void Manager::onClick (Vector mp)
+    662: {
+=>  663:     standartManagerOnClick (this, mp);	
+    664: }
+    665: 
+
+#59 0x007F89C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1349):
+
+   1347:             
+   1348:             manager->clicked = txMouseButtons();
+=> 1349: 			manager->onClick (mp);
+   1350: 			if (!IsRunning) break;
+   1351: 		}
+
+#60 0x00872E12 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 18:40:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 18:40:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F9190C (32-bit), Flags: CMdRe0, Thread: 0xF42C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00EEDE00 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00F4B608 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630)
+# 2 0x00F4BCF3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652)
+
+# 3 0x00EE6405 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::~Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (106):
+
+    104:     {
+    105:         if (dc) txDeleteDC (dc);
+=>  106:         if (finalDC) txDeleteDC (dc);
+    107:     }
+    108: 
+
+# 4 0x00EE800C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::`scalar deleting destructor'()
+
+# 5 0x00EE60E5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::~Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (161):
+
+    159:         for (int i = 0; i < length; i++)
+    160:         {
+=>  161:             if (pointers[i]) delete pointers[i];
+    162:         }
+    163:     }
+
+# 6 0x00EE7F8C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::`scalar deleting destructor'()
+
+# 7 0x00F62EB9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (668):
+
+    666: 	//blueColor->deleteButton ();
+    667: 
+=>  668:     delete manager;
+    669:     LoadManager.deleteAllImages ();
+    670: 	 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630):
+
+  13628: 
+  13629: $   HDC  dc = *pdc;
+=>13630: $   bool ok = _txBuffer_Delete (pdc);
+  13631: $   if (!ok) return false;
+  13632: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652):
+
+  13650: bool txDeleteDC (HDC dc)
+  13651:     {
+=>13652: $1  return txDeleteDC (&dc);
+  13653:     }
+  13654: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (106):
+
+    104:     {
+    105:         if (dc) txDeleteDC (dc);
+=>  106:         if (finalDC) txDeleteDC (dc);
+    107:     }
+    108: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 18:50:17, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 18:50:23
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010F9FE8.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006F190C (32-bit), Flags: CMdRe0, Thread: 0x10498 (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x006998C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x00692FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0069F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0069EE14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0069EFE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x006489C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x006C2AE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:02:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:02:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x00DD9FA8.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006F190C (32-bit), Flags: CMdRe0, Thread: 0x10A28 (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x006998C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x00692FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0069F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0069EE14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0069EFE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x006489C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x006C2AE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:02:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:03:41
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010FA310.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006F190C (32-bit), Flags: CMdRe0, Thread: 0xB3FC (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x006998C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x00692FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0069F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0069EE14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0069EFE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x006489C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x006C2AE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:02:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:05:31
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010F9FD8.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006F190C (32-bit), Flags: CMdRe0, Thread: 0x108E4 (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x006998C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x00692FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0069F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0069EE14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00688B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x006A4FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0069EFE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x006489C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x006C2AE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:02:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:06:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9D80.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0103EE84 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0103F052 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x00FE89C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x01062B52 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#17: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9D28.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B4FB65 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B272B9 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 9 0x50B142C5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50B01F5D in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#11 0x50B3C756 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+#12 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#13 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#14 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#15 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#16 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#17 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#18 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#19 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#20 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#21 0x7A64AD70 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#22 0x7A6388E0 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#23 0x7A638834 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Destroy()
+#24 0x7AF0D12B in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#25 0x7AF0F056 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#26 0x7AF0CE6F in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#27 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#28 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#29 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#31 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#32 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#33 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#40 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#41 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#42 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#43 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#44 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#45 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#46 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#47 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#48 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#49 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#51 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#52 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#53 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#54 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#55 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#56 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#57 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#58 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#59 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#60 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#61 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#17: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9D28.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#3: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B4FB65 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B272B9 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 9 0x50B142C5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50B01F5D in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#11 0x50B3C756 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+#12 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#13 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#14 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#15 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#16 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#17 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#18 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#19 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#20 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#21 0x7A64AD70 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#22 0x7A6388E0 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#23 0x7A638834 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Destroy()
+#24 0x7AF0D12B in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#25 0x7AF0F056 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#26 0x7AF0CE6F in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#27 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#28 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#29 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#31 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#32 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#33 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#40 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#41 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#42 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#43 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#44 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#45 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#46 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#47 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#48 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#49 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#51 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#52 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#53 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#54 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#55 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#56 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#57 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#58 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#59 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#60 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#61 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#19: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9DF0.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#4: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7A64AD70 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#18 0x7A6388E0 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#19 0x7A638834 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Destroy()
+#20 0x7AF0D12B in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#21 0x7AF0F056 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#22 0x7AF0CE6F in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#23 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#24 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#25 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#27 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#28 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#29 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#30 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#35 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#36 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#37 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#41 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#42 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#43 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#44 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#45 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#47 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#48 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#49 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#50 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#51 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#52 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#53 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#54 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#55 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#56 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0103EE84 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#59 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#60 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#61 0x0103F052 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#19: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9DF0.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#5: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7A64AD70 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#18 0x7A6388E0 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#19 0x7A638834 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Destroy()
+#20 0x7AF0D12B in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#21 0x7AF0F056 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#22 0x7AF0CE6F in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#23 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#24 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#25 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#27 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#28 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#29 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#30 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#35 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#36 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#37 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#41 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#42 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#43 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#44 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#45 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#47 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#48 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#49 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#50 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#51 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#52 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#53 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#54 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#55 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#56 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0103EE84 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#59 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#60 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#61 0x0103F052 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#21: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9E00.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#6: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B4FB65 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B272B9 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 9 0x50B142C5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50B01F5D in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#11 0x50B3C756 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+#12 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#13 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#14 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#15 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#16 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#17 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#18 0x7A6F5E63 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#19 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#20 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#21 0x7AF0CFE0 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#22 0x7AF0CE8A in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#23 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#24 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#25 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#27 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#28 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#29 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#30 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#35 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#36 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#37 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#41 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#42 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#43 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#44 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#45 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#47 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#48 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#49 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#50 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#51 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#52 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#53 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#54 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#55 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#56 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0103EE84 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#59 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#60 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#61 0x0103F052 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#21: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x004F9E00.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#7: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0109196C (32-bit), Flags: CMdRe0, Thread: 0x11644 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B4FB65 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B272B9 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 9 0x50B142C5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50B01F5D in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#11 0x50B3C756 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+#12 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#13 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#14 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#15 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#16 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#17 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#18 0x7A6F5E63 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#19 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#20 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#21 0x7AF0CFE0 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#22 0x7AF0CE8A in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#23 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#24 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#25 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#27 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#28 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#29 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#30 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#35 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#36 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#37 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#41 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#42 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#43 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#44 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#45 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#47 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#48 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#49 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#50 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#51 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#52 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#53 0x0103991E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#54 0x01032FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#55 0x0103F873 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#56 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0103EE84 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#59 0x01028B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#60 0x01045069 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#61 0x0103F052 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1347):
+
+   1345: 		{
+   1346:             
+=> 1347:             manager->clicked = txMouseButtons();
+   1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:11:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:11:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#15: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010F9FD8.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001B190C (32-bit), Flags: CMdRe0, Thread: 0x10F90 (Main), GetLastError(): 298 (Слишком много попыток занесения события для семафора). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B3C775 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+# 9 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#11 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#12 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#13 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#14 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#15 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#16 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#17 0x7AF029AC in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#18 0x7AF01AA8 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#19 0x77242728 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#20 0x77241C97 in C:\WINDOWS\System32\SHELL32.dll: Ordinal702()
+#21 0x77272E0A in C:\WINDOWS\System32\SHELL32.dll: SHGetKnownFolderIDList()
+#22 0x7723EFA1 in C:\WINDOWS\System32\SHELL32.dll: Shell_NotifyIconW()
+#23 0x77256F62 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#24 0x772572A3 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#25 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#26 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#27 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#31 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#33 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#34 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#35 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#36 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#37 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#38 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#39 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#40 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#41 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#42 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#44 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#45 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#46 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#47 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#48 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#49 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#50 0x001598C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#51 0x00152FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#52 0x0015F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#53 0x00148B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#54 0x00164FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#55 0x0015EE14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: List::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (777):
+
+    775: {
+    776:     mousePos = mp;
+=>  777:     int clikedButtonNum = standartManagerOnClick (this, mp);
+    778:     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    779:     {
+
+#56 0x00148B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#57 0x00164FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+#58 0x0015EFE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (665):
+
+    663: void Manager::onClick (Vector mp)
+    664: {
+=>  665:     standartManagerOnClick (this, mp);	
+    666: }
+    667: 
+
+#59 0x001089C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1348):
+
+   1346:             
+   1347:             manager->clicked = txMouseButtons();
+=> 1348: 			manager->onClick (mp);
+   1349: 			if (!IsRunning) break;
+   1350: 		}
+
+#60 0x00182AE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (660):
+
+    658: 
+    659: 
+=>  660: 	Engine (manager);
+    661: 
+    662: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:12:47, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:12:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Исключение С++, вызванное оператором throw.
+
+#17: Исключение EXCEPTION_CPP_MSC (0xE06D7363) при выполнении кода по адресу 0x75D1F192 в функции RaiseException() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Дополнительно, превышен лимит исключений _TX_EXCEPTIONS_LIMIT (16). Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+Ой, всё (EXCEPTION_NONCONTINUABLE).
+
+Объект исключения C++: class wil::ResultException, what(): "", его адрес 0x010F9F80.
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001B190C (32-bit), Flags: CMdRe0, Thread: 0x10F90 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x75D1F192 in C:\WINDOWS\System32\KERNELBASE.dll: RaiseException()
+# 1 0x76E3CB28 in C:\WINDOWS\System32\ucrtbase.dll: CxxThrowException()
+# 2 0x50AF8E5D in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 3 0x50AF8E15 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 4 0x50B1F4F6 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 5 0x50B1F882 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 6 0x50AFA223 in C:\Windows\System32\uiautomationcore.dll: UiaLookupId()
+# 7 0x50B4FB65 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 8 0x50B272B9 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+# 9 0x50B142C5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#10 0x50B01F5D in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#11 0x50B3C756 in C:\Windows\System32\uiautomationcore.dll: UiaDisconnectProvider()
+#12 0x50B01CC0 in C:\Windows\System32\uiautomationcore.dll: UiaHostProviderFromHwnd()
+#13 0x50B09900 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationEvent()
+#14 0x50AFE9E5 in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#15 0x50AFE94C in C:\Windows\System32\uiautomationcore.dll: UiaRaiseAutomationPropertyChangedEvent()
+#16 0x50AFE5FE in C:\Windows\System32\uiautomationcore.dll: UiaRaiseStructureChangedEvent()
+#17 0x7A6F590C in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureChangedEvent()
+#18 0x7A6F5F33 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::EventManager::RaiseStructureEvents()
+#19 0x7A67BCCE in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Movie::SetClassInfoPtr()
+#20 0x7A657C71 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::EndDefer()
+#21 0x7A64AD70 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#22 0x7A6388E0 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Remove()
+#23 0x7A638834 in C:\WINDOWS\SYSTEM32\DUI70.dll: DirectUI::Element::Destroy()
+#24 0x7AF0D12B in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#25 0x7AF0F056 in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#26 0x7AF0CE6F in C:\WINDOWS\system32\explorerframe.dll: Ordinal130()
+#27 0x74506CFD in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#28 0x74506C61 in C:\WINDOWS\SYSTEM32\windows.storage.dll: CViewSettings_CreateInstance()
+#29 0x77202D8C in C:\WINDOWS\System32\SHELL32.dll: SHGetFolderPathEx()
+#31 0x7725737F in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#32 0x7725830A in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#33 0x77258BC0 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#34 0x77258DC8 in C:\WINDOWS\System32\SHELL32.dll: SHCreateDefaultContextMenu()
+#38 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#39 0x77733AC4 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#40 0x77732D7F in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#41 0x77732C38 in C:\WINDOWS\System32\USER32.dll: IsThreadDesktopComposited()
+#42 0x77757C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#43 0x7773714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#44 0x77736852 in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#45 0x7773A69D in C:\WINDOWS\System32\USER32.dll: IsWindow()
+#46 0x7774E605 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#47 0x7774E532 in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamAorW()
+#48 0x7774E4EB in C:\WINDOWS\System32\USER32.dll: DialogBoxIndirectParamW()
+#49 0x759ED2F1 in C:\WINDOWS\System32\COMDLG32.dll: DllCanUnloadNow()
+#51 0x75A27F1C in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#52 0x75A26ED2 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#53 0x75A214F9 in C:\WINDOWS\System32\COMDLG32.dll: PrintDlgA()
+#54 0x75A07C3A in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#55 0x75A079BC in C:\WINDOWS\System32\COMDLG32.dll: Ssync_ANSI_UNICODE_Struct_For_WOW()
+#56 0x75A084D2 in C:\WINDOWS\System32\COMDLG32.dll: GetSaveFileNameA()
+
+#57 0x001598C3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: getCustomFilePathForSaving() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (148):
+
+    146: 
+    147:     if ((GetSaveFileNameA))
+=>  148:         (GetSaveFileNameA(&ofn));
+    149: 
+    150:     sprintf(fileName, "%s%s", fileName, fileType);
+
+#58 0x00152FEF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: SaveImages::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (791):
+
+    789: {
+    790:     
+=>  791:     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", ".bmp");
+    792:     char fullPath[MAX_PATH] = {};
+    793:     strcpy(fullPath, pathToSave);
+
+#59 0x0015F803 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: OpenManager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1312):
+
+   1310: 	{
+   1311: 		openManager->advancedMode = !openManager->advancedMode;
+=> 1312: 		openManager->draw ();
+   1313: 	}
+   1314: }
+
+#60 0x00148B7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (672):
+
+    670:     manager->activeWindow = window;
+    671:     window->clicked = manager->clicked;
+=>  672: 	window->onClick (mp - window->rect.pos);
+    673: 	window->isClicked = true;
+    674: }
+
+#61 0x00164FF9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (178):
+
+    176: 			if (manager->pointers[i]->rect.inRect(mp))
+    177: 			{
+=>  178: 				clickButton (manager->pointers[i], manager, mp);
+    179: 
+    180: 				missClicked = false;
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (135):
+
+    133:     char fileName[MAX_PATH] = "";
+    134: 
+=>  135:     OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
+    136: 
+    137:     ofn.lpstrTitle = question;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 19:12:47, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 19:12:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------

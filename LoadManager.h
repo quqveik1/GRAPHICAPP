@@ -4,6 +4,7 @@ struct Image
 {
 	const char* path = NULL;
 	HDC dc = NULL;
+    Vector size = {};
 };
 
 struct CLoadManager
@@ -13,7 +14,7 @@ struct CLoadManager
 	Image images[1000];
 
 
-	HDC loadImage (const char* path);
+    HDC loadImage(const char* path, Vector size = {});
     void deleteAllImages ();
 
 };
@@ -29,7 +30,7 @@ void CLoadManager::deleteAllImages ()
 
 
 
-HDC CLoadManager::loadImage(const char* path)
+HDC CLoadManager::loadImage(const char* path, Vector size /* = {} */)
 {
 	bool newImage = true;
 	int suitableDCNum = -1;
@@ -52,6 +53,7 @@ HDC CLoadManager::loadImage(const char* path)
 	images[currentImagesAmount].dc = txLoadImage(path);
     if (images[currentImagesAmount].dc == NULL) assert (!path);
 	images[currentImagesAmount].path = path;
+    images[currentImagesAmount].size = size;
 	currentImagesAmount++;
 
 	return images[currentImagesAmount-1].dc;

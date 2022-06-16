@@ -25,12 +25,12 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     TheApp = data;
     DLLToolExportData* dllData = new DLLToolExportData(6);
 
-    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),                                       LoadManager.loadImage("Line.bmp"), data));
-    dllData->addTool(new Point           ("Точка", sizeof(PointSave) + sizeof(Vector) * POINTSAVELENGTH, LoadManager.loadImage("Pen.bmp"), data));
-    dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave),                                      LoadManager.loadImage("Vignette.bmp"), data));
-    dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),                                       LoadManager.loadImage("Gummi.bmp"), data));
-    dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),                                       LoadManager.loadImage("Rectangle.bmp"), data));
-    dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),                                       LoadManager.loadImage("Ellipse.bmp"), data));
+    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),           LoadManager.loadImage("Line.bmp"), data));
+    dllData->addTool(new Point           ("Точка", sizeof(PointSave),          LoadManager.loadImage("Pen.bmp"), data));
+    dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave), LoadManager.loadImage("Vignette.bmp"), data));
+    dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),  LoadManager.loadImage("Gummi.bmp"), data));
+    dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),  LoadManager.loadImage("Rectangle.bmp"), data));
+    dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),  LoadManager.loadImage("Ellipse.bmp"), data));
 
 
     return dllData;
@@ -90,14 +90,14 @@ void Point::initPointSave()
 {
     pointSave->size = appData->size;
     pointSave->color = appData->color;
-    pointSave->pointsPosition = new Vector[POINTSAVELENGTH];
+    pointSave->pointsPosition = new Vector[POINTSAVELENGTH]{};
 }
 
 void Gummi::initPointSave()
 {
     pointSave->size = appData->size;
     pointSave->color = appData->backGroundColor;
-    pointSave->pointsPosition = new Vector[POINTSAVELENGTH];
+    pointSave->pointsPosition = new Vector[POINTSAVELENGTH]{};
 }
 
 bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
@@ -206,7 +206,7 @@ void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
     HDC outDC = dc;
     if (!dc)
     {
-        if (toollay->isToolFinished) outDC = toollay->lay->getPermanentDC();
+        if (isFinished(toollay)) outDC = toollay->lay->getPermanentDC();
         else                         outDC = toollay->lay->getDCForToolLoad();
     }
 
