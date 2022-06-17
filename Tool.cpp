@@ -23,7 +23,7 @@ void Tool::finishUse()
 HDC Tool::getOutDC()
 {
         if (isFinished(toolLay)) return toolLay->lay->getPermanentDC();
-        else                         return toolLay->lay->getDCForToolLoad();
+        else                         return toolLay->lay->getOutputDC();
 }
 
 
@@ -38,8 +38,8 @@ bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
     assert(data && lay && output);
     Vector pos = data->mousePos;
     firstUse(data, output, pos);
-    (app)->setColor(data->color, lay->lay->getDCForToolLoad(), data->size.x);
-    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay->getDCForToolLoad());
+    (app)->setColor(data->color, lay->lay->getOutputDC(), data->size.x);
+    txEllipse(pos.x - data->size.x, pos.y - data->size.y, pos.x + data->size.x, pos.y + data->size.y, lay->lay->getOutputDC());
 
 
 

@@ -12,12 +12,10 @@
 #include "ProgrammeDate.h"
 #include "commdlg.h"
 
-CLoadManager LoadManager;
+
 
 struct Manager;
 struct Window;
-
-Lay *ActiveLay = NULL;
 
 
 
@@ -63,7 +61,7 @@ const char* getCustomFilePathForSaving(const char* question, const char* fileTyp
 
 struct Window
 {
-	Rect rect;
+    Rect rect = {};
 	Rect originalRect;
 	COLORREF color;
 
@@ -95,6 +93,7 @@ struct Window
 		advancedMode (_advancedMode),
 		reDraw (true)
 	{
+        if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 		resize (rect);
 
 		originalRect = rect;

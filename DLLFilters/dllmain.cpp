@@ -1,11 +1,10 @@
 ﻿// dllmain.cpp : Defines the entry point for the DLL application.
 //DLLFilters
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "TXLib.h"
 #include "dllmain.h"
 //#include "..\DrawBibliothek.h"
-
-TransferData DATA = {};
 
 
 
@@ -33,25 +32,10 @@ DLLExportData *initDLL (AbstractAppData * app)
     TheApp = app;
     
 
-    dlldata.addFunc(createKontrastFilter);
-    dlldata.addFunc(createBrightnessFilter);
-    //dlldata.createKontrastFilter = createKontrastFilter;
-    //dlldata.createBrightnessFilter = createBrightnessFilter;
+    dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+    //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
     return &dlldata;
 }
-
-/*
-DLLData* initDll()
-{
-    DLLData *transferData = new DLLData;
-    transferData->createContrastMenu = createContrastMenu;
-    return transferData;
-}*/
-/*
-Window *createContrastMenu (Rect rect, Vector firstDomain, Vector secondDomain, RGBQUAD(*_algorithm)(RGBQUAD pixel, double FirstValue, double SecondValue), Manager *canvasManager)
-{
-    return new ContrastMenu (rect, firstDomain, secondDomain, _algorithm, canvasManager, TheApp);
-} */
 
 CFilter* createKontrastFilter()
 {

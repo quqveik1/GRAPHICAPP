@@ -1,13 +1,15 @@
 #pragma once
 #include "TXLib.h"
 #include "DrawBibliothek.h"
+#include "LoadManager.h"
 
+/*
 struct TransferData
 {
     HWND MAINWINDOW = NULL;
     HDC MainWindowDC = NULL;
 };
-
+*/
 
 struct AbstractAppData
 {
@@ -19,10 +21,12 @@ struct AbstractAppData
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize) = 0;
     virtual void line(Rect rect, HDC dc) = 0;
     virtual void ellipse(Vector centrPos, Vector halfSize, HDC dc) = 0;
+    virtual void transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2) = 0;
     void (*invert) (RGBQUAD* buf, unsigned int totalSize) = 0;
 
-    struct Manager* canvasManager = NULL;
+    void* canvasManager = NULL;
     COLORREF* currColor = NULL;
+    CLoadManager* loadManager = NULL;
 
     Lay transparentLay;
 

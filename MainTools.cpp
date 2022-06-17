@@ -1,3 +1,4 @@
+#pragma once
 #include "MainTools.h"
 void ToolLay::needRedraw()
 {

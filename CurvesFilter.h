@@ -70,7 +70,7 @@ void Curves::draw()
             txLine (points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, finalDC);
         }
     }
-    activeLay = ActiveLay;
+    //activeLay = ActiveLay;
     
     
     if (activePointNum >= 0 )
@@ -128,6 +128,7 @@ void Curves::algorithm (RGBQUAD *pixel)
 
 void Curves::apply()
 {
+    /*
     for (int x = 0; x < ActiveLay->laySize.x; x++)
 	{
 		for (int y = 0; y < activeLay->laySize.y; y++)
@@ -141,4 +142,5 @@ void Curves::apply()
             (activeLay->layBuf[pixelPos]).rgbBlue =0;
 		}
 	}
+    */
 }

@@ -17,7 +17,7 @@ struct ToolLay
     Rect toolZone = {};
     Vector size = { 1, 1 };//rotates between[0; unlim)
     const char* name = NULL;
-    Tool* tool = NULL;
+    struct Tool* tool = NULL;
     void* toolsData = NULL;
     int thickness = 1;
     

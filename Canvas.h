@@ -2,6 +2,7 @@
 
 #include "DrawBibliothek.h"
 #include "CLay.h"
+#include "MainTools.h"
 
 struct Canvas : Manager
 {
@@ -13,7 +14,7 @@ struct Canvas : Manager
 	bool reCountEnded = false;
 	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
-	Window closeCanvas;
+	struct Window closeCanvas;
 	bool clearBackground = true;
 	Vector canvasCoordinats;
 	Vector canvasSize;
@@ -54,15 +55,18 @@ struct Canvas : Manager
     int drawingModeLastTime = DrawingMode;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
+    CLoadManager* loadManager;
 
-	Canvas (Rect _rect, HDC _closeDC = NULL) :
+
+	Canvas (Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
 		Manager (_rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
 		canvasSize({DCMAXSIZE, DCMAXSIZE}),
 		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor ({.pos = {5, _rect.getSize().y - SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
-		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
-        resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y})
+		scrollBarHor ({.pos = {5, _rect.getSize().y - SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, _loadManager, 0, 500, true, false),
+		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, _loadManager, 0, 500, false, false),
+        resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
+        loadManager (_loadManager)
 	{
 		scrollBarVert.manager = this;
 		scrollBarHor.manager = this;
@@ -98,7 +102,7 @@ struct Canvas : Manager
    
 
     HDC getImageForSaving();
-    CLay* getActiveLay();
+    virtual CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();
     int getActiveLayNum();
     ToolLay* getNewToolLay();

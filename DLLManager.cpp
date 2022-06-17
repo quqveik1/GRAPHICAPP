@@ -15,6 +15,7 @@ bool DLLManager::loadLibs()
 {
     bool result = true;
     FILE* libsList = fopen(pathToDLLList, "r");
+    if (!libsList) printf("%s Не найден\n", pathToDLLList);
     assert(libsList);
 
     for (int i = 0; ; i++)
@@ -58,6 +59,8 @@ bool DLLManager::loadLibs()
                 libs[i + j] = LoadLibrary(fullPath);
                 result *= (int)libs[i + j];
                 if (result) currLen++;
+
+                if (debugMode) printf("Путь к библиотеке: %s\n", fullPath);
             }
         }
         else
@@ -65,7 +68,11 @@ bool DLLManager::loadLibs()
             libs[i] = LoadLibrary(path);
             result *= (int)libs[i];
             if (result) currLen++;
+
+            if (debugMode) printf("Путь к библиотеке: %s\n", path);
         }
     }
+    if (debugMode) printf("Инструменты(DLL) загрузились в exe\n");
+
     return result;
 }

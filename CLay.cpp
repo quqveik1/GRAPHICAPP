@@ -1,3 +1,4 @@
+#pragma once
 #include "CLay.h"
 
 void CLay::createLay(Vector _size /* = DCVECTORSIZE*/)
@@ -61,14 +62,30 @@ int CLay::getCurrentSize()
     return toolLength;
 }
 
-HDC CLay::getDCForToolLoad()
+HDC CLay::getOutputDC()
 {
     return lay.outputLay;
+}
+
+
+RGBQUAD* CLay::getOutputBuf()
+{
+    return lay.outputBuf;
 }
 
 ToolLay** CLay::getToolLays()
 {
     return &(toolLays[0]);
+}
+
+Lay* CLay::getLay()
+{
+    return &lay;
+}
+
+Vector CLay::getLaySize()
+{
+    return lay.laySize;
 }
 
 void CLay::redraw()
@@ -85,4 +102,9 @@ void CLay::redraw()
 HDC CLay::getPermanentDC()
 {
     return lay.lay;
+}
+
+RGBQUAD* CLay::getPermanentBuf()
+{
+    return lay.layBuf;
 }

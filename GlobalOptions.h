@@ -31,6 +31,8 @@ const int MENUBUTTONSWIDTH = 50;
 const int SIDETHICKNESS = 2;
 const int SCROLLBARTHICKNESS = 20;
 
+int debugMode = 1;
+
 
 int GummiThickness = 10;
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "BaseFunctions.h"
 void drawCadre(Rect rect, HDC dc)
 {

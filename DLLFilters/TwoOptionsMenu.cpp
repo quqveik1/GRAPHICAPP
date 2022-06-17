@@ -27,23 +27,12 @@ void TwoOptionsMenu::onClick(Vector mp)
 
 void TwoOptionsMenu::draw()
 {
-    if (canvasManager && canvasManager->activeWindow) 
+    if (canvasManager && canvasManager->getActiveCanvas())
     {
-        activeCanvas = (Canvas *)canvasManager->activeWindow; 
-        txRectangle (0, 0, 1000 ,1000, canvasManager->finalDC);
-    }
-    if (canvasManager && canvasManager->activeWindow)
-    {
-        activeLay = &activeCanvas->lay[activeCanvas->activeLayNum];
-        txSetFillColor (TX_WHITE, canvasManager->finalDC);
-    }
-    if (lastActiveLay != activeLay)
-    {
-        lastActiveLay = activeLay;
-        copyOfTempDC = txCreateCompatibleDC(activeLay->laySize.x, activeLay->laySize.y);
+        activeCanvas = canvasManager->getActiveCanvas(); 
+        activeLay = activeCanvas->getActiveLay();
     }
 
-    
 
     if (clicked == 2) 
     {
@@ -54,13 +43,11 @@ void TwoOptionsMenu::draw()
     if (!clicked && (lastfirstVal != firstVal || lastsecondVal != secondVal))
     {
         useAlgorithm();
-        txAlphaBlend(copyOfTempDC, 0, 0, 0, 0, activeLay->tempLay);
         lastfirstVal = firstVal;
         lastsecondVal = secondVal;
     }
     else
     {
-        txAlphaBlend(activeLay->tempLay, 0, 0, 0, 0, copyOfTempDC);
     }
     
 
@@ -98,11 +85,5 @@ void TwoOptionsMenu::draw()
             confirmFilter = false;
         }
     }
-
-     //txSetAllColors (TX_RED, finalDC);
-    //txRectangle (0, 0, 100, 100, finalDC);
-
-	//txSetFillColor(TX_RED);
-	//txRectangle(300, 300, 400, 400);
 }
 

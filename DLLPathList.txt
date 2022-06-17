@@ -1,1 +1,1 @@
-Debug\DLLTools.tool
+Release\*

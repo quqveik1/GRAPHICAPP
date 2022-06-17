@@ -1,6 +1,8 @@
 ﻿// dllmain.cpp : Defines the entry point for the DLL application.
 //DLLTools
+#pragma once
 #include "dllmain.h"
+
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -19,18 +21,17 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 
-
 DLLToolExportData* initDLL(AbstractAppData* data)
 {
     TheApp = data;
     DLLToolExportData* dllData = new DLLToolExportData(6);
 
-    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),           LoadManager.loadImage("Line.bmp"), data));
-    dllData->addTool(new Point           ("Точка", sizeof(PointSave),          LoadManager.loadImage("Pen.bmp"), data));
-    dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave), LoadManager.loadImage("Vignette.bmp"), data));
-    dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),  LoadManager.loadImage("Gummi.bmp"), data));
-    dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),  LoadManager.loadImage("Rectangle.bmp"), data));
-    dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),  LoadManager.loadImage("Ellipse.bmp"), data));
+    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
+    dllData->addTool(new Point           ("Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
+    dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), data));
+    dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), data));
+    dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
+    dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
 
 
     return dllData;
@@ -207,7 +208,7 @@ void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
     if (!dc)
     {
         if (isFinished(toollay)) outDC = toollay->lay->getPermanentDC();
-        else                         outDC = toollay->lay->getDCForToolLoad();
+        else                         outDC = toollay->lay->getOutputDC();
     }
 
     

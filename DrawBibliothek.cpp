@@ -67,13 +67,13 @@ void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vect
 void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line)
 {
     qassert (finalDC && dc, info);
-	HDC copyDC = NULL;
+	HDC copyOfDC = NULL;
 	//if (test1)printBlt (dc);
-	compressImage (copyDC, finalSize, dc, originalSize, line);
+	compressImage (copyOfDC, finalSize, dc, originalSize, line);
 	//printBlt (dc);
-	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
 	
-    txDeleteDC (copyDC);
+    txDeleteDC (copyOfDC);
 }
 
 
@@ -444,9 +444,12 @@ void Window::deleteButton ()
 void Window::resize (Rect newRect)
 {
     //assert (newRect.isValid());
+
+    if (debugMode) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
 	{
 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+        if (debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
 		txSetAllColors(color, finalDC);
 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);

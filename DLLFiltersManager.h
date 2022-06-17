@@ -12,7 +12,7 @@ struct DLLFiltersManager : DLLManager
     DLLFiltersManager(const char *_pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
         DLLManager (_pathToDLLList, _appData)
     { 
-        fileExtension = "dll";
+        fileExtension = "filter";
     }
 
     void addToManager(Manager* manager);

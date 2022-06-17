@@ -6,6 +6,7 @@
 #include "..\ProgrammeDate.h"
 #include "..\Tool.cpp"
 #include "..\BaseFunctions.cpp"
+#include "..\LoadManager.h"
 
 extern "C" __declspec (dllexport) DLLToolExportData* initDLL(AbstractAppData* data);
 

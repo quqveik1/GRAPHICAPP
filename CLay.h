@@ -12,14 +12,19 @@ struct CLay
     virtual void createLay(Vector _size = DCVECTORSIZE);
     virtual void addToolLay (ToolLay* tool);
 
-    virtual HDC getDCForToolLoad ();
+    virtual HDC getOutputDC ();
+    virtual RGBQUAD* getOutputBuf();
     virtual HDC getPermanentDC();
+    virtual RGBQUAD* getPermanentBuf();
+
 
     virtual ToolLay* getActiveToolLay();
     virtual int getCurrentSize();
     virtual int getActiveToolLayNum();
     virtual void setActiveToolLayNum(int num);
     virtual ToolLay** getToolLays();
+    Lay* getLay();
+    virtual Vector getLaySize();
 
     virtual void needRedraw();
     virtual void noMoreRedraw();

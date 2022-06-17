@@ -33354,3 +33354,2885 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FD77B0 (32-bit), Flags: CMdRe0, Thread: 0x9A84 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x00F9ED2D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00F2A1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x00FA4B08 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:20:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:20:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FD77B0 (32-bit), Flags: CMdRe0, Thread: 0x9A84 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x00F9ED2D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00F2A1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x00FA4B08 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:20:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:20:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x9DD8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:22:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x9DD8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:22:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0xE250 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:23:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0xE250 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:23:18
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x10F24 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:24:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x10F24 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:24:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x115E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:27:17
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010677B0 (32-bit), Flags: CMdRe0, Thread: 0x115E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x0102ED1D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00FBA1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x01034AF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:22:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:27:17
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CC77B0 (32-bit), Flags: CMdRe0, Thread: 0xF744 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x00C8ED0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00C1A1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x00C94AE8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:28:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:28:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7C344878 в функции fpieee_flt() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CC77B0 (32-bit), Flags: CMdRe0, Thread: 0xF744 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C344878 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 1 0x7C344638 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: fpieee_flt()
+# 2 0x00C8ED0D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txSleep() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956)
+
+# 3 0x00C1A1BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+# 4 0x00C94AE8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (658):
+
+    656: 
+    657: 
+=>  658: 	Engine (manager);
+    659: 
+    660: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in double __cdecl `anonymous-namespace'::TX::txSleep(double) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13956):
+
+  13954:     if (wnd) {$ RedrawWindow (wnd, NULL, NULL, RDW_INVALIDATE | RDW_INTERNALPAINT | RDW_UPDATENOW); }
+  13955: 
+=>13956: $   Sleep (ROUND ((time >= 0)? time : 0));
+  13957: 
+  13958: $   _txCanvas_RefreshLock = lock;
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1360):
+
+   1358: 
+   1359: 		
+=> 1360: 		txSleep (0);
+   1361: 
+   1362: 	}
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:28:52, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:28:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C2F2489 в функции strnicoll_l(). Попытка прочесть данные по адресу 0x403A0000 в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004877B0 (32-bit), Flags: CMdRe0, Thread: 0x11858 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C2F2489 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnicoll_l()
+# 1 0x7C2F1E2B in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnicoll_l()
+# 2 0x7C2F2CA2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnlen()
+# 3 0x7C2E2C49 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 4 0x7C2E276F in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 5 0x7C2D9E22 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 6 0x7C2D38A9 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 7 0x7C2CBE35 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 8 0x7C2CB5D6 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 9 0x7C2E637A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vsnprintf_s()
+#10 0x7C2AE9C1 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+#11 0x7C2AE980 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+#12 0x7C2AD8BA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportA()
+#13 0x7C2AD2AF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReport()
+#14 0x7C29A9CA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#15 0x7C29C1FA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtCheckMemory()
+#16 0x7C29C0F1 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#17 0x7C29B4AF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#18 0x7C29B416 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#19 0x7C29DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+#20 0x7C2EC17A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: unlock_file()
+#21 0x7C2BB92A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: putchar()
+#22 0x7C2D1F71 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#23 0x7C2CAB03 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#24 0x7C2CABFE in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#25 0x7C2CB32D in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#26 0x7C2E6252 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vfprintf()
+
+#27 0x00452219 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _vfprintf_l() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (643):
+
+    641:     #else
+    642:     {
+=>  643:         return __stdio_common_vfprintf(_CRT_INTERNAL_LOCAL_PRINTF_OPTIONS, _Stream, _Format, _Locale, _ArgList);
+    644:     }
+    645:     #endif
+
+#28 0x0045524B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: printf() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (958):
+
+    956:         va_list _ArgList;
+    957:         __crt_va_start(_ArgList, _Format);
+=>  958:         _Result = _vfprintf_l(stdout, _Format, NULL, _ArgList);
+    959:         __crt_va_end(_ArgList);
+    960:         return _Result;
+
+#29 0x003D989F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1346):
+
+   1344: 	{
+   1345:         txClearConsole();
+=> 1346:         if (testMode) printf ("FPS: %lf\n", txGetFPS());
+   1347: 		txSetAllColors (BackgroundColor);
+   1348: 		txRectangle (0, 0, 2000, 2000);
+
+#30 0x004547EB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (664):
+
+    662: 
+    663: 
+=>  664: 	Engine (manager);
+    665: 
+    666: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1346):
+
+   1344: 	{
+   1345:         txClearConsole();
+=> 1346:         if (testMode) printf ("FPS: %lf\n", txGetFPS());
+   1347: 		txSetAllColors (BackgroundColor);
+   1348: 		txRectangle (0, 0, 2000, 2000);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:43:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:43:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C2F2489 в функции strnicoll_l(). Попытка прочесть данные по адресу 0x403A0000 в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004877B0 (32-bit), Flags: CMdRe0, Thread: 0x11858 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C2F2489 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnicoll_l()
+# 1 0x7C2F1E2B in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnicoll_l()
+# 2 0x7C2F2CA2 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: strnlen()
+# 3 0x7C2E2C49 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 4 0x7C2E276F in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 5 0x7C2D9E22 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 6 0x7C2D38A9 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 7 0x7C2CBE35 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 8 0x7C2CB5D6 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+# 9 0x7C2E637A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vsnprintf_s()
+#10 0x7C2AE9C1 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+#11 0x7C2AE980 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+#12 0x7C2AD8BA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: VCrtDbgReportA()
+#13 0x7C2AD2AF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtDbgReport()
+#14 0x7C29A9CA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#15 0x7C29C1FA in C:\WINDOWS\SYSTEM32\ucrtbased.dll: CrtCheckMemory()
+#16 0x7C29C0F1 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#17 0x7C29B4AF in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#18 0x7C29B416 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: calloc_base()
+#19 0x7C29DB8A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: malloc_dbg()
+#20 0x7C2EC17A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: unlock_file()
+#21 0x7C2BB92A in C:\WINDOWS\SYSTEM32\ucrtbased.dll: putchar()
+#22 0x7C2D1F71 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#23 0x7C2CAB03 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#24 0x7C2CABFE in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#25 0x7C2CB32D in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _p__commode()
+#26 0x7C2E6252 in C:\WINDOWS\SYSTEM32\ucrtbased.dll: _stdio_common_vfprintf()
+
+#27 0x00452219 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _vfprintf_l() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (643):
+
+    641:     #else
+    642:     {
+=>  643:         return __stdio_common_vfprintf(_CRT_INTERNAL_LOCAL_PRINTF_OPTIONS, _Stream, _Format, _Locale, _ArgList);
+    644:     }
+    645:     #endif
+
+#28 0x0045524B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: printf() at C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h (958):
+
+    956:         va_list _ArgList;
+    957:         __crt_va_start(_ArgList, _Format);
+=>  958:         _Result = _vfprintf_l(stdout, _Format, NULL, _ArgList);
+    959:         __crt_va_end(_ArgList);
+    960:         return _Result;
+
+#29 0x003D989F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1346):
+
+   1344: 	{
+   1345:         txClearConsole();
+=> 1346:         if (testMode) printf ("FPS: %lf\n", txGetFPS());
+   1347: 		txSetAllColors (BackgroundColor);
+   1348: 		txRectangle (0, 0, 2000, 2000);
+
+#30 0x004547EB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (664):
+
+    662: 
+    663: 
+=>  664: 	Engine (manager);
+    665: 
+    666: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:43:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:43:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h, строка: 54, функция: struct HDC__ *__thiscall CLoadManager::loadImage(const char *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!path".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CD77B0 (32-bit), Flags: CMdRe0, Thread: 0xCE48 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00C7D8FE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CLoadManager::loadImage() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h (54):
+
+     52: 	
+     53: 	images[currentImagesAmount].dc = txLoadImage(path);
+=>   54:     if (images[currentImagesAmount].dc == NULL) assert (!path);
+     55: 	images[currentImagesAmount].path = path;
+     56:     images[currentImagesAmount].size = size;
+
+# 1 0x00CA29F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (563):
+
+    561: 
+    562: 	HDC addNewCanvasDC = {};
+=>  563: 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
+    564: 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+    565: 	txDeleteDC(oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:49:35, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:50:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h, строка: 54, функция: struct HDC__ *__thiscall CLoadManager::loadImage(const char *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!path".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CD77B0 (32-bit), Flags: CMdRe0, Thread: 0xE8A8 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00C7D8FE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CLoadManager::loadImage() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.h (54):
+
+     52: 	
+     53: 	images[currentImagesAmount].dc = txLoadImage(path);
+=>   54:     if (images[currentImagesAmount].dc == NULL) assert (!path);
+     55: 	images[currentImagesAmount].path = path;
+     56:     images[currentImagesAmount].size = size;
+
+# 1 0x00CA29F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (563):
+
+    561: 
+    562: 	HDC addNewCanvasDC = {};
+=>  563: 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
+    564: 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+    565: 	txDeleteDC(oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 16 2022 20:49:35, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 16 2022 20:50:37
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008C7798 (32-bit), Flags: CMdRe0, Thread: 0xB964 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0085A640 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0085A08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+# 2 0x00875E49 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00867C0F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x0080F024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x008935AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 15:51:59, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 15:53:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C37798 (32-bit), Flags: CMdRe0, Thread: 0x129FC (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BCA640 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x00BCA08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+
+# 2 0x00BE5E79 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00BD7C0F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x00B7F024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x00C035DE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 15:56:43, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 15:56:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00227798 (32-bit), Flags: CMdRe0, Thread: 0x12BDC (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001BA650 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x001BA08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x001D5E89 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x001C7C1F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x0016F024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x001F35EE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 15:59:26, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 15:59:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13661, функция: bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E56798 (32-bit), Flags: CMdRe0, Thread: 0xD55C (Main), GetLastError(): 13 (Недопустимые данные), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E090C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txBitBlt() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13661)
+
+# 1 0x00DF0049 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CloseButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1534):
+
+   1532: 	//txSetAllColors (color);
+   1533: 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=> 1534: 	txBitBlt (finalDC, 0, 0, 0, 0, dc);
+   1535: }
+   1536: 
+
+# 2 0x00E06214 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222:         
+    223: 
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 3 0x00DF312F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (563):
+
+    561: void Manager::draw ()
+    562: {
+=>  563:     standartManagerDraw (this);	
+    564: }
+    565: 
+
+# 4 0x00E06214 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222:         
+    223: 
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 5 0x00DF312F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (563):
+
+    561: void Manager::draw ()
+    562: {
+=>  563:     standartManagerDraw (this);	
+    564: }
+    565: 
+
+# 6 0x00DA9531 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1279):
+
+   1277:         manager->mousePos = mp;
+   1278:         printf("Engine clicked: %d\n", txMouseButtons());
+=> 1279: 		manager->draw ();
+   1280: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1281: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 7 0x00E2445D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (614):
+
+    612: 
+    613: 
+=>  614: 	Engine (manager);
+    615: 
+    616: 	txEnd ();
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13661):
+
+  13659:     {
+  13660: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13661: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13662: 
+  13663: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1534):
+
+   1532: 	//txSetAllColors (color);
+   1533: 	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=> 1534: 	txBitBlt (finalDC, 0, 0, 0, 0, dc);
+   1535: }
+   1536: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:00:19, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:00:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00487798 (32-bit), Flags: CMdRe0, Thread: 0xF754 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041A650 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0041A08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00435E89 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00427C1F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x003CF024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x004535EE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:02:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:02:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00487798 (32-bit), Flags: CMdRe0, Thread: 0x8AC0 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041A650 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0041A08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00435E89 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00427C1F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x003CF024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x004535EE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:02:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:04:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00487798 (32-bit), Flags: CMdRe0, Thread: 0xA718 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041A650 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0041A08D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00435E89 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00427C1F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x003CF024 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (158):
+
+    156: 		Window (_rect, _color, _dc)
+    157: 	{
+=>  158: 		draw ();
+    159: 		reDraw = false;
+    160: 	}
+
+# 5 0x004535EE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (550):
+
+    548: 		menu->addWindow (colorManager);
+    549: 
+=>  550: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    551: 			colorManager->addWindow(redColor);
+    552: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:02:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:05:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004A8A7C (32-bit), Flags: CMdRe0, Thread: 0x10988 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043AC80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0043A6BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x004560C9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x004481AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x003EF3D4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00473840 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:21:08, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:21:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x004A8A7C (32-bit), Flags: CMdRe0, Thread: 0x12834 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043AC80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0043A6BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x004560C9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x004481AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x003EF3D4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00473840 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:21:08, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:23:44
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001B8A7C (32-bit), Flags: CMdRe0, Thread: 0x11D98 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0014AC80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0014A6BD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x001660C9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x001581AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x000FF3D4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00183840 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:25:20, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:25:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FA8A7C (32-bit), Flags: CMdRe0, Thread: 0x9DF4 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F3B270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x00F3ACAD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00F566B9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00F4879F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x00EEF9C4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00F73E30 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:26:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:26:56
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FA8A7C (32-bit), Flags: CMdRe0, Thread: 0xF738 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F3B270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x00F3ACAD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00F566B9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00F4879F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x00EEF9C4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00F73E30 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:26:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:27:28
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FA8A7C (32-bit), Flags: CMdRe0, Thread: 0xFA20 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F3B270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x00F3ACAD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x00F566B9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x00F4879F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x00EEF9C4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x00F73E30 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:26:46, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:28:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 57, функция: void __cdecl compressImage$(struct DebugInfo,struct HDC__ *&,struct Vector,struct HDC__ *,struct Vector,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, (DWORD)0x00CC0020)".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010B8A7C (32-bit), Flags: CMdRe0, Thread: 0xFCB0 (Main), GetLastError(): 6 (Неверный дескриптор), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0104B260 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (57):
+
+     55:     qassert (newDC, info);
+     56: 
+=>   57: 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
+     58: 
+     59:  }
+
+# 1 0x0104AC9D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (72):
+
+     70: 	HDC copyOfDC = NULL;
+     71: 	//if (test1)printBlt (dc);
+=>   72: 	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+     73: 	//printBlt (dc);
+     74: 	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 2 0x010666A9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (103):
+
+    101: 	if (window->dc)                                                                                
+    102: 	{                                                                                           
+=>  103: 		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    104: 	}                                                                                         
+    105: }
+
+# 3 0x0105878F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (433):
+
+    431: void Window::draw ()
+    432: {
+=>  433: 	standartDraw(this);
+    434: }
+    435: 
+
+# 4 0x00FFF9B4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorButton::ColorButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (159):
+
+    157: 		Window (_rect, _color, _dc)
+    158: 	{
+=>  159: 		draw ();
+    160: 		reDraw = false;
+    161: 	}
+
+# 5 0x01083E20 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (552):
+
+    550: 		menu->addWindow (colorManager);
+    551: 
+=>  552: 			ColorButton *redColor = new ColorButton({.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+    553: 			colorManager->addWindow(redColor);
+    554: 	
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:28:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:28:46
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.cpp, строка: 34, функция: struct HDC__ *__thiscall CLoadManager::loadImage(const char *,struct Vector),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "!fullPath".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x005A4A80 (32-bit), Flags: CMdRe0, Thread: 0xFA40 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00497323 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CLoadManager::loadImage() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.cpp (34):
+
+     32:     if (debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
+     33:     if (debugMode == 4) printBlt(images[currentImagesAmount].dc);
+=>   34:     if (images[currentImagesAmount].dc == NULL) assert(!fullPath);
+     35:     strcpy (images[currentImagesAmount].path, fullPath);
+     36:     images[currentImagesAmount].size = size;
+
+# 1 0x005238C5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (514):
+
+    512: 
+    513: 	HDC addNewCanvasDC = {};
+=>  514: 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
+    515: 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+    516: 	txDeleteDC(oldDC);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 16:46:14, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 16:51:11
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0538A522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00374A7C (32-bit), Flags: CMdRe0, Thread: 0x6BEC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0538A522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x0538C711 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (450):
+
+    448: 	{
+    449: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+=>  450: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    451: 		txSetAllColors(color, finalDC);
+    452: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x0538B7AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (96):
+
+     94: 		reDraw (true)
+     95: 	{
+=>   96: 		resize (rect);
+     97: 
+     98: 		originalRect = rect;
+
+# 3 0x0538B9C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (143):
+
+    141: 		newButtonNum (0),
+    142: 		activeWindow (NULL), 
+=>  143: 		handle (_handle),
+    144: 		startCursorPos({}),
+    145: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x0538EA15 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x0538F9F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x002B8D16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x002F4BF1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.cpp (31):
+
+     29: 
+     30: 
+=>   31:     images[currentImagesAmount].dc = txLoadImage(fullPath);
+     32:     if (debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
+     33:     if (debugMode == 4) printBlt(images[currentImagesAmount].dc);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:30:28, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:40:30
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0538A522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00374A7C (32-bit), Flags: CMdRe0, Thread: 0x6BEC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0538A522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x0538C711 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (450):
+
+    448: 	{
+    449: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+=>  450: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    451: 		txSetAllColors(color, finalDC);
+    452: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x0538B7AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (96):
+
+     94: 		reDraw (true)
+     95: 	{
+=>   96: 		resize (rect);
+     97: 
+     98: 		originalRect = rect;
+
+# 3 0x0538B9C6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (143):
+
+    141: 		newButtonNum (0),
+    142: 		activeWindow (NULL), 
+=>  143: 		handle (_handle),
+    144: 		startCursorPos({}),
+    145: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x0538EA15 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x0538F9F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x002B8D16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x002F4BF1 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:30:28, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:40:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C4BA522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x01084A7C (32-bit), Flags: CMdRe0, Thread: 0x40C0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C4BA522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x7C4BC731 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (450):
+
+    448: 	{
+    449: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+=>  450: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    451: 		txSetAllColors(color, finalDC);
+    452: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x7C4BB7CE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (97):
+
+     95: 	{
+     96:         if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=>   97: 		resize (rect);
+     98: 
+     99: 		originalRect = rect;
+
+# 3 0x7C4BB9E6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (144):
+
+    142: 		newButtonNum (0),
+    143: 		activeWindow (NULL), 
+=>  144: 		handle (_handle),
+    145: 		startCursorPos({}),
+    146: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x7C4BEA35 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x7C4BFA19 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x00FC8DA6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x01004C81 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.cpp (31):
+
+     29: 
+     30: 
+=>   31:     images[currentImagesAmount].dc = txLoadImage(fullPath);
+     32:     if (debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
+     33:     if (debugMode == 4) printBlt(images[currentImagesAmount].dc);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:45:54, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:46:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C4BA522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x01084A7C (32-bit), Flags: CMdRe0, Thread: 0x40C0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C4BA522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x7C4BC731 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (450):
+
+    448: 	{
+    449: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+=>  450: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    451: 		txSetAllColors(color, finalDC);
+    452: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x7C4BB7CE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (97):
+
+     95: 	{
+     96:         if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=>   97: 		resize (rect);
+     98: 
+     99: 		originalRect = rect;
+
+# 3 0x7C4BB9E6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (144):
+
+    142: 		newButtonNum (0),
+    143: 		activeWindow (NULL), 
+=>  144: 		handle (_handle),
+    145: 		startCursorPos({}),
+    146: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x7C4BEA35 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x7C4BFA19 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x00FC8DA6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x01004C81 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:45:54, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:46:23
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C51A522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x007C4A7C (32-bit), Flags: CMdRe0, Thread: 0x28EC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C51A522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x7C51C770 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (453):
+
+    451: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+    452:         if (debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
+=>  453: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    454: 		txSetAllColors(color, finalDC);
+    455: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x7C51B7CE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (97):
+
+     95: 	{
+     96:         if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=>   97: 		resize (rect);
+     98: 
+     99: 		originalRect = rect;
+
+# 3 0x7C51B9E6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (144):
+
+    142: 		newButtonNum (0),
+    143: 		activeWindow (NULL), 
+=>  144: 		handle (_handle),
+    145: 		startCursorPos({}),
+    146: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x7C51EA75 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x7C51FA59 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x00708DA6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x00744D61 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LoadManager.cpp (31):
+
+     29: 
+     30: 
+=>   31:     images[currentImagesAmount].dc = txLoadImage(fullPath);
+     32:     if (debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
+     33:     if (debugMode == 4) printBlt(images[currentImagesAmount].dc);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:52:21, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:52:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x7C51A522 в функции `anonymous namespace'::TX::txCreateDIBSection() в файле C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h на строке 13583. Попытка записать данные по адресу NULL в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x007C4A7C (32-bit), Flags: CMdRe0, Thread: 0x28EC (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7C51A522 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: `anonymous namespace'::TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13583)
+
+# 1 0x7C51C770 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (453):
+
+    451: 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
+    452:         if (debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
+=>  453: 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+    454: 		txSetAllColors(color, finalDC);
+    455: 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+
+# 2 0x7C51B7CE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (97):
+
+     95: 	{
+     96:         if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+=>   97: 		resize (rect);
+     98: 
+     99: 		originalRect = rect;
+
+# 3 0x7C51B9E6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (144):
+
+    142: 		newButtonNum (0),
+    143: 		activeWindow (NULL), 
+=>  144: 		handle (_handle),
+    145: 		startCursorPos({}),
+    146: 		coordinatSysFromHandle (_coordinatSysFromHandle),
+
+# 4 0x7C51EA75 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (36):
+
+     34: 
+     35: 	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+=>   36: 		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
+     37: 		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+     38: 		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+
+# 5 0x7C51FA59 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (36):
+
+     34: 
+     35:     dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+=>   36:     dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+     38: }
+
+# 6 0x00708DA6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x00744D61 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (572):
+
+    570:     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
+    571:     dllManager->loadLibs ();
+=>  572:     dllManager->addToManager(manager);
+    573:     if (debugMode) printf("Фильтры загрузились\n");
+    574: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 17 2022 21:52:21, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 17 2022 21:52:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

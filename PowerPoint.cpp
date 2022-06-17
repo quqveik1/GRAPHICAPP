@@ -1,4 +1,4 @@
-
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "DrawBibliothek.cpp"
 #include "GlobalOptions.h"
@@ -15,9 +15,10 @@
 #include "DLLToolsManager.cpp"
 #include "CLay.cpp"
 #include "MainTools.cpp"
+#include "CanvasManager.h"
+#include "ProgressBar.h"
+#include "LoadManager.cpp"
 
-
-//#include "LoadManager.h"
 int testMode = 1;
 
 
@@ -39,7 +40,7 @@ void invertDC (RGBQUAD* buf, unsigned int totalsize);
 
 
 
-
+CLoadManager LoadManager;
 
 
 
@@ -97,7 +98,7 @@ struct ToolsPalette : Menu
 	}
 
     virtual void drawOneLine(int lineNum);
-    virtual int onClickLine(Vector mp);
+    virtual int  onClickLine(Vector mp);
 };
 
 
@@ -125,27 +126,6 @@ struct ToolMenu : Menu
 
 };
 		
-
-
-
-struct ProgressBar : Window
-{
-	double* totalNum = NULL;
-	double* currentNum = NULL;
-
-	ProgressBar (Rect _rect, COLORREF _color = TX_LIGHTGREEN) :
-		Window(_rect, _color)
-	{}
-
-	void setProgress(double *total, double *current);
-
-	virtual void draw() override;
-};
-
-
-
-
-
 
 
 
@@ -212,30 +192,7 @@ struct CleanButton : Window
 	virtual void onClick (Vector mp) override;
 };
 
-struct CanvasManager : Manager 
-{
-	HDC closeCanvasButton;
-	Canvas *activeCanvas = NULL; 
-	ProgressBar* bar;
-    bool addNewCanvas = false;
-    Vector newCanvasWindowSize = {1000, 700};
 
-
-	CanvasManager (Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar) :
-		Manager (_rect, 10, true, NULL, {}, TX_BLACK), 
-		bar (_bar)
-	{
-		compressImage (closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT}, LoadManager.loadImage("CloseButton4.bmp"), {50, 26}, __LINE__);
-	}
-
-    Canvas* getActiveCanvas();
-    bool addCanvas();
-
-	virtual void draw () override;
-	virtual void onClick(Vector mp) override;
-
-	virtual void deleteButton() override;
-};
 
 struct History : Manager
 {
@@ -259,11 +216,11 @@ struct History : Manager
 
 		for (int i = 0; i < TOOLSNUM; i++)
 		{
-			compressImage (toolsDC[i], {(double)toolHDCSize/2, (double)toolHDCSize/2}, palette->pointers[i]->dc, {palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y}, __LINE__);
+			//compressImage (toolsDC[i], {(double)toolHDCSize/2, (double)toolHDCSize/2}, palette->pointers[i]->dc, {palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y}, __LINE__);
 			 //printBlt (toolsDC[i]);
 		}
 		
-		if (_openCanvas) compressImage (openCanvas, {rect.getSize().x, (double) toolHDCSize}, _openCanvas, {50, 50}, __LINE__);
+		//if (_openCanvas) compressImage (openCanvas, {rect.getSize().x, (double) toolHDCSize}, _openCanvas, {50, 50}, __LINE__);
 	}
 
 	virtual void draw () override;
@@ -299,7 +256,6 @@ struct OpenManager : Window
 {
 	Manager *openManager;
     bool isOpeningAnotherList = false;
-    //bool advancedModeIsSameWithOpenManager;
 
 	OpenManager (Rect _rect, COLORREF _color, Manager *_manager, HDC _dc = NULL, const char *_text = "")	:
 		Window (_rect, _color, _dc, NULL, _text),
@@ -373,7 +329,7 @@ struct NumChange : Manager
 		plusMinusDC (_plusMinusDC),
 		minNum (1),
 		maxNum (20),
-		slider (_sliderRect, _num, _sliderQuadrateScale, 1, 20) 
+		slider (_sliderRect, _num, _sliderQuadrateScale, &LoadManager,  1, 20) 
 	{}
 
 	virtual void draw () override;
@@ -407,7 +363,7 @@ struct BrightnessButton : Manager
 			confirmButton.manager = this;
 			graficScale = (grafic.rect.getSize().y / grafic.rect.getSize().x);	
 
-			compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, LoadManager.loadImage ("Brightness.bmp"), {444, 361}, __LINE__);
+			//compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, LoadManager.loadImage ("Brightness.bmp"), {444, 361}, __LINE__);
 
 			//printBlt (dc);
 		}
@@ -459,6 +415,7 @@ struct AddCanvasButton : TouchButton
     virtual void onClick(Vector mp);
 };
 
+
 struct List : Manager
 {
     int itemHeight = HANDLEHEIGHT;
@@ -478,22 +435,29 @@ struct List : Manager
         isThisItemList = new bool[length]{};
     }
 
-    List (int _length, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
-        Manager ({}, _length, false),
-        mayFewWindowsBeOpenedAtTheSameTime (_mayFewWindowsBeOpenedAtTheSameTime)
-    {
-        items = new OpenManager[length]{};
-        isThisItemList = new bool[length]{};
-    }
-
     void addNewItem (Window *openButton, HDC dc = NULL, const char *text = NULL);
     Vector getNewSubItemCoordinats ();
-    void addSubList (List *subList, const char *ListText);
+    List* addSubList (const char *ListText, int length = NULL);
     void controlRect();
 
     virtual void draw() override;
 	virtual void onClick(Vector mp) override;
-};
+};  
+/*
+struct List : Manager
+{
+    Vector oneItemSize;
+
+
+    List (Vector _pos, int _maxLength, Vector _oneItemSize) :
+        Manager({ .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false),
+        oneItemSize (_oneItemSize)
+    {
+    }
+
+    virtual void draw();
+    virtual void onClick();
+}; */
 
 struct SaveImages : Window
 {
@@ -518,6 +482,7 @@ struct PowerPoint : AbstractAppData
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize);
     virtual void line(Rect rect, HDC dc);
     virtual void ellipse(Vector centrPos, Vector halfSize, HDC dc);
+    virtual void transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2);
     
 };
 
@@ -541,12 +506,6 @@ void printfDCS (const char *str = "");
 int main (int argc, int *argv[])
 {
 	MAINWINDOW = txCreateWindow (SCREENSIZE.x, SCREENSIZE.y);
-
-    TransferData Data;
-    Data.MAINWINDOW = MAINWINDOW;
-    Data.MainWindowDC = txDC ();
-
-
 	Manager *manager = new Manager({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, 20, true, NULL, {}, TX_RED);
 
     ToolSave toolSave = {};
@@ -563,7 +522,7 @@ int main (int argc, int *argv[])
 		statusBar->timeButton->manager = statusBar;
     
 
-	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar);
+	CanvasManager *canvasManager = new CanvasManager ({.pos = {0, 0}, .finishPos = {SCREENSIZE.x, SCREENSIZE.y}}, addNewCanvasDC, statusBar->progressBar, &LoadManager);
 	manager->addWindow (canvasManager);
 
     manager->addWindow(statusBar);
@@ -572,11 +531,16 @@ int main (int argc, int *argv[])
     PowerPoint* appData = new PowerPoint;
     appData->canvasManager = canvasManager;
     appData->currColor = &DrawColor;
+    appData->loadManager = &LoadManager;
     appData->transparentLay.laySize = { 2000, 2000 };
 
+
+    if (debugMode) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager("DLLPathList.txt", appData);
     dllToolsManager->loadLibs();
+    if (debugMode) printf("%p\n", &ToolManager);
     dllToolsManager->addToManager(&ToolManager);
+    if (debugMode) printf("Инструменты загрузились\n");
 
 	ToolsPalette *toolsPallette = new ToolsPalette({.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
@@ -599,21 +563,20 @@ int main (int argc, int *argv[])
 			colorManager->addWindow(greenColor);
 
 	OpenManager *openManager = new OpenManager({.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
-	menu->addWindow (openManager);	
-	
-    //HMODULE filtersLibrary = LoadLibrary ("Debug\\DLLFilters.dll");
-    //assert (filtersLibrary);
+	menu->addWindow (openManager);
+
 
 
     DLLFiltersManager* dllManager = new DLLFiltersManager("DLLPathList.txt", appData);
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
+    if (debugMode) printf("Фильтры загрузились\n");
 
     LaysMenu* laysMenu = new LaysMenu ({.pos = {0, 700}, .finishPos = {BUTTONWIDTH, 1000}}, canvasManager);
     manager->addWindow(laysMenu);
 
-    Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
-    manager->addWindow(curves);
+    //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
+    //manager->addWindow(curves);
 
 	Manager* mainhandle = new Manager({ .pos = {0, 0}, .finishPos = {SCREENSIZE.x, HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
@@ -624,33 +587,28 @@ int main (int argc, int *argv[])
         AddCanvasButton* addNewCanvas = new AddCanvasButton({.pos = {0, 0}, .finishPos = {BUTTONWIDTH, HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindow(addNewCanvas);
 
-        List* openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 5, HANDLEHEIGHT}, 5); 
-        OpenManager* openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
-        mainhandle->addWindow(openWindowsManager);
-
         List* systemList = new List({ BUTTONWIDTH * 2, HANDLEHEIGHT }, { BUTTONWIDTH * 5, HANDLEHEIGHT }, 1);
         OpenManager* openSystemList = new OpenManager({ .pos = {BUTTONWIDTH * 2, 0}, .finishPos = {BUTTONWIDTH * 3, HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
         mainhandle->addWindow(openSystemList);
 
-    manager->addWindow(systemList);
-    SaveImages* saveImages = new SaveImages(canvasManager);
-    systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
+        manager->addWindow(systemList);
+        SaveImages* saveImages = new SaveImages(canvasManager);
+        systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
 
+        List* openWindows = new List ({BUTTONWIDTH, HANDLEHEIGHT}, {BUTTONWIDTH * 5, HANDLEHEIGHT}, 5); 
+        manager->addWindow(openWindows);
+        OpenManager* openWindowsManager = new OpenManager ({.pos = {BUTTONWIDTH, 0}, .finishPos = {BUTTONWIDTH * 2, HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
+        mainhandle->addWindow(openWindowsManager);
         
-    manager->addWindow (openWindows);
         openWindows->addNewItem (menu, NULL, "Цвет");
-
         openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
         openWindows->addNewItem (laysMenu, NULL, "Слои");
         openWindows->addNewItem (toolMenu, NULL, "Инструментальные слои");
-         ///List *filters = new List (openWindows->getNewSubItemCoordinats(), {openWindows->getSize().x, openWindows->getSize().y/openWindows->length}, 3);
-        List *filters = new List (1 + dllManager->currLoadWindowNum, false);
+        List* filters = openWindows->addSubList("Фильтры");
         manager->addWindow (filters);
-
-        //openWindows->addSubList (filters, "Фильтры");
             //filters->addNewItem (dllManager->dllWindows[0], NULL, "Контрастный фильтр");
             //filters->addNewItem (dllManager->dllWindows[1], NULL, "Фильтр яркости");
-            filters->addNewItem (curves, NULL, "Кривые");
+            //filters->addNewItem (curves, NULL, "Кривые");
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
@@ -659,42 +617,13 @@ int main (int argc, int *argv[])
 	txBegin ();
 
 
-
+    if (debugMode == 1) _getch();
 	Engine (manager);
 
 	txEnd ();
 
-	//redColor->deleteButton ();
-	//blueColor->deleteButton ();
-	//blueColor->deleteButton ();
-
-    delete manager;
-    LoadManager.deleteAllImages ();
-	 
-
-	//menu->deleteButton ();
-	//colorManager->deleteButton ();
-	//closeButton->deleteButton ();
-
-	/*
-	txDeleteDC (redColor->dc);
-	txDeleteDC (blueColor->dc);
-	txDeleteDC (greenColor->dc);
-
-	//txDeleteDC (numChange->plusMinusDC);
-	numChange->slider.deleteDC ();
-	brightnessButton->brightnessSlider.deleteDC ();
-	txDeleteDC (brightnessButton->dc);
-	txDeleteDC (brightnessButtonOpen->dc);
-
-	txDeleteDC (cleanButton->dc);
-	txDeleteDC (menu->dc); 
-	txDeleteDC (openManager->dc);
-	txDeleteDC (closeButton->dc);
-	//txDeleteDC (xCoordinat->dc);
-	//xCoordinat->deleteDC ();
-	yCoordinat->deleteDC ();
-	*/
+    //delete manager;
+    //LoadManager.deleteAllImages ();
 	txDisableAutoPause ();
 
 	return 0;
@@ -705,7 +634,7 @@ int main (int argc, int *argv[])
 
 void PowerPoint::setColor (COLORREF color, HDC dc, int thickness)
 {
-    if (testMode) printf("SetColor: %d|", color);
+    if (debugMode) printf("SetColor: %d|", color);
     txSetAllColors (color, dc, thickness);
 }
 
@@ -722,6 +651,11 @@ void PowerPoint::line(Rect rect, HDC dc)
 void PowerPoint::ellipse(Vector centrePos, Vector halfSize, HDC dc)
 {
     txEllipse(centrePos.x - halfSize.x, centrePos.y - halfSize.y, centrePos.x + halfSize.x, centrePos.y + halfSize.y, dc);
+}
+
+void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
+{
+    txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, 0, 0, TRANSPARENTCOLOR);
 }
 
 void PowerPoint::drawOnScreen (HDC dc, bool useAlpha /*=false*/)
@@ -781,7 +715,7 @@ void List::onClick (Vector mp)
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
     {
         //printf ("last: %d, current: %d\n", lastClickedItemNum, clikedButtonNum);
-        if (lastClickedItemNum >= 0 && items[lastClickedItemNum].openManager->advancedMode && !mayFewWindowsBeOpenedAtTheSameTime) clickButton (pointers[lastClickedItemNum], this, mp);
+        if (items[clikedButtonNum].openManager->advancedMode && mayFewWindowsBeOpenedAtTheSameTime) clickButton (pointers[clikedButtonNum], this, mp);
         lastClickedItemNum = clikedButtonNum;
     }
 
@@ -859,13 +793,15 @@ void List::controlRect()
 }
 
 
-void List::addSubList (List *subList, const char *ListText)
+List* List::addSubList (const char *ListText, int newListLength/* = NULL*/)
 {
-    subList->rect = {.pos = getNewSubItemCoordinats (), .finishPos = {getNewSubItemCoordinats ().x + rect.getSize().x, getNewSubItemCoordinats ().y + rect.getSize().y / length * subList->length}};
-    subList->resize(subList->rect);
+    if (!newListLength) newListLength = length;
+    List* subList = new List(getNewSubItemCoordinats(), oneItemSize, newListLength);
 
     isThisItemList[newButtonNum] = true;
     addNewItem (subList, NULL, ListText);
+
+    return subList;
 }
 
 Vector List::getNewSubItemCoordinats ()
@@ -1340,13 +1276,13 @@ void Engine (Manager *manager)
 	for (;;)
 	{
         txClearConsole();
-        if (testMode) printf ("FPS: %lf\n", txGetFPS());
+        if (debugMode) printf ("FPS: %lf\n", txGetFPS());
 		txSetAllColors (BackgroundColor);
 		txRectangle (0, 0, 2000, 2000);
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
-        printf("Engine clicked: %d\n", txMouseButtons());
+        if (debugMode) printf("Engine clicked: %d\n", txMouseButtons());
 		manager->draw ();
 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
@@ -1627,7 +1563,7 @@ void CanvasManager::draw ()
 
 bool CanvasManager::addCanvas()
 {
-    return addWindow(activeCanvas = new Canvas({ .pos = {100, 50}, .finishPos = {newCanvasWindowSize.x + 100, newCanvasWindowSize.y + 50} }, closeCanvasButton));
+    return addWindow(activeCanvas = new Canvas({ .pos = {100, 50}, .finishPos = {newCanvasWindowSize.x + 100, newCanvasWindowSize.y + 50} }, loadManager, closeCanvasButton));
 }
 
 void CanvasManager::onClick(Vector mp)
@@ -1732,7 +1668,7 @@ void Canvas::draw ()
 
     
 
-    if (testMode) printf("Clicked: %d\n", clicked);
+    if (debugMode)  printf("Clicked: %d\n", clicked);
 
     
 
@@ -1847,7 +1783,7 @@ void Canvas::controlTool()
     if (!isFinished)
     {
         if (isDrawingModeChanged()) changeTool();
-        printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
+        if (debugMode) printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
         if (toollay->useTool(currentDate))
         {
             finishTool();
@@ -2094,7 +2030,7 @@ void Canvas::cleanOutputLay()
 {
     for (int i = 0; i < currentLayersLength; i++)
     {
-        //if (lay[i].redrawStatus ()) txBitBlt(lay[i].getDCForToolLoad(), 0, 0, 0, 0, lay[i].getPermanentDC());
+        //if (lay[i].redrawStatus ()) txBitBlt(lay[i].getOutPutDC(), 0, 0, 0, 0, lay[i].getPermanentDC());
         //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
         //lay[i].clean(lay[i].outputLay);
         //txTransparentBlt (lay[i].outputLay, 0, 0, 0, 0, lay[i].lay, 0, 0, TRANSPARENTCOLOR);
