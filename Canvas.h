@@ -52,21 +52,22 @@ struct Canvas : Manager
     bool editingMode = false;
 
     bool activeTool = false;
-    int drawingModeLastTime = DrawingMode;
+    int DrawingModeLastTime;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
     CLoadManager* loadManager;
 
 
-	Canvas (Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
-		Manager (_rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
+	Canvas (CSystemSettings* _systemSettings, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
+		Manager (_systemSettings, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _systemSettings->HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
-		canvasSize({DCMAXSIZE, DCMAXSIZE}),
-		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor ({.pos = {5, _rect.getSize().y - SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, _loadManager, 0, 500, true, false),
-		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, _loadManager, 0, 500, false, false),
+		canvasSize (_systemSettings->DCVECTORSIZE),
+		closeCanvas   (_systemSettings, { .pos = {_rect.getSize().x - _systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
+		scrollBarHor  (_systemSettings, {.pos = {5, _rect.getSize().y - _systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - _systemSettings->SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, _loadManager, 0, 500, true, false),
+		scrollBarVert (_systemSettings, {.pos = {_rect.getSize().x - _systemSettings->SCROLLBARTHICKNESS, _systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - _systemSettings->SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, _loadManager, 0, 500, false, false),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
-        loadManager (_loadManager)
+        loadManager (_loadManager),
+        DrawingModeLastTime (systemSettings->DrawingMode)
 	{
 		scrollBarVert.manager = this;
 		scrollBarHor.manager = this;
@@ -109,6 +110,7 @@ struct Canvas : Manager
     bool isDrawingModeChanged();
     Tool* getActiveTool();
     void setActiveToolLayNum(int num);
+    int getLastNotStartedToolNum();
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

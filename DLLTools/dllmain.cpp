@@ -26,12 +26,12 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     TheApp = data;
     DLLToolExportData* dllData = new DLLToolExportData(6);
 
-    dllData->addTool(new Line            ("Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
-    dllData->addTool(new Point           ("Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
-    dllData->addTool(new Vignette        ((const char*)(3), sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), data));
-    dllData->addTool(new Gummi           ((const char*)(4), sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), data));
-    dllData->addTool(new RectangleTool   ((const char*)(5), sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
-    dllData->addTool(new EllipseTool     ((const char*)(6), sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
+    dllData->addTool(new Line            (&DllSettings, "Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
+    dllData->addTool(new Point           (&DllSettings, "Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
+    dllData->addTool(new Vignette        (&DllSettings, "Виньетка", sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), data));
+    dllData->addTool(new Gummi           (&DllSettings, "Ластик", sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), data));
+    dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
+    dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
 
 
     return dllData;
@@ -91,14 +91,15 @@ void Point::initPointSave()
 {
     pointSave->size = appData->size;
     pointSave->color = appData->color;
-    pointSave->pointsPosition = new Vector[POINTSAVELENGTH]{};
+    pointSave->dllSettings = dllSettings;
+    pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
 }
 
 void Gummi::initPointSave()
 {
     pointSave->size = appData->size;
     pointSave->color = appData->backGroundColor;
-    pointSave->pointsPosition = new Vector[POINTSAVELENGTH]{};
+    pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
 }
 
 bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
@@ -108,6 +109,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     toolLay = lay;
     toolData = (ToolData*)lay->getToolsData();
     pointSave = (PointSave*)lay->getToolsData();
+    
 
     if (clicked == 1)
     {
@@ -126,6 +128,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     if ((!clicked) && isStarted(lay))
     {
         pointSave->isFinished = true;
+        toolLay->needRedraw();
     }
 
 
@@ -220,8 +223,8 @@ void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     assert(toollay);
-    printf("Tool clicked: %d\n", clicked);
-    printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
+    if (app->systemSettings->debugMode) printf("Tool clicked: %d\n", clicked);
+    if (app->systemSettings->debugMode) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
     ToolSave* toolDate = getToolData();
     countDeltaButtons();
@@ -379,7 +382,7 @@ void Tool4Squares::controlRightButton()
 
         toolDate->pos += appData->mousePos - lastTimeMP;
 
-        printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
+        if (app->systemSettings->debugMode) printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     }
 
     if (clicked != 2 && draggedLastTime)

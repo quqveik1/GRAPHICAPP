@@ -62,7 +62,7 @@ void clearDC (HDC dc, COLORREF color /* = TX_BLACK*/)
 	$s;
 	txSetAllColors (color, dc);
 
-	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, dc);
+	//txRectangle (0, 0, sysDCMAXSIZE, DCMAXSIZE, dc);
 }
 
 

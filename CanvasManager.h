@@ -1,22 +1,24 @@
 #pragma once
 #include "Canvas.h"
 #include "ProgressBar.h"
+#include "GlobalOptions.h"
+
 struct CanvasManager : Manager
 {
     HDC closeCanvasButton;
     Canvas* activeCanvas = NULL;
     ProgressBar* bar;
     bool addNewCanvas = false;
-    Vector newCanvasWindowSize = { 1000, 700 };
+    Vector newCanvasWindowSize = { 1000, 800 };
     CLoadManager* loadManager;
 
 
-    CanvasManager(Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar, CLoadManager* _loadManager) :
-        Manager(_rect, 10, true, NULL, {}, TX_BLACK),
+    CanvasManager (CSystemSettings* _systemSettings, Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar, CLoadManager* _loadManager) :
+        Manager(_systemSettings, _rect, 10, true, NULL, {}, TX_BLACK),
         bar(_bar),
         loadManager (_loadManager)
     {
-        compressImage(closeCanvasButton, { MENUBUTTONSWIDTH,  HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
+        compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
     }
 
     virtual Canvas* getActiveCanvas();

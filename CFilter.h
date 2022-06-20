@@ -10,8 +10,8 @@ struct CFilter : Manager
     const char* name = NULL;
     AbstractAppData* app = NULL;
 
-    CFilter(Rect _rect, int _length, AbstractAppData* _app, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}) :
-        Manager(_rect, _length, _advancedMode, _dc, _handle),
+    CFilter(CSystemSettings* _systemsettings, Rect _rect, int _length, AbstractAppData* _app, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}) :
+        Manager(_systemsettings, _rect, _length, _advancedMode, _dc, _handle),
         app (_app)
     {
     }

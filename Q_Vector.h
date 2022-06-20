@@ -12,6 +12,8 @@ struct Vector
     explicit operator double ();
 
 
+
+    Vector getNullVector() { return Vector { 0,0 }; };
     void print (const char *str = NULL);
 };
 

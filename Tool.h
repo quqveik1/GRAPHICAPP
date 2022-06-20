@@ -5,6 +5,8 @@
 #include "TransferStructure.h"
 #include "CLay.h"
 #include "MainTools.h"
+#include "DllSettings.h"
+
 struct Tool;
 struct ToolLay;
 
@@ -61,16 +63,18 @@ struct Tool
     int clicked = 0;
 
     ToolData* toolData = NULL;
+    ÑDllSettings* dllSettings;
 
     AbstractAppData* app = NULL;
     ToolLay* toolLay = NULL;
     ProgrammeDate* appData = NULL;
 
-    Tool(const char* _name, const int _ToolSaveLen, HDC _iconDC = NULL, AbstractAppData* _app = NULL) :
+    Tool(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _iconDC = NULL, AbstractAppData* _app = NULL) :
         name(_name),
         iconDC(_iconDC),
         ToolSaveLen(_ToolSaveLen),
-        app(_app)
+        app(_app),
+        dllSettings (_dllSettings)
     {}
 
 

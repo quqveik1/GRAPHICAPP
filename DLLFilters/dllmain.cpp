@@ -32,20 +32,11 @@ DLLExportData *initDLL (AbstractAppData * app)
     TheApp = app;
     
 
-    dlldata.addFilter (new KontrastMenu  ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+    dlldata.addFilter (new KontrastMenu  (app->systemSettings, { .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
     //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
     return &dlldata;
 }
 
-CFilter* createKontrastFilter()
-{
-    return new KontrastMenu ({ .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, {-256, 256}, TheApp);
-} 
-
-CFilter* createBrightnessFilter()
-{
-    return new BrightnessMenu ({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, {-256, 256}, TheApp);    
-}
 
 
 

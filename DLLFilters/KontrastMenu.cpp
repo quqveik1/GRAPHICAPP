@@ -13,9 +13,9 @@ void KontrastMenu::useAlgorithm()
             int pixelPos = (int)(laySize.y - y) * ((int)(laySize.x - 1)) + x;
             RGBQUAD pixel = ((activeLay->getPermanentBuf()))[pixelPos];
 
-            if (   pixel.rgbRed == txExtractColor(TRANSPARENTCOLOR, TX_RED)
-                && pixel.rgbGreen == txExtractColor(TRANSPARENTCOLOR, TX_GREEN)
-                && pixel.rgbBlue == txExtractColor(TRANSPARENTCOLOR, TX_BLUE))
+            if (   pixel.rgbRed == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_RED)
+                && pixel.rgbGreen == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_GREEN)
+                && pixel.rgbBlue == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_BLUE))
             {
                 pixel = { 0, 0, 0, 0 };
             }

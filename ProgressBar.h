@@ -8,8 +8,8 @@ struct ProgressBar : Window
     double* totalNum = NULL;
     double* currentNum = NULL;
 
-    ProgressBar(Rect _rect, COLORREF _color = TX_LIGHTGREEN) :
-        Window(_rect, _color)
+    ProgressBar(CSystemSettings* _systemSettings, Rect _rect, COLORREF _color = TX_LIGHTGREEN) :
+        Window(_systemSettings, _rect, _color)
     {}
 
     void setProgress(double* total, double* current);

@@ -1,16 +1,26 @@
 #pragma once
 #include "CLay.h"
 
-void CLay::createLay(Vector _size /* = DCVECTORSIZE*/)
+void CLay::createLay(CSystemSettings* _systemSetings, Vector _size /* = DCVECTORSIZE*/)
 {
-    assert(_size > 0);
-    lay.createLay(_size);
+    assert(_systemSetings);
+    systemSetings = _systemSetings;
+
+    toolLays = new ToolLay* [systemSetings->ONELAYTOOLSLIMIT];
+    for (int i = 0; i < systemSetings->ONELAYTOOLSLIMIT; i++)
+    {
+        toolLays[i] = new ToolLay;
+    }
+
+    if (_size == _size.getNullVector()) _size = systemSetings->DCVECTORSIZE;
+
+    lay.createLay(systemSetings, _size);
 }
 
 
 void CLay::addToolLay(ToolLay* tool)
 {
-    assert(toolLength < ONELAYTOOLSLIMIT);
+    assert(toolLength < systemSetings->ONELAYTOOLSLIMIT);
 
     toolLength++;
     activeToolNum = toolLength - 1;
@@ -43,6 +53,7 @@ bool CLay::redrawStatus()
 
 ToolLay* CLay::getActiveToolLay()
 {
+    if (activeToolNum < 0) return NULL;
     return toolLays[activeToolNum];
 }
 

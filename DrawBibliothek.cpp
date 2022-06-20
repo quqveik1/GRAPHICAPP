@@ -4,7 +4,7 @@
 
 
 
-void txSetAllColors$ (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+void txSetAllColors$ (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int thickness/* = 1*/)
 {
     qassert (dc, info);
 	txSetFillColor (color, dc); 
@@ -92,7 +92,7 @@ void standartDraw$ (DebugInfo info, Window *window)
 	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
                                                                                            
                                                                                           
-	if (window->finalDC) txSetAllColors (TextColor, window->finalDC);                                     
+	if (window->finalDC) txSetAllColors (window->systemSettings->TextColor, window->finalDC);                                     
 	txSetTextAlign (TA_CENTER, window->finalDC);
     selectFont ("Arial", window->font, window->finalDC);
     txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
@@ -242,35 +242,7 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 
 
 
-void Lay::createLay	(Vector _laySize)
-{
-    //qassert (manager, info);
-    laySize = _laySize;
-	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
-    clean();
-    tempLay = txCreateDIBSection (laySize.x, laySize.y, &tempBuf);
-    clean(tempLay);
-    outputLay = txCreateDIBSection (laySize.x, laySize.y, &outputBuf);
-    clean(outputLay);
 
-    /*
-	for (int y = 0; y < laySize.x; y++)
-	{
-		for (int x = 0; x < laySize.y; x++)
-		{
-			RGBQUAD* copyLay = &layBuf[x + y * DCMAXSIZE];
-			RGBQUAD* copyTemp = &tempBuf[x + y * DCMAXSIZE];
-			RGBQUAD* copyOutput = &outputBuf[x + y * DCMAXSIZE];
-		}
-	}
-    */
-}
-
-
-int Lay::getDownUpCoordinats (int x, int y)
-{
-    return (int) (x + (laySize.y - y) * laySize.x); 
-}
 
 
 void swap$ (DebugInfo info, int &x0, int &y0)
@@ -282,112 +254,6 @@ void swap$ (DebugInfo info, int &x0, int &y0)
 }
 
 
-void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD *buf/*=NULL*/, COLORREF drawColor /*=DrawColor*/) 
-{
-    if (x0 < 0) x0 = 1;
-    if (x1 < 0) x1 = 1;
-    if (y0 < 0) y0 = 1;
-    if (y1 < 0) y1 = 1;
-
-
-    if (buf == NULL) buf = layBuf;
-	bool steep = false;
-	if (abs (x0 - x1) < abs (y0 - y1)) 
-	{
-		swap (x0, y0);
-		swap (x1, y1);
-		steep = true;
-	}
-	if (x0 > x1)
-	{
-		swap (x0, x1);
-		swap (y0, y1);
-	}
-	int dx = x1-x0;
-	int dy = y1-y0;
-	int derror2 = abs (dy) * 2;
-	int error2 = 0;
-	int y = y0;
-
-	for (int x = x0; x <= x1; x++)
-	{
-		if (steep) 
-		{
-			RGBQUAD* color = &buf[getDownUpCoordinats(y, x)];
-			color->rgbRed = txExtractColor (drawColor, TX_RED);
-			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
-			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
-			color->rgbReserved = 255;
-		} 
-		else 
-		{
-			RGBQUAD* color = &buf[getDownUpCoordinats(x, y)];
-			color->rgbRed = txExtractColor (drawColor, TX_RED);
-			color->rgbGreen = txExtractColor (drawColor, TX_GREEN);
-			color->rgbBlue = txExtractColor (drawColor, TX_BLUE);
-			color->rgbReserved = 255;
-		}
-		error2 += derror2;
-
-		if (error2 > dx) 
-		{
-			y += (y1 > y0 ? 1 : -1);
-
-			error2 -= dx * 2;
-		}
-	}
-}
-
-void Lay::clean(HDC dc/* = NULL*/)
-{
-    if (!dc) dc = lay;
-    txSetAllColors(TRANSPARENTCOLOR, dc);
-    txRectangle (0, 0, laySize.x, laySize.y, dc);
-}
-
-
-void Lay::rectangle (int x0, int y0, int x1, int y1)
-{
-    if (x0 > x1) swap (x0, x1);
-    if (y0 > y1) swap (y0, y1);
-    COLORREF currColor = txGetColor (lay);
-
-    for (int x = x0; x <= x1; x++)
-    {
-        //line (x, y0, x, y1);
-        
-        for (int y = y0; y <= y1; y++)
-        {
-            RGBQUAD *pixel = &layBuf[getDownUpCoordinats(x, y)];
-            pixel->rgbRed = txExtractColor (currColor, TX_RED);
-            pixel->rgbGreen = txExtractColor (currColor, TX_GREEN);
-            pixel->rgbBlue = txExtractColor (currColor, TX_BLUE);
-            pixel->rgbReserved = 255;
-        }
-    }
-   // txSetAllColors (TX_RED, lay);
-    //txRectangle (x0, y0, x1, y1, lay);
-    //printBlt (lay);
-}
-
-
-void Lay::circle (int x0, int y0, int r, COLORREF color)
-{
-    
-	for (double t = 0; t <= 1; t += 0.001)
-	{
-		double x = x0 - r + t * 2 *(r);
-		int y1 = sqrt (r * r - (x - x0) * (x - x0)) + y0;
-		int y2 = -sqrt (r * r - (x - x0) * (x - x0)) + y0;
-
-		//printf ("x: %lf y = {%lf, %lf}\n", x, y1, y2);
-		//txSetAllColors (TX_RED, lay);
-		//txSetColor (TX_RED, 2);
-		//txLine (x, y1, x, y2, lay);
-		//if (x >= 0 && y1 >= 0 && y2 >= 0)
-		line (x, y1, x, y2, NULL, color);
-	}
-}
 
 
 Window* Manager::getActiveWindow ()
@@ -445,15 +311,15 @@ void Window::resize (Rect newRect)
 {
     //assert (newRect.isValid());
 
-    if (debugMode) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
+    if (systemSettings->debugMode) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
 	{
 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
-        if (debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
+        if (systemSettings->debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
 		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
 		txSetAllColors(color, finalDC);
 		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
-		if (test1) printBlt(finalDC);
+		if (systemSettings->debugMode == 5) printBlt(finalDC);
 	}
     rect = newRect;
 }
@@ -466,7 +332,7 @@ void Window::reInit ()
 			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
 			txSetAllColors(color, finalDC);
 			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
-			if (test1) printBlt(finalDC);
+			if (systemSettings->debugMode == 5) printBlt(finalDC);
 	}
 
 	originalRect = rect;
@@ -491,7 +357,7 @@ void Window::setStartRect (Vector pos, Vector finishPos)
 Vector Window::getRelativeMousePos (bool coordinatsWithHandle)
 {
     POINT mousePos = {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};
-    ScreenToClient (MAINWINDOW, &mousePos); 
+    ScreenToClient (systemSettings->MAINWINDOW, &mousePos);
     return {(double)mousePos.x, (double)mousePos.y};
 }
 
@@ -517,16 +383,18 @@ Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)
     return coordinats;
 }
 
-Vector windowMousePos(bool isThisMainFile /* = true*/)
+/*
+Vector windowMousePos(bool isThisMainFile /* = true)
 {
     POINT mousePos = {(double)txMouseX(), (double)txMouseY()};
 
     if (!isThisMainFile)
     {
-        ScreenToClient (MAINWINDOW, &mousePos);
+        ScreenToClient (systemSettings->MAINWINDOW, &mousePos);
     }
     return {(double)mousePos.x, (double)mousePos.y};
 }
+*/
 
 Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 {

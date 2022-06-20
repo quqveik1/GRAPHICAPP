@@ -20,16 +20,16 @@ struct Slider : Manager
 	bool isWhite;
     CLoadManager* loadManager = NULL;
 
-	Slider (Rect _mainRect, double *_num, double _quadrateScale, CLoadManager* _loadManager, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true, bool _isWhite = false) :
-		Manager (_mainRect, TX_BLACK),
-		arrow1 ({}, TX_RED),
-		arrow2 ({}, TX_RED),
+	Slider (CSystemSettings* _systemSettings, Rect _mainRect, double *_num, double _quadrateScale, CLoadManager* _loadManager, int _minNum = 0, int _maxNum = 10, bool _horizontalMode = true, bool _isWhite = false) :
+		Manager (_systemSettings, _mainRect, TX_BLACK),
+		arrow1 (_systemSettings, {}, TX_RED),
+		arrow2 (_systemSettings, {}, TX_RED),
 		num (_num),
 		minNum (_minNum),
 		maxNum (_maxNum),
 		horizontalMode (_horizontalMode),
 		cursorStartPosition ({}),
-		sliderQuadrate ({}, TX_WHITE),
+		sliderQuadrate (_systemSettings, {}, TX_WHITE),
 		tempNum (0),
 		quadrateScale (_quadrateScale),
 		isWhite (_isWhite),

@@ -61,14 +61,16 @@ const char* getCustomFilePathForSaving(const char* question, const char* fileTyp
 
 struct Window
 {
+    CSystemSettings* systemSettings = NULL;
+
     Rect rect = {};
 	Rect originalRect;
 	COLORREF color;
 
 	const char *text;
-    int format = DT_CENTER;
-    int font = MainFont;
-    int sideThickness = SIDETHICKNESS;
+    int format;
+    int font;
+    int sideThickness;
 
 	bool isClicked;
 	HDC dc;
@@ -80,10 +82,13 @@ struct Window
 	bool advancedMode;
 	bool reDraw;
 
+    CLoadManager* loadManager;
+
     Vector mousePos = {};
     int clicked = false;
 
-    Window (Rect _rect = {}, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+    Window (CSystemSettings* _systemSettings, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true, CLoadManager* _loadManager = NULL) :
+        systemSettings (_systemSettings),
 		rect (_rect),
 		color(_color),
 		manager (_manager),
@@ -91,10 +96,19 @@ struct Window
 		isClicked (false), 
 		dc (_dc),
 		advancedMode (_advancedMode),
-		reDraw (true)
+		reDraw (true),
+        loadManager (_loadManager), 
+        font (_systemSettings->MainFont),
+        sideThickness (_systemSettings->SIDETHICKNESS),
+        format (_systemSettings->TEXTFORMAT)
+
 	{
-        if (debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+        if (systemSettings->debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+
+        if (!color) color = systemSettings->MenuColor;
 		resize (rect);
+
+        if (!color) color = systemSettings->MenuColor;
 
 		originalRect = rect;
 	} 
@@ -135,20 +149,20 @@ struct Manager : Window
 	bool coordinatSysFromHandle;
     bool HideIfIsNotActive;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
-		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+	Manager (CSystemSettings* _systemSettings,  Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false, CLoadManager* _loadManager = NULL) :
+		Window (_systemSettings, _rect, _color, _dc, NULL, "", _advancedMode, _loadManager),
+        handle (_systemSettings, _handle),
 		length (_length),
-		pointers (new Window*[_length]{}),
+		pointers (new Window* [_length]{}),
 		newButtonNum (0),
-		activeWindow (NULL), 
-		handle (_handle),
+		activeWindow (NULL),
 		startCursorPos({}),
 		coordinatSysFromHandle (_coordinatSysFromHandle),
         HideIfIsNotActive (_HideIfIsNotActive) 
 	{
 		handle.manager = this;
-		handle.rect.finishPos.x = DCMAXSIZE * 10;
-		handle.color = MenuColor;
+		handle.rect.finishPos.x = systemSettings->DCMAXSIZE * 10;
+		handle.color = systemSettings->MenuColor;
 	}
 
     ~Manager()

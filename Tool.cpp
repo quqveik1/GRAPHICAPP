@@ -23,7 +23,7 @@ void Tool::finishUse()
 HDC Tool::getOutDC()
 {
         if (isFinished(toolLay)) return toolLay->lay->getPermanentDC();
-        else                         return toolLay->lay->getOutputDC();
+        else                     return toolLay->lay->getOutputDC();
 }
 
 

@@ -5,8 +5,8 @@
 
 struct DLLToolsManager : DLLManager
 {
-    DLLToolsManager(const char* _pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
-        DLLManager (_pathToDLLList, _appData)
+    DLLToolsManager(CSystemSettings* _systemSetings, const char* _pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
+        DLLManager (_systemSetings, _pathToDLLList, _appData)
     {
         fileExtension = "tool";
     }

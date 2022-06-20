@@ -3,7 +3,7 @@
 
 void PointSave::addPoint(Vector pos)
 {
-    if (currentLength >= POINTSAVELENGTH - 1) return;
+    if (currentLength >= dllSettings->POINTSAVELENGTH - 1) return;
     pointsPosition[currentLength] = pos;
     currentLength++;
 }

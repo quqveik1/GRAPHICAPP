@@ -18,6 +18,8 @@ struct TwoOptionsMenu : CFilter
     double lastfirstVal = 0;
 	double lastsecondVal = 0;
 
+    bool confirmFilter = false;
+
 
     CLay *activeLay = NULL;
     Lay *lastActiveLay = NULL;
@@ -32,11 +34,11 @@ struct TwoOptionsMenu : CFilter
 
     
 
-	TwoOptionsMenu(Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
-		CFilter (_rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, HANDLEHEIGHT} }),
-		upSlider({ .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
-		downSlider({ .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
-		confirmButton({ .pos = {240, 40}, .finishPos = {325, 60} }),
+	TwoOptionsMenu(CSystemSettings* _systemSettings, Rect _rect, Vector firstDomain, Vector secondDomain, AbstractAppData *_app = NULL)	:
+		CFilter (_systemSettings, _rect, 3, _app, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x,_systemSettings->HANDLEHEIGHT} }),
+		upSlider(_systemSettings, { .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, _app->loadManager, firstDomain.x, firstDomain.y, true, true),
+		downSlider(_systemSettings, { .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, _app->loadManager, secondDomain.x, secondDomain.y, true, true),
+		confirmButton(_systemSettings, { .pos = {240, 40}, .finishPos = {325, 60} }),
         canvasManager ((CanvasManager*)_app->canvasManager),
         loadManager (_app->loadManager)
 	{

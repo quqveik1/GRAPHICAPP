@@ -67,11 +67,11 @@ bool Filter::reCount(bool& nonConfirm, double Brightness, double IncomeBrightnes
     if (!screen) return 1;
 
 	nonConfirm = true;
-	for (int x = 0; x < DCMAXSIZE; x++)
+	for (int x = 0; x < SystemSettings.DCMAXSIZE; x++)
 	{
-		for (int y = 0; y < DCMAXSIZE; y++)
+		for (int y = 0; y < SystemSettings.DCMAXSIZE; y++)
 		{
-			int pixelPos = (int) (DCMAXSIZE - y) * ((int)(DCMAXSIZE - 1)) + x;
+			int pixelPos = (int) (SystemSettings.DCMAXSIZE - y) * ((int)(SystemSettings.DCMAXSIZE - 1)) + x;
 			RGBQUAD pixel = (*screen)[pixelPos];
 
 			assert(algorithm);

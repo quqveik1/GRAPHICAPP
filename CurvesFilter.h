@@ -16,8 +16,8 @@ struct Curves : Manager
     int permutation[256];
     Rect confirmButton;
 
-    Curves (Rect _rect, HDC _dc) :
-        Manager (_rect, 3, false, _dc, {.pos  = {0, 0}, .finishPos = {rect.getSize().x, 29}}),
+    Curves (CSystemSettings* _systemsettings, Rect _rect, HDC _dc) :
+        Manager (_systemsettings, _rect, 3, false, _dc, {.pos  = {0, 0}, .finishPos = {rect.getSize().x, 29}}),
         graficrect ({.pos = {55, 65}, .finishPos = {310, 320}}),
         confirmButton ({.pos = {360, 65}, .finishPos = {435, 80}})
     {
