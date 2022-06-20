@@ -97,7 +97,8 @@ void Point::initPointSave()
 
 void Gummi::initPointSave()
 {
-    pointSave->size = appData->size;
+    Vector size = { (double)dllSettings->GummiThickness, (double)dllSettings->GummiThickness };
+    pointSave->size = size;
     pointSave->color = appData->backGroundColor;
     pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
 }

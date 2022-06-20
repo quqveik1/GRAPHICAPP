@@ -19,6 +19,7 @@
 #include "ProgressBar.h"
 #include "LoadManager.cpp"
 #include "Lay.cpp"
+#include "GlobalOptions.cpp"
 
 
 CSystemSettings SystemSettings;
@@ -120,7 +121,7 @@ struct ToolMenu : Menu
         canvasManager(_canvasManager)
     {
         loadManager = _loadManager;
-        emptyToolDC = loadManager->loadImage("addToolButton.bmp");
+        emptyToolDC = loadManager->loadImage("addToolButton2.bmp");
 
         txSetAllColors(color, finalDC);
         txRectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
@@ -521,10 +522,13 @@ void printfDCS (const char *str = "");
 
 int main (int argc, int *argv[])
 {
+    setSystemSettings(&SystemSettings, "Settings\\Settings.txt");
 
-    Vector SCREENSIZE = { 1900, 1000 };
-    SystemSettings.MAINWINDOW = txCreateWindow (1900, 1000);
-	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = {1900, 1000}}, 20, true, NULL, {}, TX_RED);
+    _txWindowStyle = SystemSettings.WindowStyle;
+
+    SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+
+	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
     ToolSave toolSave = {};
 
@@ -533,14 +537,14 @@ int main (int argc, int *argv[])
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
 
-	StatusBar* statusBar = new StatusBar(&SystemSettings, {.pos = {0, 1000 - 20}, .finishPos = {1900, 1000} } , TX_BLUE);
+	StatusBar* statusBar = new StatusBar(&SystemSettings, {.pos = {0, SystemSettings.SizeOfScreen.y - 20}, .finishPos = SystemSettings.SizeOfScreen } , TX_BLUE);
 		statusBar->progressBar =  new ProgressBar (&SystemSettings, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
 		statusBar->progressBar->manager = statusBar;
 		statusBar->timeButton = new TimeButton(&SystemSettings, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
     
 
-        CanvasManager* canvasManager = new CanvasManager(&SystemSettings, { .pos = {0, 0}, .finishPos = {1900, 1000} }, addNewCanvasDC, statusBar->progressBar, &LoadManager);
+    CanvasManager* canvasManager = new CanvasManager(&SystemSettings, { .pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, addNewCanvasDC, statusBar->progressBar, &LoadManager);
 	manager->addWindow (canvasManager);
 
     manager->addWindow(statusBar);
@@ -554,7 +558,7 @@ int main (int argc, int *argv[])
 
 
     if (SystemSettings.debugMode) printf("Инструменты начали загружаться\n");
-    DLLToolsManager* dllToolsManager = new DLLToolsManager(&SystemSettings, "DLLPathList.txt", appData);
+    DLLToolsManager* dllToolsManager = new DLLToolsManager(&SystemSettings, "Settings\\DLLPathList.txt", appData);
     dllToolsManager->loadLibs();
     if (SystemSettings.debugMode) printf("%p\n", &ToolManager);
     dllToolsManager->addToManager(&ToolManager);
@@ -565,11 +569,11 @@ int main (int argc, int *argv[])
     ToolMenu* toolMenu = new ToolMenu(&SystemSettings, canvasManager, &LoadManager);
     manager->addWindow(toolMenu);
 
-	Manager *menu = new Manager(&SystemSettings, {.pos = {1488, 100}, .finishPos = {1900, 400}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	Manager *menu = new Manager(&SystemSettings, {.pos = {SystemSettings.SizeOfScreen.x - 712, 300}, .finishPos = {SystemSettings.SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
 	Manager *colorManager = new Manager(&SystemSettings, {.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
-		menu->addWindow (colorManager);
+	    menu->addWindow (colorManager);
 
 			ColorButton *redColor = new ColorButton(&SystemSettings, {.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
@@ -585,7 +589,7 @@ int main (int argc, int *argv[])
 
 
 
-    DLLFiltersManager* dllManager = new DLLFiltersManager(&SystemSettings, "DLLPathList.txt", appData);
+    DLLFiltersManager* dllManager = new DLLFiltersManager(&SystemSettings, "Settings\\DLLPathList.txt", appData);
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
@@ -644,9 +648,9 @@ int main (int argc, int *argv[])
     //LoadManager.deleteAllImages ();
 	txDisableAutoPause ();
 
+    saveSystemSettings(&SystemSettings, "Settings\\Settings.txt");
+
 	return 0;
-
-
 }
 
 
@@ -1117,6 +1121,7 @@ int ToolMenu::onClickLine(Vector mp)
 
     return 1;
 }
+
 
 
 
@@ -2258,7 +2263,6 @@ void Canvas::setCurrentData()
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = systemSettings->DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
-    currentDate->gummiThickness = systemSettings->GummiThickness;
     currentDate->backGroundColor = systemSettings->TRANSPARENTCOLOR;
 }
 

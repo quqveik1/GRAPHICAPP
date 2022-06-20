@@ -1,48 +1,67 @@
 #pragma once
 #include "Q_Vector.h"
+#include <stdio.h>
+
+
 
 
 struct CSystemSettings
 {
+    int WindowStyle = _txWindowStyle;
 
     const int DELTACLOCKTIME = 100;
 
     HWND MAINWINDOW = NULL;
 
-    //double SizeKForCloseCanvas = 0.05;
-    COLORREF MenuColor = RGB(45, 45, 45);
-    COLORREF SecondMenuColor = RGB(30, 30, 30);
-    COLORREF TextColor = RGB(255, 255, 255);
-    COLORREF BackgroundColor = TX_BLACK;
-    COLORREF DrawColor = TX_RED;
-    const COLORREF TRANSPARENTCOLOR = RGB(57, 57, 57);
+    COLORREF MenuColor = NULL;
+    COLORREF SecondMenuColor = NULL;
+    COLORREF TextColor = NULL;
+    COLORREF BackgroundColor = NULL;
+    COLORREF DrawColor = NULL;
+    COLORREF TRANSPARENTCOLOR = NULL;
 
 
-    const int ONEMENUBUTTONSNUM = 10; //количество пунктов в структрах MENU
-    const int ONELAYTOOLSLIMIT = 100;
+    int ONEMENUBUTTONSNUM = NULL; //количество пунктов в структрах MENU
+    int ONELAYTOOLSLIMIT = NULL;
 
 
-    int MainFont = 20;
-    const char* FONTNAME = "Arial";
-    const int TEXTFORMAT = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
+    int MainFont = NULL;
+    const char* FONTNAME = NULL;
+    int TEXTFORMAT = NULL;// = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
 
-    const double HANDLEHEIGHT = 26;
-    const double BUTTONWIDTH = 50;
-    const double BUTTONHEIGHT = 50;
-    const double MENUBUTTONSWIDTH = 50;
-    const double SIDETHICKNESS = 2;
-    const double SCROLLBARTHICKNESS = 20;
+    double HANDLEHEIGHT = NULL;
+    double BUTTONWIDTH = NULL;
+    double BUTTONHEIGHT = NULL;
+    double MENUBUTTONSWIDTH = NULL;
+    double SIDETHICKNESS = NULL;
+    double SCROLLBARTHICKNESS = NULL;
 
-    int debugMode = 1;
+    int debugMode = NULL;
 
+    int DrawingMode = NULL;
+    int TOOLSNUM = NULL;
 
-    int GummiThickness = 10;
+    Vector SizeOfScreen = {};
+    int DCMAXSIZE = NULL;
+    Vector DCVECTORSIZE = {};
 
-    int DrawingMode = 1;
-    const int TOOLSNUM = 5;
-
-    const Vector SCREENSIZE = { 1900, 900 };
-    const int DCMAXSIZE = 1000;
-    const Vector DCVECTORSIZE = { 1000, 1000 };
-    int test1 = 0;
+    const char* pathForSettings;
 };
+
+
+
+void setSystemSettings(CSystemSettings* systemSettings, const char* path);
+
+void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);
+void setIntSettings(FILE* ssFile, int* integer, const char* name);
+void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
+void setStringSettings(FILE* ssFile, const char** str, const char* name);
+
+
+void saveSystemSettings(CSystemSettings* systemSettings, const char* path);
+
+void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
+void saveIntSettings(FILE* ssFile, int* integer, const char* name);
+void saveDoubleSettings(FILE* ssFile, double* integer, const char* name);
+void saveStringSettings(FILE* ssFile, const char** str, const char* name);
+

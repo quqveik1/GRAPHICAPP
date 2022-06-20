@@ -36730,3 +36730,623 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x01074028 (32-bit), Flags: CMdRe0, Thread: 0xA6B4 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00FF8888 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00FD3AFB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: StatusBar::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (756):
+
+    754: void StatusBar::draw()
+    755: {
+=>  756: 	txSetAllColors(color, finalDC);
+    757: 	txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+    758: 
+
+# 2 0x00FE42F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222:         
+    223: 
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 3 0x00FD080F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (434):
+
+    432: void Manager::draw ()
+    433: {
+=>  434:     standartManagerDraw (this);	
+    435: }
+    436: 
+
+# 4 0x00F887EA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1323):
+
+   1321:         manager->mousePos = mp;
+   1322:         if (SystemSettings.debugMode) printf("Engine clicked: %d\n", txMouseButtons());
+=> 1323: 		manager->draw ();
+   1324: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1325: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 5 0x01002495 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (638):
+
+    636: 
+    637:     if (SystemSettings.debugMode == 6) _getch();
+=>  638: 	Engine (manager);
+    639: 
+    640: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 16:41:13, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 16:41:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00FC4028 (32-bit), Flags: CMdRe0, Thread: 0xB648 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00F48888 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00F23AFB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: StatusBar::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (756):
+
+    754: void StatusBar::draw()
+    755: {
+=>  756: 	txSetAllColors(color, finalDC);
+    757: 	txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+    758: 
+
+# 2 0x00F342F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222:         
+    223: 
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 3 0x00F2080F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (434):
+
+    432: void Manager::draw ()
+    433: {
+=>  434:     standartManagerDraw (this);	
+    435: }
+    436: 
+
+# 4 0x00ED87EA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1323):
+
+   1321:         manager->mousePos = mp;
+   1322:         if (SystemSettings.debugMode) printf("Engine clicked: %d\n", txMouseButtons());
+=> 1323: 		manager->draw ();
+   1324: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1325: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 5 0x00F52495 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (638):
+
+    636: 
+    637:     if (SystemSettings.debugMode == 6) _getch();
+=>  638: 	Engine (manager);
+    639: 
+    640: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 16:41:32, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 16:41:38
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002A4028 (32-bit), Flags: CMdRe0, Thread: 0x7634 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00228888 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00203AFB in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: StatusBar::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (756):
+
+    754: void StatusBar::draw()
+    755: {
+=>  756: 	txSetAllColors(color, finalDC);
+    757: 	txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+    758: 
+
+# 2 0x002142F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222:         
+    223: 
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 3 0x0020080F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (434):
+
+    432: void Manager::draw ()
+    433: {
+=>  434:     standartManagerDraw (this);	
+    435: }
+    436: 
+
+# 4 0x001B87EA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1323):
+
+   1321:         manager->mousePos = mp;
+   1322:         if (SystemSettings.debugMode) printf("Engine clicked: %d\n", txMouseButtons());
+=> 1323: 		manager->draw ();
+   1324: 		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+   1325: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 5 0x00232485 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (638):
+
+    636: 
+    637:     if (SystemSettings.debugMode == 6) _getch();
+=>  638: 	Engine (manager);
+    639: 
+    640: 	txEnd ();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 16:42:08, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 16:42:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 19, функция: bool __thiscall DLLManager::loadLibs(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "libsList".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00DF4000 (32-bit), Flags: CMdRe0, Thread: 0xB9F0 (Main), GetLastError(): 2 (Не удается найти указанный файл), errno: 2 (No such file or directory), _doserrno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D5C064 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (19):
+
+     17:     FILE* libsList = fopen(pathToDLLList, "r");
+     18:     if (!libsList) printf("%s Не найден\n", pathToDLLList);
+=>   19:     assert(libsList);
+     20: 
+     21:     for (int i = 0; ; i++)
+
+# 1 0x00D8107B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (558):
+
+    556:     if (SystemSettings.debugMode) printf("Инструменты начали загружаться\n");
+    557:     DLLToolsManager* dllToolsManager = new DLLToolsManager(&SystemSettings, "DLLPathList.txt", appData);
+=>  558:     dllToolsManager->loadLibs();
+    559:     if (SystemSettings.debugMode) printf("%p\n", &ToolManager);
+    560:     dllToolsManager->addToManager(&ToolManager);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 18:14:13, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 18:14:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp, строка: 19, функция: bool __thiscall DLLManager::loadLibs(void),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "libsList".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E44000 (32-bit), Flags: CMdRe0, Thread: 0xC72C (Main), GetLastError(): 2 (Не удается найти указанный файл), errno: 2 (No such file or directory), _doserrno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00DAC064 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLManager::loadLibs() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLManager.cpp (19):
+
+     17:     FILE* libsList = fopen(pathToDLLList, "r");
+     18:     if (!libsList) printf("%s Не найден\n", pathToDLLList);
+=>   19:     assert(libsList);
+     20: 
+     21:     for (int i = 0; ; i++)
+
+# 1 0x00DD132D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (558):
+
+    556:     if (SystemSettings.debugMode) printf("Инструменты начали загружаться\n");
+    557:     DLLToolsManager* dllToolsManager = new DLLToolsManager(&SystemSettings, "DLLPathList.txt", appData);
+=>  558:     dllToolsManager->loadLibs();
+    559:     if (SystemSettings.debugMode) printf("%p\n", &ToolManager);
+    560:     dllToolsManager->addToManager(&ToolManager);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 18:37:59, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 18:38:05
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00DB4000 (32-bit), Flags: CMdRe0, Thread: 0x66A0 (Main), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D39218 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x00CC45D3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ToolMenu::ToolMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (126):
+
+    124:         emptyToolDC = loadManager->loadImage("addToolButton2.bmp");
+    125: 
+=>  126:         txSetAllColors(color, finalDC);
+    127:         txRectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
+    128:         font = SystemSettings.MainFont * 1.5;
+
+# 2 0x00D418DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (565):
+
+    563: 	ToolsPalette *toolsPallette = new ToolsPalette(&SystemSettings, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + SystemSettings.HANDLEHEIGHT + 100}}, ToolManager.currentLength);
+    564:     manager->addWindow(toolsPallette);
+=>  565:     ToolMenu* toolMenu = new ToolMenu(&SystemSettings, canvasManager, &LoadManager);
+    566:     manager->addWindow(toolMenu);
+    567: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 19:25:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 19:26:40
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x01156010 (32-bit), Flags: CMdre0, Thread: 0x3D4C (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0106E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x01071D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x01078506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x01070734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x01076D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:20:42, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 20:20:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10869, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x01156010 (32-bit), Flags: CMdre0, Thread: 0x3D4C (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0106E910 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10869)
+# 1 0x01071D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x01078506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x01070734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x01076D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10869):
+
+  10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+=>10869: $   Win32::SelectObject (dc, bmap) asserted;
+  10870: 
+  10871: $   if (!bitmap) Win32::PatBlt (dc, 0, 0, sz.x, sz.y, BLACKNESS) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:20:42, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 20:20:49
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008C6010 (32-bit), Flags: CMdre0, Thread: 0x8D74 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007DE872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x007E1D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x007E8506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x007E0734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x007E6D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:23:01, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 20 2022 20:23:08
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

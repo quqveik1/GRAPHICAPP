@@ -172,7 +172,7 @@ void standartManagerDraw (DebugInfo info, Manager *manager)
     //}
 
 	txSetAllColors (manager->color, manager->finalDC);
-	//txRectangle (0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, manager->finalDC);
+	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
 	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
 
@@ -205,14 +205,14 @@ void Lay::createLay	(Vector _laySize)
     //qassert (manager, info);
     laySize = _laySize;
 	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
-	//brightnessHDC = txCreateDIBSection (SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, &brightnessBuf);
+	//brightnessHDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
 
 
 	for (int y = 0; y < laySize.x; y++)
 	{
 		for (int x = 0; x < laySize.y; x++)
 		{
-			RGBQUAD* copy = &layBuf[x + y * SystemSettings.DCMAXSIZE];
+			RGBQUAD* copy = &layBuf[x + y * DCMAXSIZE];
 			//copy->rgbRed      = (BYTE) 0;
 			//copy->rgbGreen    = (BYTE) 0;
 			//copy->rgbBlue     = (BYTE) 0;
