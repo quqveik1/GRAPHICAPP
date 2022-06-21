@@ -58,13 +58,13 @@ struct Canvas : Manager
     CLoadManager* loadManager;
 
 
-	Canvas (CSystemSettings* _systemSettings, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
-		Manager (_systemSettings, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _systemSettings->HANDLEHEIGHT}}),
+	Canvas (AbstractAppData* _app, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
+		Manager (_app, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _app->systemSettings->HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
-		canvasSize (_systemSettings->DCVECTORSIZE),
-		closeCanvas   (_systemSettings, { .pos = {_rect.getSize().x - _systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor  (_systemSettings, {.pos = {5, _rect.getSize().y - _systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - _systemSettings->SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, _loadManager, 0, 500, true, false),
-		scrollBarVert (_systemSettings, {.pos = {_rect.getSize().x - _systemSettings->SCROLLBARTHICKNESS, _systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - _systemSettings->SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, _loadManager, 0, 500, false, false),
+		canvasSize (_app->systemSettings->DCVECTORSIZE),
+		closeCanvas   (_app, { .pos = {_rect.getSize().x - _app->systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
+		scrollBarHor  (_app, {.pos = {5, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
+		scrollBarVert (_app, {.pos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
         loadManager (_loadManager),
         DrawingModeLastTime (systemSettings->DrawingMode)

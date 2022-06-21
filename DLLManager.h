@@ -8,7 +8,7 @@ int findSymbol(const char* text, int size, char symbol);
 
 struct DLLManager
 {
-    CSystemSettings* systemSettings;
+    CSystemSettings* systemSettings = NULL;
 
     const char* pathToDLLList = NULL;
     const int size = 2;
@@ -18,10 +18,10 @@ struct DLLManager
     int currLoadWindowNum = 0;
     const char* fileExtension = NULL;
 
-    DLLManager(CSystemSettings* _systemSettings, const char* _pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
+    DLLManager(AbstractAppData* _app, const char* _pathToDLLList = NULL) :
         pathToDLLList(_pathToDLLList),
-        appData(_appData),
-        systemSettings(_systemSettings)
+        appData(_app),
+        systemSettings (_app->systemSettings)
     {
     }
 

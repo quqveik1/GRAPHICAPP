@@ -2,8 +2,8 @@
 #include "TwoOptionsMenu.h"
 struct BrightnessMenu : TwoOptionsMenu
 {
-    BrightnessMenu (CSystemSettings* _systemSettings, Rect _rect, Vector _firstDomain, Vector _secondDomain, AbstractAppData *_data = NULL) :
-        TwoOptionsMenu (_systemSettings, _rect, _firstDomain, _secondDomain, _data)
+    BrightnessMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain, AbstractAppData *_data = NULL) :
+        TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
     {
         name = "‘ильтр €ркости";
     }

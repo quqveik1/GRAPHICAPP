@@ -37350,3 +37350,659 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F76010 (32-bit), Flags: CMdre0, Thread: 0x18D0 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E8E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00E91D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00E98506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00E90734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00E96D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:29:29, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:47:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F76010 (32-bit), Flags: CMdre0, Thread: 0x8FFC (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E8E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00E91D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00E98506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00E90734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00E96D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:29:29, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:47:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 8780, функция: struct HWND__ *__cdecl `anonymous-namespace'::TX::txCreateWindow(double,double,bool),
+
+Сообщение: Cannot create canvas window.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F76010 (32-bit), Flags: CMdre0, Thread: 0xAAF0 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00EEC4F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txCreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (8780)
+
+# 1 0x00F02B32 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (529):
+
+    527:     _txWindowStyle = SystemSettings.WindowStyle;
+    528: 
+=>  529:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    530: 
+    531: 	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HWND__ *__cdecl `anonymous-namespace'::TX::txCreateWindow(double,double,bool) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (8780):
+
+   8778: $   _txWaitFor (_txRunning, 10*_TX_TIMEOUT);
+   8779: 
+=> 8780: $   if (!_txRunning)       return TX_DEBUG_ERROR ("\a" "Cannot create canvas window."), (HWND) NULL;
+   8781: $   if (!txOK())           return TX_DEBUG_ERROR ("\a" "Canvas window is not OK."),     (HWND) NULL;
+   8782: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (529):
+
+    527:     _txWindowStyle = SystemSettings.WindowStyle;
+    528: 
+=>  529:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    530: 
+    531: 	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:29:29, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:47:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00F76010 (32-bit), Flags: CMdre0, Thread: 0xA540 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00E8E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00E91D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00E98506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00E90734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00E96D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 20 2022 20:29:29, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:47:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B86010 (32-bit), Flags: CMdre0, Thread: 0xCAD0 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A9E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00AA1D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00AA8506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00AA0734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00AA6D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 15:47:54, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:48:02
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 8780, функция: struct HWND__ *__cdecl `anonymous-namespace'::TX::txCreateWindow(double,double,bool),
+
+Сообщение: Cannot create canvas window.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00B86010 (32-bit), Flags: CMdre0, Thread: 0x3FD0 (Main), GetLastError(): 2 (Не удается найти указанный файл). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00AFC4F4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txCreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (8780)
+
+# 1 0x00B12B32 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (529):
+
+    527:     _txWindowStyle = SystemSettings.WindowStyle;
+    528: 
+=>  529:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    530: 
+    531: 	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HWND__ *__cdecl `anonymous-namespace'::TX::txCreateWindow(double,double,bool) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (8780):
+
+   8778: $   _txWaitFor (_txRunning, 10*_TX_TIMEOUT);
+   8779: 
+=> 8780: $   if (!_txRunning)       return TX_DEBUG_ERROR ("\a" "Cannot create canvas window."), (HWND) NULL;
+   8781: $   if (!txOK())           return TX_DEBUG_ERROR ("\a" "Canvas window is not OK."),     (HWND) NULL;
+   8782: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (529):
+
+    527:     _txWindowStyle = SystemSettings.WindowStyle;
+    528: 
+=>  529:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    530: 
+    531: 	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 15:47:54, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:48:02
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00236000 (32-bit), Flags: CMdre0, Thread: 0x4F2C (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0014E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00151D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00158506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00150734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00156D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 15:48:38, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:48:46
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00236000 (32-bit), Flags: CMdre0, Thread: 0xB0D0 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0014E872 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00151D46 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x00158506 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755E01C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755DB0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x755F2218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00150734 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x00156D9A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl `anonymous-namespace'::TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl `anonymous-namespace'::TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 15:48:38, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 15:49:26
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

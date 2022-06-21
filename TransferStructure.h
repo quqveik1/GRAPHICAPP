@@ -13,7 +13,7 @@ struct TransferData
 
 struct AbstractAppData
 {
-    CSystemSettings* systemSettings;
+    CSystemSettings* systemSettings = NULL;
 
     virtual void setColor (COLORREF color, HDC dc, int thickness) = 0;
     virtual void rectangle (Rect rect, HDC dc) = 0;

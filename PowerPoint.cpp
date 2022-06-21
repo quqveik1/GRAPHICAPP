@@ -30,7 +30,7 @@ CLoadManager LoadManager (&SystemSettings);
 
 HDC TestPhoto;
 
-void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = SystemSettings.DCMAXSIZE, int originalSizeY = SystemSettings.DCMAXSIZE, int sourceSizeX = SystemSettings.DCMAXSIZE, int sourceSizeY = SystemSettings.DCMAXSIZE);
+//void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = SystemSettings.DCMAXSIZE, int originalSizeY = SystemSettings.DCMAXSIZE, int sourceSizeX = SystemSettings.DCMAXSIZE, int sourceSizeY = SystemSettings.DCMAXSIZE);
 
 void txSelectFontDC(const char* text, int sizey, HDC& dc, int sizex = -1);
 void copyAndDelete (HDC dest, HDC source);
@@ -64,8 +64,8 @@ struct Menu : Manager
 {
     int lastSelected = 0;
     int currentSize = 0;
-    Menu(CSystemSettings* _systemSettings, Rect _rect, Rect _handle, int _length = SystemSettings.ONEMENUBUTTONSNUM, bool _isDefaultActive = false) :
-        Manager(_systemSettings, _rect, _length, _isDefaultActive, NULL, _handle, _systemSettings->MenuColor, true)
+    Menu(AbstractAppData* _app, Rect _rect, Rect _handle, int _length = SystemSettings.ONEMENUBUTTONSNUM, bool _isDefaultActive = false) :
+        Manager(_app, _rect, _length, _isDefaultActive, NULL, _handle, _app->systemSettings->MenuColor, true)
     {}
 
     virtual void drawOneLine(int lineNum) = NULL;
@@ -84,13 +84,13 @@ struct Menu : Manager
 struct ToolsPalette : Menu
 {
     
-	ToolsPalette (CSystemSettings* _systemSettings, Rect _rect, int _length) :
-		Menu(_systemSettings, _rect, { .pos = {0, 0}, .finishPos = {(double)_systemSettings->DCMAXSIZE, (double)_systemSettings->HANDLEHEIGHT}}, _length, true)
+	ToolsPalette (AbstractAppData* _app, Rect _rect, int _length) :
+		Menu(_app, _rect, { .pos = {0, 0}, .finishPos = {(double)_app->systemSettings->DCMAXSIZE, (double)_app->systemSettings->HANDLEHEIGHT}}, _length, true)
 	{
         Window** tools = new Window*[ToolManager.currentLength];
         for (int i = 0; i < ToolManager.currentLength; i++)
         {
-            tools[i] = new Window(systemSettings);
+            tools[i] = new Window(app);
         }
 
         for (int i = 0; i < ToolManager.currentLength; i++)
@@ -116,8 +116,8 @@ struct ToolMenu : Menu
     struct CanvasManager* canvasManager = NULL;
     HDC emptyToolDC = NULL;
 
-    ToolMenu(CSystemSettings* _systemSettings, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
-        Menu(_systemSettings, { .pos = {1600, 300}, .finishPos = {1900, _systemSettings->ONELAYTOOLSLIMIT * _systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_systemSettings->DCVECTORSIZE.x, _systemSettings->HANDLEHEIGHT} }, _systemSettings->ONELAYTOOLSLIMIT, true),
+    ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
+        Menu(_app, { .pos = {1600, 300}, .finishPos = {1900, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
         canvasManager(_canvasManager)
     {
         loadManager = _loadManager;
@@ -142,8 +142,8 @@ struct ToolMenu : Menu
 struct TimeButton : Window
 {
 	int font;
-	TimeButton (CSystemSettings* _systemSettings, Rect _rect, COLORREF _color = TX_RED, int _font = SystemSettings.MainFont)	:
-		Window (_systemSettings, _rect, _color),
+	TimeButton (AbstractAppData* _app, Rect _rect, COLORREF _color = TX_RED, int _font = SystemSettings.MainFont)	:
+		Window (_app, _rect, _color),
 		font (_font)
 	{}
 
@@ -153,8 +153,8 @@ struct TimeButton : Window
 struct CloseButton : Window
 { 
 
-	CloseButton (CSystemSettings* _systemSettings, Rect _rect, COLORREF _color, HDC _dc) :
-		Window (_systemSettings, _rect, _color, _dc)
+	CloseButton (AbstractAppData* _app, Rect _rect, COLORREF _color, HDC _dc) :
+		Window (_app, _rect, _color, _dc)
 	{}
 
 	virtual void draw () override;
@@ -163,8 +163,8 @@ struct CloseButton : Window
 
 struct ColorButton : Window
 {
-	ColorButton(CSystemSettings* _systemSettings, Rect _rect, COLORREF _color, HDC _dc) :
-		Window (_systemSettings, _rect, _color, _dc)
+	ColorButton(AbstractAppData* _app, Rect _rect, COLORREF _color, HDC _dc) :
+		Window (_app, _rect, _color, _dc)
 	{
 		draw ();
 		reDraw = false;
@@ -172,14 +172,29 @@ struct ColorButton : Window
 
 	virtual void onClick (Vector mp)override;
 };
+
+/*
+struct RGBSliders : Manager
+{
+    Slider redColor;
+    Slider greenColor;
+    Slider blueColor;
+
+    RGBSliders(AbstractAppData* _app, Rect _rect) :
+        Manager(_app, _rect, 3),
+        //redColor ()
+    //{}
+
+};
+*/
 																																					    
 struct SizeButton : Window
 {
 	double *num;
 	int sizeType;
 
-	SizeButton(CSystemSettings* _systemSettings, Rect _rect, double *_num, int _sizeType) :
-		Window (_systemSettings, _rect),
+	SizeButton(AbstractAppData* _app, Rect _rect, double *_num, int _sizeType) :
+		Window (_app, _rect),
 		num (_num), 
 		sizeType (_sizeType)
 	{}
@@ -193,8 +208,8 @@ struct CleanButton : Window
 {
 	Canvas *mainCanvas;
 
-	CleanButton (CSystemSettings* _systemSettings, Rect _rect, COLORREF _color, Canvas *_mainCanvas, HDC _dc = NULL, const char *_text = "") :
-		Window (_systemSettings, _rect, _color, _dc),
+	CleanButton (AbstractAppData* _app, Rect _rect, COLORREF _color, Canvas *_mainCanvas, HDC _dc = NULL, const char *_text = "") :
+		Window (_app, _rect, _color, _dc),
 		mainCanvas (_mainCanvas)
 	{}
 
@@ -247,8 +262,8 @@ struct LaysMenu : Manager
     HDC addNewLayButton;
     Vector buttonSize;
 
-    LaysMenu(CSystemSettings* _systemSettings, Rect _rect, CanvasManager* _canvasManager) :
-        Manager(_systemSettings, _rect, 0, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, SystemSettings.HANDLEHEIGHT} }),
+    LaysMenu(AbstractAppData* _app, Rect _rect, CanvasManager* _canvasManager) :
+        Manager(_app, _rect, 0, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, SystemSettings.HANDLEHEIGHT} }),
         canvasManager(_canvasManager),
         sectionHeight(systemSettings->HANDLEHEIGHT),
         sectionFont(systemSettings->MainFont * 0.9),
@@ -272,15 +287,15 @@ struct OpenManager : Window
 	Manager *openManager;
     bool isOpeningAnotherList = false;
 
-	OpenManager (CSystemSettings* _systemSettings, Rect _rect, COLORREF _color, Manager *_manager, HDC _dc = NULL, const char *_text = "")	:
-		Window (_systemSettings, _rect, _color, _dc, NULL, _text),
+	OpenManager (AbstractAppData* _app, Rect _rect, COLORREF _color, Manager *_manager, HDC _dc = NULL, const char *_text = "")	:
+		Window (_app, _rect, _color, _dc, NULL, _text),
 		openManager (_manager)
 	{
         format = DT_VCENTER;
     }
 
-    OpenManager (CSystemSettings* _systemSettings)	:
-        Window (_systemSettings),
+    OpenManager (AbstractAppData* _app)	:
+        Window (_app),
 		openManager (NULL)
 	{
         format = DT_VCENTER;
@@ -303,8 +318,8 @@ struct StringButton : Window
 
 
 
-	StringButton(CSystemSettings* _systemSettings, Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, Manager *_manager, int _MaxNum = 20, bool _onlyNums = false) :
-		Window(_systemSettings, _rect, _color, NULL, _manager),
+	StringButton(AbstractAppData* _app, Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, Manager *_manager, int _MaxNum = 20, bool _onlyNums = false) :
+		Window(_app, _rect, _color, NULL, _manager),
 		inText (_redactingText),
 		advancedMode(true),
 		cursorPosition(_redactingTextLength - 1),
@@ -335,16 +350,16 @@ struct NumChange : Manager
 	const int minNum;
 	char inText[32] = {};
 
-	NumChange (CSystemSettings* _systemSettings, Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, HDC _plusMinusDC, double _sliderQuadrateScale, int _numLength, double *_num) :
-		Manager (_systemSettings, _mainRect, 4),
+	NumChange (AbstractAppData* _app, Rect _mainRect, Rect _stringRect, Rect _plusRect, Rect _minusRect, Rect _sliderRect, HDC _plusMinusDC, double _sliderQuadrateScale, int _numLength, double *_num) :
+		Manager (_app, _mainRect, 4),
 		num (_num),
-		stringButton (_systemSettings, _stringRect, TX_WHITE, inText, _numLength, this, 20, true),
-		plusNum (_systemSettings, _plusRect, _num, +1),
-		minusNum (_systemSettings, _minusRect, _num, -1),
+		stringButton (_app, _stringRect, TX_WHITE, inText, _numLength, this, 20, true),
+		plusNum (_app, _plusRect, _num, +1),
+		minusNum (_app, _minusRect, _num, -1),
 		plusMinusDC (_plusMinusDC),
 		minNum (1),
 		maxNum (20),
-		slider (_systemSettings, _sliderRect, _num, _sliderQuadrateScale, &LoadManager,  1, 20)
+		slider (_app, _sliderRect, _num, _sliderQuadrateScale, 1, 20)
 	{}
 
 	virtual void draw () override;
@@ -396,8 +411,8 @@ struct StatusBar : Manager
 	TimeButton *timeButton = NULL;
 	ProgressBar *progressBar = NULL;
 
-	StatusBar(CSystemSettings* _systemSettings, Rect _rect, COLORREF _color) :
-		Manager(_systemSettings, _rect, 3, true, NULL, {}, _color)
+	StatusBar(AbstractAppData* _app, Rect _rect, COLORREF _color) :
+		Manager(_app, _rect, 3, true, NULL, {}, _color)
 	{}
 
 
@@ -408,8 +423,8 @@ struct TouchButton : Window
 {
     bool *flag = NULL;
 
-    TouchButton (CSystemSettings* _systemSettings, Rect _rect, HDC _dc, bool *_flag = NULL) :
-        Window (_systemSettings, _rect, SystemSettings.MenuColor, _dc),
+    TouchButton (AbstractAppData* _app, Rect _rect, HDC _dc, bool *_flag = NULL) :
+        Window (_app, _rect, SystemSettings.MenuColor, _dc),
         flag (_flag)
     {
     }
@@ -420,8 +435,8 @@ struct TouchButton : Window
 struct AddCanvasButton : TouchButton
 {
     CanvasManager* canvasManager;
-    AddCanvasButton(CSystemSettings* _systemSettings, Rect _rect, HDC _dc, CanvasManager* _canvasManager) :
-        TouchButton (_systemSettings, _rect, _dc),
+    AddCanvasButton(AbstractAppData* _app, Rect _rect, HDC _dc, CanvasManager* _canvasManager) :
+        TouchButton (_app, _rect, _dc),
         canvasManager (_canvasManager)
     {
     }
@@ -440,14 +455,14 @@ struct List : Manager
     bool mayFewWindowsBeOpenedAtTheSameTime;
     int activeItemCircleSize = 3;
 
-    List (CSystemSettings* _systemSettings, Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
-        Manager (_systemSettings, {.pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y }}, _maxLength, false),
+    List (AbstractAppData* _app, Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
+        Manager (_app, {.pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y }}, _maxLength, false),
         mayFewWindowsBeOpenedAtTheSameTime (_mayFewWindowsBeOpenedAtTheSameTime),
         oneItemSize (_oneItemSize),
         itemHeight (systemSettings->HANDLEHEIGHT)
     {
         items = new OpenManager*[length];
-        for (int i = 0; i < length; i++)  items[i] = new OpenManager (systemSettings);
+        for (int i = 0; i < length; i++)  items[i] = new OpenManager (app);
 
         isThisItemList = new bool[length]{};
     }
@@ -467,7 +482,7 @@ struct List : Manager
 
 
     List (Vector _pos, int _maxLength, Vector _oneItemSize) :
-        Manager(_systemSettings, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false),
+        Manager(_app, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false),
         oneItemSize (_oneItemSize)
     {
     }
@@ -480,8 +495,8 @@ struct SaveImages : Window
 {
     CanvasManager* canvasManager;
 
-    SaveImages(CSystemSettings* _systemSettings, CanvasManager* _canvasManager) :
-        Window(_systemSettings, {}, SystemSettings.MenuColor, NULL, NULL, "", false),
+    SaveImages(AbstractAppData* _app, CanvasManager* _canvasManager) :
+        Window(_app, {}, SystemSettings.MenuColor, NULL, NULL, "", false),
         canvasManager (_canvasManager)
     {
     }
@@ -507,7 +522,6 @@ struct PowerPoint : AbstractAppData
 
 bool IsRunning = true;
 int Radius = 2;
-int SLEEPTIME = 30;
 
 void Engine (Manager *manager);
 
@@ -522,13 +536,20 @@ void printfDCS (const char *str = "");
 
 int main (int argc, int *argv[])
 {
-    setSystemSettings(&SystemSettings, "Settings\\Settings.txt");
+    PowerPoint* appData = new PowerPoint;
+    appData->systemSettings = &SystemSettings;
+    appData->currColor = &(SystemSettings.DrawColor);
+    appData->loadManager = &LoadManager;
+
+    setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
 
     _txWindowStyle = SystemSettings.WindowStyle;
 
     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
 
-	Manager *manager = new Manager(&SystemSettings, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+    
+
+	Manager *manager = new Manager(appData, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
     ToolSave toolSave = {};
 
@@ -537,89 +558,85 @@ int main (int argc, int *argv[])
 	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
 
-	StatusBar* statusBar = new StatusBar(&SystemSettings, {.pos = {0, SystemSettings.SizeOfScreen.y - 20}, .finishPos = SystemSettings.SizeOfScreen } , TX_BLUE);
-		statusBar->progressBar =  new ProgressBar (&SystemSettings, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
+	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, SystemSettings.SizeOfScreen.y - 20}, .finishPos = SystemSettings.SizeOfScreen } , TX_BLUE);
+		statusBar->progressBar =  new ProgressBar (appData, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
 		statusBar->progressBar->manager = statusBar;
-		statusBar->timeButton = new TimeButton(&SystemSettings, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
+		statusBar->timeButton = new TimeButton(appData, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
     
 
-    CanvasManager* canvasManager = new CanvasManager(&SystemSettings, { .pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, addNewCanvasDC, statusBar->progressBar, &LoadManager);
+    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, addNewCanvasDC, statusBar->progressBar);
 	manager->addWindow (canvasManager);
 
     manager->addWindow(statusBar);
 
 
-    PowerPoint* appData = new PowerPoint;
     appData->canvasManager = canvasManager;
-    appData->currColor = &(SystemSettings.DrawColor);
-    appData->loadManager = &LoadManager;
-    appData->systemSettings = &SystemSettings;
 
 
     if (SystemSettings.debugMode) printf("Инструменты начали загружаться\n");
-    DLLToolsManager* dllToolsManager = new DLLToolsManager(&SystemSettings, "Settings\\DLLPathList.txt", appData);
+    DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
     dllToolsManager->loadLibs();
     if (SystemSettings.debugMode) printf("%p\n", &ToolManager);
     dllToolsManager->addToManager(&ToolManager);
     if (SystemSettings.debugMode) printf("Инструменты загрузились\n");
 
-	ToolsPalette *toolsPallette = new ToolsPalette(&SystemSettings, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + SystemSettings.HANDLEHEIGHT + 100}}, ToolManager.currentLength);
+	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + SystemSettings.HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
-    ToolMenu* toolMenu = new ToolMenu(&SystemSettings, canvasManager, &LoadManager);
+    ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
     manager->addWindow(toolMenu);
 
-	Manager *menu = new Manager(&SystemSettings, {.pos = {SystemSettings.SizeOfScreen.x - 712, 300}, .finishPos = {SystemSettings.SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("HUD-4.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	Manager *menu = new Manager(appData, {.pos = {SystemSettings.SizeOfScreen.x - 712, 300}, .finishPos = {SystemSettings.SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("ColorsMenu.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
-	Manager *colorManager = new Manager(&SystemSettings, {.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
+	Manager *colorManager = new Manager(appData, {.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
 	    menu->addWindow (colorManager);
 
-			ColorButton *redColor = new ColorButton(&SystemSettings, {.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
+			ColorButton *redColor = new ColorButton(appData, {.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
 			colorManager->addWindow(redColor);
 	
-			ColorButton *blueColor = new ColorButton(&SystemSettings, {.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), LoadManager.loadImage ("BlueButton.bmp"));
+			ColorButton *blueColor = new ColorButton(appData, {.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), LoadManager.loadImage ("BlueButton.bmp"));
 			colorManager->addWindow(blueColor);
 
-			ColorButton *greenColor = new ColorButton(&SystemSettings, {.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), LoadManager.loadImage ("GreenButton.bmp"));
+			ColorButton *greenColor = new ColorButton(appData, {.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), LoadManager.loadImage ("GreenButton.bmp"));
 			colorManager->addWindow(greenColor);
 
-	OpenManager *openManager = new OpenManager(&SystemSettings, {.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
+	OpenManager *openManager = new OpenManager(appData, {.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
 	menu->addWindow (openManager);
 
 
 
-    DLLFiltersManager* dllManager = new DLLFiltersManager(&SystemSettings, "Settings\\DLLPathList.txt", appData);
+    DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
 
-    LaysMenu* laysMenu = new LaysMenu (&SystemSettings, {.pos = {0, 700}, .finishPos = {SystemSettings.BUTTONWIDTH, 1000}}, canvasManager);
+    LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 700}, .finishPos = {SystemSettings.BUTTONWIDTH, 1000}}, canvasManager);
     manager->addWindow(laysMenu);
 
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager(&SystemSettings, { .pos = {0, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
+	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
 
-		CloseButton* closeButton = new CloseButton(&SystemSettings, { .pos = {1900 - SystemSettings.BUTTONWIDTH, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton(appData, { .pos = {1900 - SystemSettings.BUTTONWIDTH, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
 
-        AddCanvasButton* addNewCanvas = new AddCanvasButton(&SystemSettings, {.pos = {0, 0}, .finishPos = {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
+        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindow(addNewCanvas);
 
-        List* systemList = new List(&SystemSettings, { SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT }, { SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT }, 1);
-        OpenManager* openSystemList = new OpenManager(&SystemSettings, { .pos = {SystemSettings.BUTTONWIDTH * 2, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 3, SystemSettings.HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
+        List* systemList = new List(appData, { SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT }, { SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT }, 1);
+        OpenManager* openSystemList = new OpenManager(appData, { .pos = {SystemSettings.BUTTONWIDTH * 2, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 3, SystemSettings.HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
         mainhandle->addWindow(openSystemList);
 
         manager->addWindow(systemList);
-        SaveImages* saveImages = new SaveImages(&SystemSettings, canvasManager);
+        SaveImages* saveImages = new SaveImages(appData, canvasManager);
         systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
 
-        List* openWindows = new List (&SystemSettings, {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}, {SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT}, 5);
+        List* openWindows = new List (appData, {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}, {SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT}, 5);
         manager->addWindow(openWindows);
-        OpenManager* openWindowsManager = new OpenManager (&SystemSettings, {.pos = {SystemSettings.BUTTONWIDTH, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
+        OpenManager* openWindowsManager = new OpenManager (appData, {.pos = {SystemSettings.BUTTONWIDTH, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
         mainhandle->addWindow(openWindowsManager);
         
         openWindows->addNewItem (menu, NULL, "Цвет");
@@ -648,7 +665,7 @@ int main (int argc, int *argv[])
     //LoadManager.deleteAllImages ();
 	txDisableAutoPause ();
 
-    saveSystemSettings(&SystemSettings, "Settings\\Settings.txt");
+    saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
 
 	return 0;
 }
@@ -818,7 +835,7 @@ void List::controlRect()
 List* List::addSubList (const char *ListText, int newListLength/* = NULL*/)
 {
     if (!newListLength) newListLength = length;
-    List* subList = new List(systemSettings, getNewSubItemCoordinats(), oneItemSize, newListLength);
+    List* subList = new List(app, getNewSubItemCoordinats(), oneItemSize, newListLength);
 
     isThisItemList[newButtonNum] = true;
     addNewItem (subList, NULL, ListText);
@@ -1612,7 +1629,7 @@ void CanvasManager::draw ()
 
 bool CanvasManager::addCanvas()
 {
-    return addWindow(activeCanvas = new Canvas(systemSettings, { .pos = {100, 50}, .finishPos = {newCanvasWindowSize.x + 100, newCanvasWindowSize.y + 50} }, loadManager, closeCanvasButton));
+    return addWindow(activeCanvas = new Canvas(app, { .pos = {100, 50}, .finishPos = {newCanvasWindowSize.x + 100, newCanvasWindowSize.y + 50} }, loadManager, closeCanvasButton));
 }
 
 void CanvasManager::onClick(Vector mp)

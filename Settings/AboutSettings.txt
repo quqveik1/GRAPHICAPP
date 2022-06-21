@@ -1,2 +1,2 @@
-default WindowStyle = -2134376448;
-without handle = -2146959360;
+default WindowStyle = -2134376448
+without handle = -2146959360

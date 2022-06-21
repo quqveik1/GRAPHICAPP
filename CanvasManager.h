@@ -13,10 +13,10 @@ struct CanvasManager : Manager
     CLoadManager* loadManager;
 
 
-    CanvasManager (CSystemSettings* _systemSettings, Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar, CLoadManager* _loadManager) :
-        Manager(_systemSettings, _rect, 10, true, NULL, {}, TX_BLACK),
+    CanvasManager (AbstractAppData* _app, Rect _rect, HDC _NewCanvasDC, ProgressBar* _bar) :
+        Manager(_app, _rect, 10, true, NULL, {}, TX_BLACK),
         bar(_bar),
-        loadManager (_loadManager)
+        loadManager (_app->loadManager)
     {
         compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
     }

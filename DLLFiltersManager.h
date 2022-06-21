@@ -9,8 +9,8 @@ struct DLLFiltersManager : DLLManager
 {
     CFilter* dllWindows[10] = {};
 
-    DLLFiltersManager(CSystemSettings* _systemSettings, const char *_pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
-        DLLManager (_systemSettings, _pathToDLLList, _appData)
+    DLLFiltersManager(AbstractAppData* _app, const char *_pathToDLLList = NULL) :
+        DLLManager (_app, _pathToDLLList)
     { 
         fileExtension = "filter";
     }

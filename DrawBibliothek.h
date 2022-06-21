@@ -11,6 +11,7 @@
 #include "Tool.h"
 #include "ProgrammeDate.h"
 #include "commdlg.h"
+#include "TransferStructure.h"
 
 
 
@@ -62,6 +63,7 @@ const char* getCustomFilePathForSaving(const char* question, const char* fileTyp
 struct Window
 {
     CSystemSettings* systemSettings = NULL;
+    AbstractAppData* app = NULL;
 
     Rect rect = {};
 	Rect originalRect;
@@ -87,8 +89,9 @@ struct Window
     Vector mousePos = {};
     int clicked = false;
 
-    Window (CSystemSettings* _systemSettings, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true, CLoadManager* _loadManager = NULL) :
-        systemSettings (_systemSettings),
+    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+        app (_app),
+        systemSettings (_app->systemSettings),
 		rect (_rect),
 		color(_color),
 		manager (_manager),
@@ -97,10 +100,10 @@ struct Window
 		dc (_dc),
 		advancedMode (_advancedMode),
 		reDraw (true),
-        loadManager (_loadManager), 
-        font (_systemSettings->MainFont),
-        sideThickness (_systemSettings->SIDETHICKNESS),
-        format (_systemSettings->TEXTFORMAT)
+        loadManager (_app->loadManager),
+        font (_app->systemSettings->MainFont),
+        sideThickness (_app->systemSettings->SIDETHICKNESS),
+        format (_app->systemSettings->TEXTFORMAT)
 
 	{
         if (systemSettings->debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
@@ -149,9 +152,9 @@ struct Manager : Window
 	bool coordinatSysFromHandle;
     bool HideIfIsNotActive;
 
-	Manager (CSystemSettings* _systemSettings,  Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false, CLoadManager* _loadManager = NULL) :
-		Window (_systemSettings, _rect, _color, _dc, NULL, "", _advancedMode, _loadManager),
-        handle (_systemSettings, _handle),
+	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+		Window (_app, _rect, _color, _dc, NULL, "", _advancedMode),
+        handle (_app, _handle),
 		length (_length),
 		pointers (new Window* [_length]{}),
 		newButtonNum (0),
