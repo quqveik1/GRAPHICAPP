@@ -38006,3 +38006,2794 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Ю-ху! Переполнение стека!
+
+#1: Исключение EXCEPTION_STACK_OVERFLOW (0xC00000FD) при выполнении кода по адресу 0x00344787 в функции _chkstk() в файле D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm на строке 99 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003B2FF0 (32-bit), Flags: CMdRe0, Thread: 0xD33C (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00344787 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _chkstk() at D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm (98)
+
+# 1 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 2 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 3 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 4 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 5 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 6 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 7 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 8 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 9 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#10 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#11 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#12 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#13 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#14 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#15 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#16 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#17 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#18 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#19 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#20 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#21 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#22 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#23 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#24 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#25 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#26 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#27 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#28 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#29 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#30 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#31 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#32 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#33 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#34 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#35 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#36 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#37 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#38 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#39 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#40 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#41 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#42 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#43 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#44 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#45 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#46 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#47 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#48 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#49 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#50 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#51 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#52 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#53 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHIC...
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (546):
+
+    544:     _txWindowStyle = SystemSettings.WindowStyle;
+    545: 
+=>  546:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    547: 
+    548:     
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 23:17:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 23:17:16
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Ю-ху! Переполнение стека!
+
+#1: Исключение EXCEPTION_STACK_OVERFLOW (0xC00000FD) при выполнении кода по адресу 0x00344787 в функции _chkstk() в файле D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm на строке 99 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003B2FF0 (32-bit), Flags: CMdRe0, Thread: 0xD33C (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00344787 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _chkstk() at D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm (98)
+
+# 1 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 2 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 3 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 4 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 5 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 6 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 7 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 8 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 9 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#10 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#11 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#12 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#13 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#14 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#15 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#16 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#17 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#18 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#19 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#20 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#21 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#22 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#23 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#24 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#25 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#26 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#27 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#28 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#29 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#30 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#31 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#32 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#33 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#34 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#35 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#36 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#37 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#38 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#39 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#40 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#41 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#42 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#43 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#44 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#45 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#46 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#47 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#48 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#49 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#50 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#51 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#52 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#53 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHIC...
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (546):
+
+    544:     _txWindowStyle = SystemSettings.WindowStyle;
+    545: 
+=>  546:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    547: 
+    548:     
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 23:17:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 23:17:17
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Ю-ху! Переполнение стека!
+
+#1: Исключение EXCEPTION_STACK_OVERFLOW (0xC00000FD) при выполнении кода по адресу 0x00344787 в функции _chkstk() в файле D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm на строке 99 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003B2FF0 (32-bit), Flags: CMdRe0, Thread: 0xD50C (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00344787 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _chkstk() at D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm (98)
+
+# 1 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 2 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 3 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 4 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 5 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 6 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 7 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 8 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 9 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#10 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#11 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#12 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#13 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#14 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#15 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#16 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#17 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#18 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#19 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#20 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#21 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#22 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#23 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#24 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#25 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#26 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#27 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#28 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#29 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#30 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#31 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#32 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#33 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#34 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#35 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#36 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#37 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#38 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#39 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#40 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#41 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#42 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#43 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#44 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#45 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#46 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#47 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#48 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#49 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#50 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#51 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#52 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#53 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHIC...
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (546):
+
+    544:     _txWindowStyle = SystemSettings.WindowStyle;
+    545: 
+=>  546:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    547: 
+    548:     
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 23:17:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 23:18:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Ю-ху! Переполнение стека!
+
+#1: Исключение EXCEPTION_STACK_OVERFLOW (0xC00000FD) при выполнении кода по адресу 0x00344787 в функции _chkstk() в файле D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm на строке 99 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003B2FF0 (32-bit), Flags: CMdRe0, Thread: 0xD50C (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00344787 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: _chkstk() at D:\a\_work\1\s\src\vctools\crt\vcstartup\src\misc\i386\chkstk.asm (98)
+
+# 1 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 2 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 3 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 4 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 5 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 6 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 7 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 8 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+# 9 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#10 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#11 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#12 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#13 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#14 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#15 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#16 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#17 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#18 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#19 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#20 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#21 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#22 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#23 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#24 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#25 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#26 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#27 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#28 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#29 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#30 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#31 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#32 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#33 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#34 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#35 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#36 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#37 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#38 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#39 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#40 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#41 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#42 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#43 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#44 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#45 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#46 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#47 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#48 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#49 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#50 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#51 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#52 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (678):
+
+    676: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+    677: {
+=>  678:     return createDIBSection(sizex, sizey, pixels);
+    679: }
+    680: 
+
+#53 0x0030B383 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHIC...
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (546):
+
+    544:     _txWindowStyle = SystemSettings.WindowStyle;
+    545: 
+=>  546:     SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    547: 
+    548:     
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 21 2022 23:17:10, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 21 2022 23:18:09
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00DDFFC8 (32-bit), Flags: CMdRe0, Thread: 0x900C (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00CFD270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00D57938 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630)
+# 2 0x00D58023 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652)
+
+# 3 0x00D3B87D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::deleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+# 4 0x00D38907 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (55):
+
+     53: 		//newSize.print (str);
+     54: 
+=>   55:     if (newDC) app->deleteDC (newDC);
+     56: 	newDC = app->createDIBSection (newSize.x, newSize.y);
+     57:     qassert (newDC, info);
+
+# 5 0x00CECF87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::CanvasManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.h (21):
+
+     19:         loadManager (_app->loadManager)
+     20:     {
+=>   21:         compressImage(app, closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
+     22:     }
+     23: 
+
+# 6 0x00D6D9E2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (502):
+
+    500:     
+    501: 
+=>  502:     CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, addNewCanvasDC, statusBar->progressBar);
+    503: 	manager->addWindow (canvasManager);
+    504: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630):
+
+  13628: 
+  13629: $   HDC  dc = *pdc;
+=>13630: $   bool ok = _txBuffer_Delete (pdc);
+  13631: $   if (!ok) return false;
+  13632: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652):
+
+  13650: bool txDeleteDC (HDC dc)
+  13651:     {
+=>13652: $1  return txDeleteDC (&dc);
+  13653:     }
+  13654: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:29:38, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:30:25
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x0099FFC8 (32-bit), Flags: CMdRe0, Thread: 0xD630 (Main), GetLastError(): 13 (Недопустимые данные), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008BD270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00917938 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630)
+# 2 0x00918023 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652)
+
+# 3 0x008FB87D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::deleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+# 4 0x7A536597 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (55):
+
+     53: 		//newSize.print (str);
+     54: 
+=>   55:     if (!newDC) app->deleteDC (newDC);
+     56: 	newDC = app->createDIBSection (newSize.x, newSize.y);
+     57:     qassert (newDC, info);
+
+# 5 0x7A4FB8AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.h (59):
+
+     57: 			{
+     58: 				txDeleteDC (arrow1.dc);
+=>   59: 				compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteHor.bmp"), {16, 16}, __LINE__);
+     60: 			}
+     61: 
+
+# 6 0x7A4FFE8A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (39):
+
+     37: 	TwoOptionsMenu(AbstractAppData* _app, Rect _rect, Vector firstDomain, Vector secondDomain)	:
+     38: 		CFilter (_app, _rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
+=>   39: 		upSlider(_app, { .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, firstDomain.x, firstDomain.y, true, true),
+     40: 		downSlider(_app, { .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, secondDomain.x, secondDomain.y, true, true),
+     41: 		confirmButton(_app, { .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 7 0x7A4FAC16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: KontrastMenu::KontrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.h (7):
+
+      5: {
+      6:     KontrastMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain) :
+=>    7:         TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
+      8:     {
+      9:         name = "Фильтр контрастности";
+
+# 8 0x7A54FFE0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (35):
+
+     33:     
+     34: 
+=>   35:     dlldata.addFilter (new KontrastMenu  (app, { .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }));
+     36:     //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+
+# 9 0x008F5FBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (systemSettings->debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+#10 0x0092E59D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (545):
+
+    543:     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
+    544:     dllManager->loadLibs ();
+=>  545:     dllManager->addToManager(manager);
+    546:     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
+    547: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630):
+
+  13628: 
+  13629: $   HDC  dc = *pdc;
+=>13630: $   bool ok = _txBuffer_Delete (pdc);
+  13631: $   if (!ok) return false;
+  13632: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652):
+
+  13650: bool txDeleteDC (HDC dc)
+  13651:     {
+=>13652: $1  return txDeleteDC (&dc);
+  13653:     }
+  13654: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:18, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:31:25
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CFFC8 (32-bit), Flags: CMdRe0, Thread: 0x24D0 (Main), GetLastError(): 13 (Недопустимые данные), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00947908 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630)
+# 2 0x00947FF3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652)
+
+# 3 0x0092B84D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::deleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+# 4 0x7A536597 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (55):
+
+     53: 		//newSize.print (str);
+     54: 
+=>   55:     //if (!newDC) app->deleteDC (newDC);
+     56: 	newDC = app->createDIBSection (newSize.x, newSize.y);
+     57:     qassert (newDC, info);
+
+# 5 0x7A4FB8AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.h (59):
+
+     57: 			{
+     58: 				txDeleteDC (arrow1.dc);
+=>   59: 				compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteHor.bmp"), {16, 16}, __LINE__);
+     60: 			}
+     61: 
+
+# 6 0x7A4FFE8A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (39):
+
+     37: 	TwoOptionsMenu(AbstractAppData* _app, Rect _rect, Vector firstDomain, Vector secondDomain)	:
+     38: 		CFilter (_app, _rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
+=>   39: 		upSlider(_app, { .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, firstDomain.x, firstDomain.y, true, true),
+     40: 		downSlider(_app, { .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, secondDomain.x, secondDomain.y, true, true),
+     41: 		confirmButton(_app, { .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 7 0x7A4FAC16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: KontrastMenu::KontrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.h (7):
+
+      5: {
+      6:     KontrastMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain) :
+=>    7:         TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
+      8:     {
+      9:         name = "Фильтр контрастности";
+
+# 8 0x7A54FFE0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (35):
+
+     33:     
+     34: 
+=>   35:     dlldata.addFilter (new KontrastMenu  (app, { .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }));
+     36:     //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+
+# 9 0x00925FBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (systemSettings->debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+#10 0x0095E56D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (545):
+
+    543:     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
+    544:     dllManager->loadLibs ();
+=>  545:     dllManager->addToManager(manager);
+    546:     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
+    547: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630):
+
+  13628: 
+  13629: $   HDC  dc = *pdc;
+=>13630: $   bool ok = _txBuffer_Delete (pdc);
+  13631: $   if (!ok) return false;
+  13632: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652):
+
+  13650: bool txDeleteDC (HDC dc)
+  13651:     {
+=>13652: $1  return txDeleteDC (&dc);
+  13653:     }
+  13654: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:31:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CFFC8 (32-bit), Flags: CMdrE0, Thread: 0xAFA8 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x008F1950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x008F6714 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 9 0x755E9357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#10 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#11 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#12 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#15 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#16 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#17 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#18 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#19 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#20 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#21 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#22 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#23 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#25 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#26 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#27 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#28 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#29 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#30 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#31 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#32 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#33 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#34 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#35 0x755D5A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#36 0x755F1A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#37 0x008F5809 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#38 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#39 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#40 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#41 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#42 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:31:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#3: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CFFC8 (32-bit), Flags: CMdrE0, Thread: 0xAFA8 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x008F1950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x008F6714 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x7563B008 in C:\WINDOWS\System32\USER32.dll: SoftModalMessageBox()
+# 9 0x75639D70 in C:\WINDOWS\System32\USER32.dll: DrawStateA()
+#10 0x7563A877 in C:\WINDOWS\System32\USER32.dll: MessageBoxTimeoutW()
+#11 0x7563A8E5 in C:\WINDOWS\System32\USER32.dll: MessageBoxW()
+#12 0x0094D353 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txMessageBox() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12717)
+#13 0x0091D0BE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txProcessError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12617)
+#14 0x0090E4C5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10939)
+#15 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+#16 0x008F1950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+#17 0x008F6714 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+#18 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#19 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#20 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#21 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#22 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#23 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#24 0x755E9357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#25 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#26 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#27 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#28 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#29 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#30 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#31 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#32 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#33 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#34 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#35 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#36 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#37 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#38 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#39 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#41 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#42 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#43 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#44 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#45 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#46 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#47 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#48 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#49 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#50 0x755D5A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#51 0x755F1A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#52 0x008F5809 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#53 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#54 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#55 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#56 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#57 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in int __cdecl `anonymous-namespace'::TX::txMessageBox(const char [],const char [],unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12717):
+
+  12715: 
+  12716: $   HWND wnd = _txCanvas_Window;
+=>12717: $   int  ret = MessageBoxW ((wnd && IsWindowVisible (wnd))? wnd : _TX_CALL (Win32::GetConsoleWindow,()),
+  12718:                             textW, headerW, flags | MB_SETFOREGROUND | MB_TOPMOST);
+  12719: 
+
+# 4 in const char *__cdecl `anonymous-namespace'::TX::_txProcessError(const char [],int,const char [],unsigned int,const char [],char *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12564):
+
+  12562: 
+  12563:     if (stkTrace && strstr (stkTrace, ".exe: "))
+=>12564:         {$ fprintf (stderr,    "Стек вызовов:\n\n"
+  12565:                                "%s\n\n"
+  12566:                                "--------------------------------------------------\n",
+
+# 5 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 6 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 7 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 8 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 9 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+#10 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:31:54
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CFFC8 (32-bit), Flags: CMdRe0, Thread: 0x4604 (Main), GetLastError(): 13 (Недопустимые данные), errno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00947908 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630)
+# 2 0x00947FF3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::txDeleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652)
+
+# 3 0x0092B84D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::deleteDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+# 4 0x7A536597 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (55):
+
+     53: 		//newSize.print (str);
+     54: 
+=>   55:     //if (!newDC) app->deleteDC (newDC);
+     56: 	newDC = app->createDIBSection (newSize.x, newSize.y);
+     57:     qassert (newDC, info);
+
+# 5 0x7A4FB8AE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: Slider::Slider() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.h (59):
+
+     57: 			{
+     58: 				txDeleteDC (arrow1.dc);
+=>   59: 				compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteHor.bmp"), {16, 16}, __LINE__);
+     60: 			}
+     61: 
+
+# 6 0x7A4FFE8A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (39):
+
+     37: 	TwoOptionsMenu(AbstractAppData* _app, Rect _rect, Vector firstDomain, Vector secondDomain)	:
+     38: 		CFilter (_app, _rect, 3, false, NULL, { .pos = {0, 0}, .finishPos = {getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
+=>   39: 		upSlider(_app, { .pos = {10, 65}, .finishPos = {165, 80}}, &firstVal, 0.3, firstDomain.x, firstDomain.y, true, true),
+     40: 		downSlider(_app, { .pos = {10, 125}, .finishPos = {165, 140} }, &secondVal, 0.3, secondDomain.x, secondDomain.y, true, true),
+     41: 		confirmButton(_app, { .pos = {240, 40}, .finishPos = {325, 60} }),
+
+# 7 0x7A4FAC16 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: KontrastMenu::KontrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.h (7):
+
+      5: {
+      6:     KontrastMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain) :
+=>    7:         TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
+      8:     {
+      9:         name = "Фильтр контрастности";
+
+# 8 0x7A54FFE0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (35):
+
+     33:     
+     34: 
+=>   35:     dlldata.addFilter (new KontrastMenu  (app, { .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }));
+     36:     //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     37:     return &dlldata;
+
+# 9 0x00925FBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (systemSettings->debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+#10 0x0095E56D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (545):
+
+    543:     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
+    544:     dllManager->loadLibs ();
+=>  545:     dllManager->addToManager(manager);
+    546:     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
+    547: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13630):
+
+  13628: 
+  13629: $   HDC  dc = *pdc;
+=>13630: $   bool ok = _txBuffer_Delete (pdc);
+  13631: $   if (!ok) return false;
+  13632: 
+
+# 2 in bool __cdecl `anonymous-namespace'::TX::txDeleteDC(struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13652):
+
+  13650: bool txDeleteDC (HDC dc)
+  13651:     {
+=>13652: $1  return txDeleteDC (&dc);
+  13653:     }
+  13654: 
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (133):
+
+    131: void PowerPoint::deleteDC(HDC dc)
+    132: {
+=>  133:     if (dc) txDeleteDC(dc);
+    134:     else printf("DC[%d] не существует\n", (int)dc);
+    135: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:33:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009CFFC8 (32-bit), Flags: CMdrE0, Thread: 0xC018 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008ED270 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x008F1950 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x008F6714 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 9 0x755E9357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#10 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#11 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#12 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#15 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#16 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#17 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#18 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#19 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#20 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#21 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#22 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#23 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x755D6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#25 0x755DFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#26 0x7785719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#27 0x755ED7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#28 0x730F90B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#29 0x730FB742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#30 0x7310C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#31 0x755E9346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#32 0x008F6F21 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#33 0x755F7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#34 0x755D714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#35 0x755D5A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#36 0x755F1A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#37 0x008F5809 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: `anonymous namespace'::TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#38 0x76217EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#39 0x76217FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#40 0x76806739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#41 0x77848FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#42 0x77848FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl `anonymous-namespace'::TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl `anonymous-namespace'::TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in long __stdcall `anonymous-namespace'::TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in unsigned int __stdcall `anonymous-namespace'::TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 22 2022 00:31:48, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 22 2022 00:33:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

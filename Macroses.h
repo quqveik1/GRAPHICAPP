@@ -76,5 +76,5 @@
 #define drawOnFinalDC(button)					  \
 {												  \
 	button.draw ();								  \
-	txBitBlt (finalDC, button.rect.pos.x, button.rect.pos.y, button.rect.getSize().x, button.rect.getSize().y, button.finalDC);  \
+	button.app->bitBlt (finalDC, button.rect.pos.x, button.rect.pos.y, button.rect.getSize().x, button.rect.getSize().y, button.finalDC);  \
 }

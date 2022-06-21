@@ -56,18 +56,18 @@ void TwoOptionsMenu::draw()
 
 	if (dc) copyOnDC(0, 0, dc);
 	upSlider.draw();
-	//printBlt(finalDC);
-	txBitBlt(finalDC, upSlider.rect.pos.x, upSlider.rect.pos.y, upSlider.rect.getSize().x, upSlider.rect.getSize().y, upSlider.finalDC);
+	//app->drawOnScreen(finalDC);
+	app->bitBlt(finalDC, upSlider.rect.pos.x, upSlider.rect.pos.y, upSlider.rect.getSize().x, upSlider.rect.getSize().y, upSlider.finalDC);
 
 	downSlider.draw();
-	txBitBlt(finalDC, downSlider.rect.pos.x, downSlider.rect.pos.y, downSlider.rect.getSize().x, downSlider.rect.getSize().y, downSlider.finalDC);
+	app->bitBlt(finalDC, downSlider.rect.pos.x, downSlider.rect.pos.y, downSlider.rect.getSize().x, downSlider.rect.getSize().y, downSlider.finalDC);
 	char upNum[100] = {};
 	char downNum[100] = {};
 	sprintf(upNum, "%d", (int)firstVal);
 	sprintf(downNum, "%d", (int)secondVal);
 
 	txSetTextAlign(TA_LEFT, finalDC);
-	//txSetAllColors(TX_BLACK, finalDC);
+	//app->setColor(TX_BLACK, finalDC);
 	txSelectFont ("Arial", 18, -1, FW_DONTCARE, false, false, false, 0, finalDC);
 	txTextOut (185, 43, upNum, finalDC);
 	txTextOut (185, 92, downNum, finalDC);

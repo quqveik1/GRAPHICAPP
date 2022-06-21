@@ -1,6 +1,51 @@
 #pragma once
 #include "GlobalOptions.h"
 
+
+void setDefaultSystemSettings(CSystemSettings* systemSettings)
+{
+    if (!systemSettings)
+    {
+        printf("systemSettings не существует дефолтные параметры не установились.\n");
+        return;
+    }
+    systemSettings->MenuColor = RGB(45, 45, 45);
+    systemSettings->SecondMenuColor = RGB(30, 30, 30);
+    systemSettings->TextColor = RGB(255, 255, 255);
+    systemSettings->BackgroundColor = RGB(0, 0, 0);
+    systemSettings->DrawColor = RGB(128, 0, 0);
+    systemSettings->TRANSPARENTCOLOR = RGB(57, 57, 57);
+
+    systemSettings->ONEMENUBUTTONSNUM = 10;
+    systemSettings->ONELAYTOOLSLIMIT = 100;
+
+    systemSettings->MainFont = 20;
+    systemSettings->FONTNAME = "Arial";
+    systemSettings->TEXTFORMAT = 262165;
+
+    systemSettings->HANDLEHEIGHT = 26.000000;
+    systemSettings->BUTTONWIDTH = 50.000000;
+    systemSettings->BUTTONHEIGHT = 50.000000;
+    systemSettings->MENUBUTTONSWIDTH = 50.000000;
+    systemSettings->SIDETHICKNESS = 2.000000;
+    systemSettings->SCROLLBARTHICKNESS = 20.000000;
+
+    systemSettings->debugMode = 1;
+
+    systemSettings->DrawingMode = 1;
+
+    systemSettings->SizeOfScreen.x = 1900.000000;
+    systemSettings->SizeOfScreen.y = 900.000000;
+
+    systemSettings->WindowStyle = -2134376448;
+
+    systemSettings->DCMAXSIZE = 1000;
+
+    systemSettings->DCVECTORSIZE.x = 1000.000000;
+    systemSettings->DCVECTORSIZE.y = 1000.000000;
+
+}
+
 void setSystemSettings(CSystemSettings* systemSettings, const char* path)
 {
     assert(path);

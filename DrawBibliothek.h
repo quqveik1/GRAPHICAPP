@@ -33,9 +33,9 @@ struct CHistoryStep
 
 void txSetAllColors$(DebugInfo info, COLORREF color, HDC dc = txDC(), int thickness = 1);
 #define txSetAllColors(...) txSetAllColors$ (getDebugInfo, __VA_ARGS__)
-void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
+void compressDraw$ (DebugInfo info, AbstractAppData* app, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
 #define compressDraw(...) compressDraw$ (getDebugInfo, __VA_ARGS__)
-void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
+void compressImage$(DebugInfo info, AbstractAppData* app, HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
 #define compressImage(...) compressImage$ (getDebugInfo, __VA_ARGS__)
 bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked);
 #define drag(...) drag$ (getDebugInfo, __VA_ARGS__)
@@ -47,7 +47,7 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager);
 #define standartManagerDraw(...) standartManagerDraw$ (getDebugInfo, __VA_ARGS__)
 void clickButton (Window *window, Manager *manager, Vector mp);
 void selectFont$ (DebugInfo info, const char *text, int font, HDC dc);
-#define selectFont(...) selectFont$ (getDebugInfo, __VA_ARGS__)
+//#define selectFont(...) selectFont$ (getDebugInfo, __VA_ARGS__)
 void swap$ (DebugInfo info, int &x0, int &y0);
 #define swap(...) swap$ (getDebugInfo, __VA_ARGS__)
 Vector windowMousePos(bool isThisMainFile = true);
@@ -118,8 +118,9 @@ struct Window
 
     ~Window ()
     {
-        if (dc) txDeleteDC (dc);
-        if (finalDC) txDeleteDC (dc);
+        assert(app);
+        if (dc) app->deleteDC(dc);
+        if (finalDC) app->deleteDC(dc);
     }
 
 
@@ -170,8 +171,9 @@ struct Manager : Window
 
     ~Manager()
     {
-        if (dc) txDeleteDC(dc);
-        if (finalDC) txDeleteDC(finalDC);
+        assert(app);
+        if (dc) app->deleteDC(dc);
+        if (finalDC) app->deleteDC(finalDC);
         for (int i = 0; i < length; i++)
         {
             if (pointers[i]) delete pointers[i];

@@ -48,7 +48,7 @@ void KontrastMenu::useAlgorithm()
 
 void KontrastMenu::apply ()
 {
-    txBitBlt(activeLay->getPermanentDC(), 0, 0, 0, 0, activeLay->getOutputDC());
+    app->bitBlt(activeLay->getPermanentDC(), 0, 0, 0, 0, activeLay->getOutputDC());
     app->drawOnScreen(activeLay->getPermanentDC());
     _getch();
 }

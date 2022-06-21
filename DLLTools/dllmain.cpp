@@ -158,7 +158,7 @@ void Line::outputFunc(HDC outdc)
 { 
     ToolSave* toolDate = getToolData();
     app->line({ .pos = toolDate->pos, .finishPos = toolDate->pos + toolDate->size }, outdc);
-    //txLine(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
+    //app->line(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
 }
 
 
@@ -235,7 +235,7 @@ bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 
 
     app->setColor(TX_WHITE, dc, 1);
-    drawCadre(toolLay->toolZone, dc);
+    app->drawCadre(toolLay->toolZone, dc);
 
     for (int i = 0; i < controlSquareLength; i++)
     {

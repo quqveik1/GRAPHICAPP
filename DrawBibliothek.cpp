@@ -15,6 +15,7 @@ bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLas
 {
     qassert (objPos && lastTimePos, info);
 
+    /*
     int mx = txMouseX();
     int my = txMouseY();
     if (*dragedLastTime == false && txMouseButtons() == 1)
@@ -39,19 +40,20 @@ bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLas
 		*dragedLastTime = false;
         return true;//true if finished
 	}
+    */
     return false;
 }
 
 
-void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line)
+void compressImage$ (DebugInfo info, AbstractAppData* app, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line/* = NULL*/)
 {
     qassert (oldDC, info);
 	char str[10] = {};
 	sprintf(str, "%d", line);
 		//newSize.print (str);
 
-    if (!newDC) txDeleteDC (newDC);
-	newDC = txCreateCompatibleDC (newSize.x, newSize.y);
+    //if (!newDC) app->deleteDC (newDC);
+	newDC = app->createDIBSection (newSize.x, newSize.y);
     qassert (newDC, info);
 
 	qassert (StretchBlt (newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y, SRCCOPY), info);
@@ -64,43 +66,49 @@ void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vect
 
 
 
-void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line)
+void compressDraw$(DebugInfo info, AbstractAppData* app, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line/* = NULL*/)
 {
     qassert (finalDC && dc, info);
 	HDC copyOfDC = NULL;
 	//if (test1)printBlt (dc);
-	compressImage (copyOfDC, finalSize, dc, originalSize, line);
+	compressImage (app, copyOfDC, finalSize, dc, originalSize, line);
 	//printBlt (dc);
-	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+	app->bitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
 	
-    txDeleteDC (copyOfDC);
+    app->deleteDC (copyOfDC);
 }
 
 
+/*
 void selectFont$ (DebugInfo info, const char *text, int font, HDC dc)
 {
     txSelectFont ("Arial", font, -1, FW_DONTCARE, false, false, false, 0, dc);    
 }
+*/
 
 
 
 void standartDraw$ (DebugInfo info, Window *window)
 {
     qassert (window, info);
-    $s                                                                                     
-	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
-	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+    $s
+
+    AbstractAppData* app = window->app;
+    assert(app);
+
+	if (window->finalDC) app->setColor(window->color, window->finalDC);
+	if (window->finalDC) app->rectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);
                                                                                            
                                                                                           
-	if (window->finalDC) txSetAllColors (window->systemSettings->TextColor, window->finalDC);                                     
-	txSetTextAlign (TA_CENTER, window->finalDC);
-    selectFont ("Arial", window->font, window->finalDC);
-    txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
+	if (window->finalDC) app->setColor(window->systemSettings->TextColor, window->finalDC);
+    app->setAlign(TA_CENTER, window->finalDC);
+    app->selectFont ("Arial", window->font, window->finalDC);
+    app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
                                                                                            
                                                                                           
 	if (window->dc)                                                                                
 	{                                                                                           
-		compressDraw (window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+		compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
 	}                                                                                         
 }
 
@@ -209,10 +217,12 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
     //{
         //hide ();
     //}
+    AbstractAppData* app = manager->app;
+    assert(app);
 
-	txSetAllColors (manager->color, manager->finalDC);
+    app->setColor(manager->color, manager->finalDC);
 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
-	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
     manager->controlMouse ();
 
@@ -224,7 +234,7 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
  		if (manager->pointers[i]->advancedMode) 
 		{
-			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+            app->bitBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
 			//printBlt (pointers[i]->finalDC);
 		}
@@ -286,7 +296,7 @@ void Window::print (HDC DC)
 {
     assert (DC);
 	draw();
-	txBitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
+	app->bitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
 }
 
 Vector Window::getSize()
@@ -316,10 +326,10 @@ void Window::resize (Rect newRect)
 	{
 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
         if (systemSettings->debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
-		finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
-		txSetAllColors(color, finalDC);
-		txRectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
-		if (systemSettings->debugMode == 5) printBlt(finalDC);
+		finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+		app->setColor(color, finalDC);
+		app->rectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
+		if (systemSettings->debugMode == 5) app->drawOnScreen(finalDC);
 	}
     rect = newRect;
 }
@@ -329,10 +339,10 @@ void Window::reInit ()
     if (rect.getSize().x > 0 && rect.getSize().y > 0)
 	{
 			finalDCSize = {rect.getSize().x, rect.getSize().y};
-			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
-			txSetAllColors(color, finalDC);
-			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
-			if (systemSettings->debugMode == 5) printBlt(finalDC);
+			finalDC = app->createDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+            app->setColor(color, finalDC);
+            app->rectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+			if (systemSettings->debugMode == 5) app->drawOnScreen(finalDC);
 	}
 
 	originalRect = rect;
@@ -356,9 +366,10 @@ void Window::setStartRect (Vector pos, Vector finishPos)
 }
 Vector Window::getRelativeMousePos (bool coordinatsWithHandle)
 {
-    POINT mousePos = {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};
-    ScreenToClient (systemSettings->MAINWINDOW, &mousePos);
-    return {(double)mousePos.x, (double)mousePos.y};
+    //POINT mousePos = {(double)txMouseX() - getAbsCoordinats(coordinatsWithHandle).x, (double) txMouseY () - getAbsCoordinats(coordinatsWithHandle).y};
+    //ScreenToClient (systemSettings->MAINWINDOW, &mousePos);
+    //return {(double)mousePos.x, (double)mousePos.y};
+    return { 0, 0 };
 }
 
 Vector Window::getAbsCoordinats (bool coordinatsWithHandle /*=false*/)

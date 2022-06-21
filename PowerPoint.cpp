@@ -20,6 +20,7 @@
 #include "LoadManager.cpp"
 #include "Lay.cpp"
 #include "GlobalOptions.cpp"
+#include "AppApi.cpp"
 
 
 CSystemSettings SystemSettings;
@@ -97,7 +98,7 @@ struct ToolsPalette : Menu
         {
             tools[i]->rect = {.pos = {0, (double) i * 50}, .finishPos = {50, (double) (i + 1) * 50}};
             tools[i]->dc = ToolManager.tools[i]->getDC();
-            tools[i]->finalDC = txCreateDIBSection (tools[i]->getSize().x, tools[i]->getSize().y);
+            tools[i]->finalDC = app->createDIBSection (tools[i]->getSize().x, tools[i]->getSize().y);
             tools[i]->originalRect = tools[i]->rect;
             addWindow (tools[i]);
             currentSize++;
@@ -123,10 +124,10 @@ struct ToolMenu : Menu
         loadManager = _loadManager;
         emptyToolDC = loadManager->loadImage("addToolButton2.bmp");
 
-        txSetAllColors(color, finalDC);
-        txRectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
+        app->setColor(color, finalDC);
+        app->rectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
         font = SystemSettings.MainFont * 1.5;
-        txSelectFontDC(SystemSettings.FONTNAME, font, finalDC);
+        app->selectFont(SystemSettings.FONTNAME, font, finalDC);
     }
 
 
@@ -216,43 +217,6 @@ struct CleanButton : Window
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;
 };
-
-
-
-/*
-struct History : Manager
-{
-	CanvasManager *canvasManager;
-	ToolsPalette *palette;
-	HDC openCanvas;
-	int toolHDCSize;
-	HDC *toolsDC = new HDC[SystemSettings.TOOLSNUM];
-
-	History (Rect _rect, CanvasManager *_canvasManager, ToolsPalette *_palette, HDC _openCanvas = NULL) :
-		Manager (_rect, 0, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize().x, SystemSettings.HANDLEHEIGHT}}),
-		canvasManager (_canvasManager),
-		palette (_palette),
-		toolHDCSize (palette->pointers[0]->rect.getSize().y * 0.5)
-	{
-		txSelectFont ("Arial", 21, 7, FW_DONTCARE, false, false, false, 0, handle.finalDC);
-		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y;
-		handle.rect.finishPos.x = rect.getSize().x;
-		handle.color = SystemSettings.MenuColor;
-		handle.text = "История";
-
-		for (int i = 0; i < SystemSettings.TOOLSNUM; i++)
-		{
-			//compressImage (toolsDC[i], {(double)toolHDCSize/2, (double)toolHDCSize/2}, palette->pointers[i]->dc, {palette->pointers[0]->rect.getSize().y, palette->pointers[0]->rect.getSize().y}, __LINE__);
-			 //printBlt (toolsDC[i]);
-		}
-		
-		//if (_openCanvas) compressImage (openCanvas, {rect.getSize().x, (double) toolHDCSize}, _openCanvas, {50, 50}, __LINE__);
-	}
-
-	virtual void draw () override;
-	virtual void onClick (Vector mp) override;
-};
-*/
 
 struct LaysMenu : Manager
 {
@@ -365,46 +329,7 @@ struct NumChange : Manager
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;
 };
-
-/*
-struct BrightnessButton : Manager
-{
-	Slider SecondFilterValueSlider;
-	Slider FirstFilterValueSlider;
-	Window closeButton;
-	Window grafic;
-	Window confirmButton;
-	double graficScale;
-	//double copyOfSecondFilterValue;
-
-	BrightnessButton (Rect _mainRect, Rect _graficRect, Rect _sliderRect, Rect _FirstFilterValueSliderRect, Rect _confirmButton, Rect _closeButtonRect = {}) :
-		Manager (_mainRect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_mainRect.getSize ().x, _mainRect.getSize ().y * 0.1}}),
-		grafic (_graficRect),
-		SecondFilterValueSlider (_sliderRect, &copyOfSecondFilterValue, 0.18, 0, 255, false, true),
-		confirmButton (_confirmButton),
-		closeButton (_closeButtonRect),
-		FirstFilterValueSlider (_FirstFilterValueSliderRect, &copyOfFirstFilterValue, 0.18, 0, 255, false, true)
-		{
-			SecondFilterValueSlider.manager = this;
-			FirstFilterValueSlider.manager = this;
-			closeButton.manager = this;
-			SecondFilterValueSlider.manager = this;
-			confirmButton.manager = this;
-			graficScale = (grafic.rect.getSize().y / grafic.rect.getSize().x);	
-
-			//compressImage (dc, {rect.getSize ().x, rect.getSize ().y}, LoadManager.loadImage ("Brightness.bmp"), {444, 361}, __LINE__);
-
-			//printBlt (dc);
-		}
-
-
-	virtual void draw () override;
-	virtual void onClick (Vector mp) override;
-};
-*/
  
-
-
 struct StatusBar : Manager
 {
 
@@ -475,21 +400,6 @@ struct List : Manager
     virtual void draw() override;
 	virtual void onClick(Vector mp) override;
 };  
-/*
-struct List : Manager
-{
-    Vector oneItemSize;
-
-
-    List (Vector _pos, int _maxLength, Vector _oneItemSize) :
-        Manager(_app, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false),
-        oneItemSize (_oneItemSize)
-    {
-    }
-
-    virtual void draw();
-    virtual void onClick();
-}; */
 
 struct SaveImages : Window
 {
@@ -504,19 +414,6 @@ struct SaveImages : Window
     virtual void draw() override;
 };
 
-struct PowerPoint : AbstractAppData
-{
-    virtual void setColor (COLORREF color, HDC dc, int thickness);
-    virtual void rectangle (Rect rect, HDC dc);
-    virtual void drawOnScreen (HDC dc, bool useAlpha = false);
-    virtual void cleanTransparentDC();
-    virtual bool getAsyncKeyState(int symbol);
-    virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize);
-    virtual void line(Rect rect, HDC dc);
-    virtual void ellipse(Vector centrPos, Vector halfSize, HDC dc);
-    virtual void transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2);
-    
-};
 
 
 
@@ -541,6 +438,8 @@ int main (int argc, int *argv[])
     appData->currColor = &(SystemSettings.DrawColor);
     appData->loadManager = &LoadManager;
 
+    setDefaultSystemSettings(appData->systemSettings);
+
     setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
 
     _txWindowStyle = SystemSettings.WindowStyle;
@@ -555,7 +454,7 @@ int main (int argc, int *argv[])
 
 	HDC addNewCanvasDC = {};
 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
-	compressImage (addNewCanvasDC, {50, 50}, oldDC, {225, 225});
+	compressImage (appData, addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	txDeleteDC(oldDC);
 
 	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, SystemSettings.SizeOfScreen.y - 20}, .finishPos = SystemSettings.SizeOfScreen } , TX_BLUE);
@@ -671,58 +570,6 @@ int main (int argc, int *argv[])
 }
 
 
-void PowerPoint::setColor (COLORREF color, HDC dc, int thickness)
-{
-    if (SystemSettings.debugMode) printf("SetColor: %d|", color);
-    txSetAllColors (color, dc, thickness);
-}
-
-void PowerPoint::rectangle (Rect rect, HDC dc)
-{
-    txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
-}
-
-void PowerPoint::line(Rect rect, HDC dc)
-{
-    txLine(rect.pos.x, rect.pos .y, rect.finishPos.x, rect.finishPos.y, dc);
-}
-
-void PowerPoint::ellipse(Vector centrePos, Vector halfSize, HDC dc)
-{
-    txEllipse(centrePos.x - halfSize.x, centrePos.y - halfSize.y, centrePos.x + halfSize.x, centrePos.y + halfSize.y, dc);
-}
-
-void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
-{
-    txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, 0, 0, SystemSettings.TRANSPARENTCOLOR);
-}
-
-void PowerPoint::drawOnScreen (HDC dc, bool useAlpha /*=false*/)
-{
-    if (!useAlpha)txBitBlt (0, 0, dc);
-    if (useAlpha)txAlphaBlend (0, 0, dc);
-    txSleep (0);
-} 
-void PowerPoint::cleanTransparentDC()
-{
-    txSetAllColors(SystemSettings.TRANSPARENTCOLOR, transparentLay.lay);
-    txRectangle(0, 0, transparentLay.laySize.x, transparentLay.laySize.y, transparentLay.lay);
-    //txClear(transparentLay.lay);
-    //deleteTransparency(transparentLay.layBuf, transparentLay.laySize.x * transparentLay.laySize.y);
-}
-
-bool PowerPoint::getAsyncKeyState(int symbol)
-{
-    return txGetAsyncKeyState(symbol);
-}
-
-void PowerPoint::deleteTransparency(RGBQUAD* buf, unsigned int totalSize)
-{
-    for (int i = 0; i < totalSize; i++)
-    {
-        buf[i].rgbReserved = 255;
-    }
-}
 
 
 void List::draw()
@@ -734,11 +581,11 @@ void List::draw()
     for (int i = 0; i < newButtonNum; i++)
     {
         //pointers[i]->advancedMode = advancedMode;
-        txSetAllColors (SystemSettings.SecondMenuColor, finalDC, SystemSettings.SIDETHICKNESS);
-        txLine (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+        app->setColor (SystemSettings.SecondMenuColor, finalDC, SystemSettings.SIDETHICKNESS);
+        app->line (0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
 
         if (items[i]->openManager->advancedMode) 
-            txEllipse (rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
+            app->ellipse (rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
 
         if (isThisItemList[i] && !advancedMode)
         {
@@ -777,8 +624,8 @@ void SaveImages::draw()
 
 void StatusBar::draw()
 {
-	txSetAllColors(color, finalDC);
-	txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+	app->setColor(color, finalDC);
+	app->rectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 
 	if (timeButton)timeButton->draw();
 	
@@ -790,11 +637,11 @@ void StatusBar::draw()
 		currentNum = *progressBar->currentNum;
 	}
 
-	if (currentNum)txBitBlt(finalDC, 0, 0, rect.getSize().x, rect.getSize().y, progressBar->finalDC);
+	if (currentNum)app->bitBlt(finalDC, 0, 0, rect.getSize().x, rect.getSize().y, progressBar->finalDC);
 
 	char text[32] = {};
-	txSetAllColors(TX_WHITE, finalDC);
-	txSelectFontDC("Arial", SystemSettings.MainFont, finalDC);
+	app->setColor(TX_WHITE, finalDC);
+	app->selectFont("Arial", SystemSettings.MainFont, finalDC);
 	if (currentNum != 0)
 	{
 		sprintf(text, "Статус: применяется фильтр");
@@ -804,10 +651,11 @@ void StatusBar::draw()
 	{
 		sprintf(text, "Статус: фоновых задач нет");
 	}
-	txSetTextAlign(TA_LEFT, finalDC);
-	txTextOut(10, 0, text, finalDC);
+	app->setAlign(TA_LEFT, finalDC);
+	app->drawText(10, 0, getSize().x, getSize().y, text, finalDC);
 
-	txBitBlt(finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
+
+	if (timeButton) app->bitBlt (finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
 
 }
 
@@ -880,19 +728,19 @@ void BrightnessButton::draw ()
 
 	if (dc) copyOnDC (0, 0, dc);
 	SecondFilterValueSlider.draw ();
-	//printBlt(brightnessSlider.finalDC);
-	txBitBlt (finalDC, SecondFilterValueSlider.rect.pos.x, SecondFilterValueSlider.rect.pos.y, SecondFilterValueSlider.rect.getSize().x, SecondFilterValueSlider.rect.getSize().y, SecondFilterValueSlider.finalDC);
+	//app->drawOnScreen(brightnessSlider.finalDC);
+	app->bitBlt (finalDC, SecondFilterValueSlider.rect.pos.x, SecondFilterValueSlider.rect.pos.y, SecondFilterValueSlider.rect.getSize().x, SecondFilterValueSlider.rect.getSize().y, SecondFilterValueSlider.finalDC);
 
 	FirstFilterValueSlider.draw ();
-	//printBlt(FirstFilterValueSlider.finalDC);
-	txBitBlt (finalDC, FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.rect.getSize().x, FirstFilterValueSlider.rect.getSize().y, FirstFilterValueSlider.finalDC);
-	//txBitBlt (FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.finalDC);
-	//txBitBlt (300, 300, FirstFilterValueSlider.finalDC);
+	//app->drawOnScreen(FirstFilterValueSlider.finalDC);
+	app->bitBlt (finalDC, FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.rect.getSize().x, FirstFilterValueSlider.rect.getSize().y, FirstFilterValueSlider.finalDC);
+	//app->bitBlt (FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.finalDC);
+	//app->bitBlt (300, 300, FirstFilterValueSlider.finalDC);
 	txSetFillColor (TX_RED);
-	txRectangle (300, 300, 400, 400);
+	app->rectangle (300, 300, 400, 400);
 
-	txSetAllColors (SystemSettings.BackgroundColor, finalDC);
-	txLine (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfFirstFilterValue / 255),
+	app->setColor (SystemSettings.BackgroundColor, finalDC);
+	app->line (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfFirstFilterValue / 255),
 			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfSecondFilterValue / 255), finalDC);
 }
 
@@ -934,9 +782,9 @@ void NumChange::draw ()
 
 	sscanf  (inText, "%lf", num);
 
-	txBitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusDC); 
+	//app->bitBlt (plusNum.rect.pos.x, plusNum.rect.pos.y, plusMinusDC); 
 
-	//if (backGround) txBitBlt (minusNum.rect.pos.x, minusNum.rect.pos.y, backGround);
+	//if (backGround) app->bitBlt (minusNum.rect.pos.x, minusNum.rect.pos.y, backGround);
 
 	plusNum.draw  ();
 	minusNum.draw (); 
@@ -954,9 +802,10 @@ void NumChange::draw ()
 
 void NumChange::onClick (Vector mp)
 {
-	int mx = txMouseX ();
-	int my = txMouseY ();
+	//int mx = txMouseX ();
+	//int my = txMouseY ();
 
+    /*
 	 if (stringButton.rect.inRect (mx, my))
 	 {
 		 activeWindow = &stringButton;
@@ -1011,27 +860,27 @@ void NumChange::onClick (Vector mp)
 
 		//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 	}
-
+   */
 }
 
 void ToolsPalette::drawOneLine(int lineNum)
 {
     pointers[lineNum]->draw();
-    //printBlt (pointers[lineNum]->dc);
-    if (pointers[lineNum]->advancedMode) txBitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
+    //app->drawOnScreen (pointers[lineNum]->dc);
+    if (pointers[lineNum]->advancedMode) app->bitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
 
     if (lastSelected == lineNum)
     {
-        txSetAllColors(TX_WHITE, finalDC);
-        txRectangle(pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.pos.x + pointers[lineNum]->rect.getSize().x * 0.1, pointers[lineNum]->rect.pos.y + pointers[lineNum]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
+        app->setColor(TX_WHITE, finalDC);
+        app->rectangle(pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.pos.x + pointers[lineNum]->rect.getSize().x * 0.1, pointers[lineNum]->rect.pos.y + pointers[lineNum]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
     }
-    if (txMouseButtons() != 1)
+    if (clicked != 1)
     {
         pointers[lineNum]->isClicked = false;
     }
 
-    txSetColor(TX_BLACK, 1, finalDC);
-    txLine(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
+    app->setColor(TX_BLACK, finalDC);
+    app->line(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
 }
 
 int ToolsPalette::onClickLine(Vector mp)
@@ -1106,20 +955,20 @@ void ToolMenu::drawOneLine(int lineNum)
 
     int linePosY = SystemSettings.BUTTONHEIGHT * lineNum + handle.rect.finishPos.y;
 
-    txBitBlt(finalDC, 0, linePosY, SystemSettings.BUTTONWIDTH, linePosY + SystemSettings.BUTTONHEIGHT, toolDC);
-    txSetAllColors(SystemSettings.MenuColor, finalDC);
-    txRectangle(SystemSettings.BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + SystemSettings.BUTTONHEIGHT,                         finalDC);
+    app->bitBlt(finalDC, 0, linePosY, SystemSettings.BUTTONWIDTH, linePosY + SystemSettings.BUTTONHEIGHT, toolDC);
+    app->setColor(SystemSettings.MenuColor, finalDC);
+    app->rectangle(SystemSettings.BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + SystemSettings.BUTTONHEIGHT,                         finalDC);
 
-    txSetColor(SystemSettings.TextColor, 1, finalDC);
-    txDrawText (SystemSettings.BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + SystemSettings.BUTTONHEIGHT, outputText, SystemSettings.TEXTFORMAT, finalDC);
+    app->setColor(SystemSettings.TextColor, finalDC);
+    app->drawText (SystemSettings.BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + SystemSettings.BUTTONHEIGHT, outputText, finalDC, SystemSettings.TEXTFORMAT);
 
-    txSetColor(TX_BLACK, 1, finalDC);
-    txLine(0, linePosY, rect.getSize().x, linePosY, finalDC);
+    app->setColor(TX_BLACK, finalDC);
+    app->line(0, linePosY, rect.getSize().x, linePosY, finalDC);
 
     if (lastSelected == lineNum)
     {
-        txSetAllColors(TX_WHITE, finalDC);
-        txRectangle(0, linePosY, 5, linePosY + 5, finalDC);
+        app->setColor(TX_WHITE, finalDC);
+        app->rectangle(0, linePosY, 5, linePosY + 5, finalDC);
     }
 }
 
@@ -1154,19 +1003,19 @@ void StringButton::draw ()
 	{
 		if (checkDeltaTime (lastTimeClicked))
 		{
-			if (txGetAsyncKeyState(VK_LEFT) && cursorPosition >= 0)
+			if (app->getAsyncKeyState(VK_LEFT) && cursorPosition >= 0)
 			{
 				cursorMovement (VK_LEFT);
 				//printf ("left");
 				switched = true;
 			}
-			if (txGetAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 2)
+			if (app->getAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 2)
 			{
 				cursorMovement (VK_RIGHT);
 				switched = true;
 			}
 
-			if (txGetAsyncKeyState (VK_BACK))
+			if (app->getAsyncKeyState (VK_BACK))
 			{
 				backSpace ();	
 			}
@@ -1191,10 +1040,10 @@ void StringButton::draw ()
 		}
 	}
 
-	txSetTextAlign (TA_LEFT);
-	txSetAllColors (TX_WHITE);
+	//txSetTextAlign (TA_LEFT);
+	//app->setColor (TX_WHITE);
 	
-	txTextOut (rect.pos.x, rect.pos.y, inText);
+	//txTextOut (rect.pos.x, rect.pos.y, inText);
 
 	if (manager->getActiveWindow () == this) shiftArrBack (&inText[cursorPosition + 1], 10);
 
@@ -1322,7 +1171,7 @@ void OpenManager::onClick (Vector mp)
 void OpenManager::draw()
 {
     standartDraw (this);
-	txSetAllColors (SystemSettings.TextColor, finalDC, SystemSettings.MainFont); 
+	app->setColor (SystemSettings.TextColor, finalDC, SystemSettings.MainFont); 
     
     //openManager->advancedMode = advancedMode;
 
@@ -1334,19 +1183,22 @@ void OpenManager::draw()
 
 void Engine (Manager *manager)
 {
-    assert (manager);                                                       
+    assert (manager); 
+    AbstractAppData* app = manager->app;
+    assert(app);
+
 	for (;;)
 	{
         txClearConsole();
         if (SystemSettings.debugMode) printf ("FPS: %lf\n", txGetFPS());
-		txSetAllColors (SystemSettings.BackgroundColor);
-		txRectangle (0, 0, 2000, 2000);
+		app->setColor (SystemSettings.BackgroundColor, txDC());
+		app->rectangle (0, 0, 2000, 2000, txDC());
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
         if (SystemSettings.debugMode) printf("Engine clicked: %d\n", txMouseButtons());
 		manager->draw ();
-		if (manager->finalDC) txBitBlt (manager->rect.pos.x, manager->rect.pos.x, manager->finalDC);
+		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
 		{
             
@@ -1370,7 +1222,7 @@ void Engine (Manager *manager)
 void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 {
     assert (dc);
-	txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
+	//app->rectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
 void LaysMenu::onClick (Vector mp)
@@ -1405,8 +1257,8 @@ void LaysMenu::onClick (Vector mp)
 
 void LaysMenu::draw()
 {
-	txSetAllColors(color, finalDC);
-	txRectangle(0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, finalDC);
+	app->setColor(color, finalDC);
+	app->rectangle(0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, finalDC);
 	char text[30] = {};
 
     handle.print(finalDC);
@@ -1422,16 +1274,16 @@ void LaysMenu::draw()
 
 			sprintf(text, "Слой %d", i + 1);
 
-			txSetTextAlign(TA_CENTER, finalDC);
-			txSetAllColors(SystemSettings.TextColor, finalDC);
-            selectFont ("Arial", sectionFont, finalDC);
+			app->setAlign(TA_CENTER, finalDC);
+			app->setColor(SystemSettings.TextColor, finalDC);
+            app->selectFont ("Arial", sectionFont, finalDC);
 			
-			txDrawText(sideThickness, sideThickness + handle.rect.getSize().y + sectionHeight * i, rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i + 1), text, DT_VCENTER, finalDC);
+			app->drawText(sideThickness, sideThickness + handle.rect.getSize().y + sectionHeight * i, rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i + 1), text, finalDC, DT_VCENTER);
 
-			txLine(0, handle.rect.getSize().y + sectionHeight * (i), rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i), finalDC);
+			app->line(0, handle.rect.getSize().y + sectionHeight * (i), rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i), finalDC);
 		}
-        txBitBlt(finalDC, 0, rect.getSize().y - buttonSize.y, 0, 0, addNewLayButton);
-        txLine(0, rect.getSize().y - buttonSize.y, rect.getSize().x, rect.getSize().y - buttonSize.y, finalDC);
+        app->bitBlt(finalDC, 0, rect.getSize().y - buttonSize.y, 0, 0, addNewLayButton);
+        app->line(0, rect.getSize().y - buttonSize.y, rect.getSize().x, rect.getSize().y - buttonSize.y, finalDC);
 	}
 }
 
@@ -1439,8 +1291,8 @@ void LaysMenu::draw()
 /*
 void History::draw ()
 {
-	txSetAllColors (TX_BLACK, finalDC);
-	txRectangle (0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, finalDC);
+	app->setColor (TX_BLACK, finalDC);
+	app->rectangle (0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, finalDC);
 
 	
 	
@@ -1456,13 +1308,13 @@ void History::draw ()
 				int tool = 0;
 				if (canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1] > 0 && canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i >= 0)	
 				{
-					txBitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);
+					app->bitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);
 					tool = canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i];
 				}
 		
 				if (canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i < 0 && canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i]  >  0)
 				{
-					txBitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);	
+					app->bitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);	
 					tool = canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i];
 				}
 				//txSetTextAlign (TA_LEFT);
@@ -1490,14 +1342,14 @@ void History::draw ()
 				
 
 				//txTextOut ((toolHDCSize + rect.getSize().x) / 2, handle.rect.getSize().y + toolHDCSize * i + toolHDCSize / 2, toolName, finalDC);
-				//printBlt(finalDC);
+				//app->drawOnScreen(finalDC);
 				txSelectFont ("Arial", 18, 5, FW_DONTCARE, false, false, false, 0, finalDC);
 				txSetTextAlign(TA_CENTER, finalDC);
-				txSetAllColors(SystemSettings.TextColor, finalDC);
+				app->setColor(SystemSettings.TextColor, finalDC);
 				txDrawText (toolHDCSize + rect.getSize().x * 0.05, handle.rect.getSize().y + toolHDCSize * i, rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i + 1), toolName, DT_VCENTER, finalDC);
 
-				txSetAllColors(SystemSettings.MenuColor, finalDC);
-				txLine (0, handle.rect.getSize().y + toolHDCSize * (i), rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i), finalDC);
+				app->setColor(SystemSettings.MenuColor, finalDC);
+				app->line (0, handle.rect.getSize().y + toolHDCSize * (i), rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i), finalDC);
 			}
 
 		}
@@ -1506,9 +1358,9 @@ void History::draw ()
 	handle.print (finalDC);
 	controlHandle ();
 	
-	txRectangle (0, 0, SystemSettings.SIDETHICKNESS, rect.getSize().y, finalDC);
-	txRectangle (0, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
-	txRectangle(rect.getSize().x - SystemSettings.SIDETHICKNESS, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, 0, finalDC);
+	app->rectangle (0, 0, SystemSettings.SIDETHICKNESS, rect.getSize().y, finalDC);
+	app->rectangle (0, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
+	app->rectangle(rect.getSize().x - SystemSettings.SIDETHICKNESS, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, 0, finalDC);
 }
 
 
@@ -1547,8 +1399,8 @@ void History::onClick (Vector mp)
 
 void TimeButton::draw ()
 {
-	if (manager)txSetAllColors (manager->color, finalDC);
-	txRectangle(0, 0, getSize().x, getSize().y, finalDC);
+	if (manager)app->setColor (manager->color, finalDC);
+	app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 	time_t t = time (NULL);
 	t = t % (24 * 3600);
 
@@ -1559,11 +1411,11 @@ void TimeButton::draw ()
 
 	sprintf (newStr, "%d:%02d:%02d", hours + 3, minutes, second);
 
-	txSetTextAlign (TA_LEFT, finalDC);
-	txSetAllColors (color, finalDC);
-	txSelectFontDC ("Arial", font, finalDC);
-	txTextOut (0, 0, newStr, finalDC);
-	//printBlt(finalDC);
+	app->setAlign (TA_LEFT, finalDC);
+	app->setColor (color, finalDC);
+    app->selectFont("Arial", font, finalDC);
+	app->drawText (0, 0, getSize().x, getSize().y, newStr, finalDC);
+	//app->drawOnScreen(finalDC);
 
 }
 
@@ -1572,13 +1424,14 @@ void TimeButton::draw ()
 void SizeButton::draw ()
 {
 	$s
-	if (dc) txBitBlt (rect.pos.x, rect.pos.y, dc);
+	//if (dc) app->bitBlt (rect.pos.x, rect.pos.y, dc);
 
-	txSetTextAlign (TA_CENTER);
-		txSetAllColors (TX_GRAY);
+	//txSetTextAlign (TA_CENTER);
+		//app->setColor (TX_GRAY);
+        /*
 		txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
 					rect.pos.y + (rect.finishPos.y - rect.pos.y) / 5, 
-					text);
+					text);    */
 }
 
 void CleanButton::draw()
@@ -1590,7 +1443,7 @@ void CleanButton::draw()
 
 	/*
 	txSetTextAlign (TA_CENTER);
-	txSetAllColors (TX_BLACK);  */
+	app->setColor (TX_BLACK);  */
 	
 	/*
 	txTextOut (rect.pos.x + (rect.finishPos.x - rect.pos.x) / 2, 
@@ -1602,9 +1455,9 @@ void CleanButton::draw()
 void CloseButton::draw()
 {
 	$s
-	//txSetAllColors (color);
-	//txRectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
-	txBitBlt (finalDC, 0, 0, 0, 0, dc);
+	//app->setColor (color);
+	//app->rectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+	app->bitBlt (finalDC, 0, 0, 0, 0, dc);
 }
 
 
@@ -1618,8 +1471,8 @@ Canvas* CanvasManager::getActiveCanvas()
 void CanvasManager::draw ()
 {
    
-	txSetAllColors (SystemSettings.BackgroundColor, finalDC);
-	txRectangle (0, 0, 3000, 3000, finalDC);
+	app->setColor (SystemSettings.BackgroundColor, finalDC);
+	app->rectangle (0, 0, 3000, 3000, finalDC);
 
     controlMouse ();
 	
@@ -1666,20 +1519,20 @@ void ProgressBar::setProgress(double* total, double* current)
 void ProgressBar::draw()
 {
 	$s
-	if(manager) txSetAllColors(manager->color, finalDC);
-	txRectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+	if(manager) app->setColor(manager->color, finalDC);
+	app->rectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 
-	txSetAllColors(color, finalDC);
+	app->setColor(color, finalDC);
 	if (totalNum && currentNum)
 	{
-		txRectangle(0, 0, rect.getSize().x * (*currentNum / *totalNum), rect.getSize().y, finalDC);
+		app->rectangle(0, 0, rect.getSize().x * (*currentNum / *totalNum), rect.getSize().y, finalDC);
 	}
-	//printBlt(finalDC);
+	//app->drawOnScreen(finalDC);
 } 
 
 void Menu::draw()
 {
-    if (dc) txBitBlt(finalDC, 0, 0, 0, 0, dc);
+    if (dc) app->bitBlt(finalDC, 0, 0, 0, 0, dc);
 
     controlHandle();
 
@@ -1728,13 +1581,13 @@ void Menu::onClick(Vector mp)
 void Canvas::draw ()
 {
     controlMouse();
-    txSetFillColor(TX_BLACK, finalDC);
-    txRectangle(0, 0, 3000, 3000, finalDC);
-	txSetAllColors (systemSettings->BackgroundColor, finalDC); 
+    app->setColor(TX_BLACK, finalDC);
+    app->rectangle(0, 0, 3000, 3000, finalDC);
+	app->setColor (systemSettings->BackgroundColor, finalDC); 
 
     
 
-    if (systemSettings->debugMode)  printf("Clicked: %d\n", clicked);
+    if (systemSettings->debugMode == 6)  printf("Clicked: %d\n", clicked);
 
     
 
@@ -1743,9 +1596,6 @@ void Canvas::draw ()
     cleanOutputLay();                                                                                                                      
     controlLay();
 
-    
-
-
     drawLay();
 
     CLay* activeLay = getActiveLay();
@@ -1753,10 +1603,7 @@ void Canvas::draw ()
 
     controlEditLay();
 
-    
-
-
-	if (txGetAsyncKeyState('Q'))
+	if (app->getAsyncKeyState('Q'))
 	{
 		endtillkey('Q');
 		//playHistory ();
@@ -1764,7 +1611,7 @@ void Canvas::draw ()
 
 	}
 
-    if (txGetAsyncKeyState ('2'))
+    if (app->getAsyncKeyState ('2'))
     {
         systemSettings->DrawingMode = 2;
     }
@@ -1774,9 +1621,11 @@ void Canvas::draw ()
 
 	 
 	scrollBarVert.draw ();
-	txBitBlt (finalDC, scrollBarVert.rect.pos.x, scrollBarVert.rect.pos.y, scrollBarVert.rect.getSize().x, scrollBarVert.rect.getSize().y, scrollBarVert.finalDC);
+	app->bitBlt (finalDC, scrollBarVert.rect.pos.x, scrollBarVert.rect.pos.y, scrollBarVert.rect.getSize().x, scrollBarVert.rect.getSize().y, scrollBarVert.finalDC);
 	scrollBarHor.draw ();
-	txBitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
+	app->bitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
+
+    drawCadre();
 
 	controlHandle();
 	drawOnFinalDC(handle);
@@ -1801,9 +1650,9 @@ HDC Canvas::getImageForSaving()
 {
     HDC notClearedDC = getActiveLay()->lay.lay;
 
-    HDC clearedDC = txCreateCompatibleDC(getActiveLay()->lay.laySize.x, getActiveLay()->lay.laySize.y);
+    HDC clearedDC = app->createDIBSection(getActiveLay()->lay.laySize.x, getActiveLay()->lay.laySize.y);
 
-    txTransparentBlt(clearedDC, 0, 0, 0, 0, notClearedDC, 0, 0, systemSettings->TRANSPARENTCOLOR);
+    app->transparentBlt(clearedDC, 0, 0, 0, 0, notClearedDC);
 
     return clearedDC;   
     //выданный HDC следует удалить после использваония
@@ -1891,10 +1740,10 @@ void copyAndDelete (HDC dest, HDC source)
  
 void Canvas::controlFilter ()
 {
-	//if (txGetAsyncKeyState(VK_LEFT)) SecondFilterValue++;
-	//if (txGetAsyncKeyState(VK_RIGHT)) SecondFilterValue--;
-	//if (txGetAsyncKeyState(VK_DOWN)) FirstFilterValue+=10;
-	//if (txGetAsyncKeyState(VK_UP)) FirstFilterValue-=10;
+	//if (app->getAsyncKeyState(VK_LEFT)) SecondFilterValue++;
+	//if (app->getAsyncKeyState(VK_RIGHT)) SecondFilterValue--;
+	//if (app->getAsyncKeyState(VK_DOWN)) FirstFilterValue+=10;
+	//if (app->getAsyncKeyState(VK_UP)) FirstFilterValue-=10;
     /*
 	filter->algorithm = FilterAlgorithm;
 
@@ -1904,7 +1753,7 @@ void Canvas::controlFilter ()
 	{
 		confirmFilter = false;
 		nonConfirmFilter = false;
-		txBitBlt(canvas, 0, 0, 0, 0, tempFilterDC);
+		app->bitBlt(canvas, 0, 0, 0, 0, tempFilterDC);
 	}
 
 	if (((int)FirstFilterValue != (int)lastFirstFilterValue || (int)SecondFilterValue != (int)lastSecondFilterValue))
@@ -1934,10 +1783,11 @@ void Canvas::controlFilter ()
  
 void Canvas::controlSize()
 {
-	txSetAllColors(SystemSettings.MenuColor, finalDC);
-	txRectangle (0, 0, SystemSettings.SIDETHICKNESS, rect.getSize().y, finalDC);
-	txRectangle (0, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
-	txRectangle(rect.getSize().x - SystemSettings.SIDETHICKNESS, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, 0, finalDC);
+    /*
+	app->setColor(SystemSettings.MenuColor, finalDC);
+	app->rectangle (0, 0, SystemSettings.SIDETHICKNESS, rect.getSize().y, finalDC);
+	app->rectangle (0, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
+	app->rectangle(rect.getSize().x - SystemSettings.SIDETHICKNESS, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, 0, finalDC);
 	if (isResizing)
 	{
 		if (startResizingCursor.x != txMouseX() || startResizingCursor.y != txMouseY())
@@ -1952,6 +1802,7 @@ void Canvas::controlSize()
 		startResizingCursor = { txMouseX(), txMouseY() };
 	}
 	if (clicked != 1) isResizing = false;
+    */
 }
 
 void Canvas::controlSizeSliders ()
@@ -1994,7 +1845,7 @@ int min (int a, int b)
 
 void Canvas::saveHistory ()
 {
-	//txBitBlt (history[currentHistoryNumber - 1], 0, 0, 0, 0, canvas);
+	//app->bitBlt (history[currentHistoryNumber - 1], 0, 0, 0, 0, canvas);
 	timeSavedHistory++;
 	if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
 	else currentHistoryNumber = 0;
@@ -2011,7 +1862,7 @@ void Canvas::saveHistory ()
 			newLastStep = 0;
 		}
 		lastSavedDC = playHistoryDC(9);
-		printBlt(lastSavedDC);
+		app->drawOnScreen(lastSavedDC);
 	}  */
 	
 	//history[addNewHistoryNum].toolsNum = SystemSettings.DrawingMode;
@@ -2036,9 +1887,9 @@ void Canvas::controlEditLay()
 {
     if (!getActiveLay()) return;
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
-    if (txGetAsyncKeyState('E') && currentToolLength > 0 && activeToolLay->isFinished())
+    if (app->getAsyncKeyState('E') && currentToolLength > 0 && activeToolLay->isFinished())
     {
-        while (txGetAsyncKeyState('E')) {};
+        while (app->getAsyncKeyState('E')) {};
         editingMode = !editingMode;
         activeToolLay->needRedraw();
     }
@@ -2047,43 +1898,43 @@ void Canvas::controlEditLay()
 bool Canvas::controlLay ()
 {
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
-    if (txGetAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
+    if (app->getAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
     {
         activeToolLay->toolZone.pos += {1, 0};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState(VK_LEFT) && currentToolLength > 0)
+    if (app->getAsyncKeyState(VK_LEFT) && currentToolLength > 0)
     {
         activeToolLay->toolZone.pos += {-1, 0};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState(VK_DOWN) && currentToolLength > 0)
+    if (app->getAsyncKeyState(VK_DOWN) && currentToolLength > 0)
     {
         activeToolLay->toolZone.pos += {0, 1};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState(VK_UP) && currentToolLength > 0)
+    if (app->getAsyncKeyState(VK_UP) && currentToolLength > 0)
     {
         activeToolLay->toolZone.pos += {0, -1};
         activeToolLay->needRedraw();
     }
 
-    if (txGetAsyncKeyState('T') && currentToolLength > 0)
+    if (app->getAsyncKeyState('T') && currentToolLength > 0)
     {
         activeToolLay->size += { 0.01, 0};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState('G') && currentToolLength > 0)
+    if (app->getAsyncKeyState('G') && currentToolLength > 0)
     {
         activeToolLay->size += {-0.01, 0};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState('Y') && currentToolLength > 0)
+    if (app->getAsyncKeyState('Y') && currentToolLength > 0)
     {
         activeToolLay->size += { 0, 0.01};
         activeToolLay->needRedraw();
     }
-    if (txGetAsyncKeyState('H') && currentToolLength > 0)
+    if (app->getAsyncKeyState('H') && currentToolLength > 0)
     {
         activeToolLay->size += { 0, -0.01};
         activeToolLay->needRedraw();
@@ -2096,12 +1947,12 @@ void Canvas::cleanOutputLay()
 {
     for (int i = 0; i < currentLayersLength; i++)
     {
-        //if (lay[i].redrawStatus ()) txBitBlt(lay[i].getOutPutDC(), 0, 0, 0, 0, lay[i].getPermanentDC());
+        //if (lay[i].redrawStatus ()) app->bitBlt(lay[i].getOutPutDC(), 0, 0, 0, 0, lay[i].getPermanentDC());
         //txAlphaBlend(lay[i].outputLay, 0, 0, 0, 0, lay[i].lay);
         //lay[i].clean(lay[i].outputLay);
         //txTransparentBlt (lay[i].outputLay, 0, 0, 0, 0, lay[i].lay, 0, 0, SystemSettings.TRANSPARENTCOLOR);
-        //txBitBlt(0, 0, lay[i].tempLay);
-        //while (txGetAsyncKeyState('G')) { txSleep(0); }
+        //app->bitBlt(0, 0, lay[i].tempLay);
+        //while (app->getAsyncKeyState('G')) { txSleep(0); }
         
     }
 }
@@ -2114,7 +1965,7 @@ void Canvas::drawLay()
         {
             lay[lays].redraw();
             lay[lays].noMoreRedraw();
-            txTransparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay, 0, 0, SystemSettings.TRANSPARENTCOLOR);
+            app->transparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay);
             
         }
 
@@ -2124,8 +1975,15 @@ void Canvas::drawLay()
             lay[lays].editTool(currentDate);
         }
 
-        txTransparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay, 0, 0, SystemSettings.TRANSPARENTCOLOR);
+        app->transparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
     }  
+}
+
+
+void Canvas::drawCadre()
+{
+    app->setColor(app->systemSettings->MenuColor, finalDC, 5);
+    app->drawCadre({ .pos = {0,0}, .finishPos = getSize() }, finalDC);
 }
 
 void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX, int originalSizeY, int sourceSizeX, int sourceSizeY)
@@ -2199,12 +2057,12 @@ HDC Canvas::playHistoryDC (int stepBack)
 		currentHistoryLength;
 		
 	}			  */
-	HDC historyDC = txCreateCompatibleDC (canvasSize.x, canvasSize.y);
+	HDC historyDC = app->createDIBSection (canvasSize.x, canvasSize.y);
 
 	if (stepBack <= currentHistoryLength && stepBack < HistoryLength)
 	{
-		txBitBlt(historyDC, 0, 0, 0, 0, lastSavedDC);
-		//printBlt(lastSavedDC);
+		app->bitBlt(historyDC, 0, 0, 0, 0, lastSavedDC);
+		//app->drawOnScreen(lastSavedDC);
 
 		for (int i = currentHistoryLength - stepBack - 1; i >= 0; i--)
 		{
@@ -2223,9 +2081,9 @@ HDC Canvas::playHistoryDC (int stepBack)
 
 void Canvas::deleteButton ()
 {
-	if (dc) txDeleteDC (dc);
-	if (finalDC) txDeleteDC (finalDC);
-	if (canvas) txDeleteDC (canvas);
+	if (dc) app->deleteDC (dc);
+	if (finalDC) app->deleteDC(finalDC);
+	if (canvas) app->deleteDC(canvas);
  	closeCanvas.deleteButton ();
 	scrollBarVert.deleteButton ();
 	scrollBarHor.deleteButton ();
@@ -2316,7 +2174,7 @@ void Canvas::onClick(Vector mp)
     if (clicked == 1)
     {
 
-        txSetAllColors(drawColor);
+        ///app->setColor(drawColor, fi);
         lastClick = mp;
         mousePos = mp;
 

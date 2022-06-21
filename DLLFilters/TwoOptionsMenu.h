@@ -45,7 +45,7 @@ struct TwoOptionsMenu : CFilter
 		addWindow(&upSlider);
 		addWindow(&downSlider);
 		addWindow(&confirmButton);
-		compressImage(dc, getSize(), loadManager->loadImage("ContrastMenu.bmp"), {335, 179});
+		compressImage(app, dc, getSize(), loadManager->loadImage("ContrastMenu.bmp"), {335, 179});
 	}
 
 

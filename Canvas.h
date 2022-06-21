@@ -84,6 +84,8 @@ struct Canvas : Manager
 	void returnHistory(int stepsBack);
 	void deleteHistory ();
 
+    void drawCadre();
+
 	void createLay ();
 	bool controlLay ();
     void controlEditLay();

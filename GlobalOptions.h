@@ -50,6 +50,8 @@ struct CSystemSettings
 
 
 
+void setDefaultSystemSettings(CSystemSettings* systemSettings);
+
 void setSystemSettings(CSystemSettings* systemSettings, const char* path);
 
 void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);

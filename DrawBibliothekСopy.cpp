@@ -3,13 +3,13 @@
 
 
 
-void txSetAllColors (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int thickness)
+void app->setColor (DebugInfo info, COLORREF color, HDC dc /*= txDc ()*/, int thickness)
 {
     qassert (dc, info);
 	txSetFillColor (color, dc); 
 	txSetColor (color, thickness, dc);
 }
-#define txSetAllColors(...) txSetAllColors (getDebugInfo, __VA_ARGS__)
+#define app->setColor(...) app->setColor (getDebugInfo, __VA_ARGS__)
 
 bool drag (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime)
 {
@@ -71,7 +71,7 @@ void compressDraw (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HD
 	//if (test1)printBlt (dc);
 	compressImage (copyDC, finalSize, dc, originalSize, line);
 	//printBlt (dc);
-	txBitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
+	app->bitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyDC);
 	
     txDeleteDC (copyDC);
 }
@@ -96,14 +96,14 @@ void standartDraw (DebugInfo info, Window *window)
 {
     qassert (window, info);
     $s                                                                                     
-	if (window->finalDC) txSetAllColors (window->color, window->finalDC);                                           
-	if (window->finalDC) txRectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
+	if (window->finalDC) app->setColor (window->color, window->finalDC);                                           
+	if (window->finalDC) app->rectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);        
                                                                                            
                                                                                           
-	if (window->finalDC) txSetAllColors (TextColor, window->finalDC);                                     
+	if (window->finalDC) app->setColor (TextColor, window->finalDC);                                     
 	txSetTextAlign (TA_CENTER, window->finalDC);
     selectFont ("Arial", window->font, window->finalDC);
-    txDrawText (window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->format, window->finalDC);
+    window->app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
                                                                                            
                                                                                           
 	if (window->dc)                                                                                
@@ -171,9 +171,9 @@ void standartManagerDraw (DebugInfo info, Manager *manager)
         //hide ();
     //}
 
-	txSetAllColors (manager->color, manager->finalDC);
-	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
-	if (manager->dc) txBitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
+	app->setColor (manager->color, manager->finalDC);
+	//app->rectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
+	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
 
 	for (int i = 0; i < manager->newButtonNum; i++)
@@ -181,7 +181,7 @@ void standartManagerDraw (DebugInfo info, Manager *manager)
 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw (manager);
  		if (manager->pointers[i]->advancedMode) 
 		{
-			txBitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+			app->bitBlt (manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
 			//bitBlt (finalDCArr, pointers[i]->rect.pos.x, pointers[i]->rect.pos.y, pointers[i]->rect.getSize().x, pointers[i]->rect.getSize().y, pointers[i]->finalDCArr, pointers[i]->finalDCSize.x, pointers[i]->finalDCSize.y, finalDCSize.x, finalDCSize.y);	
 			//printBlt (pointers[i]->finalDC);
 		}
@@ -204,8 +204,8 @@ void Lay::createLay	(Vector _laySize)
 {
     //qassert (manager, info);
     laySize = _laySize;
-	lay = txCreateDIBSection (laySize.x, laySize.y, &layBuf);
-	//brightnessHDC = txCreateDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
+	lay = app->createDIBSection (laySize.x, laySize.y, &layBuf);
+	//brightnessHDC = app->createDIBSection (DCMAXSIZE, DCMAXSIZE, &brightnessBuf);
 
 
 	for (int y = 0; y < laySize.x; y++)
@@ -307,8 +307,8 @@ void Lay::rectangle (int x0, int y0, int x1, int y1)
             pixel->rgbReserved = 255;
         }
     }
-   // txSetAllColors (TX_RED, lay);
-    //txRectangle (x0, y0, x1, y1, lay);
+   // app->setColor (TX_RED, lay);
+    //app->rectangle (x0, y0, x1, y1, lay);
     //printBlt (lay);
 }
 
@@ -323,9 +323,9 @@ void Lay::circle (int x0, int y0, int r, COLORREF color)
 		int y2 = -sqrt (r * r - (x - x0) * (x - x0)) + y0;
 
 		//printf ("x: %lf y = {%lf, %lf}\n", x, y1, y2);
-		//txSetAllColors (TX_RED, lay);
+		//app->setColor (TX_RED, lay);
 		//txSetColor (TX_RED, 2);
-		//txLine (x, y1, x, y2, lay);
+		//app->line (x, y1, x, y2, lay);
 		//if (x >= 0 && y1 >= 0 && y2 >= 0)
 		line (x, y1, x, y2, color);
 	}
@@ -358,7 +358,7 @@ void Window::print (HDC DC)
 {
     assert (DC);
 	draw();
-	txBitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
+	app->bitBlt (DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
 }
 
 Vector Window::getSize()
@@ -386,9 +386,9 @@ void resize (Window *obj, Rect newRect)
 	if (obj->newRect.getSize().x > 0 && obj->newRect.getSize().y > 0)
 	{
 		obj->finalDCSize = {obj->newRect.getSize().x, obj->newRect.getSize().y};
-		obj->finalDC = txCreateDIBSection(obj->finalDCSize.x, obj->finalDCSize.y, &(obj->finalDCArr));
-		txSetAllColors(obj->color, obj->finalDC);
-		txRectangle(0, 0, obj->newRect.getSize().x, obj->newRect.getSize().y, obj->finalDC);
+		obj->finalDC = app->createDIBSection(obj->finalDCSize.x, obj->finalDCSize.y, &(obj->finalDCArr));
+		app->setColor(obj->color, obj->finalDC);
+		app->rectangle(0, 0, obj->newRect.getSize().x, obj->newRect.getSize().y, obj->finalDC);
 		printBlt(obj->finalDC);
 	}
     rect = newRect;
@@ -399,9 +399,9 @@ void Window::reInit ()
     if (rect.getSize().x > 0 && rect.getSize().y > 0)
 	{
 			finalDCSize = {rect.getSize().x, rect.getSize().y};
-			finalDC = txCreateDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
-			txSetAllColors(color, finalDC);
-			txRectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
+			finalDC = app->createDIBSection(finalDCSize.x, finalDCSize.y, &finalDCArr);
+			app->setColor(color, finalDC);
+			app->rectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
 			if (test1) printBlt(finalDC);
 	}
 

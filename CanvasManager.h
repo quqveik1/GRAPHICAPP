@@ -18,7 +18,7 @@ struct CanvasManager : Manager
         bar(_bar),
         loadManager (_app->loadManager)
     {
-        compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
+        compressImage(app, closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
     }
 
     virtual Canvas* getActiveCanvas();
