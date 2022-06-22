@@ -50,5 +50,5 @@ void KontrastMenu::apply ()
 {
     app->bitBlt(activeLay->getPermanentDC(), 0, 0, 0, 0, activeLay->getOutputDC());
     app->drawOnScreen(activeLay->getPermanentDC());
-    _getch();
+    if (app->systemSettings->debugMode == 5)_getch();
 }

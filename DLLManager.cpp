@@ -24,7 +24,7 @@ bool DLLManager::loadLibs()
 
         if (!fscanf(libsList, "%s ", path)) break;
         if (path[0] == 0) break;
-        int numOfStarSymbol = findSymbol(path, 100, '*');
+        int numOfStarSymbol = findSymbol(path, MAX_PATH, '*');
         if (numOfStarSymbol)
         {
             numOfStarSymbol--;
@@ -56,8 +56,8 @@ bool DLLManager::loadLibs()
 
                 sprintf(fullPath, "%s%s", path, fileinfo.name);
 
-                libs[i + j] = LoadLibrary(fullPath);
-                result *= (int)libs[i + j];
+                libs[currLen] = LoadLibrary(fullPath);
+                result *= (int)libs[currLen];
                 if (result) currLen++;
 
                 if (appData->systemSettings->debugMode) printf("Путь к библиотеке: %s\n", fullPath);
@@ -65,11 +65,17 @@ bool DLLManager::loadLibs()
         }
         else
         {
-            libs[i] = LoadLibrary(path);
-            result *= (int)libs[i];
-            if (result) currLen++;
+            int extensionPlace = findSymbol(path, MAX_PATH, '.');
+            int resultOfExtensonComparision = strcmp(&path[extensionPlace], fileExtension);
+            if (resultOfExtensonComparision == 0)
+            {
 
-            if (appData->systemSettings->debugMode) printf("Путь к библиотеке: %s\n", path);
+                libs[currLen] = LoadLibrary(path);
+                result *= (int)libs[currLen];
+                if (libs[currLen]) currLen++;
+            }
+
+            if (appData->systemSettings->debugMode) printf("Путь к библиотеке[%p]: %s\n", libs[currLen], path);
         }
     }
     if (appData->systemSettings->debugMode) printf("Инструменты(DLL) загрузились в exe\n");

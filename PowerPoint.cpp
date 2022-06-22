@@ -439,53 +439,48 @@ int main (int argc, int *argv[])
     appData->loadManager = &LoadManager;
 
     setDefaultSystemSettings(appData->systemSettings);
-
     setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
 
-    _txWindowStyle = SystemSettings.WindowStyle;
+    _txWindowStyle = appData->systemSettings->WindowStyle;
 
-    SystemSettings.MAINWINDOW = txCreateWindow (SystemSettings.SizeOfScreen.x, SystemSettings.SizeOfScreen.y);
+    appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->SizeOfScreen.x, appData->systemSettings->SizeOfScreen.y);
 
-    
-
-	Manager *manager = new Manager(appData, {.pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+	Manager *manager = new Manager(appData, {.pos = {0, 0}, .finishPos = appData->systemSettings->SizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
     ToolSave toolSave = {};
 
 	HDC addNewCanvasDC = {};
 	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
 	compressImage (appData, addNewCanvasDC, {50, 50}, oldDC, {225, 225});
-	txDeleteDC(oldDC);
+	appData->deleteDC(oldDC);
 
-	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, SystemSettings.SizeOfScreen.y - 20}, .finishPos = SystemSettings.SizeOfScreen } , TX_BLUE);
+	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = appData->systemSettings->SizeOfScreen } , TX_BLUE);
 		statusBar->progressBar =  new ProgressBar (appData, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
 		statusBar->progressBar->manager = statusBar;
 		statusBar->timeButton = new TimeButton(appData, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
     
 
-    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = SystemSettings.SizeOfScreen }, addNewCanvasDC, statusBar->progressBar);
+    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->SizeOfScreen }, addNewCanvasDC, statusBar->progressBar);
+    appData->canvasManager = canvasManager;
 	manager->addWindow (canvasManager);
 
     manager->addWindow(statusBar);
 
-
-    appData->canvasManager = canvasManager;
-
-
-    if (SystemSettings.debugMode) printf("Инструменты начали загружаться\n");
+    if (appData->systemSettings->debugMode) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
     dllToolsManager->loadLibs();
-    if (SystemSettings.debugMode) printf("%p\n", &ToolManager);
     dllToolsManager->addToManager(&ToolManager);
-    if (SystemSettings.debugMode) printf("Инструменты загрузились\n");
+    if (appData->systemSettings->debugMode) printf("Инструменты загрузились\n");
 
-	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + SystemSettings.HANDLEHEIGHT + 100}}, ToolManager.currentLength);
+	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
-    ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
-    manager->addWindow(toolMenu);
 
-	Manager *menu = new Manager(appData, {.pos = {SystemSettings.SizeOfScreen.x - 712, 300}, .finishPos = {SystemSettings.SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("ColorsMenu.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+    ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
+    manager->addWindow(toolMenu);   
+
+
+	Manager *menu = new Manager(appData, {.pos = {appData->systemSettings->SizeOfScreen.x - 712, 300}, .finishPos = {appData->systemSettings->SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("ColorsMenu.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
 	manager->addWindow (menu);
 	
 	Manager *colorManager = new Manager(appData, {.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
@@ -510,32 +505,32 @@ int main (int argc, int *argv[])
     dllManager->addToManager(manager);
     if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
 
-    LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 700}, .finishPos = {SystemSettings.BUTTONWIDTH, 1000}}, canvasManager);
+    LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 700}, .finishPos = {appData->systemSettings->BUTTONWIDTH, 1000}}, canvasManager);
     manager->addWindow(laysMenu);
 
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
+	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {1900, appData->systemSettings->HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
 
-		CloseButton* closeButton = new CloseButton(appData, { .pos = {1900 - SystemSettings.BUTTONWIDTH, 0}, .finishPos = {1900, SystemSettings.HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton(appData, { .pos = {1900 - appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {1900, appData->systemSettings->HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
 
-        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
+        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindow(addNewCanvas);
 
-        List* systemList = new List(appData, { SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT }, { SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT }, 1);
-        OpenManager* openSystemList = new OpenManager(appData, { .pos = {SystemSettings.BUTTONWIDTH * 2, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 3, SystemSettings.HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
+        List* systemList = new List(appData, { appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
+        OpenManager* openSystemList = new OpenManager(appData, { .pos = {appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 3, appData->systemSettings->HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
         mainhandle->addWindow(openSystemList);
 
         manager->addWindow(systemList);
         SaveImages* saveImages = new SaveImages(appData, canvasManager);
         systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
 
-        List* openWindows = new List (appData, {SystemSettings.BUTTONWIDTH, SystemSettings.HANDLEHEIGHT}, {SystemSettings.BUTTONWIDTH * 5, SystemSettings.HANDLEHEIGHT}, 5);
+        List* openWindows = new List (appData, { appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT}, 5);
         manager->addWindow(openWindows);
-        OpenManager* openWindowsManager = new OpenManager (appData, {.pos = {SystemSettings.BUTTONWIDTH, 0}, .finishPos = {SystemSettings.BUTTONWIDTH * 2, SystemSettings.HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
+        OpenManager* openWindowsManager = new OpenManager (appData, {.pos = {appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
         mainhandle->addWindow(openWindowsManager);
         
         openWindows->addNewItem (menu, NULL, "Цвет");
@@ -544,8 +539,6 @@ int main (int argc, int *argv[])
         openWindows->addNewItem (toolMenu, NULL, "Инструментальные слои");
         List* filters = openWindows->addSubList("Фильтры");
         manager->addWindow (filters);
-            //filters->addNewItem (dllManager->dllWindows[0], NULL, "Контрастный фильтр");
-            //filters->addNewItem (dllManager->dllWindows[1], NULL, "Фильтр яркости");
             //filters->addNewItem (curves, NULL, "Кривые");
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
             {
@@ -617,8 +610,8 @@ void SaveImages::draw()
 
     HDC saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
 
-    int result = txSaveImage(fullPath, saveDC);
-    txDeleteDC(saveDC);
+    int result = app->saveImage(saveDC, fullPath);
+    app->deleteDC(saveDC);
     advancedMode = false;
 }
 
@@ -652,7 +645,7 @@ void StatusBar::draw()
 		sprintf(text, "Статус: фоновых задач нет");
 	}
 	app->setAlign(TA_LEFT, finalDC);
-	app->drawText(10, 0, getSize().x, getSize().y, text, finalDC);
+	app->drawText(10, 0, getSize().x, getSize().y, text, finalDC, DT_LEFT | DT_VCENTER);
 
 
 	if (timeButton) app->bitBlt (finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
@@ -869,7 +862,7 @@ void ToolsPalette::drawOneLine(int lineNum)
     //app->drawOnScreen (pointers[lineNum]->dc);
     if (pointers[lineNum]->advancedMode) app->bitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
 
-    if (lastSelected == lineNum)
+    if (app->systemSettings->DrawingMode - 1 == lineNum)
     {
         app->setColor(TX_WHITE, finalDC);
         app->rectangle(pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.pos.x + pointers[lineNum]->rect.getSize().x * 0.1, pointers[lineNum]->rect.pos.y + pointers[lineNum]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
@@ -1589,9 +1582,6 @@ void Canvas::draw ()
 
     if (systemSettings->debugMode == 6)  printf("Clicked: %d\n", clicked);
 
-    
-
-	//controlFilter();
 
     cleanOutputLay();                                                                                                                      
     controlLay();
@@ -1698,13 +1688,13 @@ void Canvas::controlTool()
     if (!isFinished)
     {
         if (isDrawingModeChanged()) changeTool();
-        if (SystemSettings.debugMode) printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
+        if (systemSettings->debugMode == 5) printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
         if (toollay->useTool(currentDate))
         {
             finishTool();
         }
     }
-    if (clicked == 0) tool->setMBCondition (clicked);
+    if (clicked == 0) toollay->setMBCondition (clicked);
 }
 
 void Canvas::finishTool()
@@ -1897,6 +1887,7 @@ void Canvas::controlEditLay()
 
 bool Canvas::controlLay ()
 {
+    /*
     ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
     if (app->getAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
     {
@@ -1939,7 +1930,7 @@ bool Canvas::controlLay ()
         activeToolLay->size += { 0, -0.01};
         activeToolLay->needRedraw();
     }
-
+    */
 	return false;
 }
 
@@ -1971,7 +1962,7 @@ void Canvas::drawLay()
 
         if (editingMode && (lays == getActiveLayNum()))
         {
-            lay[lays].getActiveToolLay()->getTool()->setMBCondition(clicked);
+            lay[lays].getActiveToolLay()->setMBCondition(clicked);
             lay[lays].editTool(currentDate);
         }
 
@@ -2128,6 +2119,7 @@ void Canvas::addToolLay()
 void Canvas::setToolToToolLay(ToolLay* toollay)
 {
     toollay->tool = getActiveTool();
+    if (toollay->tool == NULL) return;
     toollay->tool->clicked = clicked;
     toollay->toolsData = new char[getActiveTool()->ToolSaveLen]{};
 }
@@ -2153,7 +2145,8 @@ bool Canvas::isDrawingModeChanged()
 
 Tool* Canvas::getActiveTool()
 {
-    return ToolManager.tools[SystemSettings.DrawingMode - 1];
+    if (app->systemSettings->DrawingMode <= 0) return NULL;
+    return ToolManager.tools[app->systemSettings->DrawingMode - 1];
 }
 
 void Canvas::setActiveToolLayNum(int num) 

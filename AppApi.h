@@ -4,10 +4,10 @@
 struct PowerPoint : AbstractAppData
 {
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1);
+
     virtual void rectangle(Rect rect, HDC dc);
     virtual void rectangle(int x1, int y1, int x2, int y2, HDC dc);
     virtual void rectangle(Vector pos1, Vector pos2, HDC dc);
-
 
     virtual void drawOnScreen(HDC dc, bool useAlpha = false);
     virtual void cleanTransparentDC();
@@ -34,6 +34,7 @@ struct PowerPoint : AbstractAppData
 
     virtual void setAlign(unsigned align, HDC dc);
     virtual void deleteDC(HDC dc);
+    virtual int saveImage(HDC dc, const char* path);
 
     virtual void drawCadre(Rect rect, HDC dc);
 

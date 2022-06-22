@@ -39,7 +39,6 @@ struct AbstractAppData
     virtual HDC createDIBSection(Vector size, RGBQUAD** pixels = NULL) = 0;
     virtual HDC createDIBSection(int sizex, int sizey, RGBQUAD** pixels = NULL) = 0;
 
-
     virtual void drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS) = 0;
 
@@ -47,6 +46,7 @@ struct AbstractAppData
     virtual void selectFont(const char* text, int sizey, HDC& dc, int sizex = -1) = 0;
 
     virtual void deleteDC(HDC dc) = 0;
+    virtual int saveImage(HDC dc, const char* path) = 0;
 
     virtual void drawCadre(Rect rect, HDC dc) = 0;
 

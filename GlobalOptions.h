@@ -26,7 +26,7 @@ struct CSystemSettings
 
 
     int MainFont = NULL;
-    const char* FONTNAME = NULL;
+    char FONTNAME[MAX_PATH] = {};
     int TEXTFORMAT = NULL;// = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
 
     double HANDLEHEIGHT = NULL;
@@ -57,7 +57,7 @@ void setSystemSettings(CSystemSettings* systemSettings, const char* path);
 void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void setIntSettings(FILE* ssFile, int* integer, const char* name);
 void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
-void setStringSettings(FILE* ssFile, const char** str, const char* name);
+void setStringSettings(FILE* ssFile, char* str, const char* name);
 
 
 void saveSystemSettings(CSystemSettings* systemSettings, const char* path);
@@ -65,5 +65,5 @@ void saveSystemSettings(CSystemSettings* systemSettings, const char* path);
 void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void saveIntSettings(FILE* ssFile, int* integer, const char* name);
 void saveDoubleSettings(FILE* ssFile, double* integer, const char* name);
-void saveStringSettings(FILE* ssFile, const char** str, const char* name);
+void saveStringSettings(FILE* ssFile, char* str, const char* name);
 

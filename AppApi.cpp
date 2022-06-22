@@ -133,3 +133,8 @@ void PowerPoint::deleteDC(HDC dc)
     if (dc) txDeleteDC(dc);
     else printf("DC[%d] не существует\n", (int)dc);
 }
+
+int PowerPoint::saveImage(HDC dc, const char* path)
+{
+    return txSaveImage(path, dc);
+}

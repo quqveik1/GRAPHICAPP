@@ -20,7 +20,7 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
     systemSettings->ONELAYTOOLSLIMIT = 100;
 
     systemSettings->MainFont = 20;
-    systemSettings->FONTNAME = "Arial";
+    strcpy (systemSettings->FONTNAME, "Arial");
     systemSettings->TEXTFORMAT = 262165;
 
     systemSettings->HANDLEHEIGHT = 26.000000;
@@ -64,7 +64,7 @@ void setSystemSettings(CSystemSettings* systemSettings, const char* path)
     setIntSettings(ssFile, &systemSettings->ONELAYTOOLSLIMIT,  "ONELAYTOOLSLIMIT");
 
     setIntSettings(ssFile, &systemSettings->MainFont,    "MainFont");
-    setStringSettings(ssFile, &systemSettings->FONTNAME, "FONTNAME");
+    setStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
     setIntSettings(ssFile, &systemSettings->TEXTFORMAT,  "TEXTFORMAT");
 
     setDoubleSettings(ssFile, &systemSettings->HANDLEHEIGHT,       "HANDLEHEIGHT");
@@ -123,7 +123,7 @@ void setColorSettings(FILE* ssFile, COLORREF* color, const char* name)
             _color = _color * 10 + number;
         }
 
-        *color = _color;
+        if (_color)*color = _color;
     }
 }
 
@@ -145,7 +145,7 @@ void setDoubleSettings(FILE* ssFile, double* integer, const char* name)
 
 }
 
-void setStringSettings(FILE* ssFile, const char** str, const char* name)
+void setStringSettings(FILE* ssFile, char* str, const char* name)
 {
     char format[MAX_PATH] = {};
     sprintf(format, " %s = %%s; ", name);
@@ -161,7 +161,7 @@ void setStringSettings(FILE* ssFile, const char** str, const char* name)
             break;
         }
     }
-    *str = finalStr;
+    strcpy (str, finalStr);
 }
 
 
@@ -184,7 +184,7 @@ void saveSystemSettings(CSystemSettings* systemSettings, const char* path)
     saveIntSettings(ssFile, &systemSettings->ONELAYTOOLSLIMIT, "ONELAYTOOLSLIMIT");
 
     saveIntSettings(ssFile, &systemSettings->MainFont, "MainFont");
-    saveStringSettings(ssFile, &systemSettings->FONTNAME, "FONTNAME");
+    saveStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
     saveIntSettings(ssFile, &systemSettings->TEXTFORMAT, "TEXTFORMAT");
 
     saveDoubleSettings(ssFile, &systemSettings->HANDLEHEIGHT, "HANDLEHEIGHT");
@@ -229,7 +229,7 @@ void saveDoubleSettings(FILE* ssFile, double* integer, const char* name)
     fprintf(ssFile, "%s = %lf;\n", name, *integer);
 }
 
-void saveStringSettings(FILE* ssFile, const char** str, const char* name)
+void saveStringSettings(FILE* ssFile, char* str, const char* name)
 {
-    fprintf(ssFile, "%s = %s;\n", name, *str);
+    fprintf(ssFile, "%s = %s;\n", name, str);
 }

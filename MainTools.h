@@ -29,11 +29,14 @@ struct ToolLay
 
     virtual void needRedraw();
 
+
     bool useTool(ProgrammeDate* data);
     void drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
+    int setMBCondition(int condition);
     bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
     void* getToolsData() { return toolsData; };
+
     virtual bool isFinished();
     virtual bool isStarted();
     virtual Tool* getTool();
