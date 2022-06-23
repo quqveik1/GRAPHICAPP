@@ -20,7 +20,7 @@ bool DLLManager::loadLibs()
 
     for (int i = 0; ; i++)
     {
-        char path[100] = {};
+        char path[MAX_PATH] = {};
 
         if (!fscanf(libsList, "%s ", path)) break;
         if (path[0] == 0) break;

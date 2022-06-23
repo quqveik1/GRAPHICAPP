@@ -1,26 +1,26 @@
 #pragma once
 #include "CLay.h"
 
-void CLay::createLay(CSystemSettings* _systemSetings, Vector _size /* = DCVECTORSIZE*/)
+void CLay::createLay(AbstractAppData* _app, Vector _size /* = DCVECTORSIZE*/)
 {
-    assert(_systemSetings);
-    systemSetings = _systemSetings;
+    assert(_app);
+    app = _app;
 
-    toolLays = new ToolLay* [systemSetings->ONELAYTOOLSLIMIT];
-    for (int i = 0; i < systemSetings->ONELAYTOOLSLIMIT; i++)
+    toolLays = new ToolLay* [app->systemSettings->ONELAYTOOLSLIMIT];
+    for (int i = 0; i < app->systemSettings->ONELAYTOOLSLIMIT; i++)
     {
         toolLays[i] = new ToolLay;
     }
 
-    if (_size == _size.getNullVector()) _size = systemSetings->DCVECTORSIZE;
+    if (_size == _size.getNullVector()) _size = app->systemSettings->DCVECTORSIZE;
 
-    lay.createLay(systemSetings, _size);
+    lay.createLay(app->systemSettings, _size);
 }
 
 
 void CLay::addToolLay(ToolLay* tool)
 {
-    assert(toolLength < systemSetings->ONELAYTOOLSLIMIT);
+    assert(toolLength < app->systemSettings->ONELAYTOOLSLIMIT);
 
     toolLength++;
     activeToolNum = toolLength - 1;
@@ -106,7 +106,8 @@ void CLay::redraw()
 
     for (int toollay = 0; toollay < toolLength; toollay++)
     {
-        toolLays[toollay]->drawTool();
+        HDC outDC = toolLays[toollay]->drawTool();
+        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
     }
 }
 

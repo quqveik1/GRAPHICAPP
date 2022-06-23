@@ -7,18 +7,18 @@ void TwoOptionsMenu::onClick(Vector mp)
     mousePos = mp;
 	clickHandle ();
 
-	if (upSlider.rect.inRect(mp) && !isClicked)
+	if (upSlider.rect.inRect(mp) && !isClickedLastTime())
 	{
         clickButton (&upSlider, this, mousePos);
 		//upSlider.onClick(mp - upSlider.rect.pos);
 	}
-	if (downSlider.rect.inRect(mp) && !isClicked)
+	if (downSlider.rect.inRect(mp) && !isClickedLastTime())
 	{
         clickButton (&downSlider, this, mousePos);
 		//downSlider.onClick(mp - downSlider.rect.pos);
 	}
-	//if (closeButton.getAbsRect().inRect(mx, my) && !isClicked) advancedMode = false;
-	if (confirmButton.rect.inRect(mp) && !isClicked)
+	//if (closeButton.getAbsRect().inRect(mx, my) && !isClickedLastTime()) advancedMode = false;
+	if (confirmButton.rect.inRect(mp) && !isClickedLastTime())
 	{
 		confirmFilter = true;
 	}
@@ -34,13 +34,13 @@ void TwoOptionsMenu::draw()
     }
 
 
-    if (clicked == 2) 
+    if (getMBCondition() == 2) 
     {
         //data->drawOnScreen(copyOfTempDC);
         _getch();
     }
 
-    if (!clicked && (lastfirstVal != firstVal || lastsecondVal != secondVal))
+    if (!getMBCondition() && (lastfirstVal != firstVal || lastsecondVal != secondVal))
     {
         useAlgorithm();
         lastfirstVal = firstVal;

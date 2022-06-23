@@ -540,10 +540,12 @@ int main (int argc, int *argv[])
         List* filters = openWindows->addSubList("Фильтры");
         manager->addWindow (filters);
             //filters->addNewItem (curves, NULL, "Кривые");
+        
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
             }
+            
 	
 	txBegin ();
 
@@ -585,19 +587,24 @@ void List::draw()
             items[i]->openManager->advancedMode = false;
         }
     }
+
+    if (!getMBCondition()) lastClickedItemNum = -1;
+    setMbLastTime();
 }
 
 void List::onClick (Vector mp)
 {
     mousePos = mp;
     int clikedButtonNum = standartManagerOnClick (this, mp);
-    if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum)
+    if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum && !isClickedLastTime())
     {
         //printf ("last: %d, current: %d\n", lastClickedItemNum, clikedButtonNum);
-        if (items[clikedButtonNum]->openManager->advancedMode && mayFewWindowsBeOpenedAtTheSameTime) clickButton (pointers[clikedButtonNum], this, mp);
+        if (pointers[clikedButtonNum]->advancedMode && mayFewWindowsBeOpenedAtTheSameTime)
+        {
+            clickButton(pointers[clikedButtonNum], this, mp);
+        }
         lastClickedItemNum = clikedButtonNum;
     }
-
 }
 
 
@@ -608,9 +615,10 @@ void SaveImages::draw()
     char fullPath[MAX_PATH] = {};
     strcpy(fullPath, pathToSave);
 
-    HDC saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
+    HDC saveDC = NULL;
+    if (canvasManager->getActiveCanvas()) saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
 
-    int result = app->saveImage(saveDC, fullPath);
+    if (canvasManager->getActiveCanvas()) int result = app->saveImage(saveDC, fullPath);
     app->deleteDC(saveDC);
     advancedMode = false;
 }
@@ -692,76 +700,20 @@ Vector List::getNewSubItemCoordinats ()
 
 void TouchButton::onClick (Vector mp)
 {
-    if (!isClicked) *flag = true;
+    if (!isClickedLastTime()) *flag = true;
+    setMbLastTime();
 }
 
 void AddCanvasButton::onClick (Vector mp)
 {
-    if (!isClicked) canvasManager->addCanvas();
+    if (!isClickedLastTime()) canvasManager->addCanvas();
+    setMbLastTime();
 }
 
 void txSelectFontDC(const char* text, int sizey, HDC &dc, int sizex/* = -1*/)
 {
 	txSelectFont(text, sizey, sizex, FW_DONTCARE, false, false, false, 0, dc);
 }
-
-
-/*
-void BrightnessButton::draw ()
-{
-	if (!advancedMode) return;
-
-	if (txMouseButtons() != 1)
-	{
-		SecondFilterValue = copyOfSecondFilterValue;
-		FirstFilterValue = copyOfFirstFilterValue;
-	}
-
-	controlHandle ();
-
-	if (dc) copyOnDC (0, 0, dc);
-	SecondFilterValueSlider.draw ();
-	//app->drawOnScreen(brightnessSlider.finalDC);
-	app->bitBlt (finalDC, SecondFilterValueSlider.rect.pos.x, SecondFilterValueSlider.rect.pos.y, SecondFilterValueSlider.rect.getSize().x, SecondFilterValueSlider.rect.getSize().y, SecondFilterValueSlider.finalDC);
-
-	FirstFilterValueSlider.draw ();
-	//app->drawOnScreen(FirstFilterValueSlider.finalDC);
-	app->bitBlt (finalDC, FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.rect.getSize().x, FirstFilterValueSlider.rect.getSize().y, FirstFilterValueSlider.finalDC);
-	//app->bitBlt (FirstFilterValueSlider.rect.pos.x, FirstFilterValueSlider.rect.pos.y, FirstFilterValueSlider.finalDC);
-	//app->bitBlt (300, 300, FirstFilterValueSlider.finalDC);
-	txSetFillColor (TX_RED);
-	app->rectangle (300, 300, 400, 400);
-
-	app->setColor (SystemSettings.BackgroundColor, finalDC);
-	app->line (grafic.rect.pos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfFirstFilterValue / 255),
-			grafic.rect.finishPos.x, grafic.rect.pos.y + grafic.rect.getSize ().y * (copyOfSecondFilterValue / 255), finalDC);
-}
-
-void BrightnessButton::onClick (Vector mp)
-{
-	if (!advancedMode) return;
-	int mx = mp.x;
-	int my = mp.y;
-
-	if (handle.rect.inRect (mx, my))
-	{
-			startCursorPos.x = mx;
-			startCursorPos.y = my;
-			handle.isClicked = true;
-	}
-
-	if (SecondFilterValueSlider.rect.inRect (mx, my) && !isClicked) SecondFilterValueSlider.onClick (mp - SecondFilterValueSlider.rect.pos);		
-	if (FirstFilterValueSlider.rect.inRect (mx, my) && !isClicked) FirstFilterValueSlider.onClick (mp - FirstFilterValueSlider.rect.pos);		
-	if (closeButton.rect.inRect (mx, my) && !isClicked) advancedMode = false;
-	if (confirmButton.rect.inRect (mx, my) && !isClicked) 
-	{
-		confirmFilter = true;
-		//SecondFilterValueSlider.maxNum = Brightness;
-		//brightnessSlider.maxNum = 255;
-		//FirstFilterValueSlider.maxNum = FirstFilterValue;
-	}
-}
-*/
 
 void NumChange::draw ()
 {
@@ -786,8 +738,8 @@ void NumChange::draw ()
 	slider.draw ();
 	//checkTextLen (*num, numBeforeSlider, &stringButton.textLen, &stringButton.cursorPosition);
 
-	if (clicked != 1 && plusNum.isClicked  == true) plusNum.isClicked = false;
-	if (clicked != 1 && minusNum.isClicked == true) minusNum.isClicked = false;
+	//if (getMBCondition() != 1 && plusNum.isClickedLastTime()  == true) plusNum.isClickedLastTime() = false;
+	//if (getMBCondition() != 1 && minusNum.isClickedLastTime() == true) minusNum.isClickedLastTime() = false;
 
 	if (manager->activeWindow != this) activeWindow = NULL;
 }
@@ -804,41 +756,41 @@ void NumChange::onClick (Vector mp)
 		 activeWindow = &stringButton;
 	 }
 
-	if (plusNum.rect.inRect (mx, my) && !plusNum.isClicked)
+	if (plusNum.rect.inRect (mx, my) && !plusNum.isClickedLastTime())
 	{
 		activeWindow = &plusNum;
 
 		if (*num >= maxNum) return;
-		if ((*num == 9) || (*num == 99) || (*num == 999) || (*num == 9999) && !plusNum.isClicked && *num < maxNum) //fix?!
+		if ((*num == 9) || (*num == 99) || (*num == 999) || (*num == 9999) && !plusNum.isClickedLastTime() && *num < maxNum) //fix?!
 		{
 			stringButton.textLen++;
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
-		if (!plusNum.isClicked)
+		if (!plusNum.isClickedLastTime())
 		{
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
 		//plusNum.onClick ();
-		plusNum.isClicked = true;
+		plusNum.isClickedLastTime() = true;
 	}
 
-	if (minusNum.rect.inRect (mx, my) && !minusNum.isClicked)
+	if (minusNum.rect.inRect (mx, my) && !minusNum.isClickedLastTime())
 	{
 		activeWindow = &minusNum;
 
 		if (*num <= minNum) return;
 
-		if ((*num == 10) || (*num == 100) || (*num == 1000) || (*num == 10000)&& !plusNum.isClicked && minNum < *num)
+		if ((*num == 10) || (*num == 100) || (*num == 1000) || (*num == 10000)&& !plusNum.isClickedLastTime() && minNum < *num)
 		{
 			stringButton.textLen--;
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
-		if (!plusNum.isClicked)
+		if (!plusNum.isClickedLastTime())
 		{
 			stringButton.cursorPosition =  stringButton.textLen - 2;
 		}
 		//minusNum.onClick ();
-		minusNum.isClicked = true;
+		minusNum.isClickedLastTime() = true;
 	}
 
 
@@ -867,10 +819,6 @@ void ToolsPalette::drawOneLine(int lineNum)
         app->setColor(TX_WHITE, finalDC);
         app->rectangle(pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.pos.x + pointers[lineNum]->rect.getSize().x * 0.1, pointers[lineNum]->rect.pos.y + pointers[lineNum]->rect.getSize().y * 0.1 + handle.rect.finishPos.y, finalDC);
     }
-    if (clicked != 1)
-    {
-        pointers[lineNum]->isClicked = false;
-    }
 
     app->setColor(TX_BLACK, finalDC);
     app->line(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
@@ -887,7 +835,7 @@ int ToolsPalette::onClickLine(Vector mp)
             activeWindow = pointers[lineNum];
             clickButton(pointers[lineNum], this, mp);
             //pointers[lineNum]->onClick(mp - pointers[lineNum]->rect.pos);
-            //pointers[lineNum]->isClicked = true;
+            //pointers[lineNum]->isClickedLastTime() = true;
             SystemSettings.DrawingMode = lineNum + 1;
             lastSelected = lineNum;
 
@@ -897,8 +845,6 @@ int ToolsPalette::onClickLine(Vector mp)
         }
         else
         {
-            pointers[lineNum]->isClicked = false;
-
             missClicked = true;
         }
 
@@ -1154,24 +1100,19 @@ void shiftArrBack (char arr[], int length)
 
 void OpenManager::onClick (Vector mp)
 {
-	if (!isClicked)
-	{
-		openManager->advancedMode = !openManager->advancedMode;
-		openManager->draw ();
-	}
+    if (!isClickedLastTime())
+    {
+        openManager->advancedMode = !openManager->advancedMode;
+        openManager->draw();
+    }   
+    setMbLastTime();
 }
 
 void OpenManager::draw()
 {
     standartDraw (this);
 	app->setColor (SystemSettings.TextColor, finalDC, SystemSettings.MainFont); 
-    
-    //openManager->advancedMode = advancedMode;
-
-    //txTriangle (rect.getSize().x - 10, rect.getSize().y * 0.3,  rect.getSize().x - 10, rect.getSize().y * 0.66, rect.getSize().x - 5, rect.getSize().y * 0.5);
-		//txSelectFont ("Arial", 40);
-	//if (text) txTextOut (0, 0,  text, finalDC,);
-	//if (text) txDrawText (0, 0, rect.getSize ().x, rect.getSize ().y, text, DT_VCENTER, finalDC);
+    setMbLastTime();
 }
 
 void Engine (Manager *manager)
@@ -1189,7 +1130,7 @@ void Engine (Manager *manager)
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
-        if (SystemSettings.debugMode) printf("Engine clicked: %d\n", txMouseButtons());
+        if (SystemSettings.debugMode) printf("Engine getMBCondition(): %d\n", txMouseButtons());
 		manager->draw ();
 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
@@ -1223,16 +1164,16 @@ void LaysMenu::onClick (Vector mp)
     mousePos = mp;
     if (advancedMode)
     {
-	    if (advancedMode && !isClicked)
-	    {
-		    clickHandle ();
+        if (advancedMode && !isClickedLastTime())
+        {
+            clickHandle();
 
-		    if (canvasManager->getActiveCanvas() != NULL)
-		    {
-			    for (int i = 0; i < canvasManager->getActiveCanvas()->currentHistoryLength; i++)
-			    {
-				    Rect button = {.pos = {(double)i, handle.rect.getSize().y + i * sectionHeight}, .finishPos = {rect.getSize().x, handle.rect.getSize().y +  (i + 1) * sectionHeight}};
-                    if (button.inRect (mp))
+            if (canvasManager->getActiveCanvas() != NULL)
+            {
+                for (int i = 0; i < canvasManager->getActiveCanvas()->currentHistoryLength; i++)
+                {
+                    Rect button = { .pos = {(double)i, handle.rect.getSize().y + i * sectionHeight}, .finishPos = {rect.getSize().x, handle.rect.getSize().y + (i + 1) * sectionHeight} };
+                    if (button.inRect(mp))
                     {
                         canvasManager->getActiveCanvas()->activeLayNum = i;
                     }
@@ -1278,117 +1219,8 @@ void LaysMenu::draw()
         app->bitBlt(finalDC, 0, rect.getSize().y - buttonSize.y, 0, 0, addNewLayButton);
         app->line(0, rect.getSize().y - buttonSize.y, rect.getSize().x, rect.getSize().y - buttonSize.y, finalDC);
 	}
+    setMbLastTime();
 }
-
-
-/*
-void History::draw ()
-{
-	app->setColor (TX_BLACK, finalDC);
-	app->rectangle (0, 0, SystemSettings.DCMAXSIZE, SystemSettings.DCMAXSIZE, finalDC);
-
-	
-	
-
-	if (canvasManager->activeCanvas != NULL)
-	{
-		rect.finishPos.y = rect.pos.y + handle.rect.getSize().y + (toolHDCSize) * canvasManager->activeCanvas->currentHistoryLength;
-		for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
-		{
-		
-			if (canvasManager->activeCanvas != NULL)
-			{
-				int tool = 0;
-				if (canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1] > 0 && canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i >= 0)	
-				{
-					app->bitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);
-					tool = canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i];
-				}
-		
-				if (canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i < 0 && canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i]  >  0)
-				{
-					app->bitBlt (finalDC, (toolHDCSize / 4), handle.rect.getSize().y + (toolHDCSize) * i + (toolHDCSize / 4), 0, 0, toolsDC[canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i] - 1]);	
-					tool = canvasManager->activeCanvas->historyOfSystemSettings.DrawingMode[10 +canvasManager->activeCanvas->currentHistoryNumber - 1 - 1 - i];
-				}
-				//txSetTextAlign (TA_LEFT);
-				//char *num = new char[canvasManager->activeCanvas->currentHistoryLength]{};
-				char strNum[10] = {};
-				sprintf (strNum, "%d", canvasManager->activeCanvas->currentHistoryLength - i);
-				
-
-				char toolName[50] = {};
-				if (tool == 1)
-				{
-					sprintf (toolName, "Линия");
-				}
-				if (tool == 2)
-				{
-					sprintf (toolName, "Ластик");
-				}
-				if (tool == 4)
-				{
-					sprintf (toolName, "Ручка");
-				}
-
-				//txTextOut (0, handle.rect.getSize().y + (toolHDCSize) * i, strNum, finalDC);
-				
-				
-
-				//txTextOut ((toolHDCSize + rect.getSize().x) / 2, handle.rect.getSize().y + toolHDCSize * i + toolHDCSize / 2, toolName, finalDC);
-				//app->drawOnScreen(finalDC);
-				txSelectFont ("Arial", 18, 5, FW_DONTCARE, false, false, false, 0, finalDC);
-				txSetTextAlign(TA_CENTER, finalDC);
-				app->setColor(SystemSettings.TextColor, finalDC);
-				txDrawText (toolHDCSize + rect.getSize().x * 0.05, handle.rect.getSize().y + toolHDCSize * i, rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i + 1), toolName, DT_VCENTER, finalDC);
-
-				app->setColor(SystemSettings.MenuColor, finalDC);
-				app->line (0, handle.rect.getSize().y + toolHDCSize * (i), rect.getSize().x, handle.rect.getSize().y + toolHDCSize * (i), finalDC);
-			}
-
-		}
-	}
-
-	handle.print (finalDC);
-	controlHandle ();
-	
-	app->rectangle (0, 0, SystemSettings.SIDETHICKNESS, rect.getSize().y, finalDC);
-	app->rectangle (0, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
-	app->rectangle(rect.getSize().x - SystemSettings.SIDETHICKNESS, rect.getSize().y - SystemSettings.SIDETHICKNESS, rect.getSize().x, 0, finalDC);
-}
-
-
-void History::onClick (Vector mp)
-{
-    mousePos = mp;
-	int mx = mp.x;
-	int my = mp.y;
-	if (advancedMode && !isClicked)
-	{
-		clickHandle ();
-
-		if (canvasManager->activeCanvas != NULL)
-		{
-			for (int i = 0; i < canvasManager->activeCanvas->currentHistoryLength; i++)
-			{
-					Rect button = {.pos = {getAbsCoordinats().x + i, getAbsCoordinats().y + handle.rect.getSize().y + i *toolHDCSize}, .finishPos = {getAbsCoordinats().x + rect.getSize().x, getAbsCoordinats().y + handle.rect.getSize().y +  (i + 1) * toolHDCSize}};
-					if (button.inRect (txMouseX(), txMouseY()))
-					{
-						//int savecurrentHistoryNumber - 1 = canvasManager->activeCanvas->currentHistoryNumber - 1;
-						//canvasManager->activeCanvas->currentHistoryNumber - 1 -= (i);
-						//if (canvasManager->activeCanvas->currentHistoryNumber - 1 < 0) canvasManager->activeCanvas->currentHistoryNumber - 1 += 9;
-						canvasManager->activeCanvas->currentHistoryLength -= (i);
-
-						//if (i != 0)canvasManager->activeCanvas->canvas = canvasManager->activeCanvas->history[canvasManager->activeCanvas->currentHistoryNumber - 1];
-					}
-
-			}
-		}
-		
-	}
-
-}
-*/
-
 
 void TimeButton::draw ()
 {
@@ -1561,7 +1393,7 @@ void Menu::onClick(Vector mp)
 
 
 
-    if (advancedMode && !isClicked)
+    if (advancedMode)
     {
         reDraw = true;
         missClicked = onClickLine(mp);
@@ -1580,7 +1412,7 @@ void Canvas::draw ()
 
     
 
-    if (systemSettings->debugMode == 6)  printf("Clicked: %d\n", clicked);
+    if (systemSettings->debugMode == 3)  printf("Clicked: %d\n", getMBCondition());
 
 
     cleanOutputLay();                                                                                                                      
@@ -1610,10 +1442,10 @@ void Canvas::draw ()
 	if (manager->activeWindow != this) wasClicked = false;
 
 	 
-	scrollBarVert.draw ();
-	app->bitBlt (finalDC, scrollBarVert.rect.pos.x, scrollBarVert.rect.pos.y, scrollBarVert.rect.getSize().x, scrollBarVert.rect.getSize().y, scrollBarVert.finalDC);
-	scrollBarHor.draw ();
-	app->bitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
+	//scrollBarVert.draw ();
+	//app->bitBlt (finalDC, scrollBarVert.rect.pos.x, scrollBarVert.rect.pos.y, scrollBarVert.rect.getSize().x, scrollBarVert.rect.getSize().y, scrollBarVert.finalDC);
+	//scrollBarHor.draw ();
+	//app->bitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
 
     drawCadre();
 
@@ -1694,7 +1526,10 @@ void Canvas::controlTool()
             finishTool();
         }
     }
-    if (clicked == 0) toollay->setMBCondition (clicked);
+    if (getMBCondition() == 0)
+    {
+        toollay->setMBCondition(0);
+    }
 }
 
 void Canvas::finishTool()
@@ -1791,7 +1626,7 @@ void Canvas::controlSize()
 		rect.finishPos.y += txMouseY() - startResizingCursor.y;
 		startResizingCursor = { txMouseX(), txMouseY() };
 	}
-	if (clicked != 1) isResizing = false;
+	if (getMBCondition() != 1) isResizing = false;
     */
 }
 
@@ -1954,18 +1789,18 @@ void Canvas::drawLay()
     {
         if (lay[lays].redrawStatus())
         {
+            
             lay[lays].redraw();
             lay[lays].noMoreRedraw();
-            app->transparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay);
-            
+            //app->transparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay);
         }
 
         if (editingMode && (lays == getActiveLayNum()))
         {
-            lay[lays].getActiveToolLay()->setMBCondition(clicked);
+            lay[lays].getActiveToolLay()->setMBCondition(getMBCondition());
             lay[lays].editTool(currentDate);
         }
-
+        
         app->transparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
     }  
 }
@@ -2025,7 +1860,7 @@ void CToolManager::addTool (Tool *tool)
 void Canvas::createLay ()
 {
     assert(!(currentLayersLength >= LayersNum));
-    lay[currentLayersLength].createLay(systemSettings);
+    lay[currentLayersLength].createLay(app);
     if (currentLayersLength <= LayersNum) currentLayersLength++;
 
     activeLayNum = currentLayersLength - 1;
@@ -2120,7 +1955,6 @@ void Canvas::setToolToToolLay(ToolLay* toollay)
 {
     toollay->tool = getActiveTool();
     if (toollay->tool == NULL) return;
-    toollay->tool->clicked = clicked;
     toollay->toolsData = new char[getActiveTool()->ToolSaveLen]{};
 }
 
@@ -2130,7 +1964,7 @@ void Canvas::setCurrentData()
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = systemSettings->DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
-    currentDate->backGroundColor = systemSettings->TRANSPARENTCOLOR;
+    currentDate->backGroundColor = TX_BLACK;
 }
 
 ToolLay* Canvas::getNewToolLay()
@@ -2164,7 +1998,7 @@ int Canvas::getLastNotStartedToolNum()
 
 void Canvas::onClick(Vector mp)
 {
-    if (clicked == 1)
+    if (getMBCondition() == 1)
     {
 
         ///app->setColor(drawColor, fi);
@@ -2199,7 +2033,7 @@ void Canvas::onClick(Vector mp)
 
         if (clickHandle()) return;
 
-        if (!(isClicked) && manager->activeWindow == this)
+        if (!(isClickedLastTime()) && manager->activeWindow == this)
         {
             if (handle.rect.inRect(lastClick.x, lastClick.y))
             {
@@ -2218,14 +2052,16 @@ void Canvas::onClick(Vector mp)
 
     if (editingMode)
     {
-        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, mousePos, clicked)) return;
+        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, mousePos, getMBCondition())) return;
     }
 
     
     //independet scenery block++++++++++++++++++++++++++++++++++++++++++++++++++++
-    if (getActiveLay() && getActiveLay()->getActiveToolLay() && getActiveLay()->getActiveToolLay()->getTool()) getActiveLay()->getActiveToolLay()->getTool()->setMBCondition(clicked);
+    if (getActiveLay() && getActiveLay()->getActiveToolLay()) getActiveLay()->getActiveToolLay()->setMBCondition(getMBCondition());
     //independet scenery block----------------------------------------------------
     
+
+    setMbLastTime();
 }
 
 void ColorButton::onClick (Vector mp)

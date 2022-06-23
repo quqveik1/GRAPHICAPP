@@ -61,12 +61,13 @@ bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void Tool::load(ToolLay* toollay, HDC dc /* = NULL*/)
+HDC Tool::load(ToolLay* toollay, HDC dc /* = NULL*/)
 {
     //assert(input && finalDC);
     //ToolSave* toolDate = (ToolSave*)input;
    // (app)->setColor(toolDate->color, finalDC, toolDate->thickness);
     //txEllipse(toolDate->pos.x - toolDate->size.x, toolDate->pos.y - toolDate->size.y, toolDate->pos.x + toolDate->size.x, toolDate->pos.y + toolDate->size.y, finalDC);
+    return NULL;
 }
 
 

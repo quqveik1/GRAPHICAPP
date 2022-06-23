@@ -60,7 +60,7 @@ struct Tool4Squares : Tool
     ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
     virtual bool edit(ToolLay* toollay, HDC dc = NULL);
 };
 
@@ -104,7 +104,7 @@ struct Point : Tool
     virtual void initPointSave();
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Vignette : Tool
@@ -121,7 +121,7 @@ struct Vignette : Tool
     virtual bool isStarted(ToolLay* data) { return colorSave->isStarted; };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL) {};
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };
 };
 
 struct Gummi : Point

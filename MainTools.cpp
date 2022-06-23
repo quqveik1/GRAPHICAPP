@@ -29,9 +29,10 @@ bool ToolLay::useTool(ProgrammeDate* data)
     return getTool()->use(data, this, toolsData);
 }
 
-void ToolLay::drawTool(HDC dc /*= NULL*/)
+HDC ToolLay::drawTool(HDC dc /*= NULL*/)
 {
-    if (getTool() && isStarted())getTool()->load(this, dc);
+    if (getTool() && isStarted()) return getTool()->load(this, dc);
+    return NULL;
 }
 
 void ToolLay::editTool(ProgrammeDate* data)

@@ -31,7 +31,7 @@ struct ToolLay
 
 
     bool useTool(ProgrammeDate* data);
-    void drawTool(HDC dc = NULL);
+    HDC drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
     int setMBCondition(int condition);
     bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);

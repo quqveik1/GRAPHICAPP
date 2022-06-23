@@ -37,7 +37,7 @@ void compressDraw$ (DebugInfo info, AbstractAppData* app, HDC finalDC, Vector po
 #define compressDraw(...) compressDraw$ (getDebugInfo, __VA_ARGS__)
 void compressImage$(DebugInfo info, AbstractAppData* app, HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
 #define compressImage(...) compressImage$ (getDebugInfo, __VA_ARGS__)
-bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked);
+bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool getMBCondition());
 #define drag(...) drag$ (getDebugInfo, __VA_ARGS__)
 int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp);
 #define standartManagerOnClick(...) standartManagerOnClick$ (getDebugInfo, __VA_ARGS__);;
@@ -74,7 +74,8 @@ struct Window
     int font;
     int sideThickness;
 
-	bool isClicked;
+    bool redrawStatus = false;
+
 	HDC dc;
 
 	HDC finalDC = NULL;
@@ -87,7 +88,8 @@ struct Window
     CLoadManager* loadManager;
 
     Vector mousePos = {};
-    int clicked = false;
+    int clicked = 0;
+    int mbLastTime = 0;
 
     Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
         app (_app),
@@ -96,7 +98,6 @@ struct Window
 		color(_color),
 		manager (_manager),
 		text (_text), 
-		isClicked (false), 
 		dc (_dc),
 		advancedMode (_advancedMode),
 		reDraw (true),
@@ -127,6 +128,8 @@ struct Window
 	Vector getAbsCoordinats (bool coordinatsWithHandle = false);
     Vector getRelativeMousePos (bool coordinatsWithHandle = false);
 	Rect getAbsRect (bool coordinatsWithHandle = false);
+
+    
 	
 	virtual void resize (Rect newSize);
 	//void resize (Vector newSize, Vector oldSize);
@@ -136,6 +139,24 @@ struct Window
     
 
 	Vector getSize();
+    Manager* getManager() { return manager; };
+    virtual void needRedraw() {};
+    virtual bool getRadrawStatus() { return redrawStatus; };
+    virtual void noMoreRedraw() { redrawStatus = false; };
+
+
+    virtual int getMBCondition() {
+        if (getManager()) return ((Window*)getManager())->getMBCondition();
+        else              return clicked; };
+    virtual bool isClickedLastTime() { 
+        if (mbLastTime == 0) return false;
+        else                 return mbLastTime == getMBCondition(); };
+
+    virtual void setMbLastTime() { mbLastTime = getMBCondition(); };
+    
+
+    //void standartDraw();
+
 	virtual void draw ();
 	virtual void onClick (Vector mp) {};
 
@@ -189,6 +210,8 @@ struct Manager : Window
     void unHide ();
 
     void controlMouse ();
+
+    virtual void redraw() { redrawStatus = true; };
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

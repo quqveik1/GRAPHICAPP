@@ -2,7 +2,7 @@
 #include "DrawBibliothek.h"
 struct CLay
 {
-    CSystemSettings* systemSetings;
+    AbstractAppData* app;
 
     Lay lay = {};
     int toolLength = 0;
@@ -12,7 +12,7 @@ struct CLay
     struct ToolLay** toolLays;
 
 
-    virtual void createLay(CSystemSettings* _systemSetings, Vector _size = {});
+    virtual void createLay(AbstractAppData* _app, Vector _size = {});
     virtual void addToolLay (ToolLay* tool);
 
     virtual HDC getOutputDC ();

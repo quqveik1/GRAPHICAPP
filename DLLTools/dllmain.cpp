@@ -100,6 +100,7 @@ void Gummi::initPointSave()
     Vector size = { (double)dllSettings->GummiThickness, (double)dllSettings->GummiThickness };
     pointSave->size = size;
     pointSave->color = appData->backGroundColor;
+    pointSave->dllSettings = dllSettings;
     pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
 }
 
@@ -136,7 +137,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return pointSave->isFinished;
 }
 
-void Point::load(ToolLay* toollay, HDC dc)
+HDC Point::load(ToolLay* toollay, HDC dc)
 {
     assert(toollay);
     toolLay = toollay;
@@ -146,11 +147,14 @@ void Point::load(ToolLay* toollay, HDC dc)
     if (!outDC) outDC = getOutDC();
 
     app->setColor(pointSave->color, outDC, 1);
+    if (app->systemSettings->debugMode == 5) printf("pointSave->currentLength: %d", pointSave->currentLength);
 
     for (int i = 0; i < pointSave->currentLength; i++)
     {
         app->ellipse(pointSave->pointsPosition[i], pointSave->size, outDC);
     }
+
+    return outDC;
 }
 
 
@@ -200,7 +204,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
+HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 {
     assert(toollay);
 
@@ -219,13 +223,15 @@ void Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 
     app->setColor(toolDate->color, outDC, toolDate->thickness);
     outputFunc(outDC);
+
+    return outDC;
 }  
 
 bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     assert(toollay);
-    if (app->systemSettings->debugMode) printf("Tool clicked: %d\n", clicked);
-    if (app->systemSettings->debugMode) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
+    if (app->systemSettings->debugMode == 5) printf("Tool getMBCondition(): %d\n", clicked);
+    if (app->systemSettings->debugMode == 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
     ToolSave* toolDate = getToolData();
     countDeltaButtons();
