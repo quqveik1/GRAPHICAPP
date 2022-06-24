@@ -29,6 +29,8 @@ CLoadManager LoadManager (&SystemSettings);
 
 
 
+
+
 HDC TestPhoto;
 
 //void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = SystemSettings.DCMAXSIZE, int originalSizeY = SystemSettings.DCMAXSIZE, int sourceSizeX = SystemSettings.DCMAXSIZE, int sourceSizeY = SystemSettings.DCMAXSIZE);
@@ -111,6 +113,8 @@ struct ToolsPalette : Menu
 };
 
 
+
+
 //Меню, которое будет позволять управлять уже нарисованными на слое инструментами
 struct ToolMenu : Menu
 {
@@ -160,6 +164,20 @@ struct CloseButton : Window
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;
+};
+
+struct ResizeButton : Window
+{
+    Vector sizeLastTime;
+
+    ResizeButton(AbstractAppData* _app, Rect _rect) :
+        Window(_app, _rect, NULL, _app->loadManager->loadImage("FullScreenButton.bmp")),
+        sizeLastTime (app->systemSettings->FullSizeOfScreen)
+    {
+    }
+
+    virtual void draw() override;
+    virtual void onClick(Vector mp) override;
 };
 
 struct ColorButton : Window
@@ -427,6 +445,8 @@ void shiftArrBack    (char arr[], int length);
 void shiftArrForward (char arr[], int length);
 bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
+bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
+    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
 
 
 
@@ -443,9 +463,12 @@ int main (int argc, int *argv[])
 
     _txWindowStyle = appData->systemSettings->WindowStyle;
 
+    _txSwapBuffers = swapDC;
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->SizeOfScreen.x, appData->systemSettings->SizeOfScreen.y);
 
-	Manager *manager = new Manager(appData, {.pos = {0, 0}, .finishPos = appData->systemSettings->SizeOfScreen }, 20, true, NULL, {}, TX_RED);
+    //appData->changeWindow(appData->systemSettings->SizeOfScreen);
+
+    Manager* manager = new Manager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
     ToolSave toolSave = {};
 
@@ -454,7 +477,7 @@ int main (int argc, int *argv[])
 	compressImage (appData, addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	appData->deleteDC(oldDC);
 
-	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = appData->systemSettings->SizeOfScreen } , TX_BLUE);
+	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x,  appData->systemSettings->SizeOfScreen.y}} , TX_BLUE);
 		statusBar->progressBar =  new ProgressBar (appData, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
 		statusBar->progressBar->manager = statusBar;
 		statusBar->timeButton = new TimeButton(appData, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
@@ -511,20 +534,24 @@ int main (int argc, int *argv[])
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {1900, appData->systemSettings->HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
+	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
 
-		CloseButton* closeButton = new CloseButton(appData, { .pos = {1900 - appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {1900, appData->systemSettings->HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
+
+        ResizeButton* resizeButton = new ResizeButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT} });
+        //mainhandle->addWindow(resizeButton);
 
         AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindow(addNewCanvas);
 
         List* systemList = new List(appData, { appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
+        manager->addWindow(systemList);
         OpenManager* openSystemList = new OpenManager(appData, { .pos = {appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 3, appData->systemSettings->HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
         mainhandle->addWindow(openSystemList);
+        
 
-        manager->addWindow(systemList);
         SaveImages* saveImages = new SaveImages(appData, canvasManager);
         systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
 
@@ -540,7 +567,6 @@ int main (int argc, int *argv[])
         List* filters = openWindows->addSubList("Фильтры");
         manager->addWindow (filters);
             //filters->addNewItem (curves, NULL, "Кривые");
-        
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
@@ -594,7 +620,7 @@ void List::draw()
 
 void List::onClick (Vector mp)
 {
-    mousePos = mp;
+    mousePos = getMousePos();
     int clikedButtonNum = standartManagerOnClick (this, mp);
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum && !isClickedLastTime())
     {
@@ -1121,16 +1147,19 @@ void Engine (Manager *manager)
     AbstractAppData* app = manager->app;
     assert(app);
 
+    HDC outputDC = app->createDIBSection(app->systemSettings->SizeOfScreen.x, app->systemSettings->SizeOfScreen.y);
+    txDC() = outputDC;
+
 	for (;;)
 	{
         txClearConsole();
-        if (SystemSettings.debugMode) printf ("FPS: %lf\n", txGetFPS());
+        if (SystemSettings.debugMode == -1 || SystemSettings.debugMode > 0) printf ("\nFPS: %lf\n", txGetFPS());
 		app->setColor (SystemSettings.BackgroundColor, txDC());
 		app->rectangle (0, 0, 2000, 2000, txDC());
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
-        if (SystemSettings.debugMode) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+        if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
 		manager->draw ();
 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
@@ -1149,6 +1178,13 @@ void Engine (Manager *manager)
 		txSleep (0);
 
 	}
+}
+
+
+bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
+    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp)
+{
+    return txBitBlt(dest, 0, 0, wDest, hDest, src);
 }
 
 
@@ -1789,10 +1825,8 @@ void Canvas::drawLay()
     {
         if (lay[lays].redrawStatus())
         {
-            
             lay[lays].redraw();
             lay[lays].noMoreRedraw();
-            //app->transparentBlt(lay[lays].lay.outputLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.lay);
         }
 
         if (editingMode && (lays == getActiveLayNum()))
@@ -1960,7 +1994,7 @@ void Canvas::setToolToToolLay(ToolLay* toollay)
 
 void Canvas::setCurrentData()
 {
-    currentDate->mousePos = mousePos;
+    currentDate->mousePos = getMousePos();
     currentDate->managerPos = getAbsCoordinats();
     currentDate->color = systemSettings->DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
@@ -2052,7 +2086,7 @@ void Canvas::onClick(Vector mp)
 
     if (editingMode)
     {
-        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, mousePos, getMBCondition())) return;
+        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, getMousePos(), getMBCondition())) return;
     }
 
     
@@ -2074,6 +2108,22 @@ void ColorButton::onClick (Vector mp)
 void CleanButton::onClick (Vector mp)
 {
 	mainCanvas->clearBackground = true;
+}
+
+
+void ResizeButton::onClick(Vector mp)
+{
+    PowerPoint* fullapp = (PowerPoint*)app;
+
+    Vector rememberSize = app->systemSettings->SizeOfScreen;
+    fullapp->changeWindow(sizeLastTime);
+    sizeLastTime = rememberSize;
+}
+
+void ResizeButton::draw()
+{
+    setMbLastTime();
+    standartDraw(this);
 }
 
 

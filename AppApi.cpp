@@ -138,3 +138,18 @@ int PowerPoint::saveImage(HDC dc, const char* path)
 {
     return txSaveImage(path, dc);
 }
+
+void PowerPoint::changeWindow(Vector size, Vector pos/* = {}*/)
+{
+    
+    if (pos == pos.getNullVector())
+    {
+        pos = { .x = abs((size.x - systemSettings->FullSizeOfScreen.x) / 2), .y = abs( (size.y - systemSettings->FullSizeOfScreen.y) / 2) };
+    }
+
+    MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+    HDC outDC = txCreateDIBSection(size.x, size.y);
+    txDC() = outDC;
+
+    systemSettings->SizeOfScreen = size;
+}

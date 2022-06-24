@@ -109,7 +109,6 @@ void standartDraw$ (DebugInfo info, Window *window)
 	{                                                                                           
 		compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
 	} 
-
 }
 
 
@@ -134,7 +133,6 @@ const char* getCustomFilePath(const char* question)
 
     return fileName;
 }
-
 
 const char* getCustomFilePathForSaving(const char* question, const char* fileTypeDescribtion, const char* fileType)
 {
@@ -297,7 +295,7 @@ Vector Window::getSize()
 
 void Window::draw ()
 {
-    needRedraw();
+    
 	standartDraw(this);
 }
 
@@ -427,11 +425,6 @@ Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 
 
 
-Vector Manager::getMousePos()
-{
-    return mousePos;
-}
-
 void Manager::draw ()
 {
     standartManagerDraw (this);	
@@ -439,10 +432,10 @@ void Manager::draw ()
 
 bool Manager::clickHandle ()
 {
-	if (handle.rect.inRect (mousePos))
+	if (handle.rect.inRect (getMousePos()))
 	{
-		startCursorPos.x = manager->getMousePos().x;
-		startCursorPos.y = manager->getMousePos().y;
+		startCursorPos.x = getAbsMousePos().x;
+		startCursorPos.y = getAbsMousePos().y;
         handle.setMbLastTime();
         return true;
 	}
@@ -453,18 +446,21 @@ void Manager::controlHandle ()
 {
     bool isClickedAgo = handle.isClickedLastTime();
     if (app->systemSettings->debugMode == 5) printf("isClickedLastTime: %d\n", isClickedAgo);
+
+    Vector absMP = getAbsMousePos ();
+
+    if (app->systemSettings->debugMode == 5) printf("absMP: {%lf, %lf}\n", absMP.x, absMP.y);
+
 	if (isClickedAgo && manager)
 	{
-		rect.pos.x += manager->getMousePos().x - startCursorPos.x;
-		rect.pos.y += manager->getMousePos().y - startCursorPos.y;
-		rect.finishPos.x += manager->getMousePos().x - startCursorPos.x;
-		rect.finishPos.y += manager->getMousePos().y - startCursorPos.y;
-		startCursorPos.x = manager->getMousePos().x;
-		startCursorPos.y = manager->getMousePos().y;
-        //printf ("mouse == 1\n");
+		rect.pos.x += absMP.x - startCursorPos.x;
+		rect.pos.y += absMP.y - startCursorPos.y;
+		rect.finishPos.x += absMP.x - startCursorPos.x;
+		rect.finishPos.y += absMP.y - startCursorPos.y;
+		startCursorPos.x = absMP.x;
+		startCursorPos.y = absMP.y;
 	}
     if (getMBCondition () == 0) handle.setMbLastTime();
-	//drawOnFinalDC (handle);
 }
 
 
@@ -498,11 +494,14 @@ void Manager::unHide ()
 
 void Manager::controlMouse ()
 {
+    
+    /*
     for (int i = 0; i < newButtonNum; i++)
     {
         assert (pointers[i]);
         pointers[i]->mousePos = mousePos - pointers[i]->rect.pos;
-    }
+    }       
+    */
 
     /*
     if (clicked >= 1) return;

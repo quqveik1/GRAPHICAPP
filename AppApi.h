@@ -38,4 +38,6 @@ struct PowerPoint : AbstractAppData
 
     virtual void drawCadre(Rect rect, HDC dc);
 
+    virtual void changeWindow(Vector size, Vector pos = {});
+
 };

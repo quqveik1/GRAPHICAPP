@@ -2,7 +2,7 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "TXLib.h"
+#include "TXLib.cpp"
 #include "Q_Rect.h"
 #include "Macroses.h"
 #include "GlobalOptions.h"
@@ -153,9 +153,13 @@ struct Window
         else                 return mbLastTime == getMBCondition(); };
 
     virtual void setMbLastTime() { mbLastTime = getMBCondition(); };
-    
 
-    //void standartDraw();
+    virtual Vector getMousePos() {
+        if (getManager()) return ((Window*)getManager())->getMousePos() - rect.pos;
+        else              return mousePos; };
+
+    virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
+
 
 	virtual void draw ();
 	virtual void onClick (Vector mp) {};
@@ -216,7 +220,6 @@ struct Manager : Window
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;
 
-    Vector getMousePos();
 };
 
 

@@ -36,6 +36,7 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
 
     systemSettings->SizeOfScreen.x = 1900.000000;
     systemSettings->SizeOfScreen.y = 900.000000;
+    systemSettings->FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
 
     systemSettings->WindowStyle = -2134376448;
 

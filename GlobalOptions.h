@@ -42,6 +42,7 @@ struct CSystemSettings
     int TOOLSNUM = NULL;
 
     Vector SizeOfScreen = {};
+    Vector FullSizeOfScreen = {};
     int DCMAXSIZE = NULL;
     Vector DCVECTORSIZE = {};
 

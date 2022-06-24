@@ -2,7 +2,7 @@
 //DLLFilters
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#include "TXLib.h"
+#include "..\TXLib.cpp"
 #include "dllmain.h"
 //#include "..\DrawBibliothek.h"
 

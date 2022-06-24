@@ -4,7 +4,7 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Rect.h(63,54): war
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,45): warning C4100: 'dc': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,32): warning C4100: 'toollay': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(106,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(161,31): warning C4100: 'mp': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(165,31): warning C4100: 'mp': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,93): warning C4100: 'clicked': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,72): warning C4100: 'dragedLastTime': unreferenced formal parameter
@@ -17,24 +17,24 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(7
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(76,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(100,95): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(100,68): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(131,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(157,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(234,187): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(234,147): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(234,107): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(234,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(249,23): warning C4100: 'info': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(290,75): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(290,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(290,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(290,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(323,62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(323,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(334,62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(334,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(336,66): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(336,48): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(359,42): warning C4100: 'coordinatsWithHandle': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(130,10): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(156,10): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(233,187): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(233,147): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(233,107): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(233,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(248,23): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(289,75): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(289,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(289,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(289,27): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(322,62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(322,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(333,62): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(333,47): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(335,66): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(335,48): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(358,42): warning C4100: 'coordinatsWithHandle': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(87,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(88,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(88,6): warning C4189: 'my': local variable is initialized but not referenced
@@ -91,7 +91,7 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.c
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(113,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(114,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(96,75): warning C4100: 'SecondValue': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(135): warning C4172: returning address of local variable or temporary: fileName
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(162): warning C4172: returning address of local variable or temporary: fileName
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(134): warning C4172: returning address of local variable or temporary: fileName
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(161): warning C4172: returning address of local variable or temporary: fileName
      Creating library C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.lib and object C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.exp
   DLLFilters.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter
