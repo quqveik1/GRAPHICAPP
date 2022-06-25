@@ -2,8 +2,6 @@
 #include "DrawBibliothek.h"
 #include "TransferStructure.h"
 
-
-
 struct CFilter : Manager
 {
     int guid = 0;

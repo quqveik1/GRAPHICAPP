@@ -15,6 +15,7 @@
 
 
 
+
 struct Manager;
 struct Window;
 
@@ -107,7 +108,7 @@ struct Window
         format (_app->systemSettings->TEXTFORMAT)
 
 	{
-        if (systemSettings->debugMode) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+        if (systemSettings->debugMode >= 0) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
 
         if (!color) color = systemSettings->MenuColor;
 		resize (rect);
@@ -133,13 +134,13 @@ struct Window
 	
 	virtual void resize (Rect newSize);
 	//void resize (Vector newSize, Vector oldSize);
-    void reInit ();
-	void setStartRect (Vector pos, Vector finishPos);
-	void print (HDC finalDC);
+    virtual void reInit ();
+    virtual void setStartRect (Vector pos, Vector finishPos);
+    virtual void print (HDC finalDC);
     
 
-	Vector getSize();
-    Manager* getManager() { return manager; };
+    virtual Vector getSize();
+    virtual Manager* getManager() { return manager; };
     virtual void needRedraw() {};
     virtual bool getRadrawStatus() { return redrawStatus; };
     virtual void noMoreRedraw() { redrawStatus = false; };
@@ -205,19 +206,18 @@ struct Manager : Window
         }
     }
 
-	bool addWindow (Window *window);
-	Window *getActiveWindow ();
-	void controlHandle ();
-	bool clickHandle ();
-	void replaceWindow (int numOfWindow);
-    void hide ();
-    void unHide ();
+    virtual bool addWindow (Window *window);
+    virtual Window *getActiveWindow ();
+    virtual void controlHandle ();
+    virtual bool clickHandle ();
+    virtual void replaceWindow (int numOfWindow);
+    virtual void hide ();
+    virtual void unHide ();
 
-    void controlMouse ();
 
     virtual void redraw() { redrawStatus = true; };
 
-	virtual void draw () override;
+	virtual void draw ()             override;
 	virtual void onClick (Vector mp) override;
 
 };

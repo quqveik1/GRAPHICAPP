@@ -60,7 +60,7 @@ bool DLLManager::loadLibs()
                 result *= (int)libs[currLen];
                 if (result) currLen++;
 
-                if (appData->systemSettings->debugMode) printf("Путь к библиотеке: %s\n", fullPath);
+                if (appData->systemSettings->debugMode >= 0) printf("Путь к библиотеке: %s\n", fullPath);
             }
         }
         else
@@ -75,10 +75,16 @@ bool DLLManager::loadLibs()
                 if (libs[currLen]) currLen++;
             }
 
-            if (appData->systemSettings->debugMode) printf("Путь к библиотеке[%p]: %s\n", libs[currLen], path);
+            if (appData->systemSettings->debugMode >= 0) printf("Путь к библиотеке[%p]: %s\n", libs[currLen], path);
         }
     }
-    if (appData->systemSettings->debugMode) printf("Инструменты(DLL) загрузились в exe\n");
+    if (appData->systemSettings->debugMode >= 0) printf("Инструменты(DLL) загрузились в exe\n");
 
     return result;
+}
+
+
+int DLLManager::getNumberOfLibs()
+{
+    return currLen;
 }

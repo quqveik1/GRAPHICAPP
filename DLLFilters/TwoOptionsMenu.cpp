@@ -52,7 +52,6 @@ void TwoOptionsMenu::draw()
     
 
 	controlHandle();
-    controlMouse ();
 
 	if (dc) copyOnDC(0, 0, dc);
 	upSlider.draw();

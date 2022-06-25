@@ -26,7 +26,7 @@ struct CSystemSettings
 
 
     int MainFont = NULL;
-    char FONTNAME[MAX_PATH] = {};
+    char FONTNAME[256] = {};
     int TEXTFORMAT = NULL;// = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
 
     double HANDLEHEIGHT = NULL;
@@ -43,10 +43,14 @@ struct CSystemSettings
 
     Vector SizeOfScreen = {};
     Vector FullSizeOfScreen = {};
+    Vector lastTimeSizeOfScreen = {};
     int DCMAXSIZE = NULL;
     Vector DCVECTORSIZE = {};
 
-    const char* pathForSettings;
+    int save(const char* path);
+    int read(const char* path);
+
+    int byteSize = sizeof(*this);
 };
 
 
@@ -61,7 +65,7 @@ void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
 void setStringSettings(FILE* ssFile, char* str, const char* name);
 
 
-void saveSystemSettings(CSystemSettings* systemSettings, const char* path);
+int saveSystemSettings(CSystemSettings* systemSettings, const char* path);
 
 void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void saveIntSettings(FILE* ssFile, int* integer, const char* name);

@@ -457,16 +457,20 @@ int main (int argc, int *argv[])
     appData->systemSettings = &SystemSettings;
     appData->currColor = &(SystemSettings.DrawColor);
     appData->loadManager = &LoadManager;
+    
 
     setDefaultSystemSettings(appData->systemSettings);
+    
+    appData->systemSettings->read("Settings\\FullSettings.settings");
     setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
 
     _txWindowStyle = appData->systemSettings->WindowStyle;
 
-    _txSwapBuffers = swapDC;
-    appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->SizeOfScreen.x, appData->systemSettings->SizeOfScreen.y);
 
-    //appData->changeWindow(appData->systemSettings->SizeOfScreen);
+    _txSwapBuffers = swapDC;
+    appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
+
+    appData->changeWindow(appData->systemSettings->SizeOfScreen);
 
     Manager* manager = new Manager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
@@ -490,11 +494,13 @@ int main (int argc, int *argv[])
 
     manager->addWindow(statusBar);
 
-    if (appData->systemSettings->debugMode) printf("Инструменты начали загружаться\n");
+    if (appData->systemSettings->debugMode >= 0) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
     dllToolsManager->loadLibs();
     dllToolsManager->addToManager(&ToolManager);
-    if (appData->systemSettings->debugMode) printf("Инструменты загрузились\n");
+    if (appData->systemSettings->debugMode >= 0) printf("Инструменты загрузились\n");
+    appData->toolManager = dllToolsManager;
+    
 
 	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
@@ -526,7 +532,7 @@ int main (int argc, int *argv[])
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
-    if (SystemSettings.debugMode) printf("Фильтры загрузились\n");
+    if (SystemSettings.debugMode >= 0) printf("Фильтры загрузились\n");
 
     LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 700}, .finishPos = {appData->systemSettings->BUTTONWIDTH, 1000}}, canvasManager);
     manager->addWindow(laysMenu);
@@ -534,14 +540,14 @@ int main (int argc, int *argv[])
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, 4, true, NULL, {}, RGB(45, 45, 45));
+	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, 5, true, NULL, {}, RGB(45, 45, 45));
     manager->addWindow(mainhandle);
 
 		CloseButton* closeButton = new CloseButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindow(closeButton);
 
         ResizeButton* resizeButton = new ResizeButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT} });
-        //mainhandle->addWindow(resizeButton);
+        mainhandle->addWindow(resizeButton);
 
         AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindow(addNewCanvas);
@@ -573,20 +579,19 @@ int main (int argc, int *argv[])
             }
             
 	
-	txBegin ();
-
 
     if (SystemSettings.debugMode == 6) _getch();
+
+
+
+	txBegin ();
 	Engine (manager);
-
+    saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    appData->systemSettings->save("Settings\\FullSettings.settings");
 	txEnd ();
-
+    txDisableAutoPause();
     //delete manager;
     //LoadManager.deleteAllImages ();
-	txDisableAutoPause ();
-
-    saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
-
 	return 0;
 }
 
@@ -636,17 +641,34 @@ void List::onClick (Vector mp)
 
 void SaveImages::draw()
 {
-    
+    advancedMode = false;
+
+    //условие выхода если холст не создан
+    if (!canvasManager->getActiveCanvas())
+    {
+        txMessageBox("Нечего сохранять, холст не создан", "Ошибка");
+        return;
+    }
+
     const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", "Image (*.bmp)", "bmp");
     char fullPath[MAX_PATH] = {};
     strcpy(fullPath, pathToSave);
 
-    HDC saveDC = NULL;
-    if (canvasManager->getActiveCanvas()) saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
+    if (fullPath[0] == NULL)
+    {
+        return;
+    }
 
-    if (canvasManager->getActiveCanvas()) int result = app->saveImage(saveDC, fullPath);
+    HDC saveDC = NULL;
+
+    saveDC = canvasManager->getActiveCanvas()->getImageForSaving();
+
+
+    int result = app->saveImage(saveDC, fullPath);
     app->deleteDC(saveDC);
-    advancedMode = false;
+    
+
+    if (!result) txMessageBox("Ничего не сохранилось", "Ошибка");
 }
 
 void StatusBar::draw()
@@ -1335,8 +1357,6 @@ void CanvasManager::draw ()
 	app->setColor (SystemSettings.BackgroundColor, finalDC);
 	app->rectangle (0, 0, 3000, 3000, finalDC);
 
-    controlMouse ();
-	
     standartManagerDraw (this);
     activeWindow = activeCanvas;
 }
@@ -1441,7 +1461,6 @@ void Menu::onClick(Vector mp)
 
 void Canvas::draw ()
 {
-    controlMouse();
     app->setColor(TX_BLACK, finalDC);
     app->rectangle(0, 0, 3000, 3000, finalDC);
 	app->setColor (systemSettings->BackgroundColor, finalDC); 
@@ -1671,15 +1690,6 @@ void Canvas::controlSizeSliders ()
 	//scrollBarVert.resize ({.pos = {rect.finishPos}});
 }
 
-
-
-/*
-void Filter::reStartCount()
-{
-	lastX = 0;
-	lastY = 0;
-} */ 
- 
 
 void SizeButton::onClick (Vector mp)
 {
@@ -2013,7 +2023,7 @@ bool Canvas::isDrawingModeChanged()
 
 Tool* Canvas::getActiveTool()
 {
-    if (app->systemSettings->DrawingMode <= 0) return NULL;
+    if (app->systemSettings->DrawingMode <= 0 || app->toolManager->getNumberOfLibs() <= 0) return NULL;
     return ToolManager.tools[app->systemSettings->DrawingMode - 1];
 }
 
@@ -2115,9 +2125,12 @@ void ResizeButton::onClick(Vector mp)
 {
     PowerPoint* fullapp = (PowerPoint*)app;
 
-    Vector rememberSize = app->systemSettings->SizeOfScreen;
-    fullapp->changeWindow(sizeLastTime);
-    sizeLastTime = rememberSize;
+    if (!isClickedLastTime())
+    {
+        Vector saveSize = app->systemSettings->SizeOfScreen;
+        fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+        app->systemSettings->lastTimeSizeOfScreen = saveSize;
+    }
 }
 
 void ResizeButton::draw()

@@ -220,8 +220,6 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
 	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
-    manager->controlMouse ();
-
 	for (int i = 0; i < manager->newButtonNum; i++)
 	{
         
@@ -490,27 +488,6 @@ void Manager::hide ()
 void Manager::unHide ()
 {
     advancedMode = true;
-}
-
-void Manager::controlMouse ()
-{
-    
-    /*
-    for (int i = 0; i < newButtonNum; i++)
-    {
-        assert (pointers[i]);
-        pointers[i]->mousePos = mousePos - pointers[i]->rect.pos;
-    }       
-    */
-
-    /*
-    if (clicked >= 1) return;
-    for (int i = 0; i < newButtonNum; i++)
-    {
-        pointers[i]->clicked = 0;
-        pointers[i]->isClicked = 0;
-    }
-    */
 }
 
 void Manager::replaceWindow(int numOfWindow)

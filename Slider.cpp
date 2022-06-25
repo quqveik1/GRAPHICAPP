@@ -82,7 +82,6 @@ void Slider::draw ()
 	if (maxNum - minNum != 0) kScale = axis / (maxNum - minNum);
 	else kScale = 0;
 
-    controlMouse ();
 
 	int mx = mousePos.x;
 	int my = mousePos.y;

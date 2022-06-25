@@ -47223,3 +47223,1200 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp, строка: 175, функция: void __cdecl saveSystemSettings(struct CSystemSettings *,const char *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "ssFile".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003637C0 (32-bit), Flags: CMdRE0, Thread: 0x8FE4 (Main), GetLastError(): 3 (Системе не удается найти указанный путь), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x002BCFB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: saveSystemSettings() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp (175):
+
+    173:     systemSettings->pathForSettings = path;
+    174:     FILE* ssFile = fopen(path, "w");
+=>  175:     assert(ssFile);
+    176: 
+    177:     saveColorSettings(ssFile, &systemSettings->MenuColor, "MenuColor");
+
+# 1 0x002EA913 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (588):
+
+    586: 	txDisableAutoPause ();
+    587: 
+=>  588:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    589: 
+    590: 	return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 21:57:25, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 21:57:35
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp, строка: 175, функция: void __cdecl saveSystemSettings(struct CSystemSettings *,const char *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "ssFile".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdRE0, Thread: 0x4394 (Main), GetLastError(): 3 (Системе не удается найти указанный путь), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007BCFB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: saveSystemSettings() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp (175):
+
+    173:     systemSettings->pathForSettings = path;
+    174:     FILE* ssFile = fopen(path, "w+t");
+=>  175:     assert(ssFile);
+    176: 
+    177:     saveColorSettings(ssFile, &systemSettings->MenuColor, "MenuColor");
+
+# 1 0x007EA913 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (588):
+
+    586: 	txDisableAutoPause ();
+    587: 
+=>  588:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    589: 
+    590: 	return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:03:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdrE0, Thread: 0xA124 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007684A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x0076CB80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00771944 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 9 0x76D19357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#10 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#11 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#12 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#15 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#16 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#17 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#18 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#19 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#20 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#21 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#22 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#23 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#25 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#26 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#27 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#28 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#29 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#30 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#31 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#32 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#33 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#34 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#35 0x76D05A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#36 0x76D21A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#37 0x00770A39 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#38 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#39 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#40 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#41 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#42 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:03:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#3: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdrE0, Thread: 0xA124 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007684A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x0076CB80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00771944 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D6B008 in C:\WINDOWS\System32\USER32.dll: SoftModalMessageBox()
+# 9 0x76D69D70 in C:\WINDOWS\System32\USER32.dll: DrawStateA()
+#10 0x76D6A877 in C:\WINDOWS\System32\USER32.dll: MessageBoxTimeoutW()
+#11 0x76D6A8E5 in C:\WINDOWS\System32\USER32.dll: MessageBoxW()
+#12 0x007D2993 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txMessageBox() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12717)
+#13 0x00799CDE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txProcessError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12617)
+#14 0x0078A475 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10939)
+#15 0x007684A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+#16 0x0076CB80 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+#17 0x00771944 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+#18 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#19 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#20 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#21 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#22 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#23 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#24 0x76D19357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#25 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#26 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#27 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#28 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#29 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#30 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#31 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#32 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#33 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#34 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#35 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#36 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#37 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#38 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#39 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#40 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#41 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#42 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#43 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#44 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#45 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#46 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#47 0x00772151 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#48 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#49 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#50 0x76D05A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#51 0x76D21A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#52 0x00770A39 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#53 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#54 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#55 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#56 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#57 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in int __cdecl TX::txMessageBox(const char [],const char [],unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12717):
+
+  12715: 
+  12716: $   HWND wnd = _txCanvas_Window;
+=>12717: $   int  ret = MessageBoxW ((wnd && IsWindowVisible (wnd))? wnd : _TX_CALL (Win32::GetConsoleWindow,()),
+  12718:                             textW, headerW, flags | MB_SETFOREGROUND | MB_TOPMOST);
+  12719: 
+
+# 4 in const char *__cdecl TX::_txProcessError(const char [],int,const char [],unsigned int,const char [],char *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12564):
+
+  12562: 
+  12563:     if (stkTrace && strstr (stkTrace, ".exe: "))
+=>12564:         {$ fprintf (stderr,    "Стек вызовов:\n\n"
+  12565:                                "%s\n\n"
+  12566:                                "--------------------------------------------------\n",
+
+# 5 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 6 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 7 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 8 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 9 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+#10 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:03:53
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp, строка: 175, функция: void __cdecl saveSystemSettings(struct CSystemSettings *,const char *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "ssFile".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdRE0, Thread: 0x2F70 (Main), GetLastError(): 3 (Системе не удается найти указанный путь), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007BCFB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: saveSystemSettings() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp (175):
+
+    173:     systemSettings->pathForSettings = path;
+    174:     FILE* ssFile = fopen(path, "w+t");
+=>  175:     assert(ssFile);
+    176: 
+    177:     saveColorSettings(ssFile, &systemSettings->MenuColor, "MenuColor");
+
+# 1 0x007EA913 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (588):
+
+    586: 	txDisableAutoPause ();
+    587: 
+=>  588:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    589: 
+    590: 	return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:06:20
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp, строка: 175, функция: void __cdecl saveSystemSettings(struct CSystemSettings *,const char *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "ssFile".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdRE0, Thread: 0x85E4 (Main), GetLastError(): 3 (Системе не удается найти указанный путь), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007BCFB4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: saveSystemSettings() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\GlobalOptions.cpp (175):
+
+    173:     systemSettings->pathForSettings = path;
+    174:     FILE* ssFile = fopen(path, "w+t");
+=>  175:     assert(ssFile);
+    176: 
+    177:     saveColorSettings(ssFile, &systemSettings->MenuColor, "MenuColor");
+
+# 1 0x007EA913 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (588):
+
+    586: 	txDisableAutoPause ();
+    587: 
+=>  588:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    589: 
+    590: 	return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:07:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10113, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008637C0 (32-bit), Flags: CMdrE0, Thread: 0x9C7C (Canvas), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0076CDB8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 1 0x00771944 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x0077088D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 8 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+# 9 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#10 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9790):
+
+   9788: $   while (GetMessage (&msg, NULL, 0, 0))
+   9789:         {
+=> 9790:         if (!msg.hwnd) {$ continue; }
+   9791: 
+   9792:         if (accel && TranslateAccelerator (wnd, accel, &msg)) {$ continue; }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:03:11, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:07:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Images
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00AB37C0 (32-bit), Flags: CMdrE0, Thread: 0xA818 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x009B8480 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x009BCD6F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 2 0x009C1924 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x009C086D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 9 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#10 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#11 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9797):
+
+   9795: $       DispatchMessage  (&msg);
+   9796: 
+=> 9797: $       Sleep (0);
+   9798:         }
+   9799: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 22:31:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 22:31:42
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10113, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x003D3830 (32-bit), Flags: CMdrE0, Thread: 0xB0DC (Canvas), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x002DCE38 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 1 0x002E19C4 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x002E090D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 8 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+# 9 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#10 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9797):
+
+   9795: $       DispatchMessage  (&msg);
+   9796: 
+=> 9797: $       Sleep (0);
+   9798:         }
+   9799: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 24 2022 23:38:36, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 24 2022 23:39:17
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x002B4868 (32-bit), Flags: CMdre0, Thread: 0x9B24 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001B7C82 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x001BB156 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x001C1916 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D101C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D0B0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x76D22218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x001B9B44 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x001C01AA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 15:29:55, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 15:30:02
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00413840 (32-bit), Flags: CMdRE0, Thread: 0xBDDC (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00318570 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x0031CC50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00321A14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 9 0x76D19357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#10 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#11 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#12 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#15 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#16 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#17 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#18 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#19 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#20 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#21 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#22 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#23 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#25 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#26 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#27 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#28 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#29 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#30 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#31 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#32 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#33 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#34 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#35 0x76D05A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#36 0x76D21A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#37 0x00320B09 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#38 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#39 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#40 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#41 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#42 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 15:40:20, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 15:41:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00413840 (32-bit), Flags: CMdrE0, Thread: 0xBDDC (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00318570 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x0031CC50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00321A14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x00325D79 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCleanup() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120)
+# 9 0x00349E20 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txProcessError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12633)
+#10 0x0033A545 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10939)
+#11 0x00318570 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+#12 0x0031CC50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+#13 0x00321A14 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+#14 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#15 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#16 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#17 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#18 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#19 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#20 0x76D19357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#21 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#22 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#23 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#25 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#26 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#27 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#28 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#29 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#30 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#31 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#32 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#33 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#34 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#35 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#36 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#37 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#38 0x76D1D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#39 0x732890B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#40 0x7328B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#41 0x7329C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#42 0x76D19346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#43 0x00322221 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#44 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#45 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#46 0x76D05A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#47 0x76D21A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#48 0x00320B09 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#49 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#50 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#51 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#52 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#53 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in void __cdecl TX::_txCleanup(void) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120):
+
+   9118: 
+   9119: $   if (txWindow())
+=> 9120:         {$ SendNotifyMessage (txWindow(), WM_DESTROY, 0, 0); }
+   9121: 
+   9122: $   _txWaitFor (!txWindow(), 5*_TX_TIMEOUT);
+
+# 4 in const char *__cdecl TX::_txProcessError(const char [],int,const char [],unsigned int,const char [],char *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12564):
+
+  12562: 
+  12563:     if (stkTrace && strstr (stkTrace, ".exe: "))
+=>12564:         {$ fprintf (stderr,    "Стек вызовов:\n\n"
+  12565:                                "%s\n\n"
+  12566:                                "--------------------------------------------------\n",
+
+# 5 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 6 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 7 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 8 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 9 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+#10 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 15:40:20, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 15:41:27
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00193840 (32-bit), Flags: CMdre0, Thread: 0x6134 (Canvas). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00097C72 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x0009B146 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnCREATE() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060)
+# 2 0x000A1906 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D101C9 in C:\WINDOWS\System32\USER32.dll: GetMessageW()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x76D0B0E4 in C:\WINDOWS\System32\USER32.dll: CreateWindowExW()
+# 9 0x76D22218 in C:\WINDOWS\System32\USER32.dll: CreateWindowExA()
+#10 0x00099B34 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_CreateWindow() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845)
+#11 0x000A019A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761)
+#12 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#13 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#14 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in bool __cdecl TX::_txCanvas_OnCREATE(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10060):
+
+  10058: $8  if (_TX_ARGUMENT_FAILED (wnd)) return false;
+  10059: 
+=>10060: $   _txCanvas_BackBuf[0] = _txBuffer_Create (wnd, NULL, NULL, &_txCanvas_Pixels); assert (_txCanvas_BackBuf[0]);
+  10061: $   _txCanvas_BackBuf[1] = _txBuffer_Create (wnd, NULL, NULL, NULL);              assert (_txCanvas_BackBuf[1]);
+  10062: 
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10009):
+
+  10007:     switch (msg)
+  10008:         {
+=>10009:         case WM_CREATE:         {$     _txCanvas_OnCREATE     (wnd);                    return 0; }
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+
+# 3 in struct HWND__ *__cdecl TX::_txCanvas_CreateWindow(const struct tagSIZE *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9845):
+
+   9843: $   if (!wndClass) return (HWND) NULL;
+   9844: 
+=> 9845: $   HWND wnd = CreateWindowEx (WS_EX_APPWINDOW, wndClass, txGetModuleFileName (false), _txWindowStyle | WS_CLIPCHILDREN,
+   9846:                               (centered)? screen.cx/2 - size.cx/2 : (console)? conPos.left : CW_USEDEFAULT,
+   9847:                               (centered)? screen.cy/2 - size.cy/2 : (console)? conPos.top  : CW_USEDEFAULT,
+
+# 4 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9761):
+
+   9759: $   _TX_CALL (Win32::SetThreadStackGuarantee, (&stackSize));
+   9760: 
+=> 9761: $   HWND wnd = _txCanvas_CreateWindow ((SIZE*) data);
+   9762: $   if (!txWindow()) return TX_DEBUG_ERROR ("\a" "Cannot create canvas!"), 0;
+   9763: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 16:00:05, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 16:00:11
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

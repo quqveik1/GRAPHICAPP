@@ -173,7 +173,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     toolLay = lay;
     saveTool = (ToolSave*)output;
     Vector pos = data->mousePos;
-    printf("pos: {%lf, %lf}\n", pos.x, pos.y);
+    if (app->systemSettings->debugMode == 5) printf("pos: {%lf, %lf}\n", pos.x, pos.y);
 
     if (clicked == 1)
     {

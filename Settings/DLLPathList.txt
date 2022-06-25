@@ -1,2 +1,2 @@
-Debug\DLLTools.tool
-Debug\DLLFilters.filter
+DLLTools.tool
+DLLFilters.filter

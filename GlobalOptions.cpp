@@ -1,6 +1,41 @@
 #pragma once
 #include "GlobalOptions.h"
 
+int CSystemSettings::save(const char* path)
+{
+    FILE* ssFile = fopen(path, "wb");
+    if (!ssFile)
+    {
+        printf("Файл не открылся\n");
+        return 1;
+    }
+
+    int result = fwrite(this, sizeof(char), byteSize, ssFile);
+
+    fclose(ssFile);
+    return 0;
+}
+
+
+int CSystemSettings::read(const char* path)
+{
+    FILE* ssFile = fopen(path, "rb");
+    if (!ssFile)
+    {
+        printf("Файл не открылся\n");
+        return 1;
+    }
+
+    int result = fread(this, sizeof(char), byteSize, ssFile);
+
+    fclose(ssFile);
+
+    
+
+    return 0;
+}
+
+
 
 void setDefaultSystemSettings(CSystemSettings* systemSettings)
 {
@@ -37,6 +72,7 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
     systemSettings->SizeOfScreen.x = 1900.000000;
     systemSettings->SizeOfScreen.y = 900.000000;
     systemSettings->FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
+    systemSettings->lastTimeSizeOfScreen = systemSettings->FullSizeOfScreen;
 
     systemSettings->WindowStyle = -2134376448;
 
@@ -47,47 +83,23 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
 
 }
 
+
+
+
+
 void setSystemSettings(CSystemSettings* systemSettings, const char* path)
 {
     assert(path);
-    systemSettings->pathForSettings = path;
     FILE* ssFile = fopen(path, "r");
     assert(ssFile);
-
-    setColorSettings(ssFile, &systemSettings->MenuColor,       "MenuColor");
-    setColorSettings(ssFile, &systemSettings->SecondMenuColor, "SecondMenuColor");
-    setColorSettings(ssFile, &systemSettings->TextColor,       "TextColor");
-    setColorSettings(ssFile, &systemSettings->BackgroundColor, "BackgroundColor ");
-    setColorSettings(ssFile, &systemSettings->DrawColor,       "DrawColor");
-    setColorSettings(ssFile, &systemSettings->TRANSPARENTCOLOR,"TRANSPARENTCOLOR");
-
-    setIntSettings(ssFile, &systemSettings->ONEMENUBUTTONSNUM, "ONEMENUBUTTONSNUM");
-    setIntSettings(ssFile, &systemSettings->ONELAYTOOLSLIMIT,  "ONELAYTOOLSLIMIT");
-
     setIntSettings(ssFile, &systemSettings->MainFont,    "MainFont");
     setStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
-    setIntSettings(ssFile, &systemSettings->TEXTFORMAT,  "TEXTFORMAT");
-
-    setDoubleSettings(ssFile, &systemSettings->HANDLEHEIGHT,       "HANDLEHEIGHT");
-    setDoubleSettings(ssFile, &systemSettings->BUTTONWIDTH,        "BUTTONWIDTH");
-    setDoubleSettings(ssFile, &systemSettings->BUTTONHEIGHT,       "BUTTONHEIGHT");
-    setDoubleSettings(ssFile, &systemSettings->MENUBUTTONSWIDTH,   "MENUBUTTONSWIDTH");
-    setDoubleSettings(ssFile, &systemSettings->SIDETHICKNESS,      "SIDETHICKNESS");
-    setDoubleSettings(ssFile, &systemSettings->SCROLLBARTHICKNESS, "SCROLLBARTHICKNESS");
 
     setIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
 
     setIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
-
-    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
-    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
+    
     setIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
-
-    setIntSettings(ssFile, &systemSettings->DCMAXSIZE, "DCMAXSIZE");
-
-    setDoubleSettings(ssFile, &systemSettings->DCVECTORSIZE.x, "DCVECTORSIZE.x");
-    setDoubleSettings(ssFile, &systemSettings->DCVECTORSIZE.y, "DCVECTORSIZE.y");
-
 
     fclose(ssFile);
 }
@@ -142,7 +154,7 @@ void setDoubleSettings(FILE* ssFile, double* integer, const char* name)
     char format[MAX_PATH] = {};
     sprintf(format, " %s = %%lf; ", name);
 
-    fscanf(ssFile, format, integer);
+    int result = fscanf(ssFile, format, integer);
 
 }
 
@@ -167,48 +179,28 @@ void setStringSettings(FILE* ssFile, char* str, const char* name)
 
 
 
-void saveSystemSettings(CSystemSettings* systemSettings, const char* path)
+int saveSystemSettings(CSystemSettings* systemSettings, const char* path)
 {
     assert(path);
-    systemSettings->pathForSettings = path;
     FILE* ssFile = fopen(path, "w");
-    assert(ssFile);
-
-    saveColorSettings(ssFile, &systemSettings->MenuColor, "MenuColor");
-    saveColorSettings(ssFile, &systemSettings->SecondMenuColor, "SecondMenuColor");
-    saveColorSettings(ssFile, &systemSettings->TextColor, "TextColor");
-    saveColorSettings(ssFile, &systemSettings->BackgroundColor, "BackgroundColor ");
-    saveColorSettings(ssFile, &systemSettings->DrawColor, "DrawColor");
-    saveColorSettings(ssFile, &systemSettings->TRANSPARENTCOLOR, "TRANSPARENTCOLOR");
-
-    saveIntSettings(ssFile, &systemSettings->ONEMENUBUTTONSNUM, "ONEMENUBUTTONSNUM");
-    saveIntSettings(ssFile, &systemSettings->ONELAYTOOLSLIMIT, "ONELAYTOOLSLIMIT");
+    if (!ssFile)
+    {
+        printf("Сохранение всех данных не прошло||Errno: %d\n", errno);
+        return (int)ssFile; 
+    }
 
     saveIntSettings(ssFile, &systemSettings->MainFont, "MainFont");
     saveStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
-    saveIntSettings(ssFile, &systemSettings->TEXTFORMAT, "TEXTFORMAT");
-
-    saveDoubleSettings(ssFile, &systemSettings->HANDLEHEIGHT, "HANDLEHEIGHT");
-    saveDoubleSettings(ssFile, &systemSettings->BUTTONWIDTH, "BUTTONWIDTH");
-    saveDoubleSettings(ssFile, &systemSettings->BUTTONHEIGHT, "BUTTONHEIGHT");
-    saveDoubleSettings(ssFile, &systemSettings->MENUBUTTONSWIDTH, "MENUBUTTONSWIDTH");
-    saveDoubleSettings(ssFile, &systemSettings->SIDETHICKNESS, "SIDETHICKNESS");
-    saveDoubleSettings(ssFile, &systemSettings->SCROLLBARTHICKNESS, "SCROLLBARTHICKNESS");
 
     saveIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
 
     saveIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
 
-    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
-    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
     saveIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
-
-    saveIntSettings(ssFile, &systemSettings->DCMAXSIZE, "DCMAXSIZE");
-
-    saveDoubleSettings(ssFile, &systemSettings->DCVECTORSIZE.x, "DCVECTORSIZE.x");
-    saveDoubleSettings(ssFile, &systemSettings->DCVECTORSIZE.y, "DCVECTORSIZE.y");
-
+    
     fclose(ssFile);
+
+    return (int)ssFile;
 }
 
 

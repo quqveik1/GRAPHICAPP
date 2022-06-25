@@ -3,6 +3,7 @@
 #include "DrawBibliothek.h"
 #include "LoadManager.h"
 
+
 /*
 struct TransferData
 {
@@ -55,4 +56,5 @@ struct AbstractAppData
     void* canvasManager = NULL;
     COLORREF* currColor = NULL;
     CLoadManager* loadManager = NULL;
+    struct DLLManager* toolManager = NULL;
 }; 

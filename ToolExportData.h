@@ -6,7 +6,7 @@ struct DLLToolExportData
     int size;
     int currlen = 0;
     int lastGuid = 0;
-    Tool** tools = NULL;
+    struct Tool** tools = NULL;
 
     DLLToolExportData(int _size) :
         size(_size),

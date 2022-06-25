@@ -8,6 +8,7 @@
 *.tlog
 *.log
 *Debug/*
+*Images/*
 *DLLTools/x64/*
 *x64/*
 *.vs
