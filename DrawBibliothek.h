@@ -213,7 +213,7 @@ struct Manager : Window
     virtual void replaceWindow (int numOfWindow);
     virtual void hide ();
     virtual void unHide ();
-
+    virtual int& getCurLen() { return newButtonNum; };
 
     virtual void redraw() { redrawStatus = true; };
 

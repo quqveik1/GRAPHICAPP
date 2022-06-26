@@ -11,8 +11,6 @@ struct Lay
     Vector layCoordinats = {};
     Vector laySize = {};
     RGBQUAD* layBuf = {};
-    HDC tempLay = NULL;
-    RGBQUAD* tempBuf = {};
     HDC outputLay = NULL;
     RGBQUAD* outputBuf = {};
     bool isClicked = false;

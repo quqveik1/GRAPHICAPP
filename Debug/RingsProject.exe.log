@@ -48420,3 +48420,1767 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13412, функция: bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: Параметр x0 = 2 больше, чем x1 = -1850. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00433800 (32-bit), Flags: CMdRe0, Thread: 0xB6E0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0039B2FF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412)
+
+# 1 0x003825AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::drawText() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+# 2 0x00390153 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104:     app->setAlign(TA_CENTER, window->finalDC);
+    105:     app->selectFont ("Arial", window->font, window->finalDC);
+=>  106:     app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    107:                                                                                           
+    108: 	if (window->dc)                                                                                
+
+# 3 0x0037F555 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 4 0x00390A64 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 5 0x0037D6CC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+# 6 0x00390A64 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 7 0x0037E94F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+# 8 0x003328F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 9 0x003BB1C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412):
+
+  13410:         {
+  13411: $       SetLastError (ERROR_INVALID_DATA);
+=>13412: $       TX_ERROR ("Параметр x0 = %lg больше, чем x1 = %lg. Текст выводиться не будет.", x0, x1);
+  13413:         }
+  13414: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:55:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 19:55:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00433800 (32-bit), Flags: CMdrE0, Thread: 0x8B64 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00338480 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x0033CB60 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00341924 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x0034086D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 9 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#10 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#11 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9797):
+
+   9795: $       DispatchMessage  (&msg);
+   9796: 
+=> 9797: $       Sleep (0);
+   9798:         }
+   9799: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:55:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 19:55:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13412, функция: bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: Параметр x0 = 2 больше, чем x1 = -1850. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdRe0, Thread: 0xB484 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D8B30F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412)
+
+# 1 0x00D725BF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::drawText() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+# 2 0x00D80163 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104:     app->setAlign(TA_CENTER, window->finalDC);
+    105:     app->selectFont ("Arial", window->font, window->finalDC);
+=>  106:     app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    107:                                                                                           
+    108: 	if (window->dc)                                                                                
+
+# 3 0x00D6F565 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 4 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 5 0x00D6D6DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+# 6 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 7 0x00D6E95F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+# 8 0x00D228F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 9 0x00DAB1D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412):
+
+  13410:         {
+  13411: $       SetLastError (ERROR_INVALID_DATA);
+=>13412: $       TX_ERROR ("Параметр x0 = %lg больше, чем x1 = %lg. Текст выводиться не будет.", x0, x1);
+  13413:         }
+  13414: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 19:59:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13412, функция: bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: Параметр x0 = 2 больше, чем x1 = -1850. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdRe0, Thread: 0xC230 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D8B30F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412)
+
+# 1 0x00D725BF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::drawText() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+# 2 0x00D80163 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104:     app->setAlign(TA_CENTER, window->finalDC);
+    105:     app->selectFont ("Arial", window->font, window->finalDC);
+=>  106:     app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    107:                                                                                           
+    108: 	if (window->dc)                                                                                
+
+# 3 0x00D6F565 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 4 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 5 0x00D6D6DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+# 6 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 7 0x00D6E95F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+# 8 0x00D228F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 9 0x00DAB1D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412):
+
+  13410:         {
+  13411: $       SetLastError (ERROR_INVALID_DATA);
+=>13412: $       TX_ERROR ("Параметр x0 = %lg больше, чем x1 = %lg. Текст выводиться не будет.", x0, x1);
+  13413:         }
+  13414: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:00:23
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdRe0, Thread: 0xC230 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D27B82 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00D8705C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00D87980 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00D691FF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (11):
+
+      9: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+     10: {
+=>   11:     return txCreateDIBSection(sizex, sizey, pixels);
+     12: }
+     13: 
+
+# 4 0x00D67F87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressImage$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (56):
+
+     54: 
+     55:     //if (!newDC) app->deleteDC (newDC);
+=>   56: 	newDC = app->createDIBSection (newSize.x, newSize.y);
+     57:     qassert (newDC, info);
+     58: 
+
+# 5 0x00D67D31 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: compressDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (74):
+
+     72: 	HDC copyOfDC = NULL;
+     73: 	//if (test1)printBlt (dc);
+=>   74: 	compressImage (app, copyOfDC, finalSize, dc, originalSize, line);
+     75: 	//printBlt (dc);
+     76: 	app->bitBlt (finalDC, pos.x, pos.y, finalSize.x, finalSize.y, copyOfDC);
+
+# 6 0x00D8059A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (110):
+
+    108: 	if (window->dc)                                                                                
+    109: 	{                                                                                           
+=>  110: 		compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+    111: 	} 
+    112: }
+
+# 7 0x00D6F565 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 8 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 9 0x00D6D6DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+#10 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+#11 0x00D6E95F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+#12 0x00D228F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+#13 0x00DAB1D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (11):
+
+      9: HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+     10: {
+=>   11:     return txCreateDIBSection(sizex, sizey, pixels);
+     12: }
+     13: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:00:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10884, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#3: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdrE0, Thread: 0x4850 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D28480 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884)
+# 1 0x00D2CB60 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104)
+# 2 0x00D31924 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 3 0x76D27C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x76D0714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76D06BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 6 0x76D0FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 7 0x778F719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x00D3086D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 9 0x77267EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#10 0x77267FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#11 0x75C36739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x778E8FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x778E8FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10884):
+
+  10882: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10883: $   if (                   !*dc)  return false;
+=>10884: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10885: 
+  10886: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10104):
+
+  10102: $       Sleep (_TX_TIMEOUT);
+  10103: 
+=>10104: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10105: $       _txCanvas_UserDCs->clear();
+  10106:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9797):
+
+   9795: $       DispatchMessage  (&msg);
+   9796: 
+=> 9797: $       Sleep (0);
+   9798:         }
+   9799: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:00:24
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13412, функция: bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: Параметр x0 = 2 больше, чем x1 = -1850. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdRe0, Thread: 0xB238 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D8B30F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412)
+
+# 1 0x00D725BF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::drawText() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+# 2 0x00D80163 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104:     app->setAlign(TA_CENTER, window->finalDC);
+    105:     app->selectFont ("Arial", window->font, window->finalDC);
+=>  106:     app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    107:                                                                                           
+    108: 	if (window->dc)                                                                                
+
+# 3 0x00D6F565 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 4 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 5 0x00D6D6DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+# 6 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 7 0x00D6E95F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+# 8 0x00D228F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 9 0x00DAB1D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412):
+
+  13410:         {
+  13411: $       SetLastError (ERROR_INVALID_DATA);
+=>13412: $       TX_ERROR ("Параметр x0 = %lg больше, чем x1 = %lg. Текст выводиться не будет.", x0, x1);
+  13413:         }
+  13414: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:01:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13412, функция: bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *),
+
+Сообщение: Параметр x0 = 2 больше, чем x1 = -1850. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E23800 (32-bit), Flags: CMdRe0, Thread: 0x5C18 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D8B30F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txDrawText() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412)
+
+# 1 0x00D725BF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::drawText() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+# 2 0x00D80163 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (106):
+
+    104:     app->setAlign(TA_CENTER, window->finalDC);
+    105:     app->selectFont ("Arial", window->font, window->finalDC);
+=>  106:     app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    107:                                                                                           
+    108: 	if (window->dc)                                                                                
+
+# 3 0x00D6F565 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2212):
+
+   2210: {
+   2211:     setMbLastTime();
+=> 2212:     standartDraw(this);
+   2213: }
+   2214: 
+
+# 4 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 5 0x00D6D6DC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Handle::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (693):
+
+    691: void Handle::draw()
+    692: {
+=>  693:     standartManagerDraw(this);
+    694: 
+    695:     if (app->wasResized())
+
+# 6 0x00D80A74 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (227):
+
+    225:         
+    226: 
+=>  227: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    228:  		if (manager->pointers[i]->advancedMode) 
+    229: 		{
+
+# 7 0x00D6E95F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (430):
+
+    428: void Manager::draw ()
+    429: {
+=>  430:     standartManagerDraw (this);	
+    431: }
+    432: 
+
+# 8 0x00D228F8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1258):
+
+   1256:         manager->mousePos = mp;
+   1257:         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+=> 1258: 		manager->draw ();
+   1259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+   1260: 		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+
+# 9 0x00DAB1D0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (605):
+
+    603: 
+    604: 	txBegin ();
+=>  605: 	Engine (manager);
+    606:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    607:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txDrawText(double,double,double,double,const char [],unsigned int,struct HDC__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13412):
+
+  13410:         {
+  13411: $       SetLastError (ERROR_INVALID_DATA);
+=>13412: $       TX_ERROR ("Параметр x0 = %lg больше, чем x1 = %lg. Текст выводиться не будет.", x0, x1);
+  13413:         }
+  13414: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (43):
+
+     41:     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+     42: {
+=>   43:     txDrawText(x0, y0, x1, y1, text, format, dc);
+     44: }
+     45: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 19:58:24, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:02:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00715800 (32-bit), Flags: CMdRe0, Thread: 0xA124 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00618CE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x0067842C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00678D50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00657DE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+# 4 0x0066BC1B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2218):
+
+   2216:     {
+   2217:         Vector saveSize = app->systemSettings->SizeOfScreen;
+=> 2218:         fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+   2219:         app->systemSettings->lastTimeSizeOfScreen = saveSize;
+   2220:     }
+
+# 5 0x006589CC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 6 0x00672267 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+# 7 0x0066B7F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+# 8 0x006589CC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 9 0x00672267 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+#10 0x0066B7F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+#11 0x00613D27 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1278):
+
+   1276: 		{
+   1277:             manager->clicked = txMouseButtons();
+=> 1278: 			manager->onClick (mp);
+   1279: 			if (!IsRunning) break;
+   1280: 		}
+
+#12 0x0069C5B6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (613):
+
+    611: 
+    612: 	txBegin ();
+=>  613: 	Engine (manager);
+    614:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    615:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 20:43:08, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:43:15
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00715800 (32-bit), Flags: CMdRe0, Thread: 0xBF28 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00618CE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x0067842C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00678D50 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00657DE2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+# 4 0x0066BC1B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2218):
+
+   2216:     {
+   2217:         Vector saveSize = app->systemSettings->SizeOfScreen;
+=> 2218:         fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+   2219:         app->systemSettings->lastTimeSizeOfScreen = saveSize;
+   2220:     }
+
+# 5 0x006589CC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 6 0x00672267 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+# 7 0x0066B7F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+# 8 0x006589CC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 9 0x00672267 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+#10 0x0066B7F2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+#11 0x00613D27 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1278):
+
+   1276: 		{
+   1277:             manager->clicked = txMouseButtons();
+=> 1278: 			manager->onClick (mp);
+   1279: 			if (!IsRunning) break;
+   1280: 		}
+
+#12 0x0069C5B6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (613):
+
+    611: 
+    612: 	txBegin ();
+=>  613: 	Engine (manager);
+    614:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    615:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 20:43:08, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:43:29
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00E95800 (32-bit), Flags: CMdRe0, Thread: 0xB8CC (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00D98D42 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00DF85FC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00DF8F20 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00DD7E42 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+# 4 0x00DEBCCA in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2227):
+
+   2225:             else
+   2226:             {
+=> 2227:                 fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+   2228:             }
+   2229: 
+
+# 5 0x00DD8A2C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 6 0x00DF2437 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+# 7 0x00DEB772 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+# 8 0x00DD8A2C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 9 0x00DF2437 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+#10 0x00DEB772 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+#11 0x00D93D87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1278):
+
+   1276: 		{
+   1277:             manager->clicked = txMouseButtons();
+=> 1278: 			manager->onClick (mp);
+   1279: 			if (!IsRunning) break;
+   1280: 		}
+
+#12 0x00E1C786 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (613):
+
+    611: 
+    612: 	txBegin ();
+=>  613: 	Engine (manager);
+    614:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    615:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 20:56:57, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:57:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x009C5800 (32-bit), Flags: CMdRe0, Thread: 0xBBC0 (Main), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x008C8D42 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x009285EC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00928F10 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00907E42 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+# 4 0x0091BCBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ResizeButton::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (2227):
+
+   2225:             else
+   2226:             {
+=> 2227:                 fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+   2228:             }
+   2229: 
+
+# 5 0x00908A2C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 6 0x00922427 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+# 7 0x0091B772 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+# 8 0x00908A2C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (524):
+
+    522: {
+    523:     manager->activeWindow = window;
+=>  524: 	window->onClick (mp - window->rect.pos);
+    525: }
+    526: 
+
+# 9 0x00922427 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (186):
+
+    184: 			if (manager->pointers[i]->rect.inRect(mp))
+    185: 			{
+=>  186: 				clickButton (manager->pointers[i], manager, mp);
+    187: 
+    188: 				missClicked = false;
+
+#10 0x0091B772 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::onClick() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (518):
+
+    516: void Manager::onClick (Vector mp)
+    517: {
+=>  518:     standartManagerOnClick (this, mp);	
+    519: }
+    520: 
+
+#11 0x008C3D87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (1278):
+
+   1276: 		{
+   1277:             manager->clicked = txMouseButtons();
+=> 1278: 			manager->onClick (mp);
+   1279: 			if (!IsRunning) break;
+   1280: 		}
+
+#12 0x0094C776 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (613):
+
+    611: 
+    612: 	txBegin ();
+=>  613: 	Engine (manager);
+    614:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    615:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (151):
+
+    149: 
+    150:     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+=>  151:     HDC outDC = txCreateDIBSection(size.x, size.y);
+    152:     deleteDC(txDC());
+    153:     txDC() = outDC;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 25 2022 20:57:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 25 2022 20:57:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00245828 (32-bit), Flags: CMdRe0, Thread: 0xA508 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00148E22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x001A8CBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x001A95E0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x0018A76F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+# 4 0x0019EEB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (318):
+
+    316: 
+    317:         app->deleteDC(finalDC);
+=>  318: 		finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+    319: 
+    320: 		app->setColor(color, finalDC);
+
+# 5 0x0013F70E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (114):
+
+    112: 
+    113:         if (!color) color = systemSettings->MenuColor;
+=>  114: 		resize (rect);
+    115: 
+    116:         if (!color) color = systemSettings->MenuColor;
+
+# 6 0x001392AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (184):
+
+    182: 	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+    183: 		Window (_app, _rect, _color, _dc, NULL, "", _advancedMode),
+=>  184:         handle (_app, _handle),
+    185: 		length (_length),
+    186: 		pointers (new Window* [_length]{}),
+
+# 7 0x0013948F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Menu::Menu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (71):
+
+     69:     int currentSize = 0;
+     70:     Menu(AbstractAppData* _app, Rect _rect, Rect _handle, int _length = SystemSettings.ONEMENUBUTTONSNUM, bool _isDefaultActive = false) :
+=>   71:         Manager(_app, _rect, _length, _isDefaultActive, NULL, _handle, _app->systemSettings->MenuColor, true)
+     72:     {}
+     73: 
+
+# 8 0x0013EB8D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ToolMenu::ToolMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (125):
+
+    123: 
+    124:     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
+=>  125:         Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
+    126:         canvasManager(_canvasManager)
+    127:     {
+
+# 9 0x001CB5C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (534):
+
+    532:     manager->addWindow(toolsPallette);
+    533: 
+=>  534:     ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
+    535:     manager->addWindow(toolMenu);   
+    536: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 26 2022 16:35:22, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 26 2022 16:35:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00245828 (32-bit), Flags: CMdRe0, Thread: 0xD1E4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00148E22 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x001A8CBC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x001A95E0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x0018A76F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+# 4 0x0019EEB7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (318):
+
+    316: 
+    317:         app->deleteDC(finalDC);
+=>  318: 		finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+    319: 
+    320: 		app->setColor(color, finalDC);
+
+# 5 0x0013F70E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::Window() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (114):
+
+    112: 
+    113:         if (!color) color = systemSettings->MenuColor;
+=>  114: 		resize (rect);
+    115: 
+    116:         if (!color) color = systemSettings->MenuColor;
+
+# 6 0x001392AF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Manager::Manager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h (184):
+
+    182: 	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+    183: 		Window (_app, _rect, _color, _dc, NULL, "", _advancedMode),
+=>  184:         handle (_app, _handle),
+    185: 		length (_length),
+    186: 		pointers (new Window* [_length]{}),
+
+# 7 0x0013948F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Menu::Menu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (71):
+
+     69:     int currentSize = 0;
+     70:     Menu(AbstractAppData* _app, Rect _rect, Rect _handle, int _length = SystemSettings.ONEMENUBUTTONSNUM, bool _isDefaultActive = false) :
+=>   71:         Manager(_app, _rect, _length, _isDefaultActive, NULL, _handle, _app->systemSettings->MenuColor, true)
+     72:     {}
+     73: 
+
+# 8 0x0013EB8D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ToolMenu::ToolMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (125):
+
+    123: 
+    124:     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
+=>  125:         Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
+    126:         canvasManager(_canvasManager)
+    127:     {
+
+# 9 0x001CB5C2 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (534):
+
+    532:     manager->addWindow(toolsPallette);
+    533: 
+=>  534:     ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
+    535:     manager->addWindow(toolMenu);   
+    536: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 26 2022 16:35:22, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 26 2022 16:36:07
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -139,17 +139,59 @@ int PowerPoint::saveImage(HDC dc, const char* path)
     return txSaveImage(path, dc);
 }
 
-void PowerPoint::changeWindow(Vector size, Vector pos/* = {}*/)
+void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 {
-    
+    bool wasSizeChanged = true;
     if (pos == pos.getNullVector())
     {
         pos = { .x = abs((size.x - systemSettings->FullSizeOfScreen.x) / 2), .y = abs( (size.y - systemSettings->FullSizeOfScreen.y) / 2) };
     }
+    if (size == size.getNullVector())
+    {
+        size = systemSettings->SizeOfScreen;
+        wasSizeChanged = false;
+    }
+
+
+    
+    systemSettings->ScreenPos = pos;
 
     MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+
+    SetWindowLong(systemSettings->MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+    if (size == systemSettings->FullSizeOfScreen)
+    {
+        //SetWindowLong(systemSettings->MAINWINDOW, GWL_STYLE, WS_CAPTION);
+        //ShowWindow(systemSettings->MAINWINDOW, SW_SHOW);
+    }
+    else
+    {
+        //SetWindowLong(systemSettings->MAINWINDOW, GWL_STYLE, WS_THICKFRAME);
+        //ShowWindow(systemSettings->MAINWINDOW, SW_SHOW);
+    }
+
     HDC outDC = txCreateDIBSection(size.x, size.y);
+    deleteDC(txDC());
     txDC() = outDC;
 
+    
+
     systemSettings->SizeOfScreen = size;
+    if (wasSizeChanged) isResized = true;
+}
+
+
+bool PowerPoint::isFullScreen()
+{
+    assert(systemSettings);
+
+    return systemSettings->SizeOfScreen == systemSettings->FullSizeOfScreen;
+
+}
+
+
+void PowerPoint::setResized(bool state/* = true*/)
+{
+    isResized = state;
 }

@@ -38,6 +38,11 @@ struct PowerPoint : AbstractAppData
 
     virtual void drawCadre(Rect rect, HDC dc);
 
-    virtual void changeWindow(Vector size, Vector pos = {});
+    virtual void changeWindow(Vector size = {}, Vector pos = {});
+
+    virtual bool wasResized() { return isResized; };
+    virtual void setResized(bool state = true);
+
+    virtual bool isFullScreen();
 
 };

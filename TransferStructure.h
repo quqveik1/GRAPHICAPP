@@ -51,10 +51,15 @@ struct AbstractAppData
 
     virtual void drawCadre(Rect rect, HDC dc) = 0;
 
-    void (*invert) (RGBQUAD* buf, unsigned int totalSize) = 0;
+    virtual void changeWindow(Vector size = {}, Vector pos = {}) = 0;
+
+    virtual bool wasResized() = 0;
+    virtual bool isFullScreen() = 0;
+    virtual void setResized(bool state = true) = 0;
 
     void* canvasManager = NULL;
     COLORREF* currColor = NULL;
     CLoadManager* loadManager = NULL;
     struct DLLManager* toolManager = NULL;
+    bool isResized = false;
 }; 

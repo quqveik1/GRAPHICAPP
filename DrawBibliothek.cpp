@@ -186,7 +186,7 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 				clickButton (manager->pointers[i], manager, mp);
 
 				missClicked = false;
-                returnableVal=  i;
+                returnableVal = i;
 				if (manager->pointers[i]->advancedMode) break;
 			}
 			else
@@ -307,14 +307,16 @@ void Window::deleteButton ()
 
 void Window::resize (Rect newRect)
 {
-    //assert (newRect.isValid());
 
-    if (systemSettings->debugMode) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
+    if (systemSettings->debugMode == 2) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
 	if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
 	{
 		finalDCSize = {newRect.getSize().x, newRect.getSize().y};
-        if (systemSettings->debugMode) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
+        if (systemSettings->debugMode == 2) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
+
+        app->deleteDC(finalDC);
 		finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+
 		app->setColor(color, finalDC);
 		app->rectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
 		if (systemSettings->debugMode == 5) app->drawOnScreen(finalDC);

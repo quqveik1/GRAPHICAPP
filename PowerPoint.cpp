@@ -75,8 +75,8 @@ struct Menu : Manager
     virtual int onClickLine(Vector mp) = NULL;
     virtual void onUpdate() {};
 
-    virtual void draw();
-    virtual void onClick(Vector mp);
+    virtual void draw() override;
+    virtual void onClick(Vector mp) override;
 
 
 };
@@ -122,7 +122,7 @@ struct ToolMenu : Menu
     HDC emptyToolDC = NULL;
 
     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
-        Menu(_app, { .pos = {1600, 300}, .finishPos = {1900, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
+        Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
         canvasManager(_canvasManager)
     {
         loadManager = _loadManager;
@@ -169,10 +169,15 @@ struct CloseButton : Window
 struct ResizeButton : Window
 {
     Vector sizeLastTime;
+    HDC nowIsFullScreen;
+    HDC nowIsNotFullScreen;
+    
 
     ResizeButton(AbstractAppData* _app, Rect _rect) :
-        Window(_app, _rect, NULL, _app->loadManager->loadImage("FullScreenButton.bmp")),
-        sizeLastTime (app->systemSettings->FullSizeOfScreen)
+        Window(_app, _rect),
+        sizeLastTime(app->systemSettings->FullSizeOfScreen),
+        nowIsFullScreen(app->loadManager->loadImage("FullScreenButton.bmp")),
+        nowIsNotFullScreen (app->loadManager->loadImage("ResizeScreenButton.bmp"))
     {
     }
 
@@ -189,7 +194,7 @@ struct ColorButton : Window
 		reDraw = false;
 	}
 
-	virtual void onClick (Vector mp)override;
+	virtual void onClick (Vector mp) override;
 };
 
 /*
@@ -372,7 +377,7 @@ struct TouchButton : Window
     {
     }
 
-    virtual void onClick (Vector mp);
+    virtual void onClick (Vector mp) override;
 };
 
 struct AddCanvasButton : TouchButton
@@ -384,7 +389,7 @@ struct AddCanvasButton : TouchButton
     {
     }
 
-    virtual void onClick(Vector mp);
+    virtual void onClick(Vector mp) override;
 };
 
 
@@ -432,6 +437,24 @@ struct SaveImages : Window
     virtual void draw() override;
 };
 
+struct Handle : Manager
+{
+    int addToBackElemetsPos[10] = {};
+    int numberOfAddToBackElements = 0;   
+    bool wasCommonHandlePlaceClicked = false;
+    Vector lastTimeMousePos = {};
+
+    Handle(AbstractAppData* _app, Rect _rect) :
+        Manager(_app, _rect, 10, true, NULL, {}, _app->systemSettings->MenuColor)
+    {}
+
+    virtual bool addWindowToStart(Window* window);
+    virtual bool addWindowToBack(Window* window);
+
+    virtual void draw() override;
+    virtual void onClick(Vector mp) override;
+};
+
 
 
 
@@ -462,15 +485,16 @@ int main (int argc, int *argv[])
     setDefaultSystemSettings(appData->systemSettings);
     
     appData->systemSettings->read("Settings\\FullSettings.settings");
-    setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");  
+    setDynamicSystemSettings(appData->systemSettings);
+
 
     _txWindowStyle = appData->systemSettings->WindowStyle;
-
-
     _txSwapBuffers = swapDC;
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
 
     appData->changeWindow(appData->systemSettings->SizeOfScreen);
+    appData->setResized(false);
 
     Manager* manager = new Manager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 20, true, NULL, {}, TX_RED);
 
@@ -481,18 +505,20 @@ int main (int argc, int *argv[])
 	compressImage (appData, addNewCanvasDC, {50, 50}, oldDC, {225, 225});
 	appData->deleteDC(oldDC);
 
-	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x,  appData->systemSettings->SizeOfScreen.y}} , TX_BLUE);
+    /*
+	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = {appData->systemSettings->SizeOfScreen.x,  appData->systemSettings->SizeOfScreen.y}} , TX_BLUE);
 		statusBar->progressBar =  new ProgressBar (appData, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
 		statusBar->progressBar->manager = statusBar;
 		statusBar->timeButton = new TimeButton(appData, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
 		statusBar->timeButton->manager = statusBar;
+      */
     
 
-    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->SizeOfScreen }, addNewCanvasDC, statusBar->progressBar);
+    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, addNewCanvasDC);
     appData->canvasManager = canvasManager;
 	manager->addWindow (canvasManager);
 
-    manager->addWindow(statusBar);
+    //manager->addWindow(statusBar);
 
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
@@ -540,31 +566,22 @@ int main (int argc, int *argv[])
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Manager* mainhandle = new Manager(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, 5, true, NULL, {}, RGB(45, 45, 45));
+	Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
     manager->addWindow(mainhandle);
 
 		CloseButton* closeButton = new CloseButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} }, TX_RED, LoadManager.loadImage("CloseButton4.bmp"));
-		mainhandle->addWindow(closeButton);
+		mainhandle->addWindowToBack(closeButton);
 
         ResizeButton* resizeButton = new ResizeButton(appData, { .pos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x - appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT} });
-        mainhandle->addWindow(resizeButton);
+        mainhandle->addWindowToBack(resizeButton);
 
         AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, {.pos = {0, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}}, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
-		mainhandle->addWindow(addNewCanvas);
-
-        List* systemList = new List(appData, { appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
-        manager->addWindow(systemList);
-        OpenManager* openSystemList = new OpenManager(appData, { .pos = {appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 3, appData->systemSettings->HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
-        mainhandle->addWindow(openSystemList);
-        
-
-        SaveImages* saveImages = new SaveImages(appData, canvasManager);
-        systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
+		mainhandle->addWindowToStart(addNewCanvas);
 
         List* openWindows = new List (appData, { appData->systemSettings->BUTTONWIDTH, appData->systemSettings->HANDLEHEIGHT}, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT}, 5);
         manager->addWindow(openWindows);
         OpenManager* openWindowsManager = new OpenManager (appData, {.pos = {appData->systemSettings->BUTTONWIDTH, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT}}, TX_WHITE, openWindows, LoadManager.loadImage ("OpenWindows.bmp"));
-        mainhandle->addWindow(openWindowsManager);
+        mainhandle->addWindowToStart(openWindowsManager);
         
         openWindows->addNewItem (menu, NULL, "Цвет");
         openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
@@ -577,6 +594,16 @@ int main (int argc, int *argv[])
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
             }
+
+
+        List* systemList = new List(appData, { appData->systemSettings->BUTTONWIDTH * 2, appData->systemSettings->HANDLEHEIGHT }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
+        manager->addWindow(systemList);
+        OpenManager* openSystemList = new OpenManager(appData, { .pos = {appData->systemSettings->BUTTONWIDTH * 2, 0}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 3, appData->systemSettings->HANDLEHEIGHT} }, TX_WHITE, systemList, LoadManager.loadImage("SettingsIcon.bmp"));
+        mainhandle->addWindowToStart(openSystemList);
+
+
+        SaveImages* saveImages = new SaveImages(appData, canvasManager);
+        systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
             
 	
 
@@ -594,6 +621,17 @@ int main (int argc, int *argv[])
     //LoadManager.deleteAllImages ();
 	return 0;
 }
+                                                                                            
+
+LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    if (message == WM_SIZING)
+    {
+        
+    }
+    return 0;
+}
+
 
 
 
@@ -635,6 +673,101 @@ void List::onClick (Vector mp)
             clickButton(pointers[clikedButtonNum], this, mp);
         }
         lastClickedItemNum = clikedButtonNum;
+    }
+}
+
+
+bool Handle::addWindowToStart(Window* window)
+{
+    Rect windowRect = {};
+    windowRect.pos.x = rect.pos.x + app->systemSettings->BUTTONWIDTH * (getCurLen() - numberOfAddToBackElements);
+    windowRect.pos.y = rect.pos.y;
+
+    windowRect.finishPos.x = rect.pos.x + app->systemSettings->BUTTONWIDTH * (getCurLen() - numberOfAddToBackElements + 1);
+    windowRect.finishPos.y = rect.finishPos.y;
+
+    window->resize(windowRect);
+
+    return addWindow(window);
+}
+
+bool Handle::addWindowToBack(Window* window)
+{
+    Rect windowRect = {};
+    windowRect.pos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * (getCurLen() + 1);
+    windowRect.pos.y = rect.pos.y;
+
+    windowRect.finishPos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * getCurLen();
+    windowRect.finishPos.y = rect.finishPos.y;
+
+    window->resize(windowRect);
+
+    addToBackElemetsPos[numberOfAddToBackElements] = getCurLen();
+    numberOfAddToBackElements++;
+
+    return addWindow(window);
+}
+
+
+void Handle::draw()
+{
+    standartManagerDraw(this);
+
+    if (app->wasResized())
+    {
+        Rect newRect = { .pos = rect.pos, .finishPos = {app->systemSettings->SizeOfScreen.x, rect.pos.y + getSize().y} };
+        resize(newRect);
+
+        for (int i = 0; i < numberOfAddToBackElements; i++)
+        {
+            Rect windowRect = {};
+            windowRect.pos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * (i + 1);
+            windowRect.pos.y = rect.pos.y;
+
+            windowRect.finishPos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * i;
+            windowRect.finishPos.y = rect.finishPos.y;
+            pointers[i]->resize(windowRect);
+        }
+    }
+
+    if (wasCommonHandlePlaceClicked)
+    {
+        Vector superAbsMP = getAbsMousePos() + app->systemSettings->ScreenPos;
+        Vector delta = superAbsMP - lastTimeMousePos;
+        if (app->wasResized())
+        {
+            delta = { 0, 0 };
+        }
+
+        if (app->systemSettings->debugMode >= 2) printf("delta: {%lf, %lf}\n", delta.x, delta.y);
+        if (app->systemSettings->debugMode >= 2) printf("mp: {%lf, %lf}\n", superAbsMP.x, superAbsMP.y);
+
+        if (delta != 0)
+        {
+            app->systemSettings->ScreenPos += delta;
+            app->changeWindow({}, app->systemSettings->ScreenPos);
+        }
+
+        lastTimeMousePos = superAbsMP;
+        if (wasCommonHandlePlaceClicked && getMBCondition() == 0)wasCommonHandlePlaceClicked = 0;
+    }
+
+    setMbLastTime();
+}
+
+void Handle::onClick(Vector mp)
+{
+    int resultOfClicking = standartManagerOnClick(this, mp);
+
+    if (resultOfClicking == -1 && !wasCommonHandlePlaceClicked)
+    {
+        if (app->isFullScreen())
+        {
+            app->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+            app->setResized();
+        }
+        lastTimeMousePos = getAbsMousePos() + app->systemSettings->ScreenPos;
+        wasCommonHandlePlaceClicked = true;
     }
 }
 
@@ -1172,21 +1305,29 @@ void Engine (Manager *manager)
     HDC outputDC = app->createDIBSection(app->systemSettings->SizeOfScreen.x, app->systemSettings->SizeOfScreen.y);
     txDC() = outputDC;
 
+    bool wasResizedInLastFrame = false;
+
 	for (;;)
 	{
         txClearConsole();
         if (SystemSettings.debugMode == -1 || SystemSettings.debugMode > 0) printf ("\nFPS: %lf\n", txGetFPS());
+
 		app->setColor (SystemSettings.BackgroundColor, txDC());
-		app->rectangle (0, 0, 2000, 2000, txDC());
+		app->rectangle (0, 0, app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y, txDC());
 
         Vector mp = {txMouseX (), txMouseY ()};
         manager->mousePos = mp;
         if (SystemSettings.debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+        if (SystemSettings.debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+
 		manager->draw ();
 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
-		if (txMouseButtons () && manager->rect.inRect (txMouseX (), txMouseY ()))
+        if (wasResizedInLastFrame) app->setResized(false);
+        wasResizedInLastFrame = app->wasResized();
+
+
+		if (txMouseButtons ())
 		{
-            
             manager->clicked = txMouseButtons();
 			manager->onClick (mp);
 			if (!IsRunning) break;
@@ -1566,7 +1707,9 @@ void Canvas::controlTool()
     }
 
     CLay* clay = getActiveLay();
+    assert(clay);
     ToolLay* toollay = clay->getActiveToolLay();
+    assert(toollay);
     Tool* tool = toollay->getTool();
     bool isFinished = toollay->isFinished();
 
@@ -2128,7 +2271,24 @@ void ResizeButton::onClick(Vector mp)
     if (!isClickedLastTime())
     {
         Vector saveSize = app->systemSettings->SizeOfScreen;
-        fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+        if (app->isFullScreen())
+        {
+            if (app->systemSettings->FullSizeOfScreen == app->systemSettings->lastTimeSizeOfScreen || app->systemSettings->lastTimeSizeOfScreen == app->systemSettings->lastTimeSizeOfScreen.getNullVector())
+            {
+                Vector newSize = app->systemSettings->FullSizeOfScreen / 1.5;
+                fullapp->changeWindow(newSize);
+            }
+            else
+            {
+                fullapp->changeWindow(app->systemSettings->lastTimeSizeOfScreen);
+            }
+
+        }
+        else
+        {
+            fullapp->changeWindow(app->systemSettings->FullSizeOfScreen);
+        }
+        app->setResized();
         app->systemSettings->lastTimeSizeOfScreen = saveSize;
     }
 }
@@ -2136,6 +2296,10 @@ void ResizeButton::onClick(Vector mp)
 void ResizeButton::draw()
 {
     setMbLastTime();
+    if (app->isFullScreen()) dc = nowIsFullScreen;
+    else                     dc = nowIsNotFullScreen;
+
+
     standartDraw(this);
 }
 

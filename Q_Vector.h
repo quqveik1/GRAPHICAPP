@@ -18,10 +18,10 @@ struct Vector
 };
 
 void equal (Vector &a, const Vector &b);
-inline Vector operator +  (const Vector &a, const Vector &b);
+inline Vector& operator +  (const Vector &a, const Vector &b);
 inline Vector &operator += (Vector &a, const Vector &b);
 inline Vector& operator -= (Vector& a, const Vector& b);
-inline Vector operator -  (const Vector &a, const Vector &b);
+inline Vector& operator -  (const Vector &a, const Vector &b);
 inline void lining ();
 inline Vector operator *  (const Vector &a, const double b);
 inline Vector operator *  (const Vector &a, const Vector &b);
@@ -34,6 +34,9 @@ inline Vector operator / (const double a, const Vector &b);
        bool   operator > (const Vector &a, const int &b);
        bool   operator < (const Vector &a, const Vector &b);
        bool operator == (const Vector &a, const Vector &b);
+       bool operator != (const Vector &a, const Vector &b); 
+       bool operator == (const Vector &a, const double &b);
+       bool operator != (const Vector &a, const double &b);
 
 
 void Vector::print (const char *str /* = NULL*/)
@@ -44,6 +47,24 @@ void Vector::print (const char *str /* = NULL*/)
 bool operator == (const Vector &a, const Vector &b)
 {
     if (a.x == b.x && a.y == b.y) return true;
+    return false;
+}  
+
+bool operator != (const Vector &a, const Vector &b)
+{
+    if (a.x != b.x || a.y != b.y) return true;
+    return false;
+}
+
+bool operator != (const Vector& a, const double& b)
+{
+    if (a.x != b || a.y != b) return true;
+    return false;
+} 
+
+bool operator == (const Vector& a, const double& b)
+{
+    if (a.x != b && a.y != b) return true;
     return false;
 }
 
@@ -71,7 +92,7 @@ inline Vector operator / (const double a, const Vector &b)
     return result;
 }
 
-inline Vector operator + (const Vector &a, const Vector &b)
+inline Vector& operator + (const Vector &a, const Vector &b)
 {
     Vector result = {};
     result.x = a.x + b.x;
@@ -80,10 +101,13 @@ inline Vector operator + (const Vector &a, const Vector &b)
     return result;
 }
 
-inline Vector operator - (const Vector &a, const Vector &b)
+inline Vector& operator - (const Vector &a, const Vector &b)
 {
-    return { .x = a.x - b.x,
-             .y = a.y - b.y };
+    Vector result = {};
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
+
+    return result;
 }
 
 inline Vector &operator += (Vector &a, const Vector &b)

@@ -44,6 +44,7 @@ struct CSystemSettings
     Vector SizeOfScreen = {};
     Vector FullSizeOfScreen = {};
     Vector lastTimeSizeOfScreen = {};
+    Vector ScreenPos = {};
     int DCMAXSIZE = NULL;
     Vector DCVECTORSIZE = {};
 
@@ -54,6 +55,7 @@ struct CSystemSettings
 };
 
 
+void setDynamicSystemSettings(CSystemSettings* systemSettings);
 
 void setDefaultSystemSettings(CSystemSettings* systemSettings);
 

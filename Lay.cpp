@@ -14,8 +14,6 @@ void Lay::createLay(CSystemSettings* _systemSettings, Vector _laySize/* = {}*/)
     if (laySize == nullVector) laySize = systemSettings->DCVECTORSIZE;
     lay = txCreateDIBSection(laySize.x, laySize.y, &layBuf);
     clean();
-    tempLay = txCreateDIBSection(laySize.x, laySize.y, &tempBuf);
-    clean(tempLay);
     outputLay = txCreateDIBSection(laySize.x, laySize.y, &outputBuf);
     clean(outputLay);
 }

@@ -19,6 +19,7 @@ int CSystemSettings::save(const char* path)
 
 int CSystemSettings::read(const char* path)
 {
+    if (_access(path, 0) == -1) return 1;
     FILE* ssFile = fopen(path, "rb");
     if (!ssFile)
     {
@@ -36,6 +37,12 @@ int CSystemSettings::read(const char* path)
 }
 
 
+void setDynamicSystemSettings(CSystemSettings* systemSettings)
+{
+    systemSettings->FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
+}
+
+
 
 void setDefaultSystemSettings(CSystemSettings* systemSettings)
 {
@@ -44,6 +51,8 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
         printf("systemSettings не существует дефолтные параметры не установились.\n");
         return;
     }
+    setDynamicSystemSettings(systemSettings);
+
     systemSettings->MenuColor = RGB(45, 45, 45);
     systemSettings->SecondMenuColor = RGB(30, 30, 30);
     systemSettings->TextColor = RGB(255, 255, 255);
@@ -69,10 +78,8 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
 
     systemSettings->DrawingMode = 1;
 
-    systemSettings->SizeOfScreen.x = 1900.000000;
+    systemSettings->SizeOfScreen.x = 1000.000000;
     systemSettings->SizeOfScreen.y = 900.000000;
-    systemSettings->FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
-    systemSettings->lastTimeSizeOfScreen = systemSettings->FullSizeOfScreen;
 
     systemSettings->WindowStyle = -2134376448;
 
@@ -100,6 +107,9 @@ void setSystemSettings(CSystemSettings* systemSettings, const char* path)
     setIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
     
     setIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
+
+    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
+    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
 
     fclose(ssFile);
 }
@@ -197,6 +207,9 @@ int saveSystemSettings(CSystemSettings* systemSettings, const char* path)
     saveIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
 
     saveIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
+
+    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
+    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
     
     fclose(ssFile);
 
