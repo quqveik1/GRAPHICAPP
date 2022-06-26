@@ -60,7 +60,6 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
     systemSettings->DrawColor = RGB(128, 0, 0);
     systemSettings->TRANSPARENTCOLOR = RGB(57, 57, 57);
 
-    systemSettings->ONEMENUBUTTONSNUM = 10;
     systemSettings->ONELAYTOOLSLIMIT = 100;
 
     systemSettings->MainFont = 20;

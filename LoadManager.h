@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GlobalOptions.h"
+#include "TransferStructure.h"
 
 struct Image
 {
@@ -11,17 +12,18 @@ struct Image
 
 struct CLoadManager
 {
-    CSystemSettings* systemSettings;
+    AbstractAppData* app;
 
 	int currentImagesAmount = 0;
 
 	Image images[1000];
 
-    CLoadManager(CSystemSettings* _systemSettings) :
-        systemSettings (_systemSettings)
+    CLoadManager(AbstractAppData* _app) :
+        app (_app)
     {}
 
 
 
     virtual HDC loadImage(const char* path, Vector size = {});
+    int deleteAllImages();
 };

@@ -107,7 +107,8 @@ void standartDraw$ (DebugInfo info, Window *window)
                                                                                           
 	if (window->dc)                                                                                
 	{                                                                                           
-		compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+		//compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+        app->bitBlt(window->finalDC, 0, 0 , window->rect.getSize().x, window->rect.getSize().y, window->dc);
 	} 
 }
 
@@ -179,7 +180,7 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 	if (manager->advancedMode)
 	{
 		manager->clickHandle();
-		for (int i = manager->newButtonNum - 1; i >= 0; i--)
+		for (int i = manager->currLen - 1; i >= 0; i--)
 		{
 			if (manager->pointers[i]->rect.inRect(mp))
 			{
@@ -220,10 +221,8 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
 	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
-	for (int i = 0; i < manager->newButtonNum; i++)
+	for (int i = 0; i < manager->currLen; i++)
 	{
-        
-
 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
  		if (manager->pointers[i]->advancedMode) 
 		{
@@ -264,14 +263,14 @@ Window* Manager::getActiveWindow ()
 bool Manager::addWindow (Window *window)
 {
     assert (window);
-	if (newButtonNum >= length)
+	if (currLen >= length)
     {
-        //printf ("!!!Unable to add new Window!!!\n");
+        printf ("!!!Unable to add new Window!!!\n");
         return 0;
     }
 
-	pointers[newButtonNum] = window;
-	newButtonNum++;
+	pointers[currLen] = window;
+    currLen++;
 
 	window->manager = this;
 	
@@ -291,10 +290,25 @@ Vector Window::getSize()
 	return this->rect.finishPos - this->rect.pos;
 }
 
+void Window::MoveWindowTo(Vector pos)
+{
+    Vector size = getSize();
+
+    rect.pos = pos;
+    rect.finishPos = rect.pos + size;
+}
+
+void Window::MoveWindow(Vector delta)
+{
+    rect.pos += delta;
+    rect.finishPos += delta;
+}
+
 void Window::draw ()
 {
     
-	standartDraw(this);
+    standartDraw(this);
+
 }
 
 void Window::deleteButton ()
@@ -495,19 +509,19 @@ void Manager::unHide ()
 void Manager::replaceWindow(int numOfWindow)
 {
 	Window* copyOfStartWindow = pointers[numOfWindow];
-	Window* copyOfWindow = pointers[newButtonNum - 1];
+	Window* copyOfWindow = pointers[currLen - 1];
     
 
-	for (int i = newButtonNum - 1; i > numOfWindow; i--)
+	for (int i = currLen - 1; i > numOfWindow; i--)
 	{
 		Window* preCopyOfWindow = pointers[i - 1];
 		pointers[i - 1] = copyOfWindow;
 		copyOfWindow = preCopyOfWindow;
 	}
 
-	if (numOfWindow < newButtonNum - 1) 
+	if (numOfWindow < currLen - 1)
 	{
-		pointers[newButtonNum - 1] = copyOfStartWindow;
+		pointers[currLen - 1] = copyOfStartWindow;
 	}
     
 

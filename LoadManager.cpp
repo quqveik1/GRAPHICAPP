@@ -22,15 +22,15 @@ HDC CLoadManager::loadImage(const char* path, Vector size /* = {} */)
 
     if (!newImage)
     {
-        if (systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[suitableDCNum].dc);
-        if (systemSettings->debugMode == 4) printBlt(images[suitableDCNum].dc);
+        if (app->systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[suitableDCNum].dc);
+        if (app->systemSettings->debugMode == 4) printBlt(images[suitableDCNum].dc);
         return images[suitableDCNum].dc;
     }
 
 
     images[currentImagesAmount].dc = txLoadImage(fullPath);
-    if (systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
-    if (systemSettings->debugMode == 4) printBlt(images[currentImagesAmount].dc);
+    if (app->systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %lf\n", fullPath, images[currentImagesAmount].dc);
+    if (app->systemSettings->debugMode == 4) printBlt(images[currentImagesAmount].dc);
     if (images[currentImagesAmount].dc == NULL) assert(!fullPath);
     strcpy (images[currentImagesAmount].path, fullPath);
     images[currentImagesAmount].size = size;
@@ -39,4 +39,16 @@ HDC CLoadManager::loadImage(const char* path, Vector size /* = {} */)
     return images[currentImagesAmount - 1].dc;
 
 
+}
+
+int CLoadManager::deleteAllImages()
+{
+    int succesfullDeletedImagesAmount = 0;
+    for (int i = 0; i < currentImagesAmount; i++)
+    {
+        int result = app->smartDeleteDC(images[i].dc);
+        if (result) succesfullDeletedImagesAmount++;
+    }
+    if (app->systemSettings->debugMode > 0)printf("succesfullDeleteImagesAmount: %d\n", succesfullDeletedImagesAmount);
+    return 0;
 }

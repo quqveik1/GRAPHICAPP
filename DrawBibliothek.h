@@ -145,6 +145,9 @@ struct Window
     virtual bool getRadrawStatus() { return redrawStatus; };
     virtual void noMoreRedraw() { redrawStatus = false; };
 
+    virtual void MoveWindow(Vector pos);
+    virtual void MoveWindowTo(Vector delta);
+
 
     virtual int getMBCondition() {
         if (getManager()) return ((Window*)getManager())->getMBCondition();
@@ -172,7 +175,7 @@ struct Manager : Window
 {
 	int length;
 	Window **pointers = NULL;
-	int newButtonNum;
+	int currLen;
 	Window *activeWindow;
 	Window handle;
 	Vector startCursorPos;
@@ -184,7 +187,7 @@ struct Manager : Window
         handle (_app, _handle),
 		length (_length),
 		pointers (new Window* [_length]{}),
-		newButtonNum (0),
+		currLen (0),
 		activeWindow (NULL),
 		startCursorPos({}),
 		coordinatSysFromHandle (_coordinatSysFromHandle),
@@ -213,7 +216,7 @@ struct Manager : Window
     virtual void replaceWindow (int numOfWindow);
     virtual void hide ();
     virtual void unHide ();
-    virtual int& getCurLen() { return newButtonNum; };
+    virtual int& getCurLen() { return currLen; };
 
     virtual void redraw() { redrawStatus = true; };
 

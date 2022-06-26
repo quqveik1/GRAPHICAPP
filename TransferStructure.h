@@ -47,19 +47,20 @@ struct AbstractAppData
     virtual void selectFont(const char* text, int sizey, HDC& dc, int sizex = -1) = 0;
 
     virtual void deleteDC(HDC dc) = 0;
+    virtual int smartDeleteDC(HDC dc) = 0;
     virtual int saveImage(HDC dc, const char* path) = 0;
 
     virtual void drawCadre(Rect rect, HDC dc) = 0;
 
     virtual void changeWindow(Vector size = {}, Vector pos = {}) = 0;
 
+    virtual void setResized(bool state = true) = 0;
     virtual bool wasResized() = 0;
     virtual bool isFullScreen() = 0;
-    virtual void setResized(bool state = true) = 0;
 
     void* canvasManager = NULL;
     COLORREF* currColor = NULL;
-    CLoadManager* loadManager = NULL;
+    struct CLoadManager* loadManager = NULL;
     struct DLLManager* toolManager = NULL;
     bool isResized = false;
 }; 

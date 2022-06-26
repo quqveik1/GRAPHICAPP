@@ -27,14 +27,6 @@
             if (!key (a)) break;      \
         }                            \
     }                                 \
-}
-
-#define smartDeleteDC(dc)   \
-{							\
-	if (dc)					 \
-	{						 \
-		txDeleteDC (dc);	 \
-	}						\
 }							 
 
 #define stop						\

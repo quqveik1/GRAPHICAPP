@@ -9,8 +9,6 @@ struct CSystemSettings
 {
     int WindowStyle = _txWindowStyle;
 
-    const int DELTACLOCKTIME = 100;
-
     HWND MAINWINDOW = NULL;
 
     COLORREF MenuColor = NULL;
@@ -21,7 +19,6 @@ struct CSystemSettings
     COLORREF TRANSPARENTCOLOR = NULL;
 
 
-    int ONEMENUBUTTONSNUM = NULL; //количество пунктов в структрах MENU
     int ONELAYTOOLSLIMIT = NULL;
 
 

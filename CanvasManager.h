@@ -8,7 +8,7 @@ struct CanvasManager : Manager
     HDC closeCanvasButton;
     Canvas* activeCanvas = NULL;
     bool addNewCanvas = false;
-    Vector newCanvasWindowSize = { 1000, 800 };
+    Vector newCanvasWindowSize = { 1000, 600 };
     CLoadManager* loadManager;
 
 
