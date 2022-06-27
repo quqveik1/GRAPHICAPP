@@ -1,7 +1,8 @@
 #pragma once
 
 
-#include "TXLib.h"
+#include "TXLib.cpp"
+#include "Double comparision.h"
 
 struct Vector 
 {
@@ -46,25 +47,25 @@ void Vector::print (const char *str /* = NULL*/)
 
 bool operator == (const Vector &a, const Vector &b)
 {
-    if (a.x == b.x && a.y == b.y) return true;
+    if (isEqual (a.x, b.x) && isEqual(a.y, b.y)) return true;
     return false;
 }  
 
 bool operator != (const Vector &a, const Vector &b)
 {
-    if (a.x != b.x || a.y != b.y) return true;
+    if ( (! isEqual(a.x, b.x) ) || (!isEqual(a.y, b.y))) return true;
     return false;
 }
 
 bool operator != (const Vector& a, const double& b)
 {
-    if (a.x != b || a.y != b) return true;
+    if ( (!isEqual(a.x, b)) || (!isEqual(a.y, b)) ) return true;
     return false;
 } 
 
 bool operator == (const Vector& a, const double& b)
 {
-    if (a.x != b && a.y != b) return true;
+    if (isEqual(a.x, b) && isEqual(a.x, b)) return true;
     return false;
 }
 
@@ -188,9 +189,9 @@ inline void lining ()
 
 bool operator > (const Vector &a, const Vector &b)
 {
-    if (a.x > b.x)
+    if (isBigger (a.x, b.x))
     {
-        if (a.y > b.y)
+        if (isBigger(a.y, b.y))
         {
             return true;
         }
@@ -202,9 +203,9 @@ bool operator > (const Vector &a, const Vector &b)
 
 bool operator < (const Vector &a, const Vector &b)
 {
-    if (a.x < b.x)
+    if (isSmaller (a.x, b.x))
     {
-        if (a.y < b.y)
+        if (isBigger(a.y, b.y))
         {
             return true;
         }

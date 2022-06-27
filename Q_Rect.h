@@ -58,9 +58,9 @@ bool Rect::inRect (double x, double y)
 
 bool Rect::inRect (Vector vector)
 {
-    if (vector.x > pos.x ^ vector.x > finishPos.x)
+    if (isBigger (vector.x, pos.x) ^ isBigger(vector.x, finishPos.x))
     {
-        if (vector.y > pos.y ^ vector.y > finishPos.y)
+        if (isBigger(vector.y, pos.y) ^ isBigger(vector.y, finishPos.y))
         {
             return true;
         }

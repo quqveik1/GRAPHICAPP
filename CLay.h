@@ -2,14 +2,14 @@
 #include "DrawBibliothek.h"
 struct CLay
 {
-    AbstractAppData* app;
+    AbstractAppData* app = NULL;
 
     Lay lay = {};
     int toolLength = 0;
     int activeToolNum = -1;
     bool needToRedraw = false;
 
-    struct ToolLay** toolLays;
+    struct ToolLay** toolLays = NULL;
 
 
     virtual void createLay(AbstractAppData* _app, Vector _size = {});

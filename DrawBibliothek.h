@@ -24,7 +24,7 @@ struct Window;
 struct CHistoryStep
 {
 	int toolsNum = 0;
-	Tool* tools;
+	Tool* tools = NULL;
     void* toolsData = NULL;
 	int thickness = 1;
 };

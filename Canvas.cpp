@@ -49,7 +49,7 @@ HDC Canvas::playHistoryDC(int stepBack)
 
         for (int i = currentHistoryLength - stepBack - 1; i >= 0; i--)
         {
-            int pos;
+            int pos = 0;
             //if (currentHistoryLength == HistoryLength - 1)  pos = currentHistoryNumber - 1 + 1 + i;
             if (currentHistoryLength < HistoryLength - 1) pos = currentHistoryNumber - 1 - 1 - i;
             if (pos >= HistoryLength) pos -= HistoryLength;
