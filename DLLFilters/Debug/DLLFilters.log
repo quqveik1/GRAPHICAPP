@@ -1,8 +1,8 @@
 ﻿  dllmain.cpp
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,45): warning C4100: 'dc': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,32): warning C4100: 'toollay': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(107,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(169,31): warning C4100: 'mp': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(108,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(172,31): warning C4100: 'mp': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,93): warning C4100: 'clicked': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,72): warning C4100: 'dragedLastTime': unreferenced formal parameter
@@ -19,10 +19,10 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(1
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(111,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(131,10): warning C4551: function call missing argument list
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(156,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,187): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,147): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,107): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,195): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,155): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,115): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(229,81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(244,23): warning C4100: 'info': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(285,75): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(285,57): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
@@ -51,17 +51,16 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(105,24): 
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(54,10): message : see declaration of 'Canvas::activeTool'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(105,11): warning C4189: 'activeTool': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(153,18): warning C4458: declaration of 'length' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(176,6): message : see declaration of 'Manager::length'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(179,6): message : see declaration of 'Manager::length'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(167,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(168,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(294,101): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(294,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(320,18): warning C4458: declaration of 'length' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(176,6): message : see declaration of 'Manager::length'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(179,6): message : see declaration of 'Manager::length'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(336,11): warning C4189: 'tool': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(589,96): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(589,65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.h(15,59): warning C4100: '_NewCanvasDC': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(39,104): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(39,89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(40,112): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data

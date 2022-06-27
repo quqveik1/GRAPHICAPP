@@ -89,6 +89,7 @@ struct Window
     CLoadManager* loadManager;
 
     Vector mousePos = {};
+    Vector mousePosLastTime = {};
     int clicked = 0;
     int mbLastTime = 0;
 
@@ -163,6 +164,8 @@ struct Window
         else              return mousePos; };
 
     virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
+    
+    virtual void setLastTimeMP() { mousePosLastTime = getMousePos(); }
 
 
 	virtual void draw ();

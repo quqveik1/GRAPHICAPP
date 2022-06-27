@@ -31,6 +31,8 @@
 #include "Handle.cpp"
 #include "MainManager.cpp"
 #include "SaveImages.cpp"
+#include "ColorComponentChanger.cpp"
+#include "ColorMenu.cpp"
 
 
 
@@ -79,8 +81,10 @@ struct RGBSliders : Manager
 
     RGBSliders(AbstractAppData* _app, Rect _rect) :
         Manager(_app, _rect, 3),
-        //redColor ()
-    //{}
+        redColor (),
+        greenColor (),
+        blueColor ()
+    {}
 
 };
 */
@@ -134,7 +138,6 @@ struct StatusBar : Manager
 
 
 
-int Radius = 2;
 
 void Engine (Manager *manager);
 
@@ -145,8 +148,6 @@ bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
 bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
     HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
-
-
 
 
 int main (int argc, int *argv[])
@@ -181,23 +182,13 @@ int main (int argc, int *argv[])
 
     ToolSave toolSave = {};
 
-	HDC addNewCanvasDC = {};
-	HDC oldDC = LoadManager.loadImage ("addNewCanvas.bmp");
-	compressImage (appData, addNewCanvasDC, {50, 50}, oldDC, {225, 225});
-	appData->deleteDC(oldDC);
-
-    /*
-	StatusBar* statusBar = new StatusBar(appData, {.pos = {0, appData->systemSettings->SizeOfScreen.y - 20}, .finishPos = {appData->systemSettings->SizeOfScreen.x,  appData->systemSettings->SizeOfScreen.y}} , TX_BLUE);
-		statusBar->progressBar =  new ProgressBar (appData, {.pos = {0, 0}, .finishPos = statusBar->rect.getSize()}, TX_GREEN);
-		statusBar->progressBar->manager = statusBar;
-		statusBar->timeButton = new TimeButton(appData, {.pos = {statusBar->rect.getSize().x - 65, 0}, .finishPos = statusBar->rect.getSize()}, TX_WHITE);
-		statusBar->timeButton->manager = statusBar;
-      */
-    
-
-    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, addNewCanvasDC);
+    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen });
     appData->canvasManager = canvasManager;
 	manager->addWindow (canvasManager);
+
+    Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
+    manager->addWindow(mainhandle);
+
 
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
@@ -213,30 +204,14 @@ int main (int argc, int *argv[])
     manager->addWindow(toolMenu);   
 
 
-	Manager *menu = new Manager(appData, {.pos = {appData->systemSettings->SizeOfScreen.x - 712, 300}, .finishPos = {appData->systemSettings->SizeOfScreen.x - 300, 600}}, 3, false, LoadManager.loadImage ("ColorsMenu.bmp"), {.pos = {0, 0}, .finishPos = {412, 50}});
+	ColorMenu *menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, true);
 	manager->addWindow (menu);
-	
-	Manager *colorManager = new Manager(appData, {.pos = {10, 180}, .finishPos = {170, 220}}, 3, true, NULL, {}, RGB (26, 29, 29));
-	    menu->addWindow (colorManager);
-
-			ColorButton *redColor = new ColorButton(appData, {.pos = {0, 0}, .finishPos = {40, 40}}, RGB (255, 0, 0), LoadManager.loadImage ("RedButton.bmp"));
-			colorManager->addWindow(redColor);
-	
-			ColorButton *blueColor = new ColorButton(appData, {.pos = {60, 0}, .finishPos = {100, 40}}, RGB (0, 0, 255), LoadManager.loadImage ("BlueButton.bmp"));
-			colorManager->addWindow(blueColor);
-
-			ColorButton *greenColor = new ColorButton(appData, {.pos = {120, 0}, .finishPos = {160, 40}}, RGB (0, 255, 0), LoadManager.loadImage ("GreenButton.bmp"));
-			colorManager->addWindow(greenColor);
-
-	OpenManager *openManager = new OpenManager(appData, {.pos = {15, 135}, .finishPos = {36, 153}}, TX_WHITE, colorManager, LoadManager.loadImage ("OpenColorButton.bmp"));
-	menu->addWindow (openManager);
-
-
 
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
     if (appData->systemSettings->debugMode >= 0) printf("Фильтры загрузились\n");
+
 
     LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH, 800}}, canvasManager);
     manager->addWindow(laysMenu);
@@ -244,8 +219,7 @@ int main (int argc, int *argv[])
     //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
     //manager->addWindow(curves);
 
-	Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
-    manager->addWindow(mainhandle);
+    mainhandle;
 
 		CloseButton* closeButton = new CloseButton(appData, LoadManager.loadImage("CloseButton4.bmp"));
 		mainhandle->addWindowToBack(closeButton);

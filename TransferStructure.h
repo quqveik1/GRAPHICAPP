@@ -19,6 +19,7 @@ struct AbstractAppData
     struct CLoadManager* loadManager = NULL;
 
     virtual void setColor (COLORREF color, HDC dc, int thickness = 1) = 0;
+    virtual int getColorComponent(COLORREF color, COLORREF component) = 0;
 
     virtual void rectangle (Rect rect, HDC dc) = 0;
     virtual void rectangle(int x1, int y1, int x2, int y2, HDC dc) = 0;

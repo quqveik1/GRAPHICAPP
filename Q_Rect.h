@@ -23,6 +23,7 @@ struct Rect
 };
 
 inline Rect operator + (const Rect &rect, const Vector &vector);
+inline Rect operator - (const Rect &rect, const Vector &vector);
 
 bool Rect::isValid ()
 {
@@ -83,6 +84,15 @@ inline Rect operator + (const Rect& rect, const Vector& vector)
     Rect result = rect;
     result.pos += vector;
     result.finishPos += vector;
+
+    return result;
+}      
+
+inline Rect operator - (const Rect& rect, const Vector& vector)
+{
+    Rect result = rect;
+    result.pos -= vector;
+    result.finishPos -= vector;
 
     return result;
 }

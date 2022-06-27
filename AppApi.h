@@ -4,6 +4,7 @@
 struct PowerPoint : AbstractAppData
 {
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1) override;
+    virtual int getColorComponent(COLORREF color, COLORREF component) override;
 
     virtual void rectangle(Rect rect, HDC dc) override;
     virtual void rectangle(int x1, int y1, int x2, int y2, HDC dc) override;

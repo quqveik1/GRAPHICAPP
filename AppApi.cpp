@@ -61,6 +61,12 @@ void PowerPoint::setColor(COLORREF color, HDC dc, int thickness)
     txSetAllColors(color, dc, thickness);
 }
 
+int PowerPoint::getColorComponent(COLORREF color, COLORREF component)
+{
+    return txExtractColor(color, component);
+}
+
+
 void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
 {
     txBitBlt(dc1, x0, y0, sizex, sizey, dc2);
@@ -102,7 +108,7 @@ void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, H
 void PowerPoint::drawOnScreen(HDC dc, bool useAlpha /*=false*/)
 {
     if (!useAlpha)txBitBlt(0, 0, dc);
-    if (useAlpha)txAlphaBlend(0, 0, dc);
+    if (useAlpha)transparentBlt(txDC(), 0, 0, 0, 0, dc);
     txSleep(0);
 }
 

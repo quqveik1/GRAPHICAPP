@@ -12,7 +12,7 @@ struct CanvasManager : Manager
     CLoadManager* loadManager;
 
 
-    CanvasManager (AbstractAppData* _app, Rect _rect, HDC _NewCanvasDC) :
+    CanvasManager (AbstractAppData* _app, Rect _rect) :
         Manager(_app, _rect, 10, true, NULL, {}, TX_BLACK),
         loadManager (_app->loadManager)
     {
