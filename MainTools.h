@@ -3,7 +3,7 @@
 struct CToolManager
 {
     const int ToolsLength = 10;
-    struct Tool** tools = new Tool * [ToolsLength];
+    struct Tool** tools = new Tool* [ToolsLength];
     int currentLength = 0;
 
 
@@ -30,11 +30,11 @@ struct ToolLay
     virtual void needRedraw();
 
 
-    bool useTool(ProgrammeDate* data);
+    virtual bool useTool(ProgrammeDate* data);
     HDC drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
-    int setMBCondition(int condition);
-    bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
+    virtual int setMBCondition(int condition);
+    virtual bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
     void* getToolsData() { return toolsData; };
 
     virtual bool isFinished();

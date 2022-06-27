@@ -265,7 +265,9 @@ void Tool4Squares::countDeltaButtons()
 void Tool4Squares::countToolZone()
 {
     ToolSave* toolDate = (ToolSave*)toolLay->getToolsData();
-    toolLay->toolZone = { .pos = toolDate->pos - deltaForButtons, .finishPos = toolDate->size + toolDate->pos + (deltaForButtons) };
+    toolLay->toolZone.pos = toolDate->pos - deltaForButtons;
+    Vector finishPos = toolDate->size + toolDate->pos;
+    toolLay->toolZone.finishPos = finishPos + deltaForButtons;
 }
 
 bool Tool4Squares::isFinished(ToolLay* data)

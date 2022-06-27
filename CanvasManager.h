@@ -1,5 +1,5 @@
 #pragma once
-#include "Canvas.h"
+#include "Canvas.cpp"
 #include "ProgressBar.h"
 #include "GlobalOptions.h"
 

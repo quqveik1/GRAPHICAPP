@@ -15,6 +15,8 @@ struct TransferData
 struct AbstractAppData
 {
     CSystemSettings* systemSettings = NULL;
+    struct CToolManager* toolManager = NULL;
+    struct CLoadManager* loadManager = NULL;
 
     virtual void setColor (COLORREF color, HDC dc, int thickness = 1) = 0;
 
@@ -60,7 +62,6 @@ struct AbstractAppData
 
     void* canvasManager = NULL;
     COLORREF* currColor = NULL;
-    struct CLoadManager* loadManager = NULL;
-    struct DLLManager* toolManager = NULL;
     bool isResized = false;
+    bool IsRunning = true;
 }; 

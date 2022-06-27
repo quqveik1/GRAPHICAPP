@@ -47,6 +47,22 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(174,13): 
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider.cpp(195,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Алехандро\Desktop\AlexProjects\Macroses.h(80,1): warning C4005: 'drawOnFinalDC': macro redefinition
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Macroses.h(72): message : see previous definition of 'drawOnFinalDC'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(43,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(43,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(105,24): warning C4458: declaration of 'activeTool' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.h(54,10): message : see declaration of 'Canvas::activeTool'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(105,11): warning C4189: 'activeTool': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(153,18): warning C4458: declaration of 'length' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(176,6): message : see declaration of 'Manager::length'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(167,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(168,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(294,101): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(294,70): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(320,18): warning C4458: declaration of 'length' hides class member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.h(176,6): message : see declaration of 'Manager::length'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(336,11): warning C4189: 'tool': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(589,96): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(589,65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.h(15,59): warning C4100: '_NewCanvasDC': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(39,104): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(39,89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data

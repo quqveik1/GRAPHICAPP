@@ -50258,3 +50258,255 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010D20B0 (32-bit), Flags: CMdRe0, Thread: 0x41D0 (Main), GetLastError(): 126 (Не найден указанный модуль). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x01019372 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x010797BC in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x0107A0E0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x0105AB3F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+# 4 0x0106FD17 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (332):
+
+    330: 
+    331:         app->deleteDC(finalDC);
+=>  332: 		finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+    333: 
+    334: 		app->setColor(color, finalDC);
+
+# 5 0x7AC36E0E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLTools.tool: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLTools\dllmain.cpp (29):
+
+     27:     DLLToolExportData* dllData = new DLLToolExportData(6);
+     28: 
+=>   29:     dllData->addTool(new Line            (&DllSettings, "Р›РёРЅРёСЏ", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
+     30:     dllData->addTool(new Point           (&DllSettings, "РўРѕС‡РєР°", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
+     31:     dllData->addTool(new Vignette        (&DllSettings, "Р’РёРЅСЊРµС‚РєР°", sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), data));
+
+# 6 0x01056591 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLToolsManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLToolsManager.cpp (13):
+
+     11:         if (appData->systemSettings->debugMode) printf("Инструмент добавился в прожку\n");
+     12:         if (!initDll) assert(!"функция не загрузилась");
+=>   13:         DLLToolExportData* exportData = initDll(appData);
+     14:         assert(exportData);
+     15:         for (int j = 0; j < exportData->currlen; j++)
+
+# 7 0x0109BF55 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (449):
+
+    447:     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
+    448:     dllToolsManager->loadLibs();
+=>  449:     dllToolsManager->addToManager(&ToolManager);
+    450:     if (appData->systemSettings->debugMode >= 0) printf("Инструменты загрузились\n");
+    451:     
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (6):
+
+      4: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      5: {
+=>    6:     return txCreateDIBSection(size.x, size.y, pixels);
+      7: }
+      8: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 27 2022 19:41:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 27 2022 19:41:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10113, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010D20B0 (32-bit), Flags: CMdrE0, Thread: 0x53B4 (Canvas), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0101E588 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 1 0x01023114 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76CE7C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x76CC714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76CC6BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x76CCFAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x77A6719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x0102205D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9788)
+# 8 0x77147EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+# 9 0x77147FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#10 0x76E66739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#11 0x77A58FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#12 0x77A58FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9797):
+
+   9795: $       DispatchMessage  (&msg);
+   9796: 
+=> 9797: $       Sleep (0);
+   9798:         }
+   9799: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 27 2022 19:41:04, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 27 2022 19:41:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#1: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77877F05 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008520B0 (32-bit), Flags: CMdre0, Thread: 0x53E8. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77877F05 in C:\WINDOWS\System32\KERNELBASE.dll: CtrlRoutine()
+# 1 0x76E66739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 2 0x77A58FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 3 0x77A58FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 27 2022 19:42:37, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 27 2022 19:49:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Отладчик получил сигнал прерывания Control+Break.
+
+#1: Исключение DBG_CONTROL_BREAK (0x40010008) при выполнении кода по адресу 0x77877F05 в функции CtrlRoutine() в модуле C:\WINDOWS\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008520B0 (32-bit), Flags: CMdRe0, Thread: 0x53E8. 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77877F05 in C:\WINDOWS\System32\KERNELBASE.dll: CtrlRoutine()
+# 1 0x76E66739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+# 2 0x77A58FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+# 3 0x77A58FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 27 2022 19:42:37, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 27 2022 19:49:21
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
