@@ -69,7 +69,6 @@ void List::draw()
 
 void List::onClick(Vector mp)
 {
-    mousePos = getMousePos();
     int clikedButtonNum = standartManagerOnClick(this, mp);
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum && !isClickedLastTime())
     {

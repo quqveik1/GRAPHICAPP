@@ -51183,3 +51183,479 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00B6AF7E в функции InputButton::checkKeyboard() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp на строке 75 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BE5104 (32-bit), Flags: CMdRe0, Thread: 0x5460 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B6AF7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::checkKeyboard() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (75):
+
+     73: 
+     74: 
+=>   75:     int numsAfterEnteredNum = *parameter % ((int)pow(10, numLength - cursorPos));
+     76: 
+     77:     int numsAfterEnteredNumLength = numLength - cursorPos;
+
+# 1 0x00B72B01 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (112):
+
+    110:         int fontSize = 24 * 0.45;
+    111:         app->line(2 + fontSize * cursorPos, 0, 2 + fontSize * cursorPos, getSize().y, finalDC);
+=>  112:         checkKeyboard();
+    113:     }
+    114:     else
+
+# 2 0x00B70E7A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorComponentChanger.cpp (12):
+
+     10:     app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
+     11: 
+=>   12:     inputButton->draw();
+     13:     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
+     14: }
+
+# 3 0x00B86444 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222: 	for (int i = 0; i < manager->currLen; i++)
+    223: 	{
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 4 0x00B7101F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorMenu.cpp (6):
+
+      4: void ColorMenu::draw()
+      5: {
+=>    6:     standartManagerDraw(this);
+      7: 
+      8:     app->systemSettings->DrawColor = RGB(redComponent, greenComponent, blueComponent);
+
+# 5 0x00B86444 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222: 	for (int i = 0; i < manager->currLen; i++)
+    223: 	{
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 6 0x00B7401E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: }
+     24: 
+
+# 7 0x00B26456 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (537):
+
+    535:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    536: 
+=>  537: 		manager->draw ();
+    538: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    539:         if (wasResizedInLastFrame) app->setResized(false);
+
+# 8 0x00BAFCDF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (271):
+
+    269: 
+    270: 	txBegin ();
+=>  271: 	Engine (manager);
+    272:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    273:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (125):
+
+    123: bool PowerPoint::getAsyncKeyState(int symbol)
+    124: {
+=>  125:     return txGetAsyncKeyState(symbol);
+    126: }
+    127: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 28 2022 15:04:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 28 2022 15:05:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00B6AF7E в функции InputButton::checkKeyboard() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp на строке 75 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00BE5104 (32-bit), Flags: CMdRe0, Thread: 0x5460 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B6AF7E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::checkKeyboard() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (75):
+
+     73: 
+     74: 
+=>   75:     int numsAfterEnteredNum = *parameter % ((int)pow(10, numLength - cursorPos));
+     76: 
+     77:     int numsAfterEnteredNumLength = numLength - cursorPos;
+
+# 1 0x00B72B01 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (112):
+
+    110:         int fontSize = 24 * 0.45;
+    111:         app->line(2 + fontSize * cursorPos, 0, 2 + fontSize * cursorPos, getSize().y, finalDC);
+=>  112:         checkKeyboard();
+    113:     }
+    114:     else
+
+# 2 0x00B70E7A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorComponentChanger.cpp (12):
+
+     10:     app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
+     11: 
+=>   12:     inputButton->draw();
+     13:     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
+     14: }
+
+# 3 0x00B86444 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222: 	for (int i = 0; i < manager->currLen; i++)
+    223: 	{
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 4 0x00B7101F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorMenu.cpp (6):
+
+      4: void ColorMenu::draw()
+      5: {
+=>    6:     standartManagerDraw(this);
+      7: 
+      8:     app->systemSettings->DrawColor = RGB(redComponent, greenComponent, blueComponent);
+
+# 5 0x00B86444 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (224):
+
+    222: 	for (int i = 0; i < manager->currLen; i++)
+    223: 	{
+=>  224: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    225:  		if (manager->pointers[i]->advancedMode) 
+    226: 		{
+
+# 6 0x00B7401E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: }
+     24: 
+
+# 7 0x00B26456 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (537):
+
+    535:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    536: 
+=>  537: 		manager->draw ();
+    538: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    539:         if (wasResizedInLastFrame) app->setResized(false);
+
+# 8 0x00BAFCDF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (271):
+
+    269: 
+    270: 	txBegin ();
+=>  271: 	Engine (manager);
+    272:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    273:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (125):
+
+    123: bool PowerPoint::getAsyncKeyState(int symbol)
+    124: {
+=>  125:     return txGetAsyncKeyState(symbol);
+    126: }
+    127: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 28 2022 15:04:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 28 2022 15:05:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00719D73 в функции InputButton::backSpace() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp на строке 33 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00795104 (32-bit), Flags: CMdRe0, Thread: 0x53F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00719D73 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::backSpace() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (33):
+
+     31:     newNum /= pow(10, numLength - cursorPos + 1);
+     32: 
+=>   33:     int numsAfterEnteredNum = *parameter % ((int)pow(10, numLength - cursorPos));
+     34: 
+     35:     int numsAfterEnteredNumLength = numLength - cursorPos;
+
+# 1 0x0071AECE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::checkKeyboard() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (61):
+
+     59:     if (symbol == VK_BACK)
+     60:     {
+=>   61:         backSpace();
+     62:     }
+     63:     
+
+# 2 0x00722AFE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (114):
+
+    112:         app->line(2 + fontSize * cursorPos, 0, 2 + fontSize * cursorPos, getSize().y, finalDC);
+    113: 
+=>  114:         checkKeyboard();
+    115:         if (*parameter == 0) cursorPos = 1;
+    116:     }
+
+# 3 0x00720E6A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorComponentChanger.cpp (12):
+
+     10:     app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
+     11: 
+=>   12:     inputButton->draw();
+     13:     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
+     14: }
+
+# 4 0x00736644 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (222):
+
+    220: 	for (int i = 0; i < manager->currLen; i++)
+    221: 	{
+=>  222: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    223:  		if (manager->pointers[i]->advancedMode) 
+    224: 		{
+
+# 5 0x0072100F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorMenu.cpp (6):
+
+      4: void ColorMenu::draw()
+      5: {
+=>    6:     standartManagerDraw(this);
+      7: 
+      8:     app->systemSettings->DrawColor = RGB(redComponent, greenComponent, blueComponent);
+
+# 6 0x00736644 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (222):
+
+    220: 	for (int i = 0; i < manager->currLen; i++)
+    221: 	{
+=>  222: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    223:  		if (manager->pointers[i]->advancedMode) 
+    224: 		{
+
+# 7 0x0072403E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: }
+     24: 
+
+# 8 0x006D6456 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (537):
+
+    535:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    536: 
+=>  537: 		manager->draw ();
+    538: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    539:         if (wasResizedInLastFrame) app->setResized(false);
+
+# 9 0x0075FEBF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (271):
+
+    269: 
+    270: 	txBegin ();
+=>  271: 	Engine (manager);
+    272:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    273:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (125):
+
+    123: bool PowerPoint::getAsyncKeyState(int symbol)
+    124: {
+=>  125:     return txGetAsyncKeyState(symbol);
+    126: }
+    127: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 28 2022 15:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 28 2022 15:25:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Целочисленное деление на ноль.
+
+#1: Исключение EXCEPTION_INT_DIVIDE_BY_ZERO (0xC0000094) при выполнении кода по адресу 0x00719D73 в функции InputButton::backSpace() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp на строке 33 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00795104 (32-bit), Flags: CMdRe0, Thread: 0x53F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00719D73 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::backSpace() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (33):
+
+     31:     newNum /= pow(10, numLength - cursorPos + 1);
+     32: 
+=>   33:     int numsAfterEnteredNum = *parameter % ((int)pow(10, numLength - cursorPos));
+     34: 
+     35:     int numsAfterEnteredNumLength = numLength - cursorPos;
+
+# 1 0x0071AECE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::checkKeyboard() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (61):
+
+     59:     if (symbol == VK_BACK)
+     60:     {
+=>   61:         backSpace();
+     62:     }
+     63:     
+
+# 2 0x00722AFE in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: InputButton::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp (114):
+
+    112:         app->line(2 + fontSize * cursorPos, 0, 2 + fontSize * cursorPos, getSize().y, finalDC);
+    113: 
+=>  114:         checkKeyboard();
+    115:         if (*parameter == 0) cursorPos = 1;
+    116:     }
+
+# 3 0x00720E6A in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorComponentChanger.cpp (12):
+
+     10:     app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
+     11: 
+=>   12:     inputButton->draw();
+     13:     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
+     14: }
+
+# 4 0x00736644 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (222):
+
+    220: 	for (int i = 0; i < manager->currLen; i++)
+    221: 	{
+=>  222: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    223:  		if (manager->pointers[i]->advancedMode) 
+    224: 		{
+
+# 5 0x0072100F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ColorMenu.cpp (6):
+
+      4: void ColorMenu::draw()
+      5: {
+=>    6:     standartManagerDraw(this);
+      7: 
+      8:     app->systemSettings->DrawColor = RGB(redComponent, greenComponent, blueComponent);
+
+# 6 0x00736644 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (222):
+
+    220: 	for (int i = 0; i < manager->currLen; i++)
+    221: 	{
+=>  222: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    223:  		if (manager->pointers[i]->advancedMode) 
+    224: 		{
+
+# 7 0x0072403E in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: }
+     24: 
+
+# 8 0x006D6456 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (537):
+
+    535:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    536: 
+=>  537: 		manager->draw ();
+    538: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    539:         if (wasResizedInLastFrame) app->setResized(false);
+
+# 9 0x0075FEBF in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (271):
+
+    269: 
+    270: 	txBegin ();
+=>  271: 	Engine (manager);
+    272:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    273:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (125):
+
+    123: bool PowerPoint::getAsyncKeyState(int symbol)
+    124: {
+=>  125:     return txGetAsyncKeyState(symbol);
+    126: }
+    127: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun 28 2022 15:24:53, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 28 2022 15:25:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

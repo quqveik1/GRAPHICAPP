@@ -26,16 +26,18 @@ void ColorSlider::draw()
         pointSliderPos.x += getMousePos().x - mousePosLastTime.x;
         if (isSmaller(pointSliderPos.x, 0)) pointSliderPos.x = 0;
         if (isBigger(pointSliderPos.x, getSize().x - pointSliderSize.x)) pointSliderPos.x = getSize().x - pointSliderSize.x;
+        *colorParametr = pointSliderPos.x * kOfParametr;
         setLastTimeMP();
     }
 
-    *colorParametr = pointSliderPos.x * kOfParametr;
+    pointSliderPos.x = *colorParametr / kOfParametr;
 
 }
 
 
 void ColorSlider::onClick(Vector mp)
 {
+    setActiveWindow(this);
     if (getPointSliderRect().inRect(mp))
     {
         isSliderClicked = true;

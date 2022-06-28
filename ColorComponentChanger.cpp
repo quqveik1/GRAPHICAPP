@@ -7,20 +7,15 @@ void ColorComponentChanger::draw()
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
     slider->draw();
-    app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);
+    app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
 
-    char output[MAX_PATH] = {};
-
-    int result = sprintf(output, "%d", *component);
-
-    app->selectFont(app->systemSettings->FONTNAME, 24, finalDC);
-    app->setColor(app->systemSettings->TextColor, finalDC);
-    app->drawText(slider->rect.finishPos.x, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER | DT_CENTER);
-
-
+    inputButton->draw();
+    app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
 }
 
 void ColorComponentChanger::onClick(Vector mp)
 {
+    setActiveWindow(this);
     if (slider->rect.inRect(mp)) slider->onClick(mp - slider->rect.pos);
+    if (inputButton->rect.inRect(mp)) inputButton->onClick(mp - inputButton->rect.pos);
 }

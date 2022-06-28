@@ -161,23 +161,22 @@ void Canvas::onClick(Vector mp)
 
         ///app->setColor(drawColor, fi);
         lastClick = mp;
-        mousePos = mp;
 
 
         int mx = mp.x;
         int my = mp.y;
 
-        if (manager->activeWindow == this)
+        if (getActiveWindow() == this)
         {
             if (scrollBarVert.rect.inRect(mx, my))
             {
-                clickButton(&scrollBarVert, this, mousePos);
+                clickButton(&scrollBarVert, this, getMousePos());
                 //scrollBarVert.onClick(mp - scrollBarVert.rect.pos);
                 return;
             }
             if (scrollBarHor.rect.inRect(mx, my))
             {
-                clickButton(&scrollBarHor, this, mousePos);
+                clickButton(&scrollBarHor, this, getMousePos());
                 //scrollBarHor.onClick(mp - scrollBarHor.rect.pos);
                 return;
             }
@@ -191,7 +190,7 @@ void Canvas::onClick(Vector mp)
 
         if (clickHandle()) return;
 
-        if (!(isClickedLastTime()) && manager->activeWindow == this)
+        if (!(isClickedLastTime()) && getActiveWindow() == this)
         {
             if (handle.rect.inRect(lastClick.x, lastClick.y))
             {
@@ -231,7 +230,7 @@ void Canvas::draw()
 
 
 
-    if (systemSettings->debugMode == 3)  printf("Clicked: %d\n", getMBCondition());
+    if (systemSettings->debugMode >= 3)  printf("Clicked: %d\n", getMBCondition());
 
 
     cleanOutputLay();
@@ -258,7 +257,7 @@ void Canvas::draw()
     }
 
 
-    if (manager->activeWindow != this) wasClicked = false;
+    if (getActiveWindow() != this) wasClicked = false;
 
 
     //scrollBarVert.draw ();

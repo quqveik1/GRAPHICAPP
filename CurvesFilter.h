@@ -76,7 +76,7 @@ void Curves::draw()
     if (activePointNum >= 0 )
     {
         //printf ("[num: %d|pos: {%lf, %lf}]  ", activePointNum, points[activePointNum].x, points[activePointNum].y);
-        if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime, clicked))
+        //if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime, clicked))
         {
             activePointNum = -1;
             countPermutate ();

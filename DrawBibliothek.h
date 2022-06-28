@@ -88,9 +88,7 @@ struct Window
 
     CLoadManager* loadManager;
 
-    Vector mousePos = {};
     Vector mousePosLastTime = {};
-    int clicked = 0;
     int mbLastTime = 0;
 
     Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
@@ -152,7 +150,7 @@ struct Window
 
     virtual int getMBCondition() {
         if (getManager()) return ((Window*)getManager())->getMBCondition();
-        else              return clicked; };
+        else              return 0; };
     virtual bool isClickedLastTime() { 
         if (mbLastTime == 0) return false;
         else                 return mbLastTime == getMBCondition(); };
@@ -161,7 +159,15 @@ struct Window
 
     virtual Vector getMousePos() {
         if (getManager()) return ((Window*)getManager())->getMousePos() - rect.pos;
-        else              return mousePos; };
+        else              return {}; };
+
+    virtual Window* getActiveWindow() {
+        if (getManager()) return ((Window*)getManager())->getActiveWindow();
+        else              return 0;
+    }; 
+    virtual void setActiveWindow(Window* window) {
+        if (getManager()) return ((Window*)getManager())->setActiveWindow(window);
+    };
 
     virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
     
@@ -179,7 +185,6 @@ struct Manager : Window
 	int length;
 	Window **pointers = NULL;
 	int currLen;
-	Window *activeWindow;
 	Window handle;
 	Vector startCursorPos;
 	bool coordinatSysFromHandle;
@@ -191,7 +196,6 @@ struct Manager : Window
 		length (_length),
 		pointers (new Window* [_length]{}),
 		currLen (0),
-		activeWindow (NULL),
 		startCursorPos({}),
 		coordinatSysFromHandle (_coordinatSysFromHandle),
         HideIfIsNotActive (_HideIfIsNotActive) 
@@ -213,7 +217,8 @@ struct Manager : Window
     }
 
     virtual bool addWindow (Window *window);
-    virtual Window *getActiveWindow ();
+
+    
     virtual void controlHandle ();
     virtual bool clickHandle ();
     virtual void replaceWindow (int numOfWindow);

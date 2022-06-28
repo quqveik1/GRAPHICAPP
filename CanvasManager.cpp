@@ -16,7 +16,6 @@ void CanvasManager::draw()
     app->rectangle(0, 0, 3000, 3000, finalDC);
 
     standartManagerDraw(this);
-    activeWindow = activeCanvas;
 }
 
 bool CanvasManager::addCanvas()
@@ -26,7 +25,6 @@ bool CanvasManager::addCanvas()
 
 void CanvasManager::onClick(Vector mp)
 {
-    mousePos = mp;
     int clickedCellNum = standartManagerOnClick(this, mp);
 
     if (clickedCellNum >= 0)

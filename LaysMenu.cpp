@@ -4,7 +4,6 @@
 
 void LaysMenu::onClick(Vector mp)
 {
-    mousePos = mp;
     if (advancedMode)
     {
         if (advancedMode && !isClickedLastTime())

@@ -16,24 +16,17 @@ void Menu::draw()
     {
         drawOneLine(i);
     }
-
-    if (manager->getActiveWindow() != this && manager)
-    {
-        activeWindow = NULL;
-    }
-
 }
 
 void Menu::onClick(Vector mp)
 {
+    setActiveWindow(this);
+
     int missClicked = true;
     clickHandle();
 
     mp.y -= handle.rect.finishPos.y;
 
-
-
-    mousePos = mp;
     int mx = mp.x;
     int my = mp.y;
 
@@ -45,6 +38,4 @@ void Menu::onClick(Vector mp)
         reDraw = true;
         missClicked = onClickLine(mp);
     }
-
-    if (missClicked == true) activeWindow = NULL;
 }

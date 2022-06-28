@@ -139,7 +139,7 @@ struct StatusBar : Manager
 
 
 
-void Engine (Manager *manager);
+void Engine (MainManager* manager);
 
 void RECTangle (const Rect rect, HDC dc = txDC ());
 void shiftArrBack    (char arr[], int length);
@@ -510,7 +510,7 @@ void shiftArrBack (char arr[], int length)
 }
 
 
-void Engine (Manager *manager)
+void Engine (MainManager *manager)
 {
     assert (manager); 
     AbstractAppData* app = manager->app;

@@ -25,10 +25,8 @@ int ToolsPalette::onClickLine(Vector mp)
         bool missClicked = false;
         if (pointers[lineNum]->rect.inRect(mp.x, mp.y))
         {
-            activeWindow = pointers[lineNum];
+            setActiveWindow(pointers[lineNum]);
             clickButton(pointers[lineNum], this, mp);
-            //pointers[lineNum]->onClick(mp - pointers[lineNum]->rect.pos);
-            //pointers[lineNum]->isClickedLastTime() = true;
             app->systemSettings->DrawingMode = lineNum + 1;
             lastSelected = lineNum;
 

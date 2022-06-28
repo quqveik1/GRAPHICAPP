@@ -169,8 +169,6 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 {
     qassert (manager, info);
 
-    manager->mousePos = mp;
-
     bool missClicked = true;
 
     int returnableVal = -1;
@@ -196,8 +194,6 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 			}
 		}
 	}
-
-	if (missClicked == true) manager->activeWindow = NULL;
 
     return returnableVal;
 }
@@ -229,11 +225,6 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
             app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
 		}
 	}
-
-	if (manager->getActiveWindow () != manager && manager->manager) 
-	{
-		manager->activeWindow = NULL;
-    }
 }
 
 
@@ -250,14 +241,6 @@ void swap$ (DebugInfo info, int &x0, int &y0)
 }
 
 
-
-
-Window* Manager::getActiveWindow ()
-{
-	if (this == NULL) return 0;
-
-	return activeWindow;
-}
 
 
 bool Manager::addWindow (Window *window)
@@ -534,6 +517,5 @@ void Manager::onClick (Vector mp)
 
 void clickButton (Window *window, Manager *manager, Vector mp)
 {
-    manager->activeWindow = window;
 	window->onClick (mp - window->rect.pos);
 }

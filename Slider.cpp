@@ -83,8 +83,8 @@ void Slider::draw ()
 	else kScale = 0;
 
 
-	int mx = mousePos.x;
-	int my = mousePos.y;
+	//int mx = mousePos.x;
+	//int my = mousePos.y;
     //printf ("{%d}\n", mx);
 	//mousePos =  {mx, my};
 
@@ -161,6 +161,7 @@ void Slider::draw ()
 
 void Slider::onClick (Vector mp)
 {
+    /*
 	int mx = mp.x;
 	int my = mp.y;
     mousePos = mp;
@@ -186,6 +187,7 @@ void Slider::onClick (Vector mp)
 		(*num)++;
 	}
     setMbLastTime();
+    */
 }
 
 

@@ -22,15 +22,15 @@ struct ColorMenu : Manager
         resize(newRect);
 
         redComponent = app->getColorComponent (app->systemSettings->DrawColor, TX_RED);
-        redChanger = new ColorComponentChanger(app, { .pos = {75, 60}, .finishPos = {380, 75} }, &redComponent);
+        redChanger = new ColorComponentChanger(app, { .pos = {75, 60}, .finishPos = {380, 80} }, &redComponent);
         addWindow(redChanger);
 
         greenComponent = app->getColorComponent(app->systemSettings->DrawColor, TX_GREEN);
-        greenChanger = new ColorComponentChanger(app, { .pos = {75, 85}, .finishPos = {380, 100} }, &greenComponent);
+        greenChanger = new ColorComponentChanger(app, { .pos = {75, 85}, .finishPos = {380, 105} }, &greenComponent);
         addWindow(greenChanger);
 
         blueComponent = app->getColorComponent(app->systemSettings->DrawColor, TX_BLUE);
-        blueChanger = new ColorComponentChanger(app, { .pos = {75, 115}, .finishPos = {380, 130} }, &blueComponent);
+        blueChanger = new ColorComponentChanger(app, { .pos = {75, 110}, .finishPos = {380, 130} }, &blueComponent);
         addWindow(blueChanger);
     }
 

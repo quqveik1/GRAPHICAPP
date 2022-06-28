@@ -4,17 +4,16 @@
 
 void TwoOptionsMenu::onClick(Vector mp)
 {
-    mousePos = mp;
 	clickHandle ();
 
 	if (upSlider.rect.inRect(mp) && !isClickedLastTime())
 	{
-        clickButton (&upSlider, this, mousePos);
+        clickButton (&upSlider, this, getMousePos());
 		//upSlider.onClick(mp - upSlider.rect.pos);
 	}
 	if (downSlider.rect.inRect(mp) && !isClickedLastTime())
 	{
-        clickButton (&downSlider, this, mousePos);
+        clickButton (&downSlider, this, getMousePos());
 		//downSlider.onClick(mp - downSlider.rect.pos);
 	}
 	//if (closeButton.getAbsRect().inRect(mx, my) && !isClickedLastTime()) advancedMode = false;
@@ -76,7 +75,7 @@ void TwoOptionsMenu::draw()
 
     if (confirmFilter)
     {
-        if (canvasManager && canvasManager->activeWindow && canvasManager->activeWindow->finalDC)
+        if (canvasManager && canvasManager->getActiveCanvas() && canvasManager->getActiveCanvas()->finalDC)
         {
             apply ();
             firstVal = 0;
