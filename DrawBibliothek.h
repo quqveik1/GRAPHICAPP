@@ -85,6 +85,7 @@ struct Window
 	Manager *manager;
 	bool advancedMode;
 	bool reDraw;
+    bool needTransparencyOutput = false;
 
     CLoadManager* loadManager;
 
@@ -120,8 +121,8 @@ struct Window
     ~Window ()
     {
         assert(app);
-        if (dc) app->deleteDC(dc);
-        if (finalDC) app->deleteDC(dc);
+        if (dc) app->smartDeleteDC(dc);
+        if (finalDC) app->smartDeleteDC(dc);
     }
 
 
@@ -208,8 +209,8 @@ struct Manager : Window
     ~Manager()
     {
         assert(app);
-        if (dc) app->deleteDC(dc);
-        if (finalDC) app->deleteDC(finalDC);
+        if (dc) app->smartDeleteDC(dc);
+        if (finalDC) app->smartDeleteDC(finalDC);
         for (int i = 0; i < length; i++)
         {
             if (pointers[i]) delete pointers[i];

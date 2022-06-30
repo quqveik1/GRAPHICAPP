@@ -9,6 +9,12 @@ Rect ColorSlider::getPointSliderRect()
     return tempRect;
 }
 
+
+void ColorSlider::confirmColor()
+{
+    colorConfirmed = true;
+}
+
 void ColorSlider::draw()
 {
     app->setColor(app->systemSettings->TRANSPARENTCOLOR, finalDC);
@@ -21,7 +27,11 @@ void ColorSlider::draw()
 
     if (isSliderClicked)
     {
-        if (!getMBCondition()) isSliderClicked = false;
+        if (!getMBCondition())
+        {
+            isSliderClicked = false;
+            confirmColor();
+        }
 
         pointSliderPos.x += getMousePos().x - mousePosLastTime.x;
         if (isSmaller(pointSliderPos.x, 0)) pointSliderPos.x = 0;
@@ -32,13 +42,15 @@ void ColorSlider::draw()
 
     pointSliderPos.x = *colorParametr / kOfParametr;
 
+    setMbLastTime();
+
 }
 
 
 void ColorSlider::onClick(Vector mp)
-{
+{ 
     setActiveWindow(this);
-    if (getPointSliderRect().inRect(mp))
+    if (getPointSliderRect().inRect(mp) && !isClickedLastTime())
     {
         isSliderClicked = true;
         setLastTimeMP();

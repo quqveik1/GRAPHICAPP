@@ -9,13 +9,22 @@ struct ColorMenu : Manager
     int redComponent = 0;
     int greenComponent = 0;
     int blueComponent = 0;
+    const int HistoryLength = 11;
+    COLORREF colorHistory[11] = {};
+    Rect colorRect[11] = {};
+    int currentPos = 0;
+    int currHistoryLen = 0;
     
-    Vector sizeOfColorMenu = {412, 300};
+    Vector sizeOfColorMenu = {412, 227};
 
     ColorMenu(AbstractAppData* _app, Vector _pos, bool _advancedMode = false) :
-        sizeOfColorMenu ({ 412, 300 }),
+        sizeOfColorMenu ({ 412, 227 }),
         Manager(_app, { .pos = _pos, .finishPos = _pos + sizeOfColorMenu }, 3, _advancedMode, _app->loadManager->loadImage("ColorsMenu-2.bmp"), { .pos = {0, 0}, .finishPos = { 412, 50 } })
     {
+        needTransparencyOutput = true;
+
+        confirmColor();
+
         assert(app);
         assert(app->systemSettings);
         Rect newRect = { .pos = _pos, .finishPos = _pos + sizeOfColorMenu };
@@ -34,6 +43,12 @@ struct ColorMenu : Manager
         addWindow(blueChanger);
     }
 
+
+    void setColorRects();
+    void moveHistory(int clickedNumOFColorRect);
+    virtual void confirmColor();
+    
     virtual void draw() override;
+    virtual void onClick(Vector mp) override;
 
 };

@@ -4,6 +4,7 @@
 struct InputButton : Window
 {
     int* parameter = NULL;
+    int parametrBeforeRedacting = NULL;
     int minParametr = 0;
     int maxParametr = 255;
     int cursorPos = 0;
@@ -11,14 +12,21 @@ struct InputButton : Window
     int delta = 30;
     int lastTimeCursorConditionChanged = 0;
     bool shouldShowCursor = false;
+    bool wasClicked = false;
+    bool confirmed = false;
 
     COLORREF cadreColor = NULL;
+    COLORREF cursorColor = NULL;
+    
 
-    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, COLORREF _mainColor, COLORREF _cadreColor) :
+    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, COLORREF _mainColor, COLORREF _cadreColor, COLORREF _cursorColor) :
         Window (_app, _rect, _mainColor),
         parameter (_parameter),
-        cadreColor (_cadreColor)
+        cadreColor (_cadreColor),
+        cursorColor (_cursorColor)
     {
+        needTransparencyOutput = true;
+
         cursorPos = getAmountOfNumbers(*parameter);
     }
 

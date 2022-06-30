@@ -98,12 +98,11 @@ void InputButton::drawCursor()
     {
         if (shouldShowCursor == false) shouldShowCursor = true;
         else shouldShowCursor = false;
-        printf("shouldShowCursor: %b\n", shouldShowCursor);
         lastTimeCursorConditionChanged = clock();
     }
 
     if (!shouldShowCursor)  return;
-    app->setColor(TX_RED, finalDC);
+    app->setColor(cursorColor, finalDC);
     int fontSize = 24 * 0.45;
     int tempCursorPos = cursorPos;
     if (*parameter == 0) tempCursorPos = 0;
@@ -122,8 +121,14 @@ void InputButton::draw()
 
     int result = sprintf(output, "%d", *parameter);
 
-    if (getActiveWindow() == this)
+    if (wasClicked)
     {
+        if (getActiveWindow() != this)
+        {
+            wasClicked = false;
+            if (*parameter != parametrBeforeRedacting)confirmed = true;
+        }
+
         if (*parameter == 0)
         {
             cursorPos = 1;
@@ -142,14 +147,22 @@ void InputButton::draw()
 
     app->selectFont(app->systemSettings->FONTNAME, 24, finalDC);
     app->setColor(app->systemSettings->TextColor, finalDC);
-    app->drawText(2, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER);
+    app->drawText(2, 2, getSize().x - 2, getSize().y - 2, output, finalDC, DT_VCENTER);
 
-    app->setColor(cadreColor, finalDC, 3);
-    app->drawCadre(rect - rect.pos, finalDC);
+    app->setColor(cadreColor, finalDC, 1);
+    Rect cadreRect = { .pos = {0, 0}, .finishPos = {getSize().x - 1, getSize().y - 1} };
+    app->drawCadre(cadreRect, finalDC);
+
+    setMbLastTime();
 }
 
 
 void InputButton::onClick(Vector mp)
 {
     setActiveWindow(this);
+    if (!isClickedLastTime())
+    {
+        wasClicked = true;
+        parametrBeforeRedacting = *parameter;
+    }
 }

@@ -4,7 +4,6 @@
 #include "GlobalOptions.h"
 #include "Q_Buttons.h"
 #include <cmath>
-//#include "..\Brightness\Q_Filter.h"
 #include "StandartFunctions.h"
 #include "CurvesFilter.h"
 #include "Slider.cpp"
@@ -34,16 +33,7 @@
 #include "ColorComponentChanger.cpp"
 #include "ColorMenu.cpp"
 
-
-
-
-
-
-//void bitBlt(RGBQUAD* dest, int x, int y, int sizeX, int sizeY, RGBQUAD* source, int originalSizeX = _app->systemSettings->DCMAXSIZE, int originalSizeY = _app->systemSettings->DCMAXSIZE, int sourceSizeX = _app->systemSettings->DCMAXSIZE, int sourceSizeY = _app->systemSettings->DCMAXSIZE);
-
-
-
-
+/*
 struct TimeButton : Window
 {
 	int font;
@@ -58,36 +48,6 @@ struct TimeButton : Window
 };
 
 
-
-
-struct ColorButton : Window
-{
-	ColorButton(AbstractAppData* _app, Rect _rect, COLORREF _color, HDC _dc) :
-		Window (_app, _rect, _color, _dc)
-	{
-		draw ();
-		reDraw = false;
-	}
-
-	virtual void onClick (Vector mp) override;
-};
-
-/*
-struct RGBSliders : Manager
-{
-    Slider redColor;
-    Slider greenColor;
-    Slider blueColor;
-
-    RGBSliders(AbstractAppData* _app, Rect _rect) :
-        Manager(_app, _rect, 3),
-        redColor (),
-        greenColor (),
-        blueColor ()
-    {}
-
-};
-*/
 
 
 struct StringButton : Window
@@ -135,6 +95,7 @@ struct StatusBar : Manager
 
 	virtual void draw() override;
 };
+*/
 
 
 
@@ -144,7 +105,6 @@ void Engine (MainManager* manager);
 void RECTangle (const Rect rect, HDC dc = txDC ());
 void shiftArrBack    (char arr[], int length);
 void shiftArrForward (char arr[], int length);
-bool checkDeltaTime (int lastTimeClicked);
 void printfDCS (const char *str = "");
 bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
     HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
@@ -271,10 +231,10 @@ int main (int argc, int *argv[])
 	Engine (manager);
     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
     appData->systemSettings->save("Settings\\FullSettings.settings");
+    delete manager;
 	txEnd ();
     txDisableAutoPause();
-    appData->loadManager->deleteAllImages();
-    //delete manager;
+    
 	return 0;
 }
      
@@ -292,6 +252,7 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
 
 
 
+/*
 void StatusBar::draw()
 {
 	app->setColor(color, finalDC);
@@ -328,7 +289,7 @@ void StatusBar::draw()
 	if (timeButton) app->bitBlt (finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
 
 }
-
+*/
 
 
 
@@ -338,7 +299,7 @@ void txSelectFontDC(const char* text, int sizey, HDC &dc, int sizex/* = -1*/)
 	txSelectFont(text, sizey, sizex, FW_DONTCARE, false, false, false, 0, dc);
 }
 
-
+/*
 void StringButton::draw ()
 {
 	$s;
@@ -473,8 +434,9 @@ void StringButton::cursorMovement (int side)
 		if (side == VK_LEFT) cursorPosition--;
 		shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
 	}
-    */
+    
 }
+*/
 
 void shiftArrForward (char arr[], int length)
 {
@@ -516,15 +478,12 @@ void Engine (MainManager *manager)
     AbstractAppData* app = manager->app;
     assert(app);
 
-    HDC outputDC = app->createDIBSection(app->systemSettings->SizeOfScreen.x, app->systemSettings->SizeOfScreen.y);
-    txDC() = outputDC;
-
     bool wasResizedInLastFrame = false;
 
 	for (;;)
 	{
         txClearConsole();
-        if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf ("\nFPS: %lf\n", txGetFPS());
+        if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf ("\nFPS: %d\n", (int)txGetFPS());
 
 		app->setColor (app->systemSettings->BackgroundColor, txDC());
 		app->rectangle (0, 0, app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y, txDC());
@@ -536,6 +495,7 @@ void Engine (MainManager *manager)
 
 		manager->draw ();
 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+
         if (wasResizedInLastFrame) app->setResized(false);
         wasResizedInLastFrame = app->wasResized();
 
@@ -550,11 +510,12 @@ void Engine (MainManager *manager)
         {
             manager->clicked = 0;
         }
-
-		
 		txSleep (0);
-
 	}
+
+    ShowWindow(app->systemSettings->MAINWINDOW, SW_HIDE);
+
+    app->loadManager->deleteAllImages();
 }
 
 
@@ -572,6 +533,7 @@ void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
 	//app->rectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
+/*
 void TimeButton::draw ()
 {
 	if (manager)app->setColor (manager->color, finalDC);
@@ -593,6 +555,7 @@ void TimeButton::draw ()
 	//app->drawOnScreen(finalDC);
 
 }
+*/
 
 
 void ProgressBar::setProgress(double* total, double* current)
@@ -652,11 +615,4 @@ void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source,
 
 		}
 	}
-}
-
-
-
-void ColorButton::onClick (Vector mp)
-{
-	app->systemSettings->DrawColor = color;
 }

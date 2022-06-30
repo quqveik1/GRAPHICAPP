@@ -206,23 +206,18 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 
     manager->controlHandle ();
 
-    //if (manager->HideIfIsNotActive && manager->activeWindow != this) 
-    //{
-        //hide ();
-    //}
     AbstractAppData* app = manager->app;
     assert(app);
-
-    app->setColor(manager->color, manager->finalDC);
-	//txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, manager->finalDC);
 	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
+    int test1 = 0;
 	for (int i = 0; i < manager->currLen; i++)
 	{
 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
  		if (manager->pointers[i]->advancedMode) 
 		{
-            app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+            if (manager->pointers[i]->needTransparencyOutput) app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+            else                                              app->bitBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
 		}
 	}
 }

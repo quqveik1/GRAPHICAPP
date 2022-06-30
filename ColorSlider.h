@@ -10,16 +10,21 @@ struct ColorSlider : Manager
     bool isSliderClicked = false;
     double kOfParametr = 0;
 
+    bool colorConfirmed = false;
+
     ColorSlider(AbstractAppData* _app, Rect _rect, int* _colorParametr) :
         Manager(_app, _rect, 1, true, NULL, {}, RGB (144, 144, 144)),
         colorParametr (_colorParametr),
         pointSlider (app->loadManager->loadImage("SliderPointer.bmp"))
     {
+        needTransparencyOutput = true;
+
         kOfParametr = 255 / (getSize().x - pointSliderSize.x);
         pointSliderPos.x = *colorParametr / kOfParametr;
     };
 
     Rect getPointSliderRect();
+    void confirmColor();
 
     virtual void draw() override;
     virtual void onClick(Vector mp) override;

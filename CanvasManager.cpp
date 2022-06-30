@@ -13,7 +13,8 @@ void CanvasManager::draw()
 {
 
     app->setColor(app->systemSettings->BackgroundColor, finalDC);
-    app->rectangle(0, 0, 3000, 3000, finalDC);
+    app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
+
 
     standartManagerDraw(this);
 }
