@@ -20,4 +20,10 @@ void MainManager::draw()
         }
     }
     standartManagerDraw(this);
+
+    if (!app->isFullScreen())
+    {
+        app->setColor(color, finalDC, 5);
+        app->drawCadre({ .pos = {}, .finishPos = app->systemSettings->SizeOfScreen }, finalDC);
+    }
 }

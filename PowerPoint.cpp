@@ -32,87 +32,23 @@
 #include "SaveImages.cpp"
 #include "ColorComponentChanger.cpp"
 #include "ColorMenu.cpp"
-
-/*
-struct TimeButton : Window
-{
-	int font;
-	TimeButton (AbstractAppData* _app, Rect _rect, COLORREF _color = TX_RED, int _font = NULL)	:
-		Window (_app, _rect, _color),
-		font (_font)
-	{
-        if (!font) font = _app->systemSettings->MainFont;
-    }
-
-	virtual void draw () override;
-};
-
-
-
-
-struct StringButton : Window
-{
-	bool advancedMode;
-	char *inText;
-	int cursorPosition;
-	int textLen;
-	int lastButton;
-	int lastTimeClicked;
-	bool onlyNums;
-	const int MaxNum;
-
-
-
-	StringButton(AbstractAppData* _app, Rect _rect, COLORREF _color, char *_redactingText, int _redactingTextLength, Manager *_manager, int _MaxNum = 20, bool _onlyNums = false) :
-		Window(_app, _rect, _color, NULL, _manager),
-		inText (_redactingText),
-		advancedMode(true),
-		cursorPosition(_redactingTextLength - 1),
-		textLen (_redactingTextLength + 1),
-		lastButton (0),
-		lastTimeClicked (0),
-		onlyNums (_onlyNums),
-		MaxNum (_MaxNum)
-	{}
-
-
-	virtual void draw () override;
-	void checkSymbols ();
-	void cursorMovement (int side);
-	void backSpace ();
-};
-
-struct StatusBar : Manager
-{
-
-	TimeButton *timeButton = NULL;
-	ProgressBar *progressBar = NULL;
-
-	StatusBar(AbstractAppData* _app, Rect _rect, COLORREF _color) :
-		Manager(_app, _rect, 3, true, NULL, {}, _color)
-	{}
-
-
-	virtual void draw() override;
-};
-*/
-
-
+#include "FileSavings.cpp"
 
 
 void Engine (MainManager* manager);
-
-void RECTangle (const Rect rect, HDC dc = txDC ());
-void shiftArrBack    (char arr[], int length);
-void shiftArrForward (char arr[], int length);
+LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 void printfDCS (const char *str = "");
 bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
     HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
+bool checkVersionCompability(PowerPoint* app);
+void writeVersion(PowerPoint* app);
+
+
+PowerPoint* appData = new PowerPoint;
 
 
 int main (int argc, int *argv[])
 {
-    PowerPoint* appData = new PowerPoint;
     CSystemSettings SystemSettings;
     appData->systemSettings = &SystemSettings;
 
@@ -121,10 +57,19 @@ int main (int argc, int *argv[])
 
     CLoadManager LoadManager(appData);
     appData->loadManager = &LoadManager;
+
+    CFileSavings FileSavings;
+    FileSavings.add("Settings\\FullSettings.settings");
+    FileSavings.add("Settings\\ColorHistory.history");
+    appData->fileSavings = &FileSavings;
     
     appData->currColor = &SystemSettings.DrawColor;
 
     setDefaultSystemSettings(appData->systemSettings);
+
+    bool needLoadFiles = checkVersionCompability(appData);
+    if (!needLoadFiles) appData->fileSavings->deleteAllFiles();
+
     
     appData->systemSettings->read("Settings\\FullSettings.settings");
     setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");  
@@ -133,6 +78,7 @@ int main (int argc, int *argv[])
 
     _txWindowStyle = appData->systemSettings->WindowStyle;
     _txSwapBuffers = swapDC;
+    txSetWindowsHook(CtrlWindowFunc);
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
 
     appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);
@@ -157,14 +103,15 @@ int main (int argc, int *argv[])
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты загрузились\n");
     
 
-	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {0, 100}, .finishPos = {50, (double)ToolManager.currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, ToolManager.currentLength);
+	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {3, 100}, .finishPos = {53, (double)ToolManager.currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, ToolManager.currentLength);
     manager->addWindow(toolsPallette);
 
     ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
     manager->addWindow(toolMenu);   
 
 
-	ColorMenu *menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, true);
+	ColorMenu *menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, "Settings\\ColorHistory.history", true);
+    menu->devName = "ColorMenu";
 	manager->addWindow (menu);
 
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
@@ -173,11 +120,8 @@ int main (int argc, int *argv[])
     if (appData->systemSettings->debugMode >= 0) printf("Фильтры загрузились\n");
 
 
-    LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {0, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH, 800}}, canvasManager);
+    LaysMenu* laysMenu = new LaysMenu (appData, {.pos = {3, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH, 800}}, canvasManager);
     manager->addWindow(laysMenu);
-
-    //Curves *curves = new Curves ({.pos = {500, 500}, .finishPos = {500 + 443, 500 + 360}}, LoadManager.loadImage("Brightness.bmp"));
-    //manager->addWindow(curves);
 
     mainhandle;
 
@@ -205,7 +149,6 @@ int main (int argc, int *argv[])
         openWindows->addNewItem (toolMenu, NULL, "Инструментальные слои");
         List* filters = openWindows->addSubList("Фильтры");
     manager->addWindow (filters);
-            //filters->addNewItem (curves, NULL, "Кривые");
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
             {
                 filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
@@ -218,10 +161,6 @@ int main (int argc, int *argv[])
     manager->addWindow(systemList);
             SaveImages* saveImages = new SaveImages(appData, canvasManager);
             systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
-        
-        
-            
-	
 
     if (appData->systemSettings->debugMode == 6) _getch();
 
@@ -231,258 +170,70 @@ int main (int argc, int *argv[])
 	Engine (manager);
     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
     appData->systemSettings->save("Settings\\FullSettings.settings");
+    menu->saveMenu();
+    writeVersion(appData);
     delete manager;
 	txEnd ();
     txDisableAutoPause();
     
 	return 0;
 }
-     
+ 
 
+void writeVersion(PowerPoint* app)
+{
+    assert(app);
+    FILE* versionFile = fopen("Settings\\Version.txt", "w");
+
+    if (versionFile)
+    {
+        fprintf(versionFile, "%s", app->appVersion);
+    }
+}
+
+
+bool checkVersionCompability(PowerPoint* app)
+{
+    assert(app);
+    bool needLoadSaves = false;
+    FILE* versionFile = fopen("Settings\\Version.txt", "r");
+   
+    if (versionFile)
+    {
+        char versionName[MAX_PATH] = {};
+        fscanf(versionFile, "%s", versionName);
+        int result = strcmp(app->appVersion, versionName);
+        if (result == 0) needLoadSaves = true;
+    }
+
+    return needLoadSaves;
+}
 
 
 LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    if (message == WM_SIZING)
+    if (message == WM_SETCURSOR)
     {
-        
+        if (appData->activeCursor)
+        {
+            SetClassLongPtr(window, GCLP_HCURSOR, (LONG_PTR)appData->activeCursor);
+        }
     }
     return 0;
-}
-
-
-
-/*
-void StatusBar::draw()
-{
-	app->setColor(color, finalDC);
-	app->rectangle(0, 0, rect.getSize().x, rect.getSize().y, finalDC);
-
-	if (timeButton)timeButton->draw();
-	
-	progressBar->draw();
-
-	int currentNum = NULL;
-	if (progressBar->currentNum)
-	{
-		currentNum = *progressBar->currentNum;
-	}
-
-	if (currentNum)app->bitBlt(finalDC, 0, 0, rect.getSize().x, rect.getSize().y, progressBar->finalDC);
-
-	char text[32] = {};
-	app->setColor(TX_WHITE, finalDC);
-	app->selectFont("Arial", app->systemSettings->MainFont, finalDC);
-	if (currentNum != 0)
-	{
-		sprintf(text, "Статус: применяется фильтр");
-	}
-
-	if (currentNum == 0)
-	{
-		sprintf(text, "Статус: фоновых задач нет");
-	}
-	app->setAlign(TA_LEFT, finalDC);
-	app->drawText(10, 0, getSize().x, getSize().y, text, finalDC, DT_LEFT | DT_VCENTER);
-
-
-	if (timeButton) app->bitBlt (finalDC, timeButton->rect.pos.x, timeButton->rect.pos.y, timeButton->getSize().x, timeButton->getSize().y, timeButton->finalDC);
-
-}
-*/
-
-
-
-
-void txSelectFontDC(const char* text, int sizey, HDC &dc, int sizex/* = -1*/)
-{
-	txSelectFont(text, sizey, sizex, FW_DONTCARE, false, false, false, 0, dc);
-}
-
-/*
-void StringButton::draw ()
-{
-	$s;
-	bool switched = false;
-	bool isShifted = false;
-	bool deleteChar = false;
-
-
-	if (manager->getActiveWindow () == this)
-	{
-		if (checkDeltaTime (lastTimeClicked))
-		{
-			if (app->getAsyncKeyState(VK_LEFT) && cursorPosition >= 0)
-			{
-				cursorMovement (VK_LEFT);
-				//printf ("left");
-				switched = true;
-			}
-			if (app->getAsyncKeyState(VK_RIGHT) && cursorPosition <= textLen - 2)
-			{
-				cursorMovement (VK_RIGHT);
-				switched = true;
-			}
-
-			if (app->getAsyncKeyState (VK_BACK))
-			{
-				backSpace ();	
-			}
-		
-			checkSymbols ();
-		}
-	
-		if (clock() % 500 < 250)
-		{
-			if (!switched)
-				shiftArrForward (&inText[cursorPosition + 1], 10);
-
-			inText[cursorPosition + 1] = '|';
-			printf ("");
-		}
-		else
-		{
-			if (!switched)
-				shiftArrForward (&inText[cursorPosition + 1], 10);
-
-			inText[cursorPosition + 1] = ' ';
-		}
-	}
-
-	//txSetTextAlign (TA_LEFT);
-	//app->setColor (TX_WHITE);
-	
-	//txTextOut (rect.pos.x, rect.pos.y, inText);
-
-	if (manager->getActiveWindow () == this) shiftArrBack (&inText[cursorPosition + 1], 10);
-
-	if (onlyNums)
-	{
-		double num;
-		if (!strcmp ("", inText)) num = 0;
-
-		sscanf  (inText, "%lf", &num);
-		if (num > MaxNum) 
-		{
-			if ( ((int) log10 (num)) - ((int) log10 (MaxNum)) >= 1) 
-			{
-				cursorPosition--;
-			}
-			sprintf (inText, "%d", (int) MaxNum);
-		}
-	}
-
-	return;
-}
-
-void stringToInt (const char *str, const int  strLen, int &num)
-{
-	num = 0;
-	for (int i = 0; i < strLen; i++)
-	{
-		num += (str[i] - 48) * pow (10, strLen - i - 1);
-	}
-}
-
-
-void StringButton::checkSymbols ()
-{
-	if (!_kbhit ())	return;
-	int symbol = _getch ();
-
-	if (! (symbol >= 48 && symbol <= 57) && onlyNums) return;
-	if (lastButton == symbol || symbol == '\b') return;
-	if (symbol == 48 &&	onlyNums && cursorPosition == -1) return;
-
-	lastTimeClicked = clock();
-	shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-	inText[cursorPosition + 1] = symbol;
-	cursorPosition++;
-	textLen++;
-}
-
-bool checkDeltaTime (int lastTimeClicked)
-{
-    const int DELTACLOCKTIME = 100;
-	return clock () - lastTimeClicked > DELTACLOCKTIME;
-}
-
-void StringButton::backSpace ()
-{
-	if (cursorPosition >= 0)
-	{
-		lastTimeClicked = clock();
-		shiftArrBack(&inText[cursorPosition], textLen - cursorPosition  + 1);
-		cursorPosition--;
-		textLen--;
-	}
-}
-
-
-void StringButton::cursorMovement (int side)
-{
-	bool validMovement = false;	
-	if (side == VK_RIGHT) validMovement = (cursorPosition < textLen - 2);
-	if (side == VK_LEFT)  validMovement = (cursorPosition >= 0);
-
-    /*
-	if (validMovement && clock () - lastTimeClicked > _app->systemSettings->DELTACLOCKTIME)
-	{
-		lastTimeClicked = clock();
-		//shiftArrBack(&inText[cursorPosition + 1], textLen - cursorPosition);
-		if (side == VK_RIGHT) cursorPosition++;
-		if (side == VK_LEFT) cursorPosition--;
-		shiftArrForward(&inText[cursorPosition + 1], textLen - cursorPosition);
-	}
-    
-}
-*/
-
-void shiftArrForward (char arr[], int length)
-{
-    assert (arr);
-	char copyChar = arr[0];
-
-	for (int i = 1; i < length; i++)
-	{
-		char rememberArr = arr[i];
-		arr[i] = copyChar;
-		copyChar = rememberArr;
-	}
-}
-
-void shiftArrBack (char arr[], int length)
-{
-
-    assert (arr);
-	char copyChar = '\0';
-
-	for (int i = 0; i < length; i++)
-	{
-		if (i == length - 1)
-		{
-			arr[i] = '\0';
-		}
-		else
-		{
-			arr[i] = arr[i + 1];
-		}
-		
-	}
 }
 
 
 void Engine (MainManager *manager)
 {
     assert (manager); 
-    AbstractAppData* app = manager->app;
+    PowerPoint* app = (PowerPoint*)manager->app;
     assert(app);
 
     bool wasResizedInLastFrame = false;
 
 	for (;;)
 	{
-        txClearConsole();
+        app->controlApp();
         if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf ("\nFPS: %d\n", (int)txGetFPS());
 
 		app->setColor (app->systemSettings->BackgroundColor, txDC());
@@ -499,17 +250,13 @@ void Engine (MainManager *manager)
         if (wasResizedInLastFrame) app->setResized(false);
         wasResizedInLastFrame = app->wasResized();
 
-
+        manager->clicked = txMouseButtons();
 		if (txMouseButtons ())
-		{
-            manager->clicked = txMouseButtons();
+        {
 			manager->onClick (mp);
 			if (!app->IsRunning) break;
 		}
-        else
-        {
-            manager->clicked = 0;
-        }
+
 		txSleep (0);
 	}
 
@@ -527,92 +274,3 @@ bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
 
 
 
-void RECTangle (const Rect rect, HDC dc /* = txDc ()*/)
-{
-    assert (dc);
-	//app->rectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
-}
-
-/*
-void TimeButton::draw ()
-{
-	if (manager)app->setColor (manager->color, finalDC);
-	app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
-	time_t t = time (NULL);
-	t = t % (24 * 3600);
-
-	char newStr[50] = {};
-	int hours =	t / 3600;
-	int minutes = t / 60 - hours * 60;
-	int second  = t - hours * 3600 - minutes * 60;
-
-	sprintf (newStr, "%d:%02d:%02d", hours + 3, minutes, second);
-
-	app->setAlign (TA_LEFT, finalDC);
-	app->setColor (color, finalDC);
-    app->selectFont("Arial", font, finalDC);
-	app->drawText (0, 0, getSize().x, getSize().y, newStr, finalDC);
-	//app->drawOnScreen(finalDC);
-
-}
-*/
-
-
-void ProgressBar::setProgress(double* total, double* current)
-{	
-	totalNum = total;
-	currentNum = current;
-
-};
-
-
-void ProgressBar::draw()
-{
-	$s
-	if(manager) app->setColor(manager->color, finalDC);
-	app->rectangle (0, 0, rect.getSize().x, rect.getSize().y, finalDC);
-
-	app->setColor(color, finalDC);
-	if (totalNum && currentNum)
-	{
-		app->rectangle(0, 0, rect.getSize().x * (*currentNum / *totalNum), rect.getSize().y, finalDC);
-	}
-	//app->drawOnScreen(finalDC);
-} 
-
-int min(int a, int b)
-{
-    if (a > b) return b;
-    else return a;
-}
-
-void bitBlt (RGBQUAD *dest, int x, int y, int sizeX, int sizeY, RGBQUAD *source, int originalSizeX, int originalSizeY, int sourceSizeX, int sourceSizeY)
-{
-	for (int i = 0; i < min (sizeX, sourceSizeX); i++)
-	{
-		for (int j = 0; j < min (sizeY, sourceSizeY); j++)
-		{	
-			if (j + y < originalSizeY && i + x < originalSizeX && j + y >= 0 && i + x >= 0)
-			{
-				//if ( j == 249) _getch ();
-				RGBQUAD *destCopy = &dest[i + (originalSizeY - (j + y) - 1) * originalSizeX + x];
-				RGBQUAD *sourceCopy = &source[i + (sourceSizeY - j - 1) * sourceSizeX];
-				
-				sourceCopy->rgbReserved= 255;
-
-				//if (sourceCopy->rgbReserved != 255) _getch ();
-
-				destCopy->rgbRed = sourceCopy->rgbRed * ((float) sourceCopy->rgbReserved / 255.0);
-				destCopy->rgbGreen = sourceCopy->rgbGreen * ((float)sourceCopy->rgbReserved / 255.0);
-				destCopy->rgbBlue = sourceCopy->rgbBlue * ((float)sourceCopy->rgbReserved / 255.0);
-				destCopy->rgbReserved = 255;
-
-				//txSetPixel (i, j, RGB (sourceCopy->rgbRed, sourceCopy->rgbGreen, sourceCopy->rgbBlue));
-				//txSetPixel (i, j, RGB (dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbRed, dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbGreen, dest[i + (sizeY - (j + y) - 1) * sizeX + x].rgbBlue));
-
-				continue;
-			}
-
-		}
-	}
-}

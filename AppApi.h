@@ -3,6 +3,11 @@
 
 struct PowerPoint : AbstractAppData
 {
+    HCURSOR activeCursor = NULL;
+    int lastTimeCursorSetTime = NULL;
+
+
+
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1) override;
     virtual int getColorComponent(COLORREF color, COLORREF component) override;
 
@@ -41,10 +46,13 @@ struct PowerPoint : AbstractAppData
     virtual void drawCadre(Rect rect, HDC dc) override;
 
     virtual void changeWindow(Vector size = {}, Vector pos = {})  override;
+    virtual void setCursor(HCURSOR cursor) override;
 
     virtual bool wasResized() override { return isResized; };
     virtual void setResized(bool state = true) override;
 
     virtual bool isFullScreen() override;
+
+    virtual void controlApp();
 
 };

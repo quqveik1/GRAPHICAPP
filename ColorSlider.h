@@ -10,12 +10,13 @@ struct ColorSlider : Manager
     bool isSliderClicked = false;
     double kOfParametr = 0;
 
-    bool colorConfirmed = false;
+    bool* confirmedColor = NULL;
 
-    ColorSlider(AbstractAppData* _app, Rect _rect, int* _colorParametr) :
+    ColorSlider(AbstractAppData* _app, Rect _rect, int* _colorParametr, bool* _confirmedColor) :
         Manager(_app, _rect, 1, true, NULL, {}, RGB (144, 144, 144)),
         colorParametr (_colorParametr),
-        pointSlider (app->loadManager->loadImage("SliderPointer.bmp"))
+        pointSlider (app->loadManager->loadImage("SliderPointer.bmp")),
+        confirmedColor (_confirmedColor)
     {
         needTransparencyOutput = true;
 

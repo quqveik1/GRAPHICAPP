@@ -78,7 +78,7 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
     systemSettings->DrawingMode = 1;
 
     systemSettings->SizeOfScreen.x = 1000.000000;
-    systemSettings->SizeOfScreen.y = 900.000000;
+    systemSettings->SizeOfScreen.y = 800.000000;
 
     systemSettings->WindowStyle = -2134376448;
 
@@ -97,7 +97,11 @@ void setSystemSettings(CSystemSettings* systemSettings, const char* path)
 {
     assert(path);
     FILE* ssFile = fopen(path, "r");
-    assert(ssFile);
+    if (!ssFile)
+    {
+        printf("Системные настройки не загрузили\n");
+        return;
+    }
     setIntSettings(ssFile, &systemSettings->MainFont,    "MainFont");
     setStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
 

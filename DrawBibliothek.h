@@ -63,6 +63,8 @@ const char* getCustomFilePathForSaving(const char* question, const char* fileTyp
 
 struct Window
 {
+    const char* devName = NULL;
+
     CSystemSettings* systemSettings = NULL;
     AbstractAppData* app = NULL;
 
@@ -70,7 +72,8 @@ struct Window
 	Rect originalRect;
 	COLORREF color;
 
-	const char *text;
+	const char* text;
+    
     int format;
     int font;
     int sideThickness;
@@ -118,11 +121,11 @@ struct Window
 		originalRect = rect;
 	} 
 
-    ~Window ()
+    virtual void defaultDestructor();
+
+    virtual ~Window ()
     {
-        assert(app);
-        if (dc) app->smartDeleteDC(dc);
-        if (finalDC) app->smartDeleteDC(dc);
+        //defaultDestructor();
     }
 
 
@@ -206,16 +209,14 @@ struct Manager : Window
 		handle.color = systemSettings->MenuColor;
 	}
 
-    ~Manager()
+
+    virtual void defaultDestructor() override;
+
+    virtual ~Manager()
     {
-        assert(app);
-        if (dc) app->smartDeleteDC(dc);
-        if (finalDC) app->smartDeleteDC(finalDC);
-        for (int i = 0; i < length; i++)
-        {
-            if (pointers[i]) delete pointers[i];
-        }
+        //defaultDestructor();
     }
+                             
 
     virtual bool addWindow (Window *window);
 
@@ -227,12 +228,31 @@ struct Manager : Window
     virtual void unHide ();
     virtual int& getCurLen() { return currLen; };
 
+
     virtual void redraw() { redrawStatus = true; };
 
 	virtual void draw ()             override;
 	virtual void onClick (Vector mp) override;
 
 };
+
+void Manager::defaultDestructor()
+{
+    assert(app);
+    if (dc) app->smartDeleteDC(dc);
+    if (finalDC) app->smartDeleteDC(finalDC);
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        if (pointers[i]) delete pointers[i];
+    }
+};
+
+void Window::defaultDestructor()
+{
+    assert(app);
+    if (dc) app->smartDeleteDC(dc);
+    if (finalDC) app->smartDeleteDC(dc);
+}
 
 
 

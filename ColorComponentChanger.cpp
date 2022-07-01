@@ -11,18 +11,6 @@ void ColorComponentChanger::draw()
 
     inputButton->draw();
     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
-
-
-    if (slider->colorConfirmed)
-    {
-        slider->colorConfirmed = false;
-        confirmColor = true;
-    }  
-    if (inputButton->confirmed)
-    {
-        inputButton->confirmed = false;
-        confirmColor = true;
-    }
 }
 
 void ColorComponentChanger::onClick(Vector mp)

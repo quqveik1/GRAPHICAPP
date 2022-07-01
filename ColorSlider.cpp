@@ -12,7 +12,7 @@ Rect ColorSlider::getPointSliderRect()
 
 void ColorSlider::confirmColor()
 {
-    colorConfirmed = true;
+    *confirmedColor = true;
 }
 
 void ColorSlider::draw()

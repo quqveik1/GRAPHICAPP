@@ -10,10 +10,10 @@ struct ColorComponentChanger : Manager
     InputButton* inputButton = NULL;
     Rect sliderRect = {};
     Vector numSize = {};
+    int minLimit = 0;
+    int maxLimit = 255;
 
-    bool confirmColor = false;
-
-    ColorComponentChanger(AbstractAppData* _app, Rect _rect, int* _component) :
+    ColorComponentChanger(AbstractAppData* _app, Rect _rect, int* _component, bool* _confirmColor) :
         Manager(_app, _rect, 2, true, NULL, {}, _app->systemSettings->TRANSPARENTCOLOR),
         component(_component),
         numSize({ 40, getSize().y })
@@ -22,12 +22,12 @@ struct ColorComponentChanger : Manager
         sliderRect = rect - rect.pos;
         sliderRect.finishPos.x -= numSize.x;
 
-        slider = new ColorSlider(app, sliderRect, component);
+        slider = new ColorSlider(app, sliderRect, component, _confirmColor);
         addWindow(slider);
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, 0}, .finishPos = getSize() };
 
-        inputButton = new InputButton(app, inputButtonRect, component, color, RGB(144, 144, 144), RGB (200, 200, 200));
+        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, color, RGB(144, 144, 144), RGB (200, 200, 200), _confirmColor);
         addWindow(inputButton);
     }
     virtual void draw() override;

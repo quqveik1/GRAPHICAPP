@@ -182,6 +182,13 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 }
 
 
+void PowerPoint::setCursor(HCURSOR cursor)
+{
+    activeCursor = cursor;
+    lastTimeCursorSetTime = clock();
+}
+
+
 bool PowerPoint::isFullScreen()
 {
     assert(systemSettings);
@@ -194,4 +201,14 @@ bool PowerPoint::isFullScreen()
 void PowerPoint::setResized(bool state/* = true*/)
 {
     isResized = state;
+}
+
+
+void PowerPoint::controlApp()
+{
+    if (clock() - lastTimeCursorSetTime > 60)
+    {
+        setCursor(defaultCursor);
+    }
+    txClearConsole();
 }

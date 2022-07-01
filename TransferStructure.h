@@ -2,6 +2,7 @@
 #include "TXLib.cpp"
 #include "DrawBibliothek.h"
 #include "LoadManager.h"
+#include "FileSavings.h"
 
 
 /*
@@ -14,9 +15,18 @@ struct TransferData
 
 struct AbstractAppData
 {
-    CSystemSettings* systemSettings = NULL;
+    const char* appVersion = "v0.1.7.1";
+
+    struct CSystemSettings* systemSettings = NULL;
     struct CToolManager* toolManager = NULL;
     struct CLoadManager* loadManager = NULL;
+    struct CFileSavings* fileSavings = NULL;
+
+    void* canvasManager = NULL;
+    COLORREF* currColor = NULL;
+    bool isResized = false;
+    bool IsRunning = true;
+    HCURSOR defaultCursor = LoadCursor(NULL, IDC_ARROW);
 
     virtual void setColor (COLORREF color, HDC dc, int thickness = 1) = 0;
     virtual int getColorComponent(COLORREF color, COLORREF component) = 0;
@@ -56,13 +66,9 @@ struct AbstractAppData
     virtual void drawCadre(Rect rect, HDC dc) = 0;
 
     virtual void changeWindow(Vector size = {}, Vector pos = {}) = 0;
+    virtual void setCursor(HCURSOR cursor) = 0;
 
     virtual void setResized(bool state = true) = 0;
     virtual bool wasResized() = 0;
     virtual bool isFullScreen() = 0;
-
-    void* canvasManager = NULL;
-    COLORREF* currColor = NULL;
-    bool isResized = false;
-    bool IsRunning = true;
 }; 

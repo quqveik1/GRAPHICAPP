@@ -80,7 +80,7 @@ void InputButton::checkKeyboard()
     newNum += numsAfterEnteredNum;
 
 
-    if (newNum <= maxParametr)
+    if (newNum <= *maxParametr && newNum >= *minParametr)
     {
         if (*parameter != 0)cursorPos++;
         *parameter = newNum;
@@ -114,19 +114,25 @@ void InputButton::drawCursor()
 void InputButton::draw()
 {
     app->setColor(color, finalDC);
-    app->rectangle({0, 0}, getSize(), finalDC);
+    app->rectangle({ 0, 0 }, getSize(), finalDC);
 
 
     char output[MAX_PATH] = {};
 
     int result = sprintf(output, "%d", *parameter);
 
+    if (rect.inRect(getAbsMousePos()))
+    {
+        app->setCursor(cursor);
+    }
+
+
     if (wasClicked)
     {
         if (getActiveWindow() != this)
         {
             wasClicked = false;
-            if (*parameter != parametrBeforeRedacting)confirmed = true;
+            if (*parameter != parametrBeforeRedacting && confirmInput) *confirmInput = true;
         }
 
         if (*parameter == 0)
