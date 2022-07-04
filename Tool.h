@@ -5,6 +5,8 @@
 #include "TransferStructure.h"
 #include "CLay.h"
 #include "MainTools.h"
+#include "DllSettings.h"
+
 struct Tool;
 struct ToolLay;
 
@@ -61,30 +63,33 @@ struct Tool
     int clicked = 0;
 
     ToolData* toolData = NULL;
+    ÑDllSettings* dllSettings;
 
     AbstractAppData* app = NULL;
     ToolLay* toolLay = NULL;
     ProgrammeDate* appData = NULL;
 
-    Tool(const char* _name, const int _ToolSaveLen, HDC _iconDC = NULL, AbstractAppData* _app = NULL) :
+    Tool(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _iconDC = NULL, AbstractAppData* _app = NULL) :
         name(_name),
         iconDC(_iconDC),
         ToolSaveLen(_ToolSaveLen),
-        app(_app)
+        app(_app),
+        dllSettings (_dllSettings)
     {}
 
 
     bool firstUse(ProgrammeDate* data, void* output, Vector currentPos);
     void finishUse();
+    HDC getOutDC();
 
     virtual HDC getDC();
     virtual const char* getName();
     virtual void setMBCondition(int mbCond);
-    virtual bool isFinished(ToolLay* data) { return toolData->isFinished; };
-    virtual bool isStarted(ToolLay* data) { return toolData->isStarted; };
+    virtual bool isFinished(ToolLay* data);
+    virtual bool isStarted(ToolLay* data) { return ((ToolData*)data->getToolsData())->isStarted; };
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void *output);
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
     virtual bool edit(ToolLay* toollay, HDC dc = NULL) { return 1; };
 };
 

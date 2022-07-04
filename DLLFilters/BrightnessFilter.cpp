@@ -4,12 +4,15 @@
 
 void BrightnessMenu::useAlgorithm()
 {
-    for (int x = 0; x < activeLay->laySize.x; x++)
+    Vector laySize = activeCanvas->getActiveLay()->getLaySize();
+    activeLay = activeCanvas->getActiveLay();
+
+    for (int x = 0; x < laySize.x; x++)
     {
-        for (int y = 0; y < activeLay->laySize.y; y++)
+        for (int y = 0; y < laySize.y; y++)
         {
-            int pixelPos = (int)(activeLay->laySize.y - y) * ((int)(activeLay->laySize.x - 1)) + x;
-            RGBQUAD pixel = ((activeLay->layBuf))[pixelPos];
+            int pixelPos = (int)(laySize.y - y) * ((int)(laySize.x - 1)) + x;
+            RGBQUAD pixel = ((activeLay->getPermanentBuf()))[pixelPos];
 
             int copyOfFirstVal = firstVal;
             firstVal += 100;
@@ -33,7 +36,7 @@ void BrightnessMenu::useAlgorithm()
             if (blue > 255) pixel.rgbBlue = 255;
 
 
-            ((activeLay->tempBuf))[pixelPos] = pixel;
+            ((activeLay->getOutputBuf()))[pixelPos] = pixel;
             firstVal = copyOfFirstVal;
         }
     }
@@ -41,5 +44,5 @@ void BrightnessMenu::useAlgorithm()
 
 void BrightnessMenu::apply ()
 {
-    txAlphaBlend(activeLay->lay, 0, 0, 0, 0, activeLay->tempLay);
+    txBitBlt(activeLay->getPermanentDC(), 0, 0, 0, 0, activeLay->getOutputDC());
 }

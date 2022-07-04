@@ -1,5 +1,5 @@
 #pragma once
-#include "TXLib.h"
+#include "TXLib.cpp"
 
 struct MainProgramData
 {

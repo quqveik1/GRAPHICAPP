@@ -1,6 +1,6 @@
 ﻿// DLLTools.cpp : Defines the exported functions for the DLL.
 //
-
+#pragma once
 #include "pch.h"
 #include "framework.h"
 #include "DLLTools.h"

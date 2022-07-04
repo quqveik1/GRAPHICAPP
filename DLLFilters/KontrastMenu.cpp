@@ -4,15 +4,25 @@
 
 void KontrastMenu::useAlgorithm()
 {
-    for (int x = 0; x < activeLay->laySize.x; x++)
+    Vector laySize = activeCanvas->getActiveLay()->getLaySize();
+    activeLay = activeCanvas->getActiveLay();
+    for (int x = 0; x < laySize.x; x++)
     {
-        for (int y = 0; y < activeLay->laySize.y; y++)
+        for (int y = 0; y < laySize.y; y++)
         {
-            int pixelPos = (int)(activeLay->laySize.y - y) * ((int)(activeLay->laySize.x - 1)) + x;
-            RGBQUAD pixel = ((activeLay->layBuf))[pixelPos];
+            int pixelPos = (int)(laySize.y - y) * ((int)(laySize.x - 1)) + x;
+            RGBQUAD pixel = ((activeLay->getPermanentBuf()))[pixelPos];
+
+            if (   pixel.rgbRed == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_RED)
+                && pixel.rgbGreen == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_GREEN)
+                && pixel.rgbBlue == txExtractColor(systemSettings->TRANSPARENTCOLOR, TX_BLUE))
+            {
+                pixel = { 0, 0, 0, 0 };
+            }
+
             double kOfBrightness = firstVal + 1; //коэффициент
             double bOfBrightness = secondVal;	// b графика
-            //printf("%lf %lf\n", kOfBrightness, bOfBrightness);
+            
 
 
             int red = (pixel.rgbRed - 128) * kOfBrightness + bOfBrightness + 128;
@@ -30,7 +40,7 @@ void KontrastMenu::useAlgorithm()
             if (blue < 0) pixel.rgbBlue = 0;
             if (blue > 255) pixel.rgbBlue = 255;
 
-            ((activeLay->tempBuf))[pixelPos] = pixel;
+            ((activeLay->getOutputBuf()))[pixelPos] = pixel;
         }
     }
 }
@@ -38,5 +48,7 @@ void KontrastMenu::useAlgorithm()
 
 void KontrastMenu::apply ()
 {
-    txAlphaBlend(activeLay->lay, 0, 0, 0, 0, activeLay->tempLay);
+    app->bitBlt(activeLay->getPermanentDC(), 0, 0, 0, 0, activeLay->getOutputDC());
+    app->drawOnScreen(activeLay->getPermanentDC());
+    if (app->systemSettings->debugMode == 5)_getch();
 }

@@ -1,15 +1,14 @@
 #pragma once
 #include "DLLExportData.h"
 
-void DLLExportData::addFunc(CFilter* (*func)())
+void DLLExportData::addFilter(CFilter* filter)
 {
     if (currlen >= size)
     {
         printf("Мест для новых функция нет");
         return;
     }
-    funcs[currlen].func = func;
-    funcs[currlen].guid = ++lastGuid;
+    filters[currlen] = filter;
     currlen++;
     
    
@@ -20,7 +19,7 @@ CFilter* DLLExportData::addToManager(Manager* manager)
 {
     for (int i = 0; i < currlen; i++)
     {
-        manager->addWindow(funcs[i].func());
+        manager->addWindow(filters[i]);
     }
     return 0;
 }

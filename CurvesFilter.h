@@ -16,8 +16,8 @@ struct Curves : Manager
     int permutation[256];
     Rect confirmButton;
 
-    Curves (Rect _rect, HDC _dc) :
-        Manager (_rect, 3, false, _dc, {.pos  = {0, 0}, .finishPos = {rect.getSize().x, 29}}),
+    Curves (AbstractAppData* _app, Rect _rect, HDC _dc) :
+        Manager (_app, _rect, 3, false, _dc, {.pos  = {0, 0}, .finishPos = {rect.getSize().x, 29}}),
         graficrect ({.pos = {55, 65}, .finishPos = {310, 320}}),
         confirmButton ({.pos = {360, 65}, .finishPos = {435, 80}})
     {
@@ -70,13 +70,13 @@ void Curves::draw()
             txLine (points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, finalDC);
         }
     }
-    activeLay = ActiveLay;
+    //activeLay = ActiveLay;
     
     
     if (activePointNum >= 0 )
     {
         //printf ("[num: %d|pos: {%lf, %lf}]  ", activePointNum, points[activePointNum].x, points[activePointNum].y);
-        if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime, clicked))
+        //if (drag (&points[activePointNum], &lastTimeMousePos, &isPointClickedLastTime, clicked))
         {
             activePointNum = -1;
             countPermutate ();
@@ -128,6 +128,7 @@ void Curves::algorithm (RGBQUAD *pixel)
 
 void Curves::apply()
 {
+    /*
     for (int x = 0; x < ActiveLay->laySize.x; x++)
 	{
 		for (int y = 0; y < activeLay->laySize.y; y++)
@@ -141,4 +142,5 @@ void Curves::apply()
             (activeLay->layBuf[pixelPos]).rgbBlue =0;
 		}
 	}
+    */
 }

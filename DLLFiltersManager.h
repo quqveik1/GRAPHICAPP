@@ -9,10 +9,10 @@ struct DLLFiltersManager : DLLManager
 {
     CFilter* dllWindows[10] = {};
 
-    DLLFiltersManager(const char *_pathToDLLList = NULL, AbstractAppData* _appData = NULL) :
-        DLLManager (_pathToDLLList, _appData)
+    DLLFiltersManager(AbstractAppData* _app, const char *_pathToDLLList = NULL) :
+        DLLManager (_app, _pathToDLLList)
     { 
-        fileExtension = "dll";
+        fileExtension = "filter";
     }
 
     void addToManager(Manager* manager);

@@ -2,6 +2,7 @@
 
 #include "DrawBibliothek.h"
 #include "CLay.h"
+#include "MainTools.h"
 
 struct Canvas : Manager
 {
@@ -13,7 +14,7 @@ struct Canvas : Manager
 	bool reCountEnded = false;
 	double lineThickness = 3;
 	COLORREF drawColor = TX_RED;
-	Window closeCanvas;
+	struct Window closeCanvas;
 	bool clearBackground = true;
 	Vector canvasCoordinats;
 	Vector canvasSize;
@@ -50,20 +51,23 @@ struct Canvas : Manager
 
     bool editingMode = false;
 
-    //Tool** tools = new Tool*[10];
     bool activeTool = false;
-    bool drawingModeLastTime = DrawingMode;
+    int DrawingModeLastTime;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
+    CLoadManager* loadManager;
 
-	Canvas (Rect _rect, HDC _closeDC = NULL) :
-		Manager (_rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, HANDLEHEIGHT}}),
+
+	Canvas (AbstractAppData* _app, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
+		Manager (_app, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _app->systemSettings->HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
-		canvasSize({DCMAXSIZE, DCMAXSIZE}),
-		closeCanvas ({ .pos = {_rect.getSize().x - MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor ({.pos = {5, _rect.getSize().y - SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
-		scrollBarVert ({.pos = {_rect.getSize().x - SCROLLBARTHICKNESS, SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
-        resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y})
+		canvasSize (_app->systemSettings->DCVECTORSIZE),
+		closeCanvas   (_app, { .pos = {_rect.getSize().x - _app->systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
+		scrollBarHor  (_app, {.pos = {5, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
+		scrollBarVert (_app, {.pos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
+        resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
+        loadManager (_loadManager),
+        DrawingModeLastTime (systemSettings->DrawingMode)
 	{
 		scrollBarVert.manager = this;
 		scrollBarHor.manager = this;
@@ -80,6 +84,8 @@ struct Canvas : Manager
 	void returnHistory(int stepsBack);
 	void deleteHistory ();
 
+    void drawCadre();
+
 	void createLay ();
 	bool controlLay ();
     void controlEditLay();
@@ -94,17 +100,20 @@ struct Canvas : Manager
     void changeTool();
     void initToolLay();
     void addToolLay();
+    void setToolToToolLay(ToolLay* toollay);
     void setCurrentData();
    
 
     HDC getImageForSaving();
-    CLay* getActiveLay();
+    virtual CLay* getActiveLay();
     int getCurrentToolLengthOnActiveLay();
     int getActiveLayNum();
+    virtual int getCurrentLayLength();
     ToolLay* getNewToolLay();
     bool isDrawingModeChanged();
     Tool* getActiveTool();
     void setActiveToolLayNum(int num);
+    int getLastNotStartedToolNum();
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

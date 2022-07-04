@@ -1,3 +1,4 @@
+#pragma once
 #include "MainTools.h"
 void ToolLay::needRedraw()
 {
@@ -11,38 +12,44 @@ Tool* ToolLay::getTool()
 
 bool ToolLay::isFinished()
 {
-    assert(getTool());
+    if (!getTool()) return false;
     return getTool()->isFinished(this);
 }
 
 bool ToolLay::isStarted()
 {
-    assert(getTool());
+    if (!getTool()) return false;
     return getTool()->isStarted(this);
 }
 
 bool ToolLay::useTool(ProgrammeDate* data)
 {
-    assert(tool);
+    if (!getTool()) return false;
     assert(data);
-    return tool->use(data, this, toolsData);
+    return getTool()->use(data, this, toolsData);
 }
 
-void ToolLay::drawTool(HDC dc /*= NULL*/)
+HDC ToolLay::drawTool(HDC dc /*= NULL*/)
 {
-    assert(tool);
-    if (isStarted())tool->load(this, dc);
+    if (getTool() && isStarted()) return getTool()->load(this, dc);
+    return NULL;
 }
 
 void ToolLay::editTool(ProgrammeDate* data)
 {
+    if (!getTool()) return;
     assert(data);
     HDC outDC = lay->lay.outputLay;
 
-    isEditing = !tool->edit(this, outDC);
+    isEditing = !getTool()->edit(this, outDC);
+}
 
+int ToolLay::setMBCondition(int condition)
+{
+    if (!getTool()) return 0;
 
-
+    getTool()->setMBCondition(condition);
+    return 1;
 }
 
 
@@ -51,6 +58,7 @@ bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
     if (toolZone.inRect(mp))
     {
         HDC outDC = lay->lay.outputLay;
+        if (!getTool()) return false;
         getTool()->setMBCondition(mbCondition);
         //isEditing = !tool->edit(this, outDC);
         return true;

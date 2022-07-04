@@ -1,17 +1,22 @@
 #pragma once
+#include "..\Tool.h"
+#include "..\DllSettings.h"
+
 struct PointSave : ToolData
 {
-    int Length = POINTSAVELENGTH;
+    ÑDllSettings* dllSettings;
+    int Length;
     int currentLength = 0;
-    ToolSave* points = new ToolSave[Length]{};
+    Vector size = {};
+    COLORREF color = {};
+    Vector* pointsPosition = new Vector[Length]{};
 
 
-    PointSave(int _Length = POINTSAVELENGTH) :
-        Length(_Length)
+    PointSave(ÑDllSettings* _dllSettings, int _Length = 0) :
+          dllSettings (_dllSettings)
     {
+        if (!_Length) Length = dllSettings->POINTSAVELENGTH;
     }
 
-    void addPoint(ToolSave& point);
-
-    virtual int getByteSize();
+    void addPoint(Vector pos);
 };

@@ -1,15 +1,26 @@
+#pragma once
 #include "CLay.h"
 
-void CLay::createLay(Vector _size /* = DCVECTORSIZE*/)
+void CLay::createLay(AbstractAppData* _app, Vector _size /* = DCVECTORSIZE*/)
 {
-    assert(_size > 0);
-    lay.createLay(_size);
+    assert(_app);
+    app = _app;
+
+    toolLays = new ToolLay* [app->systemSettings->ONELAYTOOLSLIMIT];
+    for (int i = 0; i < app->systemSettings->ONELAYTOOLSLIMIT; i++)
+    {
+        toolLays[i] = new ToolLay;
+    }
+
+    if (_size == _size.getNullVector()) _size = app->systemSettings->DCVECTORSIZE;
+
+    lay.createLay(app->systemSettings, _size);
 }
 
 
 void CLay::addToolLay(ToolLay* tool)
 {
-    assert(toolLength < ONELAYTOOLSLIMIT);
+    assert(toolLength < app->systemSettings->ONELAYTOOLSLIMIT);
 
     toolLength++;
     activeToolNum = toolLength - 1;
@@ -42,10 +53,11 @@ bool CLay::redrawStatus()
 
 ToolLay* CLay::getActiveToolLay()
 {
+    if (activeToolNum < 0 || !toolLays) return NULL;
     return toolLays[activeToolNum];
 }
 
-int CLay::getActiveToolLayNum()
+int CLay::getActiveToolLayNum()                                                                                                                             
 {
     return activeToolNum;
 }
@@ -61,14 +73,30 @@ int CLay::getCurrentSize()
     return toolLength;
 }
 
-HDC CLay::getDCForToolLoad()
+HDC CLay::getOutputDC()
 {
     return lay.outputLay;
+}
+
+
+RGBQUAD* CLay::getOutputBuf()
+{
+    return lay.outputBuf;
 }
 
 ToolLay** CLay::getToolLays()
 {
     return &(toolLays[0]);
+}
+
+Lay* CLay::getLay()
+{
+    return &lay;
+}
+
+Vector CLay::getLaySize()
+{
+    return lay.laySize;
 }
 
 void CLay::redraw()
@@ -78,11 +106,17 @@ void CLay::redraw()
 
     for (int toollay = 0; toollay < toolLength; toollay++)
     {
-        toolLays[toollay]->drawTool();
+        HDC outDC = toolLays[toollay]->drawTool();
+        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
     }
 }
 
 HDC CLay::getPermanentDC()
 {
     return lay.lay;
+}
+
+RGBQUAD* CLay::getPermanentBuf()
+{
+    return lay.layBuf;
 }

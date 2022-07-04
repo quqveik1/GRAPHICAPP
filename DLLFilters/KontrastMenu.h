@@ -3,8 +3,8 @@
 
 struct KontrastMenu : TwoOptionsMenu
 {
-    KontrastMenu (Rect _rect, Vector _firstDomain, Vector _secondDomain, AbstractAppData *_data = NULL) :
-        TwoOptionsMenu (_rect, _firstDomain, _secondDomain, _data)
+    KontrastMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain) :
+        TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
     {
         name = "Фильтр контрастности";
     }

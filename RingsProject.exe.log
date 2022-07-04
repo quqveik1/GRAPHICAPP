@@ -1,0 +1,92 @@
+(0) : Run-Time Check Failure #0 - The value of ESP was not properly saved across a function call.  This is usually a result of calling a function declared with one calling convention with a function pointer declared with a different calling convention.
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0x113665B5): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001318EC (32-bit), Flags: CMdRE0, Thread: 0x71B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x772C0738 in C:\Windows\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x772BD3A4 in C:\Windows\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x772BDD12 in C:\Windows\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x772BF244 in C:\Windows\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x772BDC5F in C:\Windows\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7BB99B49 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: failwithmessage() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (188)
+# 7 0x7BB99829 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: _RTC_Failure() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (234)
+# 8 0x7BB97A49 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: _RTC_CheckEsp() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\stack.cpp (42)
+# 9 0x7BB573C9 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::_txCleanup() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (9133)
+#10 0x7BB71A84 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::_txOnExit() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (8968)
+#14 0x74FE6739 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x76EE8AFF in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x76EE8ACD in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 11 2022 14:56:13
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+(0) : Run-Time Check Failure #0 - The value of ESP was not properly saved across a function call.  This is usually a result of calling a function declared with one calling convention with a function pointer declared with a different calling convention.
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0xBBA9B6C1): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x001318EC (32-bit), Flags: CMdRE0, Thread: 0x6B1C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 1 0x772C0738 in C:\Windows\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x772BD3A4 in C:\Windows\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x772BDD12 in C:\Windows\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x772BF244 in C:\Windows\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x772BDC5F in C:\Windows\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x7BB99B49 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: failwithmessage() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (188)
+# 7 0x7BB99829 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: _RTC_Failure() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (234)
+# 8 0x7BB97A49 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: _RTC_CheckEsp() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\stack.cpp (42)
+# 9 0x7BB573C9 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::_txCleanup() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (9133)
+#10 0x7BB71A84 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: `anonymous namespace'::TX::_txOnExit() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (8968)
+#14 0x74FE6739 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#15 0x76EE8AFF in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#16 0x76EE8ACD in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jun  7 2022 20:06:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jun 11 2022 14:57:25
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------

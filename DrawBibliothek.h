@@ -2,7 +2,7 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "TXLib.h"
+#include "TXLib.cpp"
 #include "Q_Rect.h"
 #include "Macroses.h"
 #include "GlobalOptions.h"
@@ -11,20 +11,20 @@
 #include "Tool.h"
 #include "ProgrammeDate.h"
 #include "commdlg.h"
+#include "TransferStructure.h"
 
-CLoadManager LoadManager;
+
+
 
 struct Manager;
 struct Window;
-
-Lay *ActiveLay = NULL;
 
 
 
 struct CHistoryStep
 {
 	int toolsNum = 0;
-	Tool* tools;
+	Tool* tools = NULL;
     void* toolsData = NULL;
 	int thickness = 1;
 };
@@ -34,11 +34,11 @@ struct CHistoryStep
 
 void txSetAllColors$(DebugInfo info, COLORREF color, HDC dc = txDC(), int thickness = 1);
 #define txSetAllColors(...) txSetAllColors$ (getDebugInfo, __VA_ARGS__)
-void compressDraw$ (DebugInfo info, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
+void compressDraw$ (DebugInfo info, AbstractAppData* app, HDC finalDC, Vector pos, Vector finalSize, HDC dc, Vector originalSize, int line = NULL);
 #define compressDraw(...) compressDraw$ (getDebugInfo, __VA_ARGS__)
-void compressImage$ (DebugInfo info, HDC &newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
+void compressImage$(DebugInfo info, AbstractAppData* app, HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize, int line = NULL);
 #define compressImage(...) compressImage$ (getDebugInfo, __VA_ARGS__)
-bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked);
+bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool getMBCondition());
 #define drag(...) drag$ (getDebugInfo, __VA_ARGS__)
 int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp);
 #define standartManagerOnClick(...) standartManagerOnClick$ (getDebugInfo, __VA_ARGS__);;
@@ -48,11 +48,12 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager);
 #define standartManagerDraw(...) standartManagerDraw$ (getDebugInfo, __VA_ARGS__)
 void clickButton (Window *window, Manager *manager, Vector mp);
 void selectFont$ (DebugInfo info, const char *text, int font, HDC dc);
-#define selectFont(...) selectFont$ (getDebugInfo, __VA_ARGS__)
+//#define selectFont(...) selectFont$ (getDebugInfo, __VA_ARGS__)
 void swap$ (DebugInfo info, int &x0, int &y0);
 #define swap(...) swap$ (getDebugInfo, __VA_ARGS__)
 Vector windowMousePos(bool isThisMainFile = true);
 const char* getCustomFilePath(const char* question);
+const char* getCustomFilePathForSaving(const char* question, const char* fileTypeDescribtion = NULL, const char* fileType = NULL);
 
 
 
@@ -62,16 +63,23 @@ const char* getCustomFilePath(const char* question);
 
 struct Window
 {
-	Rect rect;
+    const char* devName = NULL;
+
+    CSystemSettings* systemSettings = NULL;
+    AbstractAppData* app = NULL;
+
+    Rect rect = {};
 	Rect originalRect;
 	COLORREF color;
 
-	const char *text;
-    int format = DT_CENTER;
-    int font = MainFont;
-    int sideThickness = SIDETHICKNESS;
+	const char* text;
+    
+    int format;
+    int font;
+    int sideThickness;
 
-	bool isClicked;
+    bool redrawStatus = false;
+
 	HDC dc;
 
 	HDC finalDC = NULL;
@@ -80,44 +88,96 @@ struct Window
 	Manager *manager;
 	bool advancedMode;
 	bool reDraw;
+    bool needTransparencyOutput = false;
 
-    Vector mousePos = {};
-    int clicked = false;
+    CLoadManager* loadManager;
 
-    Window (Rect _rect = {}, COLORREF _color = MenuColor, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+    Vector mousePosLastTime = {};
+    int mbLastTime = 0;
+
+    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+        app (_app),
+        systemSettings (_app->systemSettings),
 		rect (_rect),
 		color(_color),
 		manager (_manager),
 		text (_text), 
-		isClicked (false), 
 		dc (_dc),
 		advancedMode (_advancedMode),
-		reDraw (true)
+		reDraw (true),
+        loadManager (_app->loadManager),
+        font (_app->systemSettings->MainFont),
+        sideThickness (_app->systemSettings->SIDETHICKNESS),
+        format (_app->systemSettings->TEXTFORMAT)
+
 	{
+        if (systemSettings->debugMode >= 0) printf("rect {%lf, %lf}; {%lf, %lf}\n", rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
+
+        if (!color) color = systemSettings->MenuColor;
 		resize (rect);
+
+        if (!color) color = systemSettings->MenuColor;
 
 		originalRect = rect;
 	} 
 
-    ~Window ()
+    virtual void defaultDestructor();
+
+    virtual ~Window ()
     {
-        if (dc) txDeleteDC (dc);
-        if (finalDC) txDeleteDC (dc);
+        //defaultDestructor();
     }
 
 
 	Vector getAbsCoordinats (bool coordinatsWithHandle = false);
     Vector getRelativeMousePos (bool coordinatsWithHandle = false);
 	Rect getAbsRect (bool coordinatsWithHandle = false);
+
+    
 	
 	virtual void resize (Rect newSize);
 	//void resize (Vector newSize, Vector oldSize);
-    void reInit ();
-	void setStartRect (Vector pos, Vector finishPos);
-	void print (HDC finalDC);
+    virtual void reInit ();
+    virtual void setStartRect (Vector pos, Vector finishPos);
+    virtual void print (HDC finalDC);
     
 
-	Vector getSize();
+    virtual Vector getSize();
+    virtual Manager* getManager() { return manager; };
+    virtual void needRedraw() {};
+    virtual bool getRadrawStatus() { return redrawStatus; };
+    virtual void noMoreRedraw() { redrawStatus = false; };
+
+    virtual void MoveWindow(Vector pos);
+    virtual void MoveWindowTo(Vector delta);
+
+
+    virtual int getMBCondition() {
+        if (getManager()) return ((Window*)getManager())->getMBCondition();
+        else              return 0; };
+    virtual bool isClickedLastTime() { 
+        if (mbLastTime == 0) return false;
+        else                 return mbLastTime == getMBCondition(); };
+
+    virtual void setMbLastTime() { mbLastTime = getMBCondition(); };
+
+    virtual Vector getMousePos() {
+        if (getManager()) return ((Window*)getManager())->getMousePos() - rect.pos;
+        else              return {}; };
+
+    virtual Window* getActiveWindow() {
+        if (getManager()) return ((Window*)getManager())->getActiveWindow();
+        else              return 0;
+    }; 
+    virtual void setActiveWindow(Window* window) {
+        if (getManager()) return ((Window*)getManager())->setActiveWindow(window);
+    };
+
+    virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
+    
+    virtual void setLastTimeMP() { mousePosLastTime = getMousePos(); }
+
+
 	virtual void draw ();
 	virtual void onClick (Vector mp) {};
 
@@ -128,54 +188,71 @@ struct Manager : Window
 {
 	int length;
 	Window **pointers = NULL;
-	int newButtonNum;
-	Window *activeWindow;
+	int currLen;
 	Window handle;
 	Vector startCursorPos;
 	bool coordinatSysFromHandle;
     bool HideIfIsNotActive;
 
-	Manager (Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = MenuColor, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
-		Window (_rect, _color, _dc, NULL, "", _advancedMode),
+	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+		Window (_app, _rect, _color, _dc, NULL, "", _advancedMode),
+        handle (_app, _handle),
 		length (_length),
-		pointers (new Window*[_length]{}),
-		newButtonNum (0),
-		activeWindow (NULL), 
-		handle (_handle),
+		pointers (new Window* [_length]{}),
+		currLen (0),
 		startCursorPos({}),
 		coordinatSysFromHandle (_coordinatSysFromHandle),
         HideIfIsNotActive (_HideIfIsNotActive) 
 	{
 		handle.manager = this;
-		handle.rect.finishPos.x = DCMAXSIZE * 10;
-		handle.color = MenuColor;
+		handle.rect.finishPos.x = systemSettings->DCMAXSIZE * 10;
+		handle.color = systemSettings->MenuColor;
 	}
 
-    ~Manager()
+
+    virtual void defaultDestructor() override;
+
+    virtual ~Manager()
     {
-        if (dc) txDeleteDC(dc);
-        if (finalDC) txDeleteDC(finalDC);
-        for (int i = 0; i < length; i++)
-        {
-            if (pointers[i]) delete pointers[i];
-        }
+        //defaultDestructor();
     }
+                             
 
-	bool addWindow (Window *window);
-	Window *getActiveWindow ();
-	void controlHandle ();
-	bool clickHandle ();
-	void replaceWindow (int numOfWindow);
-    void hide ();
-    void unHide ();
+    virtual bool addWindow (Window *window);
 
-    void controlMouse ();
+    
+    virtual void controlHandle ();
+    virtual bool clickHandle ();
+    virtual void replaceWindow (int numOfWindow);
+    virtual void hide ();
+    virtual void unHide ();
+    virtual int& getCurLen() { return currLen; };
 
-	virtual void draw () override;
+
+    virtual void redraw() { redrawStatus = true; };
+
+	virtual void draw ()             override;
 	virtual void onClick (Vector mp) override;
 
-    Vector getMousePos();
 };
+
+void Manager::defaultDestructor()
+{
+    assert(app);
+    if (dc) app->smartDeleteDC(dc);
+    if (finalDC) app->smartDeleteDC(finalDC);
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        if (pointers[i]) delete pointers[i];
+    }
+};
+
+void Window::defaultDestructor()
+{
+    assert(app);
+    if (dc) app->smartDeleteDC(dc);
+    if (finalDC) app->smartDeleteDC(dc);
+}
 
 
 

@@ -3,7 +3,6 @@ struct ProgrammeDate
 {
     Vector absMouseCoordinats;
     Vector mousePos;
-    int mbCondition = 0;
     Vector managerPos;
     Vector canvasCoordinats = {};
     COLORREF color;

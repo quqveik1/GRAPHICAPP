@@ -62,7 +62,7 @@ void clearDC (HDC dc, COLORREF color /* = TX_BLACK*/)
 	$s;
 	txSetAllColors (color, dc);
 
-	txRectangle (0, 0, DCMAXSIZE, DCMAXSIZE, dc);
+	//txRectangle (0, 0, sysDCMAXSIZE, DCMAXSIZE, dc);
 }
 
 
@@ -82,10 +82,9 @@ void Slider::draw ()
 	if (maxNum - minNum != 0) kScale = axis / (maxNum - minNum);
 	else kScale = 0;
 
-    controlMouse ();
 
-	int mx = mousePos.x;
-	int my = mousePos.y;
+	//int mx = mousePos.x;
+	//int my = mousePos.y;
     //printf ("{%d}\n", mx);
 	//mousePos =  {mx, my};
 
@@ -97,13 +96,14 @@ void Slider::draw ()
 	//bottomSideOfQuadrateSlider.draw ();
 	//txBitBlt (finalDC, bottomSideOfQuadrateSlider.rect.pos.x, bottomSideOfQuadrateSlider.rect.pos.y, rect.getSize ().x, rect.getSize ().y, bottomSideOfQuadrateSlider.finalDC);
 
-	if (isClicked == 0) sliderQuadrate.isClicked = false;
+	//sif (isClickedLastTime() == 0)sliderQuadrate.isClicked = false;
 
 	
 	//copyOnDC (sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.dc);
 	//txBitBlt (finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, rect.getSize ().x, rect.getSize ().y, sliderQuadrate.dc);
 
 
+    /*
 	if (sliderQuadrate.isClicked)
 	{
 		if (horizontalMode && kScale != 0)  *num = tempNum + ( (mousePos.x - cursorStartPosition.x) / (kScale));
@@ -127,19 +127,19 @@ void Slider::draw ()
 	txSetAllColors (TX_WHITE, finalDC);
 
 	//if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {arrow2.rect.pos.x - arrow1.rect.finishPos.x, arrow2.rect.finishPos.y - arrow1.rect.pos.y}, dc, originalRect.getSize());
-	if (horizontalMode)compressDraw (finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
-	if (!horizontalMode)compressDraw (finalDC, {arrow1.rect.pos.x, arrow1.rect.finishPos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
+	if (horizontalMode)compressDraw (app, finalDC, {arrow1.rect.finishPos.x, arrow1.rect.pos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
+	if (!horizontalMode)compressDraw (app, finalDC, {arrow1.rect.pos.x, arrow1.rect.finishPos.y }, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize(), __LINE__);
 	//if (horizontalMode) compressDraw (finalDC, {0, 0}, {rect.getSize ().x, rect.getSize ().y}, dc, originalRect.getSize());
 
 	arrow1.draw ();
-	compressDraw (finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize (), __LINE__);
+	compressDraw (app, finalDC, arrow1.rect.pos, arrow1.rect.getSize (), arrow1.finalDC, arrow1.originalRect.getSize (), __LINE__);
 	//printBlt(arrow1.finalDC);
 	//printBlt (arrow1.finalDC);
 	//txBitBlt (finalDC, arrow1.rect.pos.x, arrow1.rect.pos.y, rect.getSize ().x, rect.getSize ().y, arrow1.finalDC);
 
 
 	arrow2.draw ();
-	compressDraw (finalDC, arrow2.rect.pos, arrow2.rect.getSize (), arrow2.finalDC, arrow2.originalRect.getSize (), __LINE__);
+	compressDraw (app, finalDC, arrow2.rect.pos, arrow2.rect.getSize (), arrow2.finalDC, arrow2.originalRect.getSize (), __LINE__);
 	//printBlt(finalDC);
 	//txBitBlt(finalDC, arrow2.rect.pos.x, arrow2.rect.pos.y, arrow2.rect.getSize().x, arrow2.rect.getSize().y, arrow2.finalDC);
 
@@ -156,10 +156,12 @@ void Slider::draw ()
 	//printBlt(finalDC);
 	txBitBlt (finalDC, sliderQuadrate.rect.pos.x, sliderQuadrate.rect.pos.y, sliderQuadrate.rect.getSize ().x, sliderQuadrate.rect.getSize ().y, sliderQuadrate.dc);
 	//printBlt (finalDC);
+    */
 }
 
 void Slider::onClick (Vector mp)
 {
+    /*
 	int mx = mp.x;
 	int my = mp.y;
     mousePos = mp;
@@ -167,24 +169,25 @@ void Slider::onClick (Vector mp)
 
 
 
-	if (sliderQuadrate.rect.inRect (mx, my) && !isClicked)
+	if (sliderQuadrate.rect.inRect (mx, my) && !isClickedLastTime())
 	{
 		cursorStartPosition = mp;
 		tempNum = *num;
         sliderQuadrate.clicked = true;
-		sliderQuadrate.isClicked = true;
 	}
 
-	if (arrow1.rect.inRect (mx, my) && *num > minNum && !isClicked)
+	if (arrow1.rect.inRect (mx, my) && *num > minNum && !isClickedLastTime())
 	{
         arrow1.clicked = true;
 		(*num)--;
 	}
-	if (arrow2.rect.inRect (mx, my) && *num < maxNum && !isClicked)
+	if (arrow2.rect.inRect (mx, my) && *num < maxNum && !isClickedLastTime())
 	{
         arrow2.clicked = true;
 		(*num)++;
 	}
+    setMbLastTime();
+    */
 }
 
 

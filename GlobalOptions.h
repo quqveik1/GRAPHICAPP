@@ -1,56 +1,73 @@
 #pragma once
 #include "Q_Vector.h"
-
-const int DELTACLOCKTIME = 100;
-
-HWND MAINWINDOW = NULL;
-
-//double SizeKForCloseCanvas = 0.05;
-COLORREF MenuColor = RGB(45, 45, 45);
-COLORREF SecondMenuColor = RGB (30, 30, 30);
-COLORREF TextColor = RGB(255, 255, 255);
-COLORREF BackgroundColor = TX_BLACK;
-COLORREF DrawColor = TX_RED;
-const COLORREF TRANSPARENTCOLOR = RGB(57, 57, 57);
-
-const int ONELAYTOOLSLIMIT = 100;
-
-const int ONEMENUBUTTONSNUM = 10; //количество пунктов в структрах MENU
+#include <stdio.h>
 
 
 
 
-int MainFont = 20;
-const char* TEXTNAME = "Arial";
-const int TEXTFORMAT = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
+struct CSystemSettings
+{
+    int WindowStyle = _txWindowStyle;
 
-const int HANDLEHEIGHT = 26;
-const int BUTTONWIDTH = 50;
-const int BUTTONHEIGHT = 50;
-const int MENUBUTTONSWIDTH = 50;
-const int SIDETHICKNESS = 2;
-const int SCROLLBARTHICKNESS = 20;
+    HWND MAINWINDOW = NULL;
 
-
-int GummiThickness = 10;
-
-int DrawingMode = 1;
-const int TOOLSNUM = 5;
-
-const Vector SCREENSIZE = { 1900, 900 };
-const int DCMAXSIZE = 1000;
-const Vector DCVECTORSIZE = { 1000, 1000 };
-const int TRANSPARENTDCSIZE = 2000;
-int test1 = 0;
-
-//double IncomeBrightness = 255;
-//double Brightness = 0;
-double FirstFilterValue = 0;
-double SecondFilterValue = 0;
-
-int POINTSAVELENGTH = 100;
+    COLORREF MenuColor = NULL;
+    COLORREF SecondMenuColor = NULL;
+    COLORREF TextColor = NULL;
+    COLORREF BackgroundColor = NULL;
+    COLORREF DrawColor = NULL;
+    COLORREF TRANSPARENTCOLOR = NULL;
 
 
-bool confirmFilter = false;
+    int ONELAYTOOLSLIMIT = NULL;
 
-RGBQUAD(*FilterAlgorithm)(RGBQUAD pixel, double FirstValue, double SecondValue);
+
+    int MainFont = NULL;
+    char FONTNAME[256] = {};
+    int TEXTFORMAT = NULL;// = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS;
+
+    double HANDLEHEIGHT = NULL;
+    double BUTTONWIDTH = NULL;
+    double BUTTONHEIGHT = NULL;
+    double MENUBUTTONSWIDTH = NULL;
+    double SIDETHICKNESS = NULL;
+    double SCROLLBARTHICKNESS = NULL;
+
+    int debugMode = NULL;
+
+    int DrawingMode = NULL;
+    int TOOLSNUM = NULL;
+
+    Vector SizeOfScreen = {};
+    Vector FullSizeOfScreen = {};
+    Vector lastTimeSizeOfScreen = {};
+    Vector ScreenPos = {};
+    int DCMAXSIZE = NULL;
+    Vector DCVECTORSIZE = {};
+
+    int save(const char* path);
+    int read(const char* path);
+
+    int byteSize = sizeof(*this);
+};
+
+
+void setDynamicSystemSettings(CSystemSettings* systemSettings);
+
+void setDefaultSystemSettings(CSystemSettings* systemSettings);
+
+void setSystemSettings(CSystemSettings* systemSettings, const char* path);
+
+void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);
+void setIntSettings(FILE* ssFile, int* integer, const char* name);
+void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
+void setStringSettings(FILE* ssFile, char* str, const char* name);
+
+
+int saveSystemSettings(CSystemSettings* systemSettings, const char* path);
+
+void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
+void saveIntSettings(FILE* ssFile, int* integer, const char* name);
+void saveDoubleSettings(FILE* ssFile, double* integer, const char* name);
+void saveStringSettings(FILE* ssFile, char* str, const char* name);
+

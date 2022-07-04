@@ -1,18 +1,10 @@
 #pragma once
 #include "PointSave.h"
 
-void PointSave::addPoint(ToolSave& point)
+void PointSave::addPoint(Vector pos)
 {
-    //assert (*point);
-    points[currentLength].pos = point.pos;
-    points[currentLength].size = point.size;
-    points[currentLength].color = point.color;
-    points[currentLength].thickness = point.thickness;
+    assert(dllSettings);
+    if (currentLength >= dllSettings->POINTSAVELENGTH - 1) return;
+    pointsPosition[currentLength] = pos;
     currentLength++;
-}
-
-int PointSave::getByteSize()
-{
-    byteLength = sizeof(*this) + Length * sizeof(ToolSave);
-    return byteLength;
 }

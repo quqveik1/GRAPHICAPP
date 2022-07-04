@@ -6,21 +6,25 @@
 #include "..\ProgrammeDate.h"
 #include "..\Tool.cpp"
 #include "..\BaseFunctions.cpp"
+#include "..\LoadManager.h"
+#include "..\DllSettings.h"
 
 extern "C" __declspec (dllexport) DLLToolExportData* initDLL(AbstractAppData* data);
 
 
 AbstractAppData* TheApp = NULL;
+ÑDllSettings DllSettings;
+
 
 struct ColorSave : ToolData
 {
     COLORREF color;
-    ColorSave(COLORREF _color = DrawColor) :
+    ColorSave(COLORREF _color) :
         color(_color)
     {}
 
 };
-
+                                                                                                                                    
 
 struct Tool4Squares : Tool
 {
@@ -34,8 +38,8 @@ struct Tool4Squares : Tool
     bool draggedLastTime = false;
     Vector lastTimeMP = {};
 
-    Tool4Squares(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+    Tool4Squares(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
@@ -56,7 +60,7 @@ struct Tool4Squares : Tool
     ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
     virtual bool edit(ToolLay* toollay, HDC dc = NULL);
 };
 
@@ -73,8 +77,8 @@ struct Line : Tool4Squares
     bool draggedLastTime = false;
     Vector lastTimeMP = {};
 
-    Line(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool4Squares(_name, _ToolSaveLen, _dc, _data)
+    Line(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool4Squares(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
@@ -90,15 +94,17 @@ struct Point : Tool
 {
     Vector lastPos = {};
     PointSave* pointSave = NULL;
+    
 
-    Point(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+    Point(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
+    virtual void initPointSave();
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL);
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
 };
 
 struct Vignette : Tool
@@ -106,8 +112,8 @@ struct Vignette : Tool
     COLORREF selectedColor = NULL;
     ColorSave* colorSave = NULL;
 
-    Vignette(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+    Vignette(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
@@ -115,25 +121,26 @@ struct Vignette : Tool
     virtual bool isStarted(ToolLay* data) { return colorSave->isStarted; };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual void load(ToolLay* toollay, HDC dc = NULL) {};
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };
 };
 
-struct Gummi : Tool
+struct Gummi : Point
 {
 
-    Gummi(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_name, _ToolSaveLen, _dc, _data)
+    Gummi(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Point(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
+
+    virtual void initPointSave();
 };
 
 struct RectangleTool : Tool4Squares
 {
     
 
-    RectangleTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool4Squares(_name, _ToolSaveLen, _dc, _data)
+    RectangleTool(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool4Squares(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
@@ -143,8 +150,8 @@ struct RectangleTool : Tool4Squares
 
 struct EllipseTool : Tool4Squares
 {
-    EllipseTool(const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool4Squares(_name, _ToolSaveLen, _dc, _data)
+    EllipseTool(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
+        Tool4Squares(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 

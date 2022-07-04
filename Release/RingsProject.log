@@ -1,2 +1,1 @@
-﻿PowerPoint.obj : error LNK2005: _main already defined in TXWaveExample.obj
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Release\RingsProject.exe : fatal error LNK1169: one or more multiply defined symbols found
+﻿  RingsProject.vcxproj -> C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Release\RingsProject.exe

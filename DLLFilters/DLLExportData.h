@@ -12,16 +12,16 @@ struct DLLFunc
 struct DLLExportData
 {
     int size;
-    DLLFunc* funcs = NULL;
+    CFilter* filters[10] = {};
     int currlen = 0;
     int lastGuid = 0;
 
     DLLExportData(int _size) :
-        size(_size),
-        funcs(new DLLFunc[_size])
+        size(_size)
     {
     }
 
-    virtual void addFunc(CFilter* (*func)());
+    void addFilter(CFilter* filter);
+    
     virtual CFilter* addToManager(Manager* manager);
 };
