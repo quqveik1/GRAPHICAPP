@@ -19,14 +19,14 @@ struct Vector
 };
 
 void equal (Vector &a, const Vector &b);
-inline Vector& operator +  (const Vector &a, const Vector &b);
-inline Vector &operator += (Vector &a, const Vector &b);
+inline Vector operator +  (const Vector &a, const Vector &b);
+inline Vector& operator += (Vector &a, const Vector &b);
 inline Vector& operator -= (Vector& a, const Vector& b);
-inline Vector& operator -  (const Vector &a, const Vector &b);
+inline Vector operator -  (const Vector &a, const Vector &b);
 inline void lining ();
 inline Vector operator *  (const Vector &a, const double b);
 inline Vector operator *  (const Vector &a, const Vector &b);
-inline Vector &operator *= (Vector &a, const Vector &b);
+inline Vector& operator *= (Vector &a, const Vector &b);
 inline Vector operator /  (const Vector &a, double m);
 inline Vector operator /  (const Vector &a, const Vector &b);
 inline Vector operator / (const double a, const Vector &b);
@@ -93,7 +93,7 @@ inline Vector operator / (const double a, const Vector &b)
     return result;
 }
 
-inline Vector& operator + (const Vector &a, const Vector &b)
+inline Vector operator + (const Vector &a, const Vector &b)
 {
     Vector result = {};
     result.x = a.x + b.x;
@@ -102,7 +102,7 @@ inline Vector& operator + (const Vector &a, const Vector &b)
     return result;
 }
 
-inline Vector& operator - (const Vector &a, const Vector &b)
+inline Vector operator - (const Vector &a, const Vector &b)
 {
     Vector result = {};
     result.x = a.x - b.x;

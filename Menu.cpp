@@ -10,7 +10,7 @@ void Menu::draw()
 
     onUpdate();
 
-    drawOnFinalDC(handle);
+    handle.print (finalDC);
 
     for (int i = 0; i < currentSize; i++)
     {

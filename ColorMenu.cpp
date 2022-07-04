@@ -45,6 +45,10 @@ void ColorMenu::draw()
     
     drawColorHistory();
     drawColorExamples();
+    
+    setMbLastTime();
+
+    colorLastTime = app->systemSettings->DrawColor;
 }
 
 
@@ -131,6 +135,7 @@ void ColorMenu::controlExampleClick()
         if (exampleColorRects[i].section.inRect(mp))
         {
             app->setDrawColor(exampleColorRects[i].color);
+            if (colorLastTime != exampleColorRects[i].color) confirmColor();
         }
     }
 }

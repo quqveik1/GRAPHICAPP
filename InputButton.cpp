@@ -129,10 +129,16 @@ void InputButton::draw()
 
     if (wasClicked)
     {
-        if (getActiveWindow() != this)
+        if (getActiveWindow() != this || app->getAsyncKeyState(VK_RETURN))
         {
             wasClicked = false;
             if (*parameter != parametrBeforeRedacting && confirmInput) *confirmInput = true;
+        }
+
+        if (app->getAsyncKeyState(VK_ESCAPE))
+        {
+            wasClicked = false;
+            *parameter = parametrBeforeRedacting;
         }
 
         if (*parameter == 0)

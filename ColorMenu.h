@@ -32,24 +32,26 @@ struct ColorMenu : Manager
     ColorHistory colorHistory;
     //saveable part
     char pathToSaveHistory[MAX_PATH] = {};
-
+    
     Vector colorHistoryStartPos = {45, 175};
     Vector colorSectionSize = {25, 25};
     Vector exampleColorStartPos = { colorHistoryStartPos.x,  colorHistoryStartPos.y + colorSectionSize.x  + 15};
     ColorSection* exampleColorRects = NULL;
     int colorExamplesNum = NULL;
+    COLORREF colorLastTime = NULL;
 
     COLORREF frameColor = RGB(144, 144, 144);
     
     Vector sizeOfColorMenu = {412, 227};
     bool confirmedColor = false;
+    
 
     void loadHistory();
 
 
     ColorMenu(AbstractAppData* _app, Vector _pos, const char* _pathToHistory, bool _advancedMode = false) :
         sizeOfColorMenu({ 412, 257 }),
-        Manager(_app, { .pos = _pos, .finishPos = _pos + sizeOfColorMenu }, 3, _advancedMode, _app->loadManager->loadImage("ColorsMenu-2.bmp"), { .pos = {0, 0}, .finishPos = { 412, 50 } })
+        Manager(_app, {}, 3, _advancedMode, _app->loadManager->loadImage("ColorsMenu-2.bmp"), { .pos = {0, 0}, .finishPos = { 412, 50 } })
     {
         assert(app);
         assert(app->systemSettings);
@@ -61,6 +63,8 @@ struct ColorMenu : Manager
         colorExamplesNum = colorHistory.HistoryLength;
         exampleColorRects = new ColorSection[colorExamplesNum]{};
         setColorExamples();
+
+        colorLastTime = app->systemSettings->DrawColor;
 
 
         if (colorHistory.currentPos - 1 < 0)

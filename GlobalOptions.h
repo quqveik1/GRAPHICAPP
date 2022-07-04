@@ -17,6 +17,7 @@ struct CSystemSettings
     COLORREF BackgroundColor = NULL;
     COLORREF DrawColor = NULL;
     COLORREF TRANSPARENTCOLOR = NULL;
+    int thickness = 3;
 
 
     int ONELAYTOOLSLIMIT = NULL;

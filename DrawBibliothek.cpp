@@ -99,11 +99,12 @@ void standartDraw$ (DebugInfo info, Window *window)
 	if (window->finalDC) app->setColor(window->color, window->finalDC);
 	if (window->finalDC) app->rectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);
                                                                                            
-                                                                                          
-	if (window->finalDC) app->setColor(window->systemSettings->TextColor, window->finalDC);
-    app->setAlign(TA_CENTER, window->finalDC);
-    app->selectFont ("Arial", window->font, window->finalDC);
-    app->drawText(window->sideThickness, window->sideThickness, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);                                                                                              
+    if (window->text)
+    {
+        app->setColor(window->systemSettings->TextColor, window->finalDC);
+        app->selectFont("Arial", window->font, window->finalDC);
+        app->drawText(0, 0, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
+    }
                                                                                           
 	if (window->dc)                                                                                
 	{                                                                                           

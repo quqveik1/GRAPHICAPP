@@ -52467,3 +52467,630 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h, строка: 13323, функция: bool __cdecl TX::txRectangle(double,double,double,double,struct HDC__ *),
+
+Сообщение: Если вы указали параметр "dc", то он неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x001C6138 (32-bit), Flags: CMdRe0, Thread: 0x5EFC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x001824A0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txRectangle() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13323)
+
+# 1 0x00163647 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::rectangle() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (17):
+
+     15: void PowerPoint::rectangle(int x1, int y1, int x2, int y2, HDC dc)
+     16: {
+=>   17:     txRectangle(x1, y1, x2, y2, dc);
+     18: }
+     19: 
+
+# 2 0x590DEFD2 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: RectangleTool::outputFunc() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLTools\dllmain.cpp (66):
+
+     64:     Vector ellipseSize = (rectDate->size) / 2;
+     65:     app->setColor(rectDate->color, outdc, rectDate->thickness);
+=>   66:     app->rectangle({ .pos = rectDate->pos, .finishPos = rectDate->pos + rectDate->size }, outdc);
+     67: }
+     68: 
+
+# 3 0x590DE330 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: Tool4Squares::load() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLTools\dllmain.cpp (227):
+
+    225: 
+    226:     app->setColor(toolDate->color, outDC, toolDate->thickness);
+=>  227:     outputFunc(outDC);
+    228: 
+    229:     return outDC;
+
+# 4 0x00158D08 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ToolLay::drawTool() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainTools.cpp (34):
+
+     32: HDC ToolLay::drawTool(HDC dc /*= NULL*/)
+     33: {
+=>   34:     if (getTool() && isStarted()) return getTool()->load(this, dc);
+     35:     return NULL;
+     36: }
+
+# 5 0x001639D3 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CLay::redraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CLay.cpp (109):
+
+    107:     for (int toollay = 0; toollay < toolLength; toollay++)
+    108:     {
+=>  109:         HDC outDC = toolLays[toollay]->drawTool();
+    110:         if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
+    111:     }
+
+# 6 0x00157668 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (583):
+
+    581:         if (lay[lays].redrawStatus())
+    582:         {
+=>  583:             lay[lays].redraw();
+    584:             lay[lays].noMoreRedraw();
+    585:         }
+
+# 7 0x00151D4C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (239):
+
+    237:     controlLay();
+    238: 
+=>  239:     drawLay();
+    240: 
+    241:     CLay* activeLay = getActiveLay();
+
+# 8 0x0016823C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (216):
+
+    214: 	for (int i = 0; i < manager->currLen; i++)
+    215: 	{
+=>  216: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    217:  		if (manager->pointers[i]->advancedMode) 
+    218: 		{
+
+# 9 0x00152546 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp (19):
+
+     17: 
+     18: 
+=>   19:     standartManagerDraw(this);
+     20: }
+     21: 
+
+#10 0x0016823C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (216):
+
+    214: 	for (int i = 0; i < manager->currLen; i++)
+    215: 	{
+=>  216: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    217:  		if (manager->pointers[i]->advancedMode) 
+    218: 		{
+
+#11 0x00155DE1 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: 
+     24:     if (!app->isFullScreen())
+
+#12 0x00107AB2 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (249):
+
+    247:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    248: 
+=>  249: 		manager->draw ();
+    250: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    251: 
+
+#13 0x00191483 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (170):
+
+    168: 
+    169: 	txBegin ();
+=>  170: 	Engine (manager);
+    171:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    172:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txRectangle(double,double,double,double,struct HDC__ *) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13323):
+
+  13321: bool txRectangle (double x0, double y0, double x1, double y1, HDC dc /*= txDC()*/)
+  13322:     {
+=>13323: $1  if (_TX_DEFAULT_HDC_FAILED (dc)) return false;
+  13324: 
+  13325: $   return txGDI ((Win32::Rectangle (dc, ROUND (x0), ROUND (y0), ROUND (x1), ROUND (y1))), dc);
+
+# 1 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (17):
+
+     15: void PowerPoint::rectangle(int x1, int y1, int x2, int y2, HDC dc)
+     16: {
+=>   17:     txRectangle(x1, y1, x2, y2, dc);
+     18: }
+     19: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 13:35:30, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 13:35:38
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00328158 (32-bit), Flags: CMdRe0, Thread: 0x2330 (Main), errno: 2 (No such file or directory), _doserrno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x002E7B28 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x002C7247 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::setColor() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (64):
+
+     62: {
+     63:     if (systemSettings->debugMode == 5) printf("SetColor: %d|", color);
+=>   64:     txSetAllColors(color, dc, thickness);
+     65: }
+     66: 
+
+# 2 0x002B7C14 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Slider2::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp (20):
+
+     18: void Slider2::draw()
+     19: {
+=>   20:     app->setColor(app->systemSettings->TRANSPARENTCOLOR, finalDC);
+     21:     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
+     22: 
+
+# 3 0x002C9B6C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 4 0x002B832F in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ThicknessButton::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.cpp (5):
+
+      3: void ThicknessButton::draw()
+      4: {
+=>    5:     standartManagerDraw(this);
+      6: 
+      7: }
+
+# 5 0x002C9B6C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 6 0x002B6EC1 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: 
+     24:     if (!app->isFullScreen())
+
+# 7 0x00269182 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (254):
+
+    252:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    253: 
+=>  254: 		manager->draw ();
+    255: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    256: 
+
+# 8 0x002F2E86 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (175):
+
+    173: 
+    174: 	txBegin ();
+=>  175: 	Engine (manager);
+    176:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    177:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:32:34, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:32:40
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h, строка: 10902, функция: bool __cdecl TX::_txBuffer_Delete(struct HDC__ **),
+
+Сообщение: Параметр "*dc" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00328158 (32-bit), Flags: CMdrE0, Thread: 0x5770 (Canvas), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0026EA80 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Delete() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10902)
+# 1 0x00273160 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10118)
+# 2 0x00277F04 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10026)
+# 3 0x774C7CE2 in C:\Windows\System32\USER32.dll: AddClipboardFormatListener()
+# 4 0x774A719A in C:\Windows\System32\USER32.dll: CallWindowProcW()
+# 5 0x774A6C2A in C:\Windows\System32\USER32.dll: CallWindowProcW()
+# 6 0x774AFB0F in C:\Windows\System32\USER32.dll: IsRectEmpty()
+# 7 0x77836FDC in C:\Windows\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 8 0x00276E4D in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (9802)
+# 9 0x75ED7EE5 in C:\Windows\System32\msvcrt.dll: beginthreadex()
+#10 0x75ED7FB1 in C:\Windows\System32\msvcrt.dll: endthreadex()
+#11 0x76EC6739 in C:\Windows\System32\KERNEL32.dll: BaseThreadInitThunk()
+#12 0x77828E7F in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#13 0x77828E4D in C:\Windows\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txBuffer_Delete(struct HDC__ **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10902):
+
+  10900: $1  if (_TX_ARGUMENT_FAILED (dc)) return false;
+  10901: $   if (                   !*dc)  return false;
+=>10902: $   if (_TX_HDC_FAILED     (*dc)) return false;
+  10903: 
+  10904: $   if (!Win32::GetObjectType (Win32::GetCurrentObject (*dc, OBJ_BITMAP))) return false;
+
+# 1 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10118):
+
+  10116: $       Sleep (_TX_TIMEOUT);
+  10117: 
+=>10118: $       for (size_t i = 0; i < _txCanvas_UserDCs->size(); i++) _txBuffer_Delete (&_txCanvas_UserDCs->at (i));
+  10119: $       _txCanvas_UserDCs->clear();
+  10120:         }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10026):
+
+  10024: 
+  10025:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10026:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10027: 
+  10028:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 3 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (9811):
+
+   9809: $       DispatchMessage  (&msg);
+   9810: 
+=> 9811: $       Sleep (0);
+   9812:         }
+   9813: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:32:34, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:32:40
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00408158 (32-bit), Flags: CMdRe0, Thread: 0x7DB8 (Main), errno: 2 (No such file or directory), _doserrno: 2 (No such file or directory). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x003C7B98 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x003A72B7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::setColor() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (64):
+
+     62: {
+     63:     if (systemSettings->debugMode == 5) printf("SetColor: %d|", color);
+=>   64:     txSetAllColors(color, dc, thickness);
+     65: }
+     66: 
+
+# 2 0x00397C84 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Slider2::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp (20):
+
+     18: void Slider2::draw()
+     19: {
+=>   20:     app->setColor(app->systemSettings->TRANSPARENTCOLOR, finalDC);
+     21:     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
+     22: 
+
+# 3 0x003A9BDC in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 4 0x0039839F in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ThicknessButton::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.cpp (5):
+
+      3: void ThicknessButton::draw()
+      4: {
+=>    5:     standartManagerDraw(this);
+      6: 
+      7: }
+
+# 5 0x003A9BDC in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 6 0x00396F31 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: 
+     24:     if (!app->isFullScreen())
+
+# 7 0x003491F2 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (254):
+
+    252:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    253: 
+=>  254: 		manager->draw ();
+    255: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    256: 
+
+# 8 0x003D2EF6 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (175):
+
+    173: 
+    174: 	txBegin ();
+=>  175: 	Engine (manager);
+    176:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    177:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:33:37, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:33:43
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00432882 в функции ThicknessButton::ThicknessButton() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.h на строке 17. Попытка прочесть данные по адресу 0xCDCDCDD5 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x004F8158 (32-bit), Flags: CMdRe0, Thread: 0x3970 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00432882 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ThicknessButton::ThicknessButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.h (17):
+
+     15: 
+     16:     ThicknessButton(AbstractAppData* _app, Vector _pos, bool _advancedMode) :
+=>   17:         Manager(_app, {}, 2, _advancedMode, NULL, { .pos = {}, .finishPos = {app->systemSettings->HANDLEHEIGHT, 500} }),
+     18:         inputButtonSize({50, getSize().y})
+     19:     {
+
+# 1 0x004C2294 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (122):
+
+    120: 	manager->addWindow (menu);
+    121: 
+=>  122:     ThicknessButton* thicknessButton = new ThicknessButton(appData, { 300, 300 }, true);
+    123:     manager->addWindow(thicknessButton);
+    124: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (17):
+
+     15: void PowerPoint::rectangle(int x1, int y1, int x2, int y2, HDC dc)
+     16: {
+=>   17:     txRectangle(x1, y1, x2, y2, dc);
+     18: }
+     19: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:44:52, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:44:59
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00432882 в функции ThicknessButton::ThicknessButton() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.h на строке 17. Попытка прочесть данные по адресу 0xCDCDCDD5 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x004F8158 (32-bit), Flags: CMdRe0, Thread: 0x3970 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00432882 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ThicknessButton::ThicknessButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.h (17):
+
+     15: 
+     16:     ThicknessButton(AbstractAppData* _app, Vector _pos, bool _advancedMode) :
+=>   17:         Manager(_app, {}, 2, _advancedMode, NULL, { .pos = {}, .finishPos = {app->systemSettings->HANDLEHEIGHT, 500} }),
+     18:         inputButtonSize({50, getSize().y})
+     19:     {
+
+# 1 0x004C2294 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (122):
+
+    120: 	manager->addWindow (menu);
+    121: 
+=>  122:     ThicknessButton* thicknessButton = new ThicknessButton(appData, { 300, 300 }, true);
+    123:     manager->addWindow(thicknessButton);
+    124: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:44:52, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:44:58
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp, строка: 9, функция: void __cdecl txSetAllColors$(struct DebugInfo,unsigned long,struct HDC__ *,int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "dc".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00538158 (32-bit), Flags: CMdRe0, Thread: 0x6E10 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004F7BB8 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: txSetAllColors$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (9)
+
+# 1 0x004D72D7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::setColor() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (64):
+
+     62: {
+     63:     if (systemSettings->debugMode == 5) printf("SetColor: %d|", color);
+=>   64:     txSetAllColors(color, dc, thickness);
+     65: }
+     66: 
+
+# 2 0x004C7CA4 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Slider2::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp (20):
+
+     18: void Slider2::draw()
+     19: {
+=>   20:     app->setColor(app->systemSettings->TRANSPARENTCOLOR, finalDC);
+     21:     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
+     22: 
+
+# 3 0x004D9BFC in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 4 0x004C83BF in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ThicknessButton::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.cpp (5):
+
+      3: void ThicknessButton::draw()
+      4: {
+=>    5:     standartManagerDraw(this);
+      6: 
+      7: }
+
+# 5 0x004D9BFC in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (219):
+
+    217: 	for (int i = 0; i < manager->currLen; i++)
+    218: 	{
+=>  219: 		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
+    220:  		if (manager->pointers[i]->advancedMode) 
+    221: 		{
+
+# 6 0x004C6F51 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: 
+     24:     if (!app->isFullScreen())
+
+# 7 0x00479212 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (254):
+
+    252:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    253: 
+=>  254: 		manager->draw ();
+    255: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    256: 
+
+# 8 0x00502F16 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (175):
+
+    173: 
+    174: 	txBegin ();
+=>  175: 	Engine (manager);
+    176:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    177:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  4 2022 16:48:43, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  4 2022 16:48:48
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------

@@ -1,12 +1,12 @@
 #pragma once
-#include "ColorSlider.cpp"
+#include "Slider2.cpp"
 #include "InputButton.cpp"
 
 
 struct ColorComponentChanger : Manager
 {
     int* component = NULL;
-    ColorSlider* slider = NULL;
+    Slider2* slider = NULL;
     InputButton* inputButton = NULL;
     Rect sliderRect = {};
     Vector numSize = {};
@@ -22,12 +22,12 @@ struct ColorComponentChanger : Manager
         sliderRect = rect - rect.pos;
         sliderRect.finishPos.x -= numSize.x;
 
-        slider = new ColorSlider(app, sliderRect, component, _confirmColor);
+        slider = new Slider2(app, sliderRect, component, &minLimit, &maxLimit, _confirmColor);
         addWindow(slider);
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, 0}, .finishPos = getSize() };
 
-        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, color, RGB(144, 144, 144), RGB (200, 200, 200), _confirmColor);
+        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, color, RGB(144, 144, 144), RGB(200, 200, 200), _confirmColor);
         addWindow(inputButton);
     }
     virtual void draw() override;

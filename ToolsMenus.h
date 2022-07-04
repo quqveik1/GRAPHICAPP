@@ -43,16 +43,25 @@ struct ToolMenu : Menu
     HDC emptyToolDC = NULL;
 
     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
-        Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, { .pos = {0, 0}, .finishPos = {_app->systemSettings->DCVECTORSIZE.x, _app->systemSettings->HANDLEHEIGHT} }, _app->systemSettings->ONELAYTOOLSLIMIT, true),
+        Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, {}, _app->systemSettings->ONELAYTOOLSLIMIT, true),
         canvasManager(_canvasManager)
     {
         loadManager = _loadManager;
         emptyToolDC = loadManager->loadImage("addToolButton2.bmp");
 
+
+
         app->setColor(color, finalDC);
         app->rectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
         font = _app->systemSettings->MainFont * 1.5;
         app->selectFont(_app->systemSettings->FONTNAME, font, finalDC);
+        
+        handle.rect = { .pos = {0, 0}, .finishPos = {getSize().x, app->systemSettings->HANDLEHEIGHT} };
+        handle.resize(handle.rect);
+        handle.rect.finishPos.x = rect.getSize().x;
+        handle.text = "Инструменты на слое";
+        handle.color = color;
+        handle.font = app->systemSettings->MainFont;
     }
 
 

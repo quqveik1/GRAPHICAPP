@@ -74,6 +74,12 @@ void PowerPoint::setDrawColor(COLORREF color)
     systemSettings->DrawColor = color;
 }
 
+COLORREF PowerPoint::getPixel(Vector pos, HDC dc)
+{
+    return txGetPixel(pos.x, pos.y, dc);
+}
+
+
 void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
 {
     txBitBlt(dc1, x0, y0, sizex, sizey, dc2);

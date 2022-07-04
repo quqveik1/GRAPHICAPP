@@ -95,7 +95,7 @@ struct Window
     Vector mousePosLastTime = {};
     int mbLastTime = 0;
 
-    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = "", bool _advancedMode = true) :
+    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = NULL, bool _advancedMode = true) :
         app (_app),
         systemSettings (_app->systemSettings),
 		rect (_rect),
@@ -195,7 +195,7 @@ struct Manager : Window
     bool HideIfIsNotActive;
 
 	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
-		Window (_app, _rect, _color, _dc, NULL, "", _advancedMode),
+		Window (_app, _rect, _color, _dc, NULL, NULL, _advancedMode),
         handle (_app, _handle),
 		length (_length),
 		pointers (new Window* [_length]{}),

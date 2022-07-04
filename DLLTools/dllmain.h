@@ -115,10 +115,7 @@ struct Vignette : Tool
     Vignette(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
         Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
-    }
-
-    virtual bool isFinished(ToolLay* data) { return colorSave->isFinished; };
-    virtual bool isStarted(ToolLay* data) { return colorSave->isStarted; };
+    } 
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
     virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };

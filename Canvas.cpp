@@ -77,8 +77,6 @@ void Canvas::deleteButton()
 void Canvas::startTool()
 {
     initToolLay();
-
-    controlTool();
 }
 
 void Canvas::changeTool()
@@ -341,6 +339,7 @@ void Canvas::controlTool()
     bool isFinished = toollay->isFinished();
 
 
+
     setCurrentData();
     if (!isFinished)
     {
@@ -597,5 +596,6 @@ void Canvas::drawLay()
 
 void Canvas::drawCadre()
 {
-    app->drawCadre({ .pos = {0,0}, .finishPos = getSize() }, finalDC, app->systemSettings->MenuColor, 5);
+    app->drawCadre(rect - rect.pos, finalDC, app->systemSettings->MenuColor, 4);
+
 }

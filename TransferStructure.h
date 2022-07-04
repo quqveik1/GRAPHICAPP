@@ -15,7 +15,7 @@ struct TransferData
 
 struct AbstractAppData
 {
-    const char* appVersion = "v0.1.7.1";
+    const char* appVersion = "v0.1.7.2";
 
     struct CSystemSettings* systemSettings = NULL;
     struct CToolManager* toolManager = NULL;
@@ -31,6 +31,7 @@ struct AbstractAppData
     virtual void setColor (COLORREF color, HDC dc, int thickness = 1) = 0;
     virtual int getColorComponent(COLORREF color, COLORREF component) = 0;
     virtual void setDrawColor(COLORREF color) = 0;
+    virtual COLORREF getPixel(Vector pos, HDC dc) = 0;
 
     virtual void rectangle (Rect rect, HDC dc) = 0;
     virtual void rectangle(int x1, int y1, int x2, int y2, HDC dc) = 0;

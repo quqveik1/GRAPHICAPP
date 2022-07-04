@@ -34,6 +34,8 @@
 #include "ColorMenu.cpp"
 #include "FileSavings.cpp"
 #include "LaysMenu.cpp"
+#include "Thickness.cpp"
+
 
 
 void Engine (MainManager* manager);
@@ -84,9 +86,8 @@ int main (int argc, int *argv[])
 
     appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);
     appData->setResized(false);
-
-
-    MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 20);
+    
+    MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
 
     ToolSave toolSave = {};
 
@@ -114,10 +115,12 @@ int main (int argc, int *argv[])
     LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, 800} }, canvasManager);
     manager->addWindow(laysMenu);
 
-
-	ColorMenu *menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, "Settings\\ColorHistory.history", true);
+	ColorMenu* menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, "Settings\\ColorHistory.history", true);
     menu->devName = "ColorMenu";
 	manager->addWindow (menu);
+
+    ThicknessMenu* thicknessButton = new ThicknessMenu(appData, { 300, 300 }, false);
+    manager->addWindow(thicknessButton);
 
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
@@ -141,14 +144,15 @@ int main (int argc, int *argv[])
 
         OpenManager* openWindowsManager = new OpenManager(appData, {}, TX_WHITE, NULL, LoadManager.loadImage("OpenWindows.bmp"));
         mainhandle->addWindowToStart(openWindowsManager);
-        List* openWindows = new List(appData, { openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 5);
+        List* openWindows = new List(appData, { openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 6);
         openWindowsManager->setOpeningManager(openWindows);
     manager->addWindow(openWindows);
         
-        openWindows->addNewItem (menu, NULL, "Цвет");
+        openWindows->addNewItem (menu, NULL, "Цвета");
+        openWindows->addNewItem(thicknessButton, NULL, "Толщина");
         openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
         openWindows->addNewItem (laysMenu, NULL, "Слои");
-        openWindows->addNewItem (toolMenu, NULL, "Инструментальные слои");
+        openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
         List* filters = openWindows->addSubList("Фильтры");
     manager->addWindow (filters);
             for (int i = 0; i < dllManager->currLoadWindowNum; i++)
@@ -175,7 +179,6 @@ int main (int argc, int *argv[])
     menu->saveMenu();
     writeVersion(appData);
     delete manager;
-
 	txEnd ();
     txDisableAutoPause();
     
@@ -211,7 +214,6 @@ bool checkVersionCompability(PowerPoint* app)
     }
 
     fclose(versionFile);
-
     return needLoadSaves;
 }
 

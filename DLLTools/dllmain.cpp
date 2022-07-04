@@ -46,14 +46,21 @@ bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
     colorSave = (ColorSave*) lay->getToolsData();
     Vector pos = data->mousePos;
-    *(app->currColor) = txGetPixel(pos.x, pos.y, lay->lay->getPermanentDC());
+    COLORREF newColor = app->getPixel(pos, lay->lay->getPermanentDC());
 
     colorSave->color = *(app->currColor);
 
-    if (clicked) return false;
+    if (clicked  && !workedLastTime)
+    {
+        workedLastTime = true;
+        colorSave->isStarted = true;
+        app->setDrawColor(newColor);
+        colorSave->isFinished = true;
+        return colorSave->isFinished;
+    }
+    if (!clicked) workedLastTime = false;
 
-    colorSave->isFinished = true;
-    return colorSave->isFinished;
+    return false;
 }
 
 void RectangleTool::outputFunc(HDC outdc)
@@ -186,7 +193,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     if (isStarted(toolLay))lay->needRedraw();
     saveTool->size = pos - saveTool->pos;
     saveTool->color = data->color;
-    saveTool->thickness = data->size.x;
+    saveTool->thickness = app->systemSettings->thickness;
     saveTool->name = (const char*)1;
 
 
