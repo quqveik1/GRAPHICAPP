@@ -37,11 +37,11 @@ struct ThicknessMenu : Manager
         sliderRect.pos.y = (rectWithOutHandleSize.y - sliderSize.y) / 2 + handle.rect.finishPos.y;
         sliderRect.finishPos.y = sliderRect.pos.y + sliderSize.y;
         
-        slider = new Slider2(app, sliderRect, &app->systemSettings->thickness, &minThickness, &maxThickness, NULL);
+        slider = new Slider2(app, sliderRect, &app->systemSettings->Thickness, &minThickness, &maxThickness, NULL);
         addWindow(slider);
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, sliderRect.pos.y}, .finishPos = {getSize().x - 5,  getSize().y - 5} };
-        inputButton = new InputButton(app, inputButtonRect, &app->systemSettings->thickness, &minThickness, &maxThickness, color, RGB(144, 144, 144), RGB(200, 200, 200));
+        inputButton = new InputButton(app, inputButtonRect, &app->systemSettings->Thickness, &minThickness, &maxThickness, color, RGB(144, 144, 144), RGB(200, 200, 200));
         addWindow(inputButton);
     }
 

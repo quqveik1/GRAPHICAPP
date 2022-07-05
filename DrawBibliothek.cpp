@@ -96,21 +96,25 @@ void standartDraw$ (DebugInfo info, Window *window)
     AbstractAppData* app = window->app;
     assert(app);
 
-	if (window->finalDC) app->setColor(window->color, window->finalDC);
-	if (window->finalDC) app->rectangle (0, 0, window->rect.getSize ().x, window->rect.getSize ().y, window->finalDC);
-                                                                                           
-    if (window->text)
+    if (window->needToShow)
     {
-        app->setColor(window->systemSettings->TextColor, window->finalDC);
-        app->selectFont("Arial", window->font, window->finalDC);
-        app->drawText(0, 0, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
+
+        if (window->finalDC) app->setColor(window->color, window->finalDC);
+        if (window->finalDC) app->rectangle(0, 0, window->rect.getSize().x, window->rect.getSize().y, window->finalDC);
+
+        if (window->text)
+        {
+            app->setColor(window->systemSettings->TextColor, window->finalDC);
+            app->selectFont("Arial", window->font, window->finalDC);
+            app->drawText(0, 0, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
+        }
+
+        if (window->dc)
+        {
+            //compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
+            app->bitBlt(window->finalDC, 0, 0, window->rect.getSize().x, window->rect.getSize().y, window->dc);
+        }
     }
-                                                                                          
-	if (window->dc)                                                                                
-	{                                                                                           
-		//compressDraw (app, window->finalDC, {0, 0}, window->rect.getSize (), window->dc, window->originalRect.getSize ());
-        app->bitBlt(window->finalDC, 0, 0 , window->rect.getSize().x, window->rect.getSize().y, window->dc);
-	} 
 }
 
 
@@ -176,8 +180,9 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 
     //if (HideIfIsNotActive) unHide ();
 
-	if (manager->advancedMode)
+	if (manager->needToShow)
 	{
+        manager->setActiveWindow(manager);
 		manager->clickHandle();
 		for (int i = manager->currLen - 1; i >= 0; i--)
 		{
@@ -187,7 +192,7 @@ int standartManagerOnClick$ (DebugInfo info, Manager *manager, Vector mp)
 
 				missClicked = false;
                 returnableVal = i;
-				if (manager->pointers[i]->advancedMode) break;
+				if (manager->pointers[i]->needToShow) break;
 			}
 			else
 			{
@@ -209,18 +214,22 @@ void standartManagerDraw$ (DebugInfo info, Manager *manager)
 
     AbstractAppData* app = manager->app;
     assert(app);
+
 	if (manager->dc) app->bitBlt (manager->finalDC, 0, 0, 0, 0, manager->dc);
 
     int test1 = 0;
-	for (int i = 0; i < manager->currLen; i++)
-	{
-		if (manager->pointers[i]->advancedMode && manager->pointers[i]->reDraw) manager->pointers[i]->draw ();
- 		if (manager->pointers[i]->advancedMode) 
-		{
-            if (manager->pointers[i]->needTransparencyOutput) app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
-            else                                              app->bitBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
-		}
-	}
+    if (manager->needToShow)
+    {
+        for (int i = 0; i < manager->getCurLen(); i++)
+        {
+            if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+            if (manager->pointers[i]->needToShow)
+            {
+                if (manager->pointers[i]->needTransparencyOutput) app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+                else                                              app->bitBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+            }
+        }
+    }
 }
 
 
@@ -241,7 +250,11 @@ void swap$ (DebugInfo info, int &x0, int &y0)
 
 bool Manager::addWindow (Window *window)
 {
-    assert (window);
+    if (!window)
+    {
+        printf("ѕопытка добавить несуществующее окно\n");
+        return 0;
+    }
 	if (currLen >= length)
     {
         printf ("!!!Unable to add new Window!!!\n");
@@ -418,6 +431,19 @@ Rect Window::getAbsRect (bool coordinatsWithHandle /*=false*/)
 
 
 
+Window* Manager::isActiveWindowBelow()
+{
+    if (getActiveWindow() == this) return this;
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        Window* activeWindowBelow = NULL;
+        if (pointers[i]) activeWindowBelow = pointers[i]->isActiveWindowBelow();
+        if (activeWindowBelow) return activeWindowBelow;
+    }
+    return NULL;
+}
+
+
 void Manager::draw ()
 {
     standartManagerDraw (this);	
@@ -475,15 +501,6 @@ void Manager::replaceWindow (int numOfWindow, int startOfWindows)
 }
 */
 
-
-void Manager::hide ()
-{
-    advancedMode = false;
-}
-void Manager::unHide ()
-{
-    advancedMode = true;
-}
 
 void Manager::replaceWindow(int numOfWindow)
 {

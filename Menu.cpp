@@ -33,7 +33,7 @@ void Menu::onClick(Vector mp)
 
 
 
-    if (advancedMode)
+    if (needToShow)
     {
         reDraw = true;
         missClicked = onClickLine(mp);

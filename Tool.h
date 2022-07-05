@@ -60,8 +60,6 @@ struct Tool
     bool workedLastTime = false;
     const int ToolSaveLen = 0;
 
-    int clicked = 0;
-
     ToolData* toolData = NULL;
     ÑDllSettings* dllSettings;
 
@@ -84,7 +82,6 @@ struct Tool
 
     virtual HDC getDC();
     virtual const char* getName();
-    virtual void setMBCondition(int mbCond);
     virtual bool isFinished(ToolLay* data);
     virtual bool isStarted(ToolLay* data) { return ((ToolData*)data->getToolsData())->isStarted; };
 

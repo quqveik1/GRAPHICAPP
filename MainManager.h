@@ -14,6 +14,7 @@ struct MainManager : Manager
     }
 
     virtual void draw() override;
+    virtual void onClick(Vector mp) override;
 
     virtual int getMBCondition() override { return clicked; };
 

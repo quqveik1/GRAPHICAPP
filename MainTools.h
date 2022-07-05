@@ -33,7 +33,6 @@ struct ToolLay
     virtual bool useTool(ProgrammeDate* data);
     HDC drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
-    virtual int setMBCondition(int condition);
     virtual bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
     void* getToolsData() { return toolsData; };
 

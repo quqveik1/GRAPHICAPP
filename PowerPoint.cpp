@@ -35,6 +35,7 @@
 #include "FileSavings.cpp"
 #include "LaysMenu.cpp"
 #include "Thickness.cpp"
+#include "OpenHandleMenuManager.cpp"
 
 
 
@@ -52,6 +53,8 @@ PowerPoint* appData = new PowerPoint;
 
 int main (int argc, int *argv[])
 {
+    appData->appVersion = "v0.1.7.3";
+
     CSystemSettings SystemSettings;
     appData->systemSettings = &SystemSettings;
 
@@ -142,25 +145,25 @@ int main (int argc, int *argv[])
         AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindowToStart(addNewCanvas);
 
-        OpenManager* openWindowsManager = new OpenManager(appData, {}, TX_WHITE, NULL, LoadManager.loadImage("OpenWindows.bmp"));
+        OpenHandleMenuManager* openWindowsManager = new OpenHandleMenuManager(appData, LoadManager.loadImage("OpenWindows.bmp"));
         mainhandle->addWindowToStart(openWindowsManager);
         List* openWindows = new List(appData, { openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 6);
         openWindowsManager->setOpeningManager(openWindows);
     manager->addWindow(openWindows);
         
-        openWindows->addNewItem (menu, NULL, "Цвета");
-        openWindows->addNewItem(thicknessButton, NULL, "Толщина");
-        openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
-        openWindows->addNewItem (laysMenu, NULL, "Слои");
-        openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
-        List* filters = openWindows->addSubList("Фильтры");
-    manager->addWindow (filters);
-            for (int i = 0; i < dllManager->currLoadWindowNum; i++)
-            {
-                filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
-            }
+            openWindows->addNewItem (menu, NULL, "Цвета");
+            openWindows->addNewItem(thicknessButton, NULL, "Толщина");
+            openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
+            openWindows->addNewItem (laysMenu, NULL, "Слои");
+            openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
+            List* filters = openWindows->addSubList("Фильтры", dllManager->currLoadWindowNum);
+        manager->addWindow (filters);
+                for (int i = 0; i < dllManager->currLoadWindowNum; i++)
+                {
+                    filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
+                }
 
-        OpenManager* openSystemList = new OpenManager(appData, {}, TX_WHITE, NULL, LoadManager.loadImage("SettingsIcon.bmp"));
+        OpenHandleMenuManager* openSystemList = new OpenHandleMenuManager(appData, LoadManager.loadImage("SettingsIcon.bmp"));
         mainhandle->addWindowToStart(openSystemList);
         List* systemList = new List(appData, { openSystemList->rect.pos.x, openSystemList->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
         openSystemList->setOpeningManager(systemList);

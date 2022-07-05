@@ -26,18 +26,13 @@ void TwoOptionsMenu::onClick(Vector mp)
 
 void TwoOptionsMenu::draw()
 {
+    if (needToShow == 0) return;
     if (canvasManager && canvasManager->getActiveCanvas())
     {
         activeCanvas = canvasManager->getActiveCanvas(); 
         activeLay = activeCanvas->getActiveLay();
     }
 
-
-    if (getMBCondition() == 2) 
-    {
-        //data->drawOnScreen(copyOfTempDC);
-        _getch();
-    }
 
     if (!getMBCondition() && (lastfirstVal != firstVal || lastsecondVal != secondVal))
     {

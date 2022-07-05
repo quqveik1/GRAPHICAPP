@@ -44,14 +44,6 @@ void ToolLay::editTool(ProgrammeDate* data)
     isEditing = !getTool()->edit(this, outDC);
 }
 
-int ToolLay::setMBCondition(int condition)
-{
-    if (!getTool()) return 0;
-
-    getTool()->setMBCondition(condition);
-    return 1;
-}
-
 
 bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
 {
@@ -59,7 +51,7 @@ bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
     {
         HDC outDC = lay->lay.outputLay;
         if (!getTool()) return false;
-        getTool()->setMBCondition(mbCondition);
+        //getTool()->setMBCondition(mbCondition);
         //isEditing = !tool->edit(this, outDC);
         return true;
     }

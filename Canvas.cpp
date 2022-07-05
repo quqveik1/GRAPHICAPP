@@ -120,6 +120,7 @@ void Canvas::setCurrentData()
     currentDate->color = systemSettings->DrawColor;
     currentDate->canvasCoordinats = canvasCoordinats;
     currentDate->backGroundColor = TX_BLACK;
+    if (getMBCondition() == 0) currentDate->clickedMB = 0;
 }
 
 ToolLay* Canvas::getNewToolLay()
@@ -181,7 +182,7 @@ void Canvas::onClick(Vector mp)
 
             if (closeCanvas.rect.inRect(mx, my))
             {
-                advancedMode = false;
+                needToShow = false;
                 return;
             }
         }
@@ -205,14 +206,9 @@ void Canvas::onClick(Vector mp)
         }
     }
 
-    if (editingMode)
-    {
-        if (getActiveLay()->getActiveToolLay()->isInToolZone(currentDate, getMousePos(), getMBCondition())) return;
-    }
-
 
     //independet scenery block++++++++++++++++++++++++++++++++++++++++++++++++++++
-    if (getActiveLay() && getActiveLay()->getActiveToolLay()) getActiveLay()->getActiveToolLay()->setMBCondition(getMBCondition());
+    currentDate->clickedMB = getMBCondition();
     //independet scenery block----------------------------------------------------
 
 
@@ -256,12 +252,6 @@ void Canvas::draw()
 
 
     if (getActiveWindow() != this) wasClicked = false;
-
-
-    //scrollBarVert.draw ();
-    //app->bitBlt (finalDC, scrollBarVert.rect.pos.x, scrollBarVert.rect.pos.y, scrollBarVert.rect.getSize().x, scrollBarVert.rect.getSize().y, scrollBarVert.finalDC);
-    //scrollBarHor.draw ();
-    //app->bitBlt (finalDC, scrollBarHor.rect.pos.x, scrollBarHor.rect.pos.y, scrollBarHor.rect.getSize().x, scrollBarHor.rect.getSize().y, scrollBarHor.finalDC);
 
     drawCadre();
 
@@ -350,16 +340,11 @@ void Canvas::controlTool()
             finishTool();
         }
     }
-    if (getMBCondition() == 0)
-    {
-        toollay->setMBCondition(0);
-    }
 }
 
 void Canvas::finishTool()
 {
     activeTool = false;
-    toolLays[currentToolLength - 1].tool->clicked = 0;
 }
 
 void Canvas::returnHistory(int stepsBack)
@@ -585,7 +570,7 @@ void Canvas::drawLay()
 
         if (editingMode && (lays == getActiveLayNum()))
         {
-            lay[lays].getActiveToolLay()->setMBCondition(getMBCondition());
+            //lay[lays].getActiveToolLay()->setMBCondition(getMBCondition());
             lay[lays].editTool(currentDate);
         }
 

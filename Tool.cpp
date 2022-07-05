@@ -45,7 +45,7 @@ bool Tool::use(ProgrammeDate* data, ToolLay* lay, void* output)
 
     //printf ("1");
 
-    if (clicked != 1 || pos != startPos)
+    if (data->clickedMB != 1 || pos != startPos)
     {
         (app)->setColor(data->color, lay->lay->getPermanentDC (), data->size.x);
         txEllipse(pos.x - data->size.x + data->canvasCoordinats.x, pos.y - data->size.y + data->canvasCoordinats.y, pos.x + data->size.x + data->canvasCoordinats.x, pos.y + data->size.y + data->canvasCoordinats.y, lay->lay->getPermanentDC());
@@ -81,11 +81,6 @@ HDC Tool::getDC()
 const char* Tool::getName()
 {
     return name;
-}
-
-void Tool::setMBCondition(int mbCond)
-{
-    clicked = mbCond;
 }
 
 

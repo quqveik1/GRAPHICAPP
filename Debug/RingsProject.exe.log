@@ -53094,3 +53094,194 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h, строка: 13687, функция: bool __cdecl TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00AA9180 (32-bit), Flags: CMdRe0, Thread: 0x42B4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A4E266 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txBitBlt() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13687)
+
+# 1 0x00A2D274 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::bitBlt() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (85):
+
+     83: void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
+     84: {
+=>   85:     txBitBlt(dc1, x0, y0, sizex, sizey, dc2);
+     86: }
+     87: 
+
+# 2 0x00A4AC0F in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (222):
+
+    220: 		{
+    221:             if (manager->pointers[i]->needTransparencyOutput) app->transparentBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+=>  222:             else                                              app->bitBlt(manager->finalDC, manager->pointers[i]->rect.pos.x, manager->pointers[i]->rect.pos.y, manager->pointers[i]->rect.getSize().x, manager->pointers[i]->rect.getSize().y, manager->pointers[i]->finalDC);
+    223: 		}
+    224: 	}
+
+# 3 0x00A377FE in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (22):
+
+     20:         }
+     21:     }
+=>   22:     standartManagerDraw(this);
+     23: 
+     24:     printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 4 0x009E9802 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (258):
+
+    256:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    257: 
+=>  258: 		manager->draw ();
+    259: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    260: 
+
+# 5 0x00A73C7A in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (179):
+
+    177: 
+    178: 	txBegin ();
+=>  179: 	Engine (manager);
+    180:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    181:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13687):
+
+  13685:     {
+  13686: $1  if (_TX_HDC_FAILED (destImage))   return false;
+=>13687: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13688: 
+  13689: $   POINT size = txGetExtent (sourceImage);
+
+# 1 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (85):
+
+     83: void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
+     84: {
+=>   85:     txBitBlt(dc1, x0, y0, sizex, sizey, dc2);
+     86: }
+     87: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  5 2022 14:40:54, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  5 2022 14:41:02
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp, строка: 245, функция: bool __thiscall Manager::addWindow(struct Window *),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "window".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00579180 (32-bit), Flags: CMdRe0, Thread: 0x42F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004FC0C8 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Manager::addWindow() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (245):
+
+    243: bool Manager::addWindow (Window *window)
+    244: {
+=>  245:     assert (window);
+    246: 	if (currLen >= length)
+    247:     {
+
+# 1 0x00543889 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (160):
+
+    158:             openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
+    159:             List* filters = openWindows->addSubList("Фильтры", dllManager->currLoadWindowNum);
+=>  160:         manager->addWindow (filters);
+    161:                 for (int i = 0; i < dllManager->currLoadWindowNum; i++)
+    162:                 {
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  5 2022 14:42:07, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  5 2022 14:42:14
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+minkernel\crts\ucrt\src\appcrt\stdio\fclose.cpp(20) : Assertion failed: stream.valid()
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (22, 0xED621C50): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x002F9180 (32-bit), Flags: CMdRe0, Thread: 0x1438 (Main), errno: 2 (No such file or directory), _doserrno: 3 (No such process). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0026CA9D in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txOnSignal() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (11038)
+# 1 0x591A0738 in C:\Windows\SYSTEM32\ucrtbased.dll: raise()
+# 2 0x5919D3A4 in C:\Windows\SYSTEM32\ucrtbased.dll: setmbcp()
+# 3 0x5919DD12 in C:\Windows\SYSTEM32\ucrtbased.dll: CrtSetReportHookW2()
+# 4 0x5919F244 in C:\Windows\SYSTEM32\ucrtbased.dll: VCrtDbgReportW()
+# 5 0x5919DC5F in C:\Windows\SYSTEM32\ucrtbased.dll: CrtDbgReportW()
+# 6 0x591A81B3 in C:\Windows\SYSTEM32\ucrtbased.dll: fclose()
+
+# 7 0x0029743F in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: saveSystemSettings() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\GlobalOptions.cpp (203):
+
+    201:     {
+    202:         printf("Сохранение всех данных не прошло||Errno: %d\n", errno);
+=>  203:         fclose(ssFile);
+    204:         return (int)ssFile; 
+    205:     }
+
+# 8 0x002C39C0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (180):
+
+    178: 	txBegin ();
+    179: 	Engine (manager);
+=>  180:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    181:     appData->systemSettings->save("Settings\\FullSettings.settings");
+    182:     menu->saveMenu();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  5 2022 15:53:08, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  5 2022 15:53:24
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Images
+
+--------------------------------------------------

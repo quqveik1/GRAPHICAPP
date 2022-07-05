@@ -49,9 +49,9 @@ struct ColorMenu : Manager
     void loadHistory();
 
 
-    ColorMenu(AbstractAppData* _app, Vector _pos, const char* _pathToHistory, bool _advancedMode = false) :
+    ColorMenu(AbstractAppData* _app, Vector _pos, const char* _pathToHistory, bool _needToShow = false) :
         sizeOfColorMenu({ 412, 257 }),
-        Manager(_app, {}, 3, _advancedMode, _app->loadManager->loadImage("ColorsMenu-2.bmp"), { .pos = {0, 0}, .finishPos = { 412, 50 } })
+        Manager(_app, {}, 3, _needToShow, _app->loadManager->loadImage("ColorsMenu-2.bmp"), { .pos = {0, 0}, .finishPos = { 412, 50 } })
     {
         assert(app);
         assert(app->systemSettings);

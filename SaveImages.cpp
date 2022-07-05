@@ -4,7 +4,7 @@
 
 void SaveImages::draw()
 {
-    advancedMode = false;
+    needToShow = false;
 
     //условие выхода если холст не создан
     if (!canvasManager->getActiveCanvas())

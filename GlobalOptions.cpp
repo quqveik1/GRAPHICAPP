@@ -108,6 +108,7 @@ void setSystemSettings(CSystemSettings* systemSettings, const char* path)
     setIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
 
     setIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
+    setIntSettings(ssFile, &systemSettings->Thickness, "Thickness");
     
     setIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
 
@@ -209,6 +210,7 @@ int saveSystemSettings(CSystemSettings* systemSettings, const char* path)
     saveIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
 
     saveIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
+    saveIntSettings(ssFile, &systemSettings->Thickness, "Thickness");
 
     saveIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
 

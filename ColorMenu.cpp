@@ -37,14 +37,16 @@ void ColorMenu::draw()
     {
         confirmColor();
     }
+    if (needToShow)
+    {
+        app->setColor(app->systemSettings->DrawColor, finalDC);
+        app->rectangle(20, 85, 45, 110, finalDC);
 
+        drawColorHistory();
+        drawColorExamples();
+
+    }
     app->systemSettings->DrawColor = RGB(redComponent, greenComponent, blueComponent);
-
-    app->setColor(app->systemSettings->DrawColor, finalDC);
-    app->rectangle(20, 85, 45, 110, finalDC);
-    
-    drawColorHistory();
-    drawColorExamples();
     
     setMbLastTime();
 

@@ -9,6 +9,7 @@ struct ProgrammeDate
     COLORREF backGroundColor;
     int thickness;
     int gummiThickness;
+    int clickedMB;
     Vector size;
 
     ProgrammeDate(Vector _absMouseCoordinats, Vector _managerPos, Vector _size, COLORREF _color) :

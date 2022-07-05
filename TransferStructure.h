@@ -15,7 +15,7 @@ struct TransferData
 
 struct AbstractAppData
 {
-    const char* appVersion = "v0.1.7.2";
+    const char* appVersion = NULL;
 
     struct CSystemSettings* systemSettings = NULL;
     struct CToolManager* toolManager = NULL;

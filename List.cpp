@@ -25,7 +25,7 @@ void List::controlRect()
 
 List* List::addSubList(const char* ListText, int newListLength/* = NULL*/)
 {
-    if (!newListLength) newListLength = length;
+    if (!newListLength) return NULL;
     List* subList = new List(app, getNewSubItemCoordinats(), oneItemSize, newListLength);
 
     isThisItemList[currLen] = true;
@@ -50,16 +50,18 @@ void List::draw()
 
     for (int i = 0; i < currLen; i++)
     {
-        //pointers[i]->advancedMode = advancedMode;
-        app->setColor(app->systemSettings->SecondMenuColor, finalDC, app->systemSettings->SIDETHICKNESS);
-        app->line(0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
-
-        if (items[i]->getOpeningManager()->advancedMode)
-            app->ellipse(rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
-
-        if (isThisItemList[i] && !advancedMode)
+        if (needToShow)
         {
-            items[i]->getOpeningManager()->advancedMode = false;
+            app->setColor(app->systemSettings->SecondMenuColor, finalDC, app->systemSettings->SIDETHICKNESS);
+            app->line(0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
+
+            if (items[i]->getOpeningManager()->needToShow)
+                app->ellipse(rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
+        }
+
+        if (isThisItemList[i] && !needToShow)
+        {
+            items[i]->getOpeningManager()->needToShow = false;
         }
     }
 
@@ -73,7 +75,7 @@ void List::onClick(Vector mp)
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum && !isClickedLastTime())
     {
         //printf ("last: %d, current: %d\n", lastClickedItemNum, clikedButtonNum);
-        if (pointers[clikedButtonNum]->advancedMode && mayFewWindowsBeOpenedAtTheSameTime)
+        if (pointers[clikedButtonNum]->needToShow && mayFewWindowsBeOpenedAtTheSameTime)
         {
             clickButton(pointers[clikedButtonNum], this, mp);
         }

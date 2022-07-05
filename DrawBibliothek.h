@@ -86,7 +86,7 @@ struct Window
 	RGBQUAD *finalDCArr = NULL;
     Vector finalDCSize = {}; 
 	Manager *manager;
-	bool advancedMode;
+	bool needToShow;
 	bool reDraw;
     bool needTransparencyOutput = false;
 
@@ -95,7 +95,7 @@ struct Window
     Vector mousePosLastTime = {};
     int mbLastTime = 0;
 
-    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = NULL, bool _advancedMode = true) :
+    Window (AbstractAppData* _app, Rect _rect = {}, COLORREF _color = NULL, HDC _dc = NULL, Manager *_manager = NULL, const char *_text = NULL, bool _needToShow = true) :
         app (_app),
         systemSettings (_app->systemSettings),
 		rect (_rect),
@@ -103,7 +103,7 @@ struct Window
 		manager (_manager),
 		text (_text), 
 		dc (_dc),
-		advancedMode (_advancedMode),
+		needToShow (_needToShow),
 		reDraw (true),
         loadManager (_app->loadManager),
         font (_app->systemSettings->MainFont),
@@ -173,6 +173,15 @@ struct Window
         if (getManager()) return ((Window*)getManager())->setActiveWindow(window);
     };
 
+    virtual Window* isActiveWindowBelow()
+    {
+        if (getActiveWindow() == this) return this;
+        else return NULL;
+    };
+
+    virtual void hide() { needToShow = false; };
+    virtual void show() { needToShow = true; };
+
     virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
     
     virtual void setLastTimeMP() { mousePosLastTime = getMousePos(); }
@@ -194,8 +203,8 @@ struct Manager : Window
 	bool coordinatSysFromHandle;
     bool HideIfIsNotActive;
 
-	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _advancedMode = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
-		Window (_app, _rect, _color, _dc, NULL, NULL, _advancedMode),
+	Manager (AbstractAppData* _app, Rect _rect,  int _length, bool _needToShow = true, HDC _dc = NULL, Rect _handle = {}, COLORREF _color = NULL, bool _coordinatSysFromHandle = false, bool _HideIfIsNotActive = false) :
+		Window (_app, _rect, _color, _dc, NULL, NULL, _needToShow),
         handle (_app, _handle),
 		length (_length),
 		pointers (new Window* [_length]{}),
@@ -224,9 +233,11 @@ struct Manager : Window
     virtual void controlHandle ();
     virtual bool clickHandle ();
     virtual void replaceWindow (int numOfWindow);
-    virtual void hide ();
-    virtual void unHide ();
+    virtual void hide() override;
+    virtual void show() override;
     virtual int& getCurLen() { return currLen; };
+
+    virtual Window* isActiveWindowBelow() override;
 
 
     virtual void redraw() { redrawStatus = true; };
@@ -252,6 +263,24 @@ void Window::defaultDestructor()
     assert(app);
     if (dc) app->smartDeleteDC(dc);
     if (finalDC) app->smartDeleteDC(dc);
+}
+
+void Manager::hide()
+{
+    needToShow = false;
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        pointers[i]->hide();
+    }
+}  
+
+void Manager::show()
+{
+    needToShow = true;
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        pointers[i]->show();
+    }
 }
 
 

@@ -5,7 +5,7 @@ void ToolsPalette::drawOneLine(int lineNum)
 {
     pointers[lineNum]->draw();
     //app->drawOnScreen (pointers[lineNum]->dc);
-    if (pointers[lineNum]->advancedMode) app->bitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
+    if (pointers[lineNum]->needToShow) app->bitBlt(finalDC, pointers[lineNum]->rect.pos.x, pointers[lineNum]->rect.pos.y + handle.rect.finishPos.y, pointers[lineNum]->rect.finishPos.x, pointers[lineNum]->rect.finishPos.y, pointers[lineNum]->finalDC);
 
     app->setColor(TX_BLACK, finalDC);
     app->line(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
@@ -32,7 +32,7 @@ int ToolsPalette::onClickLine(Vector mp)
 
             missClicked = false;
 
-            if (pointers[lineNum]->advancedMode) return missClicked + 2;
+            if (pointers[lineNum]->needToShow) return missClicked + 2;
         }
         else
         {

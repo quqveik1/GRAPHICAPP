@@ -21,8 +21,17 @@ void MainManager::draw()
     }
     standartManagerDraw(this);
 
+    printf("Active Window: %p\n", isActiveWindowBelow());
+
     if (!app->isFullScreen())
     {
         app->drawCadre({ .pos = {0, -5}, .finishPos = app->systemSettings->SizeOfScreen }, finalDC, color, 5);
     }
+}
+
+
+void MainManager::onClick(Vector mp)
+{
+    
+    standartManagerOnClick(this, mp);
 }

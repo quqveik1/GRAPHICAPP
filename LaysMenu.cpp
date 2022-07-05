@@ -4,9 +4,9 @@
 
 void LaysMenu::onClick(Vector mp)
 {
-    if (advancedMode)
+    if (needToShow)
     {
-        if (advancedMode && !isClickedLastTime())
+        if (needToShow && !isClickedLastTime())
         {
             clickHandle();
 

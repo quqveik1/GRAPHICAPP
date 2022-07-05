@@ -23,6 +23,7 @@ struct OpenManager : Window
 
     virtual void draw() override;
     virtual void onClick(Vector mp) override;
+    virtual void showControl() {};
 
     virtual Manager*& getOpeningManager() { return openingManager; };
     virtual void setOpeningManager(Manager* _manager) { openingManager = _manager; };

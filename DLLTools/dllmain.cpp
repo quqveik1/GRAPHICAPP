@@ -45,12 +45,13 @@ DLLToolExportData* initDLL(AbstractAppData* data)
 bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
 {
     colorSave = (ColorSave*) lay->getToolsData();
+    appData = data;
     Vector pos = data->mousePos;
     COLORREF newColor = app->getPixel(pos, lay->lay->getPermanentDC());
 
     colorSave->color = *(app->currColor);
 
-    if (clicked  && !workedLastTime)
+    if (data->clickedMB  && !workedLastTime)
     {
         workedLastTime = true;
         colorSave->isStarted = true;
@@ -58,7 +59,7 @@ bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
         colorSave->isFinished = true;
         return colorSave->isFinished;
     }
-    if (!clicked) workedLastTime = false;
+    if (!data->clickedMB) workedLastTime = false;
 
     return false;
 }
@@ -120,7 +121,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     pointSave = (PointSave*)lay->getToolsData();
     
 
-    if (clicked == 1)
+    if (data->clickedMB == 1)
     {
         lay->needRedraw();
 
@@ -134,7 +135,7 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
         lastPos = data->mousePos;
     }
 
-    if ((!clicked) && isStarted(lay))
+    if ((!data->clickedMB) && isStarted(lay))
     {
         pointSave->isFinished = true;
         toolLay->needRedraw();
@@ -182,7 +183,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     Vector pos = data->mousePos;
     if (app->systemSettings->debugMode == 5) printf("pos: {%lf, %lf}\n", pos.x, pos.y);
 
-    if (clicked == 1)
+    if (data->clickedMB == 1)
     {
         saveTool->pos = pos;
         workedLastTime = true;
@@ -193,11 +194,11 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     if (isStarted(toolLay))lay->needRedraw();
     saveTool->size = pos - saveTool->pos;
     saveTool->color = data->color;
-    saveTool->thickness = app->systemSettings->thickness;
+    saveTool->thickness = app->systemSettings->Thickness;
     saveTool->name = (const char*)1;
 
 
-    if (clicked == 2 && workedLastTime)
+    if (data->clickedMB == 2 && workedLastTime)
     {
         finishUse();
 
@@ -239,7 +240,7 @@ HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     assert(toollay);
-    if (app->systemSettings->debugMode == 5) printf("Tool getMBCondition(): %d\n", clicked);
+    if (app->systemSettings->debugMode == 5) printf("Tool getMBCondition(): %d\n", appData->clickedMB);
     if (app->systemSettings->debugMode == 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
     ToolSave* toolDate = getToolData();
@@ -323,7 +324,7 @@ void Tool4Squares::controlLeftButton()
 {
     ToolSave* toolDate = getToolData();
 
-    if (clicked == 1 && activeControlSquareNum < 0)
+    if (appData->clickedMB == 1 && activeControlSquareNum < 0)
     {
         Vector mp = appData->getMousePos() - toolLay->toolZone.pos;
         for (int i = 0; i < controlSquareLength; i++)
@@ -373,7 +374,7 @@ void Tool4Squares::controlLeftButton()
 
     }
 
-    if (clicked != 1 && activeControlSquareNum >= 0)
+    if (appData->clickedMB != 1 && activeControlSquareNum >= 0)
     {
         activeControlSquareNum = -1;
         toolLay->needRedraw();
@@ -385,8 +386,8 @@ void Tool4Squares::controlLeftButton()
 void Tool4Squares::controlRightButton()
 {
     ToolSave* toolDate = getToolData();
-
-    if (clicked == 2)
+    assert(appData);
+    if (appData->clickedMB == 2)
     {
         draggedLastTime = true;
         toolLay->needRedraw();
@@ -401,7 +402,7 @@ void Tool4Squares::controlRightButton()
         if (app->systemSettings->debugMode) printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     }
 
-    if (clicked != 2 && draggedLastTime)
+    if (appData->clickedMB != 2 && draggedLastTime)
     {
         draggedLastTime = false;
         toolLay->needRedraw();
