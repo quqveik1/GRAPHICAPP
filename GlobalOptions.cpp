@@ -72,6 +72,7 @@ void setDefaultSystemSettings(CSystemSettings* systemSettings)
     systemSettings->MENUBUTTONSWIDTH = 50.000000;
     systemSettings->SIDETHICKNESS = 2.000000;
     systemSettings->SCROLLBARTHICKNESS = 20.000000;
+    systemSettings->FrameThickness = 5;
 
     systemSettings->debugMode = 1;
 

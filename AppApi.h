@@ -49,6 +49,7 @@ struct PowerPoint : AbstractAppData
 
     virtual void changeWindow(Vector size = {}, Vector pos = {})  override;
     virtual void setCursor(HCURSOR cursor) override;
+    virtual Vector getCursorPos() override;
 
     virtual bool wasResized() override { return isResized; };
     virtual void setResized(bool state = true) override;

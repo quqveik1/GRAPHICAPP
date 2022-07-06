@@ -179,12 +179,14 @@ struct Window
         else return NULL;
     };
 
+    virtual void screenChanged() {};
+
     virtual void hide() { needToShow = false; };
     virtual void show() { needToShow = true; };
 
     virtual Vector getAbsMousePos() { return getMousePos() + rect.pos; };
     
-    virtual void setLastTimeMP() { mousePosLastTime = getMousePos(); }
+    virtual void setMPLastTime() { mousePosLastTime = getMousePos(); }
 
 
 	virtual void draw ();
@@ -238,6 +240,7 @@ struct Manager : Window
     virtual int& getCurLen() { return currLen; };
 
     virtual Window* isActiveWindowBelow() override;
+    virtual void screenChanged() override;
 
 
     virtual void redraw() { redrawStatus = true; };
@@ -280,6 +283,14 @@ void Manager::show()
     for (int i = 0; i < getCurLen(); i++)
     {
         pointers[i]->show();
+    }
+}
+
+void Manager::screenChanged()
+{
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        if (pointers[i]) pointers[i]->screenChanged();
     }
 }
 

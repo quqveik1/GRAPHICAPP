@@ -205,7 +205,7 @@ bool operator < (const Vector &a, const Vector &b)
 {
     if (isSmaller (a.x, b.x))
     {
-        if (isBigger(a.y, b.y))
+        if (isSmaller(a.y, b.y))
         {
             return true;
         }

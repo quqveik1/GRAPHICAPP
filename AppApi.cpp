@@ -184,9 +184,12 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 
     SetWindowLong(systemSettings->MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
 
-    HDC outDC = txCreateDIBSection(size.x, size.y);
-    deleteDC(txDC());
-    txDC() = outDC;
+    if (systemSettings->SizeOfScreen != size)
+    {
+        HDC outDC = txCreateDIBSection(size.x, size.y);
+        deleteDC(txDC());
+        txDC() = outDC;
+    }
 
     
 
@@ -199,6 +202,16 @@ void PowerPoint::setCursor(HCURSOR cursor)
 {
     activeCursor = cursor;
     lastTimeCursorSetTime = clock();
+}
+
+Vector PowerPoint::getCursorPos()
+{
+    Vector vector = {};
+    POINT point = {};
+    GetCursorPos(&point);
+    vector.x = point.x;
+    vector.y = point.y;
+    return vector;
 }
 
 

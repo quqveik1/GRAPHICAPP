@@ -11,9 +11,12 @@ Canvas* CanvasManager::getActiveCanvas()
 
 void CanvasManager::draw()
 {
+    rect.finishPos = app->systemSettings->SizeOfScreen;
 
     app->setColor(app->systemSettings->BackgroundColor, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
+
+   
 
 
     standartManagerDraw(this);

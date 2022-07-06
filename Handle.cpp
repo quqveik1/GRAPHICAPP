@@ -32,37 +32,38 @@ bool Handle::addWindowToBack(Window* window)
     return addWindow(window);
 }
 
+void Handle::screenChanged()
+{
+    Rect newRect = { .pos = rect.pos, .finishPos = {app->systemSettings->SizeOfScreen.x, rect.pos.y + getSize().y} };
+    resize(newRect);
+
+    for (int i = 0; i < numberOfAddToBackElements; i++)
+    {
+        Rect windowRect = {};
+        windowRect.pos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * (i + 1);
+        windowRect.pos.y = rect.pos.y;
+
+        windowRect.finishPos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * i;
+        windowRect.finishPos.y = rect.finishPos.y;
+        pointers[i]->resize(windowRect);
+    }
+}
+
 
 void Handle::draw()
 {
+
+
     standartManagerDraw(this);
 
-    if (app->wasResized())
-    {
-        Rect newRect = { .pos = rect.pos, .finishPos = {app->systemSettings->SizeOfScreen.x, rect.pos.y + getSize().y} };
-        resize(newRect);
-
-        for (int i = 0; i < numberOfAddToBackElements; i++)
-        {
-            Rect windowRect = {};
-            windowRect.pos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * (i + 1);
-            windowRect.pos.y = rect.pos.y;
-
-            windowRect.finishPos.x = rect.finishPos.x - app->systemSettings->BUTTONWIDTH * i;
-            windowRect.finishPos.y = rect.finishPos.y;
-            pointers[i]->resize(windowRect);
-        }
-    }
+    rect.finishPos.x = app->systemSettings->SizeOfScreen.x;
 
     if (wasCommonHandlePlaceClicked)
     {
-        Vector superAbsMP = getAbsMousePos() + app->systemSettings->ScreenPos;
+        Vector superAbsMP = app->getCursorPos();
         Vector delta = superAbsMP - lastTimeMousePos;
-        if (app->wasResized())
-        {
-            delta = { 0, 0 };
-        }
-
+        if (wasInFullScreenLastTime != app->isFullScreen()) delta = {};
+        
         if (app->systemSettings->debugMode >= 2) printf("delta: {%lf, %lf}\n", delta.x, delta.y);
         if (app->systemSettings->debugMode >= 2) printf("mp: {%lf, %lf}\n", superAbsMP.x, superAbsMP.y);
 
@@ -75,6 +76,8 @@ void Handle::draw()
         lastTimeMousePos = superAbsMP;
         if (wasCommonHandlePlaceClicked && getMBCondition() == 0)wasCommonHandlePlaceClicked = 0;
     }
+
+    wasInFullScreenLastTime = app->isFullScreen();
 
     setMbLastTime();
 }

@@ -40,7 +40,7 @@ void Slider2::draw()
         if (isBigger(pointSliderPos.x, getSize().x - pointSliderSize.x)) pointSliderPos.x = getSize().x - pointSliderSize.x;
         doubleVersionOfParameter = pointSliderPos.x * kOfParametr;
         *parametr = doubleVersionOfParameter;
-        setLastTimeMP();
+        setMPLastTime();
     }
     else
     {
@@ -62,6 +62,6 @@ void Slider2::onClick(Vector mp)
     if (sliderRect.inRect(mp) && !lastTimeCLicked)
     {
         isSliderClicked = true;
-        setLastTimeMP();
+        setMPLastTime();
     }
 }

@@ -43,7 +43,7 @@ struct ToolMenu : Menu
     HDC emptyToolDC = NULL;
 
     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
-        Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, {}, _app->systemSettings->ONELAYTOOLSLIMIT, true),
+        Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x - 5, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, {}, _app->systemSettings->ONELAYTOOLSLIMIT, true),
         canvasManager(_canvasManager)
     {
         loadManager = _loadManager;

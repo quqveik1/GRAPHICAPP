@@ -36,6 +36,7 @@
 #include "LaysMenu.cpp"
 #include "Thickness.cpp"
 #include "OpenHandleMenuManager.cpp"
+#include "winuser.h"
 
 
 
@@ -53,7 +54,7 @@ PowerPoint* appData = new PowerPoint;
 
 int main (int argc, int *argv[])
 {
-    appData->appVersion = "v0.1.7.3";
+    appData->appVersion = "v0.1.7.4";
 
     CSystemSettings SystemSettings;
     appData->systemSettings = &SystemSettings;
@@ -87,18 +88,17 @@ int main (int argc, int *argv[])
     txSetWindowsHook(CtrlWindowFunc);
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
 
-    appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);
-    appData->setResized(false);
+    appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);;
     
     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
 
     ToolSave toolSave = {};
 
-    CanvasManager* canvasManager = new CanvasManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen });
+    CanvasManager* canvasManager = new CanvasManager(appData);
     appData->canvasManager = canvasManager;
 	manager->addWindow (canvasManager);
 
-    Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->SizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
+    Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
     manager->addWindow(mainhandle);
 
 
@@ -257,9 +257,6 @@ void Engine (MainManager *manager)
 
 		manager->draw ();
 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
-
-        if (wasResizedInLastFrame) app->setResized(false);
-        wasResizedInLastFrame = app->wasResized();
 
         manager->clicked = txMouseButtons();
 		if (txMouseButtons ())

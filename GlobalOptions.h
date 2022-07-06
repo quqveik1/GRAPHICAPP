@@ -33,6 +33,7 @@ struct CSystemSettings
     double MENUBUTTONSWIDTH = NULL;
     double SIDETHICKNESS = NULL;
     double SCROLLBARTHICKNESS = NULL;
+    double FrameThickness = NULL;
 
     int debugMode = NULL;
 

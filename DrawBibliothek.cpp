@@ -292,8 +292,7 @@ void Window::MoveWindowTo(Vector pos)
 
 void Window::MoveWindow(Vector delta)
 {
-    rect.pos += delta;
-    rect.finishPos += delta;
+    rect = rect + delta;
 }
 
 void Window::draw ()
