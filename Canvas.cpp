@@ -83,6 +83,7 @@ void Canvas::startTool()
 void Canvas::changeTool()
 {
     delete (getActiveLay()->getActiveToolLay()->getToolsData());
+    getActiveLay()->needRedraw();
 
     setToolToToolLay(getActiveLay()->getActiveToolLay());
 }
@@ -290,6 +291,16 @@ CLay* Canvas::getActiveLay()
 {
     if (activeLayNum < 0 || !lay[activeLayNum].toolLays) return NULL;
     return &(lay[activeLayNum]);
+}
+
+
+Vector Canvas::getLaySize()
+{
+    if (getActiveLay())
+    {
+        return getActiveLay()->lay.laySize;
+    }
+    return {};
 }
 
 int Canvas::getEditingMode()

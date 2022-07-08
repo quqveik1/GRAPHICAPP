@@ -102,6 +102,7 @@ struct Canvas : Manager
     virtual HDC getImageForSaving();
     virtual CLay* getActiveLay();
     virtual int getEditingMode();
+    virtual Vector getLaySize();
 
     int getCurrentToolLengthOnActiveLay();
     int getActiveLayNum();

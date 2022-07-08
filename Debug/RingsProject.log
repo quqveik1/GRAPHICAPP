@@ -24,14 +24,14 @@ C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(54,44): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(44,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(44,53): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(166,16): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(167,16): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(247,5): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(255,5): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(269,101): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(269,70): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(570,96): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(570,65): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(168,16): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(248,5): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(256,5): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(270,101): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(270,70): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(581,96): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(581,65): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(60,17): warning C4804: *=: небезопасное использование типа "bool" в операции
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(74,17): warning C4804: *=: небезопасное использование типа "bool" в операции
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp(18,48): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
