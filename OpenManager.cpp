@@ -16,7 +16,7 @@ void OpenManager::onClick(Vector mp)
 
 void OpenManager::draw()
 {
-    app->standartWindowDraw(this);
+    app->windowsLibApi->standartWindowDraw(this);
 
     showControl();
     

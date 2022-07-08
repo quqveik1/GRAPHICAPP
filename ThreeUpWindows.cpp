@@ -63,6 +63,6 @@ void ResizeButton::draw()
     else                     dc = nowIsNotFullScreen;
 
 
-    app->standartWindowDraw(this);
+    app->windowsLibApi->standartWindowDraw(this);
 }
 

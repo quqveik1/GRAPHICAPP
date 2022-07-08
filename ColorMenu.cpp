@@ -29,7 +29,7 @@ void ColorMenu::draw()
 
     setColorComponents();
 
-    app->standartManagerDraw(this);
+    app->windowsLibApi->standartManagerDraw(this);
 
     if (app->systemSettings->debugMode >= 3)printf("colorHistory.currentPos: %d\n", colorHistory.currentPos);
     
@@ -58,7 +58,7 @@ void ColorMenu::draw()
 void ColorMenu::onClick(Vector mp)
 {
     setActiveWindow(this);
-    app->standartManagerOnClick(this, mp);
+    app->windowsLibApi->standartManagerOnClick(this, mp);
 
     controlHistoryClick();
     controlExampleClick();

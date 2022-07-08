@@ -1,5 +1,5 @@
 #pragma once
-#include "TransferStructure.h"
+#include "AbstractApp.h"
 
 struct PowerPoint : AbstractAppData
 {
@@ -61,10 +61,6 @@ struct PowerPoint : AbstractAppData
     virtual void drawCadre(Rect rect, HDC dc, COLORREF color, int thickness) override;
     virtual void drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness) override;
     virtual void drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness) override;
-
-    virtual int standartWindowDraw(Window* window) override;
-    virtual int standartManagerDraw(Manager* manager) override;
-    virtual int standartManagerOnClick(Manager* manager, Vector mp) override;
 
     virtual void changeWindow(Vector size = {}, Vector pos = {})  override;
     virtual void setCursor(HCURSOR cursor) override;

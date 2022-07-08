@@ -1,3 +1,4 @@
+#pragma once
 #include "Handle.h"
 
 
@@ -54,7 +55,7 @@ void Handle::draw()
 {
 
 
-    app->standartManagerDraw(this);
+    app->windowsLibApi->standartManagerDraw(this);
 
     rect.finishPos.x = app->systemSettings->SizeOfScreen.x;
 
@@ -84,7 +85,7 @@ void Handle::draw()
 
 void Handle::onClick(Vector mp)
 {
-    int resultOfClicking = app->standartManagerOnClick(this, mp);
+    int resultOfClicking = app->windowsLibApi->standartManagerOnClick(this, mp);
 
     if (resultOfClicking == -1 && !wasCommonHandlePlaceClicked)
     {

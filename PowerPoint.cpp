@@ -1,14 +1,13 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#include "SystemSettings.cpp"
 #include "DrawBibliothek.cpp"
 #include "WindowsLib.cpp"
-#include "GlobalOptions.h"
 #include "Q_Buttons.h"
 #include <cmath>
 #include "StandartFunctions.h"
 //#include "CurvesFilter.h"
 #include "Canvas.cpp"
-#include "TransferStructure.h"
 #include "DLLFiltersManager.cpp"
 #include "Tool.h"
 #include "DLLToolsManager.cpp"
@@ -18,7 +17,6 @@
 #include "ProgressBar.h"
 #include "LoadManager.cpp"
 #include "Lay.cpp"
-#include "GlobalOptions.cpp"
 #include "AppApi.cpp"
 #include "ToolsMenu.cpp"
 #include "OpenManager.cpp"
@@ -37,6 +35,7 @@
 #include "Thickness.cpp"
 #include "OpenHandleMenuManager.cpp"
 #include "winuser.h"
+#include "WindowsLibApi.cpp"
 
 
 
@@ -65,6 +64,9 @@ int main (int argc, int *argv[])
 
     CLoadManager LoadManager(appData);
     appData->loadManager = &LoadManager;
+
+    WindowsLibApi windowsLib;
+    appData->windowsLibApi = &windowsLib;
 
     CFileSavings FileSavings;
     FileSavings.add("Settings\\FullSettings.settings");
@@ -214,7 +216,7 @@ void writeVersion(PowerPoint* app)
     {
         fprintf(versionFile, "%s", app->appVersion);
     }
-    fclose(versionFile);
+    if (versionFile)fclose(versionFile);
 }
 
 
@@ -232,7 +234,7 @@ bool checkVersionCompability(PowerPoint* app)
         if (result == 0) needLoadSaves = true;
     }
 
-    fclose(versionFile);
+    if (versionFile) fclose(versionFile);
     return needLoadSaves;
 }
 

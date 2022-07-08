@@ -54298,3 +54298,191 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h, строка: 10885, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00541138 (32-bit), Flags: CMdRe0, Thread: 0x33B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00486E22 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10885)
+# 1 0x004E853C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13584)
+# 2 0x004E8E60 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13607)
+
+# 3 0x004C8CCF in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+# 4 0x60F1B3BA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: CopyDC::controlStretchedDCFullSize() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLTools\CopyDC.cpp (50):
+
+     48:         saveCopyDC->stretchedDCFullSize = absSize * 2;
+     49:         app->deleteDC(saveCopyDC->stretchedDC);
+=>   50:         saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
+     51:     }
+     52: }
+
+# 5 0x60F1F8C4 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLTools.tool: CopyDC::load() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLTools\CopyDC.cpp (141):
+
+    139:             sizeSignControl(&truePos, &absSize);
+    140: 
+=>  141:             controlStretchedDCFullSize(absSize);
+    142: 
+    143:             app->stretchBlt(saveCopyDC->stretchedDC, {}, absSize, saveCopyDC->dc, {}, saveCopyDC->startSize);
+
+# 6 0x004D2558 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ToolLay::drawTool() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainTools.cpp (34):
+
+     32: HDC ToolLay::drawTool(HDC dc /*= NULL*/)
+     33: {
+=>   34:     if (getTool() && isStarted()) return getTool()->load(this, dc);
+     35:     return NULL;
+     36: }
+
+# 7 0x004DCCF7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CLay::redraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CLay.cpp (109):
+
+    107:     for (int toollay = 0; toollay < toolLength; toollay++)
+    108:     {
+=>  109:         HDC outDC = toolLays[toollay]->drawTool();
+    110:         if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
+    111:     }
+
+# 8 0x004D0F48 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::drawLay() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (560):
+
+    558:         if (lay[lays].redrawStatus())
+    559:         {
+=>  560:             lay[lays].redraw();
+    561:             lay[lays].noMoreRedraw();
+    562:         }
+
+# 9 0x004CBB3C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (221):
+
+    219:     controlLay();
+    220: 
+=>  221:     drawLay();
+    222: 
+    223:     CLay* activeLay = getActiveLay();
+
+#10 0x004E1FC5 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+#11 0x004E23B7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+#12 0x004CC335 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp (23):
+
+     21: 
+     22: 
+=>   23:     app->windowsLibApi->standartManagerDraw(this);
+     24: }
+     25: 
+
+#13 0x004E1FC5 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+#14 0x004E23B7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+#15 0x004CEBA6 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (135):
+
+    133: 
+    134: 
+=>  135:     app->windowsLibApi->standartManagerDraw(this);
+    136: 
+    137:     printf("Active Window: %p\n", isActiveWindowBelow());
+
+#16 0x00481E62 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (276):
+
+    274:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    275: 
+=>  276: 		manager->draw ();
+    277: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    278: 
+
+#17 0x0050B8E6 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (197):
+
+    195: 
+    196: 	txBegin ();
+=>  197: 	Engine (manager);
+    198:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    199:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10885):
+
+  10883: 
+  10884: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10885: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10886: 
+  10887: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13584):
+
+  13582: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13583: 
+=>13584: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13585: $   assert (dc); if (!dc) return NULL;  //-V547
+  13586: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13607):
+
+  13605:     if (!pixels) {$ pixels = &pix; }
+  13606: 
+=>13607: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13608: 
+  13609: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  8 2022 21:13:14, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  8 2022 21:13:25
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DrawBibliothek.h"
+#include "WindowsLib.cpp"
 #include "CLay.h"
 #include "MainTools.h"
 

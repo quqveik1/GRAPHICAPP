@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GlobalOptions.h"
-#include "TransferStructure.h"
+#include "SystemSettings.h"
+#include "AbstractApp.h"
 
 struct Image
 {

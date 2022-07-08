@@ -1,5 +1,7 @@
 #pragma once
 
+#include "..\TXLib.cpp"
+#include "..\AbstractApp.h"
 #include "..\WindowsLib.cpp"
 #include "..\Q_Vector.h"
 #include "KontrastMenu.cpp"

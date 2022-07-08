@@ -1,6 +1,5 @@
 #pragma once
 #include "DrawBibliothek.h"
-#include "TransferStructure.h"
 
 struct CFilter : Manager
 {

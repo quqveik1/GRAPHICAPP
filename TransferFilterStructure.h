@@ -1,4 +1,4 @@
 #pragma once
-#include "TransferStructure.h"
+#include "AbstractApp.h"
 #include "DLLFilters\DLLExportData.cpp"
 #include "CFilter.h"

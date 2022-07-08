@@ -1,7 +1,6 @@
 #pragma once
 #include "Canvas.h"
 #include "ProgressBar.h"
-#include "GlobalOptions.h"
 
 struct CanvasManager : Manager
 {
@@ -16,6 +15,7 @@ struct CanvasManager : Manager
         Manager(_app, { .pos = {}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
         loadManager (_app->loadManager)
     {
+        gassert(loadManager);
         app->compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 });
     }
 

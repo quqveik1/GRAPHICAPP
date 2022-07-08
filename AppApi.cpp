@@ -57,24 +57,6 @@ void PowerPoint::drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF colo
 }
 
 
-int PowerPoint::standartWindowDraw(Window* window)
-{
-    standartDraw$(window);
-    return 0;
-}
-
-int PowerPoint::standartManagerDraw(Manager* manager)
-{
-    standartManagerDraw$(manager);
-    return 0;
-}
-
-
-int PowerPoint::standartManagerOnClick(Manager* manager, Vector mp)
-{
-    return standartManagerOnClick$(manager, mp);
-}
-
 void PowerPoint::drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
 {

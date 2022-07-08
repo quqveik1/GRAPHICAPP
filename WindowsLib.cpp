@@ -1,26 +1,11 @@
 #pragma once
 #include "WindowsLib.h"
+#include "WindowsLibApi.h"
 
 
 bool Manager::addWindow(Window* window)
 {
-    if (!window)
-    {
-        printf("ѕопытка добавить несуществующее окно\n");
-        return 0;
-    }
-    if (currLen >= length)
-    {
-        printf("!!!Unable to add new Window!!!\n");
-        return 0;
-    }
-
-    pointers[currLen] = window;
-    currLen++;
-
-    window->manager = this;
-
-    return 1;
+    return app->windowsLibApi->addWindow(this, window);
 }
 
 
@@ -51,26 +36,12 @@ void Window::MoveWindow(Vector delta)
 
 void Window::draw()
 {
-    app->standartWindowDraw(this);
+    app->windowsLibApi->standartWindowDraw(this);
 }
 
 void Window::resize(Rect newRect)
 {
-
-    if (systemSettings->debugMode == 2) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
-    if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
-    {
-        finalDCSize = { newRect.getSize().x, newRect.getSize().y };
-        if (systemSettings->debugMode == 2) printf("finalDCSize {%lf, %lf}; \n", finalDCSize.x, finalDCSize.y);
-
-        app->deleteDC(finalDC);
-        finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
-
-        app->setColor(color, finalDC);
-        app->rectangle(0, 0, newRect.getSize().x, newRect.getSize().y, finalDC);
-        if (systemSettings->debugMode == 5) app->drawOnScreen(finalDC);
-    }
-    rect = newRect;
+    app->windowsLibApi->resize(this, newRect);
 }
 
 void Window::reInit()
@@ -103,24 +74,7 @@ Vector Window::getRelativeMousePos(bool coordinatsWithHandle)
 
 Vector Window::getAbsCoordinats(bool coordinatsWithHandle /*=false*/)
 {
-    Vector coordinats = {};
-
-    Manager* copyOfManager = manager;
-
-    coordinats += rect.pos;
-
-    for (;;)
-    {
-        if (!copyOfManager) break;
-
-        coordinats = coordinats + copyOfManager->rect.pos;
-        if (copyOfManager->coordinatSysFromHandle && !coordinatsWithHandle) coordinats.y += copyOfManager->handle.rect.finishPos.y;
-        copyOfManager = copyOfManager->manager;
-
-    }
-
-
-    return coordinats;
+    return app->windowsLibApi->getAbsCoordinats(this, coordinatsWithHandle);
 }
 
 Rect Window::getAbsRect(bool coordinatsWithHandle /*=false*/)
@@ -153,53 +107,23 @@ Rect Window::getAbsRect(bool coordinatsWithHandle /*=false*/)
 
 Window* Manager::isActiveWindowBelow()
 {
-    if (getActiveWindow() == this) return this;
-    for (int i = 0; i < getCurLen(); i++)
-    {
-        Window* activeWindowBelow = NULL;
-        if (pointers[i]) activeWindowBelow = pointers[i]->isActiveWindowBelow();
-        if (activeWindowBelow) return activeWindowBelow;
-    }
-    return NULL;
+    return app->windowsLibApi->isActiveWindowBelow(this);
 }
 
 
 void Manager::draw()
 {
-    app->standartManagerDraw(this);
+    app->windowsLibApi->standartManagerDraw(this);
 }
 
 bool Manager::clickHandle()
 {
-    if (handle.rect.inRect(getMousePos()))
-    {
-        startCursorPos.x = getAbsMousePos().x;
-        startCursorPos.y = getAbsMousePos().y;
-        handle.setMbLastTime();
-        return true;
-    }
-    return false;
+    return app->windowsLibApi->clickHandle(this);
 }
 
 void Manager::controlHandle()
 {
-    bool isClickedAgo = handle.isClickedLastTime();
-    if (app->systemSettings->debugMode == 5) printf("isClickedLastTime: %d\n", isClickedAgo);
-
-    Vector absMP = getAbsMousePos();
-
-    if (app->systemSettings->debugMode == 5) printf("absMP: {%lf, %lf}\n", absMP.x, absMP.y);
-
-    if (isClickedAgo && manager)
-    {
-        rect.pos.x += absMP.x - startCursorPos.x;
-        rect.pos.y += absMP.y - startCursorPos.y;
-        rect.finishPos.x += absMP.x - startCursorPos.x;
-        rect.finishPos.y += absMP.y - startCursorPos.y;
-        startCursorPos.x = absMP.x;
-        startCursorPos.y = absMP.y;
-    }
-    if (getMBCondition() == 0) handle.setMbLastTime();
+    app->windowsLibApi->controlHandle(this);
 }
 
 
@@ -227,7 +151,7 @@ void Manager::replaceWindow(int numOfWindow)
 
 void Manager::onClick(Vector mp)
 {
-    app->standartManagerOnClick(this, mp);
+    app->windowsLibApi->standartManagerOnClick(this, mp);
 }
 
 
@@ -271,8 +195,5 @@ void Manager::show()
 
 void Manager::screenChanged()
 {
-    for (int i = 0; i < getCurLen(); i++)
-    {
-        if (pointers[i]) pointers[i]->screenChanged();
-    }
+    app->windowsLibApi->screenChanged(this);
 }

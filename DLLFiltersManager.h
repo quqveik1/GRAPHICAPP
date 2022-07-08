@@ -1,5 +1,4 @@
 #pragma once
-#include "wtypes.h"
 #include "DrawBibliothek.h"
 #include "DLLFilters\DLLExportData.h"
 #include "DLLManager.cpp"

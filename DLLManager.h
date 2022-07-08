@@ -1,9 +1,6 @@
 #pragma once
 #include "wtypes.h"
 #include "DrawBibliothek.h"
-#include "DLLFilters\DLLExportData.h"
-#include "TransferStructure.h"
-
 int findSymbol(const char* text, int size, char symbol);
 
 struct DLLManager

@@ -1,45 +1,39 @@
 #pragma once
 #include "TXLib.cpp"
-#include "Q_Rect.h"
-#include "Macroses.h"
-#include "GlobalOptions.h"
-#include "DebugInfo.h"
-#include "LoadManager.h"
 #include "Tool.h"
-#include "ProgrammeDate.h"
-#include "commdlg.h"
-#include "TransferStructure.h"
+#include "AbstractApp.h"
+
 
 struct Window
 {
     const char* devName = NULL;
 
     CSystemSettings* systemSettings = NULL;
-    AbstractAppData* app = NULL;
+    struct AbstractAppData* app = NULL;
 
     Rect rect = {};
-    Rect originalRect;
-    COLORREF color;
+    Rect originalRect = {};
+    COLORREF color = 0;
 
-    const char* text;
+    const char* text = NULL;
 
-    int format;
-    int font;
-    int sideThickness;
+    int format = 0;
+    int font = 0;
+    int sideThickness = 0;
 
     bool redrawStatus = false;
 
-    HDC dc;
+    HDC dc = NULL;
 
     HDC finalDC = NULL;
     RGBQUAD* finalDCArr = NULL;
     Vector finalDCSize = {};
-    Manager* manager;
-    bool needToShow;
-    bool reDraw;
+    struct Manager* manager = NULL;
+    bool needToShow = true;
+    bool reDraw = true;
     bool needTransparencyOutput = false;
 
-    CLoadManager* loadManager;
+    struct CLoadManager* loadManager = NULL;
 
     Vector mousePosLastTime = {};
     int mbLastTime = 0;
@@ -167,6 +161,7 @@ struct Manager : Window
         coordinatSysFromHandle(_coordinatSysFromHandle),
         HideIfIsNotActive(_HideIfIsNotActive)
     {
+        assert(app->windowsLibApi);
         handle.manager = this;
         handle.rect.finishPos.x = systemSettings->DCMAXSIZE * 10;
         handle.color = systemSettings->MenuColor;

@@ -1,5 +1,5 @@
 #pragma once
-#include "GlobalOptions.h"
+#include "AbstractApp.h"
 
 
 

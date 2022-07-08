@@ -20,7 +20,7 @@ void CanvasManager::draw()
    
 
 
-    app->standartManagerDraw(this);
+    app->windowsLibApi->standartManagerDraw(this);
 }
 
 int CanvasManager::setDrawingMode(int num)
@@ -58,7 +58,7 @@ bool CanvasManager::addCanvas()
 
 void CanvasManager::onClick(Vector mp)
 {
-    int clickedCellNum = app->standartManagerOnClick(this, mp);
+    int clickedCellNum = app->windowsLibApi->standartManagerOnClick(this, mp);
 
     if (clickedCellNum >= 0)
     {

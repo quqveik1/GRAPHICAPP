@@ -5,14 +5,15 @@
 #include "TXLib.cpp"
 #include "Q_Rect.h"
 #include "Macroses.h"
-#include "GlobalOptions.h"
+#include "SystemSettings.h"
 #include "DebugInfo.h"
 #include "LoadManager.h"
 #include "Tool.h"
 #include "ProgrammeDate.h"
 #include "commdlg.h"
-#include "TransferStructure.h"
+#include "AbstractApp.h"
 #include "WindowsLib.h"
+#include "WindowsLibApi.h"
 
 
 
@@ -20,7 +21,7 @@
 struct CHistoryStep
 {
 	int toolsNum = 0;
-	Tool* tools = NULL;
+	struct Tool* tools = NULL;
     void* toolsData = NULL;
 	int thickness = 1;
 };

@@ -1,15 +1,13 @@
 ﻿  dllmain.cpp
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.h(59,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(31,77): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(31,59): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(31,41): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(31,29): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(70,68): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(70,47): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(81,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(81,52): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(83,62): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(83,44): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.h(53,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,77): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,59): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,41): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,29): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(52,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(52,52): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(54,62): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(54,44): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(28,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(33,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(38,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
@@ -17,14 +15,14 @@ C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\Brig
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(23,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(28,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(33,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(63,46): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(64,50): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(65,48): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(77,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(82,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(87,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(102,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(107,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(112,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(62,46): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(63,50): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(64,48): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(76,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(81,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(86,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(101,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(106,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(111,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
      Создается библиотека C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.lib и объект C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.exp
   DLLFilters.vcxproj -> C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.filter
