@@ -25,8 +25,8 @@ struct Canvas : Manager
 	bool isResizing = false;
     Rect resizingPlace = {};
 
-	Slider scrollBarVert;
-	Slider scrollBarHor;
+	//Slider scrollBarVert;
+	//Slider scrollBarHor;
 	bool wasClicked = false;
 	Vector lastClick = {};
 	double testNum = 0;
@@ -63,18 +63,12 @@ struct Canvas : Manager
 		canvasCoordinats ({}),
 		canvasSize (_app->systemSettings->DCVECTORSIZE),
 		closeCanvas   (_app, { .pos = {_rect.getSize().x - _app->systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
-		scrollBarHor  (_app, {.pos = {5, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _rect.getSize().y}}, &canvasCoordinats.x, 0.3, 0, 500, true, false),
-		scrollBarVert (_app, {.pos = {_rect.getSize().x - _app->systemSettings->SCROLLBARTHICKNESS, _app->systemSettings->SCROLLBARTHICKNESS}, .finishPos = {_rect.getSize().x, _rect.getSize().y - _app->systemSettings->SCROLLBARTHICKNESS}}, &canvasCoordinats.y, 0.3, 0, 500, false, false),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
         loadManager (_loadManager),
         DrawingModeLastTime (systemSettings->DrawingMode)
 	{
-		scrollBarVert.manager = this;
-		scrollBarHor.manager = this;
 
         addWindow (&closeCanvas);
-        addWindow (&scrollBarVert);
-        addWindow (&scrollBarHor);
 	}
 
 	void controlSize();
@@ -104,8 +98,10 @@ struct Canvas : Manager
     void setCurrentData();
    
 
-    HDC getImageForSaving();
+    virtual HDC getImageForSaving();
     virtual CLay* getActiveLay();
+    virtual int getEditingMode();
+
     int getCurrentToolLengthOnActiveLay();
     int getActiveLayNum();
     virtual int getCurrentLayLength();

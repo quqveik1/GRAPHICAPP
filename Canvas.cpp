@@ -1,3 +1,4 @@
+#pragma once
 #include "Canvas.h"
 
 
@@ -68,8 +69,8 @@ void Canvas::deleteButton()
     if (finalDC) app->deleteDC(finalDC);
     if (canvas) app->deleteDC(canvas);
     closeCanvas.deleteButton();
-    scrollBarVert.deleteButton();
-    scrollBarHor.deleteButton();
+    //scrollBarVert.deleteButton();
+    //scrollBarHor.deleteButton();
     deleteHistory();
 
 }
@@ -167,19 +168,6 @@ void Canvas::onClick(Vector mp)
 
         if (getActiveWindow() == this)
         {
-            if (scrollBarVert.rect.inRect(mx, my))
-            {
-                clickButton(&scrollBarVert, this, getMousePos());
-                //scrollBarVert.onClick(mp - scrollBarVert.rect.pos);
-                return;
-            }
-            if (scrollBarHor.rect.inRect(mx, my))
-            {
-                clickButton(&scrollBarHor, this, getMousePos());
-                //scrollBarHor.onClick(mp - scrollBarHor.rect.pos);
-                return;
-            }
-
             if (closeCanvas.rect.inRect(mx, my))
             {
                 needToShow = false;
@@ -302,6 +290,11 @@ CLay* Canvas::getActiveLay()
 {
     if (activeLayNum < 0 || !lay[activeLayNum].toolLays) return NULL;
     return &(lay[activeLayNum]);
+}
+
+int Canvas::getEditingMode()
+{
+    return editingMode;
 }
 
 

@@ -29,7 +29,7 @@ void ColorMenu::draw()
 
     setColorComponents();
 
-    standartManagerDraw(this);
+    app->standartManagerDraw(this);
 
     if (app->systemSettings->debugMode >= 3)printf("colorHistory.currentPos: %d\n", colorHistory.currentPos);
     
@@ -58,7 +58,7 @@ void ColorMenu::draw()
 void ColorMenu::onClick(Vector mp)
 {
     setActiveWindow(this);
-    standartManagerOnClick(this, mp);
+    app->standartManagerOnClick(this, mp);
 
     controlHistoryClick();
     controlExampleClick();

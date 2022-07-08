@@ -27,7 +27,7 @@ int ToolsPalette::onClickLine(Vector mp)
         {
             setActiveWindow(pointers[lineNum]);
             clickButton(pointers[lineNum], this, mp);
-            app->systemSettings->DrawingMode = lineNum + 1;
+            if (app->canvasManager) app->canvasManager->setDrawingMode(lineNum + 1);
             lastSelected = lineNum;
 
             missClicked = false;

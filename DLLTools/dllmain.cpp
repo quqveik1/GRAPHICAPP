@@ -24,7 +24,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 DLLToolExportData* initDLL(AbstractAppData* data)
 {
     TheApp = data;
-    DLLToolExportData* dllData = new DLLToolExportData(6);
+    DLLToolExportData* dllData = new DLLToolExportData(7);
 
     dllData->addTool(new Line            (&DllSettings, "Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
     dllData->addTool(new Point           (&DllSettings, "Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
@@ -32,6 +32,7 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     dllData->addTool(new Gummi           (&DllSettings, "Ластик", sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), data));
     dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
     dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
+    dllData->addTool(new CopyDC          (&DllSettings, "Скопировать область",  TheApp->loadManager->loadImage("CopyDCButton.bmp"), data));
 
 
     return dllData;
@@ -170,7 +171,6 @@ void Line::outputFunc(HDC outdc)
 { 
     ToolSave* toolDate = getToolData();
     app->line({ .pos = toolDate->pos, .finishPos = toolDate->pos + toolDate->size }, outdc);
-    //app->line(toolDate->pos.x, toolDate->pos.y, (toolDate->size.x * toollay->size.x) + toolDate->pos.x, (toolDate->size.y * toollay->size.y) + toolDate->pos.y, outDC);
 }
 
 
@@ -180,7 +180,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     appData = data;
     toolLay = lay;
     saveTool = (ToolSave*)output;
-    Vector pos = data->mousePos;
+    Vector pos = appData->getMousePos();
     if (app->systemSettings->debugMode == 5) printf("pos: {%lf, %lf}\n", pos.x, pos.y);
 
     if (data->clickedMB == 1)
@@ -191,21 +191,26 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
         saveTool->isFinished = false;
     }
 
-    if (isStarted(toolLay))lay->needRedraw();
-    saveTool->size = pos - saveTool->pos;
-    saveTool->color = data->color;
-    saveTool->thickness = app->systemSettings->Thickness;
-    saveTool->name = (const char*)1;
+    if (isStarted(toolLay))
+    {
+        if (appData->getMousePos() != saveTool->size + saveTool->pos) lay->needRedraw();
+        saveTool->size = pos - saveTool->pos;
+        saveTool->color = data->color;
+        saveTool->thickness = app->systemSettings->Thickness;
+        saveTool->name = (const char*)1;
+    }
 
 
-    if (data->clickedMB == 2 && workedLastTime)
+    if (data->clickedMB == 2 && isStarted(toolLay))
     {
         finishUse();
 
         setControlSquares();
-        countDeltaButtons();
+        countDeltaForControlButtons();
         countToolZone();
         saveTool->isFinished = true;
+
+        lay->needRedraw();
 
         
         return true;
@@ -225,8 +230,7 @@ HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
     HDC outDC = dc;
     if (!dc)
     {
-        if (isFinished(toollay)) outDC = toollay->lay->getPermanentDC();
-        else                         outDC = toollay->lay->getOutputDC();
+        outDC = getOutDC();
     }
 
     
@@ -237,175 +241,3 @@ HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
     return outDC;
 }  
 
-bool Tool4Squares::edit(ToolLay* toollay, HDC dc/* = NULL*/)
-{
-    assert(toollay);
-    if (app->systemSettings->debugMode == 5) printf("Tool getMBCondition(): %d\n", appData->clickedMB);
-    if (app->systemSettings->debugMode == 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
-    toolLay = toollay;
-    ToolSave* toolDate = getToolData();
-    countDeltaButtons();
-    countToolZone();
-    setControlSquares();
-    controlMoving();
-
-    app->drawCadre(toolLay->toolZone, dc, TX_WHITE, 2);
-
-    for (int i = 0; i < controlSquareLength; i++)
-    {
-        Rect drawRect = controlSquare[i] + toollay->toolZone.pos;
-        app->rectangle(drawRect, dc);
-    }
-
-    return false;
-}
-
-
-void Tool4Squares::countDeltaButtons()
-{
-    int isSizePositivX = (toolLay->toolZone.getSize().x > 0);
-    int isSizePositivY = (toolLay->toolZone.getSize().y > 0);
-    deltaForButtons = { (!isSizePositivX) * ((-controlSquareSize.x) * 2) + controlSquareSize.x, (!isSizePositivY) * ((-controlSquareSize.y) * 2) + controlSquareSize.y };
-}
-
-void Tool4Squares::countToolZone()
-{
-    ToolSave* toolDate = (ToolSave*)toolLay->getToolsData();
-    toolLay->toolZone.pos = toolDate->pos - deltaForButtons;
-    Vector finishPos = toolDate->size + toolDate->pos;
-    toolLay->toolZone.finishPos = finishPos + deltaForButtons;
-}
-
-bool Tool4Squares::isFinished(ToolLay* data)
-{
-    toolLay = data;
-    ToolSave* saveData =  getToolData(); 
-    return saveData->isFinished;
-} 
-
-bool Tool4Squares::isStarted(ToolLay* data)
-{
-    toolLay = data;
-    ToolSave* saveData =  getToolData(); 
-    return saveData->isStarted;
-}
-
-void Tool4Squares::drawControlButtons(HDC outDC)
-{
-    for (int i = 0; i < controlSquareLength; i++)
-    {
-        Rect drawRect = controlSquare[i] + toolLay->toolZone.pos;
-        app->rectangle(drawRect, outDC);
-    }
-}
-
-
-void Tool4Squares::setControlSquares()
-{
-    Vector size = toolLay->toolZone.getSize();
-    controlSquare[0] = { .pos = {0, 0}, .finishPos = deltaForButtons };
-    controlSquare[1] = { .pos = {toolLay->toolZone.getSize().x - deltaForButtons.x, 0}, .finishPos = {toolLay->toolZone.getSize().x, deltaForButtons.y} };
-    controlSquare[2] = { .pos = toolLay->toolZone.getSize() - deltaForButtons, .finishPos = toolLay->toolZone.getSize() };
-    controlSquare[3] = { .pos = {0, toolLay->toolZone.getSize().y - deltaForButtons.y}, .finishPos = {deltaForButtons.x, toolLay->toolZone.getSize().y} };
-}
-
-
-
-void Tool4Squares::controlMoving()
-{
-    controlLeftButton();
-    controlRightButton();
-
-    lastTimeMP = appData->mousePos;
-}
-
-
-void Tool4Squares::controlLeftButton()
-{
-    ToolSave* toolDate = getToolData();
-
-    if (appData->clickedMB == 1 && activeControlSquareNum < 0)
-    {
-        Vector mp = appData->getMousePos() - toolLay->toolZone.pos;
-        for (int i = 0; i < controlSquareLength; i++)
-        {
-            if (controlSquare[i].inRect(mp))
-            {
-                activeControlSquareNum = i;
-            }
-        }
-    }
-
-    if (activeControlSquareNum >= 0)
-    {
-        toolLay->needRedraw();
-        Vector deltaMP = appData->mousePos - lastTimeMP;
-        if (activeControlSquareNum == 0)
-        {
-            toolLay->toolZone.pos += deltaMP;
-            toolLay->toolZone.finishPos -= deltaMP;
-            toolDate->pos += deltaMP;
-            toolDate->size -= deltaMP;
-        }
-
-        if (activeControlSquareNum == 1)
-        {
-            toolLay->toolZone.pos.y += deltaMP.y;
-            toolDate->pos.y += deltaMP.y;
-            toolDate->size.y -= deltaMP.y;
-            toolLay->toolZone.finishPos.x += deltaMP.x;
-            toolDate->size.x += deltaMP.x;
-        }
-
-        if (activeControlSquareNum == 2)
-        {
-            toolLay->toolZone.finishPos += deltaMP;
-            toolDate->size += deltaMP;
-        }
-
-        if (activeControlSquareNum == 3)
-        {
-            toolLay->toolZone.pos.x += deltaMP.x;
-            toolDate->pos.x += deltaMP.x;
-            toolDate->size.x -= deltaMP.x;
-            toolLay->toolZone.finishPos.y += deltaMP.y;
-            toolDate->size.y += deltaMP.y;
-        }
-
-    }
-
-    if (appData->clickedMB != 1 && activeControlSquareNum >= 0)
-    {
-        activeControlSquareNum = -1;
-        toolLay->needRedraw();
-    }
-
-}
-
-
-void Tool4Squares::controlRightButton()
-{
-    ToolSave* toolDate = getToolData();
-    assert(appData);
-    if (appData->clickedMB == 2)
-    {
-        draggedLastTime = true;
-        toolLay->needRedraw();
-    }
-
-    if (draggedLastTime)
-    {
-        toolLay->toolZone.pos += appData->mousePos - lastTimeMP;
-
-        toolDate->pos += appData->mousePos - lastTimeMP;
-
-        if (app->systemSettings->debugMode) printf("toolZone: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
-    }
-
-    if (appData->clickedMB != 2 && draggedLastTime)
-    {
-        draggedLastTime = false;
-        toolLay->needRedraw();
-    }
-
-}

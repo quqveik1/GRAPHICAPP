@@ -70,8 +70,14 @@ bool operator == (const Vector& a, const double& b)
 }
 
 bool operator > (const Vector &a, const int &b)
-{
-    if (a.x > b && a.y > b) return true;
+{                                   
+    if (isBigger(a.x, (double)b))
+    {
+        if (isBigger(a.y, (double)b))
+        {
+            return true;
+        }
+    }
     return false;
 }
 

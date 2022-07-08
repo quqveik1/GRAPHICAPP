@@ -132,7 +132,7 @@ void MainManager::draw()
     }
 
 
-    standartManagerDraw(this);
+    app->standartManagerDraw(this);
 
     printf("Active Window: %p\n", isActiveWindowBelow());
 
@@ -155,5 +155,5 @@ void MainManager::onClick(Vector mp)
     }
     if (wasZoneClicked) return;
 
-    standartManagerOnClick(this, mp);
+    app->standartManagerOnClick(this, mp);
 }

@@ -8,6 +8,8 @@
 #include "..\BaseFunctions.cpp"
 #include "..\LoadManager.h"
 #include "..\DllSettings.h"
+#include "CopyDC.cpp"
+#include "CadreResizingTool.cpp"
 
 extern "C" __declspec (dllexport) DLLToolExportData* initDLL(AbstractAppData* data);
 
@@ -26,48 +28,29 @@ struct ColorSave : ToolData
 };
                                                                                                                                     
 
-struct Tool4Squares : Tool
+struct Tool4Squares : CadreResizingTool
 {
     ToolSave *saveTool = NULL;
 
-    const int controlSquareLength = 4;
-    Rect* controlSquare = new Rect[controlSquareLength]{};
-    Vector controlSquareSize = { 10, 10 };
-    Vector deltaForButtons = {};
-    int activeControlSquareNum = -1;
-    bool draggedLastTime = false;
-    Vector lastTimeMP = {};
+    
 
     Tool4Squares(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
-        Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
+        CadreResizingTool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
-
-    void controlMoving();
-    void controlLeftButton();
-    void controlRightButton();
-    void setControlSquares();
-    void countDeltaButtons();
-    void drawControlButtons(HDC outDC);
-
-    virtual void countToolZone();
     virtual void outputFunc(HDC outdc) = NULL;
-    virtual bool isFinished(ToolLay* data);
-    virtual bool isStarted(ToolLay* data);
 
 
-    ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
+    virtual ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) override;
     virtual HDC load(ToolLay* toollay, HDC dc = NULL) override;
-    virtual bool edit(ToolLay* toollay, HDC dc = NULL) override;
 };
 
 
 struct Line : Tool4Squares
 {
-    ToolSave saveTool = {};
 
     const int controlSquareLength = 4;
     Rect* controlSquare = new Rect[controlSquareLength]{};

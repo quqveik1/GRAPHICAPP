@@ -1,5 +1,6 @@
 #pragma once
 #include "CanvasManager.h"
+#include "Canvas.cpp"
 
 
 
@@ -19,7 +20,35 @@ void CanvasManager::draw()
    
 
 
-    standartManagerDraw(this);
+    app->standartManagerDraw(this);
+}
+
+int CanvasManager::setDrawingMode(int num)
+{
+    Canvas* canvas = getActiveCanvas();
+
+    if (num > 0)
+    {
+        bool needToChangeDrawingMode = false;
+        if (canvas)
+        {
+            if (!canvas->getEditingMode())
+            {
+                needToChangeDrawingMode = true;
+            }
+        }
+        else
+        {
+            needToChangeDrawingMode = true;
+        }
+
+        if (needToChangeDrawingMode)
+        {
+            app->systemSettings->DrawingMode = num;
+            return !"Sucsess";
+        }
+    }
+    return 1;
 }
 
 bool CanvasManager::addCanvas()
@@ -29,7 +58,7 @@ bool CanvasManager::addCanvas()
 
 void CanvasManager::onClick(Vector mp)
 {
-    int clickedCellNum = standartManagerOnClick(this, mp);
+    int clickedCellNum = app->standartManagerOnClick(this, mp);
 
     if (clickedCellNum >= 0)
     {

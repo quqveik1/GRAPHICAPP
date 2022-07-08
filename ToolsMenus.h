@@ -1,5 +1,6 @@
 #pragma once
 #include "Menu.cpp"
+#include "CanvasManager.h"
 
 
 

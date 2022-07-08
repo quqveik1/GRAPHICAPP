@@ -46,7 +46,7 @@ void List::draw()
 {
 
     controlRect();
-    standartManagerDraw(this);
+    app->standartManagerDraw(this);
 
     for (int i = 0; i < currLen; i++)
     {
@@ -71,7 +71,7 @@ void List::draw()
 
 void List::onClick(Vector mp)
 {
-    int clikedButtonNum = standartManagerOnClick(this, mp);
+    int clikedButtonNum = app->standartManagerOnClick(this, mp);
     if (clikedButtonNum >= 0 && clikedButtonNum != lastClickedItemNum && !isClickedLastTime())
     {
         //printf ("last: %d, current: %d\n", lastClickedItemNum, clikedButtonNum);

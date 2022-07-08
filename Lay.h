@@ -5,7 +5,7 @@
 
 struct Lay
 {
-    CSystemSettings* systemSettings;
+    struct AbstractAppData* app = NULL;
 
     HDC lay = NULL;
     Vector layCoordinats = {};
@@ -15,7 +15,7 @@ struct Lay
     RGBQUAD* outputBuf = {};
     bool isClicked = false;
 
-    void createLay(CSystemSettings* _systemSettings, Vector size = {});
+    void createLay(AbstractAppData* _app, Vector size = {});
     int getDownUpCoordinats(int x, int y);
     virtual void line(int x0, int y0, int x1, int y1, RGBQUAD* buf = NULL, COLORREF drawColor = NULL);
     virtual void circle(int x, int y, int r, COLORREF color = TX_BLACK);

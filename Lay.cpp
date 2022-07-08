@@ -2,16 +2,15 @@
 #include "Lay.h"
 
 
-void Lay::createLay(CSystemSettings* _systemSettings, Vector _laySize/* = {}*/)
+void Lay::createLay(AbstractAppData* _app, Vector _laySize/* = {}*/)
 {
-    //qassert (manager, info);
-    assert(_systemSettings);
-    systemSettings = _systemSettings;
+    gassert(_app);
+    app = _app;
 
     laySize = _laySize;
     Vector nullVector = { 0, 0 };
 
-    if (laySize == nullVector) laySize = systemSettings->DCVECTORSIZE;
+    if (laySize == nullVector) laySize = app->systemSettings->DCVECTORSIZE;
     lay = txCreateDIBSection(laySize.x, laySize.y, &layBuf);
     clean();
     outputLay = txCreateDIBSection(laySize.x, laySize.y, &outputBuf);
@@ -27,6 +26,7 @@ int Lay::getDownUpCoordinats(int x, int y)
 
 void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD* buf/*=NULL*/, COLORREF drawColor /*=DrawColor*/)
 {
+    /*
     if (x0 < 0) x0 = 1;
     if (x1 < 0) x1 = 1;
     if (y0 < 0) y0 = 1;
@@ -79,18 +79,20 @@ void Lay::line(int x0, int y0, int x1, int y1, RGBQUAD* buf/*=NULL*/, COLORREF d
             error2 -= dx * 2;
         }
     }
+    */
 }
 
 void Lay::clean(HDC dc/* = NULL*/)
 {
     if (!dc) dc = lay;
-    txSetAllColors(systemSettings->TRANSPARENTCOLOR, dc);
-    txRectangle(0, 0, laySize.x, laySize.y, dc);
+    app->setColor(app->systemSettings->TRANSPARENTCOLOR, dc);
+    app->rectangle(0, 0, laySize.x, laySize.y, dc);
 }
 
 
 void Lay::rectangle(int x0, int y0, int x1, int y1)
 {
+    /*
     if (x0 > x1) swap(x0, x1);
     if (y0 > y1) swap(y0, y1);
     COLORREF currColor = txGetColor(lay);
@@ -111,6 +113,7 @@ void Lay::rectangle(int x0, int y0, int x1, int y1)
     // txSetAllColors (TX_RED, lay);
      //txRectangle (x0, y0, x1, y1, lay);
      //printBlt (lay);
+     */
 }
 
 

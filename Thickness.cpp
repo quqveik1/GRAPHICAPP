@@ -8,7 +8,7 @@ void ThicknessMenu::draw()
         app->rectangle(rect - rect.pos, finalDC);
     }
 
-    standartManagerDraw(this); 
+    app->standartManagerDraw(this);
 
     if (needToShow)
     {
@@ -20,5 +20,5 @@ void ThicknessMenu::draw()
 
 void ThicknessMenu::onClick(Vector mp)
 {
-    standartManagerOnClick(this, mp);
+    app->standartManagerOnClick(this, mp);
 }

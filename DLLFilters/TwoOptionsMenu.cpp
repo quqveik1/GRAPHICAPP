@@ -6,6 +6,7 @@ void TwoOptionsMenu::onClick(Vector mp)
 {
 	clickHandle ();
 
+    /*
 	if (upSlider.rect.inRect(mp) && !isClickedLastTime())
 	{
         clickButton (&upSlider, this, getMousePos());
@@ -16,6 +17,7 @@ void TwoOptionsMenu::onClick(Vector mp)
         clickButton (&downSlider, this, getMousePos());
 		//downSlider.onClick(mp - downSlider.rect.pos);
 	}
+    */
 	//if (closeButton.getAbsRect().inRect(mx, my) && !isClickedLastTime()) advancedMode = false;
 	if (confirmButton.rect.inRect(mp) && !isClickedLastTime())
 	{
@@ -48,12 +50,12 @@ void TwoOptionsMenu::draw()
 	controlHandle();
 
 	if (dc) copyOnDC(0, 0, dc);
-	upSlider.draw();
+	//upSlider.draw();
 	//app->drawOnScreen(finalDC);
-	app->bitBlt(finalDC, upSlider.rect.pos.x, upSlider.rect.pos.y, upSlider.rect.getSize().x, upSlider.rect.getSize().y, upSlider.finalDC);
+	//app->bitBlt(finalDC, upSlider.rect.pos.x, upSlider.rect.pos.y, upSlider.rect.getSize().x, upSlider.rect.getSize().y, upSlider.finalDC);
 
-	downSlider.draw();
-	app->bitBlt(finalDC, downSlider.rect.pos.x, downSlider.rect.pos.y, downSlider.rect.getSize().x, downSlider.rect.getSize().y, downSlider.finalDC);
+	//downSlider.draw();
+	//app->bitBlt(finalDC, downSlider.rect.pos.x, downSlider.rect.pos.y, downSlider.rect.getSize().x, downSlider.rect.getSize().y, downSlider.finalDC);
 	char upNum[100] = {};
 	char downNum[100] = {};
 	sprintf(upNum, "%d", (int)firstVal);

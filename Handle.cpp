@@ -54,7 +54,7 @@ void Handle::draw()
 {
 
 
-    standartManagerDraw(this);
+    app->standartManagerDraw(this);
 
     rect.finishPos.x = app->systemSettings->SizeOfScreen.x;
 
@@ -84,7 +84,7 @@ void Handle::draw()
 
 void Handle::onClick(Vector mp)
 {
-    int resultOfClicking = standartManagerOnClick(this, mp);
+    int resultOfClicking = app->standartManagerOnClick(this, mp);
 
     if (resultOfClicking == -1 && !wasCommonHandlePlaceClicked)
     {

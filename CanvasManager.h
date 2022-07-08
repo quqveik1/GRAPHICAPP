@@ -1,5 +1,5 @@
 #pragma once
-#include "Canvas.cpp"
+#include "Canvas.h"
 #include "ProgressBar.h"
 #include "GlobalOptions.h"
 
@@ -16,11 +16,13 @@ struct CanvasManager : Manager
         Manager(_app, { .pos = {}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
         loadManager (_app->loadManager)
     {
-        compressImage(app, closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 }, __LINE__);
+        app->compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 });
     }
 
     virtual Canvas* getActiveCanvas();
     bool addCanvas();
+
+    virtual int setDrawingMode(int num);
 
     virtual void draw() override;
     virtual void onClick(Vector mp) override;

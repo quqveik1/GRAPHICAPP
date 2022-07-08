@@ -1,6 +1,6 @@
 #pragma once
 #include "TXLib.h"
-#include "DrawBibliothek.cpp"
+#include "DrawBibliothek.h"
 #include "LoadManager.h"
 
 struct Slider : Manager 
@@ -51,12 +51,12 @@ struct Slider : Manager
 			arrow1.rect.finishPos.y = rect.getSize ().y;
 			arrow1.originalRect = arrow1.rect;
 			//compressImage (arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, LoadManager.loadImage ("arrow1Hor.bmp"), {13, 17});
-			compressImage (app, arrow1.dc, { arrow1.rect.getSize().x, arrow1.rect.getSize().y }, loadManager->loadImage("arrow1Hor.bmp"), {13, 17}, __LINE__);
+			app->compressImage (arrow1.dc, { arrow1.rect.getSize().x, arrow1.rect.getSize().y }, loadManager->loadImage("arrow1Hor.bmp"), {13, 17});
 
 			if (isWhite) 
 			{
 				txDeleteDC (arrow1.dc);
-				compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteHor.bmp"), {16, 16}, __LINE__);
+                app->compressImage(arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteHor.bmp"), {16, 16});
 			}
 
 
@@ -65,11 +65,11 @@ struct Slider : Manager
 			arrow2.rect.finishPos.x = rect.getSize ().x;
 			arrow2.rect.finishPos.y = rect.getSize ().y;
 			arrow2.originalRect = arrow2.rect;
-			compressImage (app, arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2Hor.bmp"), {13, 17}, __LINE__);
+            app->compressImage(arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2Hor.bmp"), {13, 17});
 			if (isWhite) 
 			{
 				txDeleteDC (arrow2.dc);
-				compressImage (app, arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2WhiteHor.bmp"), {16, 16}, __LINE__);
+                app->compressImage(arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2WhiteHor.bmp"), {16, 16});
                 //printBlt (loadManager->loadImage ("arrow2WhiteHor.bmp"));
 			}
 		}
@@ -80,10 +80,10 @@ struct Slider : Manager
 			arrow1.rect.finishPos.x = rect.getSize().x;
 			arrow1.rect.finishPos.y = (1) * arrow1.rect.getSize().x;
 			arrow1.originalRect = arrow1.rect;
-			if (!isWhite) compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1.bmp"), {17, 13}, __LINE__);
+			if (!isWhite) app->compressImage(arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1.bmp"), {17, 13});
 			if (isWhite) 
 			{
-				compressImage (app, arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteVert.bmp"), {16, 16}, __LINE__);
+                app->compressImage(arrow1.dc, {arrow1.rect.getSize().x, arrow1.rect.getSize().y}, loadManager->loadImage ("arrow1WhiteVert.bmp"), {16, 16});
 			}
 
 			arrow2.rect.pos.x = 0;
@@ -91,10 +91,10 @@ struct Slider : Manager
 			arrow2.rect.finishPos.x = rect.getSize().x;
 			arrow2.rect.finishPos.y = rect.getSize().y;
 			arrow2.originalRect = arrow2.rect;
-			if (!isWhite) compressImage (app, arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2.bmp"), {17, 13}, __LINE__);
+			if (!isWhite) app->compressImage(arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2.bmp"), {17, 13});
 			if (isWhite) 
 			{
-				compressImage (app, arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2WhiteVert.bmp"), {16, 16}, __LINE__);
+                app->compressImage(arrow2.dc, {arrow2.rect.getSize().x, arrow2.rect.getSize().y}, loadManager->loadImage ("arrow2WhiteVert.bmp"), {16, 16});
 			}
 		}
 
@@ -102,14 +102,14 @@ struct Slider : Manager
 
 		if (horizontalMode) 
 		{
-			if (!isWhite)compressImage (app, dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, loadManager->loadImage ("SliderBackGroundHor.bmp"), {948, 13}, __LINE__);
-			if (isWhite)compressImage (app, dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, loadManager->loadImage ("SliderBackGroundWhiteHor.bmp"), {870, 16}, __LINE__);
+			if (!isWhite) app->compressImage(dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, loadManager->loadImage ("SliderBackGroundHor.bmp"), {948, 13);
+			if (isWhite) app->compressImage(dc, {rect.getSize ().x - arrow1.rect.getSize().x - arrow2.rect.getSize().x, rect.getSize ().y}, loadManager->loadImage ("SliderBackGroundWhiteHor.bmp"), {870, 16});
 			//printBlt(dc);	 	 SliderBackGroundWhiteHot
 		}
 		else
 		{
-			if (!isWhite) compressImage (app, dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, loadManager->loadImage ("SliderBackGroundVert.bmp"), {13, 948}, __LINE__);
-			if (isWhite)  compressImage (app, dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, loadManager->loadImage ("SliderBackGroundWhite.bmp"), {16, 870}, __LINE__);
+			if (!isWhite) app->compressImage(dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, loadManager->loadImage ("SliderBackGroundVert.bmp"), {13, 948});
+			if (isWhite)  app->compressImage(dc, {rect.getSize ().x, rect.getSize ().y - arrow1.rect.getSize().y - arrow2.rect.getSize().y}, loadManager->loadImage ("SliderBackGroundWhite.bmp"), {16, 870});
 		}
 
 		if (horizontalMode)
@@ -141,8 +141,8 @@ struct Slider : Manager
 
 		if (horizontalMode) 
 		{
-			if (!isWhite)compressImage (app, sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, loadManager->loadImage ("SliderRect.bmp"), {316, 12}, __LINE__);
-			if (isWhite)compressImage (app, sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, loadManager->loadImage ("WhiteSliderRectHor.bmp"), {299, 1}, __LINE__);
+			if (!isWhite)app->compressImage(sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, loadManager->loadImage ("SliderRect.bmp"), {316, 12});
+			if (isWhite)app->compressImage(sliderQuadrate.dc, { ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y}, loadManager->loadImage ("WhiteSliderRectHor.bmp"), {299, 1});
 			sliderQuadrate.finalDC = txCreateCompatibleDC (ceil (rect.getSize ().x * _quadrateScale), sliderQuadrate.rect.getSize().y);
 			sliderQuadrate.originalRect = {.pos = {0, 0}, .finishPos = {316, 12}};
 			//printBlt (sliderQuadrate.dc);
@@ -150,8 +150,8 @@ struct Slider : Manager
 		else
 		{
 
-			if (!isWhite) compressImage (app, sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil(rect.getSize().y *  _quadrateScale)}, loadManager->loadImage ("VerticalSliderRect.bmp"), {12, 316}, __LINE__);
-			if (isWhite) compressImage (app, sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale)}, loadManager->loadImage ("WhiteSliderRect.bmp"), {14, 299}, __LINE__);
+			if (!isWhite) app->compressImage(sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil(rect.getSize().y *  _quadrateScale)}, loadManager->loadImage ("VerticalSliderRect.bmp"), {12, 316});
+			if (isWhite) app->compressImage(sliderQuadrate.dc, {sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale)}, loadManager->loadImage ("WhiteSliderRect.bmp"), {14, 299});
 			sliderQuadrate.finalDC = txCreateCompatibleDC (sliderQuadrate.rect.getSize().x, ceil (rect.getSize().y *  _quadrateScale));
 			sliderQuadrate.originalRect = {.pos = {0, 0}, .finishPos = {12, 316}};
 		}

@@ -1,5 +1,6 @@
 #pragma once
 #include "AppApi.h"
+#include "DrawBibliothek.cpp"
 
 HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
 {
@@ -40,6 +41,40 @@ void PowerPoint::drawCadre(Rect rect, HDC dc, COLORREF color, int thickness)
     line(rect.pos.x + halfThickness, rect.pos.y + halfThickness, rect.finishPos.x - halfThickness, rect.pos.y + halfThickness, dc);
 }
 
+void PowerPoint::drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness)
+{
+    Rect rect = { .pos = pos1, .finishPos = pos2 };
+
+    drawCadre(rect, dc, color, thickness);
+}
+
+void PowerPoint::drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness)
+{
+    Vector pos1 = { (double)x1, (double)y1 };
+    Vector pos2 = { (double)x2, (double)y2 };
+
+    drawCadre(pos1, pos2, dc, color, thickness);
+}
+
+
+int PowerPoint::standartWindowDraw(Window* window)
+{
+    standartDraw$(window);
+    return 0;
+}
+
+int PowerPoint::standartManagerDraw(Manager* manager)
+{
+    standartManagerDraw$(manager);
+    return 0;
+}
+
+
+int PowerPoint::standartManagerOnClick(Manager* manager, Vector mp)
+{
+    return standartManagerOnClick$(manager, mp);
+}
+
 void PowerPoint::drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
 {
@@ -61,7 +96,7 @@ void PowerPoint::selectFont(const char* text, int sizey, HDC& dc, int sizex/* = 
 void PowerPoint::setColor(COLORREF color, HDC dc, int thickness)
 {
     if (systemSettings->debugMode == 5) printf("SetColor: %d|", color);
-    txSetAllColors(color, dc, thickness);
+    txSetAllColors$(color, dc, thickness);
 }
 
 int PowerPoint::getColorComponent(COLORREF color, COLORREF component)
@@ -78,13 +113,6 @@ COLORREF PowerPoint::getPixel(Vector pos, HDC dc)
 {
     return txGetPixel(pos.x, pos.y, dc);
 }
-
-
-void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
-{
-    txBitBlt(dc1, x0, y0, sizex, sizey, dc2);
-}
-
 
 void PowerPoint::line(Rect rect, HDC dc)
 {
@@ -113,9 +141,95 @@ void PowerPoint::ellipse(int x1, int y1, int x2, int y2, HDC dc)
     txEllipse(x1, y1, x2, y2, dc);
 }
 
-void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2)
+void PowerPoint::horizontalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullDCSize/* = {}*/)
 {
-    txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, 0, 0, systemSettings->TRANSPARENTCOLOR);
+    if (fullDCSize == fullDCSize.getNullVector()) fullDCSize = size;
+    double posy = fullDCSize.y - size.y;
+
+    RGBQUAD* tempBuf = {};
+    HDC tempDC = createDIBSection(size, &tempBuf);
+
+
+    for (int x = 0; x < size.x; x++)
+    {
+        for (int y = posy; y < fullDCSize.y; y++)
+        {
+            int tempY = y - posy;
+            int newY = size.y - tempY - 1;
+            tempBuf[x + (int)(newY * size.x)] = buf[x + (int)(y * fullDCSize.x)];
+        }
+    }
+    bitBlt(dc, {}, size, tempDC);
+
+    deleteDC(tempDC);
+}
+
+void PowerPoint::verticalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullDCSize/* = {}*/)
+{
+    if (fullDCSize == fullDCSize.getNullVector()) fullDCSize = size;
+    double posy = fullDCSize.y - size.y;
+   
+    RGBQUAD* tempBuf = {};
+    HDC tempDC = createDIBSection(size, &tempBuf);
+    
+
+
+    for (int x = 0; x < size.x; x++)
+    {
+        for (int y = posy; y < fullDCSize.y; y++)
+        {
+            int newX = size.x - x - 1;
+            int tempY = y - posy;
+            tempBuf[newX + (int)(tempY * size.x)] = buf[x + (int)(y * fullDCSize.x)];
+        }
+    }
+    bitBlt(dc, {}, size, tempDC);
+
+    deleteDC(tempDC);
+
+}
+
+
+void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+{
+    txBitBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource);
+}
+
+void PowerPoint::bitBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource/* = {}*/)
+{
+    bitBlt(dc1, pos.x, pos.y, size.x, size.y, dc2, posSource.x, posSource.y);
+}
+
+void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+{
+    txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+}
+
+void PowerPoint::transparentBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource/* = {}*/)
+{
+    transparentBlt(dc1, pos.x, pos.y, size.x, size.y, dc2, posSource.x, posSource.y);
+}
+
+int PowerPoint::stretchBlt(HDC dest, int destPosx, int destPosy, int destSizex, int destSizey, HDC source, int sourcePosx, int sourcePosy, int sourceSizex, int sourceSizey)
+{
+    return StretchBlt(dest, destPosx, destPosy, destSizex, destSizey, source, sourcePosx, sourcePosy, sourceSizex, sourceSizey, SRCCOPY);
+}
+
+int PowerPoint::stretchBlt(HDC dest, Vector destPos, Vector destSize, HDC source, Vector sourcePos, Vector sourceSize)
+{
+    return stretchBlt(dest, destPos.x, destPos.y, destSize.x, destSize.y, source, sourcePos.x, sourcePos.y, sourceSize.x, sourceSize.y);
+}
+
+
+void PowerPoint::compressImage(HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize)
+{   
+    assert(oldDC);
+
+    if (!newDC) deleteDC (newDC);
+    newDC = createDIBSection(newSize.x, newSize.y);
+    assert(newDC);
+
+    assert (stretchBlt(newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y));
 }
 
 void PowerPoint::drawOnScreen(HDC dc, bool useAlpha /*=false*/)
@@ -184,11 +298,12 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 
     SetWindowLong(systemSettings->MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
 
-    if (systemSettings->SizeOfScreen != size)
+    if (systemSettings->lastTimeSizeOfScreen != size)
     {
         HDC outDC = txCreateDIBSection(size.x, size.y);
         deleteDC(txDC());
         txDC() = outDC;
+        systemSettings->lastTimeSizeOfScreen = size;
     }
 
     

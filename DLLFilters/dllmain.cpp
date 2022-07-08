@@ -4,7 +4,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "..\TXLib.cpp"
 #include "dllmain.h"
-//#include "..\DrawBibliothek.h"
 
 
 

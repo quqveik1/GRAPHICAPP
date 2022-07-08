@@ -1,13 +1,13 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include "DrawBibliothek.cpp"
+#include "WindowsLib.cpp"
 #include "GlobalOptions.h"
 #include "Q_Buttons.h"
 #include <cmath>
 #include "StandartFunctions.h"
-#include "CurvesFilter.h"
-#include "Slider.cpp"
-#include "Canvas.h"
+//#include "CurvesFilter.h"
+#include "Canvas.cpp"
 #include "TransferStructure.h"
 #include "DLLFiltersManager.cpp"
 #include "Tool.h"
@@ -54,6 +54,7 @@ PowerPoint* appData = new PowerPoint;
 
 int main (int argc, int *argv[])
 {
+
     appData->appVersion = "v0.1.7.4";
 
     CSystemSettings SystemSettings;
@@ -87,6 +88,21 @@ int main (int argc, int *argv[])
     _txSwapBuffers = swapDC;
     txSetWindowsHook(CtrlWindowFunc);
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
+
+    /*
+    HDC testPhoto = txLoadImage("Files\\TestPhoto.bmp");
+
+    RGBQUAD* tempBuf = NULL;
+
+    HDC tempDC = appData->createDIBSection(appData->systemSettings->FullSizeOfScreen, &tempBuf);
+
+    appData->bitBlt(tempDC, {}, {}, testPhoto);
+
+    appData->horizontalReflect(tempDC, tempBuf, { 1200, 727 }, appData->systemSettings->FullSizeOfScreen);
+    
+    appData->drawOnScreen(tempDC);
+    _getch();
+    */
 
     appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);;
     

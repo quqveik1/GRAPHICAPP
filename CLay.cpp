@@ -14,7 +14,7 @@ void CLay::createLay(AbstractAppData* _app, Vector _size /* = DCVECTORSIZE*/)
 
     if (_size == _size.getNullVector()) _size = app->systemSettings->DCVECTORSIZE;
 
-    lay.createLay(app->systemSettings, _size);
+    lay.createLay(app, _size);
 }
 
 

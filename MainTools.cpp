@@ -57,3 +57,15 @@ bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
     }
     return false;
 }
+
+HDC ToolLay::getPermanentDC()
+{
+    if (lay) return lay->getPermanentDC();
+    else     return NULL;
+} 
+
+HDC ToolLay::getOutputDC()
+{
+    if (lay) return lay->getOutputDC();
+    else     return NULL;
+}

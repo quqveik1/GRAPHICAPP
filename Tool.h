@@ -26,23 +26,28 @@ int ToolData::getByteSize()
     return byteLength;
 }
 
-
-
-struct ToolSave : ToolData
+struct ToolZoneSave : ToolData
 {
     Vector pos = {};
     Vector size = {};
+};
+
+
+
+struct ToolSave : ToolZoneSave
+{
     COLORREF color = NULL;
     int thickness = NULL;
-    const char* name;
+    const char* name = NULL;
 
     ToolSave(Vector _pos, Vector _size, COLORREF _color, int _thickness, const char* _name) :
-        pos(_pos),
-        size(_size),
         color(_color),
         thickness(_thickness),
         name(_name)
-    {}
+    {
+        pos = _pos;
+        size = _size;
+    }
 
     ToolSave() :
         name(NULL)

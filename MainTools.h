@@ -34,7 +34,9 @@ struct ToolLay
     HDC drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
     virtual bool isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition);
-    void* getToolsData() { return toolsData; };
+    virtual void* getToolsData() { return toolsData; };
+    virtual HDC getPermanentDC();
+    virtual HDC getOutputDC();
 
     virtual bool isFinished();
     virtual bool isStarted();
