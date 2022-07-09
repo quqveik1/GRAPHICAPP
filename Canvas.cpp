@@ -1,5 +1,6 @@
 #pragma once
 #include "Canvas.h"
+#include "ZoneSizeControl.cpp"
 
 
 void CToolManager::addTool(Tool* tool)
@@ -159,9 +160,8 @@ void Canvas::onClick(Vector mp)
 {
     if (getMBCondition() == 1)
     {
-
-        ///app->setColor(drawColor, fi);
         lastClick = mp;
+        if (zoneSizeControl.clickFrame()) return;
 
 
         int mx = mp.x;
@@ -208,12 +208,10 @@ void Canvas::onClick(Vector mp)
 void Canvas::draw()
 {
     app->setColor(TX_BLACK, finalDC);
-    app->rectangle(0, 0, 3000, 3000, finalDC);
+    app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
     app->setColor(systemSettings->BackgroundColor, finalDC);
 
-
-
-    if (systemSettings->debugMode >= 3)  printf("Clicked: %d\n", getMBCondition());
+    if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
 
 
     cleanOutputLay();
@@ -242,15 +240,15 @@ void Canvas::draw()
 
     if (getActiveWindow() != this) wasClicked = false;
 
-    drawCadre();
+    
 
     controlHandle();
     drawOnFinalDC(handle);
 
     controlSize();
+    drawCadre();
 
-    closeCanvas.rect.pos = { rect.getSize().x - systemSettings->MENUBUTTONSWIDTH,  0 };
-    closeCanvas.rect.finishPos = { rect.getSize().x, systemSettings->HANDLEHEIGHT };
+    
 
 
     drawOnFinalDC(closeCanvas);
@@ -415,26 +413,9 @@ void Canvas::controlFilter()
 
 void Canvas::controlSize()
 {
-    /*
-    app->setColor(_app->systemSettings->MenuColor, finalDC);
-    app->rectangle (0, 0, _app->systemSettings->SIDETHICKNESS, rect.getSize().y, finalDC);
-    app->rectangle (0, rect.getSize().y - _app->systemSettings->SIDETHICKNESS, rect.getSize().x, rect.getSize().y, finalDC);
-    app->rectangle(rect.getSize().x - _app->systemSettings->SIDETHICKNESS, rect.getSize().y - _app->systemSettings->SIDETHICKNESS, rect.getSize().x, 0, finalDC);
-    if (isResizing)
-    {
-        if (startResizingCursor.x != txMouseX() || startResizingCursor.y != txMouseY())
-        {
-            //printf ("1\n");
-            scrollBarVert.resize ({.pos = {rect.getSize().x * 0.99 - 20, handle.rect.finishPos.y}, .finishPos = {rect.getSize().x * 0.99, rect.getSize().y * 0.99}});
-            scrollBarHor.resize ({.pos = {rect.getSize().x * 0.01, rect.getSize().y * 0.99 - 20}, .finishPos = {rect.getSize().x * 0.99 - 20, rect.getSize().y * 0.99}});
-        }
-
-        rect.finishPos.x += txMouseX() - startResizingCursor.x;
-        rect.finishPos.y += txMouseY() - startResizingCursor.y;
-        startResizingCursor = { txMouseX(), txMouseY() };
-    }
-    if (getMBCondition() != 1) isResizing = false;
-    */
+    zoneSizeControl.controlFrame();
+    closeCanvas.rect.pos = { rect.getSize().x - systemSettings->MENUBUTTONSWIDTH,  0 };
+    closeCanvas.rect.finishPos = { rect.getSize().x, systemSettings->HANDLEHEIGHT };
 }
 
 void Canvas::controlSizeSliders()
@@ -585,6 +566,6 @@ void Canvas::drawLay()
 
 void Canvas::drawCadre()
 {
-    app->drawCadre(rect - rect.pos, finalDC, app->systemSettings->MenuColor, 4);
+    zoneSizeControl.drawFrame();
 
 }

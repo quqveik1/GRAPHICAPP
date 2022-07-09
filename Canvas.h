@@ -4,12 +4,13 @@
 #include "WindowsLib.cpp"
 #include "CLay.h"
 #include "MainTools.h"
+#include "ZoneSizeControl.h"
 
 struct Canvas : Manager
 {
 	HDC canvas = NULL;
     RGBQUAD *canvasArr = NULL;
-	HDC tempFilterDC;
+	HDC tempFilterDC = NULL;
 	RGBQUAD *tempFilterDCArr = NULL;
 	bool nonConfirmFilter = false; // показывает есть ли сейчас непримененный фильтр
 	bool reCountEnded = false;
@@ -17,10 +18,8 @@ struct Canvas : Manager
 	COLORREF drawColor = TX_RED;
 	struct Window closeCanvas;
 	bool clearBackground = true;
-	Vector canvasCoordinats;
-	Vector canvasSize;
-	
-	//bool confirmFilter;
+    Vector canvasCoordinats = {};
+    Vector canvasSize = {};
 
 	Vector startResizingCursor = {};
 	bool isResizing = false;
@@ -36,6 +35,9 @@ struct Canvas : Manager
 	int currentLayersLength = 0;
 	int activeLayNum = 0; 
     CLay* lay = new CLay[LayersNum]{};
+
+    ZoneSizeControl zoneSizeControl;
+    bool needFrameToWork = true;
 
     ToolLay* toolLays = new ToolLay[LayersNum]{};
     int currentToolLength = 0;
@@ -53,10 +55,10 @@ struct Canvas : Manager
     bool editingMode = false;
 
     bool activeTool = false;
-    int DrawingModeLastTime;
+    int DrawingModeLastTime = 0;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
-    CLoadManager* loadManager;
+    CLoadManager* loadManager = NULL;
 
 
 	Canvas (AbstractAppData* _app, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
@@ -66,7 +68,8 @@ struct Canvas : Manager
 		closeCanvas   (_app, { .pos = {_rect.getSize().x - _app->systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
         loadManager (_loadManager),
-        DrawingModeLastTime (systemSettings->DrawingMode)
+        DrawingModeLastTime (systemSettings->DrawingMode),
+        zoneSizeControl (this, &rect, &needFrameToWork)
 	{
 
         addWindow (&closeCanvas);
@@ -103,10 +106,10 @@ struct Canvas : Manager
     virtual CLay* getActiveLay();
     virtual int getEditingMode();
     virtual Vector getLaySize();
-
-    int getCurrentToolLengthOnActiveLay();
-    int getActiveLayNum();
     virtual int getCurrentLayLength();
+    virtual int getCurrentToolLengthOnActiveLay();
+
+    int getActiveLayNum();
     ToolLay* getNewToolLay();
     bool isDrawingModeChanged();
     Tool* getActiveTool();

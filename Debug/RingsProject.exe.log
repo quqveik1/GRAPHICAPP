@@ -57734,3 +57734,260 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: ,
+
+Сообщение: Сбой проверки выполнения машинного кода: ошибка 0 (Stack pointer corruption): Run-Time Check Failure #0 - The value of ESP was not properly saved across a function call.  This is usually a result of calling a function declared with one calling convention with a function pointer declared with a different calling convention.
+ в модуле C:\Users\quqve\OneDrive\Р Р°Р±РѕС‡РёР№ СЃС‚РѕР»\Progs\GRAPHICAPP\Debug\RingsProject.exe.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00C41138 (32-bit), Flags: CMdRe0, Thread: 0x51B8 (Main). 
+From: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (8788) struct HWND__ *__cdecl TX::txCreateWindow(double,double,bool).
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BB394D in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txOnRTCFailure() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (11293)
+# 1 0x00C0FDE4 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: failwithmessage() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (209)
+# 2 0x00C0FA29 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: _RTC_Failure() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\error.cpp (234)
+# 3 0x00C0DD59 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: _RTC_CheckEsp() at d:\a01\_work\38\s\src\vctools\crt\vcstartup\src\rtc\stack.cpp (42)
+# 4 0x00BE9E8C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateWindow() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (8788)
+
+# 5 0x00C0A61F in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (91):
+
+     89:     _txSwapBuffers = swapDC;
+     90:     txSetWindowsHook(CtrlWindowFunc);
+=>   91:     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
+     92: 
+     93:     /*
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HWND__ *__cdecl TX::txCreateWindow(double,double,bool) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (8788):
+
+   8786: 
+   8787: $   unsigned id = 0;
+=> 8788: $   _txCanvas_Thread = (HANDLE) Win32::_beginthreadex (NULL, 0, _txCanvas_ThreadProc, &size, 0, &id);
+   8789: 
+   8790: $   if (!_txCanvas_Thread) return TX_DEBUG_ERROR ("\a" "Cannot start canvas thread."),  (HWND) NULL;
+
+# 1 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (91):
+
+     89:     _txSwapBuffers = swapDC;
+     90:     txSetWindowsHook(CtrlWindowFunc);
+=>   91:     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
+     92: 
+     93:     /*
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  8 2022 22:26:07, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  8 2022 22:26:24
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ToolsMenu.cpp, строка: 75, функция: void __thiscall ToolMenu::drawOneLine(int),
+
+Сообщение: ВНЕЗАПНО: Логическая ошибка: Неверно, что "tool".
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00A61138 (32-bit), Flags: CMdRe0, Thread: 0x2814 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x009F16E9 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ToolMenu::drawOneLine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ToolsMenu.cpp (75):
+
+     73:         Tool* tool = lay->getToolLays()[lineNum]->getTool();
+     74: 
+=>   75:         assert(tool);
+     76: 
+     77:         toolDC = tool->getDC();
+
+# 1 0x009EEFFA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Menu::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Menu.cpp (17):
+
+     15:     for (int i = 0; i < currentSize; i++)
+     16:     {
+=>   17:         drawOneLine(i);
+     18:     }
+     19: }
+
+# 2 0x00A02125 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 3 0x00A02517 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+# 4 0x009EEC06 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (135):
+
+    133: 
+    134: 
+=>  135:     app->windowsLibApi->standartManagerDraw(this);
+    136: 
+    137:     printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 5 0x009A1E72 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (275):
+
+    273:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    274: 
+=>  275: 		manager->draw ();
+    276: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    277: 
+
+# 6 0x00A2BA46 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (196):
+
+    194: 
+    195: 	txBegin ();
+=>  196: 	Engine (manager);
+    197:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    198:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  8 2022 22:30:38, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  8 2022 22:30:44
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h, строка: 10885, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00A71138 (32-bit), Flags: CMdRe0, Thread: 0x4774 (Main), GetLastError(): 1413 (Неверный индекс). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x009B7012 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10885)
+# 1 0x00A18B1C in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13584)
+# 2 0x00A19440 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13607)
+
+# 3 0x009F61D3 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (284):
+
+    282:     if (sizeHistory[1] != size)
+    283:     {
+=>  284:         HDC outDC = txCreateDIBSection(size.x, size.y);
+    285:         deleteDC(txDC());
+    286:         txDC() = outDC;
+
+# 4 0x009F8EFC in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::controlWorkSpace() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (13):
+
+     11:     screenSizeLastTime = app->systemSettings->SizeOfScreen;
+     12: 
+=>   13:     app->changeWindow(zone.finishPos - zone.pos, zone.pos);
+     14: }
+     15: 
+
+# 5 0x009FF05B in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (35):
+
+     33:     zoneSizeControl.controlFrame();
+     34: 
+=>   35:     controlWorkSpace();
+     36:     
+     37: 
+
+# 6 0x009B2052 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (275):
+
+    273:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    274: 
+=>  275: 		manager->draw ();
+    276: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    277: 
+
+# 7 0x00A3BE66 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (196):
+
+    194: 
+    195: 	txBegin ();
+=>  196: 	Engine (manager);
+    197:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    198:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (10885):
+
+  10883: 
+  10884: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10885: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10886: 
+  10887: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13584):
+
+  13582: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13583: 
+=>13584: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13585: $   assert (dc); if (!dc) return NULL;  //-V547
+  13586: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h (13607):
+
+  13605:     if (!pixels) {$ pixels = &pix; }
+  13606: 
+=>13607: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13608: 
+  13609: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (284):
+
+    282:     if (sizeHistory[1] != size)
+    283:     {
+=>  284:         HDC outDC = txCreateDIBSection(size.x, size.y);
+    285:         deleteDC(txDC());
+    286:         txDC() = outDC;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul  9 2022 14:50:34, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul  9 2022 14:50:40
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------

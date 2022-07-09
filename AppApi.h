@@ -5,6 +5,7 @@ struct PowerPoint : AbstractAppData
 {
     HCURSOR activeCursor = NULL;
     int lastTimeCursorSetTime = NULL;
+    Vector sizeHistory[2] = {};
 
 
 

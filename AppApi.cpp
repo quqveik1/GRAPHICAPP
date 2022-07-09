@@ -272,7 +272,6 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
         wasSizeChanged = false;
     }
 
-
     
     systemSettings->ScreenPos = pos;
 
@@ -280,12 +279,14 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 
     SetWindowLong(systemSettings->MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
 
-    if (systemSettings->lastTimeSizeOfScreen != size)
+    if (sizeHistory[1] != size)
     {
         HDC outDC = txCreateDIBSection(size.x, size.y);
         deleteDC(txDC());
         txDC() = outDC;
-        systemSettings->lastTimeSizeOfScreen = size;
+        sizeHistory[0] = sizeHistory[1];
+        sizeHistory[1] = size;
+        systemSettings->lastTimeSizeOfScreen = sizeHistory[0];
     }
 
     

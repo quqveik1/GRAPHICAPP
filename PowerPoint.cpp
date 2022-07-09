@@ -6,7 +6,6 @@
 #include "Q_Buttons.h"
 #include <cmath>
 #include "StandartFunctions.h"
-//#include "CurvesFilter.h"
 #include "Canvas.cpp"
 #include "DLLFiltersManager.cpp"
 #include "Tool.h"

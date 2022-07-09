@@ -4,5 +4,5 @@ debugMode = -1;
 DrawingMode = 6;
 Thickness = 3;
 WindowStyle = -2146959360;
-SizeOfScreen.x = 1652.000000;
-SizeOfScreen.y = 805.000000;
+SizeOfScreen.x = 1920.000000;
+SizeOfScreen.y = 1080.000000;

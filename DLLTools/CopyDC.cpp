@@ -55,7 +55,6 @@ void CopyDC::controlStretchedDCFullSize(Vector absSize)
             saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
         }
     }
-
      /*
     if (isEqual(absSize.x, 0))
     {
