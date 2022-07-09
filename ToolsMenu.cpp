@@ -49,6 +49,8 @@ void ToolMenu::onUpdate()
     Canvas* activeCanvas = canvasManager->getActiveCanvas();
 
     if (activeCanvas && activeCanvas->getActiveLay()) currentSize = activeCanvas->getCurrentToolLengthOnActiveLay() + 1;
+    else                                              currentSize = 0;
+
     rect.finishPos.y = currentSize * app->systemSettings->BUTTONHEIGHT + handle.rect.finishPos.y + rect.pos.y;
 }
 

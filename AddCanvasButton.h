@@ -10,5 +10,6 @@ struct AddCanvasButton : Window
     {
     }
 
+    virtual void draw() override;
     virtual void onClick(Vector mp) override;
 };

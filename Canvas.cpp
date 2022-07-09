@@ -19,7 +19,7 @@ void CToolManager::addTool(Tool* tool)
 void Canvas::createLay()
 {
     assert(!(currentLayersLength >= LayersNum));
-    lay[currentLayersLength].createLay(app);
+    lay[currentLayersLength].createLay(app, laysSize);
     if (currentLayersLength <= LayersNum) currentLayersLength++;
 
     activeLayNum = currentLayersLength - 1;
@@ -41,8 +41,8 @@ HDC Canvas::playHistoryDC(int stepBack)
         //canvas = history[--currentHistoryNumber - 1];
         currentHistoryLength;
 
-    }			  */
-    HDC historyDC = app->createDIBSection(canvasSize.x, canvasSize.y);
+    }			  
+    //HDC historyDC = app->createDIBSection(canvasSize.x, canvasSize.y);
 
     if (stepBack <= currentHistoryLength && stepBack < HistoryLength)
     {
@@ -62,6 +62,8 @@ HDC Canvas::playHistoryDC(int stepBack)
 
     timesShowedHistoryInRow++;
     return	historyDC;
+    */
+    return NULL;
 }
 
 void Canvas::deleteButton()
@@ -240,18 +242,9 @@ void Canvas::draw()
 
     if (getActiveWindow() != this) wasClicked = false;
 
-    
+    //controlSize();
+    //drawCadre();
 
-    controlHandle();
-    drawOnFinalDC(handle);
-
-    controlSize();
-    drawCadre();
-
-    
-
-
-    drawOnFinalDC(closeCanvas);
 
 
     DrawingModeLastTime = systemSettings->DrawingMode;
@@ -313,6 +306,11 @@ int Canvas::getCurrentToolLengthOnActiveLay()
     if (!getActiveLay()->getActiveToolLay()) return 0;
     int length = getActiveLay()->getCurrentSize() - 1;
     return length;
+}
+
+const char* Canvas::getName()
+{
+    return name;
 }
 
 

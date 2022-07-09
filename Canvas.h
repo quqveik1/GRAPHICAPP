@@ -12,6 +12,8 @@ struct Canvas : Manager
     RGBQUAD *canvasArr = NULL;
 	HDC tempFilterDC = NULL;
 	RGBQUAD *tempFilterDCArr = NULL;
+    char name[MAX_PATH] = {};
+
 	bool nonConfirmFilter = false; // показывает есть ли сейчас непримененный фильтр
 	bool reCountEnded = false;
 	double lineThickness = 3;
@@ -19,7 +21,7 @@ struct Canvas : Manager
 	struct Window closeCanvas;
 	bool clearBackground = true;
     Vector canvasCoordinats = {};
-    Vector canvasSize = {};
+    
 
 	Vector startResizingCursor = {};
 	bool isResizing = false;
@@ -34,6 +36,7 @@ struct Canvas : Manager
     const int LayersNum = 100;
 	int currentLayersLength = 0;
 	int activeLayNum = 0; 
+    Vector laysSize = {};
     CLay* lay = new CLay[LayersNum]{};
 
     ZoneSizeControl zoneSizeControl;
@@ -58,20 +61,17 @@ struct Canvas : Manager
     int DrawingModeLastTime = 0;
     ProgrammeDate *currentDate = new ProgrammeDate ({}, {}, {}, TX_WHITE);
 
-    CLoadManager* loadManager = NULL;
 
-
-	Canvas (AbstractAppData* _app, Rect _rect, CLoadManager *_loadManager, HDC _closeDC = NULL) :
+	Canvas (AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC = NULL) :
 		Manager (_app, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _app->systemSettings->HANDLEHEIGHT}}),
 		canvasCoordinats ({}),
-		canvasSize (_app->systemSettings->DCVECTORSIZE),
+        laysSize(_rect.getSize()),
 		closeCanvas   (_app, { .pos = {_rect.getSize().x - _app->systemSettings->MENUBUTTONSWIDTH, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }, TX_RED, _closeDC, this, "X"),
         resizingPlace ({0, 0, 0.1 * rect.getSize().x, 0.1 * rect.getSize().y}),
-        loadManager (_loadManager),
         DrawingModeLastTime (systemSettings->DrawingMode),
         zoneSizeControl (this, &rect, &needFrameToWork)
 	{
-
+        if (_name)strcpy(name, _name);
         addWindow (&closeCanvas);
 	}
 
@@ -108,6 +108,7 @@ struct Canvas : Manager
     virtual Vector getLaySize();
     virtual int getCurrentLayLength();
     virtual int getCurrentToolLengthOnActiveLay();
+    virtual const char* getName();
 
     int getActiveLayNum();
     ToolLay* getNewToolLay();

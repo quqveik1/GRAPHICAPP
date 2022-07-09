@@ -1,7 +1,7 @@
 #pragma once
 #include "CLay.h"
 
-void CLay::createLay(AbstractAppData* _app, Vector _size /* = DCVECTORSIZE*/)
+void CLay::createLay(AbstractAppData* _app, Vector _size /* = {}*/)
 {
     assert(_app);
     app = _app;

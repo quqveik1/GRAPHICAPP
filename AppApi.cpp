@@ -63,6 +63,12 @@ void PowerPoint::drawText(double x0, double y0, double x1, double y1, const char
     txDrawText(x0, y0, x1, y1, text, format, dc);
 }
 
+void PowerPoint::drawText(Rect rect, const char text[], HDC dc,
+    unsigned format/* = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
+{
+    drawText(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, text, dc, format);
+}
+
 
 void PowerPoint::setAlign(unsigned align, HDC dc)
 {

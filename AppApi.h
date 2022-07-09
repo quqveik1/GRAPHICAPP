@@ -51,6 +51,8 @@ struct PowerPoint : AbstractAppData
 
     virtual void drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS)  override;
+    virtual void drawText(Rect rect, const char text[], HDC dc,
+        unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS)  override;
 
     virtual void selectFont(const char* text, int sizey, HDC& dc, int sizex = -1) override;
     virtual void setAlign(unsigned align, HDC dc) override;
