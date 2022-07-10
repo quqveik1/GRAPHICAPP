@@ -26,6 +26,17 @@ void SetCanvasButton::cancelEnter()
     hide();
 }
 
+
+void SetCanvasButton::show()
+{
+    needToShow = true;
+    for (int i = 0; i < getCurLen(); i++)
+    {
+        pointers[i]->show();
+    }
+    MoveWindowTo(app->getCentrizedPos(getSize(), app->systemSettings->SizeOfScreen));
+}
+
 void SetCanvasButton::draw()
 {
     if (needToShow)

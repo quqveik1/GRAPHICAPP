@@ -9,7 +9,8 @@ struct Vector
     double x;
     double y;
 
-    Vector &operator = (const Vector &a1);
+    Vector& operator = (const Vector &a1);
+    Vector& operator = (const double& num);
     explicit operator double ();
 
 
@@ -186,6 +187,14 @@ Vector& Vector::operator = (const Vector &a1)
 
     return *this;
 };
+
+Vector& Vector::operator = (const double& num)
+{
+    x = num;
+    y = num;
+
+    return *this;
+}
 
 
 inline void lining ()

@@ -70,8 +70,6 @@ void Canvas::deleteButton()
 {
     if (dc) app->deleteDC(dc);
     if (finalDC) app->deleteDC(finalDC);
-    if (canvas) app->deleteDC(canvas);
-    closeCanvas.deleteButton();
     //scrollBarVert.deleteButton();
     //scrollBarHor.deleteButton();
     deleteHistory();
@@ -93,8 +91,6 @@ void Canvas::changeTool()
 
 void Canvas::initToolLay()
 {
-
-    currentDate->size = { lineThickness, lineThickness };
     addToolLay();
     getActiveLay()->addToolLay(&toolLays[currentToolLength]);
 
@@ -120,12 +116,12 @@ void Canvas::setToolToToolLay(ToolLay* toollay)
 
 void Canvas::setCurrentData()
 {
-    currentDate->mousePos = getMousePos();
-    currentDate->managerPos = getAbsCoordinats();
-    currentDate->color = systemSettings->DrawColor;
-    currentDate->canvasCoordinats = canvasCoordinats;
-    currentDate->backGroundColor = TX_BLACK;
-    if (getMBCondition() == 0) currentDate->clickedMB = 0;
+    currentDate.mousePos = getMousePos();
+    currentDate.managerPos = getAbsCoordinats();
+    currentDate.color = systemSettings->DrawColor;
+    currentDate.canvasCoordinats = canvasCoordinats;
+    currentDate.backGroundColor = TX_BLACK;
+    if (getMBCondition() == 0) currentDate.clickedMB = 0;
 }
 
 ToolLay* Canvas::getNewToolLay()
@@ -160,75 +156,96 @@ int Canvas::getLastNotStartedToolNum()
 
 void Canvas::onClick(Vector mp)
 {
+    setActiveWindow(this);
+
     if (getMBCondition() == 1)
     {
         if (zoneSizeControl.clickFrame()) return;
-
-
-        int mx = mp.x;
-        int my = mp.y;
-
-        if (getActiveWindow() == this)
-        {
-            if (closeCanvas.rect.inRect(mx, my))
-            {
-                needToShow = false;
-                return;
-            }
-        }
 
         if (clickHandle() >= 0) return;
     }
 
 
     //independet scenery block++++++++++++++++++++++++++++++++++++++++++++++++++++
-    currentDate->clickedMB = getMBCondition();
+    if (getActiveLay())
+    {
+        currentDate.clickedMB = getMBCondition();
+    }
     //independet scenery block----------------------------------------------------
 
 
     setMbLastTime();
 }
 
+Vector Canvas::getMousePos()
+{
+    Vector mp = manager->getMousePos() - rect.pos;
+    mp.x *= laysSize.x / rect.getSize().x;
+    mp.y *= laysSize.y / rect.getSize().y;
+    return mp;
+
+}
+
 
 void Canvas::draw()
 {
-    app->setColor(TX_WHITE, finalDC);
-    app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
     if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
 
-
-    cleanOutputLay();
-    controlLay();
-
-    drawLay();
+    controlStretching();
 
     CLay* activeLay = getActiveLay();
     if (activeLay) controlTool();
-
     controlEditLay();
 
     if (app->getAsyncKeyState('Q'))
     {
         endtillkey('Q');
-        //playHistory ();
         createLay();
-
     }
 
-    if (app->getAsyncKeyState('2'))
-    {
-        systemSettings->DrawingMode = 2;
-    }
-
-    //controlSize();
-    //drawCadre();
-
+    drawLays();
+    copyFinalLayOnFinalDC();
 
 
     DrawingModeLastTime = systemSettings->DrawingMode;
 
+    setMbLastTime();
 
+
+}
+
+void Canvas::controlStretching()
+{
+    if (clock() - lastTimeButtonClicked > deltaBetween2Clicks)
+    {
+        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_PLUS))
+        {
+            Vector newSize = getSize();
+            newSize += laysSize * deltaScale;
+
+            assert(manager);
+            Vector centrizedPos = app->getCentrizedPos(newSize, manager->getSize());
+
+            resize({ .pos = centrizedPos, .finishPos = centrizedPos + newSize });
+
+            lastTimeButtonClicked = clock();
+            reDraw = true;
+        }
+
+        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_MINUS))
+        {
+            Vector newSize = getSize();
+            newSize -= laysSize * deltaScale;
+
+            assert(manager);
+            Vector centrizedPos = app->getCentrizedPos(newSize, manager->getSize());
+
+            resize({ .pos = centrizedPos, .finishPos = centrizedPos + newSize });
+            reDraw = true;
+        }
+    }
+    
 }
 
 
@@ -314,7 +331,7 @@ void Canvas::controlTool()
     {
         if (isDrawingModeChanged()) changeTool();
         if (systemSettings->debugMode == 5) printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
-        if (toollay->useTool(currentDate))
+        if (toollay->useTool(&currentDate))
         {
             finishTool();
         }
@@ -393,8 +410,6 @@ void Canvas::controlFilter()
 void Canvas::controlSize()
 {
     zoneSizeControl.controlFrame();
-    closeCanvas.rect.pos = { rect.getSize().x - systemSettings->MENUBUTTONSWIDTH,  0 };
-    closeCanvas.rect.finishPos = { rect.getSize().x, systemSettings->HANDLEHEIGHT };
 }
 
 void Canvas::controlSizeSliders()
@@ -525,23 +540,46 @@ void Canvas::cleanOutputLay()
     }
 }
 
-void Canvas::drawLay()
+void Canvas::drawLays()
 {
+    bool wasFinalLayCleared = false;
     for (int lays = 0; lays < currentLayersLength; lays++)
     {
         if (lay[lays].redrawStatus())
         {
+            if (!wasFinalLayCleared)
+            {
+                app->setColor(backgroungColor, finalLay);
+                app->rectangle({}, laysSize, finalLay);
+                wasFinalLayCleared = true;
+            }
             lay[lays].redraw();
             lay[lays].noMoreRedraw();
+            reDraw = true;
         }
 
         if (editingMode && (lays == getActiveLayNum()))
         {
-            lay[lays].editTool(currentDate);
+            lay[lays].editTool(&currentDate);
         }
-
-        app->transparentBlt(finalDC, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
+        app->transparentBlt(finalLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
     }
+}
+
+void Canvas::copyFinalLayOnFinalDC()
+{
+    if (reDraw)
+    {
+        if (laysSize == rect.getSize())
+        {
+            app->bitBlt(finalDC, {}, laysSize, finalLay);
+        }
+        else
+        {
+            app->stretchBlt(finalDC, {}, rect.getSize(), finalLay, {}, laysSize);
+        }
+    }
+    reDraw = false;
 }
 
 

@@ -61,6 +61,8 @@ struct SetCanvasButton : Manager
 
     virtual int isResultEntered();
 
+    virtual void show();
+
     virtual void draw() override;
     virtual void onClick(Vector mp) override;
    

@@ -5,8 +5,8 @@
 bool CadreResizingTool::edit(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     assert(toollay);
-    if (app->systemSettings->debugMode == 5) printf("Tool getMBCondition(): %d\n", appData->clickedMB);
-    if (app->systemSettings->debugMode == 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
+    if (app->systemSettings->debugMode >= 5) printf("Tool getMBCondition(): %d\n", appData->clickedMB);
+    if (app->systemSettings->debugMode >= 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
     ToolZoneSave* toolDate = (ToolZoneSave*)toolLay->getToolsData();
     countDeltaForControlButtons();
@@ -14,8 +14,9 @@ bool CadreResizingTool::edit(ToolLay* toollay, HDC dc/* = NULL*/)
     setControlSquares();
     controlMoving();
 
-    app->drawCadre(toolLay->toolZone, dc, TX_WHITE, 2);
-
+    app->drawCadre(toolLay->toolZone, dc, cadreColor, 2);
+    
+    app->setColor(cadreColor, dc);
     for (int i = 0; i < controlSquareLength; i++)
     {
         Rect drawRect = controlSquare[i] + toollay->toolZone.pos;

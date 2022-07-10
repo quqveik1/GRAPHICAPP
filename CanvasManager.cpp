@@ -47,9 +47,11 @@ void CanvasManager::draw()
     app->setColor(app->systemSettings->BackgroundColor, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
-    drawTabs();
+    if (getActiveCanvas()) getActiveCanvas()->MoveWindowTo(app->getCentrizedPos(getActiveCanvas()->getSize(), getSize()));
 
     if (activeCanvasNum >= 0)getActiveCanvas()->print(finalDC);
+
+    drawTabs();
 }
 
 int CanvasManager::setDrawingMode(int num)
@@ -87,13 +89,11 @@ Vector CanvasManager::getCentrizedPos(Vector localSize, Vector globalSize)
 
 bool CanvasManager::addCanvas(const char* name, Vector dcSize)
 {
-
-    activeCanvas = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name, closeCanvasButton);
-    canvases[canvasesLength] = activeCanvas;
+    canvases[canvasesLength] = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name, closeCanvasButton);
     activeCanvasNum = canvasesLength;
     canvasesLength++;
     setTabsRect();
-    return addWindow(activeCanvas);
+    return addWindow(canvases[canvasesLength - 1]);
 }
 
 
@@ -140,9 +140,8 @@ void CanvasManager::screenChanged()
         if (canvases[i])
         {
             tempSize = canvases[i]->rect.getSize();
-            centrizedPos = getCentrizedPos(tempSize, getSize());
+            centrizedPos = app->getCentrizedPos(tempSize, getSize());
             canvases[i]->MoveWindowTo(centrizedPos);
-
         }
     }
 }

@@ -90,8 +90,8 @@ struct Tool
     virtual bool isFinished(ToolLay* data);
     virtual bool isStarted(ToolLay* data) { return ((ToolData*)data->getToolsData())->isStarted; };
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void *output);
-    virtual HDC load(ToolLay* toollay, HDC dc = NULL);
+    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) { return false; };
+    virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };
     virtual bool edit(ToolLay* toollay, HDC dc = NULL) { return 1; };
 };
 

@@ -98,7 +98,7 @@ void EllipseTool::outputFunc(HDC outdc)
 
 void Point::initPointSave()
 {
-    pointSave->size = appData->size;
+    pointSave->size = app->systemSettings->Thickness;
     pointSave->color = appData->color;
     pointSave->dllSettings = dllSettings;
     pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};

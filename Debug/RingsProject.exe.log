@@ -58231,3 +58231,263 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x0060A4D4 в функции Canvas::getMousePos() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp на строке 198 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00677160 (32-bit), Flags: CMdRe0, Thread: 0x56EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0060A4D4 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::getMousePos() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (198):
+
+    196: {
+    197:     Vector mp = manager->getMousePos() - rect.pos;
+=>  198:     mp.x *= laysSize.x / rect.getSize().x;
+    199:     mp.y *= laysSize.y / rect.getSize().y;
+    200:     return mp;
+
+# 1 0x0061580E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::setCurrentData() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (123):
+
+    121: void Canvas::setCurrentData()
+    122: {
+=>  123:     currentDate->mousePos = getMousePos();
+    124:     currentDate->managerPos = getAbsCoordinats();
+    125:     currentDate->color = systemSettings->DrawColor;
+
+# 2 0x005FC641 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlTool() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (337):
+
+    335: 
+    336: 
+=>  337:     setCurrentData();
+    338:     if (!isFinished)
+    339:     {
+
+# 3 0x005FFC9A in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (217):
+
+    215: 
+    216:     CLay* activeLay = getActiveLay();
+=>  217:     if (activeLay) controlTool();
+    218: 
+    219:     controlEditLay();
+
+# 4 0x00611F64 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Window::print() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp (15):
+
+     13: {
+     14:     assert(DC);
+=>   15:     draw();
+     16:     app->bitBlt(DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
+     17: }
+
+# 5 0x00600348 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp (54):
+
+     52:     drawTabs();
+     53: 
+=>   54:     if (activeCanvasNum >= 0)getActiveCanvas()->print(finalDC);
+     55: }
+     56: 
+
+# 6 0x00618245 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 7 0x00618637 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+# 8 0x00602C50 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 9 0x005B5412 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (292):
+
+    290:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    291: 
+=>  292: 		manager->draw ();
+    293: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    294: 
+
+#10 0x00641E1E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (213):
+
+    211: 
+    212: 	txBegin ();
+=>  213: 	Engine (manager);
+    214:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    215:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul 10 2022 21:03:45, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 10 2022 21:04:00
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x0060A4D4 в функции Canvas::getMousePos() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp на строке 198 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00677160 (32-bit), Flags: CMdRe0, Thread: 0x56EC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0060A4D4 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::getMousePos() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (198):
+
+    196: {
+    197:     Vector mp = manager->getMousePos() - rect.pos;
+=>  198:     mp.x *= laysSize.x / rect.getSize().x;
+    199:     mp.y *= laysSize.y / rect.getSize().y;
+    200:     return mp;
+
+# 1 0x0061580E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::setCurrentData() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (123):
+
+    121: void Canvas::setCurrentData()
+    122: {
+=>  123:     currentDate->mousePos = getMousePos();
+    124:     currentDate->managerPos = getAbsCoordinats();
+    125:     currentDate->color = systemSettings->DrawColor;
+
+# 2 0x005FC641 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlTool() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (337):
+
+    335: 
+    336: 
+=>  337:     setCurrentData();
+    338:     if (!isFinished)
+    339:     {
+
+# 3 0x005FFC9A in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp (217):
+
+    215: 
+    216:     CLay* activeLay = getActiveLay();
+=>  217:     if (activeLay) controlTool();
+    218: 
+    219:     controlEditLay();
+
+# 4 0x00611F64 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Window::print() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp (15):
+
+     13: {
+     14:     assert(DC);
+=>   15:     draw();
+     16:     app->bitBlt(DC, rect.pos.x, rect.pos.y, rect.getSize().x, rect.getSize().y, finalDC);
+     17: }
+
+# 5 0x00600348 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp (54):
+
+     52:     drawTabs();
+     53: 
+=>   54:     if (activeCanvasNum >= 0)getActiveCanvas()->print(finalDC);
+     55: }
+     56: 
+
+# 6 0x00618245 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 7 0x00618637 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+# 8 0x00602C50 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 9 0x005B5412 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (292):
+
+    290:         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+    291: 
+=>  292: 		manager->draw ();
+    293: 		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    294: 
+
+#10 0x00641E1E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (213):
+
+    211: 
+    212: 	txBegin ();
+=>  213: 	Engine (manager);
+    214:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    215:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul 10 2022 21:03:45, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 10 2022 21:04:00
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
