@@ -43,7 +43,7 @@ bool WindowsLibApi::addWindow(Manager* manager, Window* window)
 }
 
 
-bool WindowsLibApi::clickHandle(Manager* manager)
+int WindowsLibApi::clickHandle(Manager* manager)
 {
     if (manager->handle.rect.inRect(manager->getMousePos()))
     {
@@ -52,7 +52,7 @@ bool WindowsLibApi::clickHandle(Manager* manager)
         manager->handle.setMbLastTime();
         return true;
     }
-    return false;
+    return -1;
 }
 
 

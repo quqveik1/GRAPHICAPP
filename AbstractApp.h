@@ -79,6 +79,8 @@ struct AbstractAppData
     virtual void drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness) = 0;
     virtual void drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness) = 0;
 
+    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) = 0;
+
     virtual void changeWindow(Vector size = {}, Vector pos = {}) = 0;
     virtual void setCursor(HCURSOR cursor) = 0;
     virtual Vector getCursorPos() = 0;

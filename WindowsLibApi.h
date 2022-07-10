@@ -11,7 +11,7 @@ struct WindowsLibApi
 {
     virtual void resize(Window* window, Rect newRect);
     virtual bool addWindow(Manager* manager, Window* window);
-    virtual bool clickHandle(Manager* manager);
+    virtual int clickHandle(Manager* manager);
     virtual Vector getAbsCoordinats(Window* window, bool coordinatsWithHandle = false);
     virtual struct Window* isActiveWindowBelow(Manager* manager);
     virtual void controlHandle(Manager* manager);

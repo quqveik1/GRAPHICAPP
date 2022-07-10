@@ -44,7 +44,7 @@ void CanvasManager::draw()
 {
     rect.finishPos = app->systemSettings->SizeOfScreen;
 
-    app->setColor(RGB(100, 100, 100), finalDC);
+    app->setColor(app->systemSettings->BackgroundColor, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
     drawTabs();
@@ -103,8 +103,6 @@ void CanvasManager::onClick(Vector mp)
     if (tabsOnClick() >= 0) return;
 
     if (getActiveCanvas()) if (getActiveCanvas()->rect.inRect(getMousePos()))getActiveCanvas()->onClick(mp);
-
-    //int clickedCellNum = app->windowsLibApi->standartManagerOnClick(this, mp);
 }
 
 int CanvasManager::tabsOnClick()

@@ -56,6 +56,11 @@ void PowerPoint::drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF colo
     drawCadre(pos1, pos2, dc, color, thickness);
 }
 
+Vector PowerPoint::getCentrizedPos(Vector localSize, Vector globalSize)
+{
+    return (globalSize - localSize) * 0.5;
+}
+
 
 void PowerPoint::drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)

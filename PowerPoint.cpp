@@ -161,6 +161,8 @@ int main (int argc, int *argv[])
 
         AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindowToStart(addNewCanvas);
+        SetCanvasButton* setCanvasButton = addNewCanvas->getSetCanvasButton();
+    manager->addWindow(setCanvasButton);
 
         OpenHandleMenuManager* openWindowsManager = new OpenHandleMenuManager(appData, LoadManager.loadImage("OpenWindows.bmp"));
         mainhandle->addWindowToStart(openWindowsManager);

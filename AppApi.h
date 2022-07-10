@@ -65,6 +65,8 @@ struct PowerPoint : AbstractAppData
     virtual void drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness) override;
     virtual void drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness) override;
 
+    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) override;
+
     virtual void changeWindow(Vector size = {}, Vector pos = {})  override;
     virtual void setCursor(HCURSOR cursor) override;
     virtual Vector getCursorPos() override;

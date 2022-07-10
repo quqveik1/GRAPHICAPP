@@ -14,6 +14,8 @@ struct InputButton : Window
     bool shouldShowCursor = false;
     bool wasClicked = false;
 
+    double deltaAfterCadre = 4;
+
     HCURSOR cursor = NULL;
     
 
@@ -23,7 +25,7 @@ struct InputButton : Window
     COLORREF cursorColor = NULL;
     
 
-    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int *_minParametr, int *_maxParametr, COLORREF _mainColor, COLORREF _cadreColor, COLORREF _cursorColor, bool* _confirmInput = NULL) :
+    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int *_minParametr, int *_maxParametr, COLORREF _mainColor, COLORREF _cadreColor = RGB(144, 144, 144), COLORREF _cursorColor = RGB(200, 200, 200), bool* _confirmInput = NULL) :
         Window (_app, _rect, _mainColor),
         parameter (_parameter),
         cadreColor (_cadreColor),

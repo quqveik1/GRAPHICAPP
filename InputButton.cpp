@@ -106,7 +106,7 @@ void InputButton::drawCursor()
     int fontSize = 24 * 0.45;
     int tempCursorPos = cursorPos;
     if (*parameter == 0) tempCursorPos = 0;
-    app->line(2 + fontSize * tempCursorPos, 0, 2 + fontSize * tempCursorPos, getSize().y, finalDC);
+    app->line(deltaAfterCadre + fontSize * tempCursorPos, 0, deltaAfterCadre + fontSize * tempCursorPos, getSize().y, finalDC);
 
     
 }
@@ -159,7 +159,7 @@ void InputButton::draw()
 
     app->selectFont(app->systemSettings->FONTNAME, 24, finalDC);
     app->setColor(app->systemSettings->TextColor, finalDC);
-    app->drawText(2, 2, getSize().x - 2, getSize().y - 2, output, finalDC, DT_VCENTER);
+    app->drawText(deltaAfterCadre, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER);
 
     Rect cadreRect = { .pos = {0, 0}, .finishPos = {getSize().x, getSize().y} };
     app->drawCadre(cadreRect, finalDC, cadreColor, 2);

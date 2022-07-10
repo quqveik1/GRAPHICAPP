@@ -162,7 +162,6 @@ void Canvas::onClick(Vector mp)
 {
     if (getMBCondition() == 1)
     {
-        lastClick = mp;
         if (zoneSizeControl.clickFrame()) return;
 
 
@@ -178,23 +177,7 @@ void Canvas::onClick(Vector mp)
             }
         }
 
-        if (clickHandle()) return;
-
-        if (!(isClickedLastTime()) && getActiveWindow() == this)
-        {
-            if (handle.rect.inRect(lastClick.x, lastClick.y))
-            {
-                if (resizingPlace.inRect(lastClick.x, lastClick.y))
-                {
-                    //startResizingCursor = { (double)mx, (double)my };
-                    //isResizing = true;
-                    return;
-                }
-
-                return;
-            }
-
-        }
+        if (clickHandle() >= 0) return;
     }
 
 
@@ -209,9 +192,8 @@ void Canvas::onClick(Vector mp)
 
 void Canvas::draw()
 {
-    app->setColor(TX_BLACK, finalDC);
+    app->setColor(TX_WHITE, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
-    app->setColor(systemSettings->BackgroundColor, finalDC);
 
     if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
 
@@ -238,9 +220,6 @@ void Canvas::draw()
     {
         systemSettings->DrawingMode = 2;
     }
-
-
-    if (getActiveWindow() != this) wasClicked = false;
 
     //controlSize();
     //drawCadre();
@@ -349,6 +328,7 @@ void Canvas::finishTool()
 
 void Canvas::returnHistory(int stepsBack)
 {
+    /*
     if (!(stepsBack <= currentHistoryLength)) return;
     //HDC historyDC = playHistoryDC();
     //printfDCS ();
@@ -363,6 +343,7 @@ void Canvas::returnHistory(int stepsBack)
     }
 
     timeSavedHistory--;
+    */
 
 }
 
@@ -428,6 +409,7 @@ void Canvas::controlSizeSliders()
 
 void Canvas::saveHistory()
 {
+    /*
     //app->bitBlt (history[currentHistoryNumber - 1], 0, 0, 0, 0, canvas);
     timeSavedHistory++;
     if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
@@ -446,7 +428,7 @@ void Canvas::saveHistory()
         }
         lastSavedDC = playHistoryDC(9);
         app->drawOnScreen(lastSavedDC);
-    }  */
+    }  
 
     //history[addNewHistoryNum].toolsNum = _app->systemSettings->DrawingMode;
     //history[addNewHistoryNum].pos = {lastClick.x + canvasCoordinats.x,  lastClick.y + canvasCoordinats.y};
@@ -455,15 +437,17 @@ void Canvas::saveHistory()
     //history[addNewHistoryNum].thickness = lineThickness;
 
 
-
+    */
 }
 
 void Canvas::deleteHistory()
 {
+    /*
     for (int i = 0; i < HistoryLength; i++)
     {
         //smartDeleteDC (history[i]);
     }
+    */
 }
 
 void Canvas::controlEditLay()
@@ -553,7 +537,6 @@ void Canvas::drawLay()
 
         if (editingMode && (lays == getActiveLayNum()))
         {
-            //lay[lays].getActiveToolLay()->setMBCondition(getMBCondition());
             lay[lays].editTool(currentDate);
         }
 

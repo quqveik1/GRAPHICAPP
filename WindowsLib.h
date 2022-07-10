@@ -180,7 +180,7 @@ struct Manager : Window
 
 
     virtual void controlHandle();
-    virtual bool clickHandle();
+    virtual int clickHandle();
     virtual void replaceWindow(int numOfWindow);
     virtual void hide() override;
     virtual void show() override;

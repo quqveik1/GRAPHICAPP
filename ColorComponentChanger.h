@@ -9,6 +9,7 @@ struct ColorComponentChanger : Manager
     Slider2* slider = NULL;
     InputButton* inputButton = NULL;
     Rect sliderRect = {};
+    Vector sliderSize = { 0, 15 };
     Vector numSize = {};
     int minLimit = 0;
     int maxLimit = 255;
@@ -19,8 +20,9 @@ struct ColorComponentChanger : Manager
         numSize({ 50, getSize().y })
     {
         needTransparencyOutput = true;
-        sliderRect = rect - rect.pos;
-        sliderRect.finishPos.x -= numSize.x;
+
+        Vector sliderPos = app->getCentrizedPos(sliderSize, getSize());
+        sliderRect = { .pos = {0, sliderPos.y}, .finishPos = {getSize().x - numSize.x, sliderPos.y + sliderSize.y} };
 
         slider = new Slider2(app, sliderRect, component, &minLimit, &maxLimit, _confirmColor);
         addWindow(slider);

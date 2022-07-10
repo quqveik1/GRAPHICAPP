@@ -88,13 +88,13 @@ struct ColorMenu : Manager
 
         setColorComponents();
 
-        redChanger = new ColorComponentChanger(app, { .pos = {75, 60}, .finishPos = {390, 80} }, &redComponent, &confirmedColor);
+        redChanger = new ColorComponentChanger(app, { .pos = {75, 55}, .finishPos = {390, 80} }, &redComponent, &confirmedColor);
         addWindow(redChanger);
 
-        greenChanger = new ColorComponentChanger(app, { .pos = {75, 85}, .finishPos = {390, 105} }, &greenComponent, &confirmedColor);
+        greenChanger = new ColorComponentChanger(app, { .pos = {75, 85}, .finishPos = {390, 110} }, &greenComponent, &confirmedColor);
         addWindow(greenChanger);
 
-        blueChanger = new ColorComponentChanger(app, { .pos = {75, 110}, .finishPos = {390, 130} }, &blueComponent, &confirmedColor);
+        blueChanger = new ColorComponentChanger(app, { .pos = {75, 115}, .finishPos = {390, 140} }, &blueComponent, &confirmedColor);
         addWindow(blueChanger);
     }
 

@@ -116,7 +116,7 @@ void Manager::draw()
     app->windowsLibApi->standartManagerDraw(this);
 }
 
-bool Manager::clickHandle()
+int Manager::clickHandle()
 {
     return app->windowsLibApi->clickHandle(this);
 }
