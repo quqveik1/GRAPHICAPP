@@ -273,33 +273,47 @@ void Engine (MainManager *manager)
     assert (manager); 
     PowerPoint* app = (PowerPoint*)manager->app;
     assert(app);
+    RECT programmRect = {};
+    bool deltaBetween2UnhideSuggestions = 1000;
+    double lastTimeChekedWindowCondition = 0;
 
     bool wasResizedInLastFrame = false;
 
-	for (;;)
-	{
+    for (;;)
+    {
         app->controlApp();
-        if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf ("\nFPS: %d\n", (int)txGetFPS());
+        if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf("\nFPS: %d\n", (int)txGetFPS());
 
-		app->setColor (app->systemSettings->BackgroundColor, txDC());
-		app->rectangle (0, 0, app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y, txDC());
+        app->setColor(app->systemSettings->BackgroundColor, txDC());
+        app->rectangle(0, 0, app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y, txDC());
 
-        Vector mp = {txMouseX (), txMouseY ()};
+        Vector mp = { txMouseX(), txMouseY() };
         manager->mousePos = mp;
         if (app->systemSettings->debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
         if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
 
-		manager->draw ();
-		if (manager->finalDC) app->bitBlt (txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
-
-        manager->clicked = txMouseButtons();
-		if (txMouseButtons ())
+        if (!app->isShowing)
         {
-			manager->onClick (mp);
-			if (!app->IsRunning) break;
-		}
+            GetWindowRect(app->systemSettings->MAINWINDOW, &programmRect);
+            if (isBigger(programmRect.right, 0))
+            {
+                app->isShowing = true;
+            }
+        }
+        if (app->isShowing)
+        {
 
-		txSleep (0);
+            manager->draw();
+            if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+
+            manager->clicked = txMouseButtons();
+            if (txMouseButtons())
+            {
+                manager->onClick(mp);
+                if (!app->IsRunning) break;
+            }
+            txSleep(0);
+        }
 	}
 
     ShowWindow(app->systemSettings->MAINWINDOW, SW_HIDE);

@@ -31,8 +31,8 @@ struct SetCanvasButton : Manager
     SetCanvasButton(AbstractAppData* _app, Vector _pos, Vector* _controlSize) :
         Manager(_app, { .pos = _pos, .finishPos = {_pos.x + 300, _pos.y + 200} }, 3, false, NULL, {}, _app->systemSettings->MenuColor),
         controlSize(_controlSize),
-        inputX(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeX, &minSize, &maxSize, app->systemSettings->TRANSPARENTCOLOR),
-        inputY(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeY, &minSize, &maxSize, app->systemSettings->TRANSPARENTCOLOR)
+        inputX(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeX, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR),
+        inputY(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeY, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR)
     {
         assert (app);
         assert(controlSize);

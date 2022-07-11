@@ -2,6 +2,19 @@
 #include "Canvas.h"
 #include "ZoneSizeControl.cpp"
 
+Canvas::Canvas(AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC/* = NULL*/) :
+    Manager(_app, _rect, 5, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
+    canvasCoordinats({}),
+    laysSize(_rect.getSize()),
+    DrawingModeLastTime(systemSettings->DrawingMode),
+    zoneSizeControl(this, &rect, &needFrameToWork),
+    finalLay(app->createDIBSection(laysSize))
+{
+    app->setColor(backgroungColor, finalLay);
+    app->rectangle({}, laysSize, finalLay);
+    if (_name)strcpy(name, _name);
+}
+
 
 void CToolManager::addTool(Tool* tool)
 {
@@ -180,8 +193,10 @@ void Canvas::onClick(Vector mp)
 Vector Canvas::getMousePos()
 {
     Vector mp = manager->getMousePos() - rect.pos;
-    mp.x *= laysSize.x / rect.getSize().x;
-    mp.y *= laysSize.y / rect.getSize().y;
+    if (!isEqual(rect.getSize().x, 0)) mp.x *= laysSize.x / rect.getSize().x;
+    else mp.x = 0;
+    if (!isEqual(rect.getSize().y, 0)) mp.y *= laysSize.y / rect.getSize().y;
+    else mp.y = 0;
     return mp;
 
 }
@@ -208,7 +223,7 @@ void Canvas::draw()
     copyFinalLayOnFinalDC();
 
 
-    DrawingModeLastTime = systemSettings->DrawingMode;
+    DrawingModeLastTime = app->systemSettings->DrawingMode;
 
     setMbLastTime();
 
@@ -217,6 +232,22 @@ void Canvas::draw()
 
 void Canvas::controlStretching()
 {
+    if (!isEqual (getSize().x, laysSize.x * scale, 1))
+    {
+
+        if (isBigger(scale, 0))
+        {
+            resize({ .pos = {}, .finishPos = laysSize * scale });
+        }
+        else
+        {
+            rect.pos = {};
+            rect.finishPos = laysSize * scale;
+        }
+
+        reDraw = true;
+    }
+
     if (clock() - lastTimeButtonClicked > deltaBetween2Clicks)
     {
         if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_PLUS))
@@ -225,9 +256,8 @@ void Canvas::controlStretching()
             newSize += laysSize * deltaScale;
 
             assert(manager);
-            Vector centrizedPos = app->getCentrizedPos(newSize, manager->getSize());
 
-            resize({ .pos = centrizedPos, .finishPos = centrizedPos + newSize });
+            resize({ .pos = {}, .finishPos = newSize });
 
             lastTimeButtonClicked = clock();
             reDraw = true;
@@ -236,15 +266,28 @@ void Canvas::controlStretching()
         if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_MINUS))
         {
             Vector newSize = getSize();
-            newSize -= laysSize * deltaScale;
+            if (newSize > 0)newSize -= laysSize * deltaScale;
 
-            assert(manager);
-            Vector centrizedPos = app->getCentrizedPos(newSize, manager->getSize());
+            if (newSize > 0)
+            {
 
-            resize({ .pos = centrizedPos, .finishPos = centrizedPos + newSize });
-            reDraw = true;
+                assert(manager);
+
+                resize({ .pos = {}, .finishPos = newSize });
+
+                lastTimeButtonClicked = clock();
+                reDraw = true;
+            }
+            else
+            {
+                rect.finishPos = newSize;
+                reDraw = true;
+            }
         }
+        
     }
+    double sizeX = getSize().x;
+    scale = getSize().x / laysSize.x;
     
 }
 
@@ -307,6 +350,11 @@ int Canvas::getCurrentToolLengthOnActiveLay()
 const char* Canvas::getName()
 {
     return name;
+}
+
+double& Canvas::getScale()
+{
+    return scale;
 }
 
 

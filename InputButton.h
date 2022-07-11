@@ -9,7 +9,7 @@ struct InputButton : Window
     int* maxParametr = NULL;
     int cursorPos = 0;
     int lastTimeClicked = 0;
-    int delta = 30;
+    int delta = 100;
     int lastTimeCursorConditionChanged = 0;
     bool shouldShowCursor = false;
     bool wasClicked = false;
@@ -23,24 +23,11 @@ struct InputButton : Window
 
     COLORREF cadreColor = NULL;
     COLORREF cursorColor = NULL;
+
+    int mode = 0;
     
 
-    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int *_minParametr, int *_maxParametr, COLORREF _mainColor, COLORREF _cadreColor = RGB(144, 144, 144), COLORREF _cursorColor = RGB(200, 200, 200), bool* _confirmInput = NULL) :
-        Window (_app, _rect, _mainColor),
-        parameter (_parameter),
-        cadreColor (_cadreColor),
-        cursorColor (_cursorColor),
-        minParametr(_minParametr),
-        maxParametr(_maxParametr),
-        confirmInput(_confirmInput)
-    {
-        needTransparencyOutput = true;
-
-        cursorPos = getAmountOfNumbers(*parameter);
-
-        cursor = LoadCursor(NULL, IDC_IBEAM);
-
-    }
+    InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int* _minParametr, int* _maxParametr, int _mode/* = 0*/, COLORREF _mainColor, COLORREF _cadreColor = RGB(144, 144, 144), COLORREF _cursorColor = RGB(200, 200, 200), bool* _confirmInput = NULL);
 
     int getAmountOfNumbers(int num);
     void checkKeyboard();

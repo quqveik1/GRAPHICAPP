@@ -1,9 +1,18 @@
 #pragma once
 #include "CanvasManager.h"
 #include "Canvas.cpp"
+#include "InputButton.cpp"
 
-
-
+CanvasManager::CanvasManager(AbstractAppData* _app) :
+    Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
+    oneTabSize({ app->systemSettings->BUTTONWIDTH * 4, app->systemSettings->HANDLEHEIGHT }),
+    scaleButtonSize({75, 25}),
+    scaleButton(new InputButton (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
+{
+    gassert(loadManager);
+    addWindow(scaleButton);
+    app->compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 });
+}
 Canvas* CanvasManager::getActiveCanvas()
 {
     if (activeCanvasNum < 0) return NULL;
@@ -18,6 +27,11 @@ void CanvasManager::drawTabs()
     app->setColor(TX_BLACK, finalDC, 1);
     app->line({0, 1}, { getSize().x, 1 }, finalDC);
     app->line({0, oneTabSize.y}, { getSize().x, oneTabSize.y }, finalDC);
+    if (!getActiveCanvas())
+    {
+        app->setColor(app->systemSettings->TextColor, finalDC);
+        app->drawText({ .pos = {}, .finishPos = {getSize().x, oneTabSize.y} }, "Íàæìèòå Ñtrl+N, ÷òîáû ñîçäàòü õîëñò", finalDC);
+    }
 
     for (int i = 0; i < canvasesLength; i++)
     {
@@ -47,11 +61,50 @@ void CanvasManager::draw()
     app->setColor(app->systemSettings->BackgroundColor, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
-    if (getActiveCanvas()) getActiveCanvas()->MoveWindowTo(app->getCentrizedPos(getActiveCanvas()->getSize(), getSize()));
+    if (getActiveCanvas())
+    {
+        Rect userRect = app->getUserRect();
+        userRect = userRect - rect.pos;
 
-    if (activeCanvasNum >= 0)getActiveCanvas()->print(finalDC);
+        Vector scaleButtonPos = { userRect.pos.x, userRect.finishPos.y - scaleButton->getSize().y };
+
+        intScale = getActiveCanvas()->getScale() * 100;
+        scaleButton->MoveWindowTo(scaleButtonPos);
+        scaleButton->draw();
+        controlActiveCanvas();
+        
+        app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
+    }
 
     drawTabs();
+}
+
+void CanvasManager::controlActiveCanvas()
+{
+    getActiveCanvas()->getScale() = (double)intScale / 100.0;
+
+    getActiveCanvas()->draw();
+    if (app->getAsyncKeyState(VK_RIGHT))
+    {
+        getActiveCanvas()->deltaPos.x -= 10;
+    } 
+    if (app->getAsyncKeyState(VK_LEFT))
+    {
+        getActiveCanvas()->deltaPos.x += 10;
+    }  
+    if (app->getAsyncKeyState(VK_UP))
+    {
+        getActiveCanvas()->deltaPos.y += 10;
+    }  
+    if (app->getAsyncKeyState(VK_DOWN))
+    {
+        getActiveCanvas()->deltaPos.y -= 10;
+    }
+    Vector ñanvasPos = app->getCentrizedPos(getActiveCanvas()->getSize(), getSize());
+    ñanvasPos += getActiveCanvas()->deltaPos;
+    getActiveCanvas()->MoveWindowTo(ñanvasPos);
+
+    app->bitBlt(finalDC, getActiveCanvas()->rect.pos, getActiveCanvas()->getSize(), getActiveCanvas()->finalDC);
 }
 
 int CanvasManager::setDrawingMode(int num)
@@ -102,7 +155,17 @@ void CanvasManager::onClick(Vector mp)
 {
     if (tabsOnClick() >= 0) return;
 
-    if (getActiveCanvas()) if (getActiveCanvas()->rect.inRect(getMousePos()))getActiveCanvas()->onClick(mp);
+    if (getActiveCanvas())
+    {
+        mp = getMousePos();
+        if (scaleButton->rect.inRect(mp))
+        {
+            scaleButton->onClick(mp);
+            return;
+        }
+
+        if (getActiveCanvas()->rect.inRect(mp))getActiveCanvas()->onClick(mp);
+    }
 }
 
 int CanvasManager::tabsOnClick()

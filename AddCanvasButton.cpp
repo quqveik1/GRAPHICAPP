@@ -20,6 +20,11 @@ void AddCanvasButton::draw()
             if (currentEnterStatus == 1)canvasManager->addCanvas("TestName", newCanvasSize);
         }
     }
+    if (!isEnterActive && app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('N'))
+    {
+        isEnterActive = true;
+        setCanvasButton.show();
+    }
     setMbLastTime();
 }
 

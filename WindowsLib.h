@@ -11,6 +11,7 @@ struct Window
     CSystemSettings* systemSettings = NULL;
     struct AbstractAppData* app = NULL;
 
+
     Rect rect = {};
     Rect originalRect = {};
     COLORREF color = 0;

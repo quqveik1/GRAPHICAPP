@@ -1,6 +1,5 @@
 #pragma once
 #include "Canvas.h"
-#include "ProgressBar.h"
 
 struct CanvasManager : Manager
 {
@@ -12,15 +11,14 @@ struct CanvasManager : Manager
     Canvas* canvases[10] = {};
     Rect tabs[10] = {};
     Vector oneTabSize = {};
+    Vector scaleButtonSize = {};
+    int intScale = 0;
+    int minScale = 0;
+    int maxScale = 1000;
+    struct InputButton* scaleButton;
 
 
-    CanvasManager (AbstractAppData* _app) :
-        Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
-        oneTabSize({app->systemSettings->BUTTONWIDTH * 4, app->systemSettings->HANDLEHEIGHT})
-    {
-        gassert(loadManager);
-        app->compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 });
-    }
+    CanvasManager(AbstractAppData* _app);
 
     virtual Canvas* getActiveCanvas();
     virtual bool addCanvas(const char* name, Vector dcSize);
@@ -31,6 +29,7 @@ struct CanvasManager : Manager
     void drawTabs();
     void setTabsRect();
     int tabsOnClick();
+    void controlActiveCanvas();
 
 
     virtual void screenChanged() override;
@@ -38,4 +37,4 @@ struct CanvasManager : Manager
     virtual void onClick(Vector mp) override;
 
     virtual void deleteButton() override;
-};
+};              

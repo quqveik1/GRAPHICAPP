@@ -29,7 +29,7 @@ struct ColorComponentChanger : Manager
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, 0}, .finishPos = getSize() };
 
-        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, color, RGB(144, 144, 144), RGB(200, 200, 200), _confirmColor);
+        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, 0, color, RGB(144, 144, 144), RGB(200, 200, 200), _confirmColor);
         addWindow(inputButton);
     }
     virtual void draw() override;

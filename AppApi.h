@@ -75,6 +75,7 @@ struct PowerPoint : AbstractAppData
     virtual void setResized(bool state = true) override;
 
     virtual bool isFullScreen() override;
+    virtual Rect getUserRect() override;
 
     virtual void controlApp();
 

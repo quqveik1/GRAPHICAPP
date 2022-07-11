@@ -17,6 +17,7 @@ struct AbstractAppData
     COLORREF* currColor = NULL;
     bool isResized = false;
     bool IsRunning = true;
+    bool isShowing = true;;
     HCURSOR defaultCursor = LoadCursor(NULL, IDC_ARROW);
 
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1) = 0;
@@ -88,4 +89,6 @@ struct AbstractAppData
     virtual void setResized(bool state = true) = 0;
     virtual bool wasResized() = 0;
     virtual bool isFullScreen() = 0;
+
+    virtual Rect getUserRect() = 0;
 };

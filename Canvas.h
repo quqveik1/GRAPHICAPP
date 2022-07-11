@@ -30,23 +30,13 @@ struct Canvas : Manager
     ZoneSizeControl zoneSizeControl;
     bool needFrameToWork = true;
 
-    double scale = 0;
+    double scale = 1;
     double deltaScale = 0.1;
     int lastTimeButtonClicked = 0;
-    int deltaBetween2Clicks = 500;
+    int deltaBetween2Clicks = 300;
+    Vector deltaPos = {};
 
-	Canvas (AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC = NULL) :
-		Manager (_app, _rect, 5, true, NULL, {.pos = {0, 0}, .finishPos = {_rect.getSize ().x, _app->systemSettings->HANDLEHEIGHT}}),
-		canvasCoordinats ({}),
-        laysSize(_rect.getSize()),
-        DrawingModeLastTime (systemSettings->DrawingMode),
-        zoneSizeControl (this, &rect, &needFrameToWork),
-        finalLay(app->createDIBSection(laysSize))
-    {
-        app->setColor(backgroungColor, finalLay);
-        app->rectangle({}, laysSize, finalLay);
-        if (_name)strcpy(name, _name);
-	}
+    Canvas(AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC = NULL);
 
 	void controlSize();
 	void controlSizeSliders ();
@@ -86,6 +76,7 @@ struct Canvas : Manager
     virtual int getCurrentLayLength();
     virtual int getCurrentToolLengthOnActiveLay();
     virtual const char* getName();
+    virtual double& getScale();
 
     int getActiveLayNum();
     ToolLay* getNewToolLay();

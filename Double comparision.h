@@ -3,28 +3,28 @@
 
 double deltaOfComparision = 0.00001;
 
-bool isEqual (const double& a, const double& b);
-bool isBigger(const double& a, const double& b);
-bool isSmaller(const double& a, const double& b);
+bool isEqual (const double& a, const double& b, const double& delta = deltaOfComparision);
+bool isBigger(const double& a, const double& b, const double& delta = deltaOfComparision);
+bool isSmaller(const double& a, const double& b, const double& delta = deltaOfComparision);
 
 
 
-bool isEqual(const double& a, const double& b)
+bool isEqual(const double& a, const double& b, const double& delta/* = deltaOfComparision*/)
 {
-    if (fabs(a - b) < deltaOfComparision) return true;
+    if (fabs(a - b) < delta) return true;
     return false;
 }
 
-bool isBigger(const double& a, const double& b)
+bool isBigger(const double& a, const double& b, const double& delta/* = deltaOfComparision*/)
 {
-    if (a - b > deltaOfComparision) return true;
+    if (a - b > delta) return true;
     else                            return false;
 
 }
 
-bool isSmaller(const double& a, const double& b)
+bool isSmaller(const double& a, const double& b, const double& delta/* = deltaOfComparision*/)
 {
-    if (b - a > deltaOfComparision) return true;
+    if (b - a > delta) return true;
     else                            return false;
 
 }

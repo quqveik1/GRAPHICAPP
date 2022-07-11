@@ -3,6 +3,25 @@
 
 
 
+InputButton::InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int* _minParametr, int* _maxParametr, int _mode/* = 0*/, COLORREF _mainColor, COLORREF _cadreColor/* = RGB(144, 144, 144)*/, COLORREF _cursorColor/* = RGB(200, 200, 200)*/, bool* _confirmInput/* = NULL*/) :
+    Window(_app, _rect, _mainColor),
+    parameter(_parameter),
+    cadreColor(_cadreColor),
+    cursorColor(_cursorColor),
+    minParametr(_minParametr),
+    maxParametr(_maxParametr),
+    confirmInput(_confirmInput),
+    mode (_mode)
+{
+    needTransparencyOutput = true;
+
+    if (parameter) cursorPos = getAmountOfNumbers(*parameter);
+
+    cursor = LoadCursor(NULL, IDC_IBEAM);
+
+}
+
+
 int InputButton::getAmountOfNumbers(int num)
 {
     int answer = 1;
@@ -39,7 +58,7 @@ void InputButton::backSpace()
 
     if (newNum >= 0)
     {
-        *parameter = newNum;
+        *parameter = newNum;        
         cursorPos--;
     }
 
@@ -48,7 +67,7 @@ void InputButton::backSpace()
 
 void InputButton::checkKeyboard()
 {
-    if (clock() - lastTimeClicked < 100) return;
+    if (clock() - lastTimeClicked < delta) return;
 
     if (app->getAsyncKeyState (VK_RIGHT)) moveCursorRight();
     if (app->getAsyncKeyState(VK_LEFT)) moveCursorLeft();
@@ -117,16 +136,16 @@ void InputButton::draw()
     app->rectangle({ 0, 0 }, getSize(), finalDC);
 
 
-    char output[MAX_PATH] = {};
-
-    int result = sprintf(output, "%d", *parameter);
+    
 
     if (rect.inRect(getAbsMousePos()))
     {
         app->setCursor(cursor);
     }
 
+    char parametrString[MAX_PATH] = {};
 
+    sprintf(parametrString, "%d", *parameter);
     if (wasClicked)
     {
         if (getActiveWindow() != this || app->getAsyncKeyState(VK_RETURN))
@@ -144,7 +163,7 @@ void InputButton::draw()
         if (*parameter == 0)
         {
             cursorPos = 1;
-            result = sprintf(output, " ");
+            sprintf(parametrString, "");
         }
 
         drawCursor();
@@ -156,6 +175,16 @@ void InputButton::draw()
     {
         cursorPos = getAmountOfNumbers(*parameter);
     }
+
+    char output[MAX_PATH] = {};
+
+    char addition[10] = {};
+
+    if (mode == 1)
+    {
+        int aditionPrintfResult = sprintf(addition, "%%");
+    }
+    int result = sprintf(output, "%s%s", parametrString, addition);
 
     app->selectFont(app->systemSettings->FONTNAME, 24, finalDC);
     app->setColor(app->systemSettings->TextColor, finalDC);

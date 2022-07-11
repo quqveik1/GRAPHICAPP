@@ -332,6 +332,18 @@ bool PowerPoint::isFullScreen()
 
 }
 
+Rect PowerPoint::getUserRect()
+{
+    if (isFullScreen())
+    {
+        return { .pos = {0, systemSettings->HANDLEHEIGHT}, .finishPos = systemSettings->SizeOfScreen };
+    }
+    else
+    {
+        return { .pos = {systemSettings->FrameThickness, systemSettings->HANDLEHEIGHT}, .finishPos = systemSettings->SizeOfScreen - systemSettings->FrameThickness };
+    }
+}
+
 
 void PowerPoint::setResized(bool state/* = true*/)
 {
