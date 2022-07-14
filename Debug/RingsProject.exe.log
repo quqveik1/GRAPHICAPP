@@ -60174,3 +60174,7 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+HEAP CORRUPTION DETECTED: after Normal block (#836) at 0x014CBD40.
+CRT detected that the application wrote to memory after end of heap buffer.
+Normal located at 0x014CBD40 is 1 bytes long.
+minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()

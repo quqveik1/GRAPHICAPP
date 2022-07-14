@@ -23,7 +23,20 @@ int InputButton2::getIntFromText(char* _text, int textSize/* = 0 */)
 bool InputButton2::isSymbolAllowed(int symbol)
 {
     int currentInt = getIntFromText (text, currentTextSize);
-    if (symbol == '0' || currentInt == 0 || cursorPos == 0)
+
+    char* newText = new char[currentTextSize + 2]{};
+
+    getTextAfterEnteringSymbol(newText, text, currentTextSize, cursorPos, symbol);
+    int newInt = getIntFromText(newText, 0);
+    assert(maxParametr);
+    if (newInt > *maxParametr)
+    {
+        return false;
+    }
+
+    delete newText;
+
+    if (symbol == '0' && cursorPos == 0)
     {
         return false;
     }
@@ -34,11 +47,17 @@ bool InputButton2::isSymbolAllowed(int symbol)
     return false;
 }
 
+void InputButton2::setParameter(int* newParameter)
+{
+    parameter = newParameter;
+
+}
+
 
 void InputButton2::modifyOutput(char* outputStr, char* originalStr)
 {
     assert(outputStr && originalStr);
-    if (text[0] == '0')
+    if (text[0] == '0' && getInputMode())
     {
         sprintf(outputStr, "");
         return;
@@ -61,6 +80,11 @@ void InputButton2::confirmEnter()
 {
     int numBeforeRedacting = getIntFromText(textBeforeRedacting, 0);
     int numAfterRedacting = getIntFromText(text, 0);
+    if (numAfterRedacting > *maxParametr)
+    {
+        strcpy(text, textBeforeRedacting);
+        return;
+    }
     if (numBeforeRedacting != numAfterRedacting && confirmInput)
     {
         *confirmInput = true;
@@ -75,4 +99,5 @@ void InputButton2::doBeforeMainBlock()
 void InputButton2::doAfterMainBlock()
 {
     *parameter = getIntFromText(text, currentTextSize);
+    if (*parameter == 0) currentTextSize = 0;
 }

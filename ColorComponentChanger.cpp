@@ -8,7 +8,6 @@ void ColorComponentChanger::draw()
 
     slider->draw();
     app->transparentBlt(finalDC, slider->rect.pos.x, slider->rect.pos.y, 0, 0, slider->finalDC);   
-
     inputButton->draw();
     app->transparentBlt(finalDC, inputButton->rect.pos.x, inputButton->rect.pos.y, 0, 0, inputButton->finalDC);
 }

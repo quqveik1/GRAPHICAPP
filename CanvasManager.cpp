@@ -1,13 +1,13 @@
 #pragma once
 #include "CanvasManager.h"
 #include "Canvas.cpp"
-#include "InputButton.cpp"
+#include "InputButton2.cpp"
 
 CanvasManager::CanvasManager(AbstractAppData* _app) :
     Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
     oneTabSize({ app->systemSettings->BUTTONWIDTH * 4, app->systemSettings->HANDLEHEIGHT }),
     scaleButtonSize({75, 25}),
-    scaleButton(new InputButton (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
+    scaleButton(new InputButton2 (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
 {
     gassert(loadManager);
     addWindow(scaleButton);

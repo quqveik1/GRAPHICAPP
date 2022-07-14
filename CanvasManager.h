@@ -15,7 +15,7 @@ struct CanvasManager : Manager
     int intScale = 0;
     int minScale = 0;
     int maxScale = 1000;
-    struct InputButton* scaleButton;
+    struct InputButton2* scaleButton;
 
 
     CanvasManager(AbstractAppData* _app);

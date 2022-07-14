@@ -5,13 +5,11 @@
 void StringButton2::moveCursorLeft()
 {
     if (cursorPos - 1 >= 0) cursorPos--;
-    lastTimeClicked = clock();
 }
 
 void StringButton2::moveCursorRight()
 {
     if (cursorPos + 1 <= currentTextSize) cursorPos++;
-    lastTimeClicked = clock();
 }
 
 void StringButton2::shiftTextForward(char* _text, int startPos, int finishPos)
@@ -45,6 +43,15 @@ int StringButton2::getTextSize(char* _text)
         i++;
     }
     return i;
+}
+
+
+void StringButton2::getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, int symbol)
+{
+    sprintf(finalText, "%s", originalText);
+
+    shiftTextForward(finalText, _cursorPos, _currentTextSize - 1);
+    finalText[_cursorPos] = symbol;
 }
 
 bool StringButton2::isSymbolAllowed(int symbol)
@@ -102,13 +109,15 @@ void StringButton2::draw()
                 {
                     strcpy(text, textBeforeRedacting);
                 }
-
             }
 
             checkKeyboard();
+            if (currentTextSize > strlen(text)) currentTextSize = strlen(text);
 
-            drawCursor();
             text[currentTextSize] = 0;
+            if (cursorPos > currentTextSize) cursorPos = currentTextSize;
+            drawCursor();
+           
         }
         else
         {
@@ -166,6 +175,7 @@ void StringButton2::onClick(Vector mp)
         {
             if (textBeforeRedacting) delete textBeforeRedacting;
             textBeforeRedacting = new char[maxTextSize];
+            currentTextSize = strlen(text);
             assert(textBeforeRedacting);
             strcpy(textBeforeRedacting, text);
         }
@@ -196,18 +206,21 @@ void StringButton2::checkKeyboard()
     if (app->getAsyncKeyState(VK_RIGHT) && clock() - lastTimeClicked > delta)
     {
         moveCursorRight();
+        lastTimeClicked = clock();
         return;
     }
 
     if (app->getAsyncKeyState(VK_LEFT) && clock() - lastTimeClicked > delta)
     {
         moveCursorLeft();
+        lastTimeClicked = clock();
         return;
     }
 
     if (app->getAsyncKeyState(VK_BACK) && clock() - lastTimeClicked > delta)
     {
         backSpace();
+        lastTimeClicked = clock();
         return;
     }
 
@@ -221,13 +234,10 @@ void StringButton2::checkKeyboard()
 
     if (currentTextSize < maxTextSize)
     {
-        shiftTextForward(text, cursorPos, currentTextSize - 1);
-        text[cursorPos] = symbol;
+        getTextAfterEnteringSymbol(text, text, currentTextSize, cursorPos, symbol);
         cursorPos++;
         currentTextSize++;
     }
-
-    lastTimeClicked = clock();
 
 }
 
@@ -282,14 +292,15 @@ void StringButton2::drawCursor()
     }
 
     if (!shouldShowCursor)  return;
-    int tempCursorPos = cursorPos;
-    int cursorXPosition = deltaAfterCadre + fontSizeX * tempCursorPos;
-    if (tempCursorPos > 0)
-    {
-        //cursorXPosition += spaceBetween2Symbols * (tempCursorPos - 1);
-    }
+    //int cursorXPosition = deltaAfterCadre + fontSizeX * tempCursorPos;
+    int cursorXPosition =  getCursorPosX();
     app->setColor(cursorColor, finalDC);
     app->line(cursorXPosition, 0, cursorXPosition, getSize().y, finalDC);
 
 
+}
+
+int StringButton2::getCursorPosX()
+{
+    return  deltaAfterCadre + fontSizeX * cursorPos;
 }

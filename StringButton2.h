@@ -56,11 +56,14 @@ struct StringButton2 : Manager
     int getTextSize(char* _text);
     int& getInputMode() { return inputMode; };
 
+    void getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, int symbol);
+
     virtual bool isSymbolAllowed(int symbol);
     virtual void modifyOutput(char* outputStr, char* originalStr);
     virtual void confirmEnter() {};
     virtual void doBeforeMainBlock() {};
     virtual void doAfterMainBlock() {};
+    virtual int getCursorPosX();
 
 
 

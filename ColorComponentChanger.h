@@ -7,8 +7,9 @@
 struct ColorComponentChanger : Manager
 {
     int* component = NULL;
+    int copyVersionOfCompoment = 0;
     Slider2* slider = NULL;
-    InputButton* inputButton = NULL;
+    InputButton2* inputButton = NULL;
     Rect sliderRect = {};
     Vector sliderSize = { 0, 15 };
     Vector numSize = {};
@@ -30,7 +31,7 @@ struct ColorComponentChanger : Manager
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, 0}, .finishPos = getSize() };
 
-        inputButton = new InputButton(app, inputButtonRect, component, &minLimit, &maxLimit, 0, color, RGB(144, 144, 144), RGB(200, 200, 200), _confirmColor);
+        inputButton = new InputButton2(app, inputButtonRect, component, &minLimit, &maxLimit, 0, color, RGB(144, 144, 144), RGB(200, 200, 200), _confirmColor);
         addWindow(inputButton);
     }
     virtual void draw() override;
