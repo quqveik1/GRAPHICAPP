@@ -1,6 +1,7 @@
 #pragma once
 #include "Slider2.cpp"
 #include "InputButton.cpp"
+#include "InputButton2.cpp"
 
 
 struct ColorComponentChanger : Manager

@@ -1,13 +1,14 @@
 #pragma once
 #include "DrawBibliothek.h"
 #include "InputButton.cpp"
+#include "StringButton2.cpp"
 
 
 struct SetCanvasButton : Manager
 {
     Vector* controlSize = NULL;
     Vector size = { 300, 200 };
-    Vector oneLineSize = {250, 25};
+    Vector oneLineSize = { 250, 25 };
     Vector inputButtonSize = { 50, 25 };
     Rect sizeXText = {};
     Rect sizeYText = {};
@@ -19,20 +20,23 @@ struct SetCanvasButton : Manager
     int maxSize = 1000;
     double downSectionPosY = 0;
     Vector buttonPos = {};
-    Vector buttonSize = {app->systemSettings->BUTTONWIDTH + 20, 25};
+    Vector buttonSize = { app->systemSettings->BUTTONWIDTH + 20, 25 };
     double deltaBetweenButtons = 10;
     Rect confirmButton = {};
     Rect cancelButton = {};
 
     InputButton inputX;
     InputButton inputY;
+    char canvasName[MAX_PATH] = {};
+    StringButton2 inputName;
     int enterStatus = false;
 
     SetCanvasButton(AbstractAppData* _app, Vector _pos, Vector* _controlSize) :
         Manager(_app, { .pos = _pos, .finishPos = {_pos.x + 300, _pos.y + 200} }, 3, false, NULL, {}, _app->systemSettings->MenuColor),
         controlSize(_controlSize),
         inputX(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeX, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR),
-        inputY(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeY, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR)
+        inputY(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeY, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR),
+        inputName(app, { .pos = {}, .finishPos = {100, inputButtonSize.y} }, canvasName, MAX_PATH, app->systemSettings->TRANSPARENTCOLOR)
     {
         assert (app);
         assert(controlSize);
@@ -46,6 +50,8 @@ struct SetCanvasButton : Manager
 
         inputX.MoveWindowTo({ sizeXText.finishPos.x,  sizeXText.pos.y });
         inputY.MoveWindowTo({ sizeYText.finishPos.x,  sizeYText.pos.y });
+        inputName.MoveWindow({ 10,  sizeYText.pos.y + 10 });
+        addWindow(&inputName);
         addWindow(&inputX);
         addWindow(&inputY);
 

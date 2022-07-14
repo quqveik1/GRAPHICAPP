@@ -29,14 +29,16 @@ C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(613,
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Canvas.cpp(613,66): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(60,17): warning C4804: *=: небезопасное использование типа "bool" в операции
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLManager.cpp(74,17): warning C4804: *=: небезопасное использование типа "bool" в операции
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(50,18): warning C4244: /=: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(56,18): warning C4244: *=: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(88,18): warning C4244: /=: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(98,18): warning C4244: *=: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(125,18): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(128,115): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(128,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(128,31): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(18,29): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(53,18): warning C4244: /=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(59,18): warning C4244: *=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(91,18): warning C4244: /=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(101,18): warning C4244: *=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(130,25): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(133,49): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(135,61): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(196,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp(218,40): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp(62,48): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp(62,35): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\CanvasManager.cpp(71,50): warning C4244: =: преобразование "double" в "int", возможна потеря данных
@@ -137,18 +139,24 @@ C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\LaysMenu.cpp(61
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\LaysMenu.cpp(63,90): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\LaysMenu.cpp(63,69): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\LaysMenu.cpp(63,39): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\StringButton2.h(38,33): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\StringButton2.cpp(125,50): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\StringButton2.cpp(157,40): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\StringButton2.cpp(286,25): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\StringButton2.cpp(292,61): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\SetCanvasButton.cpp(54,28): warning C4244: =: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\SetCanvasButton.cpp(55,28): warning C4244: =: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\SetCanvasButton.cpp(61,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\SetCanvasButton.cpp(69,69): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(21,48): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(21,35): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,108): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,74): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,58): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,38): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(26,48): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(42,21): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(21,52): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(21,39): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,112): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,78): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,62): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(24,42): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(26,52): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Slider2.cpp(42,25): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton2.cpp(14,39): warning C4244: +=: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorComponentChanger.cpp(7,48): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorComponentChanger.cpp(7,35): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorComponentChanger.cpp(10,70): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
@@ -160,11 +168,11 @@ C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.cpp(1
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Thickness.cpp(17,43): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp(16,76): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp(16,55): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(277,47): warning C4305: инициализация: усечение из "int" в "bool"
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(288,108): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(288,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(303,93): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(303,72): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(258,47): warning C4305: инициализация: усечение из "int" в "bool"
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(269,108): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(269,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(288,93): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp(288,72): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(95): warning C4172: возвращение адреса локальной или временной переменной : fileName
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp(121): warning C4172: возвращение адреса локальной или временной переменной : fileName
   RingsProject.vcxproj -> C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe

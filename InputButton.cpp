@@ -15,6 +15,9 @@ InputButton::InputButton(AbstractAppData* _app, Rect _rect, int* _parameter, int
 {
     needTransparencyOutput = true;
 
+    font = rect.getSize().y - 1;
+    fontSizeX = font / 3;
+    spaceBetween2Symbols = fontSizeX * 0.4;
     if (parameter) cursorPos = getAmountOfNumbers(*parameter);
 
     cursor = LoadCursor(NULL, IDC_IBEAM);
@@ -122,10 +125,14 @@ void InputButton::drawCursor()
 
     if (!shouldShowCursor)  return;
     app->setColor(cursorColor, finalDC);
-    int fontSize = 24 * 0.45;
     int tempCursorPos = cursorPos;
     if (*parameter == 0) tempCursorPos = 0;
-    app->line(deltaAfterCadre + fontSize * tempCursorPos, 0, deltaAfterCadre + fontSize * tempCursorPos, getSize().y, finalDC);
+    int cursorXPosition = deltaAfterCadre + fontSizeX * tempCursorPos;
+    if (tempCursorPos > 0)
+    {
+        cursorXPosition += spaceBetween2Symbols * (tempCursorPos - 1);
+    }
+    app->line(cursorXPosition, 0, cursorXPosition, getSize().y, finalDC);
 
     
 }
@@ -186,7 +193,7 @@ void InputButton::draw()
     }
     int result = sprintf(output, "%s%s", parametrString, addition);
 
-    app->selectFont(app->systemSettings->FONTNAME, 24, finalDC);
+    app->selectFont(app->systemSettings->FONTNAME, font, finalDC, fontSizeX);
     app->setColor(app->systemSettings->TextColor, finalDC);
     app->drawText(deltaAfterCadre, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER);
 
@@ -202,7 +209,22 @@ void InputButton::onClick(Vector mp)
     setActiveWindow(this);
     if (!isClickedLastTime())
     {
+        if (wasClicked)
+        {
+            int amountOfNumbers = getAmountOfNumbers(*parameter);
+            double trueMP = mp.x - deltaAfterCadre + spaceBetween2Symbols;
+            if (!isEqual(fontSizeX + spaceBetween2Symbols, 0))
+            {
+                int potentialCursorPos = trueMP / (fontSizeX + spaceBetween2Symbols);
+                if (potentialCursorPos <= amountOfNumbers)
+                {
+                    cursorPos = potentialCursorPos;
+                }
+            }
+        }
         wasClicked = true;
         parametrBeforeRedacting = *parameter;
+        
+
     }
 }

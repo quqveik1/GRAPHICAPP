@@ -13,8 +13,11 @@ struct InputButton : Window
     int lastTimeCursorConditionChanged = 0;
     bool shouldShowCursor = false;
     bool wasClicked = false;
+    double fontSizeX = 0;
+    double spaceBetween2Symbols;
 
     double deltaAfterCadre = 4;
+    
 
     HCURSOR cursor = NULL;
     

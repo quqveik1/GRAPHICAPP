@@ -90,21 +90,6 @@ int main (int argc, int *argv[])
     txSetWindowsHook(CtrlWindowFunc);
     appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
 
-    HDC testPhoto = txLoadImage("Files\\arrow3.bmp");
-
-    RGBQUAD* tempBuf = NULL;
-
-    HDC tempDC = appData->createDIBSection({16, 16}, &tempBuf);
-
-    /*
-    appData->bitBlt(tempDC, {}, {}, testPhoto);
-
-    appData->verticalReflect(tempDC, tempBuf, { 16, 16 });
-    appData->drawOnScreen(tempDC);
-
-    _getch();
-    /*
-
     /*
     HDC testPhoto = txLoadImage("Files\\TestPhoto.bmp");
 
@@ -204,10 +189,6 @@ int main (int argc, int *argv[])
     manager->addWindow(systemList);
             SaveImages* saveImages = new SaveImages(appData, canvasManager);
             systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
-
-    if (appData->systemSettings->debugMode == 6) _getch();
-
-
 
 	txBegin ();
 	Engine (manager);

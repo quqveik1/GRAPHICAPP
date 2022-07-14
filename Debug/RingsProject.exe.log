@@ -59904,3 +59904,273 @@ Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProje
 Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x00A14501 в функции InputButton::onClick() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp на строке 209 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00A7C160 (32-bit), Flags: CMdRe0, Thread: 0x2590 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A14501 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: InputButton::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp (209):
+
+    207:         int amountOfNumbers = getAmountOfNumbers(*parameter);
+    208:         double trueMP = mp.x - deltaAfterCadre;
+=>  209:         int potentialCursorPos = trueMP / fontSizeX;
+    210:         if (potentialCursorPos <= amountOfNumbers)
+    211:         {
+
+# 1 0x00A13FA7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorComponentChanger.cpp (20):
+
+     18:     setActiveWindow(this);
+     19:     if (slider->rect.inRect(mp)) slider->onClick(mp - slider->rect.pos);
+=>   20:     if (inputButton->rect.inRect(mp)) inputButton->onClick(mp - inputButton->rect.pos);
+     21: }
+
+# 2 0x009FC9D0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (204):
+
+    202: void clickButton (Window *window, Manager *manager, Vector mp)
+    203: {
+=>  204: 	window->onClick (mp - window->rect.pos);
+    205: }
+    206: 
+
+# 3 0x00A1D284 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (146):
+
+    144: 			if (manager->pointers[i]->rect.inRect(mp))
+    145: 			{
+=>  146: 				clickButton (manager->pointers[i], manager, mp);
+    147: 
+    148: 				missClicked = false;
+
+# 4 0x00A1D3BA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerOnClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (141):
+
+    139: int WindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
+    140: {
+=>  141:     return standartManagerOnClick$(manager, mp);
+    142: }
+
+# 5 0x00A140FA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorMenu.cpp (61):
+
+     59: {
+     60:     setActiveWindow(this);
+=>   61:     app->windowsLibApi->standartManagerOnClick(this, mp);
+     62: 
+     63:     controlHistoryClick();
+
+# 6 0x009FC9D0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (204):
+
+    202: void clickButton (Window *window, Manager *manager, Vector mp)
+    203: {
+=>  204: 	window->onClick (mp - window->rect.pos);
+    205: }
+    206: 
+
+# 7 0x00A1D284 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (146):
+
+    144: 			if (manager->pointers[i]->rect.inRect(mp))
+    145: 			{
+=>  146: 				clickButton (manager->pointers[i], manager, mp);
+    147: 
+    148: 				missClicked = false;
+
+# 8 0x00A1D3BA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerOnClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (141):
+
+    139: int WindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
+    140: {
+=>  141:     return standartManagerOnClick$(manager, mp);
+    142: }
+
+# 9 0x00A14C7A in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (54):
+
+     52:     if (zoneSizeControl.clickFrame()) return;
+     53: 
+=>   54:     app->windowsLibApi->standartManagerOnClick(this, mp);
+     55: }
+     56: 
+
+#10 0x009B79A8 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (312):
+
+    310:             if (txMouseButtons())
+    311:             {
+=>  312:                 manager->onClick(mp);
+    313:                 if (!app->IsRunning) break;
+    314:             }
+
+#11 0x00A4686E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (213):
+
+    211: 
+    212: 	txBegin ();
+=>  213: 	Engine (manager);
+    214:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    215:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (310):
+
+    308: 
+    309:             manager->clicked = txMouseButtons();
+=>  310:             if (txMouseButtons())
+    311:             {
+    312:                 manager->onClick(mp);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul 11 2022 20:06:50, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 11 2022 20:06:54
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x00A14501 в функции InputButton::onClick() в файле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp на строке 209 в модуле C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400], Instance: 0x00A7C160 (32-bit), Flags: CMdRe0, Thread: 0x2590 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00A14501 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: InputButton::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\InputButton.cpp (209):
+
+    207:         int amountOfNumbers = getAmountOfNumbers(*parameter);
+    208:         double trueMP = mp.x - deltaAfterCadre;
+=>  209:         int potentialCursorPos = trueMP / fontSizeX;
+    210:         if (potentialCursorPos <= amountOfNumbers)
+    211:         {
+
+# 1 0x00A13FA7 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ColorComponentChanger::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorComponentChanger.cpp (20):
+
+     18:     setActiveWindow(this);
+     19:     if (slider->rect.inRect(mp)) slider->onClick(mp - slider->rect.pos);
+=>   20:     if (inputButton->rect.inRect(mp)) inputButton->onClick(mp - inputButton->rect.pos);
+     21: }
+
+# 2 0x009FC9D0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (204):
+
+    202: void clickButton (Window *window, Manager *manager, Vector mp)
+    203: {
+=>  204: 	window->onClick (mp - window->rect.pos);
+    205: }
+    206: 
+
+# 3 0x00A1D284 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (146):
+
+    144: 			if (manager->pointers[i]->rect.inRect(mp))
+    145: 			{
+=>  146: 				clickButton (manager->pointers[i], manager, mp);
+    147: 
+    148: 				missClicked = false;
+
+# 4 0x00A1D3BA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerOnClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (141):
+
+    139: int WindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
+    140: {
+=>  141:     return standartManagerOnClick$(manager, mp);
+    142: }
+
+# 5 0x00A140FA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: ColorMenu::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\ColorMenu.cpp (61):
+
+     59: {
+     60:     setActiveWindow(this);
+=>   61:     app->windowsLibApi->standartManagerOnClick(this, mp);
+     62: 
+     63:     controlHistoryClick();
+
+# 6 0x009FC9D0 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: clickButton() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (204):
+
+    202: void clickButton (Window *window, Manager *manager, Vector mp)
+    203: {
+=>  204: 	window->onClick (mp - window->rect.pos);
+    205: }
+    206: 
+
+# 7 0x00A1D284 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: standartManagerOnClick$() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DrawBibliothek.cpp (146):
+
+    144: 			if (manager->pointers[i]->rect.inRect(mp))
+    145: 			{
+=>  146: 				clickButton (manager->pointers[i], manager, mp);
+    147: 
+    148: 				missClicked = false;
+
+# 8 0x00A1D3BA in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerOnClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLibApi.cpp (141):
+
+    139: int WindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
+    140: {
+=>  141:     return standartManagerOnClick$(manager, mp);
+    142: }
+
+# 9 0x00A14C7A in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: MainManager::onClick() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\MainManager.cpp (54):
+
+     52:     if (zoneSizeControl.clickFrame()) return;
+     53: 
+=>   54:     app->windowsLibApi->standartManagerOnClick(this, mp);
+     55: }
+     56: 
+
+#10 0x009B79A8 in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (312):
+
+    310:             if (txMouseButtons())
+    311:             {
+=>  312:                 manager->onClick(mp);
+    313:                 if (!app->IsRunning) break;
+    314:             }
+
+#11 0x00A4686E in C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (213):
+
+    211: 
+    212: 	txBegin ();
+=>  213: 	Engine (manager);
+    214:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    215:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\PowerPoint.cpp (310):
+
+    308: 
+    309:             manager->clicked = txMouseButtons();
+=>  310:             if (txMouseButtons())
+    311:             {
+    312:                 manager->onClick(mp);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2022-05-15 04:30:40 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\TX\TXLib.h
+Compiled:	Jul 11 2022 20:06:50, MSVS 1931, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 11 2022 20:06:55
+
+Run file:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP
+
+--------------------------------------------------

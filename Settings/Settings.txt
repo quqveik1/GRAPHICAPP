@@ -1,5 +1,5 @@
 MainFont = 20;
-FONTNAME = Arial;
+FONTNAME = Roboto;
 debugMode = -1;
 DrawingMode = 6;
 Thickness = 3;

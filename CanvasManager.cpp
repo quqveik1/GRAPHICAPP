@@ -84,19 +84,19 @@ void CanvasManager::controlActiveCanvas()
     getActiveCanvas()->getScale() = (double)intScale / 100.0;
 
     getActiveCanvas()->draw();
-    if (app->getAsyncKeyState(VK_RIGHT))
+    if (app->getAsyncKeyState(VK_RIGHT) && app->getAsyncKeyState(VK_CONTROL))
     {
         getActiveCanvas()->deltaPos.x -= 10;
     } 
-    if (app->getAsyncKeyState(VK_LEFT))
+    if (app->getAsyncKeyState(VK_LEFT) && app->getAsyncKeyState(VK_CONTROL))
     {
         getActiveCanvas()->deltaPos.x += 10;
     }  
-    if (app->getAsyncKeyState(VK_UP))
+    if (app->getAsyncKeyState(VK_UP) && app->getAsyncKeyState(VK_CONTROL))
     {
         getActiveCanvas()->deltaPos.y += 10;
     }  
-    if (app->getAsyncKeyState(VK_DOWN))
+    if (app->getAsyncKeyState(VK_DOWN) && app->getAsyncKeyState(VK_CONTROL))
     {
         getActiveCanvas()->deltaPos.y -= 10;
     }

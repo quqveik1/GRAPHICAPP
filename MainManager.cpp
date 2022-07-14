@@ -38,7 +38,7 @@ void MainManager::draw()
 
     app->windowsLibApi->standartManagerDraw(this);
 
-    printf("Active Window: %p\n", isActiveWindowBelow());
+    if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
 
     zoneSizeControl.drawFrame();
 
