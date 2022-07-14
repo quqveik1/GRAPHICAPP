@@ -3,7 +3,7 @@
 
 struct CanvasManager : Manager
 {
-    HDC closeCanvasButton;
+    HDC closeCanvasButton = NULL;
     int activeCanvasNum = -1;
     bool addNewCanvas = false;
     Vector newCanvasWindowSize = { 1000, 600 };
@@ -11,11 +11,19 @@ struct CanvasManager : Manager
     Canvas* canvases[10] = {};
     Rect tabs[10] = {};
     Vector oneTabSize = {};
-    Vector scaleButtonSize = {};
+    
     int intScale = 0;
     int minScale = 0;
     int maxScale = 1000;
-    struct InputButton2* scaleButton;
+
+    Vector scaleButtonSize = {};
+    struct InputButton2* scaleButton = NULL;
+
+    Vector plusMinusButtonSize = {};
+    Rect plusButtonRect = {};
+    Rect minusButtonRect = {};
+    HDC plusButtonDC = NULL;
+    HDC minusButtonDC = NULL;
 
 
     CanvasManager(AbstractAppData* _app);
@@ -30,6 +38,7 @@ struct CanvasManager : Manager
     void setTabsRect();
     int tabsOnClick();
     void controlActiveCanvas();
+    void controlScaleButtons();
 
 
     virtual void screenChanged() override;

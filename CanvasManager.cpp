@@ -7,6 +7,9 @@ CanvasManager::CanvasManager(AbstractAppData* _app) :
     Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
     oneTabSize({ app->systemSettings->BUTTONWIDTH * 4, app->systemSettings->HANDLEHEIGHT }),
     scaleButtonSize({75, 25}),
+    plusMinusButtonSize({25, 25}),
+    plusButtonDC(app->loadManager->loadImage("plusScaleButton.bmp")),
+    minusButtonDC(app->loadManager->loadImage("minusScaleButton.bmp")),
     scaleButton(new InputButton2 (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
 {
     gassert(loadManager);
@@ -45,11 +48,33 @@ void CanvasManager::drawTabs()
 
 void CanvasManager::setTabsRect()
 {
+    Rect userRect = app->getUserRect();
+    userRect = userRect - rect.pos;
     for (int i = 0; i < canvasesLength; i++)
     {
-        tabs[i] = { .pos = {oneTabSize.x * i, 0}, .finishPos = {oneTabSize.x * (i + 1), oneTabSize.y } };
+        tabs[i] = { .pos = {userRect.pos.x + oneTabSize.x * i, 0}, .finishPos = {userRect.pos.x + oneTabSize.x * (i + 1), oneTabSize.y } };
     }
 }
+
+void CanvasManager::controlScaleButtons()
+{
+    Rect userRect = app->getUserRect();
+    userRect = userRect - rect.pos;
+
+    Vector scaleButtonPos = { userRect.pos.x, userRect.finishPos.y - scaleButton->getSize().y };
+
+    intScale = getActiveCanvas()->getScale() * 100;
+    scaleButton->MoveWindowTo(scaleButtonPos);
+    scaleButton->draw();
+
+    plusButtonRect = { .pos = {scaleButtonPos.x + scaleButton->getSize().x,  userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {scaleButtonPos.x + scaleButton->getSize().x + plusMinusButtonSize.x, userRect.finishPos.y} };
+    minusButtonRect = { .pos = {plusButtonRect.finishPos.x,    userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {plusButtonRect.finishPos.x + plusMinusButtonSize.x,    userRect.finishPos.y} };
+
+    app->bitBlt(finalDC, plusButtonRect.pos, {}, plusButtonDC);
+    app->bitBlt(finalDC, minusButtonRect.pos, {}, minusButtonDC);
+
+}
+
 
 
 
@@ -63,20 +88,14 @@ void CanvasManager::draw()
 
     if (getActiveCanvas())
     {
-        Rect userRect = app->getUserRect();
-        userRect = userRect - rect.pos;
-
-        Vector scaleButtonPos = { userRect.pos.x, userRect.finishPos.y - scaleButton->getSize().y };
-
-        intScale = getActiveCanvas()->getScale() * 100;
-        scaleButton->MoveWindowTo(scaleButtonPos);
-        scaleButton->draw();
+        controlScaleButtons();
         controlActiveCanvas();
         
         app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
     }
 
     drawTabs();
+    setMbLastTime();
 }
 
 void CanvasManager::controlActiveCanvas()
@@ -164,6 +183,18 @@ void CanvasManager::onClick(Vector mp)
             return;
         }
 
+        if (plusButtonRect.inRect(mp) && !isClickedLastTime())
+        {
+            getActiveCanvas()->stretchCanvas(getActiveCanvas()->deltaScale);
+            return;
+        }
+
+        if (minusButtonRect.inRect(mp) && !isClickedLastTime())
+        {
+            getActiveCanvas()->stretchCanvas( -(getActiveCanvas()->deltaScale) );
+            return;
+        }
+
         if (getActiveCanvas()->rect.inRect(mp))getActiveCanvas()->onClick(mp);
     }
 }
@@ -207,4 +238,6 @@ void CanvasManager::screenChanged()
             canvases[i]->MoveWindowTo(centrizedPos);
         }
     }
+
+    setTabsRect();
 }

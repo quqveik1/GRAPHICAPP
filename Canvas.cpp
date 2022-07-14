@@ -252,43 +252,45 @@ void Canvas::controlStretching()
     {
         if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_PLUS))
         {
-            Vector newSize = getSize();
-            newSize += laysSize * deltaScale;
-
-            assert(manager);
-
-            resize({ .pos = {}, .finishPos = newSize });
-
-            lastTimeButtonClicked = clock();
-            reDraw = true;
+            stretchCanvas(deltaScale);
         }
 
         if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_MINUS))
         {
-            Vector newSize = getSize();
-            if (newSize > 0)newSize -= laysSize * deltaScale;
-
-            if (newSize > 0)
-            {
-
-                assert(manager);
-
-                resize({ .pos = {}, .finishPos = newSize });
-
-                lastTimeButtonClicked = clock();
-                reDraw = true;
-            }
-            else
-            {
-                rect.finishPos = newSize;
-                reDraw = true;
-            }
+            stretchCanvas(-deltaScale);
         }
         
     }
     double sizeX = getSize().x;
     scale = getSize().x / laysSize.x;
     
+}
+
+
+void Canvas::stretchCanvas(double percantageFromOriginal)
+{
+    Vector newSize = getSize();
+    if (newSize > 0)newSize += laysSize * percantageFromOriginal;
+
+    if (newSize > 0)
+    {
+
+        assert(manager);
+
+        resize({ .pos = {}, .finishPos = newSize });
+
+        lastTimeButtonClicked = clock();
+        reDraw = true;
+    }
+    else
+    {
+        rect.finishPos = newSize;
+        reDraw = true;
+    }
+
+
+    double sizeX = getSize().x;
+    scale = getSize().x / laysSize.x;
 }
 
 
@@ -356,6 +358,8 @@ double& Canvas::getScale()
 {
     return scale;
 }
+
+
 
 
 void Canvas::controlTool()

@@ -51,7 +51,7 @@ struct SetCanvasButton : Manager
         inputX.MoveWindowTo({ sizeXText.finishPos.x,  sizeXText.pos.y });
         inputY.MoveWindowTo({ sizeYText.finishPos.x,  sizeYText.pos.y });
         inputName.MoveWindow({ 10,  sizeYText.pos.y + 10 });
-        addWindow(&inputName);
+        //addWindow(&inputName);
         addWindow(&inputX);
         addWindow(&inputY);
 

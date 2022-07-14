@@ -340,7 +340,7 @@ Rect PowerPoint::getUserRect()
     }
     else
     {
-        return { .pos = {systemSettings->FrameThickness, systemSettings->HANDLEHEIGHT}, .finishPos = systemSettings->SizeOfScreen - systemSettings->FrameThickness };
+        return { .pos = {systemSettings->FrameThickness, systemSettings->HANDLEHEIGHT}, .finishPos = {systemSettings->SizeOfScreen.x - systemSettings->FrameThickness, systemSettings->SizeOfScreen.y - (systemSettings->FrameThickness - 1)} };
     }
 }
 

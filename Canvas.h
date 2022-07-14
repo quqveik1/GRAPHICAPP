@@ -78,6 +78,8 @@ struct Canvas : Manager
     virtual const char* getName();
     virtual double& getScale();
 
+    virtual void stretchCanvas(double percantageFromOriginal);
+
     int getActiveLayNum();
     ToolLay* getNewToolLay();
     bool isDrawingModeChanged();
