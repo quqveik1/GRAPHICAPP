@@ -55,8 +55,7 @@ bool operator == (const Vector &a, const Vector &b)
 
 bool operator != (const Vector &a, const Vector &b)
 {
-    if ( (! isEqual(a.x, b.x) ) || (!isEqual(a.y, b.y))) return true;
-    return false;
+    return !(a == b);
 }
 
 bool operator != (const Vector& a, const double& b)

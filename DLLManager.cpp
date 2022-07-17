@@ -13,7 +13,7 @@ int findSymbol(const char* text, int size, char symbol)
 
 bool DLLManager::loadLibs()
 {
-    bool result = true;
+    int result = true;
     FILE* libsList = fopen(pathToDLLList, "r");
     if (!libsList) printf("%s Не найден\n", pathToDLLList);
     assert(libsList);

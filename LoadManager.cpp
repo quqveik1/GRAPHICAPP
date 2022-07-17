@@ -22,14 +22,14 @@ HDC CLoadManager::loadImage(const char* path, Vector size /* = {} */)
 
     if (!newImage)
     {
-        if (app->systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %d\n", fullPath, images[suitableDCNum].dc);
-        if (app->systemSettings->debugMode == 4) app->drawOnScreen (images[suitableDCNum].dc);
+        if (app->systemSettings->debugMode >= 4) (void)printf("Fullpath: %s; Result: %d\n", fullPath, (int)images[suitableDCNum].dc);
+        if (app->systemSettings->debugMode >= 4) app->drawOnScreen (images[suitableDCNum].dc);
         return images[suitableDCNum].dc;
     }
 
 
     images[currentImagesAmount].dc = txLoadImage(fullPath);
-    if (app->systemSettings->debugMode == 4) printf("Fullpath: %s; Result: %d\n", fullPath, images[currentImagesAmount].dc);
+    if (app->systemSettings->debugMode == 4) (void)printf("Fullpath: %s; Result: %d\n", fullPath, (int)images[currentImagesAmount].dc);
     if (app->systemSettings->debugMode == 4) app->drawOnScreen (images[currentImagesAmount].dc);
     if (images[currentImagesAmount].dc == NULL) gassert(!fullPath);
     strcpy (images[currentImagesAmount].path, fullPath);

@@ -52,10 +52,13 @@ PowerPoint* appData = new PowerPoint;
 
 int main (int argc, int *argv[])
 {
+    appData->appVersion = "v0.1.7.6";
+    if (_mkdir("Settings") == -1)
+    {
+        if (errno == ENOENT) massert(!"Папка Settings не создалась", appData);
+    }
 
-    appData->appVersion = "v0.1.7.4";
-
-    CSystemSettings SystemSettings;
+    CSystemSettings SystemSettings (appData);
     appData->systemSettings = &SystemSettings;
 
     CToolManager ToolManager;
@@ -76,9 +79,7 @@ int main (int argc, int *argv[])
 
     setDefaultSystemSettings(appData->systemSettings);
 
-    bool needLoadFiles = checkVersionCompability(appData);
-    if (!needLoadFiles) appData->fileSavings->deleteAllFiles();
-
+    appData->filesCompability = checkVersionCompability(appData);
     
     appData->systemSettings->read("Settings\\FullSettings.settings");
     setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");  
@@ -88,22 +89,7 @@ int main (int argc, int *argv[])
     _txWindowStyle = appData->systemSettings->WindowStyle;
     _txSwapBuffers = swapDC;
     txSetWindowsHook(CtrlWindowFunc);
-    appData->systemSettings->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
-
-    /*
-    HDC testPhoto = txLoadImage("Files\\TestPhoto.bmp");
-
-    RGBQUAD* tempBuf = NULL;
-
-    HDC tempDC = appData->createDIBSection(appData->systemSettings->FullSizeOfScreen, &tempBuf);
-
-    appData->bitBlt(tempDC, {}, {}, testPhoto);
-
-    appData->horizontalReflect(tempDC, tempBuf, { 1200, 727 }, appData->systemSettings->FullSizeOfScreen);
-    
-    appData->drawOnScreen(tempDC);
-    _getch();
-    */
+    appData->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
 
     appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);;
     
@@ -226,7 +212,7 @@ bool checkVersionCompability(PowerPoint* app)
     if (versionFile)
     {
         char versionName[MAX_PATH] = {};
-        fscanf(versionFile, "%s", versionName);
+        (void)fscanf(versionFile, "%s", versionName);
         int result = strcmp(app->appVersion, versionName);
         if (result == 0) needLoadSaves = true;
     }
@@ -275,7 +261,7 @@ void Engine (MainManager *manager)
 
         if (!app->isShowing)
         {
-            GetWindowRect(app->systemSettings->MAINWINDOW, &programmRect);
+            GetWindowRect(app->MAINWINDOW, &programmRect);
             if (isBigger(programmRect.right, 0))
             {
                 app->isShowing = true;
@@ -297,7 +283,7 @@ void Engine (MainManager *manager)
         }
 	}
 
-    ShowWindow(app->systemSettings->MAINWINDOW, SW_HIDE);
+    ShowWindow(app->MAINWINDOW, SW_HIDE);
 
     app->loadManager->deleteAllImages();
 }

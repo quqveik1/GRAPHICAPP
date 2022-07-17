@@ -30,9 +30,22 @@ struct CHistoryStep
 {                                                            \
     if (condition == NULL)                                   \
     {                                                        \
-        printf("[%s] = NULL", #condition);                   \
+        printf("[%s] == NULL", #condition);                   \
         txSleep(0);                                          \
-        _getch();                                            \
+        (void)_getch();                                      \
+    }                                                        \
+}                                                            \
+
+
+#define massert(condition, _app)                             \
+{                                                            \
+    if (condition == NULL)                                   \
+    {                                                        \
+        char _tempStr[MAX_PATH] = {};                        \
+        sprintf(_tempStr, "[%s] == NULL", #condition);        \
+        _app->messageBox(_tempStr, "Ошибка", MB_OK | MB_ICONINFORMATION);         \
+        txSleep(0);                                          \
+        (void)_getch();                                      \
     }                                                        \
 }                                                            \
 

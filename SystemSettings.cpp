@@ -1,5 +1,12 @@
 #pragma once
 #include "SystemSettings.h"
+#include "AbstractApp.h"
+
+
+CSystemSettings::CSystemSettings(struct AbstractAppData* _app) :
+    app (_app)
+{
+}
 
 int CSystemSettings::save(const char* path)
 {
@@ -10,7 +17,7 @@ int CSystemSettings::save(const char* path)
         return 1;
     }
 
-    int result = fwrite(this, sizeof(char), byteSize, ssFile);
+    (void)fwrite(this, sizeof(char), byteSize, ssFile);
 
     fclose(ssFile);
     return 0;
@@ -27,7 +34,7 @@ int CSystemSettings::read(const char* path)
         return 1;
     }
 
-    int result = fread(this, sizeof(char), byteSize, ssFile);
+    if (app->needToLoadOldFiles())(void)fread(this, sizeof(char), byteSize, ssFile);
 
     fclose(ssFile);
 
@@ -127,7 +134,7 @@ void setColorSettings(FILE* ssFile, COLORREF* color, const char* name)
     sprintf(format, " %s = %%s ", name);
 
     char data[MAX_PATH] = {};
-    fscanf(ssFile, format, data);
+    (void)fscanf(ssFile, format, data);
 
     int resultOfComparision = strcmp(data, "RGB");
 
@@ -136,7 +143,7 @@ void setColorSettings(FILE* ssFile, COLORREF* color, const char* name)
         int red = 0;
         int green = 0;
         int blue = 0;
-        fscanf(ssFile, " (%d, %d, %d); ", &red, &green, &blue);
+        (void)fscanf(ssFile, " (%d, %d, %d); ", &red, &green, &blue);
         *color = RGB(red, green, blue);
     }
     else
@@ -160,7 +167,7 @@ void setIntSettings(FILE* ssFile, int* integer, const char* name)
     char format[MAX_PATH] = {};
     sprintf(format, " %s = %%d; ", name);
 
-    fscanf(ssFile, format, integer);
+    (void)fscanf(ssFile, format, integer);
 
 }
 
@@ -169,7 +176,7 @@ void setDoubleSettings(FILE* ssFile, double* integer, const char* name)
     char format[MAX_PATH] = {};
     sprintf(format, " %s = %%lf; ", name);
 
-    int result = fscanf(ssFile, format, integer);
+    (void)fscanf(ssFile, format, integer);
 
 }
 
@@ -179,7 +186,7 @@ void setStringSettings(FILE* ssFile, char* str, const char* name)
     sprintf(format, " %s = %%s; ", name);
 
     char finalStr[MAX_PATH] = {};
-    fscanf(ssFile, format, finalStr);
+    (void)fscanf(ssFile, format, finalStr);
 
     for (int i = 0; i < MAX_PATH; i++)
     {

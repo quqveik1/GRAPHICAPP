@@ -10,6 +10,7 @@ struct Manager;
 struct WindowsLibApi
 {
     virtual void resize(Window* window, Rect newRect);
+    virtual void resize(Window* window, Vector newSize);
     virtual bool addWindow(Manager* manager, Window* window);
     virtual int clickHandle(Manager* manager);
     virtual Vector getAbsCoordinats(Window* window, bool coordinatsWithHandle = false);

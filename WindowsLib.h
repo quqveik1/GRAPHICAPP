@@ -80,6 +80,7 @@ struct Window
 
 
     virtual void resize(Rect newSize);
+    virtual void resize(Vector newSize);
     //void resize (Vector newSize, Vector oldSize);
     virtual void reInit();
     virtual void setStartRect(Vector pos, Vector finishPos);

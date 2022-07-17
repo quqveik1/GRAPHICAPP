@@ -11,7 +11,7 @@ int InputButton2::getIntFromText(char* _text, int textSize/* = 0 */)
     {
         if (!_text[i]) break;
 
-        resultNum += (_text[i] - '0') * pow(10, textSize - i - 1);
+        resultNum += std::lround( (_text[i] - '0') * pow(10, textSize - i - 1) );
     }
 
     return resultNum;
@@ -20,7 +20,7 @@ int InputButton2::getIntFromText(char* _text, int textSize/* = 0 */)
 
 
 
-bool InputButton2::isSymbolAllowed(int symbol)
+bool InputButton2::isSymbolAllowed(char symbol)
 {
     int currentInt = getIntFromText (text, currentTextSize);
 
@@ -34,7 +34,7 @@ bool InputButton2::isSymbolAllowed(int symbol)
         return false;
     }
 
-    delete newText;
+    delete[] newText;
 
     if (symbol == '0' && cursorPos == 0)
     {

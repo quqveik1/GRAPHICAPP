@@ -54,7 +54,7 @@ struct ToolMenu : Menu
 
         app->setColor(color, finalDC);
         app->rectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
-        font = _app->systemSettings->MainFont * 1.5;
+        font = std::lround (_app->systemSettings->MainFont * 1.5);
         app->selectFont(_app->systemSettings->FONTNAME, font, finalDC);
         
         handle.rect = { .pos = {0, 0}, .finishPos = {getSize().x, app->systemSettings->HANDLEHEIGHT} };

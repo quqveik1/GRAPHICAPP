@@ -1,8 +1,8 @@
 MainFont = 20;
-FONTNAME = Roboto;
+FONTNAME = Arial;
 debugMode = -1;
-DrawingMode = 6;
-Thickness = 3;
+DrawingMode = 1;
+Thickness = 6;
 WindowStyle = -2146959360;
 SizeOfScreen.x = 1280.000000;
 SizeOfScreen.y = 720.000000;

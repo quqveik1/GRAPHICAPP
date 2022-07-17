@@ -45,7 +45,7 @@ void ToolLay::editTool(ProgrammeDate* data)
 }
 
 
-bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp, int mbCondition)
+bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp)
 {
     if (toolZone.inRect(mp))
     {

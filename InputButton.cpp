@@ -191,7 +191,7 @@ void InputButton::draw()
     {
         int aditionPrintfResult = sprintf(addition, "%%");
     }
-    int result = sprintf(output, "%s%s", parametrString, addition);
+    (void)sprintf(output, "%s%s", parametrString, addition);
 
     app->selectFont(app->systemSettings->FONTNAME, font, finalDC, fontSizeX);
     app->setColor(app->systemSettings->TextColor, finalDC);

@@ -18,7 +18,7 @@ void StringButton2::shiftTextForward(char* _text, int startPos, int finishPos)
     {
         if (finishPos < maxTextSize)
         {
-            text[i + 1] = text[i];
+            _text[i + 1] = _text[i];
         }
     }
 }
@@ -29,7 +29,7 @@ void StringButton2::shiftTextBack(char* _text, int startPos, int finishPos)
     {
         if (i - 1 >= 0)
         {
-            text[i - 1] = text[i];
+            _text[i - 1] = _text[i];
         }
     }
 
@@ -46,7 +46,7 @@ int StringButton2::getTextSize(char* _text)
 }
 
 
-void StringButton2::getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, int symbol)
+void StringButton2::getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, char symbol)
 {
     sprintf(finalText, "%s", originalText);
 
@@ -54,7 +54,7 @@ void StringButton2::getTextAfterEnteringSymbol(char* finalText, char* originalTe
     finalText[_cursorPos] = symbol;
 }
 
-bool StringButton2::isSymbolAllowed(int symbol)
+bool StringButton2::isSymbolAllowed(char symbol)
 {
     if (0x30 <= symbol && symbol <= 0x7E)
     {
@@ -112,7 +112,7 @@ void StringButton2::draw()
             }
 
             checkKeyboard();
-            if (currentTextSize > strlen(text)) currentTextSize = strlen(text);
+            if (currentTextSize > (int)strlen(text)) currentTextSize = strlen(text);
 
             text[currentTextSize] = 0;
             if (cursorPos > currentTextSize) cursorPos = currentTextSize;
@@ -131,7 +131,7 @@ void StringButton2::draw()
 
         modifyOutput(output, parametrString);
 
-        app->selectFont("Roboto", font, finalDC, fontSizeX);
+        app->selectFont(app->systemSettings->FONTNAME, font, finalDC, std::lround (fontSizeX));
         app->setColor(app->systemSettings->TextColor, finalDC);
         app->drawText(deltaAfterCadre, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER);
 
@@ -163,7 +163,7 @@ void StringButton2::onClick(Vector mp)
             double trueMP = mp.x - deltaAfterCadre;
             if (!isEqual(fontSizeX, 0))
             {
-                int potentialCursorPos = trueMP / (fontSizeX);
+                int potentialCursorPos = (int) (trueMP / (fontSizeX));
                 if (potentialCursorPos <= currentTextSize)
                 {
                     cursorPos = potentialCursorPos;

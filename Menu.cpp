@@ -27,8 +27,8 @@ void Menu::onClick(Vector mp)
 
     mp.y -= handle.rect.finishPos.y;
 
-    int mx = mp.x;
-    int my = mp.y;
+    int mx = std::lround(mp.x);
+    int my = std::lround(mp.y);
 
 
 

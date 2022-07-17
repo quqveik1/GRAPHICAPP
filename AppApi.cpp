@@ -4,29 +4,29 @@
 
 HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
 {
-    return txCreateDIBSection(size.x, size.y, pixels);
+    return createDIBSection(size.x, size.y, pixels);
 }
 
-HDC PowerPoint::createDIBSection(int sizex, int sizey, RGBQUAD** pixels/* = NULL*/)
+HDC PowerPoint::createDIBSection(double sizex, double sizey, RGBQUAD** pixels/* = NULL*/)
 {
-    return txCreateDIBSection(sizex, sizey, pixels);
+    return txCreateDIBSection(std::lround(sizex), std::lround(sizey), pixels);
 }
 
 
-void PowerPoint::rectangle(int x1, int y1, int x2, int y2, HDC dc)
+void PowerPoint::rectangle(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txRectangle(x1, y1, x2, y2, dc);
+    txRectangle(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 
 void PowerPoint::rectangle(Vector pos1, Vector pos2, HDC dc)
 {
-    txRectangle(pos1.x, pos1.y, pos2.x, pos2.y, dc);
+    rectangle(pos1.x, pos1.y, pos2.x, pos2.y, dc);
 }
 
 void PowerPoint::rectangle(Rect rect, HDC dc)
 {
-    txRectangle(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
+    rectangle(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
 void PowerPoint::drawCadre(Rect rect, HDC dc, COLORREF color, int thickness)
@@ -109,29 +109,29 @@ COLORREF PowerPoint::getPixel(Vector pos, HDC dc)
 
 void PowerPoint::line(Rect rect, HDC dc)
 {
-    txLine(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
+    line(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, dc);
 }
 
 
-void PowerPoint::line(int x1, int y1, int x2, int y2, HDC dc)
+void PowerPoint::line(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txLine(x1, y1, x2, y2, dc);
+    txLine(std::lround (x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 void PowerPoint::line(Vector pos1, Vector pos2, HDC dc)
 {
-    txLine(pos1.x, pos1.y, pos2.x, pos2.y, dc);
+    line(pos1.x, pos1.y, pos2.x, pos2.y, dc);
 }
 
 
 void PowerPoint::ellipse(Vector centrePos, Vector halfSize, HDC dc)
 {
-    txEllipse(centrePos.x - halfSize.x, centrePos.y - halfSize.y, centrePos.x + halfSize.x, centrePos.y + halfSize.y, dc);
+    ellipse(centrePos.x - halfSize.x, centrePos.y - halfSize.y, centrePos.x + halfSize.x, centrePos.y + halfSize.y, dc);
 }
 
-void PowerPoint::ellipse(int x1, int y1, int x2, int y2, HDC dc)
+void PowerPoint::ellipse(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txEllipse(x1, y1, x2, y2, dc);
+    txEllipse(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 void PowerPoint::horizontalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullDCSize/* = {}*/)
@@ -145,10 +145,10 @@ void PowerPoint::horizontalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector ful
 
     for (int x = 0; x < size.x; x++)
     {
-        for (int y = posy; y < fullDCSize.y; y++)
+        for (int y = std::lround (posy); y < std::lround(fullDCSize.y); y++)
         {
-            int tempY = y - posy;
-            int newY = size.y - tempY - 1;
+            int tempY = std::lround(y - posy);
+            int newY = std::lround(size.y - tempY - 1);
             tempBuf[x + (int)(newY * size.x)] = buf[x + (int)(y * fullDCSize.x)];
         }
     }
@@ -169,10 +169,10 @@ void PowerPoint::verticalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullD
 
     for (int x = 0; x < size.x; x++)
     {
-        for (int y = posy; y < fullDCSize.y; y++)
+        for (int y = std::lround(posy); y < std::lround(fullDCSize.y); y++)
         {
-            int newX = size.x - x - 1;
-            int tempY = y - posy;
+            int newX = std::lround(size.x - x - 1);
+            int tempY = std::lround(y - posy);
             tempBuf[newX + (int)(tempY * size.x)] = buf[x + (int)(y * fullDCSize.x)];
         }
     }
@@ -183,9 +183,9 @@ void PowerPoint::verticalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullD
 }
 
 
-void PowerPoint::bitBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+void PowerPoint::bitBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource/* = 0*/, double ySource/* = 0*/)
 {
-    txBitBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource);
+    txBitBlt(dc1, std::lround (x0), std::lround(y0), std::lround(sizex), std::lround(sizey), dc2, std::lround(xSource), std::lround(ySource));
 }
 
 void PowerPoint::bitBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource/* = {}*/)
@@ -193,9 +193,9 @@ void PowerPoint::bitBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSou
     bitBlt(dc1, pos.x, pos.y, size.x, size.y, dc2, posSource.x, posSource.y);
 }
 
-void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+void PowerPoint::transparentBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource/* = 0*/, double ySource/* = 0*/)
 {
-    txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    txTransparentBlt(dc1, std::lround(x0), std::lround(y0), std::lround(sizex), std::lround(sizey), dc2, std::lround(xSource), std::lround(ySource), systemSettings->TRANSPARENTCOLOR);
 }
 
 void PowerPoint::transparentBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource/* = {}*/)
@@ -203,9 +203,9 @@ void PowerPoint::transparentBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vecto
     transparentBlt(dc1, pos.x, pos.y, size.x, size.y, dc2, posSource.x, posSource.y);
 }
 
-int PowerPoint::stretchBlt(HDC dest, int destPosx, int destPosy, int destSizex, int destSizey, HDC source, int sourcePosx, int sourcePosy, int sourceSizex, int sourceSizey)
+int PowerPoint::stretchBlt(HDC dest, double destPosx, double destPosy, double destSizex, double destSizey, HDC source, double sourcePosx, double sourcePosy, double sourceSizex, double sourceSizey)
 {
-    return StretchBlt(dest, destPosx, destPosy, destSizex, destSizey, source, sourcePosx, sourcePosy, sourceSizex, sourceSizey, SRCCOPY);
+    return StretchBlt(dest, std::lround(destPosx), std::lround(destPosy), std::lround(destSizex), std::lround(destSizey), source, std::lround(sourcePosx), std::lround(sourcePosy), std::lround(sourceSizex), std::lround(sourceSizey), SRCCOPY);
 }
 
 int PowerPoint::stretchBlt(HDC dest, Vector destPos, Vector destSize, HDC source, Vector sourcePos, Vector sourceSize)
@@ -247,10 +247,16 @@ bool PowerPoint::getAsyncKeyState(int symbol)
 
 void PowerPoint::deleteTransparency(RGBQUAD* buf, unsigned int totalSize)
 {
-    for (int i = 0; i < totalSize; i++)
+    for (int i = 0; i < (int)totalSize; i++)
     {
         buf[i].rgbReserved = 255;
     }
+}
+
+
+int PowerPoint::needToLoadOldFiles()
+{
+    return filesCompability;
 }
 
 
@@ -270,6 +276,11 @@ int PowerPoint::saveImage(HDC dc, const char* path)
     return txSaveImage(path, dc);
 }
 
+
+int PowerPoint::messageBox(const char  text[]/* = ""*/, const char  header[]/* = ""*/, unsigned  flags/* = MB_ICONINFORMATION | MB_OKCANCEL*/)
+{
+    return txMessageBox(text, header, flags);
+}
 void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 {
     bool wasSizeChanged = true;
@@ -286,9 +297,9 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
     
     systemSettings->ScreenPos = pos;
 
-    MoveWindow(systemSettings->MAINWINDOW, pos.x, pos.y, size.x, size.y, TRUE);
+    MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
 
-    SetWindowLong(systemSettings->MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+    SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
 
     if (sizeHistory[1] != size)
     {

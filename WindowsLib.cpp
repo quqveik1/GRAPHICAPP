@@ -44,6 +44,11 @@ void Window::resize(Rect newRect)
     app->windowsLibApi->resize(this, newRect);
 }
 
+void Window::resize(Vector newSize)
+{
+    app->windowsLibApi->resize(this, newSize);
+}
+
 void Window::reInit()
 {
     if (rect.getSize().x > 0 && rect.getSize().y > 0)

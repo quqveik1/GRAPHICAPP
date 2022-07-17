@@ -18,7 +18,7 @@ void ColorMenu::loadHistory()
     }
 
     int byteSize = colorHistory.getByteSize();
-    fread(&colorHistory, sizeof(char), byteSize, saveFile);
+    if (app->needToLoadOldFiles()) fread(&colorHistory, sizeof(char), byteSize, saveFile);
     fclose(saveFile);
 }
 
@@ -178,7 +178,7 @@ void ColorMenu::moveHistory(int clickedNumOfColorRect)
 
     for (int i = startNumSecondCircle + 1; i <= colorHistory.currentPos - 1; i++)
     {
-        colorHistory.colorHistory[i - 1] = colorHistory.colorHistory[i];
+        if (i > 0)colorHistory.colorHistory[i - 1] = colorHistory.colorHistory[i];
     }
 }
 

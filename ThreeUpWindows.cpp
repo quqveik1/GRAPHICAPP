@@ -15,11 +15,11 @@ void MinimizeWindow::onClick(Vector mp)
 {
     assert(app);
     assert(app->systemSettings);
-    assert(app->systemSettings->MAINWINDOW);
+    assert(app->MAINWINDOW);
     if (!isClickedLastTime())
     {
         app->isShowing = false;
-        ShowWindow(app->systemSettings->MAINWINDOW, SW_SHOWMINIMIZED);
+        ShowWindow(app->MAINWINDOW, SW_SHOWMINIMIZED);
     }
 }
 

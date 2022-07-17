@@ -14,7 +14,6 @@ CanvasManager::CanvasManager(AbstractAppData* _app) :
 {
     gassert(loadManager);
     addWindow(scaleButton);
-    app->compressImage(closeCanvasButton, { systemSettings->MENUBUTTONSWIDTH,  systemSettings->HANDLEHEIGHT }, loadManager->loadImage("CloseButton4.bmp"), { 50, 26 });
 }
 Canvas* CanvasManager::getActiveCanvas()
 {
@@ -63,16 +62,22 @@ void CanvasManager::controlScaleButtons()
 
     Vector scaleButtonPos = { userRect.pos.x, userRect.finishPos.y - scaleButton->getSize().y };
 
-    intScale = getActiveCanvas()->getScale() * 100;
+    intScale = std::lround (getActiveCanvas()->getScale() * 100);
     scaleButton->MoveWindowTo(scaleButtonPos);
     scaleButton->draw();
+    
 
-    plusButtonRect = { .pos = {scaleButtonPos.x + scaleButton->getSize().x,  userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {scaleButtonPos.x + scaleButton->getSize().x + plusMinusButtonSize.x, userRect.finishPos.y} };
-    minusButtonRect = { .pos = {plusButtonRect.finishPos.x,    userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {plusButtonRect.finishPos.x + plusMinusButtonSize.x,    userRect.finishPos.y} };
+    minusButtonRect = { .pos = {scaleButtonPos.x + scaleButton->getSize().x,  userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {scaleButtonPos.x + scaleButton->getSize().x + plusMinusButtonSize.x, userRect.finishPos.y} };
+    plusButtonRect = { .pos = {minusButtonRect.finishPos.x,    userRect.finishPos.y - plusMinusButtonSize.y}, .finishPos = {minusButtonRect.finishPos.x + plusMinusButtonSize.x,    userRect.finishPos.y} };
+}
+
+
+void CanvasManager::drawScaleButtons()
+{
+    app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
 
     app->bitBlt(finalDC, plusButtonRect.pos, {}, plusButtonDC);
     app->bitBlt(finalDC, minusButtonRect.pos, {}, minusButtonDC);
-
 }
 
 
@@ -88,10 +93,11 @@ void CanvasManager::draw()
 
     if (getActiveCanvas())
     {
+
         controlScaleButtons();
         controlActiveCanvas();
-        
-        app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
+
+        drawScaleButtons();
     }
 
     drawTabs();
@@ -100,30 +106,65 @@ void CanvasManager::draw()
 
 void CanvasManager::controlActiveCanvas()
 {
-    getActiveCanvas()->getScale() = (double)intScale / 100.0;
+    if (getActiveCanvas())
+    {
+        getActiveCanvas()->getScale() = (double)intScale / 100.0;
 
-    getActiveCanvas()->draw();
-    if (app->getAsyncKeyState(VK_RIGHT) && app->getAsyncKeyState(VK_CONTROL))
-    {
-        getActiveCanvas()->deltaPos.x -= 10;
-    } 
-    if (app->getAsyncKeyState(VK_LEFT) && app->getAsyncKeyState(VK_CONTROL))
-    {
-        getActiveCanvas()->deltaPos.x += 10;
-    }  
-    if (app->getAsyncKeyState(VK_UP) && app->getAsyncKeyState(VK_CONTROL))
-    {
-        getActiveCanvas()->deltaPos.y += 10;
-    }  
-    if (app->getAsyncKeyState(VK_DOWN) && app->getAsyncKeyState(VK_CONTROL))
-    {
-        getActiveCanvas()->deltaPos.y -= 10;
+        controlStretching();
+        controlPosition();
+
+        getActiveCanvas()->print(finalDC);
     }
+}
+
+void CanvasManager::controlPosition()
+{
+    if (getActiveCanvas())
+    {
+        if (app->getAsyncKeyState(VK_RIGHT) && app->getAsyncKeyState(VK_CONTROL))
+        {
+            getActiveCanvas()->deltaPos.x -= 10;
+        }
+        if (app->getAsyncKeyState(VK_LEFT) && app->getAsyncKeyState(VK_CONTROL))
+        {
+            getActiveCanvas()->deltaPos.x += 10;
+        }
+        if (app->getAsyncKeyState(VK_UP) && app->getAsyncKeyState(VK_CONTROL))
+        {
+            getActiveCanvas()->deltaPos.y += 10;
+        }
+        if (app->getAsyncKeyState(VK_DOWN) && app->getAsyncKeyState(VK_CONTROL))
+        {
+            getActiveCanvas()->deltaPos.y -= 10;
+        }
+    }
+
     Vector ñanvasPos = app->getCentrizedPos(getActiveCanvas()->getSize(), getSize());
+    if (app->systemSettings->debugMode >= 3)printf("canvasPos: {%lf, %lf}\n", ñanvasPos.x, ñanvasPos.y);
+    if (app->systemSettings->debugMode >= 3)printf("getActiveCanvas()->getSize(): {%lf, %lf}\n", getActiveCanvas()->getSize().x, getActiveCanvas()->getSize().y);
+    if (app->systemSettings->debugMode >= 3)printf("getSize(): {%lf, %lf}\n", getSize().x, getSize().y);
+    if (app->systemSettings->debugMode >= 3)printf("Canvas deltaPos: {%lf, %lf}\n", getActiveCanvas()->deltaPos.x, getActiveCanvas()->deltaPos.y);
     ñanvasPos += getActiveCanvas()->deltaPos;
     getActiveCanvas()->MoveWindowTo(ñanvasPos);
+}
 
-    app->bitBlt(finalDC, getActiveCanvas()->rect.pos, getActiveCanvas()->getSize(), getActiveCanvas()->finalDC);
+void CanvasManager::controlStretching()
+{
+    if (clock() - lastTimeButtonClicked > deltaBetween2Clicks && getActiveCanvas())
+    {
+        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_PLUS))
+        {
+            getActiveCanvas()->stretchCanvas(getActiveCanvas()->deltaScale);
+            lastTimeButtonClicked = clock();
+        }
+
+        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_MINUS))
+        {
+            getActiveCanvas()->stretchCanvas(- (getActiveCanvas()->deltaScale));
+            lastTimeButtonClicked = clock();
+        }
+
+    }
 }
 
 int CanvasManager::setDrawingMode(int num)
@@ -161,7 +202,7 @@ Vector CanvasManager::getCentrizedPos(Vector localSize, Vector globalSize)
 
 bool CanvasManager::addCanvas(const char* name, Vector dcSize)
 {
-    canvases[canvasesLength] = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name, closeCanvasButton);
+    canvases[canvasesLength] = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name);
     activeCanvasNum = canvasesLength;
     canvasesLength++;
     setTabsRect();
@@ -183,15 +224,15 @@ void CanvasManager::onClick(Vector mp)
             return;
         }
 
-        if (plusButtonRect.inRect(mp) && !isClickedLastTime())
+        if (plusButtonRect.inRect(mp))
         {
-            getActiveCanvas()->stretchCanvas(getActiveCanvas()->deltaScale);
+            if (!isClickedLastTime()) getActiveCanvas()->stretchCanvas(getActiveCanvas()->deltaScale);
             return;
         }
 
-        if (minusButtonRect.inRect(mp) && !isClickedLastTime())
+        if (minusButtonRect.inRect(mp))
         {
-            getActiveCanvas()->stretchCanvas( -(getActiveCanvas()->deltaScale) );
+            if (!isClickedLastTime()) getActiveCanvas()->stretchCanvas( -(getActiveCanvas()->deltaScale) );
             return;
         }
 
@@ -215,8 +256,6 @@ int CanvasManager::tabsOnClick()
 
 void CanvasManager::deleteButton()
 {
-    //newCanvas.deleteButton();
-    app->smartDeleteDC(closeCanvasButton);
 
     for (int i = 0; i < length; i++)
     {

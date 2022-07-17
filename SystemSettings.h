@@ -7,9 +7,8 @@
 
 struct CSystemSettings
 {
+    struct AbstractAppData* app = NULL;
     int WindowStyle = _txWindowStyle;
-
-    HWND MAINWINDOW = NULL;
 
     COLORREF MenuColor = NULL;
     COLORREF SecondMenuColor = NULL;
@@ -51,6 +50,8 @@ struct CSystemSettings
     int read(const char* path);
 
     int byteSize = sizeof(*this);
+
+    CSystemSettings(struct AbstractAppData* _app);
 };
 
 

@@ -9,12 +9,12 @@
 struct Canvas : Manager
 {
     char name[MAX_PATH] = {};
-	bool clearBackground = true;
+    bool clearBackground = true;
     Vector canvasCoordinats = {};
 
     const int LayersNum = 100;
-	int currentLayersLength = 0;
-	int activeLayNum = 0; 
+    int currentLayersLength = 0;
+    int activeLayNum = 0;
     Vector laysSize = {};
     HDC finalLay = NULL;
     COLORREF backgroungColor = TX_WHITE;
@@ -31,21 +31,19 @@ struct Canvas : Manager
     bool needFrameToWork = true;
 
     double scale = 1;
+    double scaleLastTime = 0;
+    Vector outputDCSize = {};
+    Vector posLastTime = {};
     double deltaScale = 0.1;
     int lastTimeButtonClicked = 0;
     int deltaBetween2Clicks = 300;
     Vector deltaPos = {};
 
-    Canvas(AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC = NULL);
+    Canvas(AbstractAppData* _app, Rect _rect, const char* _name);
 
 	void controlSize();
-	void controlSizeSliders ();
     void controlStretching();
-
-	void saveHistory ();
-	HDC playHistoryDC (int stepBack);
-	void returnHistory(int stepsBack);
-	void deleteHistory ();
+    virtual Vector setNewCanvasSize(Vector newSize);
 
     void drawCadre();
 
@@ -56,8 +54,6 @@ struct Canvas : Manager
     void cleanOutputLay();
 
     void copyFinalLayOnFinalDC();
-
-	void controlFilter();
 
     void finishTool();
     void controlTool();
@@ -88,6 +84,12 @@ struct Canvas : Manager
     int getLastNotStartedToolNum();
 
     virtual Vector getMousePos() override;
+
+    virtual void MoveWindow(Vector delta) override;
+    virtual void MoveWindowTo(Vector pos) override;
+
+    virtual void print(HDC _dc) override;
+    virtual void resize(Vector newSize) override;
 
 	virtual void draw () override;
 	virtual void onClick (Vector mp) override;

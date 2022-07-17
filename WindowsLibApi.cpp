@@ -4,7 +4,7 @@
 void WindowsLibApi::resize(Window* window, Rect newRect)
 {
     if (window->systemSettings->debugMode >= 2) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
-    if (newRect.getSize().x > 0 && newRect.getSize().y > 0)
+    if (isBigger (newRect.getSize().x, 0) && isBigger (newRect.getSize().y, 0))
     {
         window->finalDCSize = { newRect.getSize().x, newRect.getSize().y };
         if (window->systemSettings->debugMode >= 2) printf("finalDCSize {%lf, %lf}; \n", window->finalDCSize.x, window->finalDCSize.y);
@@ -17,6 +17,12 @@ void WindowsLibApi::resize(Window* window, Rect newRect)
         if (window->systemSettings->debugMode == 5) window->app->drawOnScreen(window->finalDC);
     }
     window->rect = newRect;
+}
+
+
+void WindowsLibApi::resize(Window* window, Vector newSize)
+{
+    resize(window, { .pos = window->rect.pos, .finishPos = window->rect.pos + newSize });
 }
 
 
@@ -95,23 +101,27 @@ Window* WindowsLibApi::isActiveWindowBelow(Manager* manager)
 
 void WindowsLibApi::controlHandle(Manager* manager)
 {
-    bool isClickedAgo = manager->handle.isClickedLastTime();
-    if (manager->app->systemSettings->debugMode == 5) printf("isClickedLastTime: %d\n", isClickedAgo);
-
-    Vector absMP = manager->getAbsMousePos();
-
-    if (manager->app->systemSettings->debugMode == 5) printf("absMP: {%lf, %lf}\n", absMP.x, absMP.y);
-
-    if (isClickedAgo && manager)
+    gassert(manager);
+    if (manager)
     {
-        manager->rect.pos.x += absMP.x - manager->startCursorPos.x;
-        manager->rect.pos.y += absMP.y - manager->startCursorPos.y;
-        manager->rect.finishPos.x += absMP.x - manager->startCursorPos.x;
-        manager->rect.finishPos.y += absMP.y - manager->startCursorPos.y;
-        manager->startCursorPos.x = absMP.x;
-        manager->startCursorPos.y = absMP.y;
+        bool isClickedAgo = manager->handle.isClickedLastTime();
+        if (manager->app->systemSettings->debugMode == 5) printf("isClickedLastTime: %d\n", isClickedAgo);
+
+        Vector absMP = manager->getAbsMousePos();
+
+        if (manager->app->systemSettings->debugMode == 5) printf("absMP: {%lf, %lf}\n", absMP.x, absMP.y);
+
+        if (isClickedAgo && manager)
+        {
+            manager->rect.pos.x += absMP.x - manager->startCursorPos.x;
+            manager->rect.pos.y += absMP.y - manager->startCursorPos.y;
+            manager->rect.finishPos.x += absMP.x - manager->startCursorPos.x;
+            manager->rect.finishPos.y += absMP.y - manager->startCursorPos.y;
+            manager->startCursorPos.x = absMP.x;
+            manager->startCursorPos.y = absMP.y;
+        }
+        if (manager->getMBCondition() == 0) manager->handle.setMbLastTime();
     }
-    if (manager->getMBCondition() == 0) manager->handle.setMbLastTime();
 }
 
 

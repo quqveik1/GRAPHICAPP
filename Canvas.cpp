@@ -2,7 +2,7 @@
 #include "Canvas.h"
 #include "ZoneSizeControl.cpp"
 
-Canvas::Canvas(AbstractAppData* _app, Rect _rect, const char* _name, HDC _closeDC/* = NULL*/) :
+Canvas::Canvas(AbstractAppData* _app, Rect _rect, const char* _name) :
     Manager(_app, _rect, 5, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
     canvasCoordinats({}),
     laysSize(_rect.getSize()),
@@ -38,57 +38,6 @@ void Canvas::createLay()
     activeLayNum = currentLayersLength - 1;
 }
 
-HDC Canvas::playHistoryDC(int stepBack)
-{
-    /*
-    if (timesShowedHistoryInRow == HistoryLength) return;
-    if (currentHistoryLength <= 1) return;
-    if (currentHistoryNumber - 1 > 0)
-    {
-        //canvas = history[--currentHistoryNumber - 1];
-        currentHistoryLength--;
-    }
-    else
-    {
-        currentHistoryNumber - 1 = HistoryLength;
-        //canvas = history[--currentHistoryNumber - 1];
-        currentHistoryLength;
-
-    }			  
-    //HDC historyDC = app->createDIBSection(canvasSize.x, canvasSize.y);
-
-    if (stepBack <= currentHistoryLength && stepBack < HistoryLength)
-    {
-        app->bitBlt(historyDC, 0, 0, 0, 0, lastSavedDC);
-        //app->drawOnScreen(lastSavedDC);
-
-        for (int i = currentHistoryLength - stepBack - 1; i >= 0; i--)
-        {
-            int pos = 0;
-            //if (currentHistoryLength == HistoryLength - 1)  pos = currentHistoryNumber - 1 + 1 + i;
-            if (currentHistoryLength < HistoryLength - 1) pos = currentHistoryNumber - 1 - 1 - i;
-            if (pos >= HistoryLength) pos -= HistoryLength;
-            // history[pos].tools->load (history[pos].toolsData, historyDC);
-        }
-    }
-
-
-    timesShowedHistoryInRow++;
-    return	historyDC;
-    */
-    return NULL;
-}
-
-void Canvas::deleteButton()
-{
-    if (dc) app->deleteDC(dc);
-    if (finalDC) app->deleteDC(finalDC);
-    //scrollBarVert.deleteButton();
-    //scrollBarHor.deleteButton();
-    deleteHistory();
-
-}
-
 void Canvas::startTool()
 {
     initToolLay();
@@ -114,7 +63,6 @@ void Canvas::addToolLay()
 {
     assert(LayersNum >= currentToolLength);
     activeTool = true;
-    Tool* activeTool = getActiveTool();
     ToolLay* toollay = getNewToolLay();
     setToolToToolLay(toollay);
 }
@@ -163,13 +111,13 @@ void Canvas::setActiveToolLayNum(int num)
 
 int Canvas::getLastNotStartedToolNum()
 {
-    int length = getCurrentToolLengthOnActiveLay();
-    return length;
+    return getCurrentToolLengthOnActiveLay();
 }
 
 void Canvas::onClick(Vector mp)
 {
     setActiveWindow(this);
+    mp = getMousePos();
 
     if (getMBCondition() == 1)
     {
@@ -202,10 +150,14 @@ Vector Canvas::getMousePos()
 }
 
 
+
+
+
 void Canvas::draw()
 {
 
     if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
+    if (systemSettings->debugMode >= 3)printf("rect.pos: {%lf, %lf}\n", rect.pos.x, rect.pos.y);
 
     controlStretching();
 
@@ -220,6 +172,7 @@ void Canvas::draw()
     }
 
     drawLays();
+    if (posLastTime != rect.pos) reDraw = true;
     copyFinalLayOnFinalDC();
 
 
@@ -227,17 +180,18 @@ void Canvas::draw()
 
     setMbLastTime();
 
+    posLastTime = rect.pos;
+
 
 }
 
 void Canvas::controlStretching()
 {
-    if (!isEqual (getSize().x, laysSize.x * scale, 1))
+    if (getSize() != laysSize * scale)
     {
-
         if (isBigger(scale, 0))
         {
-            resize({ .pos = {}, .finishPos = laysSize * scale });
+            setNewCanvasSize(laysSize * scale);
         }
         else
         {
@@ -248,22 +202,91 @@ void Canvas::controlStretching()
         reDraw = true;
     }
 
-    if (clock() - lastTimeButtonClicked > deltaBetween2Clicks)
-    {
-        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_PLUS))
-        {
-            stretchCanvas(deltaScale);
-        }
-
-        if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState(VK_OEM_MINUS))
-        {
-            stretchCanvas(-deltaScale);
-        }
-        
-    }
-    double sizeX = getSize().x;
-    scale = getSize().x / laysSize.x;
     
+    
+}
+
+void Canvas::resize(Vector newSize)
+{
+    if (isBigger (newSize.x, 0) && isBigger (newSize.y, 0))
+    {
+        rect = { .pos = rect.pos, .finishPos = rect.pos + newSize };
+        if (isBigger(newSize.x, app->systemSettings->SizeOfScreen.x)) newSize.x = app->systemSettings->SizeOfScreen.x;
+        if (isBigger(newSize.y, app->systemSettings->SizeOfScreen.y)) newSize.y = app->systemSettings->SizeOfScreen.y;
+        finalDCSize = newSize;
+
+        app->deleteDC(finalDC);
+        finalDC = app->createDIBSection(finalDCSize, &finalDCArr);
+
+        app->setColor(color, finalDC);
+        app->rectangle(0, 0, finalDCSize.x, finalDCSize.y, finalDC);
+    }
+}
+
+void Canvas::copyFinalLayOnFinalDC()
+{
+    if (reDraw)
+    {
+        if (laysSize == getSize())
+        {
+            app->bitBlt(finalDC, {}, laysSize, finalLay);
+        }
+        else
+        {
+            Vector layStartPos = {};
+            if (isSmaller(rect.pos.x, 0))
+            {
+                if (!isEqual(getSize().x, 0)) layStartPos.x = ((0 - rect.pos.x) / getSize().x) * laysSize.x;
+            }
+
+            if (isSmaller(rect.pos.y, 0))
+            {
+                if (!isEqual(getSize().y, 0)) layStartPos.y = ((0 - rect.pos.y) / getSize().y) * laysSize.y;
+            }
+
+            Vector necessaryLaySize = {};
+            if (getSize() > 0) necessaryLaySize = (finalDCSize / getSize()) * laysSize;
+            app->stretchBlt(finalDC, {}, finalDCSize, finalLay, layStartPos, necessaryLaySize);
+        }
+        reDraw = false;
+    }
+
+    if (app->systemSettings->debugMode >= 3 && getSize() > 0) printf("Canvas: (finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+}
+
+
+void Canvas::print(HDC _dc)
+{
+    draw();
+    Vector outputPos = rect.pos;
+    if (isSmaller(outputPos.x, 0) && finalDCSize.x != getSize().x) outputPos.x = 0;
+    if (isSmaller(outputPos.y, 0) && finalDCSize.y != getSize().y) outputPos.y = 0;
+
+    app->bitBlt(_dc, outputPos, finalDCSize, finalDC);
+}
+
+
+
+Vector Canvas::setNewCanvasSize(Vector newSize)
+{
+    if (newSize > 0)
+    {
+        assert(manager);
+        scale = newSize.x / laysSize.x;
+
+        resize(newSize);
+
+        reDraw = true;
+    }
+    else
+    {
+        rect.pos = {};
+        rect.finishPos = newSize;
+        reDraw = true;
+    }
+
+    return getSize();
+
 }
 
 
@@ -271,26 +294,7 @@ void Canvas::stretchCanvas(double percantageFromOriginal)
 {
     Vector newSize = getSize();
     if (newSize > 0)newSize += laysSize * percantageFromOriginal;
-
-    if (newSize > 0)
-    {
-
-        assert(manager);
-
-        resize({ .pos = {}, .finishPos = newSize });
-
-        lastTimeButtonClicked = clock();
-        reDraw = true;
-    }
-    else
-    {
-        rect.finishPos = newSize;
-        reDraw = true;
-    }
-
-
-    double sizeX = getSize().x;
-    scale = getSize().x / laysSize.x;
+    setNewCanvasSize(newSize);
 }
 
 
@@ -360,6 +364,13 @@ double& Canvas::getScale()
 }
 
 
+void Canvas::deleteButton()
+{
+    if (dc) app->deleteDC(dc);
+    if (finalDC) app->deleteDC(finalDC);
+}
+
+
 
 
 void Canvas::controlTool()
@@ -373,7 +384,6 @@ void Canvas::controlTool()
     assert(clay);
     ToolLay* toollay = clay->getActiveToolLay();
     assert(toollay);
-    Tool* tool = toollay->getTool();
     bool isFinished = toollay->isFinished();
 
 
@@ -395,126 +405,9 @@ void Canvas::finishTool()
     activeTool = false;
 }
 
-void Canvas::returnHistory(int stepsBack)
-{
-    /*
-    if (!(stepsBack <= currentHistoryLength)) return;
-    //HDC historyDC = playHistoryDC();
-    //printfDCS ();
-    //copyAndDelete(canvas, playHistoryDC(stepsBack));
-    //txDeleteDC (hdc);
-    //printfDCS ();
-    //currentHistoryNumber - 1 -= stepsBack;
-    //if (currentHistoryNumber - 1 < 0) currentHistoryNumber - 1 += HistoryLength;
-//if (!(timeSavedHistory >= HistoryLength))
-    {
-        currentHistoryLength--;
-    }
-
-    timeSavedHistory--;
-    */
-
-}
-
-void Canvas::controlFilter()
-{
-    //if (app->getAsyncKeyState(VK_LEFT)) SecondFilterValue++;
-    //if (app->getAsyncKeyState(VK_RIGHT)) SecondFilterValue--;
-    //if (app->getAsyncKeyState(VK_DOWN)) FirstFilterValue+=10;
-    //if (app->getAsyncKeyState(VK_UP)) FirstFilterValue-=10;
-    /*
-    filter->algorithm = FilterAlgorithm;
-
-
-    if (manager->activeWindow != this) return;
-    if (confirmFilter)
-    {
-        confirmFilter = false;
-        nonConfirmFilter = false;
-        app->bitBlt(canvas, 0, 0, 0, 0, tempFilterDC);
-    }
-
-    if (((int)FirstFilterValue != (int)lastFirstFilterValue || (int)SecondFilterValue != (int)lastSecondFilterValue))
-    {
-        if (filter->lastX == 0 && filter->lastY == 0)
-        {
-            lastRecountFirstFilterValue = FirstFilterValue;
-            lastRecountSecondFilterValue = SecondFilterValue;
-        }
-        reCountEnded = filter->reCount(nonConfirmFilter, SecondFilterValue, FirstFilterValue);
-        if (reCountEnded)
-        {
-            if (!((int)FirstFilterValue != (int)lastRecountFirstFilterValue || (int)SecondFilterValue != (int)lastRecountSecondFilterValue))
-            {
-                lastFirstFilterValue = FirstFilterValue;
-                lastSecondFilterValue = SecondFilterValue;
-            }
-            else
-            {
-                reCountEnded = false;
-            }
-        }
-    }
-    */
-
-}
-
 void Canvas::controlSize()
 {
     zoneSizeControl.controlFrame();
-}
-
-void Canvas::controlSizeSliders()
-{
-    //scrollBarVert.resize ({.pos = {rect.finishPos}});
-}
-
-
-
-
-
-
-void Canvas::saveHistory()
-{
-    /*
-    //app->bitBlt (history[currentHistoryNumber - 1], 0, 0, 0, 0, canvas);
-    timeSavedHistory++;
-    if (currentHistoryNumber < HistoryLength - 1) currentHistoryNumber++;
-    else currentHistoryNumber = 0;
-    //printf ("%d %d\n ", currentHistoryNumber - 1, (currentHistoryNumber - 1 < HistoryLength - 1));
-
-    currentHistoryLength++;
-
-    /*
-    if (timeSavedHistory > HistoryLength - 1)
-    {
-        int newLastStep = currentHistoryNumber - 1;
-        if (newLastStep >= HistoryLength)
-        {
-            newLastStep = 0;
-        }
-        lastSavedDC = playHistoryDC(9);
-        app->drawOnScreen(lastSavedDC);
-    }  
-
-    //history[addNewHistoryNum].toolsNum = _app->systemSettings->DrawingMode;
-    //history[addNewHistoryNum].pos = {lastClick.x + canvasCoordinats.x,  lastClick.y + canvasCoordinats.y};
-    //history[addNewHistoryNum].size = size;
-    //history[addNewHistoryNum].color = _app->systemSettings->DrawColor;
-    //history[addNewHistoryNum].thickness = lineThickness;
-
-
-    */
-}
-
-void Canvas::deleteHistory()
-{
-    /*
-    for (int i = 0; i < HistoryLength; i++)
-    {
-        //smartDeleteDC (history[i]);
-    }
-    */
 }
 
 void Canvas::controlEditLay()
@@ -618,20 +511,28 @@ void Canvas::drawLays()
     }
 }
 
-void Canvas::copyFinalLayOnFinalDC()
+
+
+void Canvas::MoveWindow(Vector delta)
 {
-    if (reDraw)
-    {
-        if (laysSize == rect.getSize())
-        {
-            app->bitBlt(finalDC, {}, laysSize, finalLay);
-        }
-        else
-        {
-            app->stretchBlt(finalDC, {}, rect.getSize(), finalLay, {}, laysSize);
-        }
-    }
-    reDraw = false;
+    rect.pos.x += delta.x;
+    rect.finishPos.x += delta.x;
+
+    rect.pos.y += delta.y;
+    rect.finishPos.y += delta.y;
+}
+
+void Canvas::MoveWindowTo(Vector pos)
+{
+    Vector size = getSize();
+    rect.pos.x = pos.x;
+    rect.finishPos.x = rect.pos.x + size.x;
+
+    size = getSize();
+    rect.pos.y = pos.y;
+    rect.finishPos.y = rect.pos.y + size.y;
+
+    if (app->systemSettings->debugMode >= 3)printf("Canvas pos: {%lf, %lf}\n", rect.pos.x, rect.pos.y);
 }
 
 

@@ -60178,3 +60178,2225 @@ HEAP CORRUPTION DETECTED: after Normal block (#836) at 0x014CBD40.
 CRT detected that the application wrote to memory after end of heap buffer.
 Normal located at 0x014CBD40 is 1 bytes long.
 minkernel\crts\ucrt\src\appcrt\heap\debug_heap.cpp(280) : Assertion failed: _CrtCheckMemory()
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10867, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Cannot create buffer: CreateCompatibleBitmap() failed
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C321B8 (32-bit), Flags: CMdRe0, Thread: 0x9084 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B6F552 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867)
+# 1 0x00BD927C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00BD9BA0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00BB425F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+# 4 0x00BCCEE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (13):
+
+     11: 
+     12:         window->app->deleteDC(window->finalDC);
+=>   13:         window->finalDC = window->app->createDIBSection(window->finalDCSize, &window->finalDCArr);
+     14: 
+     15:         window->app->setColor(window->color, window->finalDC);
+
+# 5 0x00BCCC88 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp (44):
+
+     42: void Window::resize(Rect newRect)
+     43: {
+=>   44:     app->windowsLibApi->resize(this, newRect);
+     45: }
+     46: 
+
+# 6 0x00BB2EC3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlStretching() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (240):
+
+    238:         if (isBigger(scale, 0))
+    239:         {
+=>  240:             resize({ .pos = {}, .finishPos = laysSize * scale });
+    241:         }
+    242:         else
+
+# 7 0x00BB7389 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (210):
+
+    208:     if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
+    209: 
+=>  210:     controlStretching();
+    211: 
+    212:     CLay* activeLay = getActiveLay();
+
+# 8 0x00BB07B6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (105):
+
+    103:     getActiveCanvas()->getScale() = (double)intScale / 100.0;
+    104: 
+=>  105:     getActiveCanvas()->draw();
+    106:     if (app->getAsyncKeyState(VK_RIGHT) && app->getAsyncKeyState(VK_CONTROL))
+    107:     {
+
+# 9 0x00BB7736 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (92):
+
+     90:     {
+     91:         controlScaleButtons();
+=>   92:         controlActiveCanvas();
+     93:         
+     94:         app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
+
+#10 0x00BD26D5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+#11 0x00BD2AC7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+#12 0x00BBA4A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+#13 0x00B6A2F7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+#14 0x00BFCCF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10867):
+
+  10865: 
+  10866: $   HBITMAP bmap = bitmap? bitmap : Win32::CreateDIBSection (NULL, &info, DIB_RGB_COLORS, (void**) pixels, NULL, 0);
+=>10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+  10869: $   Win32::SelectObject (dc, bmap) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 16 2022 12:13:57, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 16 2022 12:15:12
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10869, функция: struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00C321B8 (32-bit), Flags: CMdRe0, Thread: 0x9084 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00B6F5F0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txBuffer_Create() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10869)
+# 1 0x00BD927C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateCompatibleDC() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555)
+# 2 0x00BD9BA0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txCreateDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578)
+
+# 3 0x00BB425F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::createDIBSection() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+# 4 0x00BCCEE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (13):
+
+     11: 
+     12:         window->app->deleteDC(window->finalDC);
+=>   13:         window->finalDC = window->app->createDIBSection(window->finalDCSize, &window->finalDCArr);
+     14: 
+     15:         window->app->setColor(window->color, window->finalDC);
+
+# 5 0x00BCCC88 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Window::resize() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp (44):
+
+     42: void Window::resize(Rect newRect)
+     43: {
+=>   44:     app->windowsLibApi->resize(this, newRect);
+     45: }
+     46: 
+
+# 6 0x00BB2EC3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::controlStretching() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (240):
+
+    238:         if (isBigger(scale, 0))
+    239:         {
+=>  240:             resize({ .pos = {}, .finishPos = laysSize * scale });
+    241:         }
+    242:         else
+
+# 7 0x00BB7389 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (210):
+
+    208:     if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
+    209: 
+=>  210:     controlStretching();
+    211: 
+    212:     CLay* activeLay = getActiveLay();
+
+# 8 0x00BB07B6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (105):
+
+    103:     getActiveCanvas()->getScale() = (double)intScale / 100.0;
+    104: 
+=>  105:     getActiveCanvas()->draw();
+    106:     if (app->getAsyncKeyState(VK_RIGHT) && app->getAsyncKeyState(VK_CONTROL))
+    107:     {
+
+# 9 0x00BB7736 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (92):
+
+     90:     {
+     91:         controlScaleButtons();
+=>   92:         controlActiveCanvas();
+     93:         
+     94:         app->bitBlt(finalDC, scaleButton->rect.pos, scaleButton->getSize(), scaleButton->finalDC);
+
+#10 0x00BD26D5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+#11 0x00BD2AC7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (134):
+
+    132: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    133: {
+=>  134:     standartManagerDraw$(manager);
+    135:     return 0;
+    136: }
+
+#12 0x00BBA4A0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+#13 0x00B6A2F7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+#14 0x00BFCCF8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in struct HDC__ *__cdecl TX::_txBuffer_Create(struct HWND__ *,const struct tagPOINT *,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10869):
+
+  10867: $   if (!bmap) TX_DEBUG_ERROR ("Cannot create buffer: CreateCompatibleBitmap() failed");
+  10868: 
+=>10869: $   Win32::SelectObject (dc, bmap) asserted;
+  10870: 
+  10871: $   if (!bitmap) Win32::PatBlt (dc, 0, 0, sz.x, sz.y, BLACKNESS) asserted;
+
+# 1 in struct HDC__ *__cdecl TX::txCreateCompatibleDC(double,double,struct HBITMAP__ *,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13555):
+
+  13553: $1  POINT size = { ROUND (sizeX), ROUND (sizeY) };
+  13554: 
+=>13555: $   HDC dc = _txBuffer_Create (NULL, &size, bitmap, pixels);
+  13556: $   assert (dc); if (!dc) return NULL;  //-V547
+  13557: 
+
+# 2 in struct HDC__ *__cdecl TX::txCreateDIBSection(double,double,struct tagRGBQUAD **) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13578):
+
+  13576:     if (!pixels) {$ pixels = &pix; }
+  13577: 
+=>13578: $   HDC dc = txCreateCompatibleDC (sizeX, sizeY, NULL, pixels);
+  13579: 
+  13580: $   RGBQUAD black = { 0, 0, 0, 255 };
+
+# 3 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (7):
+
+      5: HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
+      6: {
+=>    7:     return txCreateDIBSection(size.x, size.y, pixels);
+      8: }
+      9: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 16 2022 12:13:57, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 16 2022 12:15:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x00FF3E9C в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 308 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010731B8 (32-bit), Flags: CMdRe0, Thread: 0xC588 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00FF3E9C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (308):
+
+    306:     }
+    307: 
+=>  308:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    309: }
+    310: 
+
+# 1 0x00FF75DD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x0100C147 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (314):
+
+    312: void Canvas::print(HDC _dc)
+    313: {
+=>  314:     draw();
+    315:     Vector outputPos = rect.pos;
+    316:     app->bitBlt(_dc, outputPos, finalDCSize, finalDC);
+
+# 3 0x00FF0AD8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x00FF785D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x010134D5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x010138C7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x00FFA1C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x00FAA3B7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x0103D908 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 16 2022 22:18:15, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 16 2022 22:18:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x00FF3E9C в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 308 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x010731B8 (32-bit), Flags: CMdRe0, Thread: 0xC588 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00FF3E9C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (308):
+
+    306:     }
+    307: 
+=>  308:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    309: }
+    310: 
+
+# 1 0x00FF75DD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x0100C147 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (314):
+
+    312: void Canvas::print(HDC _dc)
+    313: {
+=>  314:     draw();
+    315:     Vector outputPos = rect.pos;
+    316:     app->bitBlt(_dc, outputPos, finalDCSize, finalDC);
+
+# 3 0x00FF0AD8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x00FF785D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x010134D5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x010138C7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x00FFA1C0 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x00FAA3B7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x0103D908 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 16 2022 22:18:15, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 16 2022 22:18:22
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x005D843F в функции operator/() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Vector.h на строке 168 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006A31B8 (32-bit), Flags: CMdRe0, Thread: 0x11A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x005D843F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator/() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Vector.h (168):
+
+    166: inline Vector operator / (const Vector &a, const Vector &b)
+    167: {
+=>  168:     return {.x = a.x / b.x,
+    169:             .y = a.y / b.y
+    170:     };
+
+# 1 0x00623EC6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (301):
+
+    299: 
+    300:             Vector necessaryLaySize = {};
+=>  301:             necessaryLaySize = (finalDCSize / getSize()) * laysSize;
+    302:             app->stretchBlt(finalDC, {}, finalDCSize, finalLay, layStartPos, necessaryLaySize);
+    303:         }
+
+# 2 0x0062771D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 3 0x0063C287 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 4 0x00620D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 5 0x0062799D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 6 0x00643695 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 7 0x00643A87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 8 0x0062A300 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 9 0x005DA607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+#10 0x0066DAC8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:19:39, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:19:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x005D843F в функции operator/() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Vector.h на строке 168 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x006A31B8 (32-bit), Flags: CMdRe0, Thread: 0x11A0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x005D843F in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: operator/() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Q_Vector.h (168):
+
+    166: inline Vector operator / (const Vector &a, const Vector &b)
+    167: {
+=>  168:     return {.x = a.x / b.x,
+    169:             .y = a.y / b.y
+    170:     };
+
+# 1 0x00623EC6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (301):
+
+    299: 
+    300:             Vector necessaryLaySize = {};
+=>  301:             necessaryLaySize = (finalDCSize / getSize()) * laysSize;
+    302:             app->stretchBlt(finalDC, {}, finalDCSize, finalLay, layStartPos, necessaryLaySize);
+    303:         }
+
+# 2 0x0062771D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 3 0x0063C287 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 4 0x00620D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 5 0x0062799D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 6 0x00643695 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 7 0x00643A87 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 8 0x0062A300 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 9 0x005DA607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+#10 0x0066DAC8 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:19:39, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:19:45
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x009B4066 в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A331B8 (32-bit), Flags: CMdRe0, Thread: 0x4440 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x009B4066 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x009B777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x009CC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x009B0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x009B79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x009D36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x009D3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x009BA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0096A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x009FDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:22:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x009B4066 в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00A331B8 (32-bit), Flags: CMdRe0, Thread: 0x4440 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x009B4066 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x009B777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x009CC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x009B0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x009B79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x009D36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x009D3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x009BA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0096A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x009FDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:27, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:22:34
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x007A406B в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008231B8 (32-bit), Flags: CMdRe0, Thread: 0x96C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007A406B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x007A777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x007BC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x007A0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x007A79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x007C36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x007C3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x007AA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0075A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x007EDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:22:57
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x007A406B в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008231B8 (32-bit), Flags: CMdRe0, Thread: 0x96C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007A406B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x007A777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x007BC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x007A0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x007A79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x007C36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x007C3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x007AA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0075A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x007EDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:22:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x007A406B в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008231B8 (32-bit), Flags: CMdRe0, Thread: 0x204C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007A406B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x007A777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x007BC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x007A0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x007A79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x007C36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x007C3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x007AA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0075A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x007EDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:24:02
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: #1: {ИСКЛЮЧЕНИЕ}
+Множественные ловушки с плавающей точкой. (0xC00002B5) при выполнении кода по адресу 0x007A406B в функции Canvas::copyFinalLayOnFinalDC() в файле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp на строке 307 в модуле C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции _set_se_translator() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x008231B8 (32-bit), Flags: CMdRe0, Thread: 0x204C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x007A406B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::copyFinalLayOnFinalDC() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (307):
+
+    305:     }
+    306: 
+=>  307:     printf("(finalDCSize) / getSize()): {%lf, %lf}\n", (finalDCSize.x) / getSize().x, (finalDCSize.y) / getSize().y);
+    308: }
+    309: 
+
+# 1 0x007A777D in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (228):
+
+    226:     drawLays();
+    227:     if (posLastTime != rect.pos) reDraw = true;
+=>  228:     copyFinalLayOnFinalDC();
+    229: 
+    230: 
+
+# 2 0x007BC2E7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Canvas::print() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp (313):
+
+    311: void Canvas::print(HDC _dc)
+    312: {
+=>  313:     draw();
+    314:     Vector outputPos = rect.pos;
+    315:     if (isSmaller(outputPos.x, 0)) outputPos.x = 0;
+
+# 3 0x007A0D28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::controlActiveCanvas() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (117):
+
+    115:         controlPosition();
+    116: 
+=>  117:         getActiveCanvas()->print(finalDC);
+    118:     }
+    119: }
+
+# 4 0x007A79FD in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: CanvasManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp (99):
+
+     97: 
+     98:         controlScaleButtons();
+=>   99:         controlActiveCanvas();
+    100: 
+    101:         drawScaleButtons();
+
+# 5 0x007C36F5 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: standartManagerDraw$() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp (180):
+
+    178:         for (int i = 0; i < manager->getCurLen(); i++)
+    179:         {
+=>  180:             if (manager->pointers[i]->reDraw) manager->pointers[i]->draw();
+    181:             if (manager->pointers[i]->needToShow)
+    182:             {
+
+# 6 0x007C3AE7 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: WindowsLibApi::standartManagerDraw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.cpp (140):
+
+    138: int WindowsLibApi::standartManagerDraw(Manager* manager)
+    139: {
+=>  140:     standartManagerDraw$(manager);
+    141:     return 0;
+    142: }
+
+# 7 0x007AA360 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: MainManager::draw() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.cpp (39):
+
+     37: 
+     38: 
+=>   39:     app->windowsLibApi->standartManagerDraw(this);
+     40: 
+     41:     if (app->systemSettings->debugMode >= 1)printf("Active Window: %p\n", isActiveWindowBelow());
+
+# 8 0x0075A607 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: Engine() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (287):
+
+    285:         {
+    286: 
+=>  287:             manager->draw();
+    288:             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+    289: 
+
+# 9 0x007EDB28 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (194):
+
+    192: 
+    193: 	txBegin ();
+=>  194: 	Engine (manager);
+    195:     saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
+    196:     appData->systemSettings->save("Settings\\FullSettings.settings");
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (198):
+
+    196: void PowerPoint::transparentBlt(HDC dc1, int x0, int y0, int sizex, int sizey, HDC dc2, int xSource/* = 0*/, int ySource/* = 0*/)
+    197: {
+=>  198:     txTransparentBlt(dc1, x0, y0, sizex, sizey, dc2, xSource, ySource, systemSettings->TRANSPARENTCOLOR);
+    199: }
+    200: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 15:22:51, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 15:24:01
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 13660, функция: bool __cdecl TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int),
+
+Сообщение: Параметр "destImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CA61A8 (32-bit), Flags: CMdRe0, Thread: 0x1118 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00C49F4B in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::txBitBlt() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13660)
+
+# 1 0x00C1F636 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::bitBlt() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (188):
+
+    186: void PowerPoint::bitBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource/* = 0*/, double ySource/* = 0*/)
+    187: {
+=>  188:     txBitBlt(dc1, std::lround (x0), std::lround(y0), std::lround(sizex), std::lround(sizey), dc2, std::lround(xSource), std::lround(ySource));
+    189: }
+    190: 
+
+# 2 0x7B363D47 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: TwoOptionsMenu::TwoOptionsMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h (47):
+
+     45: 		//addWindow(&downSlider);
+     46: 		addWindow(&confirmButton);
+=>   47: 		app->compressImage(dc, getSize(), loadManager->loadImage("ContrastMenu.bmp"), {335, 179});
+     48: 	}
+     49: 
+
+# 3 0x7B3634E6 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: KontrastMenu::KontrastMenu() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.h (7):
+
+      5: {
+      6:     KontrastMenu (AbstractAppData* _app, Rect _rect, Vector _firstDomain, Vector _secondDomain) :
+=>    7:         TwoOptionsMenu (_app, _rect, _firstDomain, _secondDomain)
+      8:     {
+      9:         name = "Фильтр контрастности";
+
+# 4 0x7B3D7A40 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter: initDLL() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp (33):
+
+     31:     
+     32: 
+=>   33:     dlldata.addFilter (new KontrastMenu  (app, { .pos = {900, 500}, .finishPos = {1235, 679} }, { -100, 100 }, { -256, 256 }));
+     34:     //dlldata.addFilter (new BrightnessMenu({ .pos = {500, 500}, .finishPos = {835, 679} }, { -100, 100 }, { -256, 256 }, TheApp));
+     35:     return &dlldata;
+
+# 5 0x00C1DB51 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: DLLFiltersManager::addToManager() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFiltersManager.cpp (22):
+
+     20:         if (appData->systemSettings->debugMode) printf("Инструмент добавился в прожку\n");
+     21:         if (!initDll) assert(!"функция не загрузилась");
+=>   22:         DLLExportData* exportData = initDll(appData);
+     23: 
+     24:         for (int j = 0; j < exportData->currlen; j++)
+
+# 6 0x00C6FB41 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (133):
+
+    131:     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
+    132:     dllManager->loadLibs ();
+=>  133:     dllManager->addToManager(manager);
+    134:     if (appData->systemSettings->debugMode >= 0) printf("Фильтры загрузились\n");
+    135: 
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::txBitBlt(struct HDC__ *,double,double,double,double,struct HDC__ *,double,double,unsigned int) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (13660):
+
+  13658:                HDC sourceImage, double xSource /*= 0*/, double ySource /*= 0*/, unsigned operation /*= SRCCOPY*/)
+  13659:     {
+=>13660: $1  if (_TX_HDC_FAILED (destImage))   return false;
+  13661: $   if (_TX_HDC_FAILED (sourceImage)) return false;
+  13662: 
+
+# 1 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (188):
+
+    186: void PowerPoint::bitBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource/* = 0*/, double ySource/* = 0*/)
+    187: {
+=>  188:     txBitBlt(dc1, std::lround (x0), std::lround(y0), std::lround(sizex), std::lround(sizey), dc2, std::lround(xSource), std::lround(ySource));
+    189: }
+    190: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 17:05:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 17:05:47
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10113, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CA61A8 (32-bit), Flags: CMdRE0, Thread: 0x44B4 (Canvas), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BE5B78 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 1 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 8 0x76449357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+# 9 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#10 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#11 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#12 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#14 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#15 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#16 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#17 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#18 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#19 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#20 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#21 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#22 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#23 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#25 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#26 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#27 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#28 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#29 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#30 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#31 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#32 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#33 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#34 0x76435A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#35 0x76451A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#36 0x00BE97F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#37 0x75827EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#38 0x75827FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#39 0x760F6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#40 0x77868FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#41 0x77868FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 3 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 17:05:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 17:06:04
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\WINDOWS\system32
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10110, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CA61A8 (32-bit), Flags: CMdrE0, Thread: 0x44B4 (Canvas), GetLastError(): 18 (Больше файлов не осталось). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BE5A36 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10110)
+# 1 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x00BEEA69 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCleanup() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120)
+# 8 0x00C12B10 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txProcessError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12633)
+# 9 0x00C03235 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10939)
+#10 0x00BE5B78 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+#11 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+#12 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#13 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#15 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#16 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#17 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#18 0x76449357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#19 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#20 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#21 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#22 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#23 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#24 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#25 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#26 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#27 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#28 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#29 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#30 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#31 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#33 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#34 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#35 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#36 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#37 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#38 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#39 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#40 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#41 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#42 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#43 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#44 0x76435A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#45 0x76451A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#46 0x00BE97F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#47 0x75827EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#48 0x75827FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#49 0x760F6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#50 0x77868FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#51 0x77868FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10110):
+
+  10108:     // Освобождаем ресурсы, связанные с окном
+  10109: 
+=>10110: $   if (_txCanvas_RefreshTimer) KillTimer (wnd, _txCanvas_RefreshTimer) asserted;
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in void __cdecl TX::_txCleanup(void) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120):
+
+   9118: 
+   9119: $   if (txWindow())
+=> 9120:         {$ SendNotifyMessage (txWindow(), WM_DESTROY, 0, 0); }
+   9121: 
+   9122: $   _txWaitFor (!txWindow(), 5*_TX_TIMEOUT);
+
+# 3 in const char *__cdecl TX::_txProcessError(const char [],int,const char [],unsigned int,const char [],char *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12564):
+
+  12562: 
+  12563:     if (stkTrace && strstr (stkTrace, ".exe: "))
+=>12564:         {$ fprintf (stderr,    "Стек вызовов:\n\n"
+  12565:                                "%s\n\n"
+  12566:                                "--------------------------------------------------\n",
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 5 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 7 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 8 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 17:05:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 17:06:03
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\WINDOWS\system32
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10113, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CA61A8 (32-bit), Flags: CMdRE0, Thread: 0x1788 (Canvas), GetLastError(): 6 (Неверный дескриптор). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BE5B78 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+# 1 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+# 8 0x76449357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+# 9 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#10 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#11 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#12 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#13 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#14 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#15 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#16 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#17 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#18 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#19 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#20 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#21 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#22 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#23 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#24 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#25 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#26 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#27 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#28 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#29 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#30 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#31 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#32 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#33 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#34 0x76435A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#35 0x76451A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#36 0x00BE97F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#37 0x75827EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#38 0x75827FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#39 0x760F6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#40 0x77868FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#41 0x77868FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113):
+
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+=>10113: $   if (_txCanvas_BackBuf[0]) _txBuffer_Delete (&_txCanvas_BackBuf[0])  asserted;
+  10114: $   _txCanvas_Pixels = NULL;
+  10115: 
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 3 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 5 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 17:05:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 17:05:58
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\WINDOWS\system32
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe, файл: C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h, строка: 10110, функция: bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *),
+
+Сообщение: Обнаружен нулевой или ложный результат.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00CA61A8 (32-bit), Flags: CMdrE0, Thread: 0x1788 (Canvas), GetLastError(): 18 (Больше файлов не осталось). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00BE5A36 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10110)
+# 1 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+# 2 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+# 3 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 4 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+# 5 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+# 6 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+# 7 0x00BEEA69 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCleanup() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120)
+# 8 0x00C12B10 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txProcessError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12633)
+# 9 0x00C03235 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txError() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10939)
+#10 0x00BE5B78 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_OnDESTROY() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10113)
+#11 0x00BEA704 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012)
+#12 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#13 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#14 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#15 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#16 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#17 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#18 0x76449357 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#19 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#20 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#21 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#22 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#23 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#24 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#25 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#26 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#27 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#28 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#29 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#30 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#31 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#32 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#33 0x76436BDA in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#34 0x7643FAAF in C:\WINDOWS\System32\USER32.dll: IsRectEmpty()
+#35 0x7787719C in C:\WINDOWS\SYSTEM32\ntdll.dll: KiUserCallbackDispatcher()
+#36 0x7644D7B0 in C:\WINDOWS\System32\USER32.dll: UnionRect()
+#37 0x731190B2 in C:\WINDOWS\system32\uxtheme.dll: IsThemeActive()
+#38 0x7311B742 in C:\WINDOWS\system32\uxtheme.dll: OpenThemeData()
+#39 0x7312C5F8 in C:\WINDOWS\system32\uxtheme.dll: GetThemeBackgroundRegion()
+#40 0x76449346 in C:\WINDOWS\System32\USER32.dll: DefMDIChildProcA()
+#41 0x00BEAF11 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_WndProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051)
+#42 0x76457C92 in C:\WINDOWS\System32\USER32.dll: AddClipboardFormatListener()
+#43 0x7643714A in C:\WINDOWS\System32\USER32.dll: CallWindowProcW()
+#44 0x76435A78 in C:\WINDOWS\System32\USER32.dll: DispatchMessageW()
+#45 0x76451A20 in C:\WINDOWS\System32\USER32.dll: DispatchMessageA()
+#46 0x00BE97F9 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: TX::_txCanvas_ThreadProc() at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795)
+#47 0x75827EE5 in C:\WINDOWS\System32\msvcrt.dll: beginthreadex()
+#48 0x75827FB1 in C:\WINDOWS\System32\msvcrt.dll: endthreadex()
+#49 0x760F6739 in C:\WINDOWS\System32\KERNEL32.dll: BaseThreadInitThunk()
+#50 0x77868FEF in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+#51 0x77868FBD in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlGetFullPathName_UEx()
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in bool __cdecl TX::_txCanvas_OnDESTROY(struct HWND__ *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10110):
+
+  10108:     // Освобождаем ресурсы, связанные с окном
+  10109: 
+=>10110: $   if (_txCanvas_RefreshTimer) KillTimer (wnd, _txCanvas_RefreshTimer) asserted;
+  10111: 
+  10112: $   if (_txCanvas_BackBuf[1]) _txBuffer_Delete (&_txCanvas_BackBuf[1])  asserted;
+
+# 1 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 2 in void __cdecl TX::_txCleanup(void) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9120):
+
+   9118: 
+   9119: $   if (txWindow())
+=> 9120:         {$ SendNotifyMessage (txWindow(), WM_DESTROY, 0, 0); }
+   9121: 
+   9122: $   _txWaitFor (!txWindow(), 5*_TX_TIMEOUT);
+
+# 3 in const char *__cdecl TX::_txProcessError(const char [],int,const char [],unsigned int,const char [],char *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (12564):
+
+  12562: 
+  12563:     if (stkTrace && strstr (stkTrace, ".exe: "))
+=>12564:         {$ fprintf (stderr,    "Стек вызовов:\n\n"
+  12565:                                "%s\n\n"
+  12566:                                "--------------------------------------------------\n",
+
+# 4 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10012):
+
+  10010: 
+  10011:         case WM_CLOSE:          {$ if (_txCanvas_OnCLOSE      (wnd))  break;       else return 0; }
+=>10012:         case WM_DESTROY:        {$     _txCanvas_OnDESTROY    (wnd);                    return 0; }
+  10013: 
+  10014:         case WM_ERASEBKGND:     {$ if (!bkErased) { bkErased = true;  break; }     else return 1; }
+
+# 5 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 6 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 7 in long __stdcall TX::_txCanvas_WndProc(struct HWND__ *,unsigned int,unsigned int,long) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (10051):
+
+  10049:         }
+  10050: 
+=>10051: $   return DefWindowProc (wnd, msg, wpar, lpar);
+  10052:     }
+  10053: 
+
+# 8 in unsigned int __stdcall TX::_txCanvas_ThreadProc(void *) at C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h (9795):
+
+   9793: 
+   9794: $       TranslateMessage (&msg);
+=> 9795: $       DispatchMessage  (&msg);
+   9796: 
+   9797: $       Sleep (0);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 17 2022 17:05:40, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 17 2022 17:05:59
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\WINDOWS\system32
+
+--------------------------------------------------

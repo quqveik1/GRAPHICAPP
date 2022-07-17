@@ -1,28 +1,48 @@
 ﻿  dllmain.cpp
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.h(54,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,77): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,59): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,41): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(16,29): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(52,67): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(52,52): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(54,62): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\WindowsLib.cpp(54,44): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(28,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(33,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(38,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(17,32): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(23,21): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(28,23): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(33,22): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(62,46): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(63,50): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(64,48): warning C4244: =: преобразование "double" в "BYTE", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(76,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(81,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(86,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(101,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(106,12): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\DLLFilters\dllmain.cpp(111,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
-     Создается библиотека C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.lib и объект C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.exp
-  DLLFilters.vcxproj -> C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\DLLFilters.filter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,63): warning C4100: 'output': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,52): warning C4100: 'lay': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,37): warning C4100: 'data': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(94,44): warning C4100: 'dc': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(94,31): warning C4100: 'toollay': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(95,45): warning C4100: 'dc': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(95,32): warning C4100: 'toollay': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(54,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(141,33): warning C4100: 'mp': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(72,41): warning C4100: 'coordinatsWithHandle': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(36,79): warning C4100: 'secondDomain': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.h(36,59): warning C4100: 'firstDomain': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\TwoOptionsMenu.cpp(70,10): warning C4189: 'nonConfirm': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(28,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(29,28): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(33,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(34,30): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(38,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\KontrastMenu.cpp(39,29): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.h(5,116): warning C4100: '_data': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(17,32): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(23,21): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(24,28): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(28,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(29,30): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(33,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\BrightnessFilter.cpp(34,29): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(11,31): warning C4100: 'lpReserved': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(9,32): warning C4100: 'hModule': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(62,46): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(63,50): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(64,48): warning C4244: '=': conversion from 'double' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(76,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(77,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(81,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(82,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(86,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(87,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(101,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(102,17): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(106,12): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(107,19): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(111,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(112,18): warning C4244: '=': conversion from 'int' to 'BYTE', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DLLFilters\dllmain.cpp(94,75): warning C4100: 'SecondValue': unreferenced formal parameter
+     Creating library C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.lib and object C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.exp
+  DLLFilters.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\DLLFilters.filter

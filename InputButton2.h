@@ -29,9 +29,9 @@ struct InputButton2 : StringButton2
 
     void setParameter(int* newParameter);
 
-    virtual bool isSymbolAllowed(int symbol);
-    virtual void modifyOutput(char* outputStr, char* originalStr);
-    virtual void confirmEnter();
-    virtual void doBeforeMainBlock();
-    virtual void doAfterMainBlock();
+    virtual bool isSymbolAllowed(char symbol) override;
+    virtual void modifyOutput(char* outputStr, char* originalStr) override;
+    virtual void confirmEnter() override;
+    virtual void doBeforeMainBlock() override;
+    virtual void doAfterMainBlock() override;
 };
