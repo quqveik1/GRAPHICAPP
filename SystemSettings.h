@@ -46,12 +46,21 @@ struct CSystemSettings
     int DCMAXSIZE = NULL;
     Vector DCVECTORSIZE = {};
 
-    int save(const char* path);
     int read(const char* path);
+    int readUserSettings(const char* path);
+    void setDynamicSettings(struct AbstractAppData* _app);
+    void setDefaultSettings();
+
+
+    int save(const char* path);
+    int saveUserSettings(const char* path);
+    
+    
 
     int byteSize = sizeof(*this);
 
     CSystemSettings(struct AbstractAppData* _app);
+    ~CSystemSettings();
 };
 
 
@@ -59,7 +68,7 @@ void setDynamicSystemSettings(CSystemSettings* systemSettings);
 
 void setDefaultSystemSettings(CSystemSettings* systemSettings);
 
-void setSystemSettings(CSystemSettings* systemSettings, const char* path);
+void setUserSystemSettings(CSystemSettings* systemSettings, const char* path);
 
 void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void setIntSettings(FILE* ssFile, int* integer, const char* name);
@@ -67,7 +76,7 @@ void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
 void setStringSettings(FILE* ssFile, char* str, const char* name);
 
 
-int saveSystemSettings(CSystemSettings* systemSettings, const char* path);
+int saveUserAbleSystemSettings(CSystemSettings* systemSettings, const char* path);
 
 void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void saveIntSettings(FILE* ssFile, int* integer, const char* name);

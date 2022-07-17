@@ -1,8 +1,17 @@
 #pragma once
 #include "AbstractApp.h"
+#include "FileSavings.h"
 
 struct PowerPoint : AbstractAppData
 {
+
+    CSystemSettings SystemSettings;
+    CToolManager ToolManager;
+    CLoadManager LoadManager;
+    CWindowsLibApi WindowsLibApi;
+    CFileSavings FileSavings;
+
+
     HCURSOR activeCursor = NULL;
     int lastTimeCursorSetTime = NULL;
     Vector sizeHistory[2] = {};
@@ -80,4 +89,6 @@ struct PowerPoint : AbstractAppData
 
     virtual void controlApp();
 
+    PowerPoint();
+    ~PowerPoint();
 };

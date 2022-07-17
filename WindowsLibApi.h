@@ -7,7 +7,7 @@ struct Window;
 struct Manager;
 
 
-struct WindowsLibApi
+struct CWindowsLibApi
 {
     virtual void resize(Window* window, Rect newRect);
     virtual void resize(Window* window, Vector newSize);

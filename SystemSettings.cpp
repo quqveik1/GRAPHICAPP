@@ -6,6 +6,18 @@
 CSystemSettings::CSystemSettings(struct AbstractAppData* _app) :
     app (_app)
 {
+    setDefaultSettings();
+    read("Settings\\FullSettings.settings");
+    setDynamicSettings(_app);
+    readUserSettings("Settings\\Settings.txt");
+    
+}
+
+
+CSystemSettings::~CSystemSettings()
+{
+    save("Settings\\FullSettings.settings");
+    saveUserSettings("Settings\\Settings.txt");
 }
 
 int CSystemSettings::save(const char* path)
@@ -23,18 +35,47 @@ int CSystemSettings::save(const char* path)
     return 0;
 }
 
+int CSystemSettings::saveUserSettings(const char* path)
+{
+    assert(path);
+    FILE* ssFile = fopen(path, "w");
+    if (!ssFile)
+    {
+        printf("Сохранение всех данных не прошло||Errno: %d\n", errno);
+        return (int)ssFile;
+    }
+
+    saveIntSettings(ssFile, &MainFont, "MainFont");
+    saveStringSettings(ssFile, FONTNAME, "FONTNAME");
+
+    saveIntSettings(ssFile, &debugMode, "debugMode");
+
+    saveIntSettings(ssFile, &DrawingMode, "DrawingMode");
+    saveIntSettings(ssFile, &Thickness, "Thickness");
+
+    saveIntSettings(ssFile, &WindowStyle, "WindowStyle");
+
+    saveDoubleSettings(ssFile, &SizeOfScreen.x, "SizeOfScreen.x");
+    saveDoubleSettings(ssFile, &SizeOfScreen.y, "SizeOfScreen.y");
+
+    fclose(ssFile);
+
+    return (int)ssFile;
+}
+
+
 
 int CSystemSettings::read(const char* path)
 {
     if (_access(path, 0) == -1) return 1;
     FILE* ssFile = fopen(path, "rb");
-    if (!ssFile)
+    if (!ssFile || !app->needToLoadOldFiles())
     {
         printf("Файл не открылся\n");
         return 1;
     }
 
-    if (app->needToLoadOldFiles())(void)fread(this, sizeof(char), byteSize, ssFile);
+    (void)fread(this, sizeof(char), byteSize, ssFile);
 
     fclose(ssFile);
 
@@ -43,87 +84,84 @@ int CSystemSettings::read(const char* path)
     return 0;
 }
 
-
-void setDynamicSystemSettings(CSystemSettings* systemSettings)
+int CSystemSettings::readUserSettings(const char* path)
 {
-    systemSettings->FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
+    assert(path);
+    FILE* ssFile = fopen(path, "r");
+    if (!ssFile || !app->needToLoadOldFiles())
+    {
+        printf("Системные настройки не загрузили\n");
+        return 1;
+    }
+    setIntSettings(ssFile, &MainFont, "MainFont");
+    setStringSettings(ssFile, FONTNAME, "FONTNAME");
+
+    setIntSettings(ssFile, &debugMode, "debugMode");
+
+    setIntSettings(ssFile, &DrawingMode, "DrawingMode");
+    setIntSettings(ssFile, &Thickness, "Thickness");
+
+    setIntSettings(ssFile, &WindowStyle, "WindowStyle");
+
+    setDoubleSettings(ssFile, &SizeOfScreen.x, "SizeOfScreen.x");
+    setDoubleSettings(ssFile, &SizeOfScreen.y, "SizeOfScreen.y");
+
+    fclose(ssFile);
+    
+    return 0;
+
 }
 
 
-
-void setDefaultSystemSettings(CSystemSettings* systemSettings)
+void CSystemSettings::setDefaultSettings()
 {
-    if (!systemSettings)
+    if (!this)
     {
         printf("systemSettings не существует дефолтные параметры не установились.\n");
         return;
     }
-    setDynamicSystemSettings(systemSettings);
+    setDynamicSettings(app);
 
-    systemSettings->MenuColor = RGB(45, 45, 45);
-    systemSettings->SecondMenuColor = RGB(30, 30, 30);
-    systemSettings->TextColor = RGB(255, 255, 255);
-    systemSettings->BackgroundColor = RGB(0, 0, 0);
-    systemSettings->DrawColor = RGB(128, 0, 0);
-    systemSettings->TRANSPARENTCOLOR = RGB(57, 57, 57);
+    MenuColor = RGB(45, 45, 45);
+    SecondMenuColor = RGB(30, 30, 30);
+    TextColor = RGB(255, 255, 255);
+    BackgroundColor = RGB(0, 0, 0);
+    DrawColor = RGB(255, 0, 0);
+    TRANSPARENTCOLOR = RGB(57, 57, 57);
 
-    systemSettings->ONELAYTOOLSLIMIT = 100;
+    ONELAYTOOLSLIMIT = 100;
 
-    systemSettings->MainFont = 20;
-    strcpy (systemSettings->FONTNAME, "Arial");
-    systemSettings->TEXTFORMAT = 262165;
+    MainFont = 20;
+    strcpy(FONTNAME, "Arial");
+    TEXTFORMAT = 262165;
 
-    systemSettings->HANDLEHEIGHT = 26.000000;
-    systemSettings->BUTTONWIDTH = 50.000000;
-    systemSettings->BUTTONHEIGHT = 50.000000;
-    systemSettings->MENUBUTTONSWIDTH = 50.000000;
-    systemSettings->SIDETHICKNESS = 2.000000;
-    systemSettings->SCROLLBARTHICKNESS = 20.000000;
-    systemSettings->FrameThickness = 5;
+    HANDLEHEIGHT = 26.000000;
+    BUTTONWIDTH = 50.000000;
+    BUTTONHEIGHT = 50.000000;
+    MENUBUTTONSWIDTH = 50.000000;
+    SIDETHICKNESS = 2.000000;
+    SCROLLBARTHICKNESS = 20.000000;
+    FrameThickness = 5;
 
-    systemSettings->debugMode = 1;
+    debugMode = -1;
 
-    systemSettings->DrawingMode = 1;
+    DrawingMode = 1;
 
-    systemSettings->SizeOfScreen.x = 1000.000000;
-    systemSettings->SizeOfScreen.y = 800.000000;
+    SizeOfScreen.x = 1280.000000;
+    SizeOfScreen.y = 720.000000;
 
-    systemSettings->WindowStyle = -2134376448;
+    WindowStyle = -2146959360;
 
-    systemSettings->DCMAXSIZE = 1000;
+    DCMAXSIZE = 1000;
 
-    systemSettings->DCVECTORSIZE.x = 1000.000000;
-    systemSettings->DCVECTORSIZE.y = 1000.000000;
-
+    DCVECTORSIZE.x = 1000.000000;
+    DCVECTORSIZE.y = 1000.000000;
 }
 
-
-
-
-
-void setSystemSettings(CSystemSettings* systemSettings, const char* path)
+void CSystemSettings::setDynamicSettings(struct AbstractAppData* _app)
 {
-    assert(path);
-    FILE* ssFile = fopen(path, "r");
-    if (!ssFile)
-    {
-        printf("Системные настройки не загрузили\n");
-        return;
-    }
-    setIntSettings(ssFile, &systemSettings->MainFont,    "MainFont");
-    setStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
-
-    setIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
-
-    setIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
-    setIntSettings(ssFile, &systemSettings->Thickness, "Thickness");
-    
-    setIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
-
-    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
-    setDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
-
-    fclose(ssFile);
+    FullSizeOfScreen = { .x = (double)GetSystemMetrics(SM_CXSCREEN), .y = (double)GetSystemMetrics(SM_CYSCREEN) };
+    app = _app;
 }
 
 
@@ -197,36 +235,6 @@ void setStringSettings(FILE* ssFile, char* str, const char* name)
         }
     }
     strcpy (str, finalStr);
-}
-
-
-
-int saveSystemSettings(CSystemSettings* systemSettings, const char* path)
-{
-    assert(path);
-    FILE* ssFile = fopen(path, "w");
-    if (!ssFile)
-    {
-        printf("Сохранение всех данных не прошло||Errno: %d\n", errno);
-        return (int)ssFile; 
-    }
-
-    saveIntSettings(ssFile, &systemSettings->MainFont, "MainFont");
-    saveStringSettings(ssFile, systemSettings->FONTNAME, "FONTNAME");
-
-    saveIntSettings(ssFile, &systemSettings->debugMode, "debugMode");
-
-    saveIntSettings(ssFile, &systemSettings->DrawingMode, "DrawingMode");
-    saveIntSettings(ssFile, &systemSettings->Thickness, "Thickness");
-
-    saveIntSettings(ssFile, &systemSettings->WindowStyle, "WindowStyle");
-
-    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.x, "SizeOfScreen.x");
-    saveDoubleSettings(ssFile, &systemSettings->SizeOfScreen.y, "SizeOfScreen.y");
-    
-    fclose(ssFile);
-
-    return (int)ssFile;
 }
 
 

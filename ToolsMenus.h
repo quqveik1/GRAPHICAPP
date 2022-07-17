@@ -43,11 +43,12 @@ struct ToolMenu : Menu
     struct CanvasManager* canvasManager = NULL;
     HDC emptyToolDC = NULL;
 
-    ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager, CLoadManager* _loadManager) :
+    ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager) :
         Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x - 5, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, {}, _app->systemSettings->ONELAYTOOLSLIMIT, true),
         canvasManager(_canvasManager)
     {
-        loadManager = _loadManager;
+        assert(app);
+        loadManager = app->loadManager;;
         emptyToolDC = loadManager->loadImage("addToolButton2.bmp");
 
 

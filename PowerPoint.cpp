@@ -39,59 +39,12 @@
 
 
 void Engine (MainManager* manager);
-LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
-void printfDCS (const char *str = "");
-bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
-    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
-bool checkVersionCompability(PowerPoint* app);
-void writeVersion(PowerPoint* app);
 
-
-PowerPoint* appData = new PowerPoint;
 
 
 int main (int argc, int *argv[])
 {
-    appData->appVersion = "v0.1.7.6";
-    if (_mkdir("Settings") == -1)
-    {
-        if (errno == ENOENT) massert(!"Папка Settings не создалась", appData);
-    }
-
-    CSystemSettings SystemSettings (appData);
-    appData->systemSettings = &SystemSettings;
-
-    CToolManager ToolManager;
-    appData->toolManager = &ToolManager;
-
-    CLoadManager LoadManager(appData);
-    appData->loadManager = &LoadManager;
-
-    WindowsLibApi windowsLib;
-    appData->windowsLibApi = &windowsLib;
-
-    CFileSavings FileSavings;
-    FileSavings.add("Settings\\FullSettings.settings");
-    FileSavings.add("Settings\\ColorHistory.history");
-    appData->fileSavings = &FileSavings;
-    
-    appData->currColor = &SystemSettings.DrawColor;
-
-    setDefaultSystemSettings(appData->systemSettings);
-
-    appData->filesCompability = checkVersionCompability(appData);
-    
-    appData->systemSettings->read("Settings\\FullSettings.settings");
-    setSystemSettings(appData->systemSettings, "Settings\\Settings.txt");  
-    setDynamicSystemSettings(appData->systemSettings);
-
-
-    _txWindowStyle = appData->systemSettings->WindowStyle;
-    _txSwapBuffers = swapDC;
-    txSetWindowsHook(CtrlWindowFunc);
-    appData->MAINWINDOW = txCreateWindow (appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->FullSizeOfScreen.y);
-
-    appData->changeWindow(appData->systemSettings->SizeOfScreen, appData->systemSettings->ScreenPos);;
+    appData = new PowerPoint;
     
     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
 
@@ -108,14 +61,14 @@ int main (int argc, int *argv[])
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты начали загружаться\n");
     DLLToolsManager* dllToolsManager = new DLLToolsManager(appData, "Settings\\DLLPathList.txt");
     dllToolsManager->loadLibs();
-    dllToolsManager->addToManager(&ToolManager);
+    dllToolsManager->addToManager(appData->toolManager);
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты загрузились\n");
     
 
-	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {5, 100}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, (double)ToolManager.currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, ToolManager.currentLength);
+	ToolsPalette *toolsPallette = new ToolsPalette(appData, {.pos = {5, 100}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, (double)appData->toolManager->currentLength * 50 + appData->systemSettings->HANDLEHEIGHT + 100}}, appData->toolManager->currentLength);
     manager->addWindow(toolsPallette);
 
-    ToolMenu* toolMenu = new ToolMenu(appData, canvasManager, &LoadManager);
+    ToolMenu* toolMenu = new ToolMenu(appData, canvasManager);
     manager->addWindow(toolMenu);   
 
     LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, 800} }, canvasManager);
@@ -136,7 +89,7 @@ int main (int argc, int *argv[])
 
     mainhandle;
 
-		CloseButton* closeButton = new CloseButton(appData, LoadManager.loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton(appData, appData->loadManager->loadImage("CloseButton4.bmp"));
 		mainhandle->addWindowToBack(closeButton);
 
         ResizeButton* resizeButton = new ResizeButton(appData);
@@ -145,12 +98,12 @@ int main (int argc, int *argv[])
         MinimizeWindow* minimizeButton = new MinimizeWindow(appData);
         mainhandle->addWindowToBack(minimizeButton);
 
-        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, LoadManager.loadImage ("AddNewCanvas2.bmp"), canvasManager);
+        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, appData->loadManager->loadImage ("AddNewCanvas2.bmp"), canvasManager);
 		mainhandle->addWindowToStart(addNewCanvas);
         SetCanvasButton* setCanvasButton = addNewCanvas->getSetCanvasButton();
     manager->addWindow(setCanvasButton);
 
-        OpenHandleMenuManager* openWindowsManager = new OpenHandleMenuManager(appData, LoadManager.loadImage("OpenWindows.bmp"));
+        OpenHandleMenuManager* openWindowsManager = new OpenHandleMenuManager(appData, appData->loadManager->loadImage("OpenWindows.bmp"));
         mainhandle->addWindowToStart(openWindowsManager);
         List* openWindows = new List(appData, { openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 6);
         openWindowsManager->setOpeningManager(openWindows);
@@ -168,7 +121,7 @@ int main (int argc, int *argv[])
                     filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
                 }
 
-        OpenHandleMenuManager* openSystemList = new OpenHandleMenuManager(appData, LoadManager.loadImage("SettingsIcon.bmp"));
+        OpenHandleMenuManager* openSystemList = new OpenHandleMenuManager(appData, appData->loadManager->loadImage("SettingsIcon.bmp"));
         mainhandle->addWindowToStart(openSystemList);
         List* systemList = new List(appData, { openSystemList->rect.pos.x, openSystemList->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
         openSystemList->setOpeningManager(systemList);
@@ -178,60 +131,14 @@ int main (int argc, int *argv[])
 
 	txBegin ();
 	Engine (manager);
-    saveSystemSettings(appData->systemSettings, "Settings\\Settings.txt");
-    appData->systemSettings->save("Settings\\FullSettings.settings");
+
     menu->saveMenu();
-    writeVersion(appData);
     delete manager;
+    delete appData;
 	txEnd ();
     txDisableAutoPause();
     
 	return 0;
-}
- 
-
-void writeVersion(PowerPoint* app)
-{
-    assert(app);
-    FILE* versionFile = fopen("Settings\\Version.txt", "w");
-
-    if (versionFile)
-    {
-        fprintf(versionFile, "%s", app->appVersion);
-    }
-    if (versionFile)fclose(versionFile);
-}
-
-
-bool checkVersionCompability(PowerPoint* app)
-{
-    assert(app);
-    bool needLoadSaves = false;
-    FILE* versionFile = fopen("Settings\\Version.txt", "r");
-   
-    if (versionFile)
-    {
-        char versionName[MAX_PATH] = {};
-        (void)fscanf(versionFile, "%s", versionName);
-        int result = strcmp(app->appVersion, versionName);
-        if (result == 0) needLoadSaves = true;
-    }
-
-    if (versionFile) fclose(versionFile);
-    return needLoadSaves;
-}
-
-
-LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    if (message == WM_SETCURSOR)
-    {
-        if (appData->activeCursor)
-        {
-            SetClassLongPtr(window, GCLP_HCURSOR, (LONG_PTR)appData->activeCursor);
-        }
-    }
-    return 0;
 }
 
 
@@ -277,23 +184,21 @@ void Engine (MainManager *manager)
             if (txMouseButtons())
             {
                 manager->onClick(mp);
-                if (!app->IsRunning) break;
             }
             txSleep(0);
+        }
+
+        if (!app->IsRunning)
+        {
+            break;
         }
 	}
 
     ShowWindow(app->MAINWINDOW, SW_HIDE);
-
-    app->loadManager->deleteAllImages();
 }
 
 
-bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
-    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp)
-{
-    return txBitBlt(dest, 0, 0, wDest, hDest, src);
-}
+
 
 
 

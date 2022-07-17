@@ -1,7 +1,7 @@
 #include "WindowsLibApi.h"
 #include "DrawBibliothek.cpp"
 
-void WindowsLibApi::resize(Window* window, Rect newRect)
+void CWindowsLibApi::resize(Window* window, Rect newRect)
 {
     if (window->systemSettings->debugMode >= 2) printf("newRect {%lf, %lf}; {%lf, %lf}\n", newRect.pos.x, newRect.pos.y, newRect.finishPos.x, newRect.finishPos.y);
     if (isBigger (newRect.getSize().x, 0) && isBigger (newRect.getSize().y, 0))
@@ -20,14 +20,14 @@ void WindowsLibApi::resize(Window* window, Rect newRect)
 }
 
 
-void WindowsLibApi::resize(Window* window, Vector newSize)
+void CWindowsLibApi::resize(Window* window, Vector newSize)
 {
     resize(window, { .pos = window->rect.pos, .finishPos = window->rect.pos + newSize });
 }
 
 
 
-bool WindowsLibApi::addWindow(Manager* manager, Window* window)
+bool CWindowsLibApi::addWindow(Manager* manager, Window* window)
 {
     if (!window)
     {
@@ -49,7 +49,7 @@ bool WindowsLibApi::addWindow(Manager* manager, Window* window)
 }
 
 
-int WindowsLibApi::clickHandle(Manager* manager)
+int CWindowsLibApi::clickHandle(Manager* manager)
 {
     if (manager->handle.rect.inRect(manager->getMousePos()))
     {
@@ -62,7 +62,7 @@ int WindowsLibApi::clickHandle(Manager* manager)
 }
 
 
-Vector WindowsLibApi::getAbsCoordinats(Window* window, bool coordinatsWithHandle /*=false*/)
+Vector CWindowsLibApi::getAbsCoordinats(Window* window, bool coordinatsWithHandle /*=false*/)
 {
 
     Vector coordinats = {};
@@ -86,7 +86,7 @@ Vector WindowsLibApi::getAbsCoordinats(Window* window, bool coordinatsWithHandle
 }
 
 
-Window* WindowsLibApi::isActiveWindowBelow(Manager* manager)
+Window* CWindowsLibApi::isActiveWindowBelow(Manager* manager)
 {
     if (manager->getActiveWindow() == manager) return manager;
     for (int i = 0; i < manager->getCurLen(); i++)
@@ -99,7 +99,7 @@ Window* WindowsLibApi::isActiveWindowBelow(Manager* manager)
 }
 
 
-void WindowsLibApi::controlHandle(Manager* manager)
+void CWindowsLibApi::controlHandle(Manager* manager)
 {
     gassert(manager);
     if (manager)
@@ -125,7 +125,7 @@ void WindowsLibApi::controlHandle(Manager* manager)
 }
 
 
-void WindowsLibApi::screenChanged(Manager* manager)
+void CWindowsLibApi::screenChanged(Manager* manager)
 {
     for (int i = 0; i < manager->getCurLen(); i++)
     {
@@ -133,20 +133,20 @@ void WindowsLibApi::screenChanged(Manager* manager)
     }
 }
 
-int WindowsLibApi::standartWindowDraw(struct Window* window)
+int CWindowsLibApi::standartWindowDraw(struct Window* window)
 {
     standartDraw$(window);
     return 0;
 }
 
-int WindowsLibApi::standartManagerDraw(Manager* manager)
+int CWindowsLibApi::standartManagerDraw(Manager* manager)
 {
     standartManagerDraw$(manager);
     return 0;
 }
 
 
-int WindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
+int CWindowsLibApi::standartManagerOnClick(Manager* manager, Vector mp)
 {
     return standartManagerOnClick$(manager, mp);
 }

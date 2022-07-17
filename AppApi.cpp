@@ -1,6 +1,135 @@
 #pragma once
 #include "AppApi.h"
 #include "DrawBibliothek.cpp"
+#include "SystemSettings.cpp"
+#include "FileSavings.cpp"
+
+PowerPoint* appData = NULL;
+
+
+void setWindowParameters(PowerPoint* app);
+bool checkVersionCompability(PowerPoint* app);
+void writeVersion(PowerPoint* app);
+bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
+    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
+LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
+
+
+PowerPoint::PowerPoint() :
+    SystemSettings (this),
+    ToolManager (),
+    LoadManager (this),   
+    WindowsLibApi (),
+    FileSavings ()
+{
+    appVersion = "v0.1.7.9";
+    defaultCursor = LoadCursor(NULL, IDC_ARROW);
+    appIcon = LoadIcon(NULL, "Icon.ico");
+
+    if (_mkdir("Settings") == -1)
+    {
+        if (errno == ENOENT) massert(!"Папка Settings не создалась", this);
+    }
+
+    filesCompability = checkVersionCompability(this);
+
+    systemSettings = &SystemSettings;
+
+    toolManager = &ToolManager;
+
+    loadManager = &LoadManager;
+
+    windowsLibApi = &WindowsLibApi;
+
+    fileSavings = &FileSavings;
+
+    currColor = &SystemSettings.DrawColor;
+
+    setWindowParameters(this);
+}
+
+PowerPoint::~PowerPoint()
+{
+    appData->loadManager->deleteAllImages();
+    writeVersion(appData);
+}
+
+void writeVersion(PowerPoint* app)
+{
+    assert(app);
+    FILE* versionFile = fopen("Settings\\Version.txt", "w");
+
+    if (versionFile)
+    {
+        fprintf(versionFile, "%s", app->appVersion);
+    }
+    if (versionFile)fclose(versionFile);
+}
+
+LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    if (appData)
+    {
+        if (message == WM_SETCURSOR)
+        {
+            if (appData->activeCursor)
+            {
+                SetClassLongPtr(window, GCLP_HCURSOR, (LONG_PTR)appData->activeCursor);
+            }
+        }
+
+        if (message == WM_CLOSE)
+        {
+            appData->IsRunning = false;
+        }
+    }
+    
+    return 0;
+}
+
+bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
+    HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp)
+{
+    return txBitBlt(dest, 0, 0, wDest, hDest, src);
+}
+
+bool checkVersionCompability(PowerPoint* app)
+{
+    assert(app);
+    bool needLoadSaves = false;
+    FILE* versionFile = fopen("Settings\\Version.txt", "r");
+
+    if (versionFile)
+    {
+        char versionName[MAX_PATH] = {};
+        (void)fscanf(versionFile, "%s", versionName);
+        if (app->appVersion)
+        {
+            int result = strcmp(app->appVersion, versionName);
+            if (result == 0) needLoadSaves = true;
+        }
+    }
+
+    if (versionFile) fclose(versionFile);
+    return needLoadSaves;
+}
+
+void setWindowParameters(PowerPoint* app)
+{
+    assert(app);
+    _txWindowStyle = app->systemSettings->WindowStyle;
+    _txSwapBuffers = swapDC;
+    txSetWindowsHook(CtrlWindowFunc);
+
+    app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    assert(app->MAINWINDOW);
+    app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+
+    char handleName[MAX_PATH] = {};
+    (void)sprintf(handleName, "IMRED - %s[TXLib]", app->appVersion);
+    SetWindowText(app->MAINWINDOW, handleName);
+    SendMessage(app->MAINWINDOW, WM_SETICON, ICON_BIG, (LPARAM)app->appIcon);
+}
 
 HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
 {

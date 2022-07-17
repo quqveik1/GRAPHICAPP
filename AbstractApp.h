@@ -7,6 +7,7 @@ struct AbstractAppData
 {
     const char* appVersion = NULL;
     HWND MAINWINDOW = NULL;
+    HICON appIcon = NULL;
 
     bool filesCompability = true;
 
@@ -15,13 +16,13 @@ struct AbstractAppData
     struct CLoadManager* loadManager = NULL;
     struct CFileSavings* fileSavings = NULL;
     struct CanvasManager* canvasManager = NULL;
-    struct WindowsLibApi* windowsLibApi = NULL;
+    struct CWindowsLibApi* windowsLibApi = NULL;
 
     COLORREF* currColor = NULL;
     bool isResized = false;
     bool IsRunning = true;
     bool isShowing = true;;
-    HCURSOR defaultCursor = LoadCursor(NULL, IDC_ARROW);
+    HCURSOR defaultCursor = NULL;
 
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1) = 0;
     virtual int getColorComponent(COLORREF color, COLORREF component) = 0;
