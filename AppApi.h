@@ -61,6 +61,7 @@ struct PowerPoint : AbstractAppData
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS)  override;
     virtual void drawText(Rect rect, const char text[], HDC dc,
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS)  override;
+    virtual Vector getTextExtent(const char* text, HDC finalDC) override;
 
     virtual void selectFont(const char* text, int sizey, HDC& dc, int sizex = -1) override;
     virtual void setAlign(unsigned align, HDC dc) override;
@@ -75,7 +76,7 @@ struct PowerPoint : AbstractAppData
     virtual void drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness) override;
     virtual void drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness) override;
 
-    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) override;
+    
 
     virtual void changeWindow(Vector size = {}, Vector pos = {})  override;
     virtual void setCursor(HCURSOR cursor) override;
@@ -86,6 +87,9 @@ struct PowerPoint : AbstractAppData
 
     virtual bool isFullScreen() override;
     virtual Rect getUserRect() override;
+
+    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) override;
+    void shiftArrBack(char* arr, int oneItemSize, int firstPosOfShifting, int finishPosOfShifting) override;
 
     virtual void controlApp();
 

@@ -5,11 +5,12 @@ struct CanvasManager : Manager
 {
     int activeCanvasNum = -1;
     bool addNewCanvas = false;
-    Vector newCanvasWindowSize = { 1000, 600 };
-    int canvasesLength = 0;
+    int currentCanvasesLength = 0;
     Canvas* canvases[10] = {};
     Rect tabs[10] = {};
     Vector oneTabSize = {};
+    Vector tabCrossSize = { 25, 25 };
+    HDC tabCross = NULL;
     
     int intScale = 0;
     int minScale = 0;
@@ -30,6 +31,7 @@ struct CanvasManager : Manager
     CanvasManager(AbstractAppData* _app);
 
     virtual Canvas* getActiveCanvas();
+    virtual int getActiveCanvasNum();
     virtual bool addCanvas(const char* name, Vector dcSize);
 
     virtual int setDrawingMode(int num);
@@ -43,6 +45,8 @@ struct CanvasManager : Manager
     void controlPosition();
     void controlScaleButtons();
     void drawScaleButtons();
+    void deleteCanvas(int num);
+    int setActiveCanvas(int num);
 
 
     virtual void screenChanged() override;

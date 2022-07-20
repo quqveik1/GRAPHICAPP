@@ -3,6 +3,7 @@
 #include "DrawBibliothek.cpp"
 #include "SystemSettings.cpp"
 #include "FileSavings.cpp"
+#include "resource.h"
 
 PowerPoint* appData = NULL;
 
@@ -61,7 +62,7 @@ void writeVersion(PowerPoint* app)
 
     if (versionFile)
     {
-        fprintf(versionFile, "%s", app->appVersion);
+        (void)fprintf(versionFile, "%s", app->appVersion);
     }
     if (versionFile)fclose(versionFile);
 }
@@ -81,6 +82,7 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
         if (message == WM_CLOSE)
         {
             appData->IsRunning = false;
+            return 1;
         }
     }
     
@@ -123,12 +125,30 @@ void setWindowParameters(PowerPoint* app)
 
     app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
     assert(app->MAINWINDOW);
+
+
+    /*
+    HDC iconImage = app->loadManager->loadImage("Icon.bmp");
+    int error = GetLastError();
+    HICON _tempIcon = LoadIcon(NULL, (LPCSTR)iconImage);
+    int lastError = GetLastError();
+    int _metrics = GetSystemMetrics(SM_CXICON);    
+    massert (_tempIcon, app)
+    */
+    
     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+
+    /*
+    HDC loadBMP = app->loadManager->loadImage("IconBMP.bmp");
+
+    app->appIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON3));
+    SetClassLongPtr(app->MAINWINDOW, GCLP_HICON, (LONG_PTR)app->appIcon);          //-V107 //-V112
+    SetClassLongPtr(app->MAINWINDOW, GCLP_HICONSM, (LONG_PTR)app->appIcon);
+    */
 
     char handleName[MAX_PATH] = {};
     (void)sprintf(handleName, "IMRED - %s[TXLib]", app->appVersion);
     SetWindowText(app->MAINWINDOW, handleName);
-    SendMessage(app->MAINWINDOW, WM_SETICON, ICON_BIG, (LPARAM)app->appIcon);
 }
 
 HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
@@ -160,6 +180,7 @@ void PowerPoint::rectangle(Rect rect, HDC dc)
 
 void PowerPoint::drawCadre(Rect rect, HDC dc, COLORREF color, int thickness)
 {
+    $s;
     if (systemSettings->debugMode == 5) printf("Rect: {%lf, %lf}\n", rect.pos.x, rect.pos.y);
     setColor(color, dc, thickness);
     
@@ -190,6 +211,17 @@ Vector PowerPoint::getCentrizedPos(Vector localSize, Vector globalSize)
     return (globalSize - localSize) * 0.5;
 }
 
+void PowerPoint::shiftArrBack(char* arr, int oneItemSize, int firstPosOfShifting, int finishPosOfShifting)
+{
+    for (int i = firstPosOfShifting; i <= finishPosOfShifting; i++)
+    {
+        if (i - 1 >= 0)
+        {
+            memcpy(& (arr[(i - 1) * oneItemSize]), &(arr[(i) * oneItemSize]), (size_t)oneItemSize);
+        }
+    }
+}
+
 
 void PowerPoint::drawText(double x0, double y0, double x1, double y1, const char text[], HDC dc,
     unsigned format /*= DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS*/)
@@ -203,6 +235,16 @@ void PowerPoint::drawText(Rect rect, const char text[], HDC dc,
     drawText(rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y, text, dc, format);
 }
 
+
+
+Vector PowerPoint::getTextExtent(const char* text, HDC finalDC)
+{
+    Vector result = {};
+    result.x = txGetTextExtentX(text, finalDC);
+    result.y = txGetTextExtentY(text, finalDC);
+
+    return result;
+}
 
 void PowerPoint::setAlign(unsigned align, HDC dc)
 {

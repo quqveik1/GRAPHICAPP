@@ -54,14 +54,20 @@ void StringButton2::getTextAfterEnteringSymbol(char* finalText, char* originalTe
     finalText[_cursorPos] = symbol;
 }
 
-bool StringButton2::isSymbolAllowed(char symbol)
+bool StringButton2::isSymbolAllowed(char _symbol)
 {
+    unsigned char symbol = _symbol;
     if (0x30 <= symbol && symbol <= 0x7E)
     {
         return true; 
     }
 
     //ÊÈÐÈËÈÖÀ
+    if (0xC0 <= symbol && symbol <= 0xFF)
+    {
+        return true;
+    }
+    
     if (0xC0 <= symbol && symbol <= 0xFF)
     {
         return true;
@@ -131,7 +137,7 @@ void StringButton2::draw()
 
         modifyOutput(output, parametrString);
 
-        app->selectFont(app->systemSettings->FONTNAME, font, finalDC, std::lround (fontSizeX));
+        app->selectFont(app->systemSettings->FONTNAME, font, finalDC);
         app->setColor(app->systemSettings->TextColor, finalDC);
         app->drawText(deltaAfterCadre, 0, getSize().x, getSize().y, output, finalDC, DT_VCENTER);
 
@@ -158,16 +164,12 @@ void StringButton2::onClick(Vector mp)
     setActiveWindow(this);
     if (!isClickedLastTime())
     {
-        if (getInputMode())
+        if (getInputMode())                                                                                            
         {
-            double trueMP = mp.x - deltaAfterCadre;
-            if (!isEqual(fontSizeX, 0))
+            int pos = getPotentialCursorPos(mp);
+            if (pos >= 0)
             {
-                int potentialCursorPos = (int) (trueMP / (fontSizeX));
-                if (potentialCursorPos <= currentTextSize)
-                {
-                    cursorPos = potentialCursorPos;
-                }
+                cursorPos = pos;
             }
         }
 
@@ -187,6 +189,26 @@ void StringButton2::onClick(Vector mp)
 }
 
 
+int StringButton2::getPotentialCursorPos(Vector mp)
+{
+    int pos = currentTextSize;
+    for (int i = 0; i <= currentTextSize + 1; i++)
+    {
+        int pos1 = getCertainCharPos(i);
+        int pos2 = getCertainCharPos(i + 1);
+
+        if (pos1 <= mp.x && mp.x <= pos2)
+        {
+            pos = i;
+            break;
+        }
+    }
+
+    return pos;
+
+}
+
+
 
 void StringButton2::backSpace()
 {
@@ -202,22 +224,21 @@ void StringButton2::backSpace()
 
 void StringButton2::checkKeyboard()
 {
-
-    if (app->getAsyncKeyState(VK_RIGHT) && clock() - lastTimeClicked > delta)
+    if (app->getAsyncKeyState(VK_RIGHT) && clock() - lastTimeClicked > specButtonsDelta)
     {
         moveCursorRight();
         lastTimeClicked = clock();
         return;
     }
 
-    if (app->getAsyncKeyState(VK_LEFT) && clock() - lastTimeClicked > delta)
+    if (app->getAsyncKeyState(VK_LEFT) && clock() - lastTimeClicked > specButtonsDelta)
     {
         moveCursorLeft();
         lastTimeClicked = clock();
         return;
     }
 
-    if (app->getAsyncKeyState(VK_BACK) && clock() - lastTimeClicked > delta)
+    if (app->getAsyncKeyState(VK_BACK) && clock() - lastTimeClicked > specButtonsDelta)
     {
         backSpace();
         lastTimeClicked = clock();
@@ -301,6 +322,22 @@ void StringButton2::drawCursor()
 }
 
 int StringButton2::getCursorPosX()
+{   
+    return getCertainCharPos(cursorPos);
+}
+
+
+int StringButton2::getCertainCharPos(int num)
 {
-    return  deltaAfterCadre + fontSizeX * cursorPos;
+    int positionX = -1;
+
+    if (num < maxTextSize)
+    {
+        char saveSymbol = text[num];
+        text[num] = NULL;
+        positionX = std::lround(app->getTextExtent(text, finalDC).x);
+        text[num] = saveSymbol;
+    }
+
+    return deltaAfterCadre + positionX;
 }

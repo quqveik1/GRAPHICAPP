@@ -15,6 +15,13 @@ Canvas::Canvas(AbstractAppData* _app, Rect _rect, const char* _name) :
     if (_name)strcpy(name, _name);
 }
 
+Canvas::~Canvas()
+{
+    if (finalDC) app->deleteDC(finalDC);
+    if (finalLay) app->deleteDC(finalLay);
+
+    delete[] lay;
+}
 
 void CToolManager::addTool(Tool* tool)
 {
@@ -45,10 +52,8 @@ void Canvas::startTool()
 
 void Canvas::changeTool()
 {
-    delete (getActiveLay()->getActiveToolLay()->getToolsData());
-    getActiveLay()->needRedraw();
-
     setToolToToolLay(getActiveLay()->getActiveToolLay());
+    getActiveLay()->needRedraw();
 }
 
 void Canvas::initToolLay()
@@ -62,7 +67,9 @@ void Canvas::initToolLay()
 void Canvas::addToolLay()
 {
     assert(LayersNum >= currentToolLength);
-    activeTool = true;
+    CLay* clay = getActiveLay();
+    assert(clay);
+    clay->isNewToolLayCreated = true;
     ToolLay* toollay = getNewToolLay();
     setToolToToolLay(toollay);
 }
@@ -70,9 +77,7 @@ void Canvas::addToolLay()
 
 void Canvas::setToolToToolLay(ToolLay* toollay)
 {
-    toollay->tool = getActiveTool();
-    if (toollay->tool == NULL) return;
-    toollay->toolsData = new char[getActiveTool()->ToolSaveLen]{};
+    toollay->addTool(getActiveTool());
 }
 
 void Canvas::setCurrentData()
@@ -375,17 +380,17 @@ void Canvas::deleteButton()
 
 void Canvas::controlTool()
 {
-    if (!activeTool)
+    CLay* clay = getActiveLay();
+    assert(clay);
+
+    if (!clay->isNewToolLayCreated)
     {
         startTool();
     }
 
-    CLay* clay = getActiveLay();
-    assert(clay);
     ToolLay* toollay = clay->getActiveToolLay();
     assert(toollay);
     bool isFinished = toollay->isFinished();
-
 
 
     setCurrentData();
@@ -402,7 +407,9 @@ void Canvas::controlTool()
 
 void Canvas::finishTool()
 {
-    activeTool = false;
+    CLay* clay = getActiveLay();
+    assert(clay);
+    clay->isNewToolLayCreated = false;
 }
 
 void Canvas::controlSize()
@@ -487,17 +494,15 @@ void Canvas::cleanOutputLay()
 
 void Canvas::drawLays()
 {
-    bool wasFinalLayCleared = false;
+    static int debugMode = 0;
+
+    app->setColor(backgroungColor, finalLay);
+    app->rectangle({}, laysSize, finalLay);
+
     for (int lays = 0; lays < currentLayersLength; lays++)
     {
         if (lay[lays].redrawStatus())
         {
-            if (!wasFinalLayCleared)
-            {
-                app->setColor(backgroungColor, finalLay);
-                app->rectangle({}, laysSize, finalLay);
-                wasFinalLayCleared = true;
-            }
             lay[lays].redraw();
             lay[lays].noMoreRedraw();
             reDraw = true;
@@ -507,7 +512,10 @@ void Canvas::drawLays()
         {
             lay[lays].editTool(&currentDate);
         }
+
+       
         app->transparentBlt(finalLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
+
     }
 }
 

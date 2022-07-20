@@ -7,6 +7,7 @@ struct CLay
     Lay lay = {};
     int toolLength = 0;
     int activeToolNum = -1;
+    bool isNewToolLayCreated = false;
     bool needToRedraw = false;
 
     struct ToolLay** toolLays = NULL;
@@ -34,4 +35,6 @@ struct CLay
     virtual bool redrawStatus();
     virtual void redraw();
     virtual void editTool(ProgrammeDate* data);
+
+    ~CLay();
 };

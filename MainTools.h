@@ -18,7 +18,7 @@ struct ToolLay
     Vector size = { 1, 1 };//rotates between[0; unlim)
     const char* name = NULL;
     struct Tool* tool = NULL;
-    void* toolsData = NULL;
+    char* toolsData = NULL;
     int thickness = 1;
     
 
@@ -31,14 +31,17 @@ struct ToolLay
 
 
     virtual bool useTool(ProgrammeDate* data);
+    virtual void addTool(Tool* _tool);
     HDC drawTool(HDC dc = NULL);
     void editTool(ProgrammeDate* data);
     virtual bool isInToolZone(ProgrammeDate* data, Vector mp);
-    virtual void* getToolsData() { return toolsData; };
+    virtual void* getToolsData();
     virtual HDC getPermanentDC();
     virtual HDC getOutputDC();
 
     virtual bool isFinished();
     virtual bool isStarted();
     virtual Tool* getTool();
+
+    ~ToolLay();
 };

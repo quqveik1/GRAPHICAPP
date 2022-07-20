@@ -1,5 +1,11 @@
 #pragma once
 #include "MainTools.h"
+
+ToolLay::~ToolLay()
+{
+    delete toolsData;
+}
+
 void ToolLay::needRedraw()
 {
     lay->needRedraw();
@@ -26,7 +32,7 @@ bool ToolLay::useTool(ProgrammeDate* data)
 {
     if (!getTool()) return false;
     assert(data);
-    return getTool()->use(data, this, toolsData);
+    return getTool()->use(data, this, getToolsData());
 }
 
 HDC ToolLay::drawTool(HDC dc /*= NULL*/)
@@ -58,6 +64,11 @@ bool ToolLay::isInToolZone(ProgrammeDate* data, Vector mp)
     return false;
 }
 
+void* ToolLay::getToolsData()
+{
+    return toolsData;
+}
+
 HDC ToolLay::getPermanentDC()
 {
     if (lay) return lay->getPermanentDC();
@@ -68,4 +79,19 @@ HDC ToolLay::getOutputDC()
 {
     if (lay) return lay->getOutputDC();
     else     return NULL;
+}
+
+
+void ToolLay::addTool(Tool* _tool)
+{
+    if (tool != _tool)
+    {
+        if (toolsData) delete[] toolsData;
+    }
+    tool = _tool;
+    if (tool)
+    {
+        toolsData = new char[tool->ToolSaveLen]{};
+    }
+    return;
 }

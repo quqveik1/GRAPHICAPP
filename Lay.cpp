@@ -2,6 +2,13 @@
 #include "Lay.h"
 
 
+Lay::~Lay()
+{
+    if (lay && app)app->deleteDC(lay);
+    if (outputLay && app)app->deleteDC(outputLay);
+}
+
+
 void Lay::createLay(AbstractAppData* _app, Vector _laySize/* = {}*/)
 {
     gassert(_app);

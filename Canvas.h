@@ -17,12 +17,12 @@ struct Canvas : Manager
     int activeLayNum = 0;
     Vector laysSize = {};
     HDC finalLay = NULL;
+    bool needToRedrawBackground = false;
     COLORREF backgroungColor = TX_WHITE;
     CLay* lay = new CLay[LayersNum]{};
     ToolLay* toolLays = new ToolLay[LayersNum]{};
     int currentToolLength = 0;
     bool editingMode = false;
-    bool activeTool = false;
     int DrawingModeLastTime = 0;
 
     ProgrammeDate currentDate;
@@ -40,6 +40,7 @@ struct Canvas : Manager
     Vector deltaPos = {};
 
     Canvas(AbstractAppData* _app, Rect _rect, const char* _name);
+    ~Canvas();
 
 	void controlSize();
     void controlStretching();

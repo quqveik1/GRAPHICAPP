@@ -18,4 +18,6 @@ struct Lay
     void createLay(AbstractAppData* _app, Vector size = {});
     int getDownUpCoordinats(int x, int y);
     virtual void clean(HDC dc = NULL);
+    
+    ~Lay();
 };

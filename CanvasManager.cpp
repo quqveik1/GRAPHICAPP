@@ -5,7 +5,7 @@
 
 CanvasManager::CanvasManager(AbstractAppData* _app) :
     Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
-    oneTabSize({ app->systemSettings->BUTTONWIDTH * 4, app->systemSettings->HANDLEHEIGHT }),
+    oneTabSize({ app->systemSettings->BUTTONWIDTH * 5, app->systemSettings->HANDLEHEIGHT }),
     scaleButtonSize({75, 25}),
     plusMinusButtonSize({25, 25}),
     plusButtonDC(app->loadManager->loadImage("plusScaleButton.bmp")),
@@ -13,12 +13,20 @@ CanvasManager::CanvasManager(AbstractAppData* _app) :
     scaleButton(new InputButton2 (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
 {
     gassert(loadManager);
+
+    tabCross = app->loadManager->loadImage("tabCross.bmp");
+
     addWindow(scaleButton);
 }
 Canvas* CanvasManager::getActiveCanvas()
 {
     if (activeCanvasNum < 0) return NULL;
     return canvases[activeCanvasNum];
+}
+
+int CanvasManager::getActiveCanvasNum()
+{
+    return activeCanvasNum;
 }
 
 void CanvasManager::drawTabs()
@@ -32,16 +40,21 @@ void CanvasManager::drawTabs()
     if (!getActiveCanvas())
     {
         app->setColor(app->systemSettings->TextColor, finalDC);
+        app->selectFont(app->systemSettings->FONTNAME, font, finalDC);
         app->drawText({ .pos = {}, .finishPos = {getSize().x, oneTabSize.y} }, "Нажмите Сtrl+N, чтобы создать холст", finalDC);
     }
 
-    for (int i = 0; i < canvasesLength; i++)
+    for (int i = 0; i < currentCanvasesLength; i++)
     {
+        app->setColor(app->systemSettings->TextColor, finalDC);
+        app->selectFont(app->systemSettings->FONTNAME, font, finalDC);
+        app->drawText({ .pos = tabs[i].pos, .finishPos = {tabs[i].finishPos.x - tabCrossSize.x, tabs[i].finishPos.y} }, canvases[i]->getName(), finalDC);
+
+        app->bitBlt(finalDC, { tabs[i].finishPos.x - tabCrossSize.x, tabs[i].pos.y }, {}, tabCross);
+
         COLORREF cadreColor = TX_BLACK;
         if (i == activeCanvasNum) cadreColor = TX_WHITE;
         app->drawCadre(tabs[i], finalDC, cadreColor, 2);
-        app->setColor(app->systemSettings->TextColor, finalDC);
-        app->drawText(tabs[i], canvases[i]->getName(), finalDC);
     }
 }
 
@@ -49,7 +62,7 @@ void CanvasManager::setTabsRect()
 {
     Rect userRect = app->getUserRect();
     userRect = userRect - rect.pos;
-    for (int i = 0; i < canvasesLength; i++)
+    for (int i = 0; i < currentCanvasesLength; i++)
     {
         tabs[i] = { .pos = {userRect.pos.x + oneTabSize.x * i, 0}, .finishPos = {userRect.pos.x + oneTabSize.x * (i + 1), oneTabSize.y } };
     }
@@ -202,11 +215,11 @@ Vector CanvasManager::getCentrizedPos(Vector localSize, Vector globalSize)
 
 bool CanvasManager::addCanvas(const char* name, Vector dcSize)
 {
-    canvases[canvasesLength] = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name);
-    activeCanvasNum = canvasesLength;
-    canvasesLength++;
+    canvases[currentCanvasesLength] = new Canvas(app, { .pos = getCentrizedPos(dcSize, getSize()), .finishPos = getCentrizedPos(dcSize, getSize()) + dcSize }, name);
+    activeCanvasNum = currentCanvasesLength;
+    currentCanvasesLength++;
     setTabsRect();
-    return addWindow(canvases[canvasesLength - 1]);
+    return addWindow(canvases[currentCanvasesLength - 1]);
 }
 
 
@@ -238,20 +251,56 @@ void CanvasManager::onClick(Vector mp)
 
         if (getActiveCanvas()->rect.inRect(mp))getActiveCanvas()->onClick(mp);
     }
+
+    setMbLastTime();
 }
 
 int CanvasManager::tabsOnClick()
 {
     Vector mp = getMousePos();
-    for (int i = 0; i < canvasesLength; i++)
+    for (int i = 0; i < currentCanvasesLength; i++)
     {
         if (tabs[i].inRect(mp))
         {
             activeCanvasNum = i;
+            Rect crossRect = { .pos = {tabs[i].finishPos.x - tabCrossSize.x, tabs[i].pos.y}, .finishPos = {tabs[i].finishPos.x, tabs[i].finishPos.y} };
+            if (crossRect.inRect(mp) && !isClickedLastTime())
+            {
+                deleteCanvas(i);
+                break;
+            }
             return activeCanvasNum;
         }
     }
     return -1;
+}
+
+void CanvasManager::deleteCanvas(int num)
+{
+    if (canvases[num])
+    {
+        delete canvases[num];
+    }
+
+    int oneItemSize = sizeof(Canvas*);
+    app->shiftArrBack((char*)canvases, oneItemSize, num + 1, currentCanvasesLength);
+    currentCanvasesLength--;
+    int oldCanvasNum = getActiveCanvasNum();
+    if (setActiveCanvas(oldCanvasNum - 1))
+    {
+        setActiveCanvas(oldCanvasNum + 1);
+    }
+}
+
+int CanvasManager::setActiveCanvas(int num)
+{
+    if (num >= 0 && num < currentCanvasesLength)
+    {
+        activeCanvasNum = num;
+        return !"Sucsess";
+    }
+    activeCanvasNum = -1;
+    return (int)"Error";
 }
 
 void CanvasManager::deleteButton()
@@ -268,7 +317,7 @@ void CanvasManager::screenChanged()
     rect.finishPos = app->systemSettings->SizeOfScreen;
     Vector centrizedPos = {};
     Vector tempSize = {};
-    for (int i = 0; i < canvasesLength; i++)
+    for (int i = 0; i < currentCanvasesLength; i++)
     {
         if (canvases[i])
         {

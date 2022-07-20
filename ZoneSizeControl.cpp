@@ -63,9 +63,11 @@ void ZoneSizeControl::controlScreenResizing()
     Vector superAbsMP = manager->app->getCursorPos();
     Vector delta = superAbsMP - mousePosLastTime;
     if (wasZoneClicked)
-    {
-        bool needToResize = true;
-        
+    {     
+        bool needResizex = true;
+        bool needResizey = true;
+        Vector posBeforeRedacting = zone->pos;
+
         if (activeZone == 1)
         {
             zone->pos.y += delta.y;
@@ -103,20 +105,17 @@ void ZoneSizeControl::controlScreenResizing()
             zone->finishPos.y += delta.y;
         }
 
-        if (minSize)
+        if (isSmaller(zone->getSize().x, minSize->x) || isEqual(zone->getSize().x, minSize->x))
         {
-            if (isSmaller(zone->getSize().x, minSize->x))
-            {
-                zone->finishPos.x = zone->pos.x + minSize->x;
-            }
-
-            if (isSmaller(zone->getSize().y, minSize->y))
-            {
-                zone->finishPos.y = zone->pos.y + minSize->y;
-            }
+            zone->pos.x = posBeforeRedacting.x;
+            zone->finishPos.x = zone->pos.x + minSize->x;
         }
 
-
+        if (isSmaller(zone->getSize().y, minSize->y) || isEqual(zone->getSize().y, minSize->y))
+        {
+            zone->pos.y = posBeforeRedacting.y;
+            zone->finishPos.y = zone->pos.y + minSize->y;
+        }
     }
 
     mousePosLastTime = manager->app->getCursorPos();

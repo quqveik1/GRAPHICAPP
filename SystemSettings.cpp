@@ -141,7 +141,7 @@ void CSystemSettings::setDefaultSettings()
     MENUBUTTONSWIDTH = 50.000000;
     SIDETHICKNESS = 2.000000;
     SCROLLBARTHICKNESS = 20.000000;
-    FrameThickness = 5;
+    FrameThickness = 6;
 
     debugMode = -1;
 

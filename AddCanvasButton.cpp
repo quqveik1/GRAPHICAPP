@@ -8,6 +8,8 @@ SetCanvasButton* AddCanvasButton::getSetCanvasButton()
 }
 
 
+
+
 void AddCanvasButton::draw()
 {
     app->windowsLibApi->standartWindowDraw(this);
@@ -17,9 +19,15 @@ void AddCanvasButton::draw()
         if (currentEnterStatus)
         {
             isEnterActive = false;
-            if (currentEnterStatus == 1)canvasManager->addCanvas("TestName", newCanvasSize);
+            if (currentEnterStatus == 1)
+            {
+                char* newName = setCanvasButton.getNewCanvasName();
+                if (newName[0]) canvasManager->addCanvas(newName, newCanvasSize);
+                else            canvasManager->addCanvas("TestName", newCanvasSize);
+            }
         }
     }
+
     if (!isEnterActive && app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('N'))
     {
         isEnterActive = true;
@@ -33,9 +41,9 @@ void AddCanvasButton::onClick(Vector mp)
 {
     if (!isClickedLastTime())
     {
-        //setCanvasButton.
         isEnterActive = true;
         setCanvasButton.show();
+        strcpy(setCanvasButton.getNewCanvasName(), defaultCanvasName);
     }
     setMbLastTime();
 }

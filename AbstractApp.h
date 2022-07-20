@@ -76,6 +76,7 @@ struct AbstractAppData
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS) = 0;
     virtual void drawText(Rect rect, const char text[], HDC dc,
         unsigned format = DT_CENTER | DT_VCENTER | DT_WORDBREAK | DT_WORD_ELLIPSIS) = 0;
+    virtual Vector getTextExtent(const char* text, HDC finalDC) = 0;
 
     virtual void setAlign(unsigned align, HDC dc) = 0;
     virtual void selectFont(const char* text, int sizey, HDC& dc, int sizex = -1) = 0;
@@ -86,7 +87,7 @@ struct AbstractAppData
     virtual void drawCadre(Vector pos1, Vector pos2, HDC dc, COLORREF color, int thickness) = 0;
     virtual void drawCadre(int x1, int y1, int x2, int y2, HDC dc, COLORREF color, int thickness) = 0;
 
-    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) = 0;
+    
 
     virtual void changeWindow(Vector size = {}, Vector pos = {}) = 0;
     virtual void setCursor(HCURSOR cursor) = 0;
@@ -95,6 +96,9 @@ struct AbstractAppData
     virtual void setResized(bool state = true) = 0;
     virtual bool wasResized() = 0;
     virtual bool isFullScreen() = 0;
+
+    virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) = 0;
+    virtual void shiftArrBack(char* arr, int oneItemSize, int firstPosOfShifting, int finishPosOfShifting) = 0;
 
     virtual Rect getUserRect() = 0;
 };

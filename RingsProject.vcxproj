@@ -147,6 +147,17 @@
   <ItemGroup>
     <ClCompile Include="PowerPoint.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RingsProject.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Files\ico.ico" />
+    <Image Include="Files\Icon.ico" />
+    <Image Include="Files\TX_Application.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

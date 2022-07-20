@@ -1,6 +1,11 @@
 #pragma once
 #include "CLay.h"
 
+CLay::~CLay()
+{
+    if (toolLays) delete[] toolLays;
+}
+
 void CLay::createLay(AbstractAppData* _app, Vector _size /* = {}*/)
 {
     assert(_app);

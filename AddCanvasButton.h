@@ -6,6 +6,7 @@ struct AddCanvasButton : Manager
 {
     struct CanvasManager* canvasManager = NULL;
     SetCanvasButton setCanvasButton;
+    const char* defaultCanvasName = "Холст";
 
     Vector newCanvasSize = { 500, 500 };
     bool isEnterActive = false;

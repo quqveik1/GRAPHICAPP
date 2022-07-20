@@ -40,8 +40,6 @@
 
 void Engine (MainManager* manager);
 
-
-
 int main (int argc, int *argv[])
 {
     appData = new PowerPoint;
@@ -81,10 +79,12 @@ int main (int argc, int *argv[])
     ThicknessMenu* thicknessButton = new ThicknessMenu(appData, { 300, 300 }, false);
     manager->addWindow(thicknessButton);
 
+    /*
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
     if (appData->systemSettings->debugMode >= 0) printf("Фильтры загрузились\n");
+    */
 
 
     mainhandle;
@@ -114,12 +114,14 @@ int main (int argc, int *argv[])
             openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
             openWindows->addNewItem (laysMenu, NULL, "Слои");
             openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
+            /*
             List* filters = openWindows->addSubList("Фильтры", dllManager->currLoadWindowNum);
         manager->addWindow (filters);
                 for (int i = 0; i < dllManager->currLoadWindowNum; i++)
                 {
                     filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
                 }
+                */
 
         OpenHandleMenuManager* openSystemList = new OpenHandleMenuManager(appData, appData->loadManager->loadImage("SettingsIcon.bmp"));
         mainhandle->addWindowToStart(openSystemList);

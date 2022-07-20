@@ -11,11 +11,10 @@ struct StringButton2 : Manager
     int cursorPos = 0;
     int lastTimeClicked = 0;
     int delta = 300;
+    int specButtonsDelta = 200;
     int lastTimeCursorConditionChanged = 0;
     bool wasClicked = false;
     bool shouldShowCursor = false;
-    double fontSizeX = 0;
-    double spaceBetween2Symbols = 0;
 
     int inputMode = 0;
 
@@ -35,9 +34,7 @@ struct StringButton2 : Manager
         
         needTransparencyOutput = true;
 
-        font = rect.getSize().y - 5;
-        fontSizeX = font / 3;
-        spaceBetween2Symbols = fontSizeX * 0.4;
+        font = rect.getSize().y;
 
         cursor = LoadCursor(NULL, IDC_IBEAM);
     }
@@ -57,13 +54,16 @@ struct StringButton2 : Manager
     int& getInputMode() { return inputMode; };
 
     void getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, char symbol);
+    int getPotentialCursorPos(Vector mp);
+    int getCursorPosX();
+    int getCertainCharPos(int num);
 
     virtual bool isSymbolAllowed(char symbol);
     virtual void modifyOutput(char* outputStr, char* originalStr);
     virtual void confirmEnter() {};
     virtual void doBeforeMainBlock() {};
     virtual void doAfterMainBlock() {};
-    virtual int getCursorPosX();
+    
 
 
 

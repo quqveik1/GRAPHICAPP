@@ -14,6 +14,11 @@ int SetCanvasButton::isResultEntered()
     return enterStatus;
 }
 
+char* SetCanvasButton::getNewCanvasName()
+{
+    return canvasName;
+}
+
 void SetCanvasButton::confirmEnter()
 {
     enterStatus = 1;
@@ -34,6 +39,7 @@ void SetCanvasButton::show()
     {
         pointers[i]->show();
     }
+    canvasName[0] = {};
     MoveWindowTo(app->getCentrizedPos(getSize(), app->systemSettings->SizeOfScreen));
 }
 
@@ -59,8 +65,11 @@ void SetCanvasButton::draw()
 
         app->setColor(app->systemSettings->TextColor, finalDC);
         app->selectFont(app->systemSettings->FONTNAME, oneLineSize.y, finalDC);
-        app->drawText(sizeXText, "Ширина", finalDC);
-        app->drawText(sizeYText, "Длина", finalDC);
+        app->drawText(sizeXText, "Ширина:", finalDC, format);
+        app->drawText(sizeYText, "Длина:", finalDC, format);
+
+        inputName.print(finalDC);
+        app->drawText(nameTextRect, "Имя:", finalDC, format);
 
         app->setColor(TX_WHITE, finalDC);
         app->rectangle(confirmButton, finalDC);
