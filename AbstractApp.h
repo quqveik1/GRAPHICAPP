@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Q_Rect.h"
+#include "TXLib.cpp"
 
 
 struct AbstractAppData

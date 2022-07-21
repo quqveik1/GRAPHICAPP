@@ -3,7 +3,7 @@
 #include "DrawBibliothek.cpp"
 #include "SystemSettings.cpp"
 #include "FileSavings.cpp"
-#include "resource.h"
+
 
 PowerPoint* appData = NULL;
 
@@ -16,16 +16,11 @@ bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
 LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 
 
-PowerPoint::PowerPoint() :
-    SystemSettings (this),
-    ToolManager (),
-    LoadManager (this),   
-    WindowsLibApi (),
-    FileSavings ()
+PowerPoint::PowerPoint()
 {
-    appVersion = "v0.1.7.9";
+    appVersion = "v0.2.0.0";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
-    appIcon = LoadIcon(NULL, "Icon.ico");
+    
 
     if (_mkdir("Settings") == -1)
     {
@@ -34,25 +29,29 @@ PowerPoint::PowerPoint() :
 
     filesCompability = checkVersionCompability(this);
 
-    systemSettings = &SystemSettings;
+    systemSettings = new CSystemSettings(this);
 
-    toolManager = &ToolManager;
+    toolManager = new CToolManager();
 
-    loadManager = &LoadManager;
+    loadManager = new CLoadManager(this);
 
-    windowsLibApi = &WindowsLibApi;
+    windowsLibApi = new CWindowsLibApi();
 
-    fileSavings = &FileSavings;
+    fileSavings = new CFileSavings();
 
-    currColor = &SystemSettings.DrawColor;
+    currColor = &systemSettings->DrawColor;
 
     setWindowParameters(this);
 }
 
 PowerPoint::~PowerPoint()
 {
-    appData->loadManager->deleteAllImages();
     writeVersion(appData);
+
+    delete systemSettings;
+    delete toolManager;
+    delete loadManager;
+    delete windowsLibApi;
 }
 
 void writeVersion(PowerPoint* app)
@@ -82,6 +81,10 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
         if (message == WM_CLOSE)
         {
             appData->IsRunning = false;
+            return 1;
+        }
+        if (message == WM_CREATE)
+        {
             return 1;
         }
     }
@@ -125,6 +128,8 @@ void setWindowParameters(PowerPoint* app)
 
     app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
     assert(app->MAINWINDOW);
+
+    
 
 
     /*

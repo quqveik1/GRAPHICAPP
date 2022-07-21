@@ -65044,3 +65044,438 @@ Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.
 Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00919190 (32-bit), Flags: CMdRe0, Thread: 0x9ACC (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00892575 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (471):
+
+    469:     systemSettings->ScreenPos = pos;
+    470: 
+=>  471:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    472: 
+    473:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x008B7DD3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (139):
+
+    137:     */
+    138:     
+=>  139:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    140: 
+    141:     /*
+
+# 3 0x00843566 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (49):
+
+     47:     currColor = &SystemSettings.DrawColor;
+     48: 
+=>   49:     setWindowParameters(this);
+     50: }
+     51: 
+
+# 4 0x008E287C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (126):
+
+    124:     txSetWindowsHook(CtrlWindowFunc);
+    125: 
+=>  126:     app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    127:     assert(app->MAINWINDOW);
+    128: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:27:03, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:27:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00919190 (32-bit), Flags: CMdRe0, Thread: 0x9ACC (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00892575 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (471):
+
+    469:     systemSettings->ScreenPos = pos;
+    470: 
+=>  471:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    472: 
+    473:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x008B7DD3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (139):
+
+    137:     */
+    138:     
+=>  139:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    140: 
+    141:     /*
+
+# 3 0x00843566 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (49):
+
+     47:     currColor = &SystemSettings.DrawColor;
+     48: 
+=>   49:     setWindowParameters(this);
+     50: }
+     51: 
+
+# 4 0x008E287C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:27:03, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:27:13
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00919190 (32-bit), Flags: CMdRe0, Thread: 0x16EC (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00892575 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (471):
+
+    469:     systemSettings->ScreenPos = pos;
+    470: 
+=>  471:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    472: 
+    473:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x008B7DD3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (139):
+
+    137:     */
+    138:     
+=>  139:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    140: 
+    141:     /*
+
+# 3 0x00843566 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (49):
+
+     47:     currColor = &SystemSettings.DrawColor;
+     48: 
+=>   49:     setWindowParameters(this);
+     50: }
+     51: 
+
+# 4 0x008E287C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (126):
+
+    124:     txSetWindowsHook(CtrlWindowFunc);
+    125: 
+=>  126:     app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    127:     assert(app->MAINWINDOW);
+    128: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:27:03, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:27:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00919190 (32-bit), Flags: CMdRe0, Thread: 0x16EC (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00892575 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (471):
+
+    469:     systemSettings->ScreenPos = pos;
+    470: 
+=>  471:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    472: 
+    473:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x008B7DD3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (139):
+
+    137:     */
+    138:     
+=>  139:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    140: 
+    141:     /*
+
+# 3 0x00843566 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (49):
+
+     47:     currColor = &SystemSettings.DrawColor;
+     48: 
+=>   49:     setWindowParameters(this);
+     50: }
+     51: 
+
+# 4 0x008E287C in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:27:03, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:27:51
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00419190 (32-bit), Flags: CMdRe0, Thread: 0x7DC8 (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00392675 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (466):
+
+    464:     systemSettings->ScreenPos = pos;
+    465: 
+=>  466:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    467: 
+    468:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x003B7EB3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (134):
+
+    132:     */
+    133:     
+=>  134:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    135: 
+    136:     /*
+
+# 3 0x00343654 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (44):
+
+     42:     currColor = &systemSettings->DrawColor;
+     43: 
+=>   44:     setWindowParameters(this);
+     45: }
+     46: 
+
+# 4 0x003E2959 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Стек вызовов TX:
+
+# 0 in (null) at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (121):
+
+    119:     txSetWindowsHook(CtrlWindowFunc);
+    120: 
+=>  121:     app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    122:     assert(app->MAINWINDOW);
+    123: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:50:45, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:51:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe,
+
+ВНЕЗАПНО: signal (8, 0x81): SIGFPE: Грубая ошибка в вычислениях. _FPE_INVALID: Результат неверен. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x797B27ED в функции lround() в модуле C:\WINDOWS\SYSTEM32\ucrtbased.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400], Instance: 0x00419190 (32-bit), Flags: CMdRe0, Thread: 0x7DC8 (Main), errno: 33 (Domain error). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x797B27ED in C:\WINDOWS\SYSTEM32\ucrtbased.dll: lround()
+
+# 1 0x00392675 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::changeWindow() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (466):
+
+    464:     systemSettings->ScreenPos = pos;
+    465: 
+=>  466:     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
+    467: 
+    468:     SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+
+# 2 0x003B7EB3 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: setWindowParameters() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (134):
+
+    132:     */
+    133:     
+=>  134:     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
+    135: 
+    136:     /*
+
+# 3 0x00343654 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: PowerPoint::PowerPoint() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp (44):
+
+     42:     currColor = &systemSettings->DrawColor;
+     43: 
+=>   44:     setWindowParameters(this);
+     45: }
+     46: 
+
+# 4 0x003E2959 in C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe: main() at C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp (45):
+
+     43: int main (int argc, int *argv[])
+     44: {
+=>   45:     appData = new PowerPoint;
+     46:     
+     47:     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-09-14 18:45:19 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h
+Compiled:	Jul 20 2022 16:50:45, MSVS 1929, std=199711L, MSVC Runtime, 32-bit, DEBUG
+Started:	Jul 20 2022 16:51:00
+
+Run file:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
+Directory:	C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP
+
+--------------------------------------------------

@@ -1,4 +1,4 @@
 C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.exe
 C:\Users\Алехандро\Desktop\AlexProjects\RingsProject\Debug\RingsProject.pdb
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\RingsProject.exe
 C:\Users\quqve\OneDrive\Рабочий стол\Progs\GRAPHICAPP\Debug\RingsProject.exe
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\IMRED.exe

@@ -1,5 +1,6 @@
 #pragma once
 #include "Q_Vector.h"
+#include "TXLib.cpp"
 struct ProgrammeDate
 {
     Vector absMouseCoordinats = {};

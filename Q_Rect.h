@@ -18,8 +18,6 @@ struct Rect
     Vector getSize () const {return this->finishPos - this->pos; }
     void   countFinishPos() { this->finishPos = this->pos + this->size; }
     bool isValid ();
-    
-    void draw (HDC dc = txDC());
 };
 
 inline Rect operator + (const Rect &rect, const Vector &vector);
@@ -39,11 +37,6 @@ Rect& Rect::operator = (const Rect &a1)
 
     return *this;
 };
-
-void Rect::draw (HDC dc /*= txDC()*/)
-{
-    txRectangle (this->pos.x, this->pos.y, this->finishPos.x, this->finishPos.y, dc);
-}
 
 bool Rect::inRect (double x, double y)
 {

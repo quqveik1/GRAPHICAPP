@@ -22,6 +22,8 @@ struct CLoadManager
         app (_app)
     {}
 
+    ~CLoadManager();
+
 
 
     virtual HDC loadImage(const char* path, Vector size = {});

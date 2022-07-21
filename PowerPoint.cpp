@@ -34,19 +34,52 @@
 #include "Thickness.cpp"
 #include "OpenHandleMenuManager.cpp"
 #include "winuser.h"
-#include "WindowsLibApi.cpp"
+#include "WindowsLibApi.cpp"  
+
+//Visual Studio shortcut for adding library:
 
 
 
 void Engine (MainManager* manager);
 
+
+
 int main (int argc, int *argv[])
 {
     appData = new PowerPoint;
+
+
+    /*
+    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR gdiplusToken;
+    Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
+    int w = 500;
+    int h = 500;
+    HDC dc = appData->createDIBSection(500, 500);
+    HBITMAP hBitmap = CreateCompatibleBitmap(dc, w, h);
+    HGDIOBJ old_obj = SelectObject(dc, hBitmap);
+
+    Gdiplus::Bitmap bitmap(hBitmap, NULL);
+    CLSID clsid;
+
+
+    _getch();
+    
+
+    HDC _dc = appData->createDIBSection(500, 500);       
+    HBITMAP _bitmap = (HBITMAP)GetCurrentObject(_dc, OBJ_BITMAP);
+    appData->setColor(TX_RED, _dc);
+    appData->rectangle(0, 0, 1000, 1000, _dc);
+    appData->drawOnScreen(_dc);
+    _getch();
+    */
     
     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
 
     ToolSave toolSave = {};
+
+    
 
     CanvasManager* canvasManager = new CanvasManager(appData);
     appData->canvasManager = canvasManager;

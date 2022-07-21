@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include "TXLib.cpp"
 #include "Double comparision.h"
 
 struct Vector 

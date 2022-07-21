@@ -73,52 +73,76 @@ void standartDraw$ (Window *window)
 }
 
 
-const char* getCustomFilePath(const char* question)
+const char* getCustomFilePath(const char* question, const char* fileTypeDescribtion)
 {
     char fileName[MAX_PATH] = "";
 
-    OPENFILENAMEW ofn = { sizeof(ofn), txWindow() }; 
+    OPENFILENAME ofn = { sizeof(ofn), txWindow() }; 
 
-    ofn.lpstrTitle = (LPCWSTR)question;
-
-    ofn.lpstrFile = (LPWSTR)fileName;
+    ofn.lpstrTitle = question;
+    ofn.lpstrFile = fileName;
     ofn.nMaxFile = sizeof(fileName);
-
+    ofn.lpstrFilter = (fileTypeDescribtion);
+    ofn.nFilterIndex = 1;
     ofn.lpstrInitialDir = NULL;
 
     ofn.Flags = OFN_PATHMUSTEXIST;
 
-    if ((GetOpenFileNameW))
-        (GetOpenFileNameW(&ofn));
+    if ((GetOpenFileNameA))
+        (GetOpenFileNameA(&ofn));
 
 
     return fileName;
 }
 
-const char* getCustomFilePathForSaving(const char* question, const char* fileTypeDescribtion, const char* fileType)
+const char* getCustomFilePathForSaving(const char* question, const char* defaultFilename, const char* fileTypeDescribtion)
 {
+    int fileNameLength = MAX_PATH;
     char fileName[MAX_PATH] = "";
+
+    sprintf(fileName, "%s", defaultFilename);
 
     OPENFILENAME ofn = { sizeof(OPENFILENAME), txWindow() };
 
     ofn.lpstrTitle = question;
     ofn.lpstrFile = fileName;
     ofn.nMaxFile = sizeof(fileName);
-    ofn.lpstrFilter = fileTypeDescribtion;
+    ofn.lpstrFilter = (fileTypeDescribtion);
     ofn.nFilterIndex = 1;
     ofn.lpstrInitialDir = NULL;
-    ofn.lpstrDefExt = fileType;
-
 
     bool oldPSW = _txProcessSystemWarnings;
     _txProcessSystemWarnings = false;//отключает всякие системные проверки тхлибом иначе возникает ошибка 298
 
     if ((GetSaveFileNameA))
         (GetSaveFileNameA(&ofn));
-
     _txProcessSystemWarnings = oldPSW;
 
+    const char* extension = findExtensionStart(fileTypeDescribtion, ofn.nFilterIndex);
+
+    int extensionSize = strlen(extension);
+    int realFilenameSize = strlen(fileName);
+    if (strcmp(&fileName[realFilenameSize - extensionSize], extension))
+    {
+        sprintf(fileName, "%s.%s", fileName, extension);
+    }
+
     return fileName;
+}
+
+const char* findExtensionStart(const char* text, int extensionPos)
+{
+    int startPos = 0;
+    for (int i = 0; i < extensionPos; i++)
+    {
+        startPos += strlen(&text[startPos]) + 3;
+        if (i < extensionPos - 1)
+        {
+            startPos += strlen(&text[startPos]) + 2;
+        }
+    }
+
+    return &text[startPos];
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "SystemSettings.h"
 #include "AbstractApp.h"
+#include "TXLib.cpp"
 
 
 CSystemSettings::CSystemSettings(struct AbstractAppData* _app) :
@@ -121,6 +122,8 @@ void CSystemSettings::setDefaultSettings()
         return;
     }
     setDynamicSettings(app);
+
+    WindowStyle = _txWindowStyle;
 
     MenuColor = RGB(45, 45, 45);
     SecondMenuColor = RGB(30, 30, 30);

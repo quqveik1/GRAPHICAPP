@@ -24,6 +24,7 @@
     <ProjectGuid>{a9ab25e4-0ec7-49f3-bde3-2502d2019f1f}</ProjectGuid>
     <RootNamespace>RingsProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>IMRED</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,12 +152,11 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RingsProject.rc" />
+    <ResourceCompile Include="IMRED.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Files\ico.ico" />
-    <Image Include="Files\Icon.ico" />
-    <Image Include="Files\TX_Application.ico" />
+    <Image Include="Files\Imred.bmp" />
+    <Image Include="Files\Imred.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

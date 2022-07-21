@@ -1,6 +1,7 @@
 #pragma once
 #include "Q_Vector.h"
 #include <stdio.h>
+#include "TXLib.cpp"
 
 
 
@@ -8,7 +9,7 @@
 struct CSystemSettings
 {
     struct AbstractAppData* app = NULL;
-    int WindowStyle = _txWindowStyle;
+    int WindowStyle = NULL;
 
     COLORREF MenuColor = NULL;
     COLORREF SecondMenuColor = NULL;
@@ -64,19 +65,11 @@ struct CSystemSettings
 };
 
 
-void setDynamicSystemSettings(CSystemSettings* systemSettings);
-
-void setDefaultSystemSettings(CSystemSettings* systemSettings);
-
-void setUserSystemSettings(CSystemSettings* systemSettings, const char* path);
-
 void setColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void setIntSettings(FILE* ssFile, int* integer, const char* name);
 void setDoubleSettings(FILE* ssFile, double* integer, const char* name);
 void setStringSettings(FILE* ssFile, char* str, const char* name);
 
-
-int saveUserAbleSystemSettings(CSystemSettings* systemSettings, const char* path);
 
 void saveColorSettings(FILE* ssFile, COLORREF* color, const char* name);
 void saveIntSettings(FILE* ssFile, int* integer, const char* name);

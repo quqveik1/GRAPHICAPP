@@ -63,8 +63,10 @@ void clickButton (Window *window, Manager *manager, Vector mp);
 void swap$ (DebugInfo info, int &x0, int &y0);
 //#define swap(...) swap$ (getDebugInfo, __VA_ARGS__)
 Vector windowMousePos(bool isThisMainFile = true);
-const char* getCustomFilePath(const char* question);
-const char* getCustomFilePathForSaving(const char* question, const char* fileTypeDescribtion = NULL, const char* fileType = NULL);
+const char* findExtensionStart(const char* text, int extensionPos);
+const char* getCustomFilePath(const char* question, const char* fileTypeDescribtion = NULL);
+const char* getCustomFilePathForSaving(const char* question, const char* defaultFilename = "", const char* fileTypeDescribtion = NULL);
+
 
 
 

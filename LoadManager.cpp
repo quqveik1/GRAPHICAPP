@@ -52,3 +52,14 @@ int CLoadManager::deleteAllImages()
     if (app->systemSettings->debugMode > 0)printf("succesfullDeleteImagesAmount: %d\n", succesfullDeletedImagesAmount);
     return 0;
 }
+
+CLoadManager::~CLoadManager()
+{
+    int succesfullDeletedImagesAmount = 0;
+    for (int i = 0; i < currentImagesAmount; i++)
+    {
+        int result = app->smartDeleteDC(images[i].dc);
+        if (result) succesfullDeletedImagesAmount++;
+    }
+    if (app->systemSettings->debugMode > 0)printf("succesfullDeleteImagesAmount: %d\n", succesfullDeletedImagesAmount);
+}

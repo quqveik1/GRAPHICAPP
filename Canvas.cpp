@@ -306,9 +306,13 @@ void Canvas::stretchCanvas(double percantageFromOriginal)
 
 HDC Canvas::getImageForSaving()
 {
+    if (!getActiveLay()) return NULL;
     HDC notClearedDC = getActiveLay()->lay.lay;
 
     HDC clearedDC = app->createDIBSection(getActiveLay()->lay.laySize.x, getActiveLay()->lay.laySize.y);
+
+    app->setColor(backgroungColor, clearedDC);
+    app->rectangle({}, getActiveLay()->lay.laySize, clearedDC);
 
     app->transparentBlt(clearedDC, 0, 0, 0, 0, notClearedDC);
 

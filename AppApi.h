@@ -4,12 +4,13 @@
 
 struct PowerPoint : AbstractAppData
 {
-
+    /*
     CSystemSettings SystemSettings;
     CToolManager ToolManager;
     CLoadManager LoadManager;
     CWindowsLibApi WindowsLibApi;
     CFileSavings FileSavings;
+    */
 
 
     HCURSOR activeCursor = NULL;

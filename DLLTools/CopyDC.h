@@ -19,11 +19,8 @@ struct SaveCopyDC : ToolZoneSave
 
 struct CopyDC : CadreResizingTool
 {
-    COLORREF frameColor = TX_WHITE;
+    COLORREF frameColor = TX_BLACK;
     
-
-    
-
     CopyDC(ÑDllSettings* _dllSettings, const char* _name, HDC _iconDC, AbstractAppData* _app) :
         CadreResizingTool(_dllSettings, _name, sizeof(SaveCopyDC), _iconDC, _app)
     {  

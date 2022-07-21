@@ -25,18 +25,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RingsProject.rc">
+    <ResourceCompile Include="IMRED.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Files\Icon.ico">
+    <Image Include="Files\Imred.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Files\ico.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Files\TX_Application.ico">
+    <Image Include="Files\Imred.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
