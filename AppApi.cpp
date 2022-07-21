@@ -401,6 +401,44 @@ void PowerPoint::compressImage(HDC& newDC, Vector newSize, HDC oldDC, Vector old
     assert (stretchBlt(newDC, 0, 0, newSize.x, newSize.y, oldDC, 0, 0, oldSize.x, oldSize.y));
 }
 
+HDC PowerPoint::getBufferDC(RGBQUAD** buf)
+{
+    HDC answer = NULL;
+    if (OpenClipboard(MAINWINDOW))
+    {
+        HBITMAP bitmap = (HBITMAP)GetClipboardData(CF_BITMAP);
+        HBITMAP hBmpCopy = (HBITMAP)CopyImage(bitmap, IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE);
+        if (bitmap)
+        {
+            Vector bitmapSize = getHBITMAPSize(hBmpCopy);
+            answer = createDIBSection(bitmapSize, buf);
+            HGDIOBJ result = SelectObject(answer, hBmpCopy);
+
+
+            CloseClipboard();
+        }
+    }
+
+    return answer;
+}
+
+Vector PowerPoint::getHDCSize(HDC _dc)
+{
+    HBITMAP _bitmap = (HBITMAP)GetCurrentObject(_dc, OBJ_BITMAP);
+    return getHBITMAPSize(_bitmap);
+} 
+
+Vector PowerPoint::getHBITMAPSize(HBITMAP _bitmap)
+{
+    BITMAP bm;
+    GetObject(_bitmap, sizeof(bm), (LPVOID)&bm);
+    Vector answer = {};
+    answer.x = bm.bmWidth;
+    answer.y = bm.bmHeight;
+    return answer;
+}
+
+
 void PowerPoint::drawOnScreen(HDC dc, bool useAlpha /*=false*/)
 {
     if (!useAlpha)txBitBlt(0, 0, dc);

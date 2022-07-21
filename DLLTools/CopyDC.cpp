@@ -1,3 +1,4 @@
+#pragma once
 #include "CopyDC.h"
 #include "..\CanvasManager.h"
 
@@ -55,30 +56,6 @@ void CopyDC::controlStretchedDCFullSize(Vector absSize)
             saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
         }
     }
-     /*
-    if (isEqual(absSize.x, 0))
-    {
-        absSize.x = 1;
-    }
-    if (isEqual(absSize.y, 0))
-    {
-        absSize.y = 1;
-    }
-    
-    if (isSmaller (saveCopyDC->stretchedDCFullSize.x, absSize.x) || isSmaller(saveCopyDC->stretchedDCFullSize.y, absSize.y))
-    {
-        saveCopyDC->stretchedDCFullSize = absSize * 2;
-        app->deleteDC(saveCopyDC->stretchedDC);
-        saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
-    }
-
-    if (isBigger(saveCopyDC->stretchedDCFullSize.x * 0.4, absSize.x) || isBigger(saveCopyDC->stretchedDCFullSize.y * 0.4, absSize.y))
-    {
-        saveCopyDC->stretchedDCFullSize = absSize * 2;
-        app->deleteDC(saveCopyDC->stretchedDC);
-        saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
-    }
-    */
 }
 
 

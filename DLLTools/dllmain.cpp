@@ -24,7 +24,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 DLLToolExportData* initDLL(AbstractAppData* data)
 {
     TheApp = data;
-    DLLToolExportData* dllData = new DLLToolExportData(7);
+    DLLToolExportData* dllData = new DLLToolExportData(8);
 
     dllData->addTool(new Line            (&DllSettings, "Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
     dllData->addTool(new Point           (&DllSettings, "Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
@@ -33,6 +33,7 @@ DLLToolExportData* initDLL(AbstractAppData* data)
     dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
     dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
     dllData->addTool(new CopyDC          (&DllSettings, "Скопировать область",  TheApp->loadManager->loadImage("CopyDCButton.bmp"), data));
+    dllData->addTool(new ImportDC          (&DllSettings, "Вставить изображение",  TheApp->loadManager->loadImage("ImportDC.bmp"), data));
 
 
     return dllData;

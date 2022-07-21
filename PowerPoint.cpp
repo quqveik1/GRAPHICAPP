@@ -48,8 +48,30 @@ int main (int argc, int *argv[])
 {
     appData = new PowerPoint;
 
-
+     
     /*
+    if (OpenClipboard(NULL))//открываем буфер обмена
+    {
+        //извлекаем данные из буфера обмена
+        HBITMAP handle = (HBITMAP)GetClipboardData(CF_BITMAP);
+        if (handle)
+        {
+            HDC _dc = appData->createDIBSection(appData->getHBITMAPSize(handle));
+            HGDIOBJ result = SelectObject(_dc, handle);
+
+            CloseClipboard();//закрываем буфер обмена
+            appData->drawOnScreen(_dc);
+        }
+    }
+    */
+    /*
+    RGBQUAD* quad = NULL;
+    HDC dc = appData->getBufferDC(&quad);
+    _getch();
+    */
+    /*
+
+    
     Gdiplus::GdiplusStartupInput gdiplusStartupInput;
     ULONG_PTR gdiplusToken;
     Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
@@ -102,7 +124,7 @@ int main (int argc, int *argv[])
     ToolMenu* toolMenu = new ToolMenu(appData, canvasManager);
     manager->addWindow(toolMenu);   
 
-    LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 500}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, 800} }, canvasManager);
+    LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 600}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, 800} }, canvasManager);
     manager->addWindow(laysMenu);
 
 	ColorMenu* menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, "Settings\\ColorHistory.history", true);

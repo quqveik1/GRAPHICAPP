@@ -59,8 +59,12 @@ struct AbstractAppData
     virtual void transparentBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource = {}) = 0;
     virtual void bitBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource = 0, double ySource = 0) = 0;
     virtual void bitBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSource = {}) = 0;
+    virtual HDC getBufferDC(RGBQUAD** buf) = 0;
 
     virtual void compressImage(HDC& newDC, Vector newSize, HDC oldDC, Vector oldSize) = 0;
+
+    virtual Vector getHDCSize(HDC _dc) = 0;
+    virtual Vector getHBITMAPSize(HBITMAP _dc) = 0;
 
     virtual HDC createDIBSection(Vector size, RGBQUAD** pixels = NULL) = 0;
     virtual HDC createDIBSection(double sizex, double sizey, RGBQUAD** pixels = NULL) = 0;

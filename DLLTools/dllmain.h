@@ -9,6 +9,7 @@
 #include "..\LoadManager.h"
 #include "..\DllSettings.h"
 #include "CopyDC.cpp"
+#include "ImportDC.cpp"
 #include "CadreResizingTool.cpp"
 
 extern "C" __declspec (dllexport) DLLToolExportData* initDLL(AbstractAppData* data);
