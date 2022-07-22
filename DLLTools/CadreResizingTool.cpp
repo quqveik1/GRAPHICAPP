@@ -8,7 +8,7 @@ bool CadreResizingTool::edit(ToolLay* toollay, HDC dc/* = NULL*/)
     if (app->systemSettings->debugMode >= 5) printf("Tool getMBCondition(): %d\n", appData->clickedMB);
     if (app->systemSettings->debugMode >= 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
-    ToolZoneSave* toolDate = (ToolZoneSave*)toolLay->getToolsData();
+    toolData = (ToolData*)toolLay->getToolsData();
     countDeltaForControlButtons();
     countToolZone();
     setControlSquares();

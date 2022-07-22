@@ -1,4 +1,5 @@
-﻿  dllmain.cpp
+﻿  pch.cpp
+  dllmain.cpp
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,63): warning C4100: 'output': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,52): warning C4100: 'lay': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(93,37): warning C4100: 'data': unreferenced formal parameter

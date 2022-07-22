@@ -411,12 +411,15 @@ HDC PowerPoint::getBufferDC(RGBQUAD** buf)
         if (bitmap)
         {
             Vector bitmapSize = getHBITMAPSize(hBmpCopy);
-            answer = createDIBSection(bitmapSize, buf);
-            HGDIOBJ result = SelectObject(answer, hBmpCopy);
-
-
-            CloseClipboard();
+            if (bitmapSize > 0)
+            {
+                answer = createDIBSection(bitmapSize, buf);
+                HGDIOBJ result = SelectObject(answer, hBmpCopy);
+            } 
         }
+
+
+        CloseClipboard();
     }
 
     return answer;
@@ -513,7 +516,7 @@ void PowerPoint::changeWindow(Vector size/* = {}*/, Vector pos/* = {}*/)
 
     MoveWindow(MAINWINDOW, std::lround (pos.x), std::lround(pos.y), std::lround(size.x), std::lround(size.y), TRUE);
 
-    SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
+    //SetWindowLong(MAINWINDOW, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(0,0,0)));
 
     if (sizeHistory[1] != size)
     {

@@ -1,5 +1,6 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#include "TXLib.cpp" 
 #include "SystemSettings.cpp"
 #include "DrawBibliothek.cpp"
 #include "WindowsLib.cpp"
@@ -35,6 +36,7 @@
 #include "OpenHandleMenuManager.cpp"
 #include "winuser.h"
 #include "WindowsLibApi.cpp"  
+
 
 //Visual Studio shortcut for adding library:
 
