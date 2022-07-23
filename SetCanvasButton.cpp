@@ -22,6 +22,7 @@ char* SetCanvasButton::getNewCanvasName()
 void SetCanvasButton::confirmEnter()
 {
     enterStatus = 1;
+    canvasManager->addCanvas(getNewCanvasName(), defaultCanvasSize);
     hide();
 }
 
@@ -40,6 +41,8 @@ void SetCanvasButton::show()
         pointers[i]->show();
     }
     canvasName[0] = {};
+    newCanvasSize = defaultCanvasSize;
+    strcpy(canvasName, defaultCanvasName);
     MoveWindowTo(app->getCentrizedPos(getSize(), app->systemSettings->SizeOfScreen));
 }
 
@@ -57,11 +60,11 @@ void SetCanvasButton::draw()
         app->line({ 0, downSectionPosY }, { getSize().x, downSectionPosY }, finalDC);
 
 
-        sizeX = controlSize->x;
-        sizeY = controlSize->y;
+        sizeX = defaultCanvasSize.x;
+        sizeY = defaultCanvasSize.y;
         app->windowsLibApi->standartManagerDraw(this);
-        controlSize->x = sizeX;
-        controlSize->y = sizeY;
+        defaultCanvasSize.x = sizeX;
+        defaultCanvasSize.y = sizeY;
 
         app->setColor(app->systemSettings->TextColor, finalDC);
         app->selectFont(app->systemSettings->FONTNAME, oneLineSize.y, finalDC);

@@ -5,3 +5,4 @@
 
 
 extern "C" __declspec (dllexport) int saveImage(HDC dc, const char* path);
+extern "C" __declspec (dllexport) HDC loadImage(const char* path, Vector & size);

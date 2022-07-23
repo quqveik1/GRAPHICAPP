@@ -2,11 +2,16 @@
 #include "DrawBibliothek.h"
 #include "InputButton.cpp"
 #include "StringButton2.cpp"
+#include "CanvasManager.h"
 
 
 struct SetCanvasButton : Manager
 {
-    Vector* controlSize = NULL;
+    CanvasManager* canvasManager = NULL;
+    const char* defaultCanvasName = "Холст";
+    Vector defaultCanvasSize = { 500, 500 };
+    Vector newCanvasSize = {};
+
     Vector size = { 300, 200 };
     Vector oneLineSize = { rect.getSize().x - rect.getSize().x * 0.2, 25 };
     Vector inputButtonSize = { 50, 25 };
@@ -34,15 +39,15 @@ struct SetCanvasButton : Manager
     StringButton2 inputName;
     int enterStatus = false;
 
-    SetCanvasButton(AbstractAppData* _app, Vector _pos, Vector* _controlSize) :
-        Manager(_app, { .pos = _pos, .finishPos = {_pos.x + 300, _pos.y + 200} }, 3, false, NULL, {}, _app->systemSettings->MenuColor),
-        controlSize(_controlSize),
+    SetCanvasButton(AbstractAppData* _app, CanvasManager* _canvasManager) :
+        size ({ 300, 200 }),
+        Manager(_app, { .pos = {}, .finishPos = {300, 200} }, 3, false, NULL, {}, _app->systemSettings->MenuColor),
+        canvasManager (_canvasManager),
         inputX(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeX, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR),
         inputY(app, { .pos = {}, .finishPos = inputButtonSize }, &sizeY, &minSize, &maxSize, 0, app->systemSettings->TRANSPARENTCOLOR),
         inputName(app, { .pos = {}, .finishPos = {inputNameSize.x, inputNameSize.y} }, canvasName, MAX_PATH, app->systemSettings->TRANSPARENTCOLOR)
     {
         assert (app);
-        assert(controlSize);
         handle.resize({ .pos = {}, .finishPos = {getSize().x, app->systemSettings->HANDLEHEIGHT } });
         handle.text = "Создать холст";
         handle.font = 30;

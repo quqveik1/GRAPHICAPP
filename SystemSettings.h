@@ -15,6 +15,7 @@ struct CSystemSettings
     COLORREF SecondMenuColor = NULL;
     COLORREF TextColor = NULL;
     COLORREF BackgroundColor = NULL;
+    COLORREF onMouseColor = NULL;
     COLORREF DrawColor = NULL;
     COLORREF TRANSPARENTCOLOR = NULL;
     int Thickness = 3;

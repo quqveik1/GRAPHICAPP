@@ -28,7 +28,7 @@ struct CanvasManager : Manager
     int deltaBetween2Clicks = 300;
 
 
-    CanvasManager(AbstractAppData* _app);
+    CanvasManager(AbstractAppData* _app, Vector _pos);
 
     virtual Canvas* getActiveCanvas();
     virtual int getActiveCanvasNum();

@@ -20,6 +20,7 @@ struct Window
 
     int format = 0;
     int font = 0;
+    const char* fontName = "";
     int sideThickness = 0;
 
     bool redrawStatus = false;
@@ -51,6 +52,7 @@ struct Window
         reDraw(true),
         loadManager(_app->loadManager),
         font(_app->systemSettings->MainFont),
+        fontName (_app->systemSettings->FONTNAME),
         sideThickness(_app->systemSettings->SIDETHICKNESS),
         format(_app->systemSettings->TEXTFORMAT)
 

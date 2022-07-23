@@ -49,9 +49,9 @@ void CopyDC::controlStretchedDCFullSize(Vector absSize)
     }
     else
     {
-        if (saveCopyDC->stretchedDCFullSize != canvasLaySize)
+        if (absSize != canvasLaySize)
         {
-            saveCopyDC->stretchedDCFullSize = canvasLaySize;
+            saveCopyDC->stretchedDCFullSize = absSize;
             if (saveCopyDC->stretchedDC)app->deleteDC(saveCopyDC->stretchedDC);
             saveCopyDC->stretchedDC = app->createDIBSection(saveCopyDC->stretchedDCFullSize, &saveCopyDC->stretchedBuf);
         }
@@ -109,6 +109,21 @@ bool CopyDC::use (ProgrammeDate* data, ToolLay* lay, void* output)
 }
 
 
+/*
+void CopyDC::writeBmpToClipboard(HDC _dc)
+{
+    if (OpenClipboard(app->MAINWINDOW))
+    {
+        EmptyClipboard();
+        HBITMAP newBitmap = (HBITMAP)GetCurrentObject(_dc, OBJ_BITMAP);
+        SetClipboardData(CF_BITMAP, newBitmap);
+
+        CloseClipboard();
+    }
+}
+*/
+
+
 HDC CopyDC::load(ToolLay* toollay, HDC dc/* = NULL*/)
 {
     toolLay = toollay;
@@ -121,23 +136,16 @@ HDC CopyDC::load(ToolLay* toollay, HDC dc/* = NULL*/)
         outDC = getOutDC();
     }
 
-    if (isStarted(toolLay) && !isFinished(toolLay))
-    {
-        app->drawCadre(saveCopyDC->pos, saveCopyDC->pos + saveCopyDC->size, outDC, frameColor, 2);
-    }
-
-
     if (isFinished(toolLay) && !isEqual(saveCopyDC->size.x, 0) && !isEqual(saveCopyDC->size.y, 0))
     {
         if (saveCopyDC->size > 0)
         {
-            controlStretchedDCFullSize(saveCopyDC->size);
             if (saveCopyDC->stretchedDCSize != saveCopyDC->size)
             {
+                controlStretchedDCFullSize(saveCopyDC->size);
                 app->stretchBlt(saveCopyDC->stretchedDC, {}, saveCopyDC->size, saveCopyDC->dc, {}, saveCopyDC->startSize);
 
             }
-
             app->transparentBlt(outDC, saveCopyDC->pos, saveCopyDC->size, saveCopyDC->stretchedDC);
         }
         else
@@ -171,6 +179,35 @@ HDC CopyDC::load(ToolLay* toollay, HDC dc/* = NULL*/)
         saveCopyDC->stretchedDCSize = saveCopyDC->size;
     }
 
+    if (isStarted(toolLay) && !isFinished(toolLay))
+    {
+        app->drawCadre(saveCopyDC->pos, saveCopyDC->pos + saveCopyDC->size, outDC, frameColor, 2);
+    }
+
 
     return outDC;
+}
+
+
+
+int CopyDC::destroy(ToolLay* toollay)
+{
+    toolLay = toollay;
+    if (toolLay)
+    {
+        void* data = toolLay->getToolsData();
+        SaveCopyDC* copyDCData = (SaveCopyDC*)toolLay->getToolsData();
+
+        if (data)
+        {
+            if (copyDCData->zoneCopied)
+            {
+                app->deleteDC(copyDCData->dc);
+            }
+            delete[] data;
+            return 0;
+        }
+    }
+
+    return (int)"ERROR";
 }

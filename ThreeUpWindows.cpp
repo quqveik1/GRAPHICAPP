@@ -4,10 +4,36 @@
 
 void CloseButton::draw()
 {
-    $s
-        //app->setColor (color);
-        //app->rectangle (rect.pos.x, rect.pos.y, rect.finishPos.x, rect.finishPos.y);
-        app->bitBlt(finalDC, 0, 0, 0, 0, dc);
+    $s;
+
+    if ((rect - rect.pos).inRect(getMousePos()))
+    {
+        app->setColor(trueRed, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    else
+    {
+        app->setColor(color, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    app->transparentBlt(finalDC, 0, 0, 0, 0, dc);
+
+   
+}
+
+void MinimizeWindow::draw()
+{
+    if ((rect - rect.pos).inRect(getMousePos()))
+    {
+        app->setColor(onMouseColor, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    else
+    {
+        app->setColor(color, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    app->transparentBlt(finalDC, 0, 0, 0, 0, dc);
 }
 
 
@@ -67,6 +93,16 @@ void ResizeButton::draw()
     else                     dc = nowIsNotFullScreen;
 
 
-    app->windowsLibApi->standartWindowDraw(this);
+    if ((rect - rect.pos).inRect(getMousePos()))
+    {
+        app->setColor(onMouseColor, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    else
+    {
+        app->setColor(color, finalDC);
+        app->rectangle(rect - rect.pos, finalDC);
+    }
+    app->transparentBlt(finalDC, 0, 0, 0, 0, dc);
 }
 

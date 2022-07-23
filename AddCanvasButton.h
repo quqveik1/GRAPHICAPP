@@ -8,15 +8,16 @@ struct AddCanvasButton : Manager
     SetCanvasButton setCanvasButton;
     const char* defaultCanvasName = "Холст";
 
-    Vector newCanvasSize = { 500, 500 };
+    
     bool isEnterActive = false;
 
 
-    AddCanvasButton(AbstractAppData* _app, HDC _dc, struct CanvasManager* _canvasManager) :
-        Manager(_app, {}, 1, true, _dc),
+    AddCanvasButton(AbstractAppData* _app, struct CanvasManager* _canvasManager) :
+        Manager(_app, {}, 1, true),
         canvasManager(_canvasManager),
-        setCanvasButton(_app, {300, 300}, &newCanvasSize)
+        setCanvasButton(_app, canvasManager)
     {
+        text = "Создать";
         //addWindow(&setCanvasButton);
     }
 

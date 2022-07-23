@@ -3,8 +3,8 @@
 #include "Canvas.cpp"
 #include "InputButton2.cpp"
 
-CanvasManager::CanvasManager(AbstractAppData* _app) :
-    Manager(_app, { .pos = {0, _app->systemSettings->HANDLEHEIGHT}, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
+CanvasManager::CanvasManager(AbstractAppData* _app, Vector _pos) :
+    Manager(_app, { .pos = _pos, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
     oneTabSize({ app->systemSettings->BUTTONWIDTH * 5, app->systemSettings->HANDLEHEIGHT }),
     scaleButtonSize({75, 25}),
     plusMinusButtonSize({25, 25}),

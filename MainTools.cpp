@@ -86,7 +86,10 @@ void ToolLay::addTool(Tool* _tool)
 {
     if (tool != _tool)
     {
-        if (toolsData) delete[] toolsData;
+        if (tool)
+        {
+            tool->destroy(this);
+        }
     }
     tool = _tool;
     if (tool)

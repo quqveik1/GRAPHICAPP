@@ -15,6 +15,7 @@ struct SaveImages : Window
         assert(saveDLL);
 
         saveImage = (int (*) (HDC dc, const char* path))GetProcAddress(saveDLL, "saveImage");
+        hide();
     }
 
     virtual void draw() override;

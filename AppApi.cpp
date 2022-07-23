@@ -18,7 +18,7 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
 
 PowerPoint::PowerPoint()
 {
-    appVersion = "v0.2.0.0";
+    appVersion = "v0.2.1.6";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
 

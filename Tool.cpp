@@ -32,8 +32,21 @@ bool Tool::isFinished(ToolLay* data)
     return ((ToolData*)data->getToolsData())->isFinished;
 };
 
+int Tool::destroy(ToolLay* toollay)
+{
+    toolLay = toollay;
+    if (toolLay)
+    {
+        void* data = toolLay->getToolsData();
+        if (data)
+        {
+            delete[] data;
+            return 0;
+        }
+    }
 
-
+    return (int)"ERROR";
+}
 
 HDC Tool::getDC()
 {

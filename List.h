@@ -10,9 +10,10 @@ struct List : Manager
     int lastClickedItemNum = -1;
     bool mayFewWindowsBeOpenedAtTheSameTime;
     int activeItemCircleSize = 3;
+    double deltaAfterTextBeforeFrame = 50;
 
     List(AbstractAppData* _app, Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
-        Manager(_app, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false),
+        Manager(_app, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false, NULL, {}, (RGB(60, 60, 60))),
         mayFewWindowsBeOpenedAtTheSameTime(_mayFewWindowsBeOpenedAtTheSameTime),
         oneItemSize(_oneItemSize),
         itemHeight(systemSettings->HANDLEHEIGHT)
@@ -21,6 +22,9 @@ struct List : Manager
         for (int i = 0; i < length; i++)  items[i] = new OpenManager(app);
 
         isThisItemList = new bool[length] {};
+
+        font = oneItemSize.y - 6;
+
     }
 
     void addNewItem(Window* openButton, HDC dc = NULL, const char* text = NULL);

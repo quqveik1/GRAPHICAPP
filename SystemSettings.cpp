@@ -127,6 +127,7 @@ void CSystemSettings::setDefaultSettings()
 
     MenuColor = RGB(45, 45, 45);
     SecondMenuColor = RGB(30, 30, 30);
+    onMouseColor = RGB(100, 100, 100);
     TextColor = RGB(255, 255, 255);
     BackgroundColor = RGB(0, 0, 0);
     DrawColor = RGB(255, 0, 0);
@@ -138,7 +139,7 @@ void CSystemSettings::setDefaultSettings()
     strcpy(FONTNAME, "Arial");
     TEXTFORMAT = 262165;
 
-    HANDLEHEIGHT = 26.000000;
+    HANDLEHEIGHT = 25.000000;
     BUTTONWIDTH = 50.000000;
     BUTTONHEIGHT = 50.000000;
     MENUBUTTONSWIDTH = 50.000000;

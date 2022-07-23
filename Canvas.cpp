@@ -127,8 +127,6 @@ void Canvas::onClick(Vector mp)
     if (getMBCondition() == 1)
     {
         if (zoneSizeControl.clickFrame()) return;
-
-        if (clickHandle() >= 0) return;
     }
 
 

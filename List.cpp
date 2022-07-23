@@ -5,8 +5,11 @@
 void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* = NULL*/)
 {
     Rect newRect = { .pos = {0, (double)(currLen)*itemHeight}, .finishPos = {rect.getSize().x, (double)(currLen + 1) * itemHeight} };
+
+    app->selectFont(fontName, font, finalDC);
     items[currLen]->rect = newRect;
-    items[currLen]->color = app->systemSettings->MenuColor;
+    items[currLen]->font = font;
+    items[currLen]->color = color;
     items[currLen]->getOpeningManager() = (Manager*)openButton;
     items[currLen]->dc = dc;
     items[currLen]->text = text;

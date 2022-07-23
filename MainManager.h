@@ -13,12 +13,14 @@ struct MainManager : Manager
     Vector minimumAppSize = {};
     Rect zone = {};
     bool needFrameToWork = false;
+    Manager* handle = NULL;
 
 
-    MainManager(AbstractAppData* _app, Rect _rect, int _length) :
+    MainManager(AbstractAppData* _app, Rect _rect, int _length, Manager* _handle) :
         Manager(_app, _rect, _length),
         minimumAppSize({app->systemSettings->BUTTONWIDTH * 6, app->systemSettings->HANDLEHEIGHT * 3 }),
-        zoneSizeControl ((Manager*)this, &zone, &needFrameToWork, &minimumAppSize)
+        zoneSizeControl ((Manager*)this, &zone, &needFrameToWork, &minimumAppSize),
+        handle (_handle)
     {
     }
 

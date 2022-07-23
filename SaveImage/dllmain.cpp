@@ -28,6 +28,7 @@ int saveImage(HDC dc, const char* path)
     mbstowcs_s(NULL, vOut, strlen(path) + 1, path, strlen(path));
     LPCTSTR widePath = vOut;
     HRESULT hresult = image.Save(widePath);
+    delete[] vOut;
 
     if (FAILED(hresult))
     {
@@ -35,5 +36,18 @@ int saveImage(HDC dc, const char* path)
     }
 
     return 0;
+}
+
+HDC loadImage(const char* path, Vector& size)
+{
+    CImage image;
+    wchar_t* vOut = new wchar_t[strlen(path) + 1];
+    mbstowcs_s(NULL, vOut, strlen(path) + 1, path, strlen(path));
+    LPCTSTR widePath = vOut;
+    HRESULT hresult = image.Load(widePath);
+
+    size.x = image.GetWidth();
+    size.y = image.GetHeight();
+    return image.GetDC();
 }
 

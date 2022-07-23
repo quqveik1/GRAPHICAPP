@@ -61,7 +61,7 @@ void standartDraw$ (Window *window)
         if (window->text)
         {
             app->setColor(window->systemSettings->TextColor, window->finalDC);
-            app->selectFont("Arial", window->font, window->finalDC);
+            app->selectFont(window->fontName, window->font, window->finalDC);
             app->drawText(0, 0, window->rect.getSize().x, window->rect.getSize().y, window->text, window->finalDC, window->format);
         }
 

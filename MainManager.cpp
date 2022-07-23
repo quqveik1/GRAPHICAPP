@@ -42,6 +42,8 @@ void MainManager::draw()
 
     zoneSizeControl.drawFrame();
 
+    app->bitBlt(finalDC, handle->rect.pos, handle->getSize(), handle->finalDC);
+
     
 
     setMbLastTime();
@@ -49,6 +51,7 @@ void MainManager::draw()
 
 void MainManager::onClick(Vector mp)
 {
+
     if (zoneSizeControl.clickFrame()) return;
 
     app->windowsLibApi->standartManagerOnClick(this, mp);

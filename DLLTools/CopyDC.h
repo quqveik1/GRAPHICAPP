@@ -32,4 +32,5 @@ struct CopyDC : CadreResizingTool
 
     virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) override;
     virtual HDC load(ToolLay* toollay, HDC dc = NULL) override;
+    virtual int destroy(ToolLay* toollay) override;
 };

@@ -24,7 +24,7 @@
 #include "ThreeUpWindows.cpp"
 #include "LaysMenu.cpp" 
 #include "TouchButton.cpp"
-#include "AddCanvasButton.cpp"
+#include "SetCanvasButton.cpp"
 #include "Handle.cpp"
 #include "MainManager.cpp"
 #include "SaveImages.cpp"
@@ -98,19 +98,31 @@ int main (int argc, int *argv[])
     appData->drawOnScreen(_dc);
     _getch();
     */
-    
-    MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21);
 
-    ToolSave toolSave = {};
+    /*
+    HMODULE _lib = LoadLibrary("SaveImage.dll");
+    HDC (*loadImage)(const char* path, Vector & size) = (HDC(*) (const char* path, Vector & size)) GetProcAddress(_lib, "loadImage");
+    Vector size = {};
+    HDC _dc = loadImage("Холст.bmp", size);
+    appData->drawOnScreen(_dc);
+    _getch();
+    HDC dc = appData->createDIBSection(size);
+    appData->bitBlt(dc, 0, 0, 0, 0, _dc);
+    appData->drawOnScreen(dc);
+    _getch();
+    */
 
-    
-
-    CanvasManager* canvasManager = new CanvasManager(appData);
-    appData->canvasManager = canvasManager;
-	manager->addWindow (canvasManager);
+    //saveImage = (int (*) (HDC dc, const char* path))GetProcAddress(_lib, "saveImage");
 
     Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
+
+    MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21, mainhandle);
+
     manager->addWindow(mainhandle);
+
+    CanvasManager* canvasManager = new CanvasManager(appData, {0, mainhandle->rect.finishPos.y});
+    appData->canvasManager = canvasManager;
+	manager->addWindow (canvasManager);
 
 
     if (appData->systemSettings->debugMode >= 0) printf("Инструменты начали загружаться\n");
@@ -146,7 +158,7 @@ int main (int argc, int *argv[])
 
     mainhandle;
 
-		CloseButton* closeButton = new CloseButton(appData, appData->loadManager->loadImage("CloseButton4.bmp"));
+		CloseButton* closeButton = new CloseButton(appData);
 		mainhandle->addWindowToBack(closeButton);
 
         ResizeButton* resizeButton = new ResizeButton(appData);
@@ -155,22 +167,21 @@ int main (int argc, int *argv[])
         MinimizeWindow* minimizeButton = new MinimizeWindow(appData);
         mainhandle->addWindowToBack(minimizeButton);
 
-        AddCanvasButton* addNewCanvas = new AddCanvasButton(appData, appData->loadManager->loadImage ("AddNewCanvas2.bmp"), canvasManager);
-		mainhandle->addWindowToStart(addNewCanvas);
-        SetCanvasButton* setCanvasButton = addNewCanvas->getSetCanvasButton();
-    manager->addWindow(setCanvasButton);
+        List* createList = mainhandle->createMenuOption("Создать", NULL);
+    
+        SetCanvasButton setCanvasButton(appData, canvasManager);
+        createList->addNewItem(&setCanvasButton, NULL, "Создать холст");
+        manager->addWindow(&setCanvasButton);
+    manager->addWindow(createList);
 
-        OpenHandleMenuManager* openWindowsManager = new OpenHandleMenuManager(appData, appData->loadManager->loadImage("OpenWindows.bmp"));
-        mainhandle->addWindowToStart(openWindowsManager);
-        List* openWindows = new List(appData, { openWindowsManager->rect.pos.x, openWindowsManager->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 6);
-        openWindowsManager->setOpeningManager(openWindows);
-    manager->addWindow(openWindows);
-        
+        List* openWindows = mainhandle->createMenuOption("Окна", NULL);;
+    
             openWindows->addNewItem (menu, NULL, "Цвета");
             openWindows->addNewItem(thicknessButton, NULL, "Толщина");
             openWindows->addNewItem (toolsPallette, NULL, "Инструменты");
             openWindows->addNewItem (laysMenu, NULL, "Слои");
             openWindows->addNewItem (toolMenu, NULL, "Инструменты на слое");
+        manager->addWindow(openWindows);
             /*
             List* filters = openWindows->addSubList("Фильтры", dllManager->currLoadWindowNum);
         manager->addWindow (filters);
@@ -180,13 +191,11 @@ int main (int argc, int *argv[])
                 }
                 */
 
-        OpenHandleMenuManager* openSystemList = new OpenHandleMenuManager(appData, appData->loadManager->loadImage("SettingsIcon.bmp"));
-        mainhandle->addWindowToStart(openSystemList);
-        List* systemList = new List(appData, { openSystemList->rect.pos.x, openSystemList->rect.finishPos.y }, { appData->systemSettings->BUTTONWIDTH * 5, appData->systemSettings->HANDLEHEIGHT }, 1);
-        openSystemList->setOpeningManager(systemList);
-    manager->addWindow(systemList);
+        List* importList = mainhandle->createMenuOption("Импорт/Экспорт", NULL);
             SaveImages* saveImages = new SaveImages(appData, canvasManager);
-            systemList->addNewItem(saveImages, NULL, "Сохранить изображение");
+            manager->addWindow(saveImages);
+            importList->addNewItem(saveImages, NULL, "Сохранить изображение");
+        manager->addWindow(importList);
 
 	txBegin ();
 	Engine (manager);
