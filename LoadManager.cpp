@@ -31,7 +31,12 @@ HDC CLoadManager::loadImage(const char* path, Vector size /* = {} */)
     images[currentImagesAmount].dc = txLoadImage(fullPath);
     if (app->systemSettings->debugMode == 4) (void)printf("Fullpath: %s; Result: %d\n", fullPath, (int)images[currentImagesAmount].dc);
     if (app->systemSettings->debugMode == 4) app->drawOnScreen (images[currentImagesAmount].dc);
-    if (images[currentImagesAmount].dc == NULL) gassert(!fullPath);
+    if (images[currentImagesAmount].dc == NULL)
+    {
+        printf("Image form [%s] hasn't been loaded\n", fullPath);
+        txSleep();
+        _getch();
+    }
     strcpy (images[currentImagesAmount].path, fullPath);
     images[currentImagesAmount].size = size;
     currentImagesAmount++;

@@ -6,19 +6,21 @@ struct OpenManager : Window
 {
     Manager* openingManager;
     bool isOpeningAnotherList = false;
+    int mode = 0;
+    int* opening = NULL;
 
     OpenManager(AbstractAppData* _app, Rect _rect, COLORREF _color, Manager* _manager, HDC _dc = NULL, const char* _text = "") :
         Window(_app, _rect, _color, _dc, NULL, _text),
         openingManager(_manager)
     {
-        format = DT_LEFT;
+        format = DT_LEFT | DT_VCENTER;
     }
 
     OpenManager(AbstractAppData* _app) :
         Window(_app),
         openingManager(NULL)
     {
-        format = DT_LEFT;
+        format = DT_LEFT | DT_VCENTER;
     }
 
     virtual void draw() override;

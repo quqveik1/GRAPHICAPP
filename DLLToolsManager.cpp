@@ -1,5 +1,6 @@
 #pragma once
 #include "DLLToolsManager.h"
+#include "ToolManager.h"
 
 void DLLToolsManager::addToManager(CToolManager* manager)
 {

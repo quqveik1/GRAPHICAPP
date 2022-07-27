@@ -51,7 +51,6 @@ int CSystemSettings::saveUserSettings(const char* path)
 
     saveIntSettings(ssFile, &debugMode, "debugMode");
 
-    saveIntSettings(ssFile, &DrawingMode, "DrawingMode");
     saveIntSettings(ssFile, &Thickness, "Thickness");
 
     saveIntSettings(ssFile, &WindowStyle, "WindowStyle");
@@ -99,7 +98,6 @@ int CSystemSettings::readUserSettings(const char* path)
 
     setIntSettings(ssFile, &debugMode, "debugMode");
 
-    setIntSettings(ssFile, &DrawingMode, "DrawingMode");
     setIntSettings(ssFile, &Thickness, "Thickness");
 
     setIntSettings(ssFile, &WindowStyle, "WindowStyle");
@@ -148,8 +146,6 @@ void CSystemSettings::setDefaultSettings()
     FrameThickness = 6;
 
     debugMode = -1;
-
-    DrawingMode = 1;
 
     SizeOfScreen.x = 1280.000000;
     SizeOfScreen.y = 720.000000;

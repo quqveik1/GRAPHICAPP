@@ -6,10 +6,26 @@ void OpenManager::onClick(Vector mp)
     setActiveWindow(this);
     if (!isClickedLastTime())
     {
-        assert(openingManager);
-        if (getOpeningManager()->needToShow) getOpeningManager()->hide();
-        else                                 getOpeningManager()->show();
-        getOpeningManager()->draw();
+        
+        if (mode == 0)
+        {
+            assert(openingManager);
+            if (getOpeningManager()->needToShow)
+            {
+                getOpeningManager()->hide();
+            }
+            else
+            {
+                getOpeningManager()->show();
+            }
+            getOpeningManager()->draw();
+        }
+
+        if (mode == 1)
+        {
+            if (*opening == 1) *opening = 0;
+            if (*opening == 0) *opening = 1;
+        }
     }
     setMbLastTime();
 }

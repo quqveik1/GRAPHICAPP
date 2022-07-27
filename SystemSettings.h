@@ -37,8 +37,6 @@ struct CSystemSettings
     double FrameThickness = NULL;
 
     int debugMode = NULL;
-
-    int DrawingMode = NULL;
     int TOOLSNUM = NULL;
 
     Vector SizeOfScreen = {};

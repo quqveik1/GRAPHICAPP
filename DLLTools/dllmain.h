@@ -8,9 +8,9 @@
 #include "..\BaseFunctions.cpp"
 #include "..\LoadManager.h"
 #include "..\DllSettings.h"
-#include "CopyDC.cpp"
+#include "..\CopyDC.cpp"
 #include "ImportDC.cpp"
-#include "CadreResizingTool.cpp"
+#include "..\CadreResizingTool.cpp"
 
 extern "C" __declspec (dllexport) DLLToolExportData* initDLL(AbstractAppData* data);
 
@@ -45,8 +45,8 @@ struct Tool4Squares : CadreResizingTool
 
     virtual ToolSave* getToolData() { return (ToolSave*)toolLay->getToolsData(); };
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) override;
-    virtual HDC load(ToolLay* toollay, HDC dc = NULL) override;
+    virtual long use(ToolLay* lay) override;
+    virtual HDC load(ToolLay* toollay) override;
 };
 
 
@@ -87,8 +87,8 @@ struct Point : Tool
 
     virtual void initPointSave();
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) override;
-    virtual HDC load(ToolLay* toollay, HDC dc = NULL) override;
+    virtual long use(ToolLay* lay) override;
+    virtual HDC load(ToolLay* toollay) override;
 };
 
 struct Vignette : Tool
@@ -101,8 +101,8 @@ struct Vignette : Tool
     {
     } 
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output);
-    virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };
+    virtual long use(ToolLay* lay) override;
+    virtual HDC load(ToolLay* toollay) override { return NULL; };
 };
 
 struct Gummi : Point

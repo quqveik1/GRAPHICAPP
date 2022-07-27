@@ -2,7 +2,7 @@
 #include "Handle.h"
 
 
-List* Handle::createMenuOption(const char* optionText, int* status)
+List* Handle::createMenuOption(const char* optionText, int* status, bool needToHideAfterClick/*= false*/)
 {
     if (currentOptionsLength + 1 < maxOptionsLength)
     {      
@@ -15,7 +15,7 @@ List* Handle::createMenuOption(const char* optionText, int* status)
         options[currentOptionsLength].size.x = sizeOfLabel.x + deltaBetweenFrameOfOption;
         options[currentOptionsLength].size.y = optionHeight;
 
-        List* newList = new List(app, {}, {app->systemSettings->BUTTONWIDTH * 5, getSize().y}, 10);
+        List* newList = new List(app, {}, {app->systemSettings->BUTTONWIDTH * 5, getSize().y}, 10, true, needToHideAfterClick);
         options[currentOptionsLength].list = newList;
 
         currentOptionsLength++;
@@ -74,15 +74,18 @@ void Handle::controlOptionClicking()
 {
     if (activeOptionNum >= 0)
     {
+        if (!options[activeOptionNum].list->needToShow)
+        {
+            activeOptionNum = -1;
+            return;
+        }
+
         int newActiveOptionNum = onWhichOptionIsMP();
         if (newActiveOptionNum != activeOptionNum && newActiveOptionNum >= 0)
         {
             options[activeOptionNum].list->hide();
             options[newActiveOptionNum].list->show();
             activeOptionNum = newActiveOptionNum;
-        }
-        if (!options[activeOptionNum].list->needToShow)
-        {
             options[activeOptionNum].list->show();
         }
 
@@ -218,8 +221,11 @@ void Handle::onClick(Vector mp)
             return;
         }
         activeOptionNum = num;
+        options[activeOptionNum].list->show();
         return;
     }
+
+    if (num >= 0) return;
 
     if (resultOfClicking == -1 && !wasCommonHandlePlaceClicked)
     {

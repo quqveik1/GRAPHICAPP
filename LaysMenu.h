@@ -9,6 +9,7 @@ struct LaysMenu : Manager
     int sectionFont;
     HDC addNewLayButton;
     Vector buttonSize;
+    int needToCreateLay = false;
 
     LaysMenu(AbstractAppData* _app, Rect _rect, CanvasManager* _canvasManager) :
         Manager(_app, _rect, 0, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }),

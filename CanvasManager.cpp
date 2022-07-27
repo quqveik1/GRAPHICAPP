@@ -2,6 +2,7 @@
 #include "CanvasManager.h"
 #include "Canvas.cpp"
 #include "InputButton2.cpp"
+#include "ImportTool.cpp"
 
 CanvasManager::CanvasManager(AbstractAppData* _app, Vector _pos) :
     Manager(_app, { .pos = _pos, .finishPos = _app->systemSettings->FullSizeOfScreen }, 10, true, NULL, {}, TX_BLACK),
@@ -10,9 +11,12 @@ CanvasManager::CanvasManager(AbstractAppData* _app, Vector _pos) :
     plusMinusButtonSize({25, 25}),
     plusButtonDC(app->loadManager->loadImage("plusScaleButton.bmp")),
     minusButtonDC(app->loadManager->loadImage("minusScaleButton.bmp")),
-    scaleButton(new InputButton2 (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color))
+    scaleButton(new InputButton2 (_app, { .pos = {}, .finishPos = scaleButtonSize }, &intScale, &minScale, &maxScale, 1, color)),
+    importTool(new ImportTool(_app))
 {
     gassert(loadManager);
+
+    app->toolManager->addTool(importTool, true);
 
     tabCross = app->loadManager->loadImage("tabCross.bmp");
 
@@ -114,6 +118,7 @@ void CanvasManager::draw()
     }
 
     drawTabs();
+
     setMbLastTime();
 }
 
@@ -199,11 +204,6 @@ int CanvasManager::setDrawingMode(int num)
             needToChangeDrawingMode = true;
         }
 
-        if (needToChangeDrawingMode)
-        {
-            app->systemSettings->DrawingMode = num;
-            return !"Sucsess";
-        }
     }
     return 1;
 }

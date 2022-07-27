@@ -1,12 +1,14 @@
 #pragma once
 #include "Canvas.h"
 #include "ZoneSizeControl.cpp"
+#include "ImportTool.cpp"
+#include "ToolManager.cpp"
 
 Canvas::Canvas(AbstractAppData* _app, Rect _rect, const char* _name) :
     Manager(_app, _rect, 5, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
     canvasCoordinats({}),
     laysSize(_rect.getSize()),
-    DrawingModeLastTime(systemSettings->DrawingMode),
+    DrawingModeLastTime(app->toolManager->getActiveToolNum()),
     zoneSizeControl(this, &rect, &needFrameToWork),
     finalLay(app->createDIBSection(laysSize))
 {
@@ -23,26 +25,40 @@ Canvas::~Canvas()
     delete[] lay;
 }
 
-void CToolManager::addTool(Tool* tool)
-{
-    assert(tool);
-    if (currentLength < ToolsLength - 1)
-    {
-        tools[currentLength] = tool;
-        currentLength++;
-    }
 
-}
 
 
 
 void Canvas::createLay()
 {
     assert(!(currentLayersLength >= LayersNum));
-    lay[currentLayersLength].createLay(app, laysSize);
+    lay[currentLayersLength].createLay(app, this, laysSize);
     if (currentLayersLength <= LayersNum) currentLayersLength++;
 
     activeLayNum = currentLayersLength - 1;
+}
+
+void Canvas::controlImportingImages()
+{
+    static bool wasLastTimeImporting = false;
+    static int lastTimetoolNum = -1;
+
+    if (wasLastTimeImporting && getCurrentlyImportingImage())
+    {
+        app->deleteDC(getCurrentlyImportingImage());
+        getCurrentlyImportingImage() = NULL;
+        app->toolManager->setActiveToolNum(lastTimetoolNum);
+    }
+
+    if (getCurrentlyImportingImage())
+    {
+        lastTimetoolNum = app->toolManager->getActiveToolNum();
+        int settedToolNum = app->toolManager->setActiveTool(app->canvasManager->importTool);
+        if (settedToolNum >= 0)
+        {
+            wasLastTimeImporting = true;
+        }
+    }
 }
 
 void Canvas::startTool()
@@ -50,16 +66,16 @@ void Canvas::startTool()
     initToolLay();
 }
 
-void Canvas::changeTool()
+void Canvas::changeTool(Tool* tool)
 {
-    setToolToToolLay(getActiveLay()->getActiveToolLay());
+    setToolToToolLay(getActiveLay()->getActiveToolLay(), getActiveTool());
     getActiveLay()->needRedraw();
 }
 
 void Canvas::initToolLay()
 {
     addToolLay();
-    getActiveLay()->addToolLay(&toolLays[currentToolLength]);
+    //getActiveLay()->addToolLay(&toolLays[currentToolLength]);
 
     currentToolLength++;
 }
@@ -71,13 +87,13 @@ void Canvas::addToolLay()
     assert(clay);
     clay->isNewToolLayCreated = true;
     ToolLay* toollay = getNewToolLay();
-    setToolToToolLay(toollay);
+    setToolToToolLay(toollay, getActiveTool());
 }
 
 
-void Canvas::setToolToToolLay(ToolLay* toollay)
+void Canvas::setToolToToolLay(ToolLay* toollay, Tool* tool)
 {
-    toollay->addTool(getActiveTool());
+    toollay->addTool(tool);
 }
 
 void Canvas::setCurrentData()
@@ -92,18 +108,20 @@ void Canvas::setCurrentData()
 
 ToolLay* Canvas::getNewToolLay()
 {
-    return &(toolLays[currentToolLength]);
+    return NULL;
 }
 
 bool Canvas::isDrawingModeChanged()
-{
-    return DrawingModeLastTime != systemSettings->DrawingMode;
+{        
+return false;
+    //return DrawingModeLastTime != systemSettings->DrawingMode;
 }
 
 Tool* Canvas::getActiveTool()
 {
-    if (app->systemSettings->DrawingMode <= 0 || app->toolManager->currentLength <= 0) return NULL;
-    return app->toolManager->tools[app->systemSettings->DrawingMode - 1];
+    return NULL;
+    //if (app->systemSettings->DrawingMode <= 0 || app->toolManager->currentLength <= 0) return NULL;
+    //return app->toolManager->tools[app->systemSettings->DrawingMode - 1];
 }
 
 void Canvas::setActiveToolLayNum(int num)
@@ -158,28 +176,30 @@ Vector Canvas::getMousePos()
 
 void Canvas::draw()
 {
-
-    if (systemSettings->debugMode >= 3)  printf("Canvas clicked: %d\n", getMBCondition());
-    if (systemSettings->debugMode >= 3)printf("rect.pos: {%lf, %lf}\n", rect.pos.x, rect.pos.y);
+    if (systemSettings->debugMode >= 3) printf("Canvas clicked: %d\n", getMBCondition());
+    if (systemSettings->debugMode >= 3) printf(" Canvasrect.pos: {%lf, %lf}\n", rect.pos.x, rect.pos.y);
 
     controlStretching();
 
     CLay* activeLay = getActiveLay();
-    if (activeLay) controlTool();
-    controlEditLay();
+    if (activeLay)
+    {
+        controlLay();
+        drawLays();
+    }
 
-    if (app->getAsyncKeyState('Q'))
+    if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('Q'))
     {
         endtillkey('Q');
         createLay();
     }
 
-    drawLays();
+    
     if (posLastTime != rect.pos) reDraw = true;
     copyFinalLayOnFinalDC();
 
 
-    DrawingModeLastTime = app->systemSettings->DrawingMode;
+    DrawingModeLastTime = app->toolManager->getActiveToolNum();
 
     setMbLastTime();
 
@@ -319,6 +339,20 @@ HDC Canvas::getImageForSaving()
 }
 
 
+int Canvas::importImage(HDC dc)
+{
+
+    if (!getActiveLay()) createLay();
+    currentlyImportingImage = dc;
+    return 1;
+}
+
+HDC& Canvas::getCurrentlyImportingImage()
+{
+    return currentlyImportingImage;
+}
+
+
 int Canvas::getActiveLayNum()
 {
     return activeLayNum;
@@ -398,13 +432,35 @@ void Canvas::controlTool()
     setCurrentData();
     if (!isFinished)
     {
-        if (isDrawingModeChanged()) changeTool();
+  
+        /*
+        if (isDrawingModeChanged())
+        {
+            changeTool(getActiveTool());
+        }
         if (systemSettings->debugMode == 5) printf("Num:%d_IsFinished:%d", clay->getActiveToolLayNum(), isFinished);
         if (toollay->useTool(&currentDate))
         {
             finishTool();
         }
+        */
     }
+}
+
+int Canvas::controlLay()
+{
+
+    setCurrentData();
+
+    CLay* clay = getActiveLay();
+    assert(clay);
+
+    controlImportingImages();
+
+    clay->controlTool(&currentDate);
+
+
+    return 0;
 }
 
 void Canvas::finishTool()
@@ -431,54 +487,7 @@ void Canvas::controlEditLay()
     }
 }
 
-bool Canvas::controlLay()
-{
-    /*
-    ToolLay* activeToolLay = getActiveLay()->getActiveToolLay();
-    if (app->getAsyncKeyState(VK_RIGHT) && currentToolLength > 0)
-    {
-        activeToolLay->toolZone.pos += {1, 0};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState(VK_LEFT) && currentToolLength > 0)
-    {
-        activeToolLay->toolZone.pos += {-1, 0};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState(VK_DOWN) && currentToolLength > 0)
-    {
-        activeToolLay->toolZone.pos += {0, 1};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState(VK_UP) && currentToolLength > 0)
-    {
-        activeToolLay->toolZone.pos += {0, -1};
-        activeToolLay->needRedraw();
-    }
 
-    if (app->getAsyncKeyState('T') && currentToolLength > 0)
-    {
-        activeToolLay->size += { 0.01, 0};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState('G') && currentToolLength > 0)
-    {
-        activeToolLay->size += {-0.01, 0};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState('Y') && currentToolLength > 0)
-    {
-        activeToolLay->size += { 0, 0.01};
-        activeToolLay->needRedraw();
-    }
-    if (app->getAsyncKeyState('H') && currentToolLength > 0)
-    {
-        activeToolLay->size += { 0, -0.01};
-        activeToolLay->needRedraw();
-    }
-    */
-    return false;
-}
 
 void Canvas::cleanOutputLay()
 {
@@ -515,7 +524,6 @@ void Canvas::drawLays()
             lay[lays].editTool(&currentDate);
         }
 
-       
         app->transparentBlt(finalLay, lay[lays].lay.layCoordinats.x, lay[lays].lay.layCoordinats.y, 0, 0, lay[lays].lay.outputLay);
 
     }

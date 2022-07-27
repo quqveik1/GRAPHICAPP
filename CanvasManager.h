@@ -26,6 +26,8 @@ struct CanvasManager : Manager
     HDC minusButtonDC = NULL;
     int lastTimeButtonClicked = 0;
     int deltaBetween2Clicks = 300;
+    int lastTimeMBWasClicked = 0;
+    struct ImportTool* importTool = NULL;
 
 
     CanvasManager(AbstractAppData* _app, Vector _pos);

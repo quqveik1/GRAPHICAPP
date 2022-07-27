@@ -4,16 +4,22 @@ struct CLay
 {
     AbstractAppData* app = NULL;
 
+    struct Canvas* canvas = NULL;
+
     Lay lay = {};
     int toolLength = 0;
     int activeToolNum = -1;
     bool isNewToolLayCreated = false;
     bool needToRedraw = false;
+    int oneLayToolLimit = NULL;
+    int DrawingModeLastTime = -1;
 
+    struct PragrammeDate* data = NULL;
     struct ToolLay** toolLays = NULL;
 
 
-    virtual void createLay(AbstractAppData* _app, Vector _size = {});
+    virtual void createLay(AbstractAppData* _app, struct Canvas* _canvas, Vector _size = {});
+    virtual ToolLay* createToolLay();
     virtual void addToolLay (ToolLay* tool);
 
     virtual HDC getOutputDC ();
@@ -35,6 +41,7 @@ struct CLay
     virtual bool redrawStatus();
     virtual void redraw();
     virtual void editTool(ProgrammeDate* data);
+    virtual void controlTool(ProgrammeDate* data);
 
     ~CLay();
 };

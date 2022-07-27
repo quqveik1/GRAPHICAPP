@@ -24,11 +24,8 @@ int saveImage(HDC dc, const char* path)
     CImage image;
     image.Attach(bitmap);
 
-    wchar_t* vOut = new wchar_t[strlen(path) + 1];
-    mbstowcs_s(NULL, vOut, strlen(path) + 1, path, strlen(path));
-    LPCTSTR widePath = vOut;
+    LPCTSTR widePath = path;
     HRESULT hresult = image.Save(widePath);
-    delete[] vOut;
 
     if (FAILED(hresult))
     {
@@ -38,16 +35,18 @@ int saveImage(HDC dc, const char* path)
     return 0;
 }
 
-HDC loadImage(const char* path, Vector& size)
+HDC loadImage(const char* path, Vector& size, AbstractAppData* _app)
 {
     CImage image;
-    wchar_t* vOut = new wchar_t[strlen(path) + 1];
-    mbstowcs_s(NULL, vOut, strlen(path) + 1, path, strlen(path));
-    LPCTSTR widePath = vOut;
+    LPCTSTR widePath = path;
     HRESULT hresult = image.Load(widePath);
 
     size.x = image.GetWidth();
     size.y = image.GetHeight();
-    return image.GetDC();
+    HDC imageDC = image.GetDC();
+    HDC newdc = _app->createDIBSection(size);
+    _app->bitBlt(newdc, {}, {}, imageDC);
+    image.ReleaseDC();
+    return newdc;
 }
 

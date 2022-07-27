@@ -1,36 +1,52 @@
 #pragma once
 #include "CLay.h"
+#include "Canvas.h"
+#include "ToolLay.cpp"
+#include "ProgrammeDate.h"
+#include "ToolManager.h"
 
 CLay::~CLay()
 {
     if (toolLays) delete[] toolLays;
 }
 
-void CLay::createLay(AbstractAppData* _app, Vector _size /* = {}*/)
+void CLay::createLay(AbstractAppData* _app, Canvas* _canvas, Vector _size /* = {}*/)
 {
     assert(_app);
-    app = _app;
+    app = _app;   
+    oneLayToolLimit = app->systemSettings->ONELAYTOOLSLIMIT;
+    canvas = _canvas;
+    assert(canvas);
 
     toolLays = new ToolLay* [app->systemSettings->ONELAYTOOLSLIMIT];
-    for (int i = 0; i < app->systemSettings->ONELAYTOOLSLIMIT; i++)
-    {
-        toolLays[i] = new ToolLay;
-    }
+
 
     if (_size == _size.getNullVector()) _size = app->systemSettings->DCVECTORSIZE;
 
     lay.createLay(app, _size);
+    createToolLay();
+}
+
+ToolLay* CLay::createToolLay()
+{
+    if (toolLength >= oneLayToolLimit) return NULL;
+
+    ToolLay* newToolLay = new ToolLay();
+    addToolLay(newToolLay);
+
+    return newToolLay;
 }
 
 
 void CLay::addToolLay(ToolLay* tool)
 {
-    assert(toolLength < app->systemSettings->ONELAYTOOLSLIMIT);
+    assert(toolLength < oneLayToolLimit);
 
     toolLength++;
     activeToolNum = toolLength - 1;
     toolLays[activeToolNum] = tool;
     tool->lay = this;
+    tool->addTool(app->toolManager->getActiveTool());
 }
 
 void CLay::needRedraw()
@@ -38,9 +54,35 @@ void CLay::needRedraw()
     needToRedraw = true;
 } 
 
-void CLay::editTool(ProgrammeDate* data)
+void CLay::editTool(ProgrammeDate* _data)
 {
-    if (getActiveToolLay() && getActiveToolLay()->getTool()) getActiveToolLay()->editTool(data);
+    if (getActiveToolLay() && getActiveToolLay()->getTool())
+    {
+        getActiveToolLay()->editTool(_data);
+    }
+}
+
+void CLay::controlTool(ProgrammeDate* _data)
+{
+    ToolLay* activeToolLay = getActiveToolLay();
+
+    int isFinished = activeToolLay->isFinished();
+
+    if (!isFinished)
+    {
+        if (DrawingModeLastTime != app->toolManager->getActiveToolNum())
+        {
+            activeToolLay->addTool(app->toolManager->getActiveTool());
+        }
+
+        int needToFinish = activeToolLay->useTool(_data);
+        if (needToFinish)
+        {
+            createToolLay();
+        }
+    }
+    DrawingModeLastTime = app->toolManager->getActiveToolNum();
+
 }
 
 
@@ -112,7 +154,7 @@ void CLay::redraw()
     for (int toollay = 0; toollay < toolLength; toollay++)
     {
         HDC outDC = toolLays[toollay]->drawTool();
-        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
+        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC); 
     }
 }
 

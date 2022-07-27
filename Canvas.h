@@ -3,7 +3,7 @@
 #include "DrawBibliothek.h"
 #include "WindowsLib.cpp"
 #include "CLay.h"
-#include "MainTools.h"
+#include "ToolLay.h"
 #include "ZoneSizeControl.h"
 
 struct Canvas : Manager
@@ -20,7 +20,6 @@ struct Canvas : Manager
     bool needToRedrawBackground = false;
     COLORREF backgroungColor = TX_WHITE;
     CLay* lay = new CLay[LayersNum]{};
-    ToolLay* toolLays = new ToolLay[LayersNum]{};
     int currentToolLength = 0;
     bool editingMode = false;
     int DrawingModeLastTime = 0;
@@ -39,6 +38,8 @@ struct Canvas : Manager
     int deltaBetween2Clicks = 300;
     Vector deltaPos = {};
 
+    HDC currentlyImportingImage = NULL;
+
     Canvas(AbstractAppData* _app, Rect _rect, const char* _name);
     ~Canvas();
 
@@ -48,8 +49,8 @@ struct Canvas : Manager
 
     void drawCadre();
 
-	void createLay ();
-	bool controlLay ();
+	virtual void createLay ();
+	int controlLay ();
     void controlEditLay();
 	void drawLays();
     void cleanOutputLay();
@@ -59,14 +60,18 @@ struct Canvas : Manager
     void finishTool();
     void controlTool();
     void startTool();
-    void changeTool();
+    void changeTool(Tool* tool);
     void initToolLay();
     void addToolLay();
-    void setToolToToolLay(ToolLay* toollay);
+    void setToolToToolLay(ToolLay* toollay, Tool* tool);
     void setCurrentData();
+
+    void controlImportingImages();
    
 
     virtual HDC getImageForSaving();
+    virtual int importImage(HDC dc);
+    virtual HDC& getCurrentlyImportingImage();
     virtual CLay* getActiveLay();
     virtual int getEditingMode();
     virtual Vector getLaySize();

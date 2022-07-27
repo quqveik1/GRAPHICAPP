@@ -2,9 +2,9 @@
 #include "ImportDC.h"
 
 
-bool ImportDC::use(ProgrammeDate* data, ToolLay* lay, void* output)
+long ImportDC::use(ToolLay* lay)
 {
-    appData = data;
+    appData = lay->getProgDate();
     toolLay = lay;
     assert(appData && lay);
     toolData = (ToolData*)toolLay->getToolsData();

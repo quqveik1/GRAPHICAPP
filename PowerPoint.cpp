@@ -12,7 +12,6 @@
 #include "Tool.h"
 #include "DLLToolsManager.cpp"
 #include "CLay.cpp"
-#include "MainTools.cpp"
 #include "CanvasManager.cpp"
 #include "ProgressBar.h"
 #include "LoadManager.cpp"
@@ -36,9 +35,7 @@
 #include "OpenHandleMenuManager.cpp"
 #include "winuser.h"
 #include "WindowsLibApi.cpp"  
-
-
-//Visual Studio shortcut for adding library:
+#include "ImportImage.cpp"
 
 
 
@@ -167,10 +164,11 @@ int main (int argc, int *argv[])
         MinimizeWindow* minimizeButton = new MinimizeWindow(appData);
         mainhandle->addWindowToBack(minimizeButton);
 
-        List* createList = mainhandle->createMenuOption("Создать", NULL);
+        List* createList = mainhandle->createMenuOption("Создать", NULL, true);
     
         SetCanvasButton setCanvasButton(appData, canvasManager);
         createList->addNewItem(&setCanvasButton, NULL, "Создать холст");
+        createList->addNewItem(NULL, NULL, "Создать слой", &(laysMenu->needToCreateLay));
         manager->addWindow(&setCanvasButton);
     manager->addWindow(createList);
 
@@ -191,10 +189,11 @@ int main (int argc, int *argv[])
                 }
                 */
 
-        List* importList = mainhandle->createMenuOption("Импорт/Экспорт", NULL);
-            SaveImages* saveImages = new SaveImages(appData, canvasManager);
-            manager->addWindow(saveImages);
-            importList->addNewItem(saveImages, NULL, "Сохранить изображение");
+        List* importList = mainhandle->createMenuOption("Импорт/Экспорт", NULL, true);
+            SaveImages saveImages(appData, canvasManager);
+            importList->addNewItem(&saveImages, NULL, "Сохранить изображение");
+            ImportImage importImage(appData);
+            importList->addNewItem(&importImage, NULL, "Загрузить изображение");
         manager->addWindow(importList);
 
 	txBegin ();
@@ -249,7 +248,7 @@ void Engine (MainManager *manager)
             if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
 
             manager->clicked = txMouseButtons();
-            if (txMouseButtons())
+            if (manager->clicked)
             {
                 manager->onClick(mp);
             }

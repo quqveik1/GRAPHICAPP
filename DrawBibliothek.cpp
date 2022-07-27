@@ -95,6 +95,7 @@ const char* getCustomFilePath(const char* question, const char* fileTypeDescribt
     return fileName;
 }
 
+/*
 const char* getCustomFilePathForSaving(const char* question, const char* defaultFilename, const char* fileTypeDescribtion)
 {
     int fileNameLength = MAX_PATH;
@@ -118,6 +119,11 @@ const char* getCustomFilePathForSaving(const char* question, const char* default
         (GetSaveFileNameA(&ofn));
     _txProcessSystemWarnings = oldPSW;
 
+    if (ofn.nFileOffset <= 0)
+    {
+        return NULL;
+    }
+
     const char* extension = findExtensionStart(fileTypeDescribtion, ofn.nFilterIndex);
 
     int extensionSize = strlen(extension);
@@ -129,21 +135,9 @@ const char* getCustomFilePathForSaving(const char* question, const char* default
 
     return fileName;
 }
+*/
 
-const char* findExtensionStart(const char* text, int extensionPos)
-{
-    int startPos = 0;
-    for (int i = 0; i < extensionPos; i++)
-    {
-        startPos += strlen(&text[startPos]) + 3;
-        if (i < extensionPos - 1)
-        {
-            startPos += strlen(&text[startPos]) + 2;
-        }
-    }
 
-    return &text[startPos];
-}
 
 
 

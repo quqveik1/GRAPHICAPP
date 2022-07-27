@@ -17,7 +17,8 @@ struct AbstractAppData
     struct CLoadManager* loadManager = NULL;
     struct CFileSavings* fileSavings = NULL;
     struct CanvasManager* canvasManager = NULL;
-    struct CWindowsLibApi* windowsLibApi = NULL;
+    struct CWindowsLibApi* windowsLibApi = NULL;    
+    struct CLoadLib* loadLibManager = NULL;
 
     COLORREF* currColor = NULL;
     bool isResized = false;
@@ -104,6 +105,9 @@ struct AbstractAppData
 
     virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) = 0;
     virtual void shiftArrBack(char* arr, int oneItemSize, int firstPosOfShifting, int finishPosOfShifting) = 0;
+
+    virtual char* getSaveFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename = "") = 0;
+    virtual char* getOpenFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename = "") = 0;
 
     virtual Rect getUserRect() = 0;
 };

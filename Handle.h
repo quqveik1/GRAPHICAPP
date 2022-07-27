@@ -53,7 +53,7 @@ struct Handle : Manager
     void controlOptionClicking();
     int onWhichOptionIsMP();
 
-    virtual List* createMenuOption(const char* optionText, int* status);
+    virtual List* createMenuOption(const char* optionText, int* status, bool needToHideAfterClick = false);
     virtual bool addWindowToStart(Window* window);
     virtual bool addWindowToBack(Window* window);
 

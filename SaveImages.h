@@ -1,5 +1,6 @@
 #pragma once
 #include "CanvasManager.h"
+#include "LoadLib.h"
 
 struct SaveImages : Window
 {
@@ -11,7 +12,7 @@ struct SaveImages : Window
         Window(_app, {}, _app->systemSettings->MenuColor, NULL, NULL, "", false),
         canvasManager(_canvasManager)
     {
-        saveDLL = LoadLibrary("SaveImage.dll");
+        saveDLL = _app->loadLibManager->loadLib("SaveImage.dll");
         assert(saveDLL);
 
         saveImage = (int (*) (HDC dc, const char* path))GetProcAddress(saveDLL, "saveImage");

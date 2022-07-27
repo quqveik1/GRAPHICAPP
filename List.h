@@ -12,11 +12,14 @@ struct List : Manager
     int activeItemCircleSize = 3;
     double deltaAfterTextBeforeFrame = 50;
 
-    List(AbstractAppData* _app, Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true) :
+    bool needToHideAfterClick = false;
+
+    List(AbstractAppData* _app, Vector _pos, Vector _oneItemSize, int _maxLength, bool _mayFewWindowsBeOpenedAtTheSameTime = true, bool _needToHideAfterClick = false) :
         Manager(_app, { .pos = _pos, .finishPos = {_pos.x + _oneItemSize.x, _pos.y + _maxLength * _oneItemSize.y } }, _maxLength, false, NULL, {}, (RGB(60, 60, 60))),
         mayFewWindowsBeOpenedAtTheSameTime(_mayFewWindowsBeOpenedAtTheSameTime),
         oneItemSize(_oneItemSize),
-        itemHeight(systemSettings->HANDLEHEIGHT)
+        itemHeight(systemSettings->HANDLEHEIGHT),
+        needToHideAfterClick (_needToHideAfterClick)
     {
         items = new OpenManager * [length];
         for (int i = 0; i < length; i++)  items[i] = new OpenManager(app);
@@ -27,7 +30,7 @@ struct List : Manager
 
     }
 
-    void addNewItem(Window* openButton, HDC dc = NULL, const char* text = NULL);
+    void addNewItem(Window* openButton, HDC dc = NULL, const char* text = NULL, int* option = NULL);
     Vector getNewSubItemCoordinats();
     List* addSubList(const char* ListText, int length = NULL);
     void controlRect();

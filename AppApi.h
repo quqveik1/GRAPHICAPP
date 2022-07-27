@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractApp.h"
 #include "FileSavings.h"
+#include "LoadLib.h"
 
 struct PowerPoint : AbstractAppData
 {
@@ -96,6 +97,10 @@ struct PowerPoint : AbstractAppData
 
     virtual Vector getCentrizedPos(Vector localSize, Vector globalSize) override;
     void shiftArrBack(char* arr, int oneItemSize, int firstPosOfShifting, int finishPosOfShifting) override;
+
+    virtual char* getSaveFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename = "") override;
+    virtual char* getOpenFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename = "") override;
+
 
     virtual void controlApp();
 

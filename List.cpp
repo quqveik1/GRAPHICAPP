@@ -2,7 +2,7 @@
 #include "List.h"
 
 
-void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* = NULL*/)
+void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* = NULL*/, int* option/*=NULL*/)
 {
     Rect newRect = { .pos = {0, (double)(currLen)*itemHeight}, .finishPos = {rect.getSize().x, (double)(currLen + 1) * itemHeight} };
 
@@ -10,6 +10,11 @@ void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* 
     items[currLen]->rect = newRect;
     items[currLen]->font = font;
     items[currLen]->color = color;
+    if (option)
+    {
+        items[currLen]->opening = option;
+        items[currLen]->mode = 1;
+    }
     items[currLen]->getOpeningManager() = (Manager*)openButton;
     items[currLen]->dc = dc;
     items[currLen]->text = text;
@@ -58,8 +63,11 @@ void List::draw()
             app->setColor(app->systemSettings->SecondMenuColor, finalDC, app->systemSettings->SIDETHICKNESS);
             app->line(0, i * itemHeight, rect.getSize().x, i * itemHeight, finalDC);
 
-            if (items[i]->getOpeningManager()->needToShow)
-                app->ellipse(rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
+            if (items[i]->getOpeningManager())
+            {
+                if (items[i]->getOpeningManager()->needToShow)
+                    app->ellipse(rect.getSize().x * 0.9 - activeItemCircleSize, ((double)i + 0.5) * itemHeight - activeItemCircleSize, rect.getSize().x * 0.9 + activeItemCircleSize, ((double)i + 0.5) * itemHeight + activeItemCircleSize, finalDC);
+            }
         }
 
         if (isThisItemList[i] && !needToShow)
@@ -81,6 +89,7 @@ void List::onClick(Vector mp)
         if (pointers[clikedButtonNum]->needToShow && mayFewWindowsBeOpenedAtTheSameTime)
         {
             clickButton(pointers[clikedButtonNum], this, mp);
+            if (needToHideAfterClick) hide();
         }
         lastClickedItemNum = clikedButtonNum;
     }

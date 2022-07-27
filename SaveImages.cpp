@@ -4,8 +4,6 @@
 
 void SaveImages::draw()
 {
-    needToShow = false;
-
     if (needToShow)
     {
         //условие выхода если холст не создан
@@ -13,40 +11,41 @@ void SaveImages::draw()
 
         if (!activeCanvas)
         {
-            txMessageBox("Нечего сохранять, холст не создан", "Ошибка");
+            app->messageBox("Нечего сохранять, холст не создан", "Ошибка", MB_OK);
+            needToShow = false;
             return;
         }
 
-        const char* pathToSave = getCustomFilePathForSaving("Место сохранения картинки", activeCanvas->getName(), "Image (*.bmp)\0*.bmp\0Image (*.png)\0*.png\0Image (*.jpg)\0*.jpg\0");
+        const char* pathToSave = app->getSaveFileName("Место сохранения изображения", "Image (*.bmp)\0*.bmp\0Image (*.png)\0*.png\0Image (*.jpg)\0*.jpg\0", activeCanvas->getName());
         char fullPath[MAX_PATH] = {};
-        strcpy(fullPath, pathToSave);
+        if (pathToSave)strcpy(fullPath, pathToSave);
 
-        if (fullPath[0] == NULL)
+        if (fullPath[0])
         {
-            return;
-        }
+            HDC saveDC = NULL;
 
-        HDC saveDC = NULL;
-
-        saveDC = activeCanvas->getImageForSaving();
+            saveDC = activeCanvas->getImageForSaving();
 
 
-        int wasErrorInSavings = 0;
-        if (saveDC)
-        {
-            if (saveImage)
+            int wasErrorInSavings = 0;
+            if (saveDC)
             {
-                wasErrorInSavings = saveImage(saveDC, fullPath);
+                if (saveImage)
+                {
+                    wasErrorInSavings = saveImage(saveDC, fullPath);
+                }
             }
+
+
+            //int result = app->saveImage(saveDC, fullPath);
+            app->deleteDC(saveDC);
+
+
+            if (wasErrorInSavings) app->messageBox("Ничего не сохранилось", "Ошибка", MB_OK);
         }
-
-
-        //int result = app->saveImage(saveDC, fullPath);
-        app->deleteDC(saveDC);
-
-
-        if (wasErrorInSavings) txMessageBox("Ничего не сохранилось", "Ошибка");
     }
+
+    needToShow = false;
 }
 
 

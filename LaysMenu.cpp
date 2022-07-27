@@ -24,7 +24,7 @@ void LaysMenu::onClick(Vector mp)
                 Rect addLayButton = { .pos = {0, rect.getSize().y - buttonSize.y}, .finishPos = {rect.getSize().x,  rect.getSize().y} };
                 if (addLayButton.inRect(mp) && canvasManager->getActiveCanvas())
                 {
-                    canvasManager->getActiveCanvas()->createLay();
+                    needToCreateLay = true;
                 }
             }
         }
@@ -39,6 +39,20 @@ void LaysMenu::draw()
 
     handle.print(finalDC);
     controlHandle();
+
+    if (needToCreateLay)
+    {
+        assert(canvasManager);
+        if (canvasManager->getActiveCanvas())
+        {
+            canvasManager->getActiveCanvas()->createLay();
+        }
+        else
+        {
+            txMessageBox("Нет активного холста, на который можно добавить слой", "Ошибка", MB_OK);
+        }
+        needToCreateLay = false;
+    }
 
     rect.finishPos.y = handle.rect.getSize().y + rect.pos.y;
     if (canvasManager->getActiveCanvas() != NULL)

@@ -21,7 +21,7 @@ struct ToolsPalette : Menu
         for (int i = 0; i < app->toolManager->currentLength; i++)
         {
             tools[i]->rect = { .pos = {0, (double)i * 50}, .finishPos = {50, (double)(i + 1) * 50} };
-            tools[i]->dc = app->toolManager->tools[i]->getDC();
+            tools[i]->dc = app->toolManager->tools[i]->getIconDC();
             tools[i]->finalDC = app->createDIBSection(tools[i]->getSize().x, tools[i]->getSize().y);
             tools[i]->originalRect = tools[i]->rect;
             addWindow(tools[i]);

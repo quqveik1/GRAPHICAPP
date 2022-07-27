@@ -1,5 +1,5 @@
 #pragma once
-#include "CopyDC.cpp"
+#include "..\CopyDC.cpp"
 
 
 struct ImportDC : CopyDC
@@ -11,6 +11,6 @@ struct ImportDC : CopyDC
     {
     }
 
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) override;
+    virtual long use(ToolLay* lay) override;
 
 };

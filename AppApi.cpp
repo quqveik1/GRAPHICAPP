@@ -3,6 +3,7 @@
 #include "DrawBibliothek.cpp"
 #include "SystemSettings.cpp"
 #include "FileSavings.cpp"
+#include "LoadLib.cpp"
 
 
 PowerPoint* appData = NULL;
@@ -15,10 +16,12 @@ bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
     HDC src, int xSrc, int ySrc, int wSrc, int hSrc, DWORD rOp);
 LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 
+const char* findExtensionStart(const char* text, int extensionPos);
+
 
 PowerPoint::PowerPoint()
 {
-    appVersion = "v0.2.1.6";
+    appVersion = "v0.2.1.7";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
 
@@ -31,7 +34,9 @@ PowerPoint::PowerPoint()
 
     systemSettings = new CSystemSettings(this);
 
-    toolManager = new CToolManager();
+    loadLibManager = new CLoadLib();
+
+    toolManager = new CToolManager(this);
 
     loadManager = new CLoadManager(this);
 
@@ -48,10 +53,11 @@ PowerPoint::~PowerPoint()
 {
     writeVersion(appData);
 
-    delete systemSettings;
     delete toolManager;
     delete loadManager;
     delete windowsLibApi;
+    delete systemSettings;
+    delete loadLibManager;
 }
 
 void writeVersion(PowerPoint* app)
@@ -371,6 +377,7 @@ void PowerPoint::bitBlt(HDC dc1, Vector pos, Vector size, HDC dc2, Vector posSou
 
 void PowerPoint::transparentBlt(HDC dc1, double x0, double y0, double sizex, double sizey, HDC dc2, double xSource/* = 0*/, double ySource/* = 0*/)
 {
+    assert(dc2);
     txTransparentBlt(dc1, std::lround(x0), std::lround(y0), std::lround(sizex), std::lround(sizey), dc2, std::lround(xSource), std::lround(ySource), systemSettings->TRANSPARENTCOLOR);
 }
 
@@ -586,4 +593,95 @@ void PowerPoint::controlApp()
         setCursor(defaultCursor);
     }
     txClearConsole();
+}
+
+
+char* PowerPoint::getOpenFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename)
+{
+    int fileNameLength = MAX_PATH;
+    char fileName[MAX_PATH] = "";
+
+    sprintf(fileName, "%s", defaultFilename);
+
+    OPENFILENAME ofn = { sizeof(OPENFILENAME), txWindow() };
+
+    ofn.lpstrTitle = question;
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = sizeof(fileName);
+    ofn.lpstrFilter = (fileTypeDescribtion);
+    ofn.nFilterIndex = 1;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST;
+
+    bool oldPSW = _txProcessSystemWarnings;
+    _txProcessSystemWarnings = false;//отключает всякие системные проверки тхлибом иначе возникает ошибка 298
+
+    if ((GetOpenFileNameA))
+        (GetOpenFileNameA(&ofn));
+    _txProcessSystemWarnings = oldPSW;
+
+    if (ofn.nFileOffset <= 0)
+    {
+        return NULL;
+    }
+
+    return fileName;
+}
+
+
+
+char* PowerPoint::getSaveFileName(const char* question, const char* fileTypeDescribtion, const char* defaultFilename/* = NULL*/)
+{
+    int fileNameLength = MAX_PATH;
+    char fileName[MAX_PATH] = "";
+
+    sprintf(fileName, "%s", defaultFilename);
+
+    OPENFILENAME ofn = { sizeof(OPENFILENAME), txWindow() };
+
+    ofn.lpstrTitle = question;
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = sizeof(fileName);
+    ofn.lpstrFilter = (fileTypeDescribtion);
+    ofn.nFilterIndex = 1;
+    ofn.lpstrInitialDir = NULL;
+
+    bool oldPSW = _txProcessSystemWarnings;
+    _txProcessSystemWarnings = false;//отключает всякие системные проверки тхлибом иначе возникает ошибка 298
+
+    if ((GetSaveFileNameA))
+        (GetSaveFileNameA(&ofn));
+    _txProcessSystemWarnings = oldPSW;
+
+    if (ofn.nFileOffset <= 0)
+    {
+        return NULL;
+    }
+
+    const char* extension = findExtensionStart(fileTypeDescribtion, ofn.nFilterIndex);
+
+    int extensionSize = strlen(extension);
+    int realFilenameSize = strlen(fileName);
+    if (strcmp(&fileName[realFilenameSize - extensionSize], extension))
+    {
+        sprintf(fileName, "%s.%s", fileName, extension);
+    }
+
+    return fileName;
+}
+
+
+const char* findExtensionStart(const char* text, int extensionPos)
+{
+    int startPos = 0;
+    for (int i = 0; i < extensionPos; i++)
+    {
+        startPos += strlen(&text[startPos]) + 3;
+        if (i < extensionPos - 1)
+        {
+            startPos += strlen(&text[startPos]) + 2;
+        }
+    }
+
+    return &text[startPos];
 }

@@ -4,7 +4,7 @@
 #include "Lay.h"
 #include "AbstractApp.h"
 #include "CLay.h"
-#include "MainTools.h"
+#include "ToolLay.h"
 #include "DllSettings.h"
 
 struct Tool;
@@ -55,6 +55,23 @@ struct ToolSave : ToolZoneSave
 
 };
 
+#define NOTHINGHAPPENEDAFTERMESSAGE 9223372036854775807
+
+
+
+enum TOOLMESSAGE
+{
+    T_USE = 1,
+    T_LOAD = 2,
+    T_EDIT = 3,
+    T_CREATE = 4,
+    T_DESTROY = 5,
+    T_ISSTARTED = 6,
+    T_ISFINISHED = 7,
+    T_GETNAME = 8,
+    T_GETICONDC = 9
+};
+
 struct Tool
 {
     HDC iconDC = NULL; //ее изображение
@@ -84,17 +101,22 @@ struct Tool
     bool firstUse(ProgrammeDate* data, void* output, Vector currentPos);
     void finishUse();
     HDC getOutDC();
+    long defaultHandler(TOOLMESSAGE message, ToolLay* lay);
+    long defaultCreate(ToolLay* lay);
 
-    virtual HDC getDC();
+    virtual HDC getIconDC();
     virtual const char* getName();
 
 
     virtual bool isFinished(ToolLay* data);
     virtual bool isStarted(ToolLay* data) { return ((ToolData*)data->getToolsData())->isStarted; };
-    virtual bool use(ProgrammeDate* data, ToolLay* lay, void* output) { return false; };
-    virtual HDC load(ToolLay* toollay, HDC dc = NULL) { return NULL; };
-    virtual bool edit(ToolLay* toollay, HDC dc = NULL) { return 1; };
-    virtual int destroy(ToolLay* toollay);
+    virtual long use(ToolLay* lay) { return 1; };
+    virtual HDC load(ToolLay* toollay) { return NULL; };
+    virtual long edit(ToolLay* toollay) { return 1; };
+    virtual long destroy(ToolLay* toollay);
+
+    virtual long handler(TOOLMESSAGE message, ToolLay* lay);
+    
 };
 
 

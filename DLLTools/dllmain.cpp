@@ -21,19 +21,19 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 
 
-DLLToolExportData* initDLL(AbstractAppData* data)
+DLLToolExportData* initDLL(AbstractAppData* appData)
 {
-    TheApp = data;
+    TheApp = appData;
     DLLToolExportData* dllData = new DLLToolExportData(8);
 
-    dllData->addTool(new Line            (&DllSettings, "Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), data));
-    dllData->addTool(new Point           (&DllSettings, "Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), data));
-    dllData->addTool(new Vignette        (&DllSettings, "Виньетка", sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), data));
-    dllData->addTool(new Gummi           (&DllSettings, "Ластик", sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), data));
-    dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), data));
-    dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), data));
-    dllData->addTool(new CopyDC          (&DllSettings, "Скопировать область",  TheApp->loadManager->loadImage("CopyDCButton.bmp"), data));
-    dllData->addTool(new ImportDC        (&DllSettings, "Вставить изображение",  TheApp->loadManager->loadImage("ImportDC.bmp"), data));
+    dllData->addTool(new Line            (&DllSettings, "Линия", sizeof(ToolSave),           TheApp->loadManager->loadImage("Line.bmp"), appData));
+    dllData->addTool(new Point           (&DllSettings, "Точка", sizeof(PointSave),          TheApp->loadManager->loadImage("Pen.bmp"), appData));
+    dllData->addTool(new Vignette        (&DllSettings, "Виньетка", sizeof(ColorSave), TheApp->loadManager->loadImage("Vignette.bmp"), appData));
+    dllData->addTool(new Gummi           (&DllSettings, "Ластик", sizeof(ToolSave),  TheApp->loadManager->loadImage("Gummi.bmp"), appData));
+    dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), appData));
+    dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), appData));
+    dllData->addTool(new CopyDC          (&DllSettings, "Скопировать область",  TheApp->loadManager->loadImage("CopyDCButton.bmp"), appData));
+    dllData->addTool(new ImportDC        (&DllSettings, "Вставить изображение",  TheApp->loadManager->loadImage("ImportDC.bmp"), appData));
 
 
     return dllData;
@@ -44,16 +44,16 @@ DLLToolExportData* initDLL(AbstractAppData* data)
 
 
 
-bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
+long Vignette::use(ToolLay* lay)
 {
     colorSave = (ColorSave*) lay->getToolsData();
-    appData = data;
-    Vector pos = data->mousePos;
+    appData = lay->getProgDate();
+    Vector pos = appData->mousePos;
     COLORREF newColor = app->getPixel(pos, lay->lay->getPermanentDC());
 
     colorSave->color = *(app->currColor);
 
-    if (data->clickedMB  && !workedLastTime)
+    if (appData->clickedMB  && !workedLastTime)
     {
         workedLastTime = true;
         colorSave->isStarted = true;
@@ -61,7 +61,7 @@ bool Vignette::use(ProgrammeDate* data, ToolLay* lay, void* output)
         colorSave->isFinished = true;
         return colorSave->isFinished;
     }
-    if (!data->clickedMB) workedLastTime = false;
+    if (!appData->clickedMB) workedLastTime = false;
 
     return false;
 }
@@ -114,30 +114,31 @@ void Gummi::initPointSave()
     pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
 }
 
-bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
+long Point::use(ToolLay* lay)
 {
-    assert(data && lay && output); 
-    appData = data;
+    assert(lay); 
+    appData = lay->getProgDate();
+    assert(appData);
     toolLay = lay;
     toolData = (ToolData*)lay->getToolsData();
     pointSave = (PointSave*)lay->getToolsData();
     
 
-    if (data->clickedMB == 1)
+    if (appData->clickedMB == 1)
     {
         lay->needRedraw();
 
         if (!isStarted(lay)) initPointSave();
 
         pointSave->isStarted = true;
-        if (lastPos != data->mousePos)
+        if (lastPos != appData->mousePos)
         {
-            pointSave->addPoint(data->mousePos);
+            pointSave->addPoint(appData->mousePos);
         }
-        lastPos = data->mousePos;
+        lastPos = appData->mousePos;
     }
 
-    if ((!data->clickedMB) && isStarted(lay))
+    if ((!appData->clickedMB) && isStarted(lay))
     {
         pointSave->isFinished = true;
         toolLay->needRedraw();
@@ -147,14 +148,13 @@ bool Point::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return pointSave->isFinished;
 }
 
-HDC Point::load(ToolLay* toollay, HDC dc)
+HDC Point::load(ToolLay* toollay)
 {
     assert(toollay);
     toolLay = toollay;
 
     pointSave = (PointSave*)toollay->getToolsData();
-    HDC outDC = dc;
-    if (!outDC) outDC = getOutDC();
+    HDC outDC = getOutDC();
 
     app->setColor(pointSave->color, outDC, 1);
     if (app->systemSettings->debugMode == 5) printf("pointSave->currentLength: %d", pointSave->currentLength);
@@ -175,16 +175,16 @@ void Line::outputFunc(HDC outdc)
 }
 
 
-bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
+long Tool4Squares::use(ToolLay* lay)
 {
-    assert(data && lay && output);
-    appData = data;
+    assert(lay);
+    appData = lay->getProgDate();
     toolLay = lay;
-    saveTool = (ToolSave*)output;
+    saveTool = (ToolSave*)lay->getToolsData();
     Vector pos = appData->getMousePos();
     if (app->systemSettings->debugMode == 5) printf("pos: {%lf, %lf}\n", pos.x, pos.y);
 
-    if (data->clickedMB == 1)
+    if (appData->clickedMB == 1)
     {
         saveTool->pos = pos;
         workedLastTime = true;
@@ -196,13 +196,13 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     {
         if (appData->getMousePos() != saveTool->size + saveTool->pos) lay->needRedraw();
         saveTool->size = pos - saveTool->pos;
-        saveTool->color = data->color;
+        saveTool->color = appData->color;
         saveTool->thickness = app->systemSettings->Thickness;
         saveTool->name = (const char*)1;
     }
 
 
-    if (data->clickedMB == 2 && isStarted(toolLay))
+    if (appData->clickedMB == 2 && isStarted(toolLay))
     {
         finishUse();
 
@@ -220,7 +220,7 @@ bool Tool4Squares::use(ProgrammeDate* data, ToolLay* lay, void* output)
     return false;
 }
 
-HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
+HDC Tool4Squares::load(ToolLay* toollay)
 {
     assert(toollay);
 
@@ -228,13 +228,7 @@ HDC Tool4Squares::load(ToolLay* toollay, HDC dc /* = NULL*/)
 
     ToolSave* toolDate = (ToolSave*)toollay->getToolsData();
 
-    HDC outDC = dc;
-    if (!dc)
-    {
-        outDC = getOutDC();
-    }
-
-    
+    HDC outDC = getOutDC();
 
     app->setColor(toolDate->color, outDC, toolDate->thickness);
     outputFunc(outDC);

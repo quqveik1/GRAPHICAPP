@@ -1,5 +1,6 @@
 #pragma once
 #include "ToolsMenus.h"
+#include "ToolManager.h"
 
 void ToolsPalette::drawOneLine(int lineNum)
 {
@@ -10,7 +11,7 @@ void ToolsPalette::drawOneLine(int lineNum)
     app->setColor(TX_BLACK, finalDC);
     app->line(0, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, rect.getSize().x, pointers[lineNum]->rect.pos.y + handle.rect.getSize().y, finalDC);
 
-    if (app->systemSettings->DrawingMode - 1 == lineNum)
+    if (app->toolManager->getActiveToolNum() == lineNum)
     {
         Rect trueRect = pointers[lineNum]->rect + Vector({0, handle.rect.finishPos.y});
         app->drawCadre(trueRect, finalDC, TX_WHITE, 2);
@@ -27,7 +28,9 @@ int ToolsPalette::onClickLine(Vector mp)
         {
             setActiveWindow(pointers[lineNum]);
             clickButton(pointers[lineNum], this, mp);
-            if (app->canvasManager) app->canvasManager->setDrawingMode(lineNum + 1);
+
+            app->toolManager->setActiveToolNum(lineNum);
+
             lastSelected = lineNum;
 
             missClicked = false;
@@ -76,7 +79,7 @@ void ToolMenu::drawOneLine(int lineNum)
 
         assert(tool);
 
-        toolDC = tool->getDC();
+        toolDC = tool->getIconDC();
         nameOfTool = tool->getName();
     }
 
