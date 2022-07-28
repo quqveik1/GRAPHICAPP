@@ -8,6 +8,8 @@ struct OpenManager : Window
     bool isOpeningAnotherList = false;
     int mode = 0;
     int* opening = NULL;
+    int keyBind = NULL; //ctrl + keybind
+    bool wasListTimeKeyBoardClicked = 0;
 
     OpenManager(AbstractAppData* _app, Rect _rect, COLORREF _color, Manager* _manager, HDC _dc = NULL, const char* _text = "") :
         Window(_app, _rect, _color, _dc, NULL, _text),
@@ -22,6 +24,8 @@ struct OpenManager : Window
     {
         format = DT_LEFT | DT_VCENTER;
     }
+
+    void click();
 
     virtual void draw() override;
     virtual void onClick(Vector mp) override;

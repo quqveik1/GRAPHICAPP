@@ -49,6 +49,11 @@ void CLay::addToolLay(ToolLay* tool)
     tool->addTool(app->toolManager->getActiveTool());
 }
 
+void CLay::setActiveLastToolLay()
+{
+    activeToolNum = toolLength - 1;
+}
+
 void CLay::needRedraw()
 {
     needToRedraw = true;
@@ -70,7 +75,8 @@ void CLay::controlTool(ProgrammeDate* _data)
 
     if (!isFinished)
     {
-        if (DrawingModeLastTime != app->toolManager->getActiveToolNum())
+        int drawingMode = app->toolManager->getActiveToolNum();
+        if (DrawingModeLastTime != drawingMode)
         {
             activeToolLay->addTool(app->toolManager->getActiveTool());
         }

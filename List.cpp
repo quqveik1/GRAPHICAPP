@@ -2,7 +2,7 @@
 #include "List.h"
 
 
-void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* = NULL*/, int* option/*=NULL*/)
+void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* = NULL*/, int* option/*=NULL*/, int keybind/* = NULL*/)
 {
     Rect newRect = { .pos = {0, (double)(currLen)*itemHeight}, .finishPos = {rect.getSize().x, (double)(currLen + 1) * itemHeight} };
 
@@ -10,6 +10,7 @@ void List::addNewItem(Window* openButton, HDC dc/* = NULL*/, const char* text/* 
     items[currLen]->rect = newRect;
     items[currLen]->font = font;
     items[currLen]->color = color;
+    items[currLen]->keyBind = keybind;
     if (option)
     {
         items[currLen]->opening = option;
@@ -55,6 +56,13 @@ void List::draw()
 
     controlRect();
     app->windowsLibApi->standartManagerDraw(this);
+    if (!needToShow)
+    {
+        for (int i = 0; i < currLen; i++)
+        {
+            pointers[i]->draw();
+        }
+    }
 
     for (int i = 0; i < currLen; i++)
     {

@@ -7,6 +7,7 @@ void ImportImage::draw()
 
     if (needToShow)
     {
+        needToShow = false;
         //условие выхода если холст не создан
         assert(app->canvasManager);
         Canvas* activeCanvas = app->canvasManager->getActiveCanvas();
@@ -14,7 +15,6 @@ void ImportImage::draw()
         if (!activeCanvas)
         {
             app->messageBox("Некуда открывать, холст не создан", "Ошибка", MB_OK);
-            needToShow = false;
             return;
         }
 
@@ -28,9 +28,14 @@ void ImportImage::draw()
             {
                 Vector newDCSize = {};
                 HDC dc = importImage(fullPath, newDCSize, app);
-                if (dc) activeCanvas->importImage(dc);
+                if (!dc)
+                {
+                    app->messageBox("Ничего не загрузилось", "Ошибка", MB_OK);
+                    return;
+                }
+                activeCanvas->importImage(dc);
             }
         }
     }
-    needToShow = false;
+    
 }

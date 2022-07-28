@@ -24,6 +24,7 @@ struct Handle : Manager
 
     HDC logo = NULL;
     Vector logoSize = { 25, 25 };
+    Rect logoRect = { .pos = {}, .finishPos = logoSize };
 
     Option options[4] = {};
     double optionHeight = 0;
@@ -52,6 +53,7 @@ struct Handle : Manager
     void drawOptions();
     void controlOptionClicking();
     int onWhichOptionIsMP();
+    void clickIcon();
 
     virtual List* createMenuOption(const char* optionText, int* status, bool needToHideAfterClick = false);
     virtual bool addWindowToStart(Window* window);

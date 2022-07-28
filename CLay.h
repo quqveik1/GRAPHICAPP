@@ -21,6 +21,7 @@ struct CLay
     virtual void createLay(AbstractAppData* _app, struct Canvas* _canvas, Vector _size = {});
     virtual ToolLay* createToolLay();
     virtual void addToolLay (ToolLay* tool);
+    virtual void setActiveLastToolLay();
 
     virtual HDC getOutputDC ();
     virtual RGBQUAD* getOutputBuf();

@@ -30,7 +30,13 @@ struct List : Manager
 
     }
 
-    void addNewItem(Window* openButton, HDC dc = NULL, const char* text = NULL, int* option = NULL);
+    ~List()
+    {
+        for (int i = 0; i < length; i++)  delete items[i];
+        delete items;
+    }
+
+    void addNewItem(Window* openButton, HDC dc = NULL, const char* text = NULL, int* option = NULL, int keybind = NULL);
     Vector getNewSubItemCoordinats();
     List* addSubList(const char* ListText, int length = NULL);
     void controlRect();

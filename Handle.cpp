@@ -227,6 +227,13 @@ void Handle::onClick(Vector mp)
 
     if (num >= 0) return;
 
+    if (logoRect.inRect(mp))
+    {
+        clickIcon();
+        return;
+
+    }
+
     if (resultOfClicking == -1 && !wasCommonHandlePlaceClicked)
     {
         if (app->isFullScreen())
@@ -238,5 +245,24 @@ void Handle::onClick(Vector mp)
         wasCommonHandlePlaceClicked = true;
     }
     setMbLastTime();
+}
+
+
+
+void Handle::clickIcon()
+{
+    char FAQ[4000] = {};
+
+    FILE* faqFile = fopen("README.md", "r");
+    if (!faqFile)
+    {
+        app->messageBox("Не удалось открыть FAQ", "Ошибка", MB_OK);
+        return;
+    }
+
+    fread(FAQ, sizeof(char), 2000, faqFile);
+    fclose(faqFile);
+
+    app->messageBox(FAQ, "FAQ", MB_OK);
 }
 

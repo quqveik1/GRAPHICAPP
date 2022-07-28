@@ -9,10 +9,12 @@ long CadreResizingTool::edit(ToolLay* toollay)
     if (app->systemSettings->debugMode >= 5) printf("Toolzone pos: {%lf, %lf}\n", toolLay->toolZone.pos.x, toolLay->toolZone.pos.y);
     toolLay = toollay;
     toolData = (ToolData*)toolLay->getToolsData();
+    
+    
+    controlMoving();
     countDeltaForControlButtons();
     countToolZone();
     setControlSquares();
-    controlMoving();
 
     HDC dc = toolLay->lay->getOutputDC();
 
@@ -76,6 +78,23 @@ void CadreResizingTool::controlMoving()
 }
 
 
+
+int CadreResizingTool::getSign(double num)
+{
+    if (isBigger(num, 0))
+    {
+        return 1;
+    }
+    
+    if (isSmaller(num, 0))
+    {
+        return -1;
+    }
+
+    return 1;
+
+}
+
 void CadreResizingTool::controlLeftButton()
 {
     ToolZoneSave* toolDate = (ToolZoneSave*)toolLay->getToolsData();
@@ -96,38 +115,71 @@ void CadreResizingTool::controlLeftButton()
     {
         toolLay->needRedraw();
         Vector deltaMP = appData->getMousePos() - lastTimeMP;
+        bool needProportionalResize = app->getAsyncKeyState(VK_SHIFT);
+
+        /*
+        if (needProportionalResize)
+        {
+            if (!isEqual(toolDate->size.x, 0) && !isEqual(toolDate->size.y, 0))
+            {
+                double propory = deltaMP.y / toolDate->size.y;
+                double proporx = deltaMP.x / toolDate->size.x;
+                double propormed = (fabs(proporx) + fabs(propory)) / 2;
+                deltaMP = {};
+                if (!isEqual(proporx, 0))
+                {
+                    deltaMP.x = (propormed * (proporx / fabs(proporx))) * toolDate->size.x;
+                }
+                if (!isEqual(propory, 0))
+                {
+                    deltaMP.y = (propormed * (propory / fabs(propory))) * toolDate->size.y;
+                }
+            }
+        }
+        */
+
+        double propor = 0;
+
+        if (!isEqual(toolDate->size.x, 0))
+        {
+            propor = toolDate->size.y / toolDate->size.x;
+        }
+
+        if (needProportionalResize)
+        {
+            if (!isEqual(propor, 0))
+            {
+                //toolDate->size.y = toolDate->size.x * propor;
+                deltaMP.y = deltaMP.x * propor;
+            }
+        }
+
         if (activeControlSquareNum == 0)
         {
-            toolLay->toolZone.pos += deltaMP;
-            toolLay->toolZone.finishPos -= deltaMP;
             toolDate->pos += deltaMP;
             toolDate->size -= deltaMP;
         }
 
         if (activeControlSquareNum == 1)
         {
-            toolLay->toolZone.pos.y += deltaMP.y;
+            if (needProportionalResize) deltaMP.y *= -1;
             toolDate->pos.y += deltaMP.y;
             toolDate->size.y -= deltaMP.y;
-            toolLay->toolZone.finishPos.x += deltaMP.x;
             toolDate->size.x += deltaMP.x;
         }
 
         if (activeControlSquareNum == 2)
         {
-            toolLay->toolZone.finishPos += deltaMP;
             toolDate->size += deltaMP;
         }
 
         if (activeControlSquareNum == 3)
         {
-            toolLay->toolZone.pos.x += deltaMP.x;
+            if (needProportionalResize) deltaMP.y *= -1;
             toolDate->pos.x += deltaMP.x;
             toolDate->size.x -= deltaMP.x;
-            toolLay->toolZone.finishPos.y += deltaMP.y;
             toolDate->size.y += deltaMP.y;
         }
-
     }
 
     if (appData->clickedMB != 1 && activeControlSquareNum >= 0)

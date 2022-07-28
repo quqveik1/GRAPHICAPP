@@ -148,16 +148,6 @@
   <ItemGroup>
     <ClCompile Include="PowerPoint.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="IMRED.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Files\Imred.bmp" />
-    <Image Include="Files\Imred.ico" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

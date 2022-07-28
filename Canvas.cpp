@@ -40,13 +40,13 @@ void Canvas::createLay()
 
 void Canvas::controlImportingImages()
 {
-    static bool wasLastTimeImporting = false;
     static int lastTimetoolNum = -1;
 
     if (wasLastTimeImporting && getCurrentlyImportingImage())
     {
         app->deleteDC(getCurrentlyImportingImage());
         getCurrentlyImportingImage() = NULL;
+        wasLastTimeImporting = false;
         app->toolManager->setActiveToolNum(lastTimetoolNum);
     }
 
@@ -187,13 +187,6 @@ void Canvas::draw()
         controlLay();
         drawLays();
     }
-
-    if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('Q'))
-    {
-        endtillkey('Q');
-        createLay();
-    }
-
     
     if (posLastTime != rect.pos) reDraw = true;
     copyFinalLayOnFinalDC();
@@ -344,6 +337,8 @@ int Canvas::importImage(HDC dc)
 
     if (!getActiveLay()) createLay();
     currentlyImportingImage = dc;
+    editingMode = 0;
+    getActiveLay()->setActiveLastToolLay();
     return 1;
 }
 

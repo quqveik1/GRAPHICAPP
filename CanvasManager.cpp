@@ -45,7 +45,7 @@ void CanvasManager::drawTabs()
     {
         app->setColor(app->systemSettings->TextColor, finalDC);
         app->selectFont(app->systemSettings->FONTNAME, font, finalDC);
-        app->drawText({ .pos = {}, .finishPos = {getSize().x, oneTabSize.y} }, "Нажмите Сtrl+N, чтобы создать холст", finalDC);
+        app->drawText({ .pos = {}, .finishPos = {getSize().x, oneTabSize.y} }, "FAQ доступен при клике на логотип слева наверху", finalDC);
     }
 
     for (int i = 0; i < currentCanvasesLength; i++)

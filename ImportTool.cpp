@@ -14,6 +14,7 @@ long ImportTool::use(ToolLay* lay)
     if (!canvas) return 0;
     HDC importDC = canvas->getCurrentlyImportingImage();
     
+    assert(importDC);
     Vector size = app->getHDCSize(importDC);
 
     saveCopyDC->dc = app->createDIBSection(size);

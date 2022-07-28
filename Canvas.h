@@ -39,6 +39,7 @@ struct Canvas : Manager
     Vector deltaPos = {};
 
     HDC currentlyImportingImage = NULL;
+    bool wasLastTimeImporting = false;
 
     Canvas(AbstractAppData* _app, Rect _rect, const char* _name);
     ~Canvas();

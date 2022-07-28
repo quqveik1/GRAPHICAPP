@@ -24,6 +24,7 @@ struct CadreResizingTool : Tool
     void controlRightButton();
     void setControlSquares();
     void drawControlButtons(HDC outDC);
+    int getSign(double num);
 
     virtual  void countDeltaForControlButtons();
     virtual void countToolZone();

@@ -24,6 +24,7 @@ PowerPoint::PowerPoint()
     appVersion = "v0.2.1.7";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
+    
 
     if (_mkdir("Settings") == -1)
     {
@@ -47,6 +48,7 @@ PowerPoint::PowerPoint()
     currColor = &systemSettings->DrawColor;
 
     setWindowParameters(this);
+    
 }
 
 PowerPoint::~PowerPoint()
@@ -121,6 +123,11 @@ bool checkVersionCompability(PowerPoint* app)
         }
     }
 
+    if (app->getAsyncKeyState(VK_CONTROL))
+    {
+        needLoadSaves = false;
+    }
+
     if (versionFile) fclose(versionFile);
     return needLoadSaves;
 }
@@ -132,27 +139,19 @@ void setWindowParameters(PowerPoint* app)
     _txSwapBuffers = swapDC;
     txSetWindowsHook(CtrlWindowFunc);
 
-    app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
-    assert(app->MAINWINDOW);
-
     
 
-
-    /*
-    HDC iconImage = app->loadManager->loadImage("Icon.bmp");
-    int error = GetLastError();
-    HICON _tempIcon = LoadIcon(NULL, (LPCSTR)iconImage);
-    int lastError = GetLastError();
-    int _metrics = GetSystemMetrics(SM_CXICON);    
-    massert (_tempIcon, app)
-    */
+    app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    assert(app->MAINWINDOW);
     
     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
 
     /*
+   // app->appIcon = LoadIcon(NULL, (LPCSTR)_TX_ICON);
+
     HDC loadBMP = app->loadManager->loadImage("IconBMP.bmp");
 
-    app->appIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON3));
+    app->appIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON4));
     SetClassLongPtr(app->MAINWINDOW, GCLP_HICON, (LONG_PTR)app->appIcon);          //-V107 //-V112
     SetClassLongPtr(app->MAINWINDOW, GCLP_HICONSM, (LONG_PTR)app->appIcon);
     */
@@ -434,6 +433,10 @@ HDC PowerPoint::getBufferDC(RGBQUAD** buf)
 
 Vector PowerPoint::getHDCSize(HDC _dc)
 {
+    if (!_dc)
+    {
+        return { -1, -1 };
+    }
     HBITMAP _bitmap = (HBITMAP)GetCurrentObject(_dc, OBJ_BITMAP);
     return getHBITMAPSize(_bitmap);
 } 

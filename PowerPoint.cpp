@@ -36,6 +36,7 @@
 #include "winuser.h"
 #include "WindowsLibApi.cpp"  
 #include "ImportImage.cpp"
+#include "OpenImage.cpp"
 
 
 
@@ -167,8 +168,8 @@ int main (int argc, int *argv[])
         List* createList = mainhandle->createMenuOption("Создать", NULL, true);
     
         SetCanvasButton setCanvasButton(appData, canvasManager);
-        createList->addNewItem(&setCanvasButton, NULL, "Создать холст");
-        createList->addNewItem(NULL, NULL, "Создать слой", &(laysMenu->needToCreateLay));
+        createList->addNewItem(&setCanvasButton, NULL, "Создать холст", NULL, 'N');
+        createList->addNewItem(NULL, NULL, "Создать слой", &(laysMenu->needToCreateLay), 'Q');
         manager->addWindow(&setCanvasButton);
     manager->addWindow(createList);
 
@@ -191,9 +192,11 @@ int main (int argc, int *argv[])
 
         List* importList = mainhandle->createMenuOption("Импорт/Экспорт", NULL, true);
             SaveImages saveImages(appData, canvasManager);
-            importList->addNewItem(&saveImages, NULL, "Сохранить изображение");
+            importList->addNewItem(&saveImages, NULL, "Сохранить изображение", NULL, 'S');
             ImportImage importImage(appData);
-            importList->addNewItem(&importImage, NULL, "Загрузить изображение");
+            importList->addNewItem(&importImage, NULL, "Загрузить изображение", NULL, 'I');
+            OpenImage openImage(appData);
+            importList->addNewItem(&openImage, NULL, "Открыть изображение", NULL, 'O');
         manager->addWindow(importList);
 
 	txBegin ();
