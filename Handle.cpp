@@ -254,6 +254,7 @@ void Handle::clickIcon()
     char FAQ[4000] = {};
 
     FILE* faqFile = fopen("README.md", "r");
+    if (app->systemSettings->debugMode > 0)printf("faqFile[%p] errno:%d", faqFile, errno);
     if (!faqFile)
     {
         app->messageBox("Не удалось открыть FAQ", "Ошибка", MB_OK);

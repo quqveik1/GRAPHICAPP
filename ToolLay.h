@@ -14,6 +14,8 @@ struct ToolLay
     char* toolsData = NULL;
     ProgrammeDate* data = NULL;
     int thickness = 1;
+
+    bool needToShow = 1;
     
 
     //condition block
@@ -34,6 +36,7 @@ struct ToolLay
     virtual int setProgDate(ProgrammeDate* data);
     virtual HDC getPermanentDC();
     virtual HDC getOutputDC();
+    virtual void setShowMode(int mode);
 
     virtual bool isFinished();
     virtual bool isStarted();

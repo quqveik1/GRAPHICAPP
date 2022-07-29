@@ -16,7 +16,7 @@ long CadreResizingTool::edit(ToolLay* toollay)
     countToolZone();
     setControlSquares();
 
-    HDC dc = toolLay->lay->getOutputDC();
+    HDC dc = toolLay->getOutputDC();
 
     app->drawCadre(toolLay->toolZone, dc, cadreColor, 2);
     

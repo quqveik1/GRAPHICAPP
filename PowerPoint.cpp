@@ -136,7 +136,7 @@ int main (int argc, int *argv[])
     ToolMenu* toolMenu = new ToolMenu(appData, canvasManager);
     manager->addWindow(toolMenu);   
 
-    LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 600}, .finishPos = {appData->systemSettings->BUTTONWIDTH + 5, 800} }, canvasManager);
+    LaysMenu* laysMenu = new LaysMenu(appData, { .pos = {5, 600}, .finishPos = {appData->systemSettings->BUTTONWIDTH * 2, 800} }, canvasManager);
     manager->addWindow(laysMenu);
 
 	ColorMenu* menu = new ColorMenu(appData, {appData->systemSettings->SizeOfScreen.x - 712, 300}, "Settings\\ColorHistory.history", true);

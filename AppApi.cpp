@@ -21,7 +21,7 @@ const char* findExtensionStart(const char* text, int extensionPos);
 
 PowerPoint::PowerPoint()
 {
-    appVersion = "v0.2.1.7";
+    appVersion = "v0.2.2.0";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
     

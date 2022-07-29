@@ -55,7 +55,7 @@ void LaysMenu::draw()
     }
 
     rect.finishPos.y = handle.rect.getSize().y + rect.pos.y;
-    if (canvasManager->getActiveCanvas() != NULL)
+    if (canvasManager->getActiveCanvas())
     {
         rect.finishPos.y = handle.rect.getSize().y + rect.pos.y + sectionHeight * canvasManager->getActiveCanvas()->currentLayersLength + buttonSize.y;
 
@@ -66,13 +66,18 @@ void LaysMenu::draw()
 
             app->setAlign(TA_CENTER, finalDC);
             app->setColor(app->systemSettings->TextColor, finalDC);
-            app->selectFont("Arial", sectionFont, finalDC);
+            app->selectFont(app->systemSettings->FONTNAME, sectionFont, finalDC);
 
-            app->drawText(sideThickness, sideThickness + handle.rect.getSize().y + sectionHeight * i, rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i + 1), text, finalDC, DT_VCENTER);
+            app->drawText(sideThickness, sideThickness + handle.rect.getSize().y + sectionHeight * i, rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i + 1), text, finalDC);
             app->setColor(app->systemSettings->BackgroundColor, finalDC);
             app->line(0, handle.rect.getSize().y + sectionHeight * (i), rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i), finalDC);
-        }
-        app->bitBlt(finalDC, 0, rect.getSize().y - buttonSize.y, 0, 0, addNewLayButton);
+            if (canvasManager->getActiveCanvas()->getActiveLayNum() == i)
+            {
+                app->drawCadre({ .pos = {0, handle.rect.getSize().y + sectionHeight * (i)}, .finishPos = {rect.getSize().x, handle.rect.getSize().y + sectionHeight * (i + 1)} }, finalDC, TX_WHITE, 2);
+            }
+        }    
+        Vector centrizedAddButtonPos = app->getCentrizedPos(buttonSize, rect.getSize());
+        app->bitBlt(finalDC, centrizedAddButtonPos.x, rect.getSize().y - buttonSize.y, 0, 0, addNewLayButton);
         app->setColor(app->systemSettings->BackgroundColor, finalDC);
         app->line(0, rect.getSize().y - buttonSize.y, rect.getSize().x, rect.getSize().y - buttonSize.y, finalDC);
     }

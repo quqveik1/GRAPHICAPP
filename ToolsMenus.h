@@ -43,9 +43,17 @@ struct ToolMenu : Menu
     struct CanvasManager* canvasManager = NULL;
     HDC emptyToolDC = NULL;
 
+    Vector realEyeSize = {18, 13};
+    Vector eyeSize = {};
+    HDC eye = NULL;
+    COLORREF hideColor = RGB (60, 60, 60);
+
+
     ToolMenu(AbstractAppData* _app, CanvasManager* _canvasManager) :
         Menu(_app, { .pos = {_app->systemSettings->SizeOfScreen.x - 300, 300}, .finishPos = {_app->systemSettings->SizeOfScreen.x - 5, _app->systemSettings->ONELAYTOOLSLIMIT * _app->systemSettings->BUTTONHEIGHT} }, {}, _app->systemSettings->ONELAYTOOLSLIMIT, true),
-        canvasManager(_canvasManager)
+        canvasManager(_canvasManager),
+        eyeSize({ app->systemSettings->BUTTONWIDTH, app->systemSettings->BUTTONHEIGHT }),
+        eye (app->loadManager->loadImage ("Eye.bmp"))
     {
         assert(app);
         loadManager = app->loadManager;;
@@ -55,7 +63,7 @@ struct ToolMenu : Menu
 
         app->setColor(color, finalDC);
         app->rectangle(0, 0, rect.finishPos.x, rect.finishPos.y, finalDC);
-        font = std::lround (_app->systemSettings->MainFont * 1.5);
+        font = std::lround (_app->systemSettings->MainFont);
         app->selectFont(_app->systemSettings->FONTNAME, font, finalDC);
         
         handle.rect = { .pos = {0, 0}, .finishPos = {getSize().x, app->systemSettings->HANDLEHEIGHT} };
@@ -66,6 +74,9 @@ struct ToolMenu : Menu
         handle.font = app->systemSettings->MainFont;
     }
 
+
+    Rect getLineRect(int numberOfLine);
+    Rect getEyeRect(Rect lineRect);
 
     virtual void onUpdate();
     virtual void drawOneLine(int lineNum);

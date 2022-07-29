@@ -30,6 +30,7 @@ struct CLay
 
 
     virtual ToolLay* getActiveToolLay();
+    virtual ToolLay* getToolLay(int num);
     virtual int getCurrentSize();
     virtual int getActiveToolLayNum();
     virtual void setActiveToolLayNum(int num);

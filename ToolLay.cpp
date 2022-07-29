@@ -38,7 +38,7 @@ bool ToolLay::useTool(ProgrammeDate* _data)
 
 HDC ToolLay::drawTool(HDC dc /*= NULL*/)
 {
-    if (getTool() && isStarted()) return (HDC)getTool()->handler(T_LOAD, this);
+    if (getTool() && isStarted() && needToShow) return (HDC)getTool()->handler(T_LOAD, this);
     return NULL;
 }
 
@@ -47,9 +47,8 @@ void ToolLay::editTool(ProgrammeDate* _data)
     if (!getTool()) return;
     data = _data;
     assert(data);
-    HDC outDC = lay->lay.outputLay;
 
-    isEditing = !getTool()->handler(T_EDIT, this);
+    if (needToShow)isEditing = !getTool()->handler(T_EDIT, this);
 }
 
 
@@ -93,6 +92,11 @@ HDC ToolLay::getOutputDC()
 {
     if (lay) return lay->getOutputDC();
     else     return NULL;
+}
+
+void ToolLay::setShowMode(int mode)
+{
+    needToShow = mode;
 }
 
 

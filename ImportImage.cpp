@@ -18,7 +18,7 @@ void ImportImage::draw()
             return;
         }
 
-        const char* pathToSave = app->getSaveFileName("Место хранения изображения", "Image (*.bmp)\0*.bmp\0Image (*.png)\0*.png\0Image (*.jpg)\0*.jpg\0");;//getCustomFilePathForSaving("Место сохранения картинки", activeCanvas->getName(), "Image (*.bmp)\0*.bmp\0Image (*.png)\0*.png\0Image (*.jpg)\0*.jpg\0");
+        const char* pathToSave = app->getOpenFileName("Место хранения изображения", "All Images (*.bmp;*.png;*.jpg)\0*.bmp;*.png;*.jpg\0Image (*.bmp)\0*.bmp\0Image (*.png)\0*.png\0Image (*.jpg)\0*.jpg\0");
         char fullPath[MAX_PATH] = {};
         if (pathToSave)strcpy(fullPath, pathToSave);
 

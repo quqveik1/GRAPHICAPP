@@ -57,6 +57,27 @@ void ToolMenu::onUpdate()
     rect.finishPos.y = currentSize * app->systemSettings->BUTTONHEIGHT + handle.rect.finishPos.y + rect.pos.y;
 }
 
+Rect ToolMenu::getLineRect(int numberOfLine)
+{
+    int linePosY = app->systemSettings->BUTTONHEIGHT * numberOfLine + handle.rect.finishPos.y;
+    int lineFinishPosY = app->systemSettings->BUTTONHEIGHT * (numberOfLine + 1) + handle.rect.finishPos.y;
+    Rect lineRect = { .pos = {0, (double)linePosY}, .finishPos = {getSize().x, (double)lineFinishPosY} };
+    return lineRect;
+}
+
+Rect ToolMenu::getEyeRect(Rect lineRect)
+{
+    double eyeCentrizedPosInSectionX = app->getCentrizedPos(realEyeSize, eyeSize).x + lineRect.finishPos.x - eyeSize.x;
+    double eyeCentrizedPosInSectionY = app->getCentrizedPos(realEyeSize, lineRect.getSize()).y + lineRect.pos.y;
+    
+    Vector eyeCentrizedPosInSection = { eyeCentrizedPosInSectionX, eyeCentrizedPosInSectionY };
+
+    Rect result = { .pos = eyeCentrizedPosInSection, .finishPos = {eyeCentrizedPosInSection + realEyeSize } };
+
+    return result;
+}
+
+
 
 void ToolMenu::drawOneLine(int lineNum)
 {
@@ -67,11 +88,14 @@ void ToolMenu::drawOneLine(int lineNum)
     CLay* lay = canvasManager->getActiveCanvas()->getActiveLay();
     if (!lay) return;
 
+    bool needToDrawEye = true;
+
     int notStartedNum = canvasManager->getActiveCanvas()->getLastNotStartedToolNum();
     if (lineNum == notStartedNum)
     {
         nameOfTool = "Новый инструмент";
         toolDC = emptyToolDC;
+        needToDrawEye = false;
     }
     else
     {
@@ -89,16 +113,34 @@ void ToolMenu::drawOneLine(int lineNum)
     char outputText[MAX_PATH] = {};
     sprintf(outputText, "%d - %s", lineNum + 1, nameOfTool);
 
-    int linePosY = app->systemSettings->BUTTONHEIGHT * lineNum + handle.rect.finishPos.y;
-    int lineFinishPosY = app->systemSettings->BUTTONHEIGHT * (lineNum + 1) + handle.rect.finishPos.y;
-    Rect lineRect = { .pos = {0, (double)linePosY}, .finishPos = {getSize().x, (double)lineFinishPosY} };
+    
+    Rect lineRect = getLineRect(lineNum);
+    int linePosY = std::lround (lineRect.pos.y);
+    int lineFinishPosY = std::lround(lineRect.finishPos.y);
 
     app->bitBlt(finalDC, 0, linePosY, app->systemSettings->BUTTONWIDTH, linePosY + app->systemSettings->BUTTONHEIGHT, toolDC);
     app->setColor(app->systemSettings->MenuColor, finalDC);
     app->rectangle(app->systemSettings->BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + app->systemSettings->BUTTONHEIGHT, finalDC);
 
     app->setColor(app->systemSettings->TextColor, finalDC);
-    app->drawText(app->systemSettings->BUTTONWIDTH, linePosY, rect.getSize().x, linePosY + app->systemSettings->BUTTONHEIGHT, outputText, finalDC, app->systemSettings->TEXTFORMAT);
+    app->drawText(app->systemSettings->BUTTONWIDTH, linePosY, rect.getSize().x - eyeSize.x, linePosY + app->systemSettings->BUTTONHEIGHT, outputText, finalDC, app->systemSettings->TEXTFORMAT);
+
+    Rect eyeRect = getEyeRect(lineRect);
+    if (needToDrawEye)
+    {
+        ToolLay* toollay = lay->getToolLay(lineNum);
+        if (toollay)
+        {
+            app->transparentBlt(finalDC, eyeRect.pos, {}, eye);
+            if (!toollay->needToShow)
+            {
+                app->setColor(hideColor, finalDC, 4);
+                app->line(eyeRect.pos, eyeRect.finishPos, finalDC);
+                app->line(eyeRect.pos.x, eyeRect.finishPos.y, eyeRect.finishPos.x, eyeRect.pos.y, finalDC);
+            }
+        }
+        
+    }
 
     app->setColor(TX_BLACK, finalDC);
     app->line(0, linePosY, rect.getSize().x, linePosY, finalDC);
@@ -107,6 +149,7 @@ void ToolMenu::drawOneLine(int lineNum)
     {
         app->drawCadre(lineRect, finalDC, TX_WHITE, 2);
     }
+    setMbLastTime();
 }
 
 
@@ -120,7 +163,28 @@ int ToolMenu::onClickLine(Vector mp)
 
     if (!(buttonNum >= 0 && buttonNum <= currentSize))  return 0;
 
-    canvasManager->getActiveCanvas()->setActiveToolLayNum(buttonNum);
+    Rect eyeRect = getEyeRect(getLineRect(buttonNum));
+
+    if (canvasManager->getActiveCanvas())
+    {
+        Vector absPos = { mp.x, mp.y + handle.rect.finishPos.y };
+        if (eyeRect.inRect(absPos) && buttonNum != currentSize - 1)
+        {
+            if (canvasManager->getActiveCanvas()->getActiveLay())
+            {
+                ToolLay* toolLay = canvasManager->getActiveCanvas()->getActiveLay()->getToolLay(buttonNum);
+                if (toolLay && !isClickedLastTime())
+                {                        
+                    int newMode = toolLay->needToShow;
+                    toolLay->setShowMode(!newMode);
+                    canvasManager->getActiveCanvas()->getActiveLay()->needRedraw();
+                }
+                return 1;
+            }
+        }
+
+        canvasManager->getActiveCanvas()->setActiveToolLayNum(buttonNum);
+    }
 
     return 1;
 }

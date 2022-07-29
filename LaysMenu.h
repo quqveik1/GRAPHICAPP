@@ -15,7 +15,7 @@ struct LaysMenu : Manager
         Manager(_app, _rect, 0, true, NULL, { .pos = {0, 0}, .finishPos = {_rect.getSize().x, _app->systemSettings->HANDLEHEIGHT} }),
         canvasManager(_canvasManager),
         sectionHeight(systemSettings->HANDLEHEIGHT),
-        sectionFont(systemSettings->MainFont * 0.9),
+        sectionFont(sectionHeight - 4),
         addNewLayButton(_app->loadManager->loadImage("AddNewCanvas2.bmp")),
         buttonSize({ _app->systemSettings->BUTTONWIDTH, _app->systemSettings->HANDLEHEIGHT })
     {

@@ -110,6 +110,15 @@ ToolLay* CLay::getActiveToolLay()
     return toolLays[activeToolNum];
 }
 
+ToolLay* CLay::getToolLay(int num)
+{
+    if (0 <= num && num < getCurrentSize())
+    {
+        return toolLays[num];
+    }
+    return NULL;
+}
+
 int CLay::getActiveToolLayNum()                                                                                                                             
 {
     return activeToolNum;
@@ -159,8 +168,10 @@ void CLay::redraw()
 
     for (int toollay = 0; toollay < toolLength; toollay++)
     {
+        assert(toolLays[toollay]);
+
         HDC outDC = toolLays[toollay]->drawTool();
-        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC); 
+        if (outDC != lay.outputLay && outDC) app->transparentBlt(lay.outputLay, 0, 0, 0, 0, outDC);
     }
 }
 
