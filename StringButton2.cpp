@@ -2,41 +2,245 @@
 #include "StringButton2.h"
 
 
+void Cursor::makeDefault()
+{
+    currPos = -1;
+    startPos = -1;
+}
+
+void Cursor::draw(HDC finalDC)
+{
+
+    int clockMS = clock();
+
+    if (clockMS - lastTimeCursorConditionChanged > 500)
+    {
+        if (shouldShowCursor == false) shouldShowCursor = true;
+        else shouldShowCursor = false;
+        lastTimeCursorConditionChanged = clock();
+    }
+    int cursorXPosition = getCertainCharPos(currPos);
+    int startCursorXPosition = getCertainCharPos(startPos);
+
+    if (isActiveSelection())
+    {
+        app->setColor(selectionColor, finalDC);
+        app->rectangle(startCursorXPosition, startOfText.y, cursorXPosition, stringButton->getSize().y, finalDC);
+    }
+
+    if (!shouldShowCursor)  return;
+
+    app->setColor(cursorColor, finalDC);
+    app->line(cursorXPosition, startOfText.y, cursorXPosition, stringButton->getSize().y, finalDC);
+
+}
+
+int Cursor::moveLeft()
+{
+    if (currPos - 1 >= 0)
+    {
+        moveCursorTo(currPos - 1);
+        return currPos;
+    }
+    return NULL;
+}  
+
+int Cursor::moveRight()
+{
+    if (currPos + 1 <= stringButton->currentTextSize)
+    {
+        moveCursorTo(currPos + 1);
+        return currPos;
+    }
+    return NULL;
+}
+
+int Cursor::moveCursorTo(int pos)
+{
+    if (0 <= pos && pos <= stringButton->currentTextSize)
+    {
+        currPos = pos;
+        startPos = pos;
+        return currPos;
+    }
+    return NULL;
+}
+
+
+
+int Cursor::getCursorPosX()
+{
+    return getCertainCharPos(currPos);
+}
+
+
+int Cursor::getCertainCharPos(int num)
+{
+    int positionX = -1;
+
+    if (num < stringButton->maxTextSize)
+    {
+        char saveSymbol = stringButton->text[num];
+        stringButton->text[num] = NULL;
+        positionX = std::lround(app->getTextExtent(stringButton->text, stringButton->finalDC).x);
+        stringButton->text[num] = saveSymbol;
+    }
+
+    return startOfText.x + positionX;
+}
+
+int Cursor::clickCursor(Vector mp)
+{
+    int pos = stringButton->getTextSize();
+    for (int i = 0; i <= stringButton->getTextSize(); i++)
+    {
+        int pos1 = getCertainCharPos(i);
+        int pos2 = getCertainCharPos(i + 1);
+
+        if (pos1 <= mp.x && mp.x <= pos2)
+        {
+            pos = i;
+            break;
+        }
+        if (i == stringButton->getTextSize())
+        {
+            if (pos1 <= mp.x)
+            {
+                pos = i;
+                break;
+            }
+        }
+
+        if (i == 0)
+        {
+            if (mp.x <= pos2)
+            {
+                pos = i;
+                break;
+            }
+        }
+    }
+
+    if (pos < 0)
+    {
+        pos = 0;
+    }
+
+    currPos = pos;
+    if (!stringButton->isClickedLastTime())
+    {
+        startPos = pos;
+    }
+
+
+    return pos;
+
+}
+
+bool Cursor::isActiveSelection()
+{
+    return currPos != startPos;
+}
+
+
 void StringButton2::moveCursorLeft()
 {
-    if (cursorPos - 1 >= 0) cursorPos--;
+    if (app->getAsyncKeyState(VK_SHIFT))
+    {
+        if (app->getAsyncKeyState(VK_CONTROL))
+        {
+            cursor.currPos = nearestWordStartPos(cursor.currPos);
+        }
+        else
+        {
+            if (cursor.currPos - 1 >= 0)
+            {
+                cursor.currPos--;
+            }
+        }
+    }
+    else
+    {
+        if (app->getAsyncKeyState(VK_CONTROL))
+        {
+            cursor.moveCursorTo(nearestWordStartPos(cursor.currPos));
+        }
+        else
+        {
+            if (cursor.currPos - 1 >= 0)
+            {
+                cursor.moveLeft();
+            }
+        }
+    }
 }
 
 void StringButton2::moveCursorRight()
 {
-    if (cursorPos + 1 <= currentTextSize) cursorPos++;
-}
-
-void StringButton2::shiftTextForward(char* _text, int startPos, int finishPos)
-{
-    for (int i = finishPos; i >= startPos; i--)
+    if (app->getAsyncKeyState(VK_SHIFT))
     {
-        if (finishPos < maxTextSize)
+        if (app->getAsyncKeyState(VK_CONTROL))
         {
-            _text[i + 1] = _text[i];
+            cursor.currPos = nearestWordStartPos(cursor.currPos);
+        }
+        else
+        {
+            if (cursor.currPos + 1 <= currentTextSize)
+            {
+                cursor.currPos++;
+            }
+        }
+    }
+    else
+    {
+
+        if (app->getAsyncKeyState(VK_CONTROL))
+        {
+            cursor.moveCursorTo (nearestWordStartPos(cursor.currPos));
+        }
+        else
+        {
+            if (cursor.currPos + 1 <= currentTextSize)
+            {
+                cursor.moveRight();
+            }
         }
     }
 }
 
-void StringButton2::shiftTextBack(char* _text, int startPos, int finishPos)
+void StringButton2::shiftTextForward(char* _text, int startPos, int finishPos, int delta/* = 1*/)
 {
-    for (int i = startPos; i <= finishPos; i++)
+    for (int localDelta = 0; localDelta < delta; localDelta++)
     {
-        if (i - 1 >= 0)
+        for (int i = finishPos + localDelta; i >= startPos + localDelta; i--)
         {
-            _text[i - 1] = _text[i];
+            if (finishPos < maxTextSize)
+            {
+                _text[i + 1] = _text[i];
+            }
+        }
+    }
+}
+
+void StringButton2::shiftTextBack(char* _text, int startPos, int finishPos, int delta/* = 1*/)
+{
+    for (int localDelta = 0; localDelta < delta; localDelta++)
+    {
+        for (int i = startPos - localDelta; i <= finishPos - localDelta; i++)
+        {
+            if (i - 1 >= 0)
+            {
+                _text[i - 1] = _text[i];
+            }
         }
     }
 
 }
 
-int StringButton2::getTextSize(char* _text)
+int StringButton2::getTextSize(char* _text/* = NULL*/)
 {
+    if (_text == NULL) _text = text;
+
     int i = 0;
     while (_text[i] != NULL)
     {
@@ -63,17 +267,18 @@ bool StringButton2::isSymbolAllowed(char _symbol)
     }
 
     //КИРИЛИЦА
-    if (0xC0 <= symbol && symbol <= 0xFF)
+    if (192 <= symbol && symbol <= 255)
     {
         return true;
     }
     
-    if (0xC0 <= symbol && symbol <= 0xFF)
+    if (33 <= symbol && symbol <= 126)
     {
         return true;
     }
+
     //знаки препинания
-    if (0xBB <= symbol && symbol <= 0xDF)
+    if (137 <= symbol && symbol <= 186)
     {
         return true;
     }
@@ -95,17 +300,20 @@ void StringButton2::draw()
         app->setColor(color, finalDC);
         app->rectangle({ 0, 0 }, getSize(), finalDC);
 
-        if (rect.inRect(getAbsMousePos()))
+        if (rect.inRect(getAbsMousePos()) || (cursor.isActiveSelection() & getMBCondition() == 1))
         {
-            app->setCursor(cursor);
+            app->setCursor(cursorImage);
         }
 
         if (getInputMode())
         {
             if (getActiveWindow() != this || app->getAsyncKeyState(VK_RETURN))
             {
-                getInputMode() = 0;
-                confirmEnter();
+                if (!cursor.isActiveSelection())
+                {
+                    getInputMode() = 0;
+                    confirmEnter();
+                }
             }
 
             if (app->getAsyncKeyState(VK_ESCAPE))
@@ -121,13 +329,9 @@ void StringButton2::draw()
             if (currentTextSize > (int)strlen(text)) currentTextSize = strlen(text);
 
             text[currentTextSize] = 0;
-            if (cursorPos > currentTextSize) cursorPos = currentTextSize;
-            drawCursor();
+            if (getInputMode() && getMBCondition() == 1) cursor.clickCursor(getMousePos());
+            cursor.draw(finalDC);
            
-        }
-        else
-        {
-            cursorPos = getTextSize(text);
         }
 
         char parametrString[MAX_PATH] = {};
@@ -162,17 +366,10 @@ void StringButton2::modifyOutput(char* outputStr, char* originalStr)
 void StringButton2::onClick(Vector mp)
 {
     setActiveWindow(this);
+
+    cursor.clickCursor(mp);
     if (!isClickedLastTime())
     {
-        if (getInputMode())                                                                                            
-        {
-            int pos = getPotentialCursorPos(mp);
-            if (pos >= 0)
-            {
-                cursorPos = pos;
-            }
-        }
-
         if (!getInputMode())
         {
             if (textBeforeRedacting) delete textBeforeRedacting;
@@ -182,42 +379,180 @@ void StringButton2::onClick(Vector mp)
             strcpy(textBeforeRedacting, text);
         }
         getInputMode() = 1;
-        
-
-
     }
 }
 
 
-int StringButton2::getPotentialCursorPos(Vector mp)
-{
-    int pos = currentTextSize;
-    for (int i = 0; i <= currentTextSize + 1; i++)
-    {
-        int pos1 = getCertainCharPos(i);
-        int pos2 = getCertainCharPos(i + 1);
 
-        if (pos1 <= mp.x && mp.x <= pos2)
+
+void StringButton2::copyInBuf()
+{
+    int localStartPos = cursor.startPos;
+    int localCurrPos = cursor.currPos;
+
+    if (localStartPos > localCurrPos)
+    {
+        int cpyStartPos = localStartPos;
+        localStartPos = localCurrPos;
+        localCurrPos = cpyStartPos;
+    }
+
+    if (localStartPos >= 0 && localCurrPos <= currentTextSize)
+    {
+        if (OpenClipboard(NULL))
         {
-            pos = i;
-            break;
+            if (cursor.isActiveSelection())
+            {
+                EmptyClipboard();
+                HGLOBAL buffer = NULL;
+                char cpySymbol = text[localCurrPos];
+                text[localCurrPos] = NULL;
+                int selectedZoneSize = strlen(&text[localStartPos]) + 1;
+                buffer = GlobalAlloc(GMEM_DDESHARE, selectedZoneSize);
+                if (buffer)
+                {
+                    char* tempBuffer = (char*)GlobalLock(buffer);
+                    if (tempBuffer)
+                    {
+                        strcpy(tempBuffer, &text[localStartPos]);
+                    }
+                    GlobalUnlock(buffer);
+                    SetClipboardData(CF_TEXT, buffer);
+                }
+            }
+
+            CloseClipboard();
+        }
+    }
+}
+
+void StringButton2::pasteFromBuf()
+{
+    int localStartPos = cursor.startPos;
+    int localCurrPos = cursor.currPos;
+
+    if (localStartPos > localCurrPos)
+    {
+        int cpyStartPos = localStartPos;
+        localStartPos = localCurrPos;
+        localCurrPos = cpyStartPos;
+    }
+
+    if (localStartPos >= 0 && localCurrPos <= currentTextSize)
+    {
+        if (OpenClipboard(NULL))
+        {
+            HANDLE hData = GetClipboardData(CF_TEXT);
+            if (hData)
+            {
+                char* pasteBuffer = (char*)GlobalLock(hData);
+                if (pasteBuffer)
+                {
+                    int pasteBufferLength = strlen(pasteBuffer);
+                    bool needToPaste = true;
+                    for (int i = 0; i < pasteBufferLength; i++)
+                    {
+                        if (!isSymbolAllowed(pasteBuffer[i]))
+                        {
+                            needToPaste = false;
+                            break;
+                        }
+                    }
+                    if (needToPaste)
+                    {
+                        int selectionZoneSize = localCurrPos - localStartPos;
+                        if (pasteBufferLength > selectionZoneSize)
+                        {
+                            shiftTextForward(text, localCurrPos, currentTextSize, pasteBufferLength - selectionZoneSize);
+                        }
+
+                        if (pasteBufferLength < selectionZoneSize)
+                        {
+                            shiftTextBack(text, localCurrPos, currentTextSize, selectionZoneSize - pasteBufferLength);
+                        }
+
+                        strcpy(&text[localStartPos], pasteBuffer);
+                        currentTextSize = getTextSize(text);
+                        cursor.moveCursorTo(localStartPos + pasteBufferLength);
+                    }
+                }
+                GlobalUnlock(hData);
+                CloseClipboard();
+            }
+        }
+    }
+}
+
+
+int StringButton2::nearestWordStartPos(int cursorPos)
+{
+    bool wasNonSpaceSymbolChecked = false;
+    int answer = cursorPos;
+
+    for (int i = cursorPos - 1; i >= 0; i--)
+    {
+        if (text[i] != ' ')
+        {
+            wasNonSpaceSymbolChecked = true;
+        }
+        else
+        {
+            if (wasNonSpaceSymbolChecked)
+            {
+                answer = i + 1;
+                break;
+            }
+        }
+        if (i == 0)
+        {
+            if (answer == cursorPos)
+            {
+                answer = i;
+            }
         }
     }
 
-    return pos;
-
+    return answer;
 }
-
-
 
 void StringButton2::backSpace()
 {
-    if (cursorPos > 0)
+    setActiveWindow(this);
+    if (app->getAsyncKeyState(VK_CONTROL) && !app->getAsyncKeyState(VK_SHIFT) && !cursor.isActiveSelection())
     {
-        text[cursorPos - 1] = NULL;
-        shiftTextBack(text, cursorPos, currentTextSize - 1);
-        cursorPos--;
-        currentTextSize--;
+        int nearestWordPos = nearestWordStartPos(cursor.currPos);
+        cursor.currPos = nearestWordPos;
+    }
+
+    if (cursor.isActiveSelection())
+    {
+        if (cursor.startPos > cursor.currPos)
+        {
+            int savePos = cursor.startPos;
+            cursor.startPos = cursor.currPos;
+            cursor.currPos = savePos;
+        }
+
+        for (int i = cursor.startPos; i < cursor.startPos + (cursor.currPos - cursor.startPos); i++)
+        {
+            text[i] = NULL;
+        }
+
+        shiftTextBack(text, cursor.currPos, currentTextSize, cursor.currPos - cursor.startPos);
+
+        cursor.currPos = cursor.startPos;
+        currentTextSize = getTextSize();
+
+    }
+    else
+    {
+        if (cursor.currPos > 0)
+        {
+            text[cursor.currPos - 1] = NULL;
+            shiftTextBack(text, cursor.currPos, currentTextSize);
+            cursor.moveCursorTo(cursor.currPos - 1);
+            currentTextSize--;
+        }
     }
 
 }
@@ -228,6 +563,7 @@ void StringButton2::checkKeyboard()
     {
         moveCursorRight();
         lastTimeClicked = clock();
+        setActiveWindow(this);
         return;
     }
 
@@ -235,6 +571,7 @@ void StringButton2::checkKeyboard()
     {
         moveCursorLeft();
         lastTimeClicked = clock();
+        setActiveWindow(this);
         return;
     }
 
@@ -242,6 +579,23 @@ void StringButton2::checkKeyboard()
     {
         backSpace();
         lastTimeClicked = clock();
+        setActiveWindow(this);
+        return;
+    }
+
+    if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('C'))
+    {
+        copyInBuf();
+        lastTimeClicked = clock();
+        setActiveWindow(this);
+        return;
+    } 
+    
+    if (app->getAsyncKeyState(VK_CONTROL) && app->getAsyncKeyState('V') && clock() - lastTimeClicked > specButtonsDelta)
+    {
+        pasteFromBuf();
+        lastTimeClicked = clock();
+        setActiveWindow(this);
         return;
     }
 
@@ -255,9 +609,9 @@ void StringButton2::checkKeyboard()
 
     if (currentTextSize < maxTextSize)
     {
-        getTextAfterEnteringSymbol(text, text, currentTextSize, cursorPos, symbol);
-        cursorPos++;
+        getTextAfterEnteringSymbol(text, text, currentTextSize, cursor.currPos, symbol);
         currentTextSize++;
+        cursor.moveCursorTo(cursor.currPos + 1);
     }
 
 }
@@ -303,41 +657,7 @@ int StringButton2::findClickedKey()
 
 void StringButton2::drawCursor()
 {
-    int clockMS = clock();
-
-    if (clockMS - lastTimeCursorConditionChanged > 500)
-    {
-        if (shouldShowCursor == false) shouldShowCursor = true;
-        else shouldShowCursor = false;
-        lastTimeCursorConditionChanged = clock();
-    }
-
-    if (!shouldShowCursor)  return;
-    //int cursorXPosition = deltaAfterCadre + fontSizeX * tempCursorPos;
-    int cursorXPosition =  getCursorPosX();
-    app->setColor(cursorColor, finalDC);
-    app->line(cursorXPosition, 0, cursorXPosition, getSize().y, finalDC);
+    
 
 
-}
-
-int StringButton2::getCursorPosX()
-{   
-    return getCertainCharPos(cursorPos);
-}
-
-
-int StringButton2::getCertainCharPos(int num)
-{
-    int positionX = -1;
-
-    if (num < maxTextSize)
-    {
-        char saveSymbol = text[num];
-        text[num] = NULL;
-        positionX = std::lround(app->getTextExtent(text, finalDC).x);
-        text[num] = saveSymbol;
-    }
-
-    return deltaAfterCadre + positionX;
 }

@@ -24,7 +24,6 @@ PowerPoint::PowerPoint()
     appVersion = "v0.2.2.0";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
-    
 
     if (_mkdir("Settings") == -1)
     {

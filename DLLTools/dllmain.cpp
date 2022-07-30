@@ -33,7 +33,7 @@ DLLToolExportData* initDLL(AbstractAppData* appData)
     dllData->addTool(new RectangleTool   (&DllSettings, "Прямоугольник", sizeof(ToolSave),  TheApp->loadManager->loadImage("Rectangle.bmp"), appData));
     dllData->addTool(new EllipseTool     (&DllSettings, "Эллипс", sizeof(ToolSave),  TheApp->loadManager->loadImage("Ellipse.bmp"), appData));
     dllData->addTool(new CopyDC          (&DllSettings, "Скопировать область",  TheApp->loadManager->loadImage("CopyDCButton.bmp"), appData));
-    dllData->addTool(new ImportDC        (&DllSettings, "Вставить изображение",  TheApp->loadManager->loadImage("ImportDC.bmp"), appData));
+    dllData->addTool(new ImportDC        (&DllSettings, "Вставить изображение из буффера",  TheApp->loadManager->loadImage("ImportDC.bmp"), appData));
 
 
     return dllData;

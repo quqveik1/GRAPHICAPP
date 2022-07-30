@@ -1,6 +1,49 @@
 #pragma once
 #include "WindowsLib.cpp"
 
+
+struct StringButton2;
+
+struct Cursor
+{
+    StringButton2* stringButton = NULL;
+
+    AbstractAppData* app = NULL;
+    Vector startOfText = {};
+    COLORREF cursorColor = NULL;
+    COLORREF selectionColor = RGB(0, 0, 180);
+
+    int startPos = -1;
+    int currPos = -1;
+    int lastTimeCursorConditionChanged = 0;
+    bool wasClicked = false;
+    bool shouldShowCursor = false;
+    int delta = 300;
+
+    Cursor(AbstractAppData* _app, StringButton2* _stringButton, Vector _startOfText, COLORREF _cursorColor) :
+        app (_app),
+        stringButton (_stringButton),
+        startOfText(_startOfText),
+        cursorColor (_cursorColor)
+    {
+        assert(app);
+        assert(stringButton);
+    }
+
+
+    void makeDefault();
+    void draw(HDC finalDC);
+    int moveLeft();
+    int moveRight();
+    int moveCursorTo(int pos);
+    int getCursorPosX();
+    int getCertainCharPos(int num);
+    int clickCursor(Vector mp);
+    bool isActiveSelection();
+
+
+};
+
 struct StringButton2 : Manager
 {
     char* text = NULL;
@@ -8,55 +51,53 @@ struct StringButton2 : Manager
     int maxTextSize = 0;
     char* textBeforeRedacting = NULL;
 
-    int cursorPos = 0;
     int lastTimeClicked = 0;
-    int delta = 300;
     int specButtonsDelta = 200;
-    int lastTimeCursorConditionChanged = 0;
-    bool wasClicked = false;
-    bool shouldShowCursor = false;
 
     int inputMode = 0;
 
-    HCURSOR cursor = NULL;
+    HCURSOR cursorImage = NULL;
 
     double deltaAfterCadre = 4;
     COLORREF cadreColor = NULL;
-    COLORREF cursorColor = NULL;
+    
+    Cursor cursor;
 
     StringButton2(AbstractAppData* _app, Rect _rect, char* _text, int _maxTextSize, COLORREF _mainColor, COLORREF _cadreColor = RGB(144, 144, 144), COLORREF _cursorColor = RGB(200, 200, 200)) :
         Manager(_app, _rect, 1, true, NULL, {}, _mainColor),
         text(_text),
         maxTextSize(_maxTextSize),
         cadreColor (_cadreColor),
-        cursorColor (_cursorColor)
+        cursor(_app, this, {deltaAfterCadre, 0}, _cursorColor)
     {
         
         needTransparencyOutput = true;
 
         font = rect.getSize().y;
 
-        cursor = LoadCursor(NULL, IDC_IBEAM);
+        cursorImage = LoadCursor(NULL, IDC_IBEAM);
     }
 
     void checkKeyboard();
     void backSpace();
+    void copyInBuf();
+    void pasteFromBuf();
     void moveCursorLeft();
     void moveCursorRight();
     void drawCursor();
     bool isAnyNormalKeyButtonClicked();
     int findClickedKey();
+    int nearestWordStartPos(int cursorPos);
 
-    void shiftTextForward(char* _text, int startPos, int finishPos);
-    void shiftTextBack(char* _text, int startPos, int finishPos);
+    void shiftTextForward(char* _text, int startPos, int finishPos, int delta = 1);
+    void shiftTextBack(char* _text, int startPos, int finishPos, int delta = 1);
 
-    int getTextSize(char* _text);
+    int getTextSize(char* _text = NULL);
     int& getInputMode() { return inputMode; };
 
     void getTextAfterEnteringSymbol(char* finalText, char* originalText, int _currentTextSize, int _cursorPos, char symbol);
-    int getPotentialCursorPos(Vector mp);
-    int getCursorPosX();
-    int getCertainCharPos(int num);
+    
+    
 
     virtual bool isSymbolAllowed(char symbol);
     virtual void modifyOutput(char* outputStr, char* originalStr);

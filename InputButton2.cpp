@@ -26,7 +26,7 @@ bool InputButton2::isSymbolAllowed(char symbol)
 
     char* newText = new char[currentTextSize + 2]{};
 
-    getTextAfterEnteringSymbol(newText, text, currentTextSize, cursorPos, symbol);
+    getTextAfterEnteringSymbol(newText, text, currentTextSize, cursor.currPos, symbol);
     int newInt = getIntFromText(newText, 0);
     assert(maxParametr);
     if (newInt > *maxParametr)
@@ -36,7 +36,7 @@ bool InputButton2::isSymbolAllowed(char symbol)
 
     delete[] newText;
 
-    if (symbol == '0' && cursorPos == 0)
+    if (symbol == '0' && cursor.currPos == 0)
     {
         return false;
     }

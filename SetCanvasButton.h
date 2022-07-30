@@ -23,8 +23,8 @@ struct SetCanvasButton : Manager
     int sizeY = 0;
     int minSize = 0;
     int maxSize = 1000;
-    InputButton inputX;
-    InputButton inputY;
+    InputButton2 inputX;
+    InputButton2 inputY;
     double downSectionPosY = 0;
     Vector buttonPos = {};
     Vector buttonSize = { app->systemSettings->BUTTONWIDTH + 20, 25 };
