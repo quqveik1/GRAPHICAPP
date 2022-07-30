@@ -471,6 +471,11 @@ bool PowerPoint::getAsyncKeyState(int symbol)
     return txGetAsyncKeyState(symbol);
 }
 
+bool PowerPoint::isDoubleClick()
+{
+    return dClick;
+}
+
 void PowerPoint::deleteTransparency(RGBQUAD* buf, unsigned int totalSize)
 {
     for (int i = 0; i < (int)totalSize; i++)
@@ -590,10 +595,33 @@ void PowerPoint::setResized(bool state/* = true*/)
 
 void PowerPoint::controlApp()
 {
-    if (clock() - lastTimeCursorSetTime > 60)
+    int time = clock();
+    if (time - lastTimeCursorSetTime > 60)
     {
         setCursor(defaultCursor);
     }
+
+
+
+    if (dClick)
+    {
+        dClick = false;
+    }
+
+    if (getAsyncKeyState(VK_LBUTTON))
+    {
+        if (!wasLastTimeLButtonClicked && time - lastTimeLButtonClicked < 300)
+        {
+            dClick = true;
+        }
+        wasLastTimeLButtonClicked = true;
+        lastTimeLButtonClicked = time;
+    }
+    else
+    {
+        wasLastTimeLButtonClicked = false;
+    }
+
     txClearConsole();
 }
 

@@ -11,14 +11,17 @@ struct Cursor
     AbstractAppData* app = NULL;
     Vector startOfText = {};
     COLORREF cursorColor = NULL;
-    COLORREF selectionColor = RGB(0, 0, 180);
+    COLORREF selectionColor = RGB(90, 90, 200);
 
     int startPos = -1;
     int currPos = -1;
     int lastTimeCursorConditionChanged = 0;
     bool wasClicked = false;
     bool shouldShowCursor = false;
+    int lastTimeCursorPosChanged = 0;
     int delta = 300;
+
+    int lastTimeDClick = 0;
 
     Cursor(AbstractAppData* _app, StringButton2* _stringButton, Vector _startOfText, COLORREF _cursorColor) :
         app (_app),
@@ -33,9 +36,9 @@ struct Cursor
 
     void makeDefault();
     void draw(HDC finalDC);
-    int moveLeft();
-    int moveRight();
-    int moveCursorTo(int pos);
+    int moveLeft(bool needToChangeStartPos = true);
+    int moveRight(bool needToChangeStartPos = true);
+    int moveCursorTo(int pos, bool needToChangeStartPos = true);
     int getCursorPosX();
     int getCertainCharPos(int num);
     int clickCursor(Vector mp);
@@ -82,12 +85,15 @@ struct StringButton2 : Manager
     void backSpace();
     void copyInBuf();
     void pasteFromBuf();
+    void selectAll();
     void moveCursorLeft();
     void moveCursorRight();
     void drawCursor();
     bool isAnyNormalKeyButtonClicked();
     int findClickedKey();
-    int nearestWordStartPos(int cursorPos);
+    int nearestLeftWordStartPos (int cursorPos);
+    int nearestRightWordStartPos(int cursorPos);
+    void startAndEndOfClickedWord(int cursorPos, int& pos1, int& pos2);
 
     void shiftTextForward(char* _text, int startPos, int finishPos, int delta = 1);
     void shiftTextBack(char* _text, int startPos, int finishPos, int delta = 1);
@@ -100,6 +106,7 @@ struct StringButton2 : Manager
     
 
     virtual bool isSymbolAllowed(char symbol);
+    virtual bool isSepSymbol(char symbol);
     virtual void modifyOutput(char* outputStr, char* originalStr);
     virtual void confirmEnter() {};
     virtual void doBeforeMainBlock() {};

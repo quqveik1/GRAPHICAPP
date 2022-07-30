@@ -46,6 +46,7 @@ struct AbstractAppData
     virtual void drawOnScreen(HDC dc, bool useAlpha = false) = 0;
     virtual void cleanTransparentDC() = 0;
     virtual bool getAsyncKeyState(int symbol) = 0;
+    virtual bool isDoubleClick() = 0;
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize) = 0;
 
     virtual int needToLoadOldFiles() = 0;

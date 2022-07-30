@@ -24,6 +24,7 @@ bool InputButton2::isSymbolAllowed(char symbol)
 {
     int currentInt = getIntFromText (text, currentTextSize);
 
+    /*
     char* newText = new char[currentTextSize + 2]{};
 
     getTextAfterEnteringSymbol(newText, text, currentTextSize, cursor.currPos, symbol);
@@ -35,11 +36,7 @@ bool InputButton2::isSymbolAllowed(char symbol)
     }
 
     delete[] newText;
-
-    if (symbol == '0' && cursor.currPos == 0)
-    {
-        return false;
-    }
+    */
     if ('0' <= symbol && symbol <= '9')
     {
         return true;
@@ -57,12 +54,6 @@ void InputButton2::setParameter(int* newParameter)
 void InputButton2::modifyOutput(char* outputStr, char* originalStr)
 {
     assert(outputStr && originalStr);
-    if (text[0] == '0' && getInputMode())
-    {
-        sprintf(outputStr, "");
-        return;
-    }
-
     if (mode == 1)
     {
         sprintf(outputStr, "%s%%", originalStr);
@@ -79,6 +70,7 @@ void InputButton2::modifyOutput(char* outputStr, char* originalStr)
 void InputButton2::confirmEnter()
 {
     int numBeforeRedacting = getIntFromText(textBeforeRedacting, 0);
+    sprintf(text, "%d", *parameter);
     int numAfterRedacting = getIntFromText(text, 0);
     if (numAfterRedacting > *maxParametr)
     {
@@ -87,17 +79,23 @@ void InputButton2::confirmEnter()
     }
     if (numBeforeRedacting != numAfterRedacting && confirmInput)
     {
-        *confirmInput = true;
+        *confirmInput = true; 
     }
 }
 
 void InputButton2::doBeforeMainBlock()
 {
-    sprintf(text, "%d", *parameter);
+    int currNum = getIntFromText(text);
+    if ((currNum != *parameter && !getInputMode()) || text[0] == NULL)
+    {
+        sprintf(text, "%d", *parameter);
+    }
 }
 
 void InputButton2::doAfterMainBlock()
 {
-    *parameter = getIntFromText(text, currentTextSize);
-    if (*parameter == 0) currentTextSize = 0;
+    int finalNum = getIntFromText(text, 0);
+    if (finalNum > *maxParametr) finalNum = *maxParametr;
+
+    *parameter = finalNum;
 }

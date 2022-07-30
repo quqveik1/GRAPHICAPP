@@ -18,6 +18,10 @@ struct PowerPoint : AbstractAppData
     int lastTimeCursorSetTime = NULL;
     Vector sizeHistory[2] = {};
 
+    int lastTimeLButtonClicked = 0;
+    bool wasLastTimeLButtonClicked = 0;
+    bool dClick = 0;
+
 
     virtual void setColor(COLORREF color, HDC dc, int thickness = 1) override;
     virtual int getColorComponent(COLORREF color, COLORREF component) override;
@@ -31,6 +35,7 @@ struct PowerPoint : AbstractAppData
     virtual void drawOnScreen(HDC dc, bool useAlpha = false) override;
     virtual void cleanTransparentDC() override;
     virtual bool getAsyncKeyState(int symbol) override;
+    virtual bool isDoubleClick() override;
     virtual void deleteTransparency(RGBQUAD* buf, unsigned int totalSize) override;
 
     virtual int needToLoadOldFiles() override;

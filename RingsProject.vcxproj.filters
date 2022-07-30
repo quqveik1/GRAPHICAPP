@@ -25,6 +25,5 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Files\Imred.ico" />
-    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>

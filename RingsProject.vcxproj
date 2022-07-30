@@ -156,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Files\Imred.ico" />
-    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
