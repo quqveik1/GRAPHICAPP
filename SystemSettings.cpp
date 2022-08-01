@@ -127,9 +127,9 @@ void CSystemSettings::setDefaultSettings()
     SecondMenuColor = RGB(30, 30, 30);
     onMouseColor = RGB(100, 100, 100);
     TextColor = RGB(255, 255, 255);
-    BackgroundColor = RGB(0, 0, 0);
+    BackgroundColor = RGB(255, 255, 255);
     DrawColor = RGB(255, 0, 0);
-    TRANSPARENTCOLOR = RGB(57, 57, 57);
+    TRANSPARENTCOLOR = RGB (57, 57, 57);
 
     ONELAYTOOLSLIMIT = 100;
 

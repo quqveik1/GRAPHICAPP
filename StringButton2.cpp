@@ -667,13 +667,11 @@ void StringButton2::backSpace()
     }
     else
     {
-        if (cursor.currPos > 0)
-        {
-            text[cursor.currPos - 1] = NULL;
-            shiftTextBack(text, cursor.currPos, currentTextSize);
-            cursor.moveLeft();
-            currentTextSize--;
-        }
+
+        text[cursor.currPos - 1] = NULL;
+        shiftTextBack(text, cursor.currPos, currentTextSize);
+        cursor.moveLeft();
+        currentTextSize--;
     }
 
 }     
@@ -761,9 +759,25 @@ void StringButton2::checkKeyboard()
 
     if (currentTextSize < maxTextSize)
     {
-        getTextAfterEnteringSymbol(text, text, currentTextSize, cursor.currPos, symbol);
-        currentTextSize++;
-        cursor.moveRight();
+        //getTextAfterEnteringSymbol(text, text, currentTextSize, cursor.currPos, symbol);
+        setActiveWindow(this);
+
+        if (!cursor.isActiveSelection())
+        {
+            shiftTextForward(text, cursor.currPos, currentTextSize);
+            text[cursor.currPos] = symbol;
+            currentTextSize = strlen(text);
+            cursor.moveRight();
+        }
+        else
+        {
+            shiftTextBack(text, max(cursor.currPos, cursor.startPos), currentTextSize, abs(cursor.currPos - cursor.startPos));
+            text[cursor.currPos] = symbol;
+            currentTextSize = strlen(text);
+            cursor.moveCursorTo(min(cursor.currPos, cursor.startPos));
+            cursor.moveRight();
+        }
+        
     }
 
 }

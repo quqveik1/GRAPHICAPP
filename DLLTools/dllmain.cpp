@@ -97,21 +97,14 @@ void EllipseTool::outputFunc(HDC outdc)
 }
 
 
-void Point::initPointSave()
+void Gummi::setPointSaveData()
 {
-    pointSave->size = app->systemSettings->Thickness;
-    pointSave->color = appData->color;
-    pointSave->dllSettings = dllSettings;
-    pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
+    pointSave->saveData(app->systemSettings->BackgroundColor, { (double)app->systemSettings->Thickness, (double)app->systemSettings->Thickness });
 }
 
-void Gummi::initPointSave()
+void Point::setPointSaveData()
 {
-    Vector size = { (double)dllSettings->GummiThickness, (double)dllSettings->GummiThickness };
-    pointSave->size = size;
-    pointSave->color = appData->backGroundColor;
-    pointSave->dllSettings = dllSettings;
-    pointSave->pointsPosition = new Vector[dllSettings->POINTSAVELENGTH]{};
+    pointSave->saveData(app->systemSettings->DrawColor, { (double)app->systemSettings->Thickness, (double)app->systemSettings->Thickness });
 }
 
 long Point::use(ToolLay* lay)
@@ -127,9 +120,8 @@ long Point::use(ToolLay* lay)
     if (appData->clickedMB == 1)
     {
         lay->needRedraw();
-
-        if (!isStarted(lay)) initPointSave();
-
+        
+        setPointSaveData();
         pointSave->isStarted = true;
         if (lastPos != appData->mousePos)
         {
@@ -156,15 +148,42 @@ HDC Point::load(ToolLay* toollay)
     pointSave = (PointSave*)toollay->getToolsData();
     HDC outDC = getOutDC();
 
-    app->setColor(pointSave->color, outDC, 1);
-    if (app->systemSettings->debugMode == 5) printf("pointSave->currentLength: %d", pointSave->currentLength);
+    app->setColor(pointSave->color, outDC, pointSave->size.x);
 
+    Polyline(outDC, pointSave->pointsPosition, pointSave->currentLength);
+
+    /*
     for (int i = 0; i < pointSave->currentLength; i++)
     {
-        app->ellipse(pointSave->pointsPosition[i], pointSave->size, outDC);
+        app->setColor(pointSave->color, outDC, pointSave->size.x);
+        if (i > 0)
+        {
+            app->line(pointSave->pointsPosition[i - 1], pointSave->pointsPosition[i], outDC);
+        }
     }
+    */
 
     return outDC;
+}
+
+
+long Point::handler(TOOLMESSAGE message, ToolLay* lay)
+{
+    if (message == T_CREATE)
+    {
+        PointSave* _pointSave = new PointSave(dllSettings);
+        lay->getToolsData() = (char*)_pointSave;
+        return 0;
+    }
+
+    if (message == T_DESTROY)
+    {
+        PointSave* _pointSave = (PointSave*)lay->getToolsData();
+        delete _pointSave;
+        return 0;
+    }
+
+    return defaultHandler(message, lay);
 }
 
 

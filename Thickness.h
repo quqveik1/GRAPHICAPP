@@ -6,7 +6,7 @@
 struct ThicknessMenu : Manager
 {
     Slider2* slider = NULL;
-    InputButton* inputButton = NULL;
+    InputButton2* inputButton = NULL;
     Vector inputButtonSize = {};
     int minThickness = 1;
     int maxThickness = 100;
@@ -41,7 +41,7 @@ struct ThicknessMenu : Manager
         addWindow(slider);
 
         Rect inputButtonRect = { .pos = {sliderRect.finishPos.x + 5, sliderRect.pos.y}, .finishPos = {getSize().x - 5,  getSize().y - 5} };
-        inputButton = new InputButton(app, inputButtonRect, &app->systemSettings->Thickness, &minThickness, &maxThickness, 0, color, RGB(144, 144, 144), RGB(200, 200, 200));
+        inputButton = new InputButton2(app, inputButtonRect, &app->systemSettings->Thickness, &minThickness, &maxThickness, 0, color, RGB(144, 144, 144), RGB(200, 200, 200));
         addWindow(inputButton);
     }
 

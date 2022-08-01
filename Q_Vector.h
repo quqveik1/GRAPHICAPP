@@ -2,15 +2,17 @@
 
 
 #include "Double comparision.h"
+#include "TXLib.cpp"
 
 struct Vector 
 {
-    double x;
-    double y;
+    double x = 0;
+    double y = 0;
 
     Vector& operator = (const Vector &a1);
     Vector& operator = (const double& num);
     explicit operator double ();
+    explicit operator POINT() const;
 
 
 
@@ -237,6 +239,17 @@ bool operator < (const Vector &a, const Vector &b)
     }
     else return false;
 }
+
+Vector::operator POINT() const
+{
+    POINT point = {};
+    point.x = std::lround(x);
+    point.y = std::lround(y);
+
+    return point;
+
+}
+
 
 Vector::operator double ()
 {

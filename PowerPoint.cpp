@@ -48,70 +48,6 @@ int main (int argc, int *argv[])
 {
     appData = new PowerPoint;
 
-     
-    /*
-    if (OpenClipboard(NULL))//открываем буфер обмена
-    {
-        //извлекаем данные из буфера обмена
-        HBITMAP handle = (HBITMAP)GetClipboardData(CF_BITMAP);
-        if (handle)
-        {
-            HDC _dc = appData->createDIBSection(appData->getHBITMAPSize(handle));
-            HGDIOBJ result = SelectObject(_dc, handle);
-
-            CloseClipboard();//закрываем буфер обмена
-            appData->drawOnScreen(_dc);
-        }
-    }
-    */
-    /*
-    RGBQUAD* quad = NULL;
-    HDC dc = appData->getBufferDC(&quad);
-    _getch();
-    */
-    /*
-
-    
-    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-    ULONG_PTR gdiplusToken;
-    Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
-
-    int w = 500;
-    int h = 500;
-    HDC dc = appData->createDIBSection(500, 500);
-    HBITMAP hBitmap = CreateCompatibleBitmap(dc, w, h);
-    HGDIOBJ old_obj = SelectObject(dc, hBitmap);
-
-    Gdiplus::Bitmap bitmap(hBitmap, NULL);
-    CLSID clsid;
-
-
-    _getch();
-    
-
-    HDC _dc = appData->createDIBSection(500, 500);       
-    HBITMAP _bitmap = (HBITMAP)GetCurrentObject(_dc, OBJ_BITMAP);
-    appData->setColor(TX_RED, _dc);
-    appData->rectangle(0, 0, 1000, 1000, _dc);
-    appData->drawOnScreen(_dc);
-    _getch();
-    */
-
-    /*
-    HMODULE _lib = LoadLibrary("SaveImage.dll");
-    HDC (*loadImage)(const char* path, Vector & size) = (HDC(*) (const char* path, Vector & size)) GetProcAddress(_lib, "loadImage");
-    Vector size = {};
-    HDC _dc = loadImage("Холст.bmp", size);
-    appData->drawOnScreen(_dc);
-    _getch();
-    HDC dc = appData->createDIBSection(size);
-    appData->bitBlt(dc, 0, 0, 0, 0, _dc);
-    appData->drawOnScreen(dc);
-    _getch();
-    */
-
-    //saveImage = (int (*) (HDC dc, const char* path))GetProcAddress(_lib, "saveImage");
-
     Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
 
     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21, mainhandle);
@@ -227,9 +163,6 @@ void Engine (MainManager *manager)
     {
         app->controlApp();
         if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf("\nFPS: %d\n", (int)txGetFPS());
-
-        app->setColor(app->systemSettings->BackgroundColor, txDC());
-        app->rectangle(0, 0, app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y, txDC());
 
         Vector mp = { txMouseX(), txMouseY() };
         manager->mousePos = mp;

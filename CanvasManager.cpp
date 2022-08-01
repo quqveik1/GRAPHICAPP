@@ -16,6 +16,8 @@ CanvasManager::CanvasManager(AbstractAppData* _app, Vector _pos) :
 {
     gassert(loadManager);
 
+    color = TX_BLACK;
+
     app->toolManager->addTool(importTool, true);
 
     tabCross = app->loadManager->loadImage("tabCross.bmp");
@@ -105,7 +107,7 @@ void CanvasManager::draw()
 {
     rect.finishPos = app->systemSettings->SizeOfScreen;
 
-    app->setColor(app->systemSettings->BackgroundColor, finalDC);
+    app->setColor(color, finalDC);
     app->rectangle(0, 0, getSize().x, getSize().y, finalDC);
 
     if (getActiveCanvas())

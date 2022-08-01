@@ -173,7 +173,8 @@ HDC PowerPoint::createDIBSection(double sizex, double sizey, RGBQUAD** pixels/* 
 
 void PowerPoint::rectangle(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txRectangle(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
+    Rectangle(dc, std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2));
+    //txRectangle(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 
@@ -269,7 +270,29 @@ void PowerPoint::selectFont(const char* text, int sizey, HDC& dc, int sizex/* = 
 void PowerPoint::setColor(COLORREF color, HDC dc, int thickness)
 {
     if (systemSettings->debugMode == 5) printf("SetColor: %d|", color);
-    txSetAllColors$(color, dc, thickness);
+    gassert(dc);
+
+    /*
+    HBRUSH newSolidBrush = CreateSolidBrush(color);
+    HBRUSH oldSolidBrush = (HBRUSH)SelectObject(dc, (HGDIOBJ)newSolidBrush);   
+    if (oldSolidBrush)
+    {
+        DeleteObject(oldSolidBrush);
+    }
+    
+    HPEN newPen = CreatePen(PS_SOLID, color, thickness);
+    HPEN oldPen = (HPEN)SelectObject(dc, (HGDIOBJ)newPen);
+    if (oldPen)
+    {
+        DeleteObject(oldPen);
+    }
+    
+    SetTextColor(dc, color);
+    */
+
+
+    txSetFillColor(color, dc);
+    txSetColor(color, thickness, dc);
 }
 
 int PowerPoint::getColorComponent(COLORREF color, COLORREF component)
@@ -284,7 +307,7 @@ void PowerPoint::setDrawColor(COLORREF color)
 
 COLORREF PowerPoint::getPixel(Vector pos, HDC dc)
 {
-    return txGetPixel(pos.x, pos.y, dc);
+    return GetPixel(dc, std::lround (pos.x), std::lround(pos.y));
 }
 
 void PowerPoint::line(Rect rect, HDC dc)
@@ -295,7 +318,10 @@ void PowerPoint::line(Rect rect, HDC dc)
 
 void PowerPoint::line(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txLine(std::lround (x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
+    bool result = MoveToEx(dc, std::lround(x1), std::lround(y1), NULL);
+    result *= LineTo(dc, std::lround(x2), std::lround(y2));
+
+    //txLine(std::lround (x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 void PowerPoint::line(Vector pos1, Vector pos2, HDC dc)
@@ -311,7 +337,8 @@ void PowerPoint::ellipse(Vector centrePos, Vector halfSize, HDC dc)
 
 void PowerPoint::ellipse(double x1, double y1, double x2, double y2, HDC dc)
 {
-    txEllipse(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
+    Ellipse(dc, std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2));
+    //txEllipse(std::lround(x1), std::lround(y1), std::lround(x2), std::lround(y2), dc);
 }
 
 void PowerPoint::horizontalReflect(HDC dc, RGBQUAD* buf, Vector size, Vector fullDCSize/* = {}*/)

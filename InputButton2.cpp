@@ -86,7 +86,7 @@ void InputButton2::confirmEnter()
 void InputButton2::doBeforeMainBlock()
 {
     int currNum = getIntFromText(text);
-    if ((currNum != *parameter && !getInputMode()) || text[0] == NULL)
+    if ((currNum != *parameter && !getInputMode()) || (text[0] == NULL && !getInputMode()))
     {
         sprintf(text, "%d", *parameter);
     }

@@ -78,17 +78,20 @@ struct Point : Tool
 {
     Vector lastPos = {};
     PointSave* pointSave = NULL;
-    
+
 
     Point(ÑDllSettings* _dllSettings, const char* _name, const int _ToolSaveLen, HDC _dc, AbstractAppData* _data) :
         Tool(_dllSettings, _name, _ToolSaveLen, _dc, _data)
     {
     }
 
-    virtual void initPointSave();
+
+    virtual void setPointSaveData();
 
     virtual long use(ToolLay* lay) override;
     virtual HDC load(ToolLay* toollay) override;
+
+    virtual long handler(TOOLMESSAGE message, ToolLay* lay) override;
 };
 
 struct Vignette : Tool
@@ -113,7 +116,7 @@ struct Gummi : Point
     {
     }
 
-    virtual void initPointSave();
+    virtual void setPointSaveData() override;
 };
 
 struct RectangleTool : Tool4Squares

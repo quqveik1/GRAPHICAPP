@@ -5,12 +5,12 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(114,31): warn
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(115,32): warning C4100: 'toollay': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(56,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(143,33): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,93): warning C4100: 'clicked': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(14,72): warning C4100: 'dragedLastTime': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(91,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(193,9): warning C4189: 'test1': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(209,23): warning C4100: 'info': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(220,44): warning C4100: 'manager': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(7,93): warning C4100: 'clicked': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(7,72): warning C4100: 'dragedLastTime': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(84,10): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(186,9): warning C4189: 'test1': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(202,23): warning C4100: 'info': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(213,44): warning C4100: 'manager': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(72,41): warning C4100: 'coordinatsWithHandle': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(67,14): warning C4189: 'needResizex': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(68,14): warning C4189: 'needResizey': local variable is initialized but not referenced
@@ -29,8 +29,9 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(55,43): 
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(59,13): warning C4189: 'outDC': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.h(79,30): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(90,26): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(757,26): warning C4244: 'argument': conversion from 'int' to 'char', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(764,81): warning C4244: 'argument': conversion from 'int' to 'char', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(755,26): warning C4244: 'argument': conversion from 'int' to 'char', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(768,36): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(775,36): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton2.cpp(25,9): warning C4189: 'currentInt': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(76,82): warning C4100: 'lParam': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(76,67): warning C4100: 'wParam': unreferenced formal parameter
@@ -41,11 +42,12 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(103,28): 
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(103,18): warning C4100: 'xSrc': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(102,38): warning C4100: 'yDest': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(102,27): warning C4100: 'xDest': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(422,25): warning C4189: 'result': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(649,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(631,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(682,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(665,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(322,5): warning C4804: '*=': unsafe use of type 'bool' in operation
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(449,25): warning C4189: 'result': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(676,10): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(658,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(709,10): warning C4551: function call missing argument list
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(692,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Menu.cpp(31,9): warning C4189: 'my': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Menu.cpp(30,9): warning C4189: 'mx': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolsMenu.cpp(62,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
@@ -89,11 +91,11 @@ C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\OpenImage.cpp(21,26)
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,9): message : see declaration of 'Window::dc'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(47,26): warning C4100: 'argv': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(47,15): warning C4100: 'argc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(221,47): warning C4305: 'initializing': truncation from 'int' to 'bool'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(224,10): warning C4189: 'wasResizedInLastFrame': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(222,12): warning C4189: 'lastTimeChekedWindowCondition': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(221,10): warning C4189: 'deltaBetween2UnhideSuggestions': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(95): warning C4172: returning address of local variable or temporary: fileName
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(658): warning C4172: returning address of local variable or temporary: fileName
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(700): warning C4172: returning address of local variable or temporary: fileName
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(157,47): warning C4305: 'initializing': truncation from 'int' to 'bool'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(160,10): warning C4189: 'wasResizedInLastFrame': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(158,12): warning C4189: 'lastTimeChekedWindowCondition': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(157,10): warning C4189: 'deltaBetween2UnhideSuggestions': local variable is initialized but not referenced
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88): warning C4172: returning address of local variable or temporary: fileName
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(685): warning C4172: returning address of local variable or temporary: fileName
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(727): warning C4172: returning address of local variable or temporary: fileName
   RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\IMRED.exe

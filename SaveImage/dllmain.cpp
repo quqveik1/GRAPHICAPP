@@ -40,6 +40,10 @@ HDC loadImage(const char* path, Vector& size, AbstractAppData* _app)
     CImage image;
     LPCTSTR widePath = path;
     HRESULT hresult = image.Load(widePath);
+    if (FAILED(hresult))
+    {
+        return 0;
+    }
 
     size.x = image.GetWidth();
     size.y = image.GetHeight();

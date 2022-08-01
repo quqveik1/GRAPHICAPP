@@ -1,9 +1,5 @@
-﻿  pch.cpp
-  dllmain.cpp
+﻿  dllmain.cpp
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SaveImage\dllmain.cpp(6,31): warning C4100: 'lpReserved': unreferenced formal parameter
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SaveImage\dllmain.cpp(4,32): warning C4100: 'hModule': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SaveImage\dllmain.cpp(42,13): warning C4189: 'hresult': local variable is initialized but not referenced
-  SaveImage.cpp
-  Generating Code...
      Creating library C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\SaveImage.lib and object C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\SaveImage.exp
   SaveImage.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\SaveImage.dll

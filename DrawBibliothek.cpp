@@ -4,13 +4,6 @@
 
 
 
-void txSetAllColors$ (COLORREF color, HDC dc /*= txDc ()*/, int thickness/* = 1*/)
-{
-    gassert(dc);
-	txSetFillColor (color, dc); 
-	txSetColor (color, thickness, dc);
-}
-
 bool drag$ (DebugInfo info, Vector *objPos, Vector *lastTimePos, bool *dragedLastTime, bool clicked)
 {
     qassert (objPos && lastTimePos, info);
