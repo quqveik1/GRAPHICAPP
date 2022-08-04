@@ -2,29 +2,32 @@ IMRED - простая программа по редактированию фо
 - Открыть или импортировать на холст любую фотографию, 
 
 
- ![image](https://user-images.githubusercontent.com/64206443/182903551-25f4b096-dda0-435f-8b0f-38ae5f0dd5ae.png)
-- Сохранить изображение в удобном формате после редактирования,
+<img src="https://user-images.githubusercontent.com/64206443/182854548-5493df0f-4b0f-462f-ae83-fcb3d7c1221d.png" width="500">
+
+- Сохранить изображение в удобном формате после редактирования
 
 
-![image](https://user-images.githubusercontent.com/64206443/182903919-3cd460e4-1383-4a0d-820b-688df7ad684c.png)
+<img src="https://user-images.githubusercontent.com/64206443/182854882-eaae5da0-4436-47eb-acc9-706e0200fe26.png" width="500">
+
 - Нарисовать примитивный объект - линия, прямоугольник и тд.
 
 
-![image](https://user-images.githubusercontent.com/64206443/182903718-422f5f99-f44f-449c-ad36-111bdde01748.png)
-- Растянуть или сжать фотографию,
-- Спрятать объект,
-- Изменить объект,
+<img src="https://user-images.githubusercontent.com/64206443/182887519-8bdfe034-2045-446b-b26c-abaea4d3cd8b.png" width="500">
+
+- Растянуть или сжать фотографию
+- Спрятать или изменить объект
+
+<img src="https://user-images.githubusercontent.com/64206443/182855280-365db4ca-9b22-4d17-bdec-b1cfa9bce683.png" width="500">
+
+- Поддержка работы одновременно со многими изображениями
 
 
-![image](https://user-images.githubusercontent.com/64206443/182904250-589b0845-fff8-4098-a1c5-8d7b8a892a73.png)
-- Поддержка работы одновременно со многими изображениями,
+<img src="https://user-images.githubusercontent.com/64206443/182855149-a77719ec-10ab-4451-8693-fea855a967c4.png" width="500">
 
-
-![image](https://user-images.githubusercontent.com/64206443/182904024-71c9be5b-2b89-42a2-bec5-174cb1a9fc30.png)
 - Масштабирование отдельных частей изображения
 
+<img src="https://user-images.githubusercontent.com/64206443/182855416-b7e66951-b153-41f8-92a7-ae3a7207d623.png" width="500">
 
-![image](https://user-images.githubusercontent.com/64206443/182904136-4345a657-ba64-46b2-a91b-d3b4aa2c73e7.png)
 - Поддержка добавления множеста слоев на изображение.
 ______________________________________________________________________________________________________________
 Чтобы запустить программу необходимо скачать её собранную версию из вкладки релизы(https://github.com/quqveik1/GRAPHICAPP/releases/tag/v0.2.3.0),
