@@ -66,6 +66,7 @@ void ResizeButton::onClick(Vector mp)
         Vector saveSize = app->systemSettings->SizeOfScreen;
         if (app->isFullScreen())
         {
+
             if (app->systemSettings->FullSizeOfScreen == app->systemSettings->lastTimeSizeOfScreen || app->systemSettings->lastTimeSizeOfScreen == app->systemSettings->lastTimeSizeOfScreen.getNullVector())
             {
                 Vector newSize = app->systemSettings->FullSizeOfScreen / 1.5;

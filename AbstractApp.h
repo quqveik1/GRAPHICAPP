@@ -22,7 +22,7 @@ struct AbstractAppData
 
     COLORREF* currColor = NULL;
     bool isResized = false;
-    bool IsRunning = true;
+    bool IsRunning = false;
     bool isShowing = true;;
     HCURSOR defaultCursor = NULL;
 
