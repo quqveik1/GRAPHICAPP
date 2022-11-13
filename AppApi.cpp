@@ -5,6 +5,9 @@
 #include "FileSavings.cpp"
 #include "LoadLib.cpp"
 #include "MainManager.h"
+#include <direct.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 
 PowerPoint* appData = NULL;
@@ -12,7 +15,7 @@ PowerPoint* appData = NULL;
 int oneFrameFnc(PowerPoint* app, MainManager* manager);
 
 
-void setWindowParameters(PowerPoint* app);
+void setWindowParameters(PowerPoint* app, HINSTANCE hInstance);
 bool checkVersionCompability(PowerPoint* app);
 void writeVersion(PowerPoint* app);
 bool swapDC(HDC dest, int xDest, int yDest, int wDest, int hDest,
@@ -22,7 +25,7 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
 const char* findExtensionStart(const char* text, int extensionPos);
 
 
-PowerPoint::PowerPoint()
+PowerPoint::PowerPoint(HINSTANCE hInstance)
 {
     appVersion = "v0.2.3.0";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
@@ -49,7 +52,7 @@ PowerPoint::PowerPoint()
 
     currColor = &systemSettings->DrawColor;
 
-    setWindowParameters(this);
+    setWindowParameters(this, hInstance);
     
 }
 
@@ -107,7 +110,7 @@ int oneFrameFnc(PowerPoint* app, MainManager* manager)
 LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static int timeWhenLastTimeRedrawed = 0;
-
+    PAINTSTRUCT ps = {};
     
 
     if (appData)
@@ -118,6 +121,16 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
             {
                 SetClassLongPtr(window, GCLP_HCURSOR, (LONG_PTR)appData->activeCursor);
             }
+        }
+
+        if (message == WM_PAINT)
+        {
+            if (appData)
+            {
+                HDC finalDC = BeginPaint(appData->MAINWINDOW, &ps);
+                EndPaint(appData->MAINWINDOW, &ps);
+            }
+
         }
 
         if (message == WM_CLOSE)
@@ -162,30 +175,50 @@ bool checkVersionCompability(PowerPoint* app)
     return needLoadSaves;
 }
 
-void setWindowParameters(PowerPoint* app)
+void setWindowParameters(PowerPoint* app, HINSTANCE hInstance)
 {
     assert(app);
 
-    
+    HWND hwnd = {};
+    WNDCLASSEX wndClass = {};
 
-    //app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
-    //assert(app->MAINWINDOW);
-    
-    app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
-
-    /*
-   // app->appIcon = LoadIcon(NULL, (LPCSTR)_TX_ICON);
-
-    HDC loadBMP = app->loadManager->loadImage("IconBMP.bmp");
-
-    app->appIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_ICON4));
-    SetClassLongPtr(app->MAINWINDOW, GCLP_HICON, (LONG_PTR)app->appIcon);          //-V107 //-V112
-    SetClassLongPtr(app->MAINWINDOW, GCLP_HICONSM, (LONG_PTR)app->appIcon);
-    */
-
+    wndClass.cbSize = sizeof(wndClass);
+    wndClass.style = (CS_VREDRAW | CS_HREDRAW);// &~WS_CAPTION;
+    wndClass.lpfnWndProc = CtrlWindowFunc;
+    wndClass.cbClsExtra = 0;
+    wndClass.cbWndExtra = 0;
+    wndClass.hInstance = hInstance;
+    wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    assert(wndClass.hIcon);
+    wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+    wndClass.lpszMenuName = NULL;
     char handleName[MAX_PATH] = {};
     (void)sprintf(handleName, "IMRED - %s[TXLib]", app->appVersion);
-    SetWindowText(app->MAINWINDOW, handleName);
+    wndClass.lpszClassName = handleName;
+    wndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+    assert(wndClass.hIconSm);
+
+    RegisterClassEx(&wndClass);
+
+    hwnd = CreateWindow(
+        handleName,
+        handleName,
+        (WS_OVERLAPPEDWINDOW),
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        500,
+        500,
+        NULL, NULL,
+        hInstance,
+        NULL);
+
+    assert(hwnd);
+
+    ShowWindow(hwnd, SW_SHOW);
+    UpdateWindow(hwnd);
+    
+    app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
 }
 
 HDC PowerPoint::createDIBSection(Vector size, RGBQUAD** pixels/* = NULL*/)
