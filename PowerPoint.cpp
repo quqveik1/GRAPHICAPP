@@ -51,7 +51,6 @@ int main (int argc, int *argv[])
     Handle* mainhandle = new Handle(appData, { .pos = {0, 0}, .finishPos = {appData->systemSettings->FullSizeOfScreen.x, appData->systemSettings->HANDLEHEIGHT} });
 
     MainManager* manager = new MainManager(appData, { .pos = {0, 0}, .finishPos = appData->systemSettings->FullSizeOfScreen }, 21, mainhandle);
-    appData->mainManager = manager;
 
     manager->addWindow(mainhandle);
 
@@ -137,13 +136,7 @@ int main (int argc, int *argv[])
         manager->addWindow(importList);
 
 	txBegin ();
-	//Engine (manager);
-
-    appData->IsRunning = true;
-    while (appData->IsRunning)
-    {
-        txSleep(0);
-    };
+	Engine (manager);
 
     menu->saveMenu();
     delete manager;
@@ -160,12 +153,48 @@ void Engine (MainManager *manager)
     assert (manager); 
     PowerPoint* app = (PowerPoint*)manager->app;
     assert(app);
+    RECT programmRect = {};
+    bool deltaBetween2UnhideSuggestions = 1000;
+    double lastTimeChekedWindowCondition = 0;
 
     bool wasResizedInLastFrame = false;
 
     for (;;)
     {
-        oneFrameFnc(appData, manager);
+        app->controlApp();
+        if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf("\nFPS: %d\n", (int)txGetFPS());
+
+        Vector mp = { txMouseX(), txMouseY() };
+        manager->mousePos = mp;
+        if (app->systemSettings->debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
+        if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
+
+        if (!app->isShowing)
+        {
+            GetWindowRect(app->MAINWINDOW, &programmRect);
+            if (isBigger(programmRect.right, 0))
+            {
+                app->isShowing = true;
+            }
+        }
+        if (app->isShowing)
+        {
+
+            manager->draw();
+            if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
+
+            manager->clicked = txMouseButtons();
+            if (manager->clicked)
+            {
+                manager->onClick(mp);
+            }
+            txSleep(0);
+        }
+
+        if (!app->IsRunning)
+        {
+            break;
+        }
 	}
 
     ShowWindow(app->MAINWINDOW, SW_HIDE);

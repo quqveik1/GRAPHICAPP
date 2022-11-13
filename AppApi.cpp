@@ -4,12 +4,9 @@
 #include "SystemSettings.cpp"
 #include "FileSavings.cpp"
 #include "LoadLib.cpp"
-#include "MainManager.h"
 
 
 PowerPoint* appData = NULL;
-
-int oneFrameFnc(PowerPoint* app, MainManager* manager);
 
 
 void setWindowParameters(PowerPoint* app);
@@ -24,7 +21,7 @@ const char* findExtensionStart(const char* text, int extensionPos);
 
 PowerPoint::PowerPoint()
 {
-    appVersion = "v0.2.3.0";
+    appVersion = "v0.2.2.0";
     defaultCursor = LoadCursor(NULL, IDC_ARROW);
     
 
@@ -76,40 +73,8 @@ void writeVersion(PowerPoint* app)
     if (versionFile)fclose(versionFile);
 }
 
-int oneFrameFnc(PowerPoint* app, MainManager* manager)
-{
-    app->controlApp();
-    if (app->systemSettings->debugMode == -1 || app->systemSettings->debugMode > 0) printf("\nFPS: %d\n", (int)txGetFPS());
-
-    Vector mp = { txMouseX(), txMouseY() };
-    manager->mousePos = mp;
-    if (app->systemSettings->debugMode > 0) printf("Engine getMBCondition(): %d\n", txMouseButtons());
-    if (app->systemSettings->debugMode > 0) printf("Engine mp: {%lf, %lf}\n", mp.x, mp.y);
-
-
-    manager->draw();
-    if (manager->finalDC) app->bitBlt(txDC(), manager->rect.pos.x, manager->rect.pos.x, 0, 0, manager->finalDC);
-
-    manager->clicked = txMouseButtons();
-    if (manager->clicked)
-    {
-        manager->onClick(mp);
-    }
-    txSleep(0);
-
-    if (!app->IsRunning)
-    {
-        return 1;
-    }
-    return 0;
-}
-
 LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    static int timeWhenLastTimeRedrawed = 0;
-
-    
-
     if (appData)
     {
         if (message == WM_SETCURSOR)
@@ -123,6 +88,10 @@ LRESULT CALLBACK CtrlWindowFunc(HWND window, UINT message, WPARAM wParam, LPARAM
         if (message == WM_CLOSE)
         {
             appData->IsRunning = false;
+            return 1;
+        }
+        if (message == WM_CREATE)
+        {
             return 1;
         }
     }
@@ -165,11 +134,14 @@ bool checkVersionCompability(PowerPoint* app)
 void setWindowParameters(PowerPoint* app)
 {
     assert(app);
+    _txWindowStyle = app->systemSettings->WindowStyle;
+    _txSwapBuffers = swapDC;
+    txSetWindowsHook(CtrlWindowFunc);
 
     
 
-    //app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
-    //assert(app->MAINWINDOW);
+    app->MAINWINDOW = txCreateWindow(app->systemSettings->FullSizeOfScreen.x, app->systemSettings->FullSizeOfScreen.y);
+    assert(app->MAINWINDOW);
     
     app->changeWindow(app->systemSettings->SizeOfScreen, app->systemSettings->ScreenPos);
 
@@ -307,8 +279,6 @@ void PowerPoint::setColor(COLORREF color, HDC dc, int thickness)
     {
         DeleteObject(oldSolidBrush);
     }
-   
-    
     
     HPEN newPen = CreatePen(PS_SOLID, color, thickness);
     HPEN oldPen = (HPEN)SelectObject(dc, (HGDIOBJ)newPen);
@@ -319,7 +289,6 @@ void PowerPoint::setColor(COLORREF color, HDC dc, int thickness)
     
     SetTextColor(dc, color);
     */
-    
 
 
     txSetFillColor(color, dc);
@@ -526,7 +495,7 @@ void PowerPoint::cleanTransparentDC()
 
 bool PowerPoint::getAsyncKeyState(int symbol)
 {
-    return GetAsyncKeyState(symbol);
+    return txGetAsyncKeyState(symbol);
 }
 
 bool PowerPoint::isDoubleClick()
