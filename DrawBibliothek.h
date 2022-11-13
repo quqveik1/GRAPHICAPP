@@ -44,14 +44,12 @@ struct CHistoryStep
         char _tempStr[MAX_PATH] = {};                        \
         sprintf(_tempStr, "[%s] == NULL", #condition);        \
         _app->messageBox(_tempStr, "Ошибка", MB_OK | MB_ICONINFORMATION);         \
-        txSleep(0);                                          \
     }                                                        \
 }                                                            \
 
 
 
 
-void txSetAllColors$(COLORREF color, HDC dc = txDC(), int thickness = 1);
 int standartManagerOnClick$ (struct Manager *manager, Vector mp);
 //#define standartManagerOnClick(...) standartManagerOnClick$ (getDebugInfo, __VA_ARGS__);;
 void standartDraw$ (struct Window *window);

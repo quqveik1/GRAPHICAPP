@@ -39,11 +39,6 @@
 #include "OpenImage.cpp"
 
 
-
-void Engine (MainManager* manager);
-
-
-
 int main (int argc, int *argv[])
 {
     appData = new PowerPoint;
@@ -83,12 +78,12 @@ int main (int argc, int *argv[])
     ThicknessMenu* thicknessButton = new ThicknessMenu(appData, { 300, 300 }, false);
     manager->addWindow(thicknessButton);
 
-    /*
+    
     DLLFiltersManager* dllManager = new DLLFiltersManager(appData, "Settings\\DLLPathList.txt");
     dllManager->loadLibs ();
     dllManager->addToManager(manager);
     if (appData->systemSettings->debugMode >= 0) printf("‘ильтры загрузились\n");
-    */
+    
 
 
     mainhandle;
@@ -118,14 +113,14 @@ int main (int argc, int *argv[])
             openWindows->addNewItem (laysMenu, NULL, "—лои");
             openWindows->addNewItem (toolMenu, NULL, "»нструменты на слое");
         manager->addWindow(openWindows);
-            /*
+            /
             List* filters = openWindows->addSubList("‘ильтры", dllManager->currLoadWindowNum);
         manager->addWindow (filters);
                 for (int i = 0; i < dllManager->currLoadWindowNum; i++)
                 {
                     filters->addNewItem(dllManager->dllWindows[i], NULL, dllManager->dllWindows[i]->name);
                 }
-                */
+                
 
         List* importList = mainhandle->createMenuOption("»мпорт/Ёкспорт", NULL, true);
             SaveImages saveImages(appData, canvasManager);
@@ -155,21 +150,8 @@ int main (int argc, int *argv[])
 }
 
 
-void Engine (MainManager *manager)
-{
-    assert (manager); 
-    PowerPoint* app = (PowerPoint*)manager->app;
-    assert(app);
 
-    bool wasResizedInLastFrame = false;
 
-    for (;;)
-    {
-        oneFrameFnc(appData, manager);
-	}
-
-    ShowWindow(app->MAINWINDOW, SW_HIDE);
-}
 
 
 

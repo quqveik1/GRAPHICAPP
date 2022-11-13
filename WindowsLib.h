@@ -25,9 +25,9 @@ struct Window
 
     bool redrawStatus = false;
 
-    HDC dc = NULL;
+    M_HDC dc = NULL;
 
-    HDC finalDC = NULL;
+    M_HDC finalDC = NULL;
     RGBQUAD* finalDCArr = NULL;
     Vector finalDCSize = {};
     struct Manager* manager = NULL;

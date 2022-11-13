@@ -111,6 +111,6 @@ struct PowerPoint : AbstractAppData
 
     virtual void controlApp();
 
-    PowerPoint();
+    PowerPoint(HINSTANCE hInstance);
     ~PowerPoint();
 };

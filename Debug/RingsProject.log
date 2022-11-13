@@ -1,98 +1,145 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (RingsProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   PowerPoint.cpp
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(113,31): warning C4100: 'lay': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(114,31): warning C4100: 'toollay': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.h(115,32): warning C4100: 'toollay': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4573,3): error C2988: unrecognizable template declaration/definition
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4573,3): error C2059: syntax error: 'const'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4573,1): error C2059: syntax error: ')'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4573,32): error C2143: syntax error: missing ';' before '{'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4573,32): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4599,3): error C2988: unrecognizable template declaration/definition
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4599,3): error C2059: syntax error: 'const'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4599,1): error C2059: syntax error: ')'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4599,32): error C2143: syntax error: missing ';' before '{'
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(4599,32): error C2447: '{': missing function header (old-style formal list?)
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(8510,9): error C3861: 'tx_fpreset': identifier not found
+C:\Users\Алехандро\Desktop\AlexProjects\TX\TXLib.h(11446,5): error C3861: 'tx_fpreset': identifier not found
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,11): error C3646: 'dc': unknown override specifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,14): error C2059: syntax error: '='
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,20): error C2238: unexpected token(s) preceding ';'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(30,11): error C3646: 'finalDC': unknown override specifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(30,19): error C2059: syntax error: '='
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(30,25): error C2238: unexpected token(s) preceding ';'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(56,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(143,33): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(7,93): warning C4100: 'clicked': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(7,72): warning C4100: 'dragedLastTime': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(50,9): error C2614: 'Window': illegal member initialization: 'dc' is not a base or member
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(51,21): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(51,67): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(51,74): error C2660: 'AbstractAppData::setColor': function does not take 1 arguments
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AbstractApp.h(29,18): message : see declaration of 'AbstractAppData::setColor'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(52,21): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(52,111): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(52,118): error C2661: 'AbstractAppData::rectangle': no overloaded function takes 4 arguments
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(56,70): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(56,77): error C2660: 'AbstractAppData::setColor': function does not take 1 arguments
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AbstractApp.h(29,18): message : see declaration of 'AbstractAppData::setColor'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(57,69): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(57,76): error C2660: 'AbstractAppData::selectFont': function does not take 2 arguments
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AbstractApp.h(89,18): message : see declaration of 'AbstractAppData::selectFont'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(58,107): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(58,130): error C2664: 'void AbstractAppData::drawText(double,double,double,double,const char [],HDC,unsigned int)': cannot convert argument 6 from 'int' to 'HDC'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(58,122): message : Conversion from integral type to pointer type requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AbstractApp.h(82,18): message : see declaration of 'AbstractAppData::drawText'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(61,21): error C2039: 'dc': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(63,33): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(63,108): error C2039: 'dc': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(84,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(186,9): warning C4189: 'test1': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(202,23): warning C4100: 'info': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(213,44): warning C4100: 'manager': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(72,41): warning C4100: 'coordinatsWithHandle': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(67,14): warning C4189: 'needResizex': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(68,14): warning C4189: 'needResizey': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(128,130): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(184,15): error C2039: 'dc': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(184,41): error C2039: 'finalDC': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(184,71): error C2039: 'dc': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(194,96): error C2039: 'finalDC': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(194,275): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(195,88): error C2039: 'finalDC': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(195,267): error C2039: 'finalDC': is not a member of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(6): message : see declaration of 'Window'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(16,81): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(57,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(58,30): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(59,66): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(60,63): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(168,9): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(168,32): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(169,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(169,37): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(179,9): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(179,32): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(180,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.cpp(180,37): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(128,105): error C2039: 'finalDC': is not a member of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLibApi.h(7): message : see declaration of 'Manager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ZoneSizeControl.cpp(128,144): error C2661: 'AbstractAppData::drawCadre': no overloaded function takes 3 arguments
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.cpp(61,1): warning C4305: 'return': truncation from '__int64' to 'long'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Tool.cpp(61,12): warning C4309: 'return': truncation of constant value
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(69,31): warning C4100: 'tool': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(335,29): warning C4458: declaration of 'dc' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,9): message : see declaration of 'Window::dc'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(22,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(22,32): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(234,23): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(235,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(237,30): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(238,60): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(248,25): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(265,29): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(281,46): error C2065: 'finalDC': undeclared identifier
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(388,18): warning C4458: declaration of 'length' hides class member
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(150,9): message : see declaration of 'Manager::length'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(39,27): warning C4100: 'dc': unreferenced formal parameter
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(405,9): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(405,27): error C2065: 'dc': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(406,9): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Canvas.cpp(406,32): error C2065: 'finalDC': undeclared identifier
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(55,43): warning C4458: declaration of 'data' hides class member
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.h(15,20): message : see declaration of 'ToolLay::data'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(55,43): warning C4100: 'data': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolLay.cpp(59,13): warning C4189: 'outDC': local variable is initialized but not referenced
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.h(79,30): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(86,86): error C2039: 'finalDC': is not a member of 'StringButton2'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.h(50): message : see declaration of 'StringButton2'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(86,93): error C2660: 'AbstractAppData::getTextExtent': function does not take 1 arguments
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AbstractApp.h(86,20): message : see declaration of 'AbstractAppData::getTextExtent'
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(90,26): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(313,30): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(314,45): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(346,25): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(357,62): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(358,55): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(359,77): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(362,35): error C2065: 'finalDC': undeclared identifier
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(755,26): warning C4244: 'argument': conversion from 'int' to 'char', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(768,36): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
 C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\StringButton2.cpp(775,36): warning C4244: '=': conversion from 'int' to 'char', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton2.cpp(25,9): warning C4189: 'currentInt': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(107,82): warning C4100: 'lParam': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(107,67): warning C4100: 'wParam': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(144,60): warning C4100: 'rOp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(144,48): warning C4100: 'hSrc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(144,38): warning C4100: 'wSrc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(144,28): warning C4100: 'ySrc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(144,18): warning C4100: 'xSrc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(143,38): warning C4100: 'yDest': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(143,27): warning C4100: 'xDest': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(366,5): warning C4804: '*=': unsafe use of type 'bool' in operation
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(493,25): warning C4189: 'result': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(720,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(702,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(753,10): warning C4551: function call missing argument list
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(736,9): warning C4189: 'fileNameLength': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Menu.cpp(31,9): warning C4189: 'my': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Menu.cpp(30,9): warning C4189: 'mx': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolsMenu.cpp(62,18): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolsMenu.cpp(63,24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolsMenu.cpp(119,9): warning C4189: 'lineFinishPosY': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ToolsMenu.cpp(161,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\OpenManager.cpp(27,34): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\List.h(21,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\List.h(29,30): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\List.cpp(5,47): warning C4458: declaration of 'dc' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,9): message : see declaration of 'Window::dc'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\List.cpp(5,74): warning C4458: declaration of 'text' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(19,17): message : see declaration of 'Window::text'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\List.cpp(71,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ThreeUpWindows.cpp(40,37): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ThreeUpWindows.cpp(52,34): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ThreeUpWindows.cpp(60,35): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LaysMenu.h(17,22): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\LaysMenu.cpp(38,21): warning C4458: declaration of 'text' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(19,17): message : see declaration of 'Window::text'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\TouchButton.cpp(3,34): warning C4100: 'mp': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(18,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(53,49): warning C4244: '/=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(59,49): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(91,45): warning C4244: '/=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(101,49): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(130,25): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(133,70): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(196,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(192,13): warning C4189: 'aditionPrintfResult': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton.cpp(218,40): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SetCanvasButton.cpp(63,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SetCanvasButton.cpp(64,34): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SetCanvasButton.cpp(70,67): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\SetCanvasButton.cpp(81,69): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Handle.cpp(10,15): warning C4189: 'relustOfCopy': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Slider2.cpp(42,25): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\ImportImage.cpp(30,26): warning C4458: declaration of 'dc' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,9): message : see declaration of 'Window::dc'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\OpenImage.cpp(21,26): warning C4458: declaration of 'dc' hides class member
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\WindowsLib.h(28,9): message : see declaration of 'Window::dc'
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(47,26): warning C4100: 'argv': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(47,15): warning C4100: 'argc': unreferenced formal parameter
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\PowerPoint.cpp(164,10): warning C4189: 'wasResizedInLastFrame': local variable is initialized but not referenced
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\DrawBibliothek.cpp(88): warning C4172: returning address of local variable or temporary: fileName
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(729): warning C4172: returning address of local variable or temporary: fileName
-C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(771): warning C4172: returning address of local variable or temporary: fileName
-  RingsProject.vcxproj -> C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\Debug\IMRED.exe
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(40,51): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(41,55): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(43,29): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(44,43): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(45,65): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(48,55): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(49,62): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(50,168): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(55,55): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(56,62): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(57,145): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(59,21): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(63,33): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(96,17): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(96,86): error C2039: 'finalDC': is not a member of 'InputButton2'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\InputButton2.h(6): message : see declaration of 'InputButton2'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(98,17): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(99,17): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(110,26): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(111,52): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\CanvasManager.cpp(136,34): error C2065: 'finalDC': undeclared identifier
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(94,18): error C2039: 'finalDC': is not a member of 'MainManager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.h(6): message : see declaration of 'MainManager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(94,104): error C2039: 'finalDC': is not a member of 'MainManager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\MainManager.h(6): message : see declaration of 'MainManager'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(94,111): error C2664: 'void PowerPoint::bitBlt(HDC,Vector,Vector,HDC,Vector)': cannot convert argument 2 from 'double' to 'Vector'
+C:\Users\Алехандро\Desktop\AlexProjects\GRAPHICAPP\AppApi.cpp(94,111): fatal error C1003: error count exceeds 100; stopping compilation
