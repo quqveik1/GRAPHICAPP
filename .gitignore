@@ -7,3 +7,14 @@
 *Release/*
 *DLLTools/Debug/* 
 *DLLTools/Release/*
+.vs/RingsProject/v16/.suo
+.vs/RingsProject/v16/Browse.VC.db
+DLLTools/Debug/dllmain.sbr
+.vs/RingsProject/v16/Solution.VC.db
+DLLTools/Release/DLLTools.iobj
+DLLTools/Debug/DLLTools.ilk
+DLLTools/Release/DLLTools.ipdb
+*.log
+Release/vc142.pdb
+*.obj
+SaveImage/Release/SaveImage.iobj

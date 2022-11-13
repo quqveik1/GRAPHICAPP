@@ -13,8 +13,6 @@ struct PowerPoint : AbstractAppData
     CFileSavings FileSavings;
     */
 
-    struct Manager* mainManager = NULL;
-
 
     HCURSOR activeCursor = NULL;
     int lastTimeCursorSetTime = NULL;
